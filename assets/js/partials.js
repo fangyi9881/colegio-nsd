@@ -1,4 +1,4 @@
-// =========================================================
+﻿// =========================================================
 // Partials reutilizables: header, drawer móvil y footer
 // =========================================================
 (function () {
@@ -35,8 +35,8 @@
   const NAV = `
   <header class="navbar" id="navbar">
     <div class="container navbar__inner">
-      <a href="" class="brand">
-        <img src="assets/img/logo.svg" alt="Logo NSD" class="brand__logo" />
+      <a href="/" class="brand">
+        <img src="/assets/img/logo.svg" alt="Logo NSD" class="brand__logo" />
         <span class="brand__text">
           <strong>Colegio NSD</strong>
           <small>Nuestra Señora de los Dolores</small>
@@ -45,28 +45,28 @@
 
       <nav class="nav" id="primaryNav" aria-label="Principal">
         <ul>
-          <li><a href="" data-link="home">Inicio</a></li>
+          <li><a href="/" data-link="home">Inicio</a></li>
           <li class="has-dropdown">
-            <a href="centro/sobre-nosotros.html" data-link="centro">El Centro <i class="bi bi-chevron-down"></i></a>
+            <a href="/centro/sobre-nosotros.html" data-link="centro">El Centro <i class="bi bi-chevron-down"></i></a>
             <ul class="dropdown">
-              <li><a href="centro/sobre-nosotros.html">Sobre Nosotros</a></li>
-              <li><a href="centro/sobre-nosotros.html#valores">Misión y Valores</a></li>
-              <li><a href="centro/departamentos.html">Departamentos</a></li>
+              <li><a href="/centro/sobre-nosotros.html">Sobre Nosotros</a></li>
+              <li><a href="/centro/sobre-nosotros.html#valores">Misión y Valores</a></li>
+              <li><a href="/centro/departamentos.html">Departamentos</a></li>
             </ul>
           </li>
           <li class="has-dropdown">
-            <a href="infantil-nsd/" data-link="etapas">Etapas <i class="bi bi-chevron-down"></i></a>
+            <a href="/infantil-nsd/" data-link="etapas">Etapas <i class="bi bi-chevron-down"></i></a>
             <ul class="dropdown">
-              <li><a href="infantil-nsd/">Infantil 0–3 🍼</a></li>
-              <li><a href="etapas/infantil-3-6.html">Infantil 3–6</a></li>
-              <li><a href="etapas/primaria.html">Primaria</a></li>
-              <li><a href="etapas/eso.html">ESO</a></li>
+              <li><a href="/infantil-nsd/">Infantil 0–3 🍼</a></li>
+              <li><a href="/etapas/infantil-3-6.html">Infantil 3–6</a></li>
+              <li><a href="/etapas/primaria.html">Primaria</a></li>
+              <li><a href="/etapas/eso.html">ESO</a></li>
             </ul>
           </li>
           <li><a href="#servicios" data-link="servicios">Servicios</a></li>
-          <li><a href="blog/" data-link="blog">Blog</a></li>
-          <li><a href="contacto.html" data-link="contacto">Contacto</a></li>
-          <li><a class="nav-cta magnetic" href="admision.html"><i class="bi bi-mortarboard-fill"></i> Admisión</a></li>
+          <li><a href="/blog/" data-link="blog">Blog</a></li>
+          <li><a href="/contacto.html" data-link="contacto">Contacto</a></li>
+          <li><a class="nav-cta magnetic" href="/admision.html"><i class="bi bi-mortarboard-fill"></i> Admisión</a></li>
         </ul>
       </nav>
 
@@ -82,13 +82,13 @@
       <span class="morph-blob"></span>
     </div>
     <ul>
-      <li><a href="">Inicio <i class="bi bi-arrow-right"></i></a></li>
-      <li><a href="centro/sobre-nosotros.html">Sobre Nosotros <i class="bi bi-arrow-right"></i></a></li>
-      <li><a href="etapas/primaria.html">Etapas <i class="bi bi-arrow-right"></i></a></li>
-      <li><a href="centro/departamentos.html">Departamentos <i class="bi bi-arrow-right"></i></a></li>
-      <li><a href="blog/">Blog <i class="bi bi-arrow-right"></i></a></li>
-      <li><a href="admision.html">Admisión <i class="bi bi-arrow-right"></i></a></li>
-      <li><a href="contacto.html">Contacto <i class="bi bi-arrow-right"></i></a></li>
+      <li><a href="/">Inicio <i class="bi bi-arrow-right"></i></a></li>
+      <li><a href="/centro/sobre-nosotros.html">Sobre Nosotros <i class="bi bi-arrow-right"></i></a></li>
+      <li><a href="/etapas/primaria.html">Etapas <i class="bi bi-arrow-right"></i></a></li>
+      <li><a href="/centro/departamentos.html">Departamentos <i class="bi bi-arrow-right"></i></a></li>
+      <li><a href="/blog/">Blog <i class="bi bi-arrow-right"></i></a></li>
+      <li><a href="/admision.html">Admisión <i class="bi bi-arrow-right"></i></a></li>
+      <li><a href="/contacto.html">Contacto <i class="bi bi-arrow-right"></i></a></li>
     </ul>
     <div class="drawer__footer">
       <a href="https://twitter.com/colegio_nsd" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
@@ -102,8 +102,8 @@
   <footer class="footer">
     <div class="container footer__grid">
       <div class="footer__brand">
-        <a href="" class="brand">
-          <img src="assets/img/logo.svg" alt="Logo NSD" class="brand__logo brand__logo--lg" />
+        <a href="/" class="brand">
+          <img src="/assets/img/logo.svg" alt="Logo NSD" class="brand__logo brand__logo--lg" />
           <span class="brand__text">
             <strong>Colegio NSD</strong>
             <small>Nuestra Señora de los Dolores</small>
@@ -115,20 +115,20 @@
       <div>
         <h5>Centro</h5>
         <ul>
-          <li><a href="centro/sobre-nosotros.html">Sobre nosotros</a></li>
-          <li><a href="centro/sobre-nosotros.html#valores">Misión y valores</a></li>
-          <li><a href="etapas/primaria.html">Etapas educativas</a></li>
-          <li><a href="centro/departamentos.html">Departamentos</a></li>
+          <li><a href="/centro/sobre-nosotros.html">Sobre nosotros</a></li>
+          <li><a href="/centro/sobre-nosotros.html#valores">Misión y valores</a></li>
+          <li><a href="/etapas/primaria.html">Etapas educativas</a></li>
+          <li><a href="/centro/departamentos.html">Departamentos</a></li>
         </ul>
       </div>
 
       <div>
         <h5>Familias</h5>
         <ul>
-          <li><a href="admision.html">Admisión</a></li>
-          <li><a href="blog/">Comunicados</a></li>
-          <li><a href="blog/">Becas y ayudas</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="/admision.html">Admisión</a></li>
+          <li><a href="/blog/">Comunicados</a></li>
+          <li><a href="/blog/">Becas y ayudas</a></li>
+          <li><a href="/contacto.html">Contacto</a></li>
         </ul>
       </div>
 
@@ -156,9 +156,9 @@
       <div class="container footer__bottom-inner">
         <p>© <span id="year"></span> Colegio Nuestra Señora de los Dolores. Todos los derechos reservados.</p>
         <ul>
-          <li><a href="aviso-legal.html">Aviso legal</a></li>
-          <li><a href="privacidad.html">Política de privacidad</a></li>
-          <li><a href="cookies.html">Cookies</a></li>
+          <li><a href="/aviso-legal.html">Aviso legal</a></li>
+          <li><a href="/privacidad.html">Política de privacidad</a></li>
+          <li><a href="/cookies.html">Cookies</a></li>
         </ul>
       </div>
     </div>
@@ -168,7 +168,7 @@
 
   <div class="mobile-cta-bar" id="mobileCta" aria-hidden="true">
     <a href="tel:+34911234567" class="cta-call"><i class="bi bi-telephone-fill"></i> Llamar</a>
-    <a href="contacto.html" class="cta-visit"><i class="bi bi-calendar-check"></i> Reservar visita</a>
+    <a href="/contacto.html" class="cta-visit"><i class="bi bi-calendar-check"></i> Reservar visita</a>
   </div>
 
   <div class="cursor-ring" aria-hidden="true"></div>
@@ -277,7 +277,7 @@
         <p>
           🍪 Usamos <strong>cookies técnicas necesarias</strong> para el funcionamiento del sitio.
           Puedes aceptar o rechazar el uso de cookies analíticas opcionales.
-          <a href="cookies.html">Más información</a>
+          <a href="/cookies.html">Más información</a>
         </p>
         <div class="cookie-banner__actions">
           <button id="cookie-reject" class="cookie-btn cookie-btn--ghost">Solo necesarias</button>
