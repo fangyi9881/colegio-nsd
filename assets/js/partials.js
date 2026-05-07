@@ -1,4 +1,4 @@
-// =========================================================
+﻿// =========================================================
 // Partials reutilizables: header, drawer móvil y footer
 // =========================================================
 (function () {
@@ -109,7 +109,7 @@
             <small>Nuestra Señora de los Dolores</small>
           </span>
         </a>
-        <p>Centro concertado bilingüe en Carabanchel. Educamos personas desde 1958.</p>
+        <p>Centro concertado bilingüe en Carabanchel. Educamos personas desde 1957.</p>
       </div>
 
       <div>
@@ -237,6 +237,25 @@
     checkCta();
   }
 
+  // ── Contadores animados ─────────────────────────────────
+  function animateCounter(el) {
+    if (el.dataset.done) return;
+    el.dataset.done = '1';
+    const end = parseInt(el.dataset.count, 10) || 0;
+    const duration = reduceMotion ? 0 : 1800;
+    const start = performance.now();
+    const fmt = new Intl.NumberFormat('es-ES');
+    if (duration === 0) { el.textContent = fmt.format(end); return; }
+    function step(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = fmt.format(Math.floor(end * eased));
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = fmt.format(end);
+    }
+    requestAnimationFrame(step);
+  }
+
   // Reveal global
   const autoReveal = document.querySelectorAll(
     '.section, .stage, .value, .service, .news__item, .dept, .highlight, .teacher, .form-card'
@@ -248,6 +267,10 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
+          // Lanzar contadores que estén dentro
+          const counters = entry.target.querySelectorAll?.('[data-count]');
+          counters?.forEach(c => animateCounter(c));
+          if (entry.target.matches?.('[data-count]')) animateCounter(entry.target);
           io.unobserve(entry.target);
         }
       });
@@ -255,6 +278,38 @@
     document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
   } else {
     document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-visible'));
+  }
+  // Contadores ya en pantalla al cargar
+  document.querySelectorAll('[data-count]').forEach(c => {
+    const r = c.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) animateCounter(c);
+  });
+
+  // ── BOTÓN "SUBIR ARRIBA" inteligente ─────────────────────
+  // Aparece a partir de la 3ª sección si la página tiene >2 secciones
+  const sections = document.querySelectorAll('section, .section');
+  const toTopBtn = document.querySelector('.to-top');
+  if (toTopBtn && sections.length > 2) {
+    const trigger = sections[2]; // 3ª sección
+    let visible = false;
+    const checkToTop = () => {
+      if (!trigger) return;
+      const rect = trigger.getBoundingClientRect();
+      const should = rect.top < window.innerHeight * 0.5;
+      if (should !== visible) {
+        visible = should;
+        toTopBtn.classList.toggle('is-visible', visible);
+      }
+    };
+    document.addEventListener('scroll', checkToTop, { passive: true });
+    checkToTop();
+    // Smooth scroll al hacer click
+    toTopBtn.addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  } else if (toTopBtn) {
+    toTopBtn.style.display = 'none'; // ocultar en páginas cortas
   }
 
   // ══════════════════════════════════════════════════════════
@@ -291,74 +346,149 @@
   if (existingConsent) {
     applyConsent(existingConsent);
   } else {
-    // Inyectar estilos del banner
+    // Inyectar estilos del banner — tarjeta flotante elegante
     const style = document.createElement('style');
     style.textContent = `
-      #ck-banner *{box-sizing:border-box;font-family:inherit}
+      #ck-overlay{
+        position:fixed;inset:0;z-index:99998;
+        background:rgba(15,23,42,.35);
+        backdrop-filter:blur(2px);
+        -webkit-backdrop-filter:blur(2px);
+        animation:ckFadeIn .4s ease;
+      }
+      @keyframes ckFadeIn{from{opacity:0}to{opacity:1}}
+      #ck-banner *{box-sizing:border-box;font-family:'Nunito','Inter',sans-serif}
       #ck-banner{
-        position:fixed;bottom:0;left:0;right:0;z-index:99999;
-        background:#0f172a;color:#e2e8f0;
-        padding:0;
-        box-shadow:0 -8px 40px rgba(0,0,0,.4);
-        animation:ckSlideUp .4s cubic-bezier(.22,1,.36,1);
+        position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+        z-index:99999;
+        width:calc(100% - 40px);max-width:920px;
+        background:#fff;color:#1e293b;
+        border-radius:24px;
+        box-shadow:0 24px 60px rgba(15,94,22,.18), 0 8px 24px rgba(0,0,0,.08);
+        animation:ckPop .5s cubic-bezier(.22,1,.36,1);
+        overflow:hidden;
+        border:1px solid rgba(15,94,22,.08);
       }
-      @keyframes ckSlideUp{from{transform:translateY(110%)}to{transform:translateY(0)}}
-      #ck-banner.is-expanded #ck-detail{display:block}
-      #ck-banner.is-expanded #ck-toggle-detail{display:none}
-      .ck-wrap{max-width:1200px;margin:0 auto;padding:20px 24px}
-      .ck-top{display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap}
-      .ck-info{flex:1;min-width:220px}
-      .ck-info h3{margin:0 0 6px;font-size:1rem;font-weight:700;color:#fff}
-      .ck-info p{margin:0;font-size:.82rem;line-height:1.6;color:#94a3b8}
-      .ck-info a{color:#4ade80;text-decoration:underline}
-      .ck-btns{display:flex;gap:8px;flex-shrink:0;align-items:center;flex-wrap:wrap}
+      @keyframes ckPop{
+        0%{transform:translateX(-50%) translateY(40px) scale(.96);opacity:0}
+        100%{transform:translateX(-50%) translateY(0) scale(1);opacity:1}
+      }
+      .ck-banner-deco{
+        position:absolute;top:0;left:0;right:0;height:5px;
+        background:linear-gradient(90deg, #1FA42C 0%, #34C84A 30%, #FFD500 70%, #FFA63D 100%);
+        background-size:200% 100%;
+        animation:ckGradient 6s ease infinite;
+      }
+      @keyframes ckGradient{
+        0%,100%{background-position:0% 50%}
+        50%{background-position:100% 50%}
+      }
+      .ck-wrap{padding:28px 30px 24px}
+      .ck-top{display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap}
+      .ck-info{flex:1;min-width:240px}
+      .ck-info-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+      .ck-info-emoji{
+        width:44px;height:44px;border-radius:14px;
+        background:linear-gradient(135deg,#FFF8DC,#FFE9A8);
+        display:grid;place-items:center;font-size:1.4rem;
+        box-shadow:0 4px 12px rgba(255,191,0,.2);
+      }
+      .ck-info h3{margin:0;font-size:1.15rem;font-weight:800;color:#0E5E16;line-height:1.2}
+      .ck-info p{margin:0;font-size:.86rem;line-height:1.65;color:#475569}
+      .ck-info a{color:#1FA42C;text-decoration:underline;font-weight:700}
+      .ck-info a:hover{color:#0E5E16}
+      .ck-btns{display:flex;gap:10px;flex-shrink:0;align-items:center;flex-wrap:wrap;margin-top:4px}
       .ck-btn{
-        padding:10px 22px;border-radius:999px;border:2px solid transparent;
-        font-size:.82rem;font-weight:700;cursor:pointer;white-space:nowrap;
-        transition:all .2s;font-family:inherit;line-height:1;
+        padding:11px 22px;border-radius:999px;border:2px solid transparent;
+        font-size:.85rem;font-weight:700;cursor:pointer;white-space:nowrap;
+        transition:all .25s cubic-bezier(.22,1,.36,1);
+        font-family:inherit;line-height:1;letter-spacing:.01em;
       }
-      .ck-btn-accept{background:#22c55e;color:#fff;border-color:#22c55e}
-      .ck-btn-accept:hover{background:#16a34a;border-color:#16a34a}
-      .ck-btn-save{background:#3b82f6;color:#fff;border-color:#3b82f6}
-      .ck-btn-save:hover{background:#2563eb;border-color:#2563eb}
-      .ck-btn-reject{background:transparent;color:#94a3b8;border-color:rgba(255,255,255,.2)}
-      .ck-btn-reject:hover{color:#e2e8f0;border-color:rgba(255,255,255,.4)}
-      .ck-btn-detail{background:transparent;color:#64748b;border:none;padding:10px 8px;font-size:.8rem;cursor:pointer;text-decoration:underline;font-family:inherit}
-      .ck-btn-detail:hover{color:#94a3b8}
-      #ck-detail{display:none;margin-top:20px;border-top:1px solid rgba(255,255,255,.08);padding-top:20px}
-      .ck-cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+      .ck-btn-accept{
+        background:linear-gradient(135deg,#1FA42C,#34C84A);
+        color:#fff;border-color:transparent;
+        box-shadow:0 4px 14px rgba(31,164,44,.3);
+      }
+      .ck-btn-accept:hover{
+        transform:translateY(-2px);
+        box-shadow:0 8px 22px rgba(31,164,44,.45);
+      }
+      .ck-btn-save{
+        background:#0E5E16;color:#fff;border-color:#0E5E16;
+      }
+      .ck-btn-save:hover{background:#0a4612;border-color:#0a4612}
+      .ck-btn-reject{
+        background:transparent;color:#64748b;border-color:#cbd5e1;
+      }
+      .ck-btn-reject:hover{color:#0E5E16;border-color:#0E5E16;background:#f0fdf4}
+      .ck-btn-detail{
+        background:transparent;color:#1FA42C;border:none;
+        padding:11px 10px;font-size:.85rem;font-weight:700;cursor:pointer;
+        font-family:inherit;
+      }
+      .ck-btn-detail:hover{color:#0E5E16;text-decoration:underline}
+      #ck-detail{display:none;margin-top:24px;border-top:1px solid #e2e8f0;padding-top:22px}
+      #ck-banner.is-expanded #ck-detail{display:block;animation:ckExpand .4s ease}
+      @keyframes ckExpand{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+      .ck-cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
       .ck-cat{
-        background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
-        border-radius:12px;padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
+        background:#f8fafc;border:1.5px solid #e2e8f0;
+        border-radius:14px;padding:14px 16px;
+        display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
+        transition:border-color .2s, background .2s;
       }
-      .ck-cat-info h4{margin:0 0 4px;font-size:.85rem;font-weight:700;color:#f1f5f9}
-      .ck-cat-info p{margin:0;font-size:.75rem;color:#64748b;line-height:1.5}
+      .ck-cat:has(input:checked){border-color:#1FA42C;background:#f0fdf4}
+      .ck-cat:has(input:disabled){background:#fef9c3;border-color:#fde047}
+      .ck-cat-info{flex:1;min-width:0}
+      .ck-cat-info h4{
+        margin:0 0 4px;font-size:.88rem;font-weight:800;color:#0E5E16;
+        display:flex;align-items:center;gap:6px;
+      }
+      .ck-cat-info h4 i{font-size:.95rem;color:#1FA42C}
+      .ck-cat-info p{margin:0;font-size:.74rem;color:#64748b;line-height:1.5}
       .ck-cat-info .ck-badge{
-        display:inline-block;margin-top:6px;font-size:.68rem;font-weight:700;
-        padding:2px 8px;border-radius:999px;background:rgba(34,197,94,.15);color:#4ade80;
+        display:inline-block;margin-top:6px;font-size:.66rem;font-weight:800;
+        padding:3px 9px;border-radius:999px;background:#fef3c7;color:#92400e;
+        text-transform:uppercase;letter-spacing:.05em;
       }
       /* Toggle switch */
-      .ck-switch{position:relative;flex-shrink:0;width:44px;height:24px;margin-top:2px}
+      .ck-switch{position:relative;flex-shrink:0;width:42px;height:24px;margin-top:2px}
       .ck-switch input{opacity:0;width:0;height:0;position:absolute}
       .ck-slider{
-        position:absolute;inset:0;border-radius:999px;background:#334155;
-        cursor:pointer;transition:background .25s;
+        position:absolute;inset:0;border-radius:999px;background:#cbd5e1;
+        cursor:pointer;transition:background .3s;
       }
       .ck-slider::before{
         content:'';position:absolute;width:18px;height:18px;
         left:3px;top:3px;border-radius:50%;background:#fff;
-        transition:transform .25s;
+        transition:transform .3s cubic-bezier(.22,1,.36,1);
+        box-shadow:0 2px 4px rgba(0,0,0,.2);
       }
-      .ck-switch input:checked + .ck-slider{background:#22c55e}
-      .ck-switch input:checked + .ck-slider::before{transform:translateX(20px)}
-      .ck-switch input:disabled + .ck-slider{opacity:.5;cursor:not-allowed}
-      @media(max-width:600px){
-        .ck-top{flex-direction:column}
+      .ck-switch input:checked + .ck-slider{background:#1FA42C}
+      .ck-switch input:checked + .ck-slider::before{transform:translateX(18px)}
+      .ck-switch input:disabled + .ck-slider{background:#fde047;cursor:not-allowed}
+      .ck-switch input:disabled + .ck-slider::before{background:#fff}
+      .ck-save-row{margin-top:18px;display:flex;justify-content:flex-end;gap:10px}
+      @media(max-width:680px){
+        #ck-banner{bottom:0;left:0;right:0;width:100%;max-width:none;
+          border-radius:24px 24px 0 0;transform:none}
+        @keyframes ckPop{
+          0%{transform:translateY(40px);opacity:0}
+          100%{transform:translateY(0);opacity:1}
+        }
+        .ck-wrap{padding:22px 20px}
+        .ck-top{flex-direction:column;gap:18px}
         .ck-btns{width:100%}
-        .ck-btn{flex:1;text-align:center}
+        .ck-btn,.ck-btn-detail{flex:1;text-align:center}
         .ck-cats{grid-template-columns:1fr}
+        .ck-info h3{font-size:1rem}
       }`;
     document.head.appendChild(style);
+
+    // Overlay sutil para enfocar atención
+    const overlay = document.createElement('div');
+    overlay.id = 'ck-overlay';
+    document.body.appendChild(overlay);
 
     const banner = document.createElement('div');
     banner.id = 'ck-banner';
@@ -366,22 +496,25 @@
     banner.setAttribute('aria-modal', 'true');
     banner.setAttribute('aria-label', 'Configuración de cookies');
     banner.innerHTML = `
+      <span class="ck-banner-deco" aria-hidden="true"></span>
       <div class="ck-wrap">
         <div class="ck-top">
           <div class="ck-info">
-            <h3>🍪 Tu privacidad importa</h3>
+            <div class="ck-info-head">
+              <span class="ck-info-emoji" aria-hidden="true">🍪</span>
+              <h3>Tu privacidad nos importa</h3>
+            </div>
             <p>
               Usamos cookies propias <strong>estrictamente necesarias</strong> para que el sitio funcione.
-              Con tu permiso, también usaríamos cookies <strong>analíticas</strong> (medir visitas) y
-              <strong>de preferencias</strong> (recordar tus opciones).
-              Puedes personalizar tu elección o aceptar todo.
+              Con tu permiso también usaríamos cookies <strong>analíticas</strong> y de <strong>preferencias</strong>
+              para mejorar tu experiencia. Puedes personalizar tu elección o aceptar todas.
               <a href="/cookies.html" target="_blank" rel="noopener">Política de cookies</a>.
             </p>
           </div>
           <div class="ck-btns">
-            <button id="ck-btn-reject"  class="ck-btn ck-btn-reject">Solo necesarias</button>
-            <button id="ck-btn-config"  class="ck-btn-detail">Personalizar ▾</button>
-            <button id="ck-btn-accept"  class="ck-btn ck-btn-accept">Aceptar todas</button>
+            <button id="ck-btn-reject" class="ck-btn ck-btn-reject" type="button">Solo necesarias</button>
+            <button id="ck-btn-config" class="ck-btn-detail" type="button">Personalizar ▾</button>
+            <button id="ck-btn-accept" class="ck-btn ck-btn-accept" type="button">Aceptar todas</button>
           </div>
         </div>
 
@@ -389,8 +522,8 @@
           <div class="ck-cats">
             <div class="ck-cat">
               <div class="ck-cat-info">
-                <h4>Necesarias</h4>
-                <p>Imprescindibles para el funcionamiento del sitio. No pueden desactivarse.</p>
+                <h4><i class="bi bi-shield-check"></i> Necesarias</h4>
+                <p>Imprescindibles para el funcionamiento básico del sitio.</p>
                 <span class="ck-badge">Siempre activas</span>
               </div>
               <label class="ck-switch" aria-label="Cookies necesarias">
@@ -400,8 +533,8 @@
             </div>
             <div class="ck-cat">
               <div class="ck-cat-info">
-                <h4>Analíticas</h4>
-                <p>Nos permiten medir visitas y mejorar el contenido del sitio de forma anónima.</p>
+                <h4><i class="bi bi-graph-up-arrow"></i> Analíticas</h4>
+                <p>Medimos visitas de forma anónima para mejorar el sitio.</p>
               </div>
               <label class="ck-switch" aria-label="Cookies analíticas">
                 <input type="checkbox" id="ck-chk-analytics" />
@@ -410,8 +543,8 @@
             </div>
             <div class="ck-cat">
               <div class="ck-cat-info">
-                <h4>Preferencias</h4>
-                <p>Recuerdan tus ajustes (idioma, formularios) para mejorar tu experiencia.</p>
+                <h4><i class="bi bi-sliders"></i> Preferencias</h4>
+                <p>Recuerdan tus ajustes (idioma, formularios…).</p>
               </div>
               <label class="ck-switch" aria-label="Cookies de preferencias">
                 <input type="checkbox" id="ck-chk-prefs" />
@@ -420,8 +553,8 @@
             </div>
             <div class="ck-cat">
               <div class="ck-cat-info">
-                <h4>Marketing</h4>
-                <p>Permiten mostrar contenido relevante. Actualmente no las usamos.</p>
+                <h4><i class="bi bi-megaphone"></i> Marketing</h4>
+                <p>Permitirían mostrar contenido relevante. No las usamos.</p>
               </div>
               <label class="ck-switch" aria-label="Cookies de marketing">
                 <input type="checkbox" id="ck-chk-marketing" />
@@ -429,22 +562,30 @@
               </label>
             </div>
           </div>
-          <div style="margin-top:16px;display:flex;justify-content:flex-end">
-            <button id="ck-btn-save" class="ck-btn ck-btn-save">Guardar preferencias</button>
+          <div class="ck-save-row">
+            <button id="ck-btn-save" class="ck-btn ck-btn-save" type="button">Guardar preferencias</button>
           </div>
         </div>
       </div>`;
 
     document.body.appendChild(banner);
 
+    const closeAll = () => {
+      banner.style.transition = 'opacity .3s, transform .3s';
+      banner.style.opacity = '0';
+      banner.style.transform = (window.innerWidth <= 680) ? 'translateY(20px)' : 'translateX(-50%) translateY(20px)';
+      overlay.style.transition = 'opacity .3s';
+      overlay.style.opacity = '0';
+      setTimeout(() => { banner.remove(); overlay.remove(); }, 320);
+    };
     const acceptAll = () => {
       saveConsent({ necessary: true, analytics: true, prefs: true, marketing: true });
       applyConsent({ analytics: true, prefs: true, marketing: true });
-      banner.remove();
+      closeAll();
     };
     const rejectAll = () => {
       saveConsent({ necessary: true, analytics: false, prefs: false, marketing: false });
-      banner.remove();
+      closeAll();
     };
     const saveCustom = () => {
       const prefs = {
@@ -455,7 +596,7 @@
       };
       saveConsent(prefs);
       applyConsent(prefs);
-      banner.remove();
+      closeAll();
     };
     const toggleDetail = () => {
       banner.classList.toggle('is-expanded');
