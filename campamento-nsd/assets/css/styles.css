@@ -146,7 +146,7 @@ input, select, textarea { font: inherit; }
 .brand__logo {
   width: 48px; height: 48px; object-fit: contain;
   border-radius: 0;
-  mix-blend-mode: multiply;
+  flex-shrink: 0;
 }
 .brand__text strong { display: block; font-size: .95rem; font-weight: 800; color: var(--sky-dark); }
 .brand__text small  { display: block; font-size: .72rem; color: var(--ink-soft); }
@@ -865,7 +865,7 @@ input, select, textarea { font: inherit; }
 .footer__bottom a { color: rgba(255,255,255,.35); transition: color .2s; }
 .footer__bottom a:hover { color: var(--sky); }
 
-.brand__logo--lg { width: 60px; height: 60px; border-radius: 0; filter: brightness(0) invert(1); mix-blend-mode: normal; opacity: .95; }
+.brand__logo--lg { width: 60px; height: 60px; border-radius: 0; }
 
 /* To-top */
 .to-top {
@@ -915,17 +915,27 @@ input, select, textarea { font: inherit; }
 .cta-visit { background: var(--sky); color: white; }
 
 /* ============== RESPONSIVE ============== */
+@media (max-width: 1100px) {
+  /* En pantallas medianas, las float-cards no salen del marco */
+  .float-card--1 { left: 8px; }
+  .float-card--2 { right: 8px; }
+}
+
 @media (max-width: 980px) {
-  .hero__grid { grid-template-columns: 1fr; gap: 48px; }
-  .hero__visual { max-width: 480px; margin: 0 auto; }
+  .hero__grid { grid-template-columns: 1fr; gap: 60px; }
+  .hero__visual { max-width: 460px; margin: 0 auto; width: 100%; }
+  .hero__photo { aspect-ratio: 4/3.6; }
   .act-grid { grid-template-columns: repeat(2, 1fr); }
   .porque__grid { grid-template-columns: repeat(2, 1fr); }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
   .inscripcion__grid { grid-template-columns: 1fr; }
   .contacto__grid { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
-  .float-card--1 { left: 0; }
-  .float-card--2 { right: 0; }
+  /* Float cards dentro del marco para que no desborden */
+  .float-card--1 { left: 12px; top: 14px; }
+  .float-card--2 { right: 12px; bottom: auto; top: 50%; }
+  .float-card--3 { left: 50%; transform: translateX(-50%); bottom: -14px; }
+  .float-card--3.float-card { animation: none; }
 }
 
 @media (max-width: 768px) {
@@ -935,6 +945,11 @@ input, select, textarea { font: inherit; }
   .hero__emoji { font-size: 1.4rem; }
   .horarios__grid { grid-template-columns: 1fr; max-width: 400px; }
   .topbar__left .topbar__addr { display: none; }
+  /* Compactar float cards para evitar choques en mobile */
+  .float-card { padding: 8px 12px; font-size: .82rem; }
+  .float-card__icon { font-size: 1.2rem; }
+  .float-card strong { font-size: .82rem; }
+  .float-card small { font-size: .68rem; }
 }
 
 @media (max-width: 540px) {
@@ -944,5 +959,13 @@ input, select, textarea { font: inherit; }
   .footer__grid { grid-template-columns: 1fr; }
   .form__row { grid-template-columns: 1fr; }
   .form-card { padding: 28px 20px; }
-  .hero__title { font-size: 2.4rem; }
+  .hero__title { font-size: 2.2rem; }
+  /* En móviles ocultamos la 3a float-card para evitar saturación */
+  .hero__visual { max-width: 100%; }
+  .hero__photo { aspect-ratio: 4/3.4; }
+  .float-card--3 { display: none; }
+}
+
+@media (max-width: 380px) {
+  .float-card--1, .float-card--2 { display: none; }
 }

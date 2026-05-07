@@ -106,7 +106,6 @@ body {
 }
 .navbar__logo-img {
   width: 52px; height: 52px; object-fit: contain;
-  mix-blend-mode: multiply;
   flex-shrink: 0;
 }
 .navbar__name { font-family: var(--font-title); font-weight: 800; font-size: 1.1rem; color: var(--lavanda-dark); line-height: 1.1; }

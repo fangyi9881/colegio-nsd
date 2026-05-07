@@ -103,7 +103,7 @@
     <div class="container footer__grid">
       <div class="footer__brand">
         <a href="/" class="brand">
-          <img src="/assets/img/logo.png" alt="Logo Colegio NSD" class="brand__logo brand__logo--lg footer-logo" />
+          <img src="/assets/img/logo-white.png" alt="Logo Colegio NSD" class="brand__logo brand__logo--lg" />
           <span class="brand__text">
             <strong>Colegio NSD</strong>
             <small>Nuestra Señora de los Dolores</small>
