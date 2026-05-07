@@ -1,0 +1,14 @@
+{
+  "name": "Colegio NSD - Nuestra Señora de los Dolores",
+  "short_name": "Colegio NSD",
+  "description": "Centro concertado bilingüe en Carabanchel (Madrid). Infantil, Primaria y ESO.",
+  "lang": "es-ES",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1FA42C",
+  "icons": [
+    { "src": "/assets/img/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

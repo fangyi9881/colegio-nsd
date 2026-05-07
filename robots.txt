@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /joomla-template/
+
+Sitemap: https://www.colegionsdolores.es/sitemap.xml

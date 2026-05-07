@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es" data-page="contacto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contacto · Colegio NSD</title>
+  <meta name="description" content="Contacta con el Colegio NSD: dirección en Carabanchel, teléfono, email, horarios y mapa." />
+  <meta name="theme-color" content="#1FA42C" />
+  <link rel="canonical" href="https://www.colegionsdolores.es/contacto.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Contacto · Colegio NSD" />
+  <meta property="og:description" content="C/ Tordo, 9-15 · 28019 Madrid · 91 123 45 67 · secretaria@colegionsdolores.com" />
+  <link rel="icon" type="image/svg+xml" href="/assets/img/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/pages.css" />
+</head>
+<body id="top">
+  <div id="site-header"></div>
+
+  <section class="page-hero">
+    <div class="container page-hero__inner">
+      <div>
+        <nav class="crumbs" aria-label="Migas de pan">
+          <a href="/">Inicio</a> <i class="bi bi-chevron-right"></i>
+          <span>Contacto</span>
+        </nav>
+        <h1>Hablemos.</h1>
+        <p>Resolvemos tus dudas sobre admisión, etapas, servicios o cualquier información que necesites.</p>
+      </div>
+      <div class="page-hero__meta">
+        <span class="meta"><i class="bi bi-geo-alt"></i> C/ Tordo, 9-15</span>
+        <span class="meta"><i class="bi bi-clock"></i> L–V 9:00–14:00</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container two-col two-col--reverse">
+      <div class="two-col__content">
+        <span class="eyebrow">Datos de contacto</span>
+        <h2>Estamos en Carabanchel.</h2>
+        <p>Nos puedes encontrar fácilmente, muy cerca del Metro Vista Alegre. ¡Te esperamos!</p>
+
+        <ul class="contact-list">
+          <li><i class="bi bi-geo-alt"></i> <span>C/ Tordo, 9-15 · 28019 Madrid (Carabanchel)</span></li>
+          <li><i class="bi bi-telephone"></i> <a href="tel:+34911234567">91 123 45 67</a></li>
+          <li><i class="bi bi-envelope"></i> <a href="mailto:secretaria@colegionsdolores.com">secretaria@colegionsdolores.com</a></li>
+          <li><i class="bi bi-clock"></i> <span>Secretaría: L–V de 9:00 a 14:00</span></li>
+        </ul>
+
+        <div class="contact-social">
+          <a href="https://twitter.com/colegio_nsd" target="_blank" rel="noopener" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="https://www.facebook.com/colegioNSD" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+
+        <div class="map-card" style="margin-top:30px;">
+          <iframe
+            src="https://maps.google.com/maps?q=Calle%20del%20Tordo%209%2C%2028019%20Madrid&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Mapa del Colegio NSD"></iframe>
+        </div>
+      </div>
+
+      <form class="form-card" onsubmit="event.preventDefault(); alert('¡Gracias! Te contactaremos pronto.');">
+        <h3>Solicita información</h3>
+        <div class="form-row">
+          <label>Nombre y apellidos
+            <input type="text" required placeholder="Tu nombre" />
+          </label>
+        </div>
+        <div class="form-row form-row--2">
+          <label>Email
+            <input type="email" required placeholder="tu@email.com" />
+          </label>
+          <label>Teléfono
+            <input type="tel" placeholder="6XX XXX XXX" />
+          </label>
+        </div>
+        <div class="form-row">
+          <label>Etapa de interés
+            <select>
+              <option>Infantil 0–3</option>
+              <option>Infantil 3–6</option>
+              <option>Primaria</option>
+              <option>ESO</option>
+              <option>Visita guiada</option>
+              <option>Otra</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-row">
+          <label>Mensaje
+            <textarea rows="5" placeholder="Cuéntanos qué necesitas…"></textarea>
+          </label>
+        </div>
+        <label class="form-check">
+          <input type="checkbox" required />
+          <span>Acepto la <a href="#">política de privacidad</a>.</span>
+        </label>
+        <button type="submit" class="btn btn--primary btn--block">Enviar solicitud</button>
+      </form>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="/assets/js/partials.js"></script>
+</body>
+</html>

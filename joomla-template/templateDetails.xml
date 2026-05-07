@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="template" client="site" method="upgrade" version="4.0">
+  <name>colegio_nsd</name>
+  <creationDate>2026-05-06</creationDate>
+  <author>Colegio NSD</author>
+  <authorEmail>secretaria@colegionsdolores.com</authorEmail>
+  <authorUrl>https://www.colegionsdolores.es</authorUrl>
+  <copyright>Copyright (C) 2026 Colegio Nuestra Señora de los Dolores. All rights reserved.</copyright>
+  <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+  <version>1.0.0</version>
+  <description>TPL_COLEGIO_NSD_XML_DESCRIPTION</description>
+
+  <files>
+    <filename>index.php</filename>
+    <filename>error.php</filename>
+    <filename>offline.php</filename>
+    <filename>component.php</filename>
+    <filename>templateDetails.xml</filename>
+    <filename>template_preview.png</filename>
+    <filename>template_thumbnail.png</filename>
+    <folder>css</folder>
+    <folder>js</folder>
+    <folder>images</folder>
+    <folder>html</folder>
+    <folder>language</folder>
+  </files>
+
+  <languages folder="language">
+    <language tag="es-ES">es-ES/tpl_colegio_nsd.ini</language>
+    <language tag="es-ES">es-ES/tpl_colegio_nsd.sys.ini</language>
+    <language tag="en-GB">en-GB/tpl_colegio_nsd.ini</language>
+    <language tag="en-GB">en-GB/tpl_colegio_nsd.sys.ini</language>
+  </languages>
+
+  <positions>
+    <position>topbar</position>
+    <position>menu</position>
+    <position>quick-access</position>
+    <position>hero-cta</position>
+    <position>banner</position>
+    <position>features</position>
+    <position>news</position>
+    <position>secretaria</position>
+    <position>servicios</position>
+    <position>footer-1</position>
+    <position>footer-2</position>
+    <position>footer-3</position>
+    <position>footer-4</position>
+    <position>copyright</position>
+    <position>debug</position>
+  </positions>
+
+  <config>
+    <fields name="params">
+      <fieldset name="basic" label="TPL_COLEGIO_NSD_FIELDSET_BASIC">
+        <field
+          name="logoFile"
+          type="media"
+          directory="images"
+          label="TPL_COLEGIO_NSD_FIELD_LOGO"
+          description="TPL_COLEGIO_NSD_FIELD_LOGO_DESC"
+          default="images/logo.svg"
+        />
+        <field
+          name="primaryColor"
+          type="color"
+          label="TPL_COLEGIO_NSD_FIELD_PRIMARY"
+          default="#1FA42C"
+        />
+        <field
+          name="accentColor"
+          type="color"
+          label="TPL_COLEGIO_NSD_FIELD_ACCENT"
+          default="#F7D300"
+        />
+        <field
+          name="phone"
+          type="text"
+          label="TPL_COLEGIO_NSD_FIELD_PHONE"
+          default="91 123 45 67"
+        />
+        <field
+          name="email"
+          type="email"
+          label="TPL_COLEGIO_NSD_FIELD_EMAIL"
+          default="secretaria@colegionsdolores.com"
+        />
+        <field
+          name="address"
+          type="text"
+          label="TPL_COLEGIO_NSD_FIELD_ADDRESS"
+          default="C/ Tordo, 9-15 · 28019 Madrid"
+        />
+      </fieldset>
+    </fields>
+  </config>
+</extension>
