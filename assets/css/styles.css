@@ -155,6 +155,8 @@ p  { margin: 0 0 1em; color: var(--ink-700); }
 .brand { display: flex; align-items: center; gap: 12px; color: var(--ink-900); }
 .brand__logo { width: 48px; height: 48px; }
 .brand__logo--lg { width: 64px; height: 64px; }
+/* Logo en footer oscuro: mezcla blending para quitar fondo blanco */
+.footer-logo { mix-blend-mode: screen; filter: brightness(1.1); }
 .brand__text { display: flex; flex-direction: column; line-height: 1.05; }
 .brand__text strong {
   font-family: var(--font-display); font-weight: 900;
