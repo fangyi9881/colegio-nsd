@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Logo Colegio NSD">
+  <!-- Letras NS amarillas en arco -->
+  <g font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif" font-weight="900" fill="#FFD500">
+    <text x="0" y="0" font-size="78" transform="translate(150 138) rotate(-15)">N</text>
+    <text x="0" y="0" font-size="78" transform="translate(220 148) rotate(12)">S</text>
+  </g>
+
+  <!-- D verde estilo caligráfico con un solo trazo de pincel -->
+  <path d="
+      M 90 180
+      C 130 168, 195 152, 250 162
+      C 312 175, 350 215, 348 258
+      C 345 305, 290 338, 220 348
+      C 175 352, 130 345, 100 335
+      L 115 295
+      C 145 305, 195 312, 235 305
+      C 290 295, 318 268, 318 245
+      C 315 218, 285 200, 235 195
+      C 180 190, 140 200, 122 210
+      L 122 355
+      L 90 355
+      Z
+    "
+    fill="#1FA42C" stroke="#1FA42C" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>
