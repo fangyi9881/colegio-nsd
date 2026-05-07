@@ -24,10 +24,10 @@
         <span class="topbar__addr d-none-mobile"><i class="bi bi-geo-alt-fill"></i> C/ Tordo, 9-15 · 28019 Madrid</span>
       </div>
       <div class="topbar__quick">
-        <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx" target="_blank" rel="noopener" class="quick-link"><i class="bi bi-person-badge"></i> Alexia</a>
-        <a href="https://raices.madrid.org/" target="_blank" rel="noopener" class="quick-link"><i class="bi bi-tree"></i> Raíces</a>
-        <a href="https://twitter.com/colegio_nsd" target="_blank" rel="noopener" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
-        <a href="https://www.facebook.com/colegioNSD" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-person-badge"></i> Alexia</a>
+        <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-tree"></i> Raíces</a>
+        <a href="https://twitter.com/colegio_nsd" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+        <a href="https://www.facebook.com/colegioNSD" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
       </div>
     </div>
   </div>`;
@@ -135,8 +135,8 @@
       <div>
         <h5>Accesos</h5>
         <ul>
-          <li><a href="https://web2.alexiaedu.com/" target="_blank" rel="noopener">Alexia</a></li>
-          <li><a href="https://raices.madrid.org/" target="_blank" rel="noopener">Raíces</a></li>
+          <li><a href="https://web2.alexiaedu.com/" target="_blank" rel="noopener noreferrer">Alexia</a></li>
+          <li><a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer">Raíces</a></li>
           <li><a href="#">Secretaría virtual</a></li>
           <li><a href="#">Acceso profesores</a></li>
         </ul>
@@ -156,9 +156,9 @@
       <div class="container footer__bottom-inner">
         <p>© <span id="year"></span> Colegio Nuestra Señora de los Dolores. Todos los derechos reservados.</p>
         <ul>
-          <li><a href="#">Aviso legal</a></li>
-          <li><a href="#">Política de privacidad</a></li>
-          <li><a href="#">Cookies</a></li>
+          <li><a href="aviso-legal.html">Aviso legal</a></li>
+          <li><a href="privacidad.html">Política de privacidad</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
         </ul>
       </div>
     </div>
@@ -257,7 +257,76 @@
     document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-visible'));
   }
 
-  // Magnetic
+  // ── BANNER DE COOKIES (RGPD / LSSI) ────────────────────────
+  const COOKIE_KEY = 'nsd_cookie_consent';
+  function setCookieConsent(val) {
+    const d = new Date();
+    d.setFullYear(d.getFullYear() + 1);
+    document.cookie = `${COOKIE_KEY}=${val};expires=${d.toUTCString()};path=/;SameSite=Lax`;
+  }
+  function getCookieConsent() {
+    return document.cookie.split(';').map(c => c.trim()).find(c => c.startsWith(COOKIE_KEY + '='))?.split('=')[1];
+  }
+  if (!getCookieConsent()) {
+    const banner = document.createElement('div');
+    banner.id = 'cookie-banner';
+    banner.setAttribute('role', 'dialog');
+    banner.setAttribute('aria-label', 'Aviso de cookies');
+    banner.innerHTML = `
+      <div class="cookie-banner__inner">
+        <p>
+          🍪 Usamos <strong>cookies técnicas necesarias</strong> para el funcionamiento del sitio.
+          Puedes aceptar o rechazar el uso de cookies analíticas opcionales.
+          <a href="cookies.html">Más información</a>
+        </p>
+        <div class="cookie-banner__actions">
+          <button id="cookie-reject" class="cookie-btn cookie-btn--ghost">Solo necesarias</button>
+          <button id="cookie-accept" class="cookie-btn cookie-btn--primary">Aceptar todas</button>
+        </div>
+      </div>`;
+    const style = document.createElement('style');
+    style.textContent = `
+      #cookie-banner {
+        position: fixed; bottom: 0; left: 0; right: 0; z-index: 9990;
+        background: #1e293b; color: #e2e8f0;
+        padding: 16px 24px;
+        box-shadow: 0 -4px 32px rgba(0,0,0,.25);
+        animation: cookieSlideUp .35s ease;
+      }
+      @keyframes cookieSlideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+      .cookie-banner__inner {
+        max-width: 1200px; margin: 0 auto;
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 20px; flex-wrap: wrap;
+      }
+      .cookie-banner__inner p { font-size: .88rem; line-height: 1.6; margin: 0; max-width: 680px; }
+      .cookie-banner__inner a { color: #86efac; }
+      .cookie-banner__actions { display: flex; gap: 10px; flex-shrink: 0; }
+      .cookie-btn { padding: 10px 20px; border-radius: 999px; border: 2px solid transparent;
+        font-size: .88rem; font-weight: 700; cursor: pointer; font-family: inherit; }
+      .cookie-btn--primary { background: #22c55e; color: #fff; border-color: #22c55e; }
+      .cookie-btn--primary:hover { background: #16a34a; }
+      .cookie-btn--ghost { background: transparent; color: #e2e8f0; border-color: rgba(255,255,255,.3); }
+      .cookie-btn--ghost:hover { background: rgba(255,255,255,.1); }
+      @media (max-width: 600px) {
+        .cookie-banner__inner { flex-direction: column; }
+        .cookie-banner__actions { width: 100%; }
+        .cookie-btn { flex: 1; text-align: center; }
+      }`;
+    document.head.appendChild(style);
+    document.body.appendChild(banner);
+
+    document.getElementById('cookie-accept').addEventListener('click', () => {
+      setCookieConsent('all');
+      banner.remove();
+    });
+    document.getElementById('cookie-reject').addEventListener('click', () => {
+      setCookieConsent('necessary');
+      banner.remove();
+    });
+  }
+
+  // ── Magnetic
   if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
     document.querySelectorAll('.magnetic').forEach(el => {
       const strength = 18;

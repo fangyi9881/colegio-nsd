@@ -1,5 +1,20 @@
 User-agent: *
 Allow: /
+
+# Carpetas privadas / técnicas
 Disallow: /joomla-template/
+Disallow: /assets/js/
+Disallow: /.git/
+
+# Páginas legales (no aportan tráfico SEO)
+Disallow: /privacidad.html
+Disallow: /aviso-legal.html
+Disallow: /cookies.html
+Disallow: /campamento-nsd/privacidad.html
+Disallow: /campamento-nsd/aviso-legal.html
+Disallow: /campamento-nsd/accesibilidad.html
+Disallow: /infantil-nsd/privacidad.html
+Disallow: /infantil-nsd/aviso-legal.html
+Disallow: /infantil-nsd/accesibilidad.html
 
 Sitemap: https://www.colegionsdolores.es/sitemap.xml
