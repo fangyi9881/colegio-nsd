@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- BASE: cambiar a "/infantil-nsd/" al desplegar en dominio propio -->
+  <base href="/colegio-nsd/infantil-nsd/" />
+  <title>Escuela Infantil NSD · Guardería 0–3 años en Carabanchel, Madrid</title>
+  <meta name="description" content="Escuela infantil y guardería para niños de 0 a 3 años en Carabanchel. Becas de la Comunidad de Madrid, bilingüe, comedor propio y equipo de educadoras tituladas." />
+  <meta name="theme-color" content="#8B5CF6" />
+  <link rel="canonical" href="https://www.infantilnsd.es/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Escuela Infantil NSD · Carabanchel" />
+  <meta property="og:description" content="Guardería 0–3 años con becas CM, bilingüe y comedor propio en Carabanchel, Madrid." />
+  <meta property="og:image" content="https://www.infantilnsd.es/assets/img/og.jpg" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍼</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ── TOPBAR ─────────────────────────────── -->
+  <div class="topbar">
+    <div class="topbar__inner">
+      <span>📍 Carabanchel, Madrid · <a href="tel:+34910000000">91 XXX XX XX</a></span>
+      <span class="topbar__pill">🏫 Parte del <a href="../">Colegio NSD</a></span>
+      <span>⭐ <strong style="color:#fff">Becas Comunidad de Madrid</strong> disponibles</span>
+    </div>
+  </div>
+
+  <!-- ── NAVBAR ─────────────────────────────── -->
+  <nav class="navbar" aria-label="Navegación principal">
+    <div class="navbar__inner">
+      <a href="" class="navbar__brand" aria-label="Inicio Infantil NSD">
+        <div class="navbar__logo">🍼</div>
+        <div class="navbar__name">
+          Infantil NSD
+          <span>Escuela Infantil 0–3 años</span>
+        </div>
+      </a>
+      <ul class="navbar__links" role="list">
+        <li><a href="#propuesta">Nuestra propuesta</a></li>
+        <li><a href="#edades">Por edades</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#becas">Becas</a></li>
+        <li><a href="#inscripcion" class="navbar__cta">Reservar plaza</a></li>
+      </ul>
+      <button class="navbar__burger" id="burger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── DRAWER ─────────────────────────────── -->
+  <div class="drawer" id="drawer" role="dialog" aria-label="Menú móvil">
+    <div class="drawer__overlay" id="drawer-overlay"></div>
+    <div class="drawer__panel">
+      <button class="drawer__close" id="drawer-close" aria-label="Cerrar">✕</button>
+      <div class="drawer__links">
+        <a href="#propuesta">Nuestra propuesta</a>
+        <a href="#edades">Por edades</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#testimonios">Familias</a>
+        <a href="#becas">Becas CM</a>
+        <a href="../">← Colegio NSD</a>
+      </div>
+      <a href="#inscripcion" class="drawer__cta">🍼 Reservar plaza ahora</a>
+    </div>
+  </div>
+
+  <!-- ── HERO ───────────────────────────────── -->
+  <section class="hero" aria-label="Presentación">
+    <div class="hero__blobs">
+      <div class="hero__blob"></div>
+      <div class="hero__blob"></div>
+      <div class="hero__blob"></div>
+    </div>
+    <div class="hero__inner">
+      <div class="hero__content">
+        <div class="hero__badge" data-reveal>
+          <span>🌟</span> Centro acreditado · Becas CM
+        </div>
+        <h1 data-reveal data-delay="1">
+          Tu bebé merece<br>
+          <em>un segundo hogar</em><br>
+          con todo el cariño
+        </h1>
+        <p class="hero__desc" data-reveal data-delay="2">
+          En la Escuela Infantil NSD cuidamos a los más pequeños de Carabanchel desde los <strong>4 meses hasta los 3 años</strong>. Bilingüe, con comedor propio, equipo de educadoras tituladas y becas de la Comunidad de Madrid.
+        </p>
+        <div class="hero__actions" data-reveal data-delay="3">
+          <a href="#inscripcion" class="btn btn--primary">🍼 Reservar plaza 25–26</a>
+          <a href="#propuesta" class="btn btn--secondary">Conocer el centro</a>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <div class="hero__img-wrap">
+          <span class="hero__img-emoji">🧸</span>
+          <div class="hero__float" style="top:-20px; right:-10px;">
+            <span class="float__icon">⭐</span>
+            <div class="float__text">
+              <div class="float__label">Valoración</div>
+              <div class="float__val">9.8 / 10</div>
+            </div>
+          </div>
+          <div class="hero__float" style="bottom:30px; left:-30px;">
+            <span class="float__icon">👶</span>
+            <div class="float__text">
+              <div class="float__label">Niños este año</div>
+              <div class="float__val">+120 familias</div>
+            </div>
+          </div>
+          <div class="hero__float" style="top:45%; right:-35px;">
+            <span class="float__icon">🇬🇧</span>
+            <div class="float__text">
+              <div class="float__label">Inglés desde</div>
+              <div class="float__val">1 año</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TRUST STRIP ────────────────────────── -->
+  <div class="trust-strip">
+    <div class="trust-strip__inner">
+      <div class="trust-item">
+        <span class="trust-item__icon">🏛️</span>
+        <span>Autorizado <strong>Comunidad de Madrid</strong></span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-item__icon">🎓</span>
+        <span>Educadoras <strong>tituladas</strong></span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-item__icon">🥗</span>
+        <span><strong>Comedor</strong> elaborado en el centro</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-item__icon">🌍</span>
+        <span>Programa <strong>bilingüe</strong></span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-item__icon">💰</span>
+        <span><strong>Becas CM</strong> según renta</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── STATS ──────────────────────────────── -->
+  <section class="stats" aria-label="Cifras">
+    <div class="container">
+      <div class="stats__grid">
+        <div data-reveal>
+          <span class="stat__number" data-target="20" data-suffix="+" data-prefix="">0</span>
+          <span class="stat__label">Años de experiencia<br>en educación infantil</span>
+        </div>
+        <div data-reveal data-delay="1">
+          <span class="stat__number" data-target="6" data-suffix=" aulas">0</span>
+          <span class="stat__label">Unidades habilitadas<br>ratio reducido</span>
+        </div>
+        <div data-reveal data-delay="2">
+          <span class="stat__number" data-target="98" data-suffix="%" data-prefix="">0</span>
+          <span class="stat__label">Familias que<br>nos recomiendan</span>
+        </div>
+        <div data-reveal data-delay="3">
+          <span class="stat__number" data-target="4" data-suffix=" meses">0</span>
+          <span class="stat__label">Edad mínima<br>de acceso</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PILARES ────────────────────────────── -->
+  <section class="pilares" id="propuesta" aria-labelledby="pilares-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-reveal>✨ Nuestra propuesta</div>
+        <h2 class="section-title" id="pilares-title" data-reveal data-delay="1">
+          Un entorno pensado<br><em>para los más pequeños</em>
+        </h2>
+        <p class="section-sub" data-reveal data-delay="2">
+          Cada rincón de nuestra escuela está diseñado para estimular, proteger y acompañar el desarrollo de tu bebé o tu niño.
+        </p>
+      </div>
+      <div class="pilares__grid">
+        <div class="pilar" data-reveal>
+          <span class="pilar__icon">🛡️</span>
+          <h3>Espacio seguro</h3>
+          <p>Aulas adaptadas por edades, ratio máximo de 8 niños por educadora en bebés y acceso controlado. Tu tranquilidad, nuestra prioridad.</p>
+        </div>
+        <div class="pilar" data-reveal data-delay="1">
+          <span class="pilar__icon">🎨</span>
+          <h3>Aprendizaje por juego</h3>
+          <p>Trabajamos por rincones y proyectos. Los niños aprenden explorando, tocando y experimentando en un ambiente enriquecido.</p>
+        </div>
+        <div class="pilar" data-reveal data-delay="2">
+          <span class="pilar__icon">🌍</span>
+          <h3>Inglés desde 1 año</h3>
+          <p>Inmersión temprana natural con canciones, cuentos y rutinas en inglés. El mejor momento para aprender una segunda lengua.</p>
+        </div>
+        <div class="pilar" data-reveal data-delay="3">
+          <span class="pilar__icon">🥗</span>
+          <h3>Comedor propio</h3>
+          <p>Cocina elaborada en el centro con menús equilibrados, adaptados a cada edad y necesidad dietética. Sin conservantes.</p>
+        </div>
+        <div class="pilar" data-reveal data-delay="4">
+          <span class="pilar__icon">👨‍👩‍👧</span>
+          <h3>Comunicación con familias</h3>
+          <p>Diario digital diario vía Alexia, reuniones periódicas y agenda abierta con la tutora. Siempre conectados contigo.</p>
+        </div>
+        <div class="pilar" data-reveal data-delay="5">
+          <span class="pilar__icon">🎵</span>
+          <h3>Música y psicomotricidad</h3>
+          <p>Sesiones especializadas de música y movimiento que estimulan el desarrollo cognitivo, emocional y motor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── VIDA EN EL AULA ────────────────────── -->
+  <section class="vida" aria-labelledby="vida-title">
+    <div class="container">
+      <div class="vida__inner">
+        <div class="vida__content">
+          <div class="section-tag" data-reveal>📅 Un día con nosotros</div>
+          <h2 class="section-title" id="vida-title" data-reveal data-delay="1">
+            Rutinas que dan<br><em>seguridad y confianza</em>
+          </h2>
+          <p class="section-sub" data-reveal data-delay="2">
+            Las rutinas dan seguridad a los bebés y niños pequeños. Cada día en la escuela está pensado para equilibrar estimulación, descanso y juego.
+          </p>
+          <ul class="vida__list">
+            <li class="vida__item" data-reveal data-delay="3">
+              <span class="vida__item-icon">🌅</span>
+              <div class="vida__item-text">
+                <h4>Acogida y aula matinal</h4>
+                <p>Desde las 7:30 h. Recibimos a cada niño con cariño, con un período de adaptación individualizado.</p>
+              </div>
+            </li>
+            <li class="vida__item" data-reveal data-delay="4">
+              <span class="vida__item-icon">🧩</span>
+              <div class="vida__item-text">
+                <h4>Asamblea y rincones</h4>
+                <p>Rutinas de la mañana: saludos, el tiempo, canciones y juego dirigido en los rincones temáticos.</p>
+              </div>
+            </li>
+            <li class="vida__item" data-reveal data-delay="5">
+              <span class="vida__item-icon">🌿</span>
+              <div class="vida__item-text">
+                <h4>Patio y psicomotricidad</h4>
+                <p>Tiempo al aire libre, juego sensorial y sesiones de psicomotricidad con material especializado.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="vida__horario" data-reveal>
+          <h3>⏰ Horario tipo</h3>
+          <table class="horario-table">
+            <thead>
+              <tr><th>Hora</th><th>Actividad</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>07:30 – 09:00</td><td>🌅 Aula matinal y acogida</td></tr>
+              <tr><td>09:00 – 10:30</td><td>🎵 Asamblea, rutinas y juego</td></tr>
+              <tr><td>10:30 – 11:00</td><td>🍎 Almuerzo y aseo</td></tr>
+              <tr><td>11:00 – 12:30</td><td>🌿 Patio y psicomotricidad</td></tr>
+              <tr><td>12:30 – 14:00</td><td>🥗 Comida y siesta</td></tr>
+              <tr><td>14:00 – 16:00</td><td>🎨 Juego libre y merienda</td></tr>
+              <tr><td>16:00 – 17:00</td><td>📚 Salida y tarde</td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top:16px;font-size:.82rem;color:var(--ink-soft);">
+            * Horario orientativo. El horario de siesta se adapta a cada bebé.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── POR EDADES ─────────────────────────── -->
+  <section class="edades" id="edades" aria-labelledby="edades-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-reveal>👶 Grupos por edades</div>
+        <h2 class="section-title" id="edades-title" data-reveal data-delay="1">
+          Adaptamos cada aula<br><em>a su momento evolutivo</em>
+        </h2>
+        <p class="section-sub" data-reveal data-delay="2">
+          Cada etapa del desarrollo tiene sus necesidades. Nuestras aulas y educadoras están especializadas por tramos de edad.
+        </p>
+      </div>
+      <div class="edades__grid">
+        <div class="edad-card" data-reveal>
+          <span class="edad-card__emoji">🍼</span>
+          <span class="edad-card__years">4 meses – 1 año</span>
+          <h3>Lactantes</h3>
+          <ul>
+            <li>Ratio máximo 1:8</li>
+            <li>Alimentación personalizada</li>
+            <li>Siesta adaptada a cada bebé</li>
+            <li>Estimulación sensorial temprana</li>
+            <li>Comunicación diaria con la familia</li>
+          </ul>
+        </div>
+        <div class="edad-card" data-reveal data-delay="1">
+          <span class="edad-card__emoji">🧸</span>
+          <span class="edad-card__years">1 – 2 años</span>
+          <h3>Caminantes</h3>
+          <ul>
+            <li>Control de esfínteres gradual</li>
+            <li>Primeras palabras en español e inglés</li>
+            <li>Juego paralelo y social</li>
+            <li>Talleres sensoriales y plásticos</li>
+            <li>Psicomotricidad gruesa</li>
+          </ul>
+        </div>
+        <div class="edad-card" data-reveal data-delay="2">
+          <span class="edad-card__emoji">🌟</span>
+          <span class="edad-card__years">2 – 3 años</span>
+          <h3>Exploradores</h3>
+          <ul>
+            <li>Autonomía personal y hábitos</li>
+            <li>Inglés con canciones y cuentos</li>
+            <li>Prerrequisitos de lectoescritura</li>
+            <li>Proyectos por trimestre</li>
+            <li>Preparación para Infantil 3–6</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BILINGÜE ────────────────────────────── -->
+  <section class="bilingue" aria-labelledby="bilingue-title">
+    <div class="container">
+      <div class="bilingue__inner">
+        <div class="bilingue__visual">
+          🇬🇧
+        </div>
+        <div class="bilingue__content">
+          <div class="section-tag" data-reveal>🌍 Programa bilingüe</div>
+          <h2 class="section-title" id="bilingue-title" data-reveal data-delay="1">
+            Inglés desde<br><em>el primer año</em>
+          </h2>
+          <p class="section-sub" data-reveal data-delay="2">
+            La infancia temprana es el momento óptimo para la adquisición de idiomas. En la Escuela Infantil NSD incorporamos el inglés de forma natural desde los 12 meses, sin presión y con metodología lúdica.
+          </p>
+          <div style="margin-top: 28px;" data-reveal data-delay="3">
+            <span class="idioma-pill"><span class="idioma-pill__flag">🎵</span> Songs &amp; Rhymes</span>
+            <span class="idioma-pill"><span class="idioma-pill__flag">📚</span> Storytime</span>
+            <span class="idioma-pill"><span class="idioma-pill__flag">🎭</span> Role Play</span>
+            <span class="idioma-pill"><span class="idioma-pill__flag">🖍️</span> Arts &amp; Crafts</span>
+            <span class="idioma-pill"><span class="idioma-pill__flag">🌤️</span> Daily Routines</span>
+          </div>
+          <p style="margin-top:24px; font-size:.9rem; color:var(--ink-soft);" data-reveal data-delay="4">
+            Al pasar al <strong>II Ciclo de Infantil (3–6 años)</strong> en el Colegio NSD, los niños ya llevan una base sólida en inglés dentro del programa bilingüe oficial de la Comunidad de Madrid.
+          </p>
+          <a href="../etapas/infantil-3-6.html" class="btn btn--secondary" style="margin-top:24px;" data-reveal data-delay="5">
+            Ver Infantil 3–6 años →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICIOS ──────────────────────────── -->
+  <section class="servicios" id="servicios" aria-labelledby="servicios-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-reveal>🎁 Servicios</div>
+        <h2 class="section-title" id="servicios-title" data-reveal data-delay="1">
+          Todo lo que necesitas,<br><em>en un solo lugar</em>
+        </h2>
+      </div>
+      <div class="servicios__grid">
+        <div class="servicio" data-reveal>
+          <div class="servicio__icon">☀️</div>
+          <h3>Aula Matinal</h3>
+          <p>Desde las 7:30 h para familias con horario ampliado.</p>
+        </div>
+        <div class="servicio" data-reveal data-delay="1">
+          <div class="servicio__icon">🥗</div>
+          <h3>Comedor Propio</h3>
+          <p>Menús elaborados en el centro. Adaptados a alergias y dietas especiales.</p>
+        </div>
+        <div class="servicio" data-reveal data-delay="2">
+          <div class="servicio__icon">🏖️</div>
+          <h3>Campamento de Verano</h3>
+          <p>Julio y agosto, en coordinación con el Campamento Urbano NSD.</p>
+        </div>
+        <div class="servicio" data-reveal data-delay="3">
+          <div class="servicio__icon">🌍</div>
+          <h3>Bilingüe Inglés</h3>
+          <p>Inmersión en inglés desde los 12 meses de forma natural y lúdica.</p>
+        </div>
+        <div class="servicio" data-reveal data-delay="4">
+          <div class="servicio__icon">📱</div>
+          <h3>App Alexia</h3>
+          <p>Diario digital, avisos y comunicación directa con la tutora.</p>
+        </div>
+        <div class="servicio" data-reveal data-delay="5">
+          <div class="servicio__icon">🩺</div>
+          <h3>Orientación familiar</h3>
+          <p>Equipo de orientación disponible para consultas de desarrollo y crianza.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIOS ────────────────────────── -->
+  <section class="testimonios" id="testimonios" aria-labelledby="testimonios-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-reveal>❤️ Las familias hablan</div>
+        <h2 class="section-title" id="testimonios-title" data-reveal data-delay="1">
+          Lo que dicen<br><em>nuestras familias</em>
+        </h2>
+      </div>
+      <div class="testimonios__grid">
+        <div class="testimonio" data-reveal>
+          <div class="testimonio__stars">★★★★★</div>
+          <p>Llevamos a nuestra hija desde los 6 meses. La confianza que te dan las educadoras desde el primer día es increíble. Siempre comunicadas, siempre disponibles. No podríamos estar más contentos.</p>
+          <div class="testimonio__autor">
+            <div class="testimonio__avatar">👩</div>
+            <div>
+              <div class="testimonio__name">Laura M.</div>
+              <div class="testimonio__role">Mamá de Sofía, 2 años</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonio" data-reveal data-delay="1">
+          <div class="testimonio__stars">★★★★★</div>
+          <p>Lo que más nos sorprendió fue el inglés. Con solo 18 meses nuestro hijo ya cantaba canciones en inglés. El paso al cole fue además muy suave porque ya conocían a las profes del otro edificio.</p>
+          <div class="testimonio__autor">
+            <div class="testimonio__avatar">👨</div>
+            <div>
+              <div class="testimonio__name">Alejandro R.</div>
+              <div class="testimonio__role">Papá de Mateo, 4 años (ahora en Primaria)</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonio" data-reveal data-delay="2">
+          <div class="testimonio__stars">★★★★★</div>
+          <p>Las becas de la Comunidad de Madrid nos ayudaron muchísimo. El proceso fue sencillo y el centro nos guió en todo. La calidad de la atención es brutal para el precio que pagamos.</p>
+          <div class="testimonio__autor">
+            <div class="testimonio__avatar">👩‍👧</div>
+            <div>
+              <div class="testimonio__name">Carmen T.</div>
+              <div class="testimonio__role">Mamá de gemelas, Carabanchel</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BECAS ──────────────────────────────── -->
+  <section class="becas-section" id="becas" aria-labelledby="becas-title">
+    <div class="container">
+      <div class="becas" data-reveal>
+        <div class="becas__icon">💰</div>
+        <div class="becas__text">
+          <h2 id="becas-title">Becas de la Comunidad de Madrid</h2>
+          <p>
+            La Escuela Infantil NSD está acogida al <strong>Programa de Becas para el Primer Ciclo de Educación Infantil</strong> de la Comunidad de Madrid. La cuota mensual se calcula según la renta familiar, haciendo posible el acceso a una educación de calidad para todas las familias de Carabanchel.
+          </p>
+          <div class="becas__actions">
+            <a href="#inscripcion" class="btn btn--primary">Consultar mi beca</a>
+            <a href="https://www.comunidad.madrid/servicios/educacion/escuelas-infantiles" target="_blank" rel="noopener" class="btn btn--secondary">Info Comunidad de Madrid ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INSCRIPCIÓN ────────────────────────── -->
+  <section class="inscripcion" id="inscripcion" aria-labelledby="form-title">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-reveal>📋 Reserva de plaza</div>
+        <h2 class="section-title" id="form-title" data-reveal data-delay="1">
+          Reserva la plaza<br><em>de tu pequeño/a</em>
+        </h2>
+        <p class="section-sub" data-reveal data-delay="2">
+          Rellena el formulario y nos ponemos en contacto contigo en 24 horas hábiles para informarte sobre disponibilidad y becas.
+        </p>
+      </div>
+
+      <div class="form-card" data-reveal>
+        <form id="form-inscripcion" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="nombre-padre">Nombre y apellidos <span class="req">*</span></label>
+              <input type="text" id="nombre-padre" name="nombre_padre" placeholder="Tu nombre completo" required />
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono <span class="req">*</span></label>
+              <input type="tel" id="telefono" name="telefono" placeholder="6XX XXX XXX" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Correo electrónico <span class="req">*</span></label>
+              <input type="email" id="email" name="email" placeholder="tu@email.com" required />
+            </div>
+            <div class="form-group">
+              <label for="nombre-nino">Nombre del niño/a <span class="req">*</span></label>
+              <input type="text" id="nombre-nino" name="nombre_nino" placeholder="Nombre del pequeño/a" required />
+            </div>
+            <div class="form-group">
+              <label for="fecha-nac">Fecha de nacimiento <span class="req">*</span></label>
+              <input type="date" id="fecha-nac" name="fecha_nacimiento" required />
+            </div>
+            <div class="form-group">
+              <label for="curso">Curso de interés</label>
+              <select id="curso" name="curso">
+                <option value="">Selecciona curso</option>
+                <option value="2025-2026">2025 – 2026</option>
+                <option value="2026-2027">2026 – 2027</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="mensaje">Mensaje o consulta (opcional)</label>
+              <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos lo que necesitas saber: horario, becas, servicios..."></textarea>
+            </div>
+            <div class="form-group full">
+              <label class="form-check">
+                <input type="checkbox" name="rgpd" required />
+                <span>
+                  He leído y acepto la <a href="privacidad.html" target="_blank">Política de Privacidad</a>.
+                  Consiento el tratamiento de mis datos para gestionar mi solicitud de información.
+                  <span class="req">*</span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <button type="submit" class="btn form-submit" style="margin-top:24px;">
+            🍼 Enviar solicitud de plaza
+          </button>
+        </form>
+
+        <div class="form-success" id="form-success">
+          <div class="form-success__icon">🎉</div>
+          <h3>¡Solicitud recibida!</h3>
+          <p style="margin-top:10px; color:#065F46;">
+            Nos pondremos en contacto contigo en menos de 24 horas hábiles para confirmar disponibilidad e informarte sobre becas. ¡Gracias por confiar en la Escuela Infantil NSD!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA FINAL ──────────────────────────── -->
+  <section class="cta-final" aria-label="Llamada a la acción">
+    <div class="container">
+      <h2 data-reveal>¿Tienes dudas? <br>Llámanos sin compromiso</h2>
+      <p data-reveal data-delay="1">Estaremos encantados de hacer una visita guiada y responder todas tus preguntas sobre el centro, las becas y el horario.</p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;" data-reveal data-delay="2">
+        <a href="tel:+34910000000" class="btn btn--primary">📞 Llamar ahora</a>
+        <a href="#inscripcion" class="btn btn--secondary" style="background:rgba(255,255,255,.15); color:#fff; border-color:rgba(255,255,255,.4);">Reservar visita al centro</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────── -->
+  <footer class="footer" aria-label="Pie de página">
+    <div class="footer__inner">
+      <div>
+        <div class="footer__brand">
+          <div class="footer__brand-icon">🍼</div>
+          <div class="footer__brand-name">Escuela Infantil NSD</div>
+        </div>
+        <p>Guardería y escuela infantil para niños de 0 a 3 años en Carabanchel, Madrid. Parte del Colegio Nuestra Señora de los Dolores.</p>
+        <p style="margin-top:12px;">📍 C/ Nuestra Señora de los Dolores, s/n<br>28025 Carabanchel, Madrid</p>
+      </div>
+      <div>
+        <h4>Navegación</h4>
+        <a href="#propuesta">Nuestra propuesta</a>
+        <a href="#edades">Por edades</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#becas">Becas CM</a>
+        <a href="#inscripcion">Reservar plaza</a>
+        <a href="../">← Colegio NSD</a>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <a href="tel:+34910000000">📞 91 XXX XX XX</a>
+        <a href="mailto:infantil@colegionsdolores.es">✉️ infantil@colegionsdolores.es</a>
+        <h4 style="margin-top:20px;">Legal</h4>
+        <a href="privacidad.html">Política de privacidad</a>
+        <a href="aviso-legal.html">Aviso legal</a>
+        <a href="accesibilidad.html">Accesibilidad</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 Escuela Infantil NSD · Colegio Nuestra Señora de los Dolores</span>
+      <span style="opacity:.5;">Hecho con ❤️ en Carabanchel</span>
+    </div>
+  </footer>
+
+  <!-- ── MOBILE STICKY CTA ──────────────────── -->
+  <div class="mobile-cta" aria-label="Acciones rápidas">
+    <a href="tel:+34910000000" class="mobile-cta__call">📞 Llamar</a>
+    <a href="#inscripcion" class="mobile-cta__form">🍼 Reservar plaza</a>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -55,9 +55,9 @@
             </ul>
           </li>
           <li class="has-dropdown">
-            <a href="etapas/infantil-0-3.html" data-link="etapas">Etapas <i class="bi bi-chevron-down"></i></a>
+            <a href="infantil-nsd/" data-link="etapas">Etapas <i class="bi bi-chevron-down"></i></a>
             <ul class="dropdown">
-              <li><a href="etapas/infantil-0-3.html">Infantil 0–3</a></li>
+              <li><a href="infantil-nsd/">Infantil 0–3 🍼</a></li>
               <li><a href="etapas/infantil-3-6.html">Infantil 3–6</a></li>
               <li><a href="etapas/primaria.html">Primaria</a></li>
               <li><a href="etapas/eso.html">ESO</a></li>
