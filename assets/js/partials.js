@@ -163,7 +163,7 @@
       </div>
     </div>
 
-    <a href="#top" class="to-top magnetic" aria-label="Volver arriba"><i class="bi bi-arrow-up"></i></a>
+    <a href="#top" class="to-top" aria-label="Volver arriba"><i class="bi bi-arrow-up"></i></a>
   </footer>
 
   <div class="mobile-cta-bar" id="mobileCta" aria-hidden="true">

@@ -129,8 +129,8 @@ input, select, textarea { font: inherit; }
 }
 .brand__logo-wrap {
   position: relative;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
 }
 .brand__sun {
   position: absolute;
@@ -143,7 +143,11 @@ input, select, textarea { font: inherit; }
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
-.brand__logo { width: 44px; height: 44px; border-radius: 50%; }
+.brand__logo {
+  width: 48px; height: 48px; object-fit: contain;
+  border-radius: 0;
+  mix-blend-mode: multiply;
+}
 .brand__text strong { display: block; font-size: .95rem; font-weight: 800; color: var(--sky-dark); }
 .brand__text small  { display: block; font-size: .72rem; color: var(--ink-soft); }
 
@@ -861,7 +865,7 @@ input, select, textarea { font: inherit; }
 .footer__bottom a { color: rgba(255,255,255,.35); transition: color .2s; }
 .footer__bottom a:hover { color: var(--sky); }
 
-.brand__logo--lg { width: 52px; height: 52px; border-radius: 50%; }
+.brand__logo--lg { width: 60px; height: 60px; border-radius: 0; filter: brightness(0) invert(1); mix-blend-mode: normal; opacity: .95; }
 
 /* To-top */
 .to-top {
