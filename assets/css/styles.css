@@ -1114,9 +1114,12 @@ body { overflow-x: hidden; }
   /* Stats: mantener vibrante */
   .stat__num { color: var(--yellow-500); }
   .stat p { color: var(--ink-500); }
-  /* Marquee */
-  .marquee { background: #15201A; }
-  .marquee__item { color: var(--ink-700); }
+  /* Marquee: texto legible + fundidos corregidos */
+  .marquee { background: #0E1B14; }
+  .marquee__item { color: #ECEFEC; }
+  /* Los pseudo-elementos usan var(--ink-900) que en dark = color claro → fix */
+  .marquee::before { background: linear-gradient(90deg,  #0E1B14, transparent); }
+  .marquee::after  { background: linear-gradient(-90deg, #0E1B14, transparent); }
   /* Galería de tiles */
   .gallery-tile { background: #1F2A24; }
   /* Formularios */
