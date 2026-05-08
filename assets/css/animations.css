@@ -513,3 +513,14 @@
     animation-play-state: running;
   }
 }
+
+/* 🌙 Dark mode — debe ir al final de animations.css para ganar la cascada */
+@media (prefers-color-scheme: dark) {
+  .marquee {
+    background: #060d08;
+    color: #fff;
+  }
+  .marquee__item { color: #fff; }
+  .marquee::before { background: linear-gradient(90deg,  #060d08, transparent); }
+  .marquee::after  { background: linear-gradient(-90deg, #060d08, transparent); }
+}
