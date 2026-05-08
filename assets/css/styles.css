@@ -1114,11 +1114,11 @@ body { overflow-x: hidden; }
   /* Stats: mantener vibrante */
   .stat__num { color: var(--yellow-500); }
   .stat p { color: var(--ink-500); }
-  /* Marquee: fondo verde oscuro distinto + letras blancas + fundidos corregidos */
-  .marquee { background: #1B3A24; color: #fff; }
+  /* Marquee: fondo casi negro + letras blancas + fundidos corregidos */
+  .marquee { background: #060d08; color: #fff; }
   .marquee__item { color: #fff; }
-  .marquee::before { background: linear-gradient(90deg,  #1B3A24, transparent); }
-  .marquee::after  { background: linear-gradient(-90deg, #1B3A24, transparent); }
+  .marquee::before { background: linear-gradient(90deg,  #060d08, transparent); }
+  .marquee::after  { background: linear-gradient(-90deg, #060d08, transparent); }
   /* Galería de tiles */
   .gallery-tile { background: #1F2A24; }
   /* Formularios */
