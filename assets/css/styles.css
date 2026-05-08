@@ -911,20 +911,20 @@ body { overflow-x: hidden; }
 
 /* ============== FOOTER ============== */
 .footer {
-  background: #0a140d; color: #c4d0c8; padding: 70px 0 0;
+  background: #0a140d; color: #e6ede8; padding: 70px 0 0;
   position: relative;
 }
 .footer__grid {
   display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr; gap: 36px;
   padding-bottom: 50px;
 }
-.footer__brand p { margin-top: 14px; max-width: 320px; }
+.footer__brand p { margin-top: 14px; max-width: 320px; color: #e6ede8; font-size: .95rem; line-height: 1.65; }
 .footer h5 {
   font-family: var(--font-sans); font-weight: 700; font-size: .9rem;
   text-transform: uppercase; letter-spacing: .12em; color: #fff; margin-bottom: 16px;
 }
 .footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-.footer a { color: #c4d0c8; }
+.footer a { color: #e6ede8; }
 .footer a:hover { color: var(--yellow-500); }
 .footer__contact i { color: var(--yellow-500); margin-right: 8px; }
 
