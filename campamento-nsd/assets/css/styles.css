@@ -98,6 +98,29 @@ input, select, textarea { font: inherit; }
   border-radius: var(--radius-full);
   font-weight: 700;
 }
+.topbar__pill {
+  background: rgba(255,255,255,.15);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.topbar__pill a {
+  color: var(--sun);
+  text-decoration: none;
+  display: inline;
+}
+.topbar__pill a:hover { text-decoration: underline; }
+.topbar__note {
+  font-weight: 600;
+  color: rgba(255,255,255,.95);
+  white-space: nowrap;
+}
+.topbar__note strong { color: var(--sun); }
+@media (max-width: 768px) {
+  .topbar__left a:nth-child(2) { display: none; }
+  .topbar__note { display: none; }
+}
 
 /* ============== NAVBAR ============== */
 .navbar {

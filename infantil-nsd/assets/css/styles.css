@@ -78,9 +78,16 @@ body {
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   flex-wrap: wrap;
 }
+.topbar__left {
+  display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+}
 .topbar__pill {
   background: rgba(255,255,255,.15); border-radius: 999px;
   padding: 2px 12px;
+}
+@media (max-width: 768px) {
+  .topbar__left a:nth-child(2) { display: none; }  /* email se oculta en mobile, sólo tel */
+  .topbar__inner > span:last-child { display: none; }  /* "Becas CM" oculto en mobile */
 }
 
 /* ── NAVBAR ──────────────────────────── */
