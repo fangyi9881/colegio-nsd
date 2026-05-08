@@ -691,7 +691,9 @@ section { padding: 80px 0; }
   text-decoration: none;
   white-space: nowrap;
   box-sizing: border-box;
-  border: 2px solid transparent;
+  border: 0;
+  background-clip: padding-box;
+  -webkit-tap-highlight-color: transparent;
   overflow: hidden;
 }
 .mobile-cta__icon {
