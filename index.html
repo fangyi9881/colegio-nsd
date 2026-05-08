@@ -607,42 +607,61 @@
         </div>
       </div>
 
-      <form class="form-card glass" data-reveal="right" onsubmit="event.preventDefault(); alert('¡Gracias! Te contactaremos pronto.');">
-        <h3>Solicita información</h3>
-        <div class="form-row">
-          <label>Nombre y apellidos
-            <input type="text" required placeholder="Tu nombre" />
-          </label>
+      <form class="form-card" data-reveal="right" onsubmit="event.preventDefault(); alert('¡Gracias! Te contactaremos pronto.');">
+        <!-- Cabecera visual -->
+        <div class="form-card__header">
+          <div class="form-card__header-ico"><i class="bi bi-chat-heart-fill"></i></div>
+          <div class="form-card__header-text">
+            <h3>Solicita información</h3>
+            <p class="form-card__header-sub">Te respondemos en menos de 24 h · Sin compromiso</p>
+          </div>
         </div>
-        <div class="form-row form-row--2">
-          <label>Email
-            <input type="email" required placeholder="tu@email.com" />
-          </label>
-          <label>Teléfono
-            <input type="tel" placeholder="6XX XXX XXX" />
-          </label>
+        <!-- Campos -->
+        <div class="form-body">
+          <div class="form-row">
+            <label>
+              <i class="bi bi-person-fill lbl-ico"></i> Nombre y apellidos
+              <input type="text" required placeholder="Tu nombre completo" />
+            </label>
+          </div>
+          <div class="form-row form-row--2">
+            <label>
+              <i class="bi bi-envelope-fill lbl-ico"></i> Email
+              <input type="email" required placeholder="tu@email.com" />
+            </label>
+            <label>
+              <i class="bi bi-telephone-fill lbl-ico"></i> Teléfono
+              <input type="tel" placeholder="6XX XXX XXX" />
+            </label>
+          </div>
+          <div class="form-row">
+            <label>
+              <i class="bi bi-mortarboard-fill lbl-ico"></i> Etapa de interés
+              <select>
+                <option>Infantil 0–3</option>
+                <option>Infantil 3–6</option>
+                <option>Primaria</option>
+                <option>ESO</option>
+                <option>Otra</option>
+              </select>
+            </label>
+          </div>
+          <!-- Mensaje + política de privacidad en paralelo -->
+          <div class="form-row--msg">
+            <label>
+              <i class="bi bi-chat-left-text-fill lbl-ico"></i> Mensaje
+              <textarea rows="5" placeholder="Cuéntanos qué necesitas…"></textarea>
+            </label>
+            <label class="form-privacy">
+              <input type="checkbox" required />
+              <i class="bi bi-shield-lock-fill"></i>
+              <span>He leído y acepto la <a href="/privacidad.html" target="_blank" rel="noopener">política de privacidad</a></span>
+            </label>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block magnetic">
+            <i class="bi bi-send-fill"></i> Enviar solicitud
+          </button>
         </div>
-        <div class="form-row">
-          <label>Etapa de interés
-            <select>
-              <option>Infantil 0–3</option>
-              <option>Infantil 3–6</option>
-              <option>Primaria</option>
-              <option>ESO</option>
-              <option>Otra</option>
-            </select>
-          </label>
-        </div>
-        <div class="form-row">
-          <label>Mensaje
-            <textarea rows="4" placeholder="Cuéntanos qué necesitas…"></textarea>
-          </label>
-        </div>
-        <label class="form-check">
-          <input type="checkbox" required />
-          <span>He leído y acepto la <a href="/privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.</span>
-        </label>
-        <button type="submit" class="btn btn--primary btn--block magnetic">Enviar solicitud</button>
       </form>
     </div>
   </section>
