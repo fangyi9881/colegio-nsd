@@ -885,7 +885,7 @@ input, select, textarea { font: inherit; }
 .to-top.is-visible { opacity: 1; pointer-events: auto; }
 .to-top:hover { transform: translateY(-3px); }
 
-/* ============== MOBILE CTA ============== */
+/* ============== MOBILE CTA — GRID 2 columnas idénticas ============== */
 .mobile-cta-bar {
   display: none;
   position: fixed;
@@ -894,43 +894,52 @@ input, select, textarea { font: inherit; }
   background: white;
   border-top: 2px solid var(--sky-light);
   padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-  gap: 10px;
   transform: translateY(100%);
   transition: transform .3s cubic-bezier(.4,0,.2,1);
   box-shadow: 0 -4px 20px rgba(10,175,219,.1);
-  align-items: stretch;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  box-sizing: border-box;
 }
 .mobile-cta-bar.is-visible { transform: translateY(0); }
 .cta-call, .cta-visit {
-  flex: 1 1 0;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 12px 10px;
+  gap: 8px;
+  padding: 0 12px;
+  height: 48px;
   border-radius: var(--radius-md);
   font-weight: 800;
   font-size: .9rem;
   line-height: 1;
-  min-height: 44px;
   text-decoration: none;
   white-space: nowrap;
   box-sizing: border-box;
+  border: 2px solid transparent;
+  overflow: hidden;
 }
 .mobile-cta-bar a i {
-  font-size: 1rem; line-height: 1; flex-shrink: 0;
+  font-size: 1.05rem; line-height: 1;
+  display: inline-flex; align-items: center;
+  flex-shrink: 0;
+}
+.mobile-cta-bar a span {
+  display: inline-block;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .cta-call  {
   background: var(--green-light); color: var(--green);
-  border: 2px solid var(--green-mid);
+  border-color: var(--green-mid);
 }
 .cta-visit {
   background: var(--sky); color: white;
-  border: 2px solid transparent;  /* iguala altura con cta-call */
 }
 @media (max-width: 380px) {
-  .cta-call, .cta-visit { font-size: .82rem; padding: 11px 8px; gap: 4px; }
-  .mobile-cta-bar a i { font-size: .92rem; }
+  .cta-call, .cta-visit { font-size: .82rem; padding: 0 10px; gap: 6px; }
+  .mobile-cta-bar a i { font-size: .95rem; }
 }
 
 /* ============== RESPONSIVE ============== */
@@ -950,7 +959,7 @@ input, select, textarea { font: inherit; }
 @media (max-width: 768px) {
   .nav { display: none; }
   .hamburger-x { display: flex; }
-  .mobile-cta-bar { display: flex; }
+  .mobile-cta-bar { display: grid; }
   .hero__emoji { font-size: 1.4rem; }
   .horarios__grid { grid-template-columns: 1fr; max-width: 400px; }
   .topbar__left .topbar__addr { display: none; }

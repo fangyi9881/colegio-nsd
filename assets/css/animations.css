@@ -183,7 +183,7 @@
   backdrop-filter: blur(8px);
 }
 
-/* ===== Sticky bottom CTA (mobile) ===== */
+/* ===== Sticky bottom CTA (mobile) — GRID 2 columnas idénticas ===== */
 .mobile-cta-bar {
   position: fixed; left: 0; right: 0; bottom: 0;
   background: rgba(255,255,255,.96);
@@ -193,46 +193,60 @@
   padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
   display: none;
   z-index: 40;
-  gap: 10px;
   transform: translateY(100%);
   transition: transform .35s cubic-bezier(.2,.8,.2,1);
-  align-items: stretch;
+  /* GRID: dos columnas idénticas, sin variaciones */
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  box-sizing: border-box;
 }
 .mobile-cta-bar.is-visible { transform: translateY(0); }
 .mobile-cta-bar a {
-  flex: 1 1 0;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 12px 10px;
+  gap: 8px;
+  padding: 0 12px;
+  height: 48px;
   border-radius: 12px;
-  text-align: center;
-  font-weight: 700; font-size: .9rem;
+  font-weight: 700;
+  font-size: .9rem;
   line-height: 1;
   text-decoration: none;
-  min-height: 44px;
   white-space: nowrap;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  overflow: hidden;
 }
 .mobile-cta-bar a i {
-  font-size: 1rem;
+  font-size: 1.05rem;
   line-height: 1;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   flex-shrink: 0;
 }
-.mobile-cta-bar .cta-call { background: var(--ink-50); color: var(--ink-900); }
+.mobile-cta-bar a span {
+  display: inline-block;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mobile-cta-bar .cta-call {
+  background: var(--ink-50); color: var(--ink-900);
+  border-color: var(--ink-100);
+}
 .mobile-cta-bar .cta-visit {
   background: linear-gradient(135deg, var(--green-700), var(--green-900));
   color: #fff;
   box-shadow: 0 8px 18px -8px var(--green-700);
 }
 @media (max-width: 720px) {
-  .mobile-cta-bar { display: flex; }
+  .mobile-cta-bar { display: grid; }
   body { padding-bottom: 76px; }
 }
 @media (max-width: 380px) {
-  .mobile-cta-bar a { font-size: .82rem; padding: 11px 8px; gap: 4px; }
-  .mobile-cta-bar a i { font-size: .92rem; }
+  .mobile-cta-bar a { font-size: .82rem; padding: 0 10px; gap: 6px; }
+  .mobile-cta-bar a i { font-size: .95rem; }
 }
 
 /* ===== Hamburger premium → X ===== */

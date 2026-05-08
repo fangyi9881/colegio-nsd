@@ -167,8 +167,8 @@
   </footer>
 
   <div class="mobile-cta-bar" id="mobileCta" aria-hidden="true">
-    <a href="tel:+34911234567" class="cta-call"><i class="bi bi-telephone-fill"></i> Llamar</a>
-    <a href="/contacto.html" class="cta-visit"><i class="bi bi-calendar-check"></i> Reservar visita</a>
+    <a href="tel:+34911234567" class="cta-call"><i class="bi bi-telephone-fill"></i><span>Llamar</span></a>
+    <a href="/contacto.html" class="cta-visit"><i class="bi bi-calendar-check"></i><span>Reservar visita</span></a>
   </div>
 
   <div class="cursor-ring" aria-hidden="true"></div>
