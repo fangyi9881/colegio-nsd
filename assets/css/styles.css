@@ -110,17 +110,41 @@ p  { margin: 0 0 1em; color: var(--ink-700); }
 .topbar a { color: #cfd9d2; }
 .topbar a:hover { color: var(--yellow-500); }
 .topbar__contact, .topbar__quick {
-  display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+  display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
 }
-.topbar i { margin-right: 4px; color: var(--yellow-500); }
+/* Todos los iconos del topbar: mismo tamaño */
+.topbar i {
+  font-size: 1rem; color: var(--yellow-500);
+  display: inline-flex; align-items: center; vertical-align: middle;
+}
+/* Links de contacto: icono + texto alineados */
+.topbar__contact a {
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.topbar__contact a i { margin: 0; }
 .topbar__addr { opacity: .8; }
+/* Pastillas Alexia / Raíces */
 .quick-link {
+  display: inline-flex; align-items: center; gap: 5px;
   background: rgba(255,255,255,.06);
-  padding: 4px 10px;
+  padding: 4px 10px; height: 26px;
   border-radius: 999px;
+  font-size: .82rem;
   transition: background .2s;
 }
+.quick-link i { font-size: .9rem; margin: 0; }
 .quick-link:hover { background: rgba(247,211,0,.18); color: var(--yellow-500); }
+/* Iconos sociales sueltos (sin clase): caja cuadrada uniforme */
+.topbar__quick a:not(.quick-link) {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  transition: background .2s, color .2s;
+}
+.topbar__quick a:not(.quick-link) i { font-size: 1rem; margin: 0; color: #cfd9d2; }
+.topbar__quick a:not(.quick-link):hover { background: rgba(247,211,0,.14); }
+.topbar__quick a:not(.quick-link):hover i { color: var(--yellow-500); }
+
 @media (max-width: 720px) { .d-none-mobile { display: none; } }
 
 /* Móvil: topbar mucho más compacta */
@@ -132,7 +156,6 @@ p  { margin: 0 0 1em; color: var(--ink-700); }
   .topbar__contact a:not([href^="tel"]):not([href^="mailto"]) { display: none; }
   /* Solo iconos de RRSS, no Alexia/Raíces */
   .topbar__quick .quick-link { display: none; }
-  .topbar__quick a:not(.quick-link) { font-size: 1rem; }
 }
 
 /* ============== NAVBAR ============== */
