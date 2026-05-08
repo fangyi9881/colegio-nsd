@@ -271,9 +271,10 @@ body {
   box-shadow: var(--shadow-float); display: flex; align-items: center; gap: 12px;
   animation: floatCard 6s ease-in-out infinite alternate;
 }
-.hero__float:nth-child(2) { top: -24px; right: -20px; animation-delay: .5s; }
-.hero__float:nth-child(3) { bottom: 30px; left: -30px; animation-delay: 1.5s; }
-.hero__float:nth-child(4) { top: 50%; right: -40px; animation-delay: 3s; }
+/* Posiciones unificadas con la web principal del colegio */
+.hero__float--1 { top: 6%;     left: -36px;  animation-delay: 0s; }
+.hero__float--2 { bottom: 28%; right: -44px; animation-delay: .5s; }
+.hero__float--3 { bottom: -22px; left: 14%;  animation-delay: 1.5s; }
 @keyframes floatCard {
   0% { transform: translateY(0) rotate(-.5deg); }
   100% { transform: translateY(-12px) rotate(.5deg); }
