@@ -771,13 +771,29 @@ input, select, textarea { font: inherit; }
 
 /* ============== INSCRIPCIÓN ============== */
 .inscripcion { background: linear-gradient(180deg, var(--bg) 0%, #E8F9FD 100%); }
+/* 4 tarjetas resumen arriba */
+.inscripcion__info {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 36px;
+}
+/* Form + Mapa lado a lado */
 .inscripcion__grid {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 48px;
-  align-items: start;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  align-items: stretch;
 }
-.inscripcion__info { display: flex; flex-direction: column; gap: 24px; }
+.inscripcion__map {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(10,175,219,.15);
+  border: 2px solid var(--sky-light);
+  min-height: 480px;
+  position: relative;
+}
+.inscripcion__map iframe { display: block; width: 100%; height: 100%; min-height: 480px; }
 .info-block {
   background: white;
   border-radius: var(--radius-md);
@@ -981,10 +997,12 @@ input, select, textarea { font: inherit; }
   .act-grid { grid-template-columns: repeat(2, 1fr); }
   .porque__grid { grid-template-columns: repeat(2, 1fr); }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
+  /* Inscripción: info de 4 a 2 columnas, form+mapa apilados */
+  .inscripcion__info { grid-template-columns: repeat(2, 1fr); }
   .inscripcion__grid { grid-template-columns: 1fr; }
-  .contacto__grid { grid-template-columns: 1fr; }
+  .inscripcion__map { min-height: 360px; }
+  .inscripcion__map iframe { min-height: 360px; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
-  /* Mantenemos posiciones originales de las float-cards */
 }
 
 @media (max-width: 768px) {
@@ -1016,6 +1034,10 @@ input, select, textarea { font: inherit; }
   .form-card { padding: 28px 20px; }
   .hero__title { font-size: 2.2rem; }
   .hero__photo { aspect-ratio: 4/3.6; }
+  /* Info-blocks: 1 columna en mobile */
+  .inscripcion__info { grid-template-columns: 1fr; gap: 12px; }
+  .inscripcion__map { min-height: 300px; }
+  .inscripcion__map iframe { min-height: 300px; }
   /* Solo reescalado mas compacto, mantienen posiciones originales */
   .float-card { padding: 6px 10px; font-size: .72rem; gap: 6px; }
   .float-card__icon { font-size: 1.05rem; }
