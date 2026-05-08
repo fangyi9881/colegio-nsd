@@ -118,7 +118,12 @@ input, select, textarea { font: inherit; }
 }
 .topbar__note strong { color: var(--sun); }
 @media (max-width: 768px) {
-  .topbar__left a:nth-child(2) { display: none; }
+  /* En mobile: solo iconos */
+  .topbar__left .topbar__txt { display: none; }
+  .topbar__left { gap: 14px; }
+  .topbar__left a { padding: 4px; }
+  .topbar__pill .topbar__pill-txt { display: none; }
+  .topbar__pill { font-size: .72rem; padding: 4px 10px; }
   .topbar__note { display: none; }
 }
 

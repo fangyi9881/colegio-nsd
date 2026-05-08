@@ -81,13 +81,20 @@ body {
 .topbar__left {
   display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
 }
+.topbar__left a { display: inline-flex; align-items: center; gap: 6px; }
+.topbar__ico { font-size: 1rem; }
 .topbar__pill {
   background: rgba(255,255,255,.15); border-radius: 999px;
   padding: 2px 12px;
 }
 @media (max-width: 768px) {
-  .topbar__left a:nth-child(2) { display: none; }  /* email se oculta en mobile, sólo tel */
-  .topbar__inner > span:last-child { display: none; }  /* "Becas CM" oculto en mobile */
+  /* Solo iconos en mobile, ocultamos los textos */
+  .topbar__txt { display: none; }
+  .topbar__left { gap: 14px; }
+  .topbar__left a { padding: 4px; }
+  .topbar__ico { font-size: 1.05rem; }
+  .topbar__pill { font-size: .72rem; padding: 2px 10px; }
+  .topbar__note { display: none; }
 }
 
 /* ── NAVBAR ──────────────────────────── */
