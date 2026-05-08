@@ -1167,6 +1167,9 @@ body { overflow-x: hidden; }
   }
   .stage--featured h3 { color: var(--yellow-500); }
   .stage--featured p { color: rgba(255,255,255,.75); }
+  /* Botón primario en sección CTA: amarillo con texto oscuro hardcoded */
+  .cta .btn--primary { color: #0A3810; }
+  .cta .btn--primary:hover { color: #0A3810; }
   /* Contact list */
   .contact-list i { background: var(--green-100); color: var(--green-700); }
   .contact-social a { background: #1F2A24; color: var(--ink-700); }
