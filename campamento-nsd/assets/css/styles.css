@@ -942,6 +942,12 @@ input, select, textarea { font: inherit; }
   .float-card small { font-size: .66rem; }
 }
 
+@media (max-width: 768px) {
+  /* Botones hero iguales y compactos en mobile */
+  .hero__cta { gap: 10px; flex-wrap: nowrap; }
+  .hero__cta .btn { flex: 1 1 0; padding: 12px 14px; font-size: .85rem; min-width: 0; }
+  .hero__cta .btn--lg { padding: 12px 14px; font-size: .85rem; }
+}
 @media (max-width: 540px) {
   .act-grid { grid-template-columns: 1fr; }
   .porque__grid { grid-template-columns: 1fr; }
@@ -956,6 +962,9 @@ input, select, textarea { font: inherit; }
   .float-card__icon { font-size: 1.05rem; }
   .float-card strong { font-size: .72rem; line-height: 1.1; }
   .float-card small { font-size: .6rem; line-height: 1.1; }
+  /* Botones aun mas compactos */
+  .hero__cta .btn { padding: 11px 12px; font-size: .8rem; }
+  .hero__cta .btn--lg { padding: 11px 12px; font-size: .8rem; }
 }
 
 @media (max-width: 380px) {
