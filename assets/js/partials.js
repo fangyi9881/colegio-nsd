@@ -21,7 +21,6 @@
       <div class="topbar__contact">
         <a href="tel:+34911234567" aria-label="Teléfono"><i class="bi bi-telephone-fill"></i> <span>91 123 45 67</span></a>
         <a href="mailto:secretaria@colegionsdolores.es" aria-label="Email"><i class="bi bi-envelope-fill"></i> <span>secretaria@colegionsdolores.es</span></a>
-        <span class="topbar__addr d-none-mobile"><i class="bi bi-geo-alt-fill"></i> C/ Nuestra Señora de los Dolores, s/n · Carabanchel, Madrid</span>
       </div>
       <div class="topbar__quick">
         <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-person-badge"></i> Alexia</a>
