@@ -893,26 +893,45 @@ input, select, textarea { font: inherit; }
   z-index: 90;
   background: white;
   border-top: 2px solid var(--sky-light);
-  padding: 10px 16px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
   gap: 10px;
   transform: translateY(100%);
   transition: transform .3s cubic-bezier(.4,0,.2,1);
   box-shadow: 0 -4px 20px rgba(10,175,219,.1);
+  align-items: stretch;
 }
 .mobile-cta-bar.is-visible { transform: translateY(0); }
 .cta-call, .cta-visit {
-  flex: 1;
-  display: flex;
+  flex: 1 1 0;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 12px;
+  padding: 12px 10px;
   border-radius: var(--radius-md);
   font-weight: 800;
   font-size: .9rem;
+  line-height: 1;
+  min-height: 44px;
+  text-decoration: none;
+  white-space: nowrap;
+  box-sizing: border-box;
 }
-.cta-call  { background: var(--green-light); color: var(--green); border: 2px solid var(--green-mid); }
-.cta-visit { background: var(--sky); color: white; }
+.mobile-cta-bar a i {
+  font-size: 1rem; line-height: 1; flex-shrink: 0;
+}
+.cta-call  {
+  background: var(--green-light); color: var(--green);
+  border: 2px solid var(--green-mid);
+}
+.cta-visit {
+  background: var(--sky); color: white;
+  border: 2px solid transparent;  /* iguala altura con cta-call */
+}
+@media (max-width: 380px) {
+  .cta-call, .cta-visit { font-size: .82rem; padding: 11px 8px; gap: 4px; }
+  .mobile-cta-bar a i { font-size: .92rem; }
+}
 
 /* ============== RESPONSIVE ============== */
 @media (max-width: 980px) {
