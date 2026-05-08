@@ -1003,5 +1003,99 @@ input, select, textarea { font: inherit; }
   .float-card strong { font-size: .68rem; }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   🌙 DARK MODE — Campamento NSD
+   ═══════════════════════════════════════════════════════════ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --ink:        #ECEFEC;
+    --ink-mid:    #BFC8C2;
+    --ink-soft:   #8C9991;
+    --white:      #0F1814;
+    --bg:         #0F1814;
+    --sky-light:  #0F2A33;
+    --green-light:#1A2E1F;
+    --sun-light:  #2A2410;
+    --coral-light:#2E1818;
+    --purple-light:#221525;
+  }
+  body { background: #0F1814; color: #ECEFEC; }
+  /* Topbar */
+  .topbar { background: #15201A; color: #BFC8C2; border-bottom: 1px solid #1F2A24; }
+  .topbar__addr, .topbar a { color: #BFC8C2; }
+  .topbar__colegio { background: #1F2A24; color: #ECEFEC; }
+  .topbar__colegio:hover { background: var(--sky); color: #0F1814; }
+  /* Navbar */
+  .navbar {
+    background: rgba(15,24,20,.85);
+    backdrop-filter: saturate(180%) blur(16px);
+    border-bottom: 1px solid #1F2A24;
+  }
+  .navbar.is-scrolled { background: rgba(15,24,20,.95); }
+  .nav a { color: #BFC8C2; }
+  .nav a:hover, .nav a.is-active { color: var(--sky); background: #1F2A24; }
+  .brand__text strong { color: var(--sky); }
+  .brand__text small { color: #8C9991; }
+  .hamburger-x span { background: #BFC8C2; }
+  /* Drawer */
+  .drawer { background: #0F1814; }
+  .drawer ul a { color: #ECEFEC; border-color: #1F2A24; }
+  .drawer__cta { background: var(--sky); color: #0F1814; }
+  /* Hero */
+  .hero { background: linear-gradient(180deg, #0F1814 0%, #15201A 100%); }
+  .hero__title { color: #ECEFEC; }
+  .hero__sub { color: #BFC8C2; }
+  .hero__chips span { background: #1F2A24; color: #BFC8C2; border-color: #2A3A30; }
+  /* Tarjetas */
+  .act-card, .porque-card, .horario-card, .form-card, .testimonio, .float-card {
+    background: #15201A;
+    border-color: #1F2A24;
+    color: #BFC8C2;
+  }
+  .act-card h3, .porque-card h3, .horario-card h3, .testimonio__author { color: #ECEFEC; }
+  .act-card p, .porque-card p { color: #8C9991; }
+  .float-card strong { color: #ECEFEC; }
+  .float-card small { color: #8C9991; }
+  /* Stats */
+  .stat-card { background: #15201A; border-color: #1F2A24; }
+  .stat-card .stat-num { color: var(--sun); }
+  .stat-card p { color: #8C9991; }
+  /* Forms */
+  .form-card input, .form-card select, .form-card textarea {
+    background: #1B2520; color: #ECEFEC; border-color: #2A3A30;
+  }
+  .form-card input::placeholder, .form-card textarea::placeholder { color: #8C9991; }
+  .form-card input:focus, .form-card select:focus, .form-card textarea:focus {
+    background: #15201A; border-color: var(--sky);
+    box-shadow: 0 0 0 4px rgba(10,175,219,.18);
+  }
+  .form-card label { color: #BFC8C2; }
+  .form-check { color: #8C9991; }
+  /* Inscripción/Contacto */
+  .inscripcion, .contacto { background: #15201A; }
+  .info-card { background: #1B2520; border-color: #2A3A30; }
+  /* Botones */
+  .btn--outline { background: transparent; color: var(--sky); border-color: var(--sky); }
+  .btn--outline:hover { background: var(--sky); color: #0F1814; }
+  /* Mobile CTA bar */
+  .mobile-cta-bar {
+    background: rgba(15,24,20,.95);
+    border-top-color: #1F2A24;
+    box-shadow: 0 -4px 20px rgba(0,0,0,.4);
+  }
+  .cta-call { background: #1F2A24; color: var(--sky); border-color: #2A3A30; }
+  /* Footer */
+  .footer { background: #0A1410; }
+  .footer__bottom { border-top-color: #1F2A24; }
+  /* To-top */
+  .to-top { background: var(--sky); color: #0F1814; }
+  .to-top:hover { background: var(--sky-dark); }
+  /* Hero photo: ligera atenuación */
+  .hero__photo { filter: brightness(.92); }
+  /* Inputs nativos */
+  input, select, textarea, button { color-scheme: dark; }
+}
+
 /* Evita scroll horizontal por float-cards que sobresalen */
 body { overflow-x: hidden; }

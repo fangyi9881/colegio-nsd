@@ -962,6 +962,136 @@ body { overflow-x: hidden; }
   display: flex; gap: 14px; font-size: .78rem; color: var(--ink-500);
   align-items: center; flex-wrap: wrap; margin-bottom: 4px;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   🌙 DARK MODE — automático según preferencia del sistema
+   ═══════════════════════════════════════════════════════════ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    /* Texto: invertimos jerarquía */
+    --ink-900: #ECEFEC;
+    --ink-700: #BFC8C2;
+    --ink-500: #8C9991;
+    --ink-300: #5E6E66;
+    --ink-100: #283832;
+    --ink-50:  #1B2520;
+    --white:   #0F1814;
+    /* Verdes adaptados para fondo oscuro */
+    --green-900: #6BD577;
+    --green-700: #4AC758;
+    --green-100: #1A3520;
+    /* Amarillos: el yellow-500 sigue siendo el accent, los light bg se oscurecen */
+    --yellow-100: #3B2E00;
+    /* Sombras menos prominentes en oscuro */
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+    --shadow:    0 10px 30px -12px rgba(0,0,0,.5);
+    --shadow-lg: 0 30px 60px -20px rgba(0,0,0,.6);
+  }
+  body { background: #0F1814; color: #ECEFEC; }
+  a { color: var(--green-700); }
+  a:hover { color: var(--green-900); }
+  /* Secciones */
+  .section--soft { background: #15201A; }
+  .section--dark { background: linear-gradient(160deg, #061008 0%, #0A1A0F 100%); }
+  /* Topbar / Navbar */
+  .topbar { background: #15201A; color: var(--ink-700); border-bottom: 1px solid #1F2A24; }
+  .topbar a { color: var(--ink-700); }
+  .topbar a:hover { color: var(--green-700); }
+  .navbar {
+    background: rgba(15,24,20,.85) !important;
+    backdrop-filter: saturate(180%) blur(16px);
+    border-bottom: 1px solid #1F2A24;
+  }
+  .navbar.is-scrolled { background: rgba(15,24,20,.95) !important; }
+  .nav a { color: var(--ink-700); }
+  .nav a:hover { color: var(--green-700); }
+  .dropdown { background: #15201A !important; border: 1px solid #1F2A24; }
+  .dropdown a { color: var(--ink-700); }
+  .dropdown a:hover { background: #1F2A24; color: var(--green-700); }
+  .brand__text strong { color: var(--green-700); }
+  .brand__text small { color: var(--ink-500); }
+  /* Drawer móvil */
+  .drawer { background: #0F1814; }
+  .drawer ul a { color: var(--ink-700); border-color: #1F2A24; }
+  .hamburger-x span { background: var(--ink-700); }
+  /* Hero */
+  .hero { background: linear-gradient(180deg, #0F1814 0%, #15201A 100%); }
+  .hero__photo { filter: brightness(.92); }
+  .badge-pill { background: #1A3520; color: var(--green-700); border-color: rgba(106,213,119,.25); }
+  /* Tarjetas */
+  .stage, .value, .service:not(.section--dark .service), .news__item, .form-card, .dept, .teacher, .highlight {
+    background: #15201A;
+    border-color: #1F2A24;
+    color: var(--ink-700);
+  }
+  .stage h3, .value h4, .news__body h3, .form-card h3, .dept h3, .teacher h3 { color: #ECEFEC; }
+  .stage p, .value p, .news__body p, .dept p { color: var(--ink-500); }
+  .float-card { background: #1F2A24; color: #ECEFEC; }
+  .float-card strong { color: #ECEFEC; }
+  .float-card small { color: var(--ink-500); }
+  /* Hero card que envuelve la foto */
+  .hero__card-inner { background: #15201A; }
+  /* Stats: mantener vibrante */
+  .stat__num { color: var(--yellow-500); }
+  .stat p { color: var(--ink-500); }
+  /* Marquee */
+  .marquee { background: #15201A; }
+  .marquee__item { color: var(--ink-700); }
+  /* Galería de tiles */
+  .gallery-tile { background: #1F2A24; }
+  /* Formularios */
+  .form-card input, .form-card select, .form-card textarea {
+    background: #1B2520; color: #ECEFEC; border-color: #2A3A30;
+  }
+  .form-card input::placeholder, .form-card textarea::placeholder { color: var(--ink-500); }
+  .form-card input:focus, .form-card select:focus, .form-card textarea:focus {
+    background: #15201A; border-color: var(--green-700);
+    box-shadow: 0 0 0 4px rgba(74,199,88,.15);
+  }
+  .form-check { color: var(--ink-500); }
+  /* Lista de checks */
+  .check-list i { color: var(--green-700); }
+  /* Botones */
+  .btn--ghost { background: #1F2A24; color: #ECEFEC; border-color: #2A3A30; }
+  .btn--ghost:hover { background: #283832; color: var(--green-700); }
+  /* News destacada */
+  .news__cat { background: rgba(0,0,0,.7); }
+  /* Stage/service featured: ajustar el fondo claro a algo cálido oscuro */
+  .stage--featured {
+    background: linear-gradient(160deg, #2A2410 0%, #3B2E00 60%, #4A3700 100%);
+    color: #ECEFEC;
+  }
+  .stage--featured h3 { color: var(--yellow-500); }
+  .stage--featured p { color: rgba(255,255,255,.75); }
+  /* Contact list */
+  .contact-list i { background: var(--green-100); color: var(--green-700); }
+  .contact-social a { background: #1F2A24; color: var(--ink-700); }
+  /* Mobile CTA bar */
+  .mobile-cta-bar {
+    background: rgba(15,24,20,.95) !important;
+    border-top-color: #1F2A24;
+  }
+  .mobile-cta-bar .cta-call { background: #1F2A24; color: #ECEFEC; border-color: #2A3A30; }
+  /* To-top */
+  .to-top { background: var(--green-700); color: #0F1814; }
+  .to-top:hover { background: var(--green-900); color: #0F1814; }
+  /* Cookie banner: forzamos colores oscuros legibles */
+  #ck-banner { background: #15201A !important; color: #ECEFEC !important; border-color: #1F2A24 !important; }
+  #ck-banner .ck-info h3 { color: var(--green-700) !important; }
+  #ck-banner .ck-info p { color: var(--ink-500) !important; }
+  #ck-banner .ck-info-emoji { background: linear-gradient(135deg, #3B2E00, #4A3700); }
+  #ck-banner .ck-cat { background: #1B2520; border-color: #2A3A30; }
+  #ck-banner .ck-cat h4 { color: var(--green-700); }
+  #ck-banner .ck-cat p { color: var(--ink-500); }
+  #ck-banner .ck-cat:has(input:checked) { background: #1A3520; border-color: var(--green-700); }
+  #ck-banner .ck-cat:has(input:disabled) { background: #2A2410; border-color: #5C4500; }
+  #ck-banner .ck-btn-reject { color: var(--ink-500); border-color: #2A3A30; }
+  #ck-banner .ck-btn-reject:hover { color: var(--green-700); border-color: var(--green-700); background: #1A3520; }
+  #ck-banner .ck-slider { background: #2A3A30; }
+  /* Inputs nativos: que usen el esquema oscuro */
+  input, select, textarea, button { color-scheme: dark; }
+}
 .news__meta span { display: inline-flex; align-items: center; gap: 4px; }
 .news__meta i { font-size: .82rem; }
 

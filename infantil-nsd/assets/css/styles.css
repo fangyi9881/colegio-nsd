@@ -776,3 +776,122 @@ section { padding: 80px 0; }
 
 /* Previene scroll horizontal por float-cards que sobresalen */
 body { overflow-x: hidden; }
+
+/* ═══════════════════════════════════════════════════════════
+   🌙 DARK MODE — Infantil NSD
+   ═══════════════════════════════════════════════════════════ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --crema:           #15131F;
+    --blanco:          #1C1A2E;
+    --ink:             #ECEAF5;
+    --ink-soft:        #B7B5C8;
+    --lavanda-light:   #2A1F4A;
+    --melocoton-light: #2E2010;
+    --amarillo-light:  #2C2510;
+    --menta-light:     #102A1F;
+    --rosa-light:      #2A1424;
+    --cielo-light:     #122340;
+    /* Sombras menos intensas */
+    --shadow-card:    0 8px 32px rgba(0,0,0,.5);
+    --shadow-float:   0 20px 60px rgba(0,0,0,.55);
+  }
+  body { background: #15131F; color: #ECEAF5; }
+  /* Topbar */
+  .topbar { background: #1C1A2E; color: #B7B5C8; }
+  .topbar a { color: #B7B5C8; }
+  .topbar a:hover { color: var(--lavanda); }
+  .topbar__pill { background: rgba(139,92,246,.15); color: #C4B5FD; border-color: rgba(139,92,246,.3); }
+  .topbar__pill a { color: #C4B5FD; }
+  /* Navbar */
+  .navbar {
+    background: rgba(28,26,46,.85);
+    backdrop-filter: saturate(180%) blur(16px);
+    border-bottom: 1px solid #2A2742;
+  }
+  .navbar.is-scrolled { background: rgba(28,26,46,.95); }
+  .navbar__name { color: #ECEAF5; }
+  .navbar__name span { color: #B7B5C8; }
+  .navbar__links a { color: #B7B5C8; }
+  .navbar__links a:hover { background: var(--lavanda-light); color: #C4B5FD; }
+  .navbar__burger span { background: #ECEAF5; }
+  /* Drawer */
+  .drawer__panel { background: #1C1A2E; }
+  .drawer__links a { color: #ECEAF5; border-color: #2A2742; }
+  .drawer__close { color: #ECEAF5; background: #2A2742; }
+  /* Hero */
+  .hero { background: linear-gradient(160deg, #15131F 0%, #1C1A2E 50%, #2E2010 100%); }
+  .hero__desc { color: #B7B5C8; }
+  .hero__badge { background: rgba(139,92,246,.18); color: #C4B5FD; }
+  /* Tarjetas y secciones */
+  .pilar, .servicio, .testimonio, .form-card, .horario-card, .vida__horario, .galeria__item {
+    background: #1C1A2E;
+    border-color: #2A2742;
+    color: #B7B5C8;
+  }
+  .pilar h3, .servicio h3, .testimonio__author, .form-card h3, .vida__horario h3 { color: #ECEAF5; }
+  .pilar p, .servicio p, .testimonio p { color: #B7B5C8; }
+  .edad-card { background: #1C1A2E; border-color: #2A2742; }
+  .edad-card h3 { color: #ECEAF5; }
+  .edad-card ul { color: #B7B5C8; }
+  /* Trust strip */
+  .trust-strip { background: #1C1A2E; border-color: #2A2742; }
+  .trust-item { color: #B7B5C8; }
+  .trust-item strong { color: #ECEAF5; }
+  /* Stats */
+  .stat__number { color: var(--lavanda); }
+  .stat__label { color: #B7B5C8; }
+  /* Vida en el aula */
+  .vida__item { color: #B7B5C8; }
+  .vida__item h4 { color: #ECEAF5; }
+  .horario-table th { background: var(--lavanda-light); color: #C4B5FD; }
+  .horario-table td { color: #B7B5C8; border-color: #2A2742; }
+  /* Float cards del hero */
+  .hero__float { background: #1C1A2E; }
+  .float__label { color: #B7B5C8; }
+  .float__val { color: #ECEAF5; }
+  /* Galería */
+  .galeria { background: linear-gradient(180deg, #15131F 0%, #2A1F4A 100%); }
+  /* Bilingüe */
+  .bilingue__visual { box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+  .bilingue__flag { background: #1C1A2E; border-color: #1C1A2E; }
+  .idioma-pill { background: #1C1A2E; color: #ECEAF5; }
+  /* Becas */
+  .becas { background: linear-gradient(135deg, var(--lavanda-light), var(--melocoton-light)); color: #ECEAF5; }
+  .becas h2 { color: #ECEAF5; }
+  /* Forms */
+  .form-card input, .form-card select, .form-card textarea {
+    background: #15131F; color: #ECEAF5; border-color: #2A2742;
+  }
+  .form-card input::placeholder, .form-card textarea::placeholder { color: #807D9A; }
+  .form-card input:focus, .form-card select:focus, .form-card textarea:focus {
+    background: #1C1A2E; border-color: var(--lavanda);
+    box-shadow: 0 0 0 4px rgba(139,92,246,.18);
+  }
+  .form-card label { color: #B7B5C8; }
+  .form-check { color: #B7B5C8; }
+  /* Botones secundarios */
+  .btn--secondary { background: var(--lavanda-light); color: #C4B5FD; }
+  .btn--secondary:hover { background: #3A2D5E; }
+  /* Footer */
+  .footer { background: #0F0D1A; }
+  .footer__inner { color: #B7B5C8; }
+  .footer__col h4 { color: #ECEAF5; }
+  .footer__col a { color: #B7B5C8; }
+  .footer__col a:hover { color: var(--lavanda); }
+  /* Cookie banner ya viene con su propio estilo oscuro */
+  /* Mobile sticky CTA */
+  .mobile-cta {
+    background: rgba(28,26,46,.95);
+    box-shadow: 0 -4px 24px rgba(0,0,0,.5);
+  }
+  .mobile-cta__call { background: #102A1F; color: var(--menta); }
+  /* To-top */
+  .to-top { background: var(--lavanda); color: #ECEAF5; }
+  .to-top:hover { background: var(--lavanda-dark); }
+  /* Section tag (eyebrow) */
+  .section-tag { background: var(--lavanda-light); color: #C4B5FD; }
+  /* Inputs nativos */
+  input, select, textarea, button { color-scheme: dark; }
+}
