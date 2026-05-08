@@ -1097,20 +1097,44 @@ input, select, textarea { font: inherit; }
   .hero__title { color: #ECEFEC; }
   .hero__sub { color: #BFC8C2; }
   .hero__chips span { background: #1F2A24; color: #BFC8C2; border-color: #2A3A30; }
-  /* Tarjetas */
-  .act-card, .porque-card, .horario-card, .form-card, .testimonio, .float-card {
+  /* Tarjetas — clases reales del HTML */
+  .act-card, .porque-item, .horario-card, .form-card, .testimonio, .float-card {
     background: #15201A;
     border-color: #1F2A24;
     color: #BFC8C2;
   }
-  .act-card h3, .porque-card h3, .horario-card h3, .testimonio__author { color: #ECEFEC; }
-  .act-card p, .porque-card p { color: #8C9991; }
+  .act-card h3, .porque-item h4, .horario-card h3, .testimonio__author { color: #ECEFEC; }
+  .act-card p, .porque-item p { color: #8C9991; }
+  /* Variantes de color de act-card: sobreescribir los gradientes claros */
+  .act-card--blue   { background: #0F2028; border-color: rgba(10,175,219,.25); }
+  .act-card--yellow { background: #1E1A00; border-color: rgba(255,217,61,.25); }
+  .act-card--green  { background: #0E1E10; border-color: rgba(76,175,80,.25); }
+  .act-card--coral  { background: #200E0E; border-color: rgba(255,107,107,.25); }
+  .act-card--purple { background: #180E20; border-color: rgba(155,89,182,.25); }
+  .act-card--sky    { background: #0C1B28; border-color: rgba(33,150,243,.25); }
+  /* Tag interior de las act-card */
+  .act-card__tag { background: rgba(255,255,255,.08); color: #BFC8C2; }
   .float-card strong { color: #ECEFEC; }
   .float-card small { color: #8C9991; }
-  /* Stats */
+  /* Stats section: background: white → oscuro */
+  .stats { background: #0F1814; }
+  /* Stat-card: corrección nombre de clase */
   .stat-card { background: #15201A; border-color: #1F2A24; }
-  .stat-card .stat-num { color: var(--sun); }
-  .stat-card p { color: #8C9991; }
+  .stat-card__num { color: var(--sun) !important; }
+  .stat-card__label { color: #8C9991; }
+  /* Section tag: color para contraste en oscuro */
+  .section__tag { background: #0F2A33; color: var(--sky); }
+  /* Secciones con bg hardcoded blanco/claro */
+  .horarios { background: #0F1814; }
+  .porque  { background: #0F1814; }
+  .inscripcion { background: linear-gradient(180deg, #0F1814 0%, #0F2A33 100%); }
+  /* Nota de horarios */
+  .horarios__nota { background: #1A1A00; border-color: rgba(255,217,61,.3); color: #BFC8C2; }
+  .horarios__nota .bi { color: var(--sky); }
+  /* Info-blocks (nombre correcto de clase) */
+  .info-block { background: #1B2520; border-left-color: var(--sky); }
+  .info-block h4 { color: var(--sky); }
+  .info-block p { color: #8C9991; }
   /* Forms */
   .form-card input, .form-card select, .form-card textarea {
     background: #1B2520; color: #ECEFEC; border-color: #2A3A30;
@@ -1122,9 +1146,6 @@ input, select, textarea { font: inherit; }
   }
   .form-card label { color: #BFC8C2; }
   .form-check { color: #8C9991; }
-  /* Inscripción/Contacto */
-  .inscripcion, .contacto { background: #15201A; }
-  .info-card { background: #1B2520; border-color: #2A3A30; }
   /* Botones */
   .btn--outline { background: transparent; color: var(--sky); border-color: var(--sky); }
   .btn--outline:hover { background: var(--sky); color: #0F1814; }

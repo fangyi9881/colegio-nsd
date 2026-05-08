@@ -1050,6 +1050,20 @@ body { overflow-x: hidden; }
     box-shadow: 0 0 0 4px rgba(74,199,88,.15);
   }
   .form-check { color: var(--ink-500); }
+  /* Hero chips: fondo hardcoded a #fff → oscurecer */
+  .hero__chips li {
+    background: #1F2A24; color: var(--ink-700); border-color: #2A3A30;
+  }
+  /* Badge badge-pill en el hero */
+  .hero__content .badge-pill { background: #1B2520; color: var(--ink-700); border-color: #2A3A30; }
+  /* Img-stack badge (sección nosotros) */
+  .img-stack__badge { background: #1F2A24; }
+  .img-stack__badge strong { color: var(--green-700); }
+  .img-stack__badge span { color: var(--ink-500); }
+  /* Stage icon: color-mix con white → reemplazar white por color oscuro */
+  .stage__icon { background: color-mix(in srgb, var(--c) 22%, #1B2520); }
+  /* Value: icono con fondo blanco hardcoded */
+  .value i { background: #1F2A24; }
   /* Lista de checks */
   .check-list i { color: var(--green-700); }
   /* Botones */
