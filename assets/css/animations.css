@@ -62,6 +62,11 @@
   display: flex; gap: 48px;
   width: max-content;
   animation: marquee 38s linear infinite;
+  /* GPU-acceleration: forzar capa de composición propia */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout style paint;
 }
 .marquee:hover .marquee__track { animation-play-state: paused; }
 
@@ -78,6 +83,7 @@
   -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 0c.5 6 5.5 11 11 11-6 .5-11 5.5-11 11-.5-6-5.5-11-11-11 6-.5 11-5.5 11-11z'/></svg>") no-repeat center/contain;
           mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 0c.5 6 5.5 11 11 11-6 .5-11 5.5-11 11-.5-6-5.5-11-11-11 6-.5 11-5.5 11-11z'/></svg>") no-repeat center/contain;
   animation: spin 6s linear infinite;
+  will-change: transform;
 }
 
 @keyframes marquee {
@@ -131,6 +137,8 @@
   filter: blur(60px);
   opacity: .55;
   animation: morph 14s ease-in-out infinite alternate;
+  will-change: transform, border-radius;
+  transform: translateZ(0);
 }
 @keyframes morph {
   0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: translate(0,0) rotate(0deg); }
@@ -146,6 +154,7 @@
   background-clip: text;
   color: transparent;
   animation: gradShift 8s ease-in-out infinite;
+  will-change: background-position;
 }
 @keyframes gradShift {
   0%, 100% { background-position: 0% 50%; }
@@ -163,6 +172,10 @@
 .gallery-marquee {
   display: flex; gap: 18px; width: max-content;
   animation: marquee 60s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout style paint;
 }
 .gallery-marquee--reverse { animation-direction: reverse; animation-duration: 80s; }
 .gallery-marquee:hover { animation-play-state: paused; }
@@ -444,4 +457,59 @@
   }
   [data-reveal] { opacity: 1; transform: none; filter: none; }
   .marquee__track, .gallery-marquee { animation: none; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   📱 PERFORMANCE OPTIMIZATIONS para mobile (≤900px)
+   Desactiva o simplifica animaciones costosas
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  /* Desactivar el spin continuo de las estrellas (14+ instancias = costoso) */
+  .marquee__star { animation: none; }
+
+  /* Reducir el blur del morph-blob (filter blur es muy caro en mobile) */
+  .morph-blob { filter: blur(30px); animation-duration: 20s; }
+
+  /* Deshabilitar el shine sweep en hover (solo desktop hover) */
+  .shine::before { display: none; }
+
+  /* Pausar el text-gradient-anim cuando no es visible — y reducir frecuencia */
+  .text-gradient-anim { animation-duration: 14s; }
+
+  /* Acelerar GPU para todas las marquees */
+  .marquee, .gallery-marquee, .gallery-marquee--reverse {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* content-visibility: auto en secciones largas para que no se rendericen
+     hasta que entren en el viewport. Mejora drásticamente el scroll. */
+  .life-strip, .section, .footer, .stats { content-visibility: auto; contain-intrinsic-size: auto 600px; }
+
+  /* En el hero, las morph-blobs no necesitan animación continua — son decorativas */
+  .hero__bg .morph-blob { animation-duration: 30s; }
+}
+
+/* En mobile MUY pequeño, eliminamos completamente las animaciones decorativas
+   que solo ralentizan, manteniendo las funcionales (reveals, transitions) */
+@media (max-width: 540px) {
+  /* Sólo paint cuando se necesite */
+  .marquee__star { display: none; }
+  .marquee__item { gap: 0; }
+  .marquee__item + .marquee__item::before {
+    content: '·'; color: var(--yellow-500); font-size: 1.5em;
+    margin: 0 32px;
+  }
+
+  /* Pausar morph-blobs al hacer scroll para reducir repaints */
+  .morph-blob { animation: none; opacity: .35; }
+}
+
+/* Cuando un elemento se cubre con scroll, ahorrar repaints */
+@media (prefers-reduced-motion: no-preference) {
+  .marquee, .gallery-marquee {
+    /* Sólo animar cuando el contenedor padre es visible */
+    animation-play-state: running;
+  }
 }

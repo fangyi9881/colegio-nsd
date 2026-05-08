@@ -190,21 +190,54 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // ── Scroll handler unificado con rAF (un solo listener, todos los efectos)
   const nav = document.getElementById('navbar');
-  const onScroll = () => { if (nav) nav.classList.toggle('is-scrolled', window.scrollY > 12); };
-  document.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  // Scroll progress
   const progress = document.getElementById('scrollProgress');
-  if (progress) {
-    const updateProgress = () => {
+  let scrollTicking = false;
+  let lastNavScrolled = false;
+  let lastCtaVisible  = false;
+  function onScrollFrame() {
+    const y = window.scrollY;
+    // navbar shadow
+    const navScrolled = y > 12;
+    if (nav && navScrolled !== lastNavScrolled) {
+      nav.classList.toggle('is-scrolled', navScrolled);
+      lastNavScrolled = navScrolled;
+    }
+    // progress bar
+    if (progress) {
       const h = document.documentElement;
-      progress.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + '%';
-    };
-    document.addEventListener('scroll', updateProgress, { passive: true });
-    updateProgress();
+      const denom = h.scrollHeight - h.clientHeight;
+      progress.style.width = denom > 0 ? (y / denom) * 100 + '%' : '0%';
+    }
+    // mobile CTA
+    if (mobileCtaEl) {
+      const ctaVisible = y > 400;
+      if (ctaVisible !== lastCtaVisible) {
+        mobileCtaEl.classList.toggle('is-visible', ctaVisible);
+        lastCtaVisible = ctaVisible;
+      }
+    }
+    // to-top button
+    if (toTopBtn && toTopTrigger) {
+      const r = toTopTrigger.getBoundingClientRect();
+      const should = r.top < window.innerHeight * 0.5;
+      if (should !== lastToTopVisible) {
+        toTopBtn.classList.toggle('is-visible', should);
+        lastToTopVisible = should;
+      }
+    }
+    scrollTicking = false;
   }
+  function onScroll() {
+    if (!scrollTicking) {
+      requestAnimationFrame(onScrollFrame);
+      scrollTicking = true;
+    }
+  }
+  // Variables que se rellenan más abajo (mobileCta y to-top usan este mismo handler)
+  let mobileCtaEl = null;
+  let toTopBtn = null, toTopTrigger = null, lastToTopVisible = false;
 
   // Drawer
   const burger = document.getElementById('hamburger');
@@ -222,20 +255,8 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && drawer.classList.contains('is-open')) toggle(false); });
   }
 
-  // Mobile CTA
-  const mobileCta = document.getElementById('mobileCta');
-  if (mobileCta) {
-    let visible = false;
-    const checkCta = () => {
-      const should = window.scrollY > 400;
-      if (should !== visible) {
-        visible = should;
-        mobileCta.classList.toggle('is-visible', visible);
-      }
-    };
-    document.addEventListener('scroll', checkCta, { passive: true });
-    checkCta();
-  }
+  // Mobile CTA: simplemente referenciar el elemento, el handler unificado se ocupa
+  mobileCtaEl = document.getElementById('mobileCta');
 
   // ── Contadores animados ─────────────────────────────────
   function animateCounter(el) {
@@ -288,29 +309,20 @@
   // ── BOTÓN "SUBIR ARRIBA" inteligente ─────────────────────
   // Aparece a partir de la 3ª sección si la página tiene >2 secciones
   const sections = document.querySelectorAll('section, .section');
-  const toTopBtn = document.querySelector('.to-top');
+  toTopBtn = document.querySelector('.to-top');
   if (toTopBtn && sections.length > 2) {
-    const trigger = sections[2]; // 3ª sección
-    let visible = false;
-    const checkToTop = () => {
-      if (!trigger) return;
-      const rect = trigger.getBoundingClientRect();
-      const should = rect.top < window.innerHeight * 0.5;
-      if (should !== visible) {
-        visible = should;
-        toTopBtn.classList.toggle('is-visible', visible);
-      }
-    };
-    document.addEventListener('scroll', checkToTop, { passive: true });
-    checkToTop();
-    // Smooth scroll al hacer click
+    toTopTrigger = sections[2]; // 3ª sección, controlada por handler unificado
     toTopBtn.addEventListener('click', e => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
     });
   } else if (toTopBtn) {
-    toTopBtn.style.display = 'none'; // ocultar en páginas cortas
+    toTopBtn.style.display = 'none';
   }
+
+  // Registrar el handler unificado UNA sola vez al final
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScrollFrame();
 
   // ══════════════════════════════════════════════════════════
   // BANNER DE COOKIES — RGPD / LSSI compliant
