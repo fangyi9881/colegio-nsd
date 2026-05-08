@@ -19,7 +19,7 @@
   <div class="topbar">
     <div class="container topbar__inner">
       <div class="topbar__contact">
-        <a href="tel:+34911234567" aria-label="Teléfono"><i class="bi bi-telephone-fill"></i> <span>91 123 45 67</span></a>
+        <a href="tel:+34914719959" aria-label="Teléfono"><i class="bi bi-telephone-fill"></i> <span>91 471 99 59</span></a>
         <a href="mailto:secretaria@colegionsdolores.es" aria-label="Email"><i class="bi bi-envelope-fill"></i> <span>secretaria@colegionsdolores.es</span></a>
       </div>
       <div class="topbar__quick">
@@ -94,7 +94,7 @@
       <a href="https://www.instagram.com/colegionsdolores/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
       <a href="https://www.youtube.com/@colegionsd6473" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
       <a href="https://www.facebook.com/colegioNSD" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-      <a href="tel:+34911234567" aria-label="Llamar"><i class="bi bi-telephone-fill"></i></a>
+      <a href="tel:+34914719959" aria-label="Llamar"><i class="bi bi-telephone-fill"></i></a>
       <a href="mailto:secretaria@colegionsdolores.es" aria-label="Email"><i class="bi bi-envelope-fill"></i></a>
     </div>
   </aside>`;
@@ -147,7 +147,7 @@
         <h5>Contacto</h5>
         <ul class="footer__contact">
           <li><i class="bi bi-geo-alt"></i> C/ Nuestra Señora de los Dolores, s/n<br/>Carabanchel, 28019 Madrid</li>
-          <li><i class="bi bi-telephone"></i> <a href="tel:+34911234567">91 123 45 67</a></li>
+          <li><i class="bi bi-telephone"></i> <a href="tel:+34914719959">91 471 99 59</a> · <a href="tel:+34914718954">91 471 89 54</a></li>
           <li><i class="bi bi-envelope"></i> <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a></li>
         </ul>
       </div>
@@ -168,7 +168,7 @@
   </footer>
 
   <div class="mobile-cta-bar" id="mobileCta" aria-hidden="true">
-    <a href="tel:+34911234567" class="cta-call"><i class="bi bi-telephone-fill"></i><span>Llamar</span></a>
+    <a href="tel:+34914719959" class="cta-call"><i class="bi bi-telephone-fill"></i><span>Llamar</span></a>
     <a href="/contacto.html" class="cta-visit"><i class="bi bi-calendar-check"></i><span>Reservar visita</span></a>
   </div>
 
