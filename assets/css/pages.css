@@ -8,14 +8,14 @@
   position: relative;
   padding: 90px 0 70px;
   background:
-    linear-gradient(135deg, rgba(31,164,44,.92), rgba(14,94,22,.92)),
+    linear-gradient(135deg, rgba(6,44,18,.95), rgba(10,94,36,.92)),
     url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1600&auto=format&fit=crop') center/cover;
   color: #fff;
   overflow: hidden;
 }
 .page-hero::before {
   content: ""; position: absolute; inset: 0;
-  background: radial-gradient(circle at 80% 20%, rgba(247,211,0,.18), transparent 60%);
+  background: radial-gradient(circle at 80% 20%, rgba(201,160,66,.1), transparent 60%);
   pointer-events: none;
 }
 .page-hero__inner {
