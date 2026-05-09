@@ -23,6 +23,7 @@
         <a href="mailto:secretaria@colegionsdolores.es" aria-label="Email"><i class="bi bi-envelope-fill"></i> <span>secretaria@colegionsdolores.es</span></a>
       </div>
       <div class="topbar__quick">
+        <a href="/contacto.html" class="quick-link quick-link--sv"><i class="bi bi-person-lines-fill"></i> Secretaría Virtual</a>
         <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-person-badge"></i> Alexia</a>
         <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-tree"></i> Raíces</a>
         <a href="https://www.instagram.com/colegionsdolores/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
@@ -73,7 +74,7 @@
             </ul>
           </li>
           <li><a href="/blog/" data-link="blog">Blog</a></li>
-          <li><a href="/contacto.html" data-link="contacto">Contacto</a></li>
+          <li><a href="/contacto.html" class="nav-sv" data-link="secretaria"><i class="bi bi-person-lines-fill"></i> Secretaría Virtual</a></li>
           <li><a class="nav-cta magnetic" href="/admision.html"><i class="bi bi-mortarboard-fill"></i> Admisión</a></li>
         </ul>
       </nav>
@@ -108,6 +109,7 @@
         <li><a href="/servicios/comedor.html">Comedor</a></li>
         <li><a href="/servicios/extraescolares.html">Extraescolares</a></li>
         <li><a href="/blog/">Blog</a></li>
+        <li><a href="/contacto.html">Secretaría Virtual</a></li>
         <li><a href="/contacto.html">Contacto</a></li>
       </ul>
       <div class="drawer__platforms">
@@ -125,7 +127,10 @@
         </a>
       </div>
 
-      <a href="/admision.html" class="drawer__cta">
+      <a href="/contacto.html" class="drawer__cta" style="background:linear-gradient(135deg,var(--green-700),var(--green-900));margin-bottom:10px;">
+        <i class="bi bi-person-lines-fill"></i> Secretaría Virtual
+      </a>
+      <a href="/admision.html" class="drawer__cta" style="background:linear-gradient(135deg,var(--yellow-500),#b8882a);color:var(--ink-900);">
         <i class="bi bi-mortarboard-fill"></i> Solicitar Admisión
       </a>
     </nav>
@@ -227,8 +232,6 @@
   if (PAGE) {
     document.querySelectorAll(`[data-link="${PAGE}"]`).forEach(a => {
       a.classList.add('is-active');
-      a.style.background = 'var(--green-100)';
-      a.style.color = 'var(--green-900)';
     });
   }
 

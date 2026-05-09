@@ -144,6 +144,13 @@ p  { margin: 0 0 1em; color: var(--ink-700); line-height: 1.7; }
   transition: background .2s;
 }
 .quick-link:hover { background: rgba(247,211,0,.18); color: var(--yellow-500); }
+.quick-link--sv {
+  background: rgba(201,160,66,.25);
+  color: var(--yellow-500) !important;
+  font-weight: 700;
+  border: 1px solid rgba(201,160,66,.35);
+}
+.quick-link--sv:hover { background: var(--yellow-500) !important; color: var(--ink-900) !important; }
 
 @media (max-width: 720px) { .d-none-mobile { display: none; } }
 
@@ -155,6 +162,7 @@ p  { margin: 0 0 1em; color: var(--ink-700); line-height: 1.7; }
   .topbar__contact a span,
   .topbar__contact a:not([href^="tel"]):not([href^="mailto"]) { display: none; }
   .topbar__quick .quick-link { display: none; }
+  .topbar__quick .quick-link--sv { display: inline-flex; }
 }
 
 /* ============== NAVBAR ============== */
@@ -209,6 +217,18 @@ p  { margin: 0 0 1em; color: var(--ink-700); line-height: 1.7; }
   box-shadow: 0 8px 18px -8px var(--green-700);
 }
 .nav-cta:hover { background: linear-gradient(135deg, var(--green-900), #074a0d); color: #fff !important; }
+
+/* Secretaría Virtual — outlined button */
+.nav-sv {
+  border: 1.5px solid var(--green-700) !important;
+  color: var(--green-700) !important;
+  border-radius: var(--radius-sm) !important;
+}
+.nav-sv:hover { background: var(--green-700) !important; color: #fff !important; }
+.nav-sv i { color: inherit !important; }
+
+/* Active nav link */
+.nav a.is-active { background: var(--green-100); color: var(--green-900); }
 
 /* dropdown */
 .has-dropdown { position: relative; }
