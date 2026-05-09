@@ -70,6 +70,15 @@
         </ul>
       </nav>
 
+      <div class="navbar__quick-mobile">
+        <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx" target="_blank" rel="noopener noreferrer" class="nqm-link">
+          <i class="bi bi-person-badge"></i><span>Alexia</span>
+        </a>
+        <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="nqm-link">
+          <i class="bi bi-tree"></i><span>Raíces</span>
+        </a>
+      </div>
+
       <button class="hamburger-x" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>

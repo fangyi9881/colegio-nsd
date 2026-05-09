@@ -249,6 +249,9 @@ p  { margin: 0 0 1em; color: var(--ink-700); line-height: 1.7; }
 .hamburger.is-open span:nth-child(2) { opacity: 0; }
 .hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+/* Quick-links Alexia / Raíces: solo visibles en móvil */
+.navbar__quick-mobile { display: none; }
+
 @media (max-width: 980px) {
   /* En móvil ocultamos la navegación inline y usamos el drawer (animations.css) */
   .nav { display: none; }
@@ -257,6 +260,27 @@ p  { margin: 0 0 1em; color: var(--ink-700); line-height: 1.7; }
   .brand__logo { width: 52px; height: 52px; }
   .brand__text strong { font-size: 1rem; }
   .brand__text small { font-size: .68rem; }
+
+  /* Quick-links móvil */
+  .navbar__quick-mobile {
+    display: flex; gap: 6px; align-items: center; margin-left: auto; margin-right: 8px;
+  }
+  .nqm-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 7px 11px; border-radius: 10px;
+    background: var(--ink-50); border: 1px solid var(--ink-100);
+    font-size: .75rem; font-weight: 700; color: var(--ink-700);
+    transition: background .15s, color .15s;
+    white-space: nowrap;
+  }
+  .nqm-link:hover { background: var(--green-100); color: var(--green-900); }
+  .nqm-link i { font-size: 1rem; }
+}
+
+/* En pantallas muy pequeñas, solo mostrar el icono */
+@media (max-width: 400px) {
+  .nqm-link span { display: none; }
+  .nqm-link { padding: 7px 9px; }
 }
 
 /* ============== HERO ============== */
@@ -1305,6 +1329,9 @@ body { overflow-x: hidden; }
   #ck-banner .ck-slider { background: #2A3A30; }
   /* Inputs nativos: que usen el esquema oscuro */
   input, select, textarea, button { color-scheme: dark; }
+  /* Quick-links móvil en modo oscuro */
+  .nqm-link { background: #1F2A24; color: var(--ink-700); border-color: #2A3A30; }
+  .nqm-link:hover { background: #1A3520; color: var(--green-700); }
 }
 .news__meta span { display: inline-flex; align-items: center; gap: 4px; }
 .news__meta i { font-size: .82rem; }
