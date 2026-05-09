@@ -10,7 +10,7 @@
   'use strict';
 
   // ⚠️ Reemplaza con tu clave gratuita de Web3Forms
-  const ACCESS_KEY = 'TU_CLAVE_WEB3FORMS_AQUI';
+  const ACCESS_KEY = '206c83e1-a7f9-485a-9c91-46e8a892f6f4';
 
   // ─── Estilos: spinner + mensajes de estado ─────────────
   const style = document.createElement('style');
