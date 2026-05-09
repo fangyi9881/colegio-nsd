@@ -76,26 +76,45 @@
     </div>
   </header>
 
-  <aside class="drawer" id="drawer" aria-hidden="true">
-    <div class="drawer__bg" aria-hidden="true">
-      <span class="morph-blob"></span>
-      <span class="morph-blob"></span>
+  <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+    <div class="drawer__header">
+      <a href="/" class="brand" tabindex="-1">
+        <img src="/assets/img/logo-white.png" alt="Logo Colegio NSD" class="brand__logo" style="width:44px;height:44px;" />
+        <span class="brand__text">
+          <strong style="color:#fff;">Colegio NSD</strong>
+          <small style="color:rgba(255,255,255,.6);">Nuestra Señora de los Dolores</small>
+        </span>
+      </a>
+      <button class="drawer__close" id="drawerClose" aria-label="Cerrar menú">
+        <i class="bi bi-x-lg"></i>
+      </button>
     </div>
-    <ul>
-      <li><a href="/">Inicio <i class="bi bi-arrow-right"></i></a></li>
-      <li><a href="/centro/sobre-nosotros.html">Sobre Nosotros <i class="bi bi-arrow-right"></i></a></li>
-      <li><a href="/etapas/primaria.html">Etapas <i class="bi bi-arrow-right"></i></a></li>
-      <li><a href="/centro/departamentos.html">Departamentos <i class="bi bi-arrow-right"></i></a></li>
-      <li><a href="/blog/">Blog <i class="bi bi-arrow-right"></i></a></li>
-      <li><a href="/admision.html">Admisión <i class="bi bi-arrow-right"></i></a></li>
-      <li><a href="/contacto.html">Contacto <i class="bi bi-arrow-right"></i></a></li>
-    </ul>
+
+    <nav class="drawer__nav">
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/centro/sobre-nosotros.html">El Centro</a></li>
+        <li><a href="/etapas/primaria.html">Etapas</a></li>
+        <li><a href="/centro/departamentos.html">Departamentos</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/contacto.html">Contacto</a></li>
+      </ul>
+      <a href="/admision.html" class="drawer__cta">
+        <i class="bi bi-mortarboard-fill"></i> Solicitar Admisión
+      </a>
+    </nav>
+
     <div class="drawer__footer">
-      <a href="https://www.instagram.com/colegionsdolores/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-      <a href="https://www.youtube.com/@colegionsd6473" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-      <a href="https://www.facebook.com/colegioNSD" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-      <a href="tel:+34914719959" aria-label="Llamar"><i class="bi bi-telephone-fill"></i></a>
-      <a href="mailto:secretaria@colegionsdolores.es" aria-label="Email"><i class="bi bi-envelope-fill"></i></a>
+      <div class="drawer__contact">
+        <a href="tel:+34914719959"><i class="bi bi-telephone-fill"></i> 91 471 99 59</a>
+        <a href="mailto:secretaria@colegionsdolores.es"><i class="bi bi-envelope-fill"></i> secretaria@colegionsdolores.es</a>
+      </div>
+      <div class="drawer__social">
+        <a href="https://www.instagram.com/colegionsdolores/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.youtube.com/@colegionsd6473" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        <a href="https://www.facebook.com/colegioNSD" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+      </div>
     </div>
   </aside>`;
 
@@ -243,16 +262,22 @@
   // Drawer
   const burger = document.getElementById('hamburger');
   const drawer = document.getElementById('drawer');
+  const backdrop = document.getElementById('drawerBackdrop');
+  const drawerClose = document.getElementById('drawerClose');
   if (burger && drawer) {
     const toggle = (open) => {
       drawer.classList.toggle('is-open', open);
       burger.classList.toggle('is-open', open);
       burger.setAttribute('aria-expanded', String(open));
       drawer.setAttribute('aria-hidden', String(!open));
+      if (backdrop) backdrop.classList.toggle('is-open', open);
       document.body.style.overflow = open ? 'hidden' : '';
+      if (open && drawerClose) drawerClose.focus();
     };
     burger.addEventListener('click', () => toggle(!drawer.classList.contains('is-open')));
-    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
+    if (drawerClose) drawerClose.addEventListener('click', () => toggle(false));
+    if (backdrop) backdrop.addEventListener('click', () => toggle(false));
+    drawer.querySelectorAll('.drawer__nav a').forEach(a => a.addEventListener('click', () => toggle(false)));
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && drawer.classList.contains('is-open')) toggle(false); });
   }
 

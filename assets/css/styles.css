@@ -1105,8 +1105,8 @@ body { overflow-x: hidden; }
   .brand__text strong { color: var(--green-700); }
   .brand__text small { color: var(--ink-500); }
   /* Drawer móvil */
-  .drawer { background: #0F1814; }
-  .drawer ul a { color: var(--ink-700); border-color: #1F2A24; }
+  .drawer { background: #030a04; }
+  .drawer__nav ul a { color: rgba(255,255,255,.8); border-color: rgba(255,255,255,.07); }
   .hamburger-x span { background: var(--ink-700); }
   /* Hero */
   .hero { background: linear-gradient(180deg, #0F1814 0%, #15201A 100%); }
