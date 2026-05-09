@@ -107,6 +107,12 @@
         <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="drawer__platform-btn">
           <i class="bi bi-tree"></i> Raíces
         </a>
+        <a href="/infantil-nsd/" class="drawer__platform-btn">
+          <i class="bi bi-balloon-heart"></i> Infantil NSD
+        </a>
+        <a href="/campamento-nsd/" class="drawer__platform-btn">
+          <i class="bi bi-sun-fill"></i> Campamento
+        </a>
       </div>
 
       <a href="/admision.html" class="drawer__cta">
