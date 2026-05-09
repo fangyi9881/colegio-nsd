@@ -125,6 +125,9 @@
         <a href="/campamento-nsd/" class="drawer__platform-btn">
           <i class="bi bi-sun-fill"></i> Campamento
         </a>
+        <a href="/baloncesto-nsd/" class="drawer__platform-btn" style="color:#D4AF37;border-color:rgba(212,175,55,.35);background:rgba(212,175,55,.08);">
+          <i class="bi bi-basketball"></i> Dragons
+        </a>
       </div>
 
       <a href="/contacto.html" class="drawer__cta" style="background:linear-gradient(135deg,var(--green-700),var(--green-900));margin-bottom:10px;">
