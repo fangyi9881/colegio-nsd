@@ -67,8 +67,8 @@
             <a href="/#servicios" data-link="servicios">Servicios <i class="bi bi-chevron-down"></i></a>
             <ul class="dropdown">
               <li><a href="/servicios/comedor.html">Comedor escolar</a></li>
-              <li><a href="/#servicios">Extraescolares</a></li>
-              <li><a href="/#servicios">Madrugadores</a></li>
+              <li><a href="/servicios/extraescolares.html">Extraescolares</a></li>
+              <li><a href="/servicios/extraescolares.html">Madrugadores</a></li>
               <li><a href="/#servicios">Transporte</a></li>
             </ul>
           </li>
@@ -106,6 +106,7 @@
         <li><a href="/etapas/primaria.html">Etapas</a></li>
         <li><a href="/centro/departamentos.html">Departamentos</a></li>
         <li><a href="/servicios/comedor.html">Comedor</a></li>
+        <li><a href="/servicios/extraescolares.html">Extraescolares</a></li>
         <li><a href="/blog/">Blog</a></li>
         <li><a href="/contacto.html">Contacto</a></li>
       </ul>
