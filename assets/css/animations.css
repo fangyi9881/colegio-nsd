@@ -265,26 +265,66 @@
 }
 
 /* ===== Hamburger premium → X ===== */
+@keyframes burgerPulse {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(.82); }
+  65%  { transform: scale(1.12); }
+  85%  { transform: scale(.96); }
+  100% { transform: scale(1); }
+}
+@keyframes burgerRing {
+  0%   { opacity: .7; transform: translate(-50%,-50%) scale(1); }
+  100% { opacity: 0;  transform: translate(-50%,-50%) scale(2.6); }
+}
+
 .hamburger-x {
   width: 48px; height: 48px;
   display: none;
-  border: 1px solid var(--ink-100);
+  border: 1.5px solid var(--ink-100);
   background: #fff; border-radius: 14px;
   position: relative; cursor: pointer;
-  transition: background .2s, border-color .2s;
+  overflow: hidden;
+  transition: background .3s cubic-bezier(.22,1,.36,1),
+              border-color .3s cubic-bezier(.22,1,.36,1),
+              box-shadow .3s;
 }
+.hamburger-x:hover {
+  box-shadow: 0 0 0 4px rgba(31,164,44,.15);
+  border-color: var(--green-700);
+}
+/* anillo de burst — aparece al añadir .is-burst vía JS */
+.hamburger-x::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--green-700);
+  opacity: 0; pointer-events: none;
+}
+.hamburger-x.is-burst { animation: burgerPulse .5s cubic-bezier(.22,1,.36,1) both; }
+.hamburger-x.is-burst::before { animation: burgerRing .55s cubic-bezier(.2,.8,.2,1) both; }
+
 .hamburger-x span {
-  position: absolute; left: 14px; right: 14px; height: 2px;
+  position: absolute; left: 13px; right: 13px; height: 2px;
   background: var(--ink-900); border-radius: 2px;
-  transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .2s, top .35s cubic-bezier(.2,.8,.2,1);
+  transform-origin: center;
+  transition: transform .42s cubic-bezier(.22,1,.36,1),
+              opacity .25s ease,
+              top .42s cubic-bezier(.22,1,.36,1),
+              background .3s;
 }
-.hamburger-x span:nth-child(1) { top: 16px; }
+.hamburger-x span:nth-child(1) { top: 15px; }
 .hamburger-x span:nth-child(2) { top: 23px; }
-.hamburger-x span:nth-child(3) { top: 30px; }
-.hamburger-x.is-open { background: var(--ink-900); border-color: var(--ink-900); }
+.hamburger-x span:nth-child(3) { top: 31px; }
+
+.hamburger-x.is-open {
+  background: #060f08;
+  border-color: #060f08;
+  box-shadow: 0 0 0 4px rgba(31,164,44,.2);
+}
 .hamburger-x.is-open span { background: #fff; }
 .hamburger-x.is-open span:nth-child(1) { top: 23px; transform: rotate(45deg); }
-.hamburger-x.is-open span:nth-child(2) { opacity: 0; }
+.hamburger-x.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .hamburger-x.is-open span:nth-child(3) { top: 23px; transform: rotate(-45deg); }
 
 @media (max-width: 980px) { .hamburger-x { display: block; } }

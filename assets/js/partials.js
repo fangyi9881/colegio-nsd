@@ -274,7 +274,11 @@
       document.body.style.overflow = open ? 'hidden' : '';
       if (open && drawerClose) drawerClose.focus();
     };
-    burger.addEventListener('click', () => toggle(!drawer.classList.contains('is-open')));
+    burger.addEventListener('click', () => {
+      toggle(!drawer.classList.contains('is-open'));
+      burger.classList.add('is-burst');
+      burger.addEventListener('animationend', () => burger.classList.remove('is-burst'), { once: true });
+    });
     if (drawerClose) drawerClose.addEventListener('click', () => toggle(false));
     if (backdrop) backdrop.addEventListener('click', () => toggle(false));
     drawer.querySelectorAll('.drawer__nav a').forEach(a => a.addEventListener('click', () => toggle(false)));
