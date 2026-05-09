@@ -411,6 +411,27 @@
 .drawer.is-open .drawer__cta { opacity: 1; transform: translateY(0); }
 .drawer__cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(31,164,44,.45); color: #fff; }
 
+/* ── Drawer platforms (Alexia / Raíces) ── */
+.drawer__platforms {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity .4s .30s, transform .4s .30s cubic-bezier(.22,1,.36,1);
+}
+.drawer.is-open .drawer__platforms { opacity: 1; transform: translateY(0); }
+.drawer__platform-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px 10px; border-radius: 14px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.14);
+  color: rgba(255,255,255,.8); font-weight: 700; font-size: .88rem;
+  transition: background .2s, border-color .2s, color .2s, transform .2s;
+}
+.drawer__platform-btn:hover {
+  background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.3);
+  color: #fff; transform: translateY(-2px);
+}
+.drawer__platform-btn i { font-size: 1.1rem; }
+
 /* ── Drawer footer ── */
 .drawer__footer {
   padding: 24px 28px 32px;

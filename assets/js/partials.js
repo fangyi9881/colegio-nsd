@@ -23,8 +23,8 @@
         <a href="mailto:secretaria@colegionsdolores.es" aria-label="Email"><i class="bi bi-envelope-fill"></i> <span>secretaria@colegionsdolores.es</span></a>
       </div>
       <div class="topbar__quick">
-        <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx" target="_blank" rel="noopener noreferrer" class="quick-link" aria-label="Alexia"><i class="bi bi-person-badge"></i> <span>Alexia</span></a>
-        <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="quick-link" aria-label="Raíces"><i class="bi bi-tree"></i> <span>Raíces</span></a>
+        <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-person-badge"></i> Alexia</a>
+        <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-tree"></i> Raíces</a>
         <a href="https://www.instagram.com/colegionsdolores/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
         <a href="https://www.youtube.com/@colegionsd6473" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
         <a href="https://www.facebook.com/colegioNSD" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
@@ -100,6 +100,15 @@
         <li><a href="/blog/">Blog</a></li>
         <li><a href="/contacto.html">Contacto</a></li>
       </ul>
+      <div class="drawer__platforms">
+        <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx" target="_blank" rel="noopener noreferrer" class="drawer__platform-btn">
+          <i class="bi bi-person-badge"></i> Alexia
+        </a>
+        <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="drawer__platform-btn">
+          <i class="bi bi-tree"></i> Raíces
+        </a>
+      </div>
+
       <a href="/admision.html" class="drawer__cta">
         <i class="bi bi-mortarboard-fill"></i> Solicitar Admisión
       </a>

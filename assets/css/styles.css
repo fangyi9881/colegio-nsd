@@ -154,12 +154,7 @@ p  { margin: 0 0 1em; color: var(--ink-700); line-height: 1.7; }
   .topbar__contact { gap: 12px; }
   .topbar__contact a span,
   .topbar__contact a:not([href^="tel"]):not([href^="mailto"]) { display: none; }
-  /* Quick-links: mostrar solo el icono, sin pastilla */
-  .topbar__quick .quick-link {
-    background: transparent; padding: 0; border-radius: 0;
-    font-size: 1rem;
-  }
-  .topbar__quick .quick-link span { display: none; }
+  .topbar__quick .quick-link { display: none; }
 }
 
 /* ============== NAVBAR ============== */
