@@ -87,13 +87,58 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ── FORM SUBMIT ───────────────────────────────────────────
-const form = document.getElementById('form-inscripcion');
-const formSuccess = document.getElementById('form-success');
-form?.addEventListener('submit', e => {
-  e.preventDefault();
-  // Aquí se conectará con backend/Formspree/etc.
-  form.style.display = 'none';
-  formSuccess?.classList.add('show');
-  formSuccess?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-});
+// ── FORM SUBMIT con Web3Forms ─────────────────────────────
+(function () {
+  const form      = document.getElementById('form-inscripcion');
+  const successEl = document.getElementById('form-success');
+  if (!form) return;
+
+  // Estilos spinner
+  const s = document.createElement('style');
+  s.textContent =
+    '.inf-spinner{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.3);' +
+    'border-top-color:#fff;border-radius:50%;animation:_inf-spin .7s linear infinite;vertical-align:middle;margin-right:6px}' +
+    '@keyframes _inf-spin{to{transform:rotate(360deg)}}' +
+    '.form-err{padding:12px 16px;border-radius:10px;margin-top:12px;font-size:.87rem;' +
+    'background:rgba(220,38,38,.09);border:1px solid rgba(220,38,38,.18);color:#dc2626;' +
+    'animation:_inf-fade .3s ease}' +
+    '@keyframes _inf-fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}';
+  document.head.appendChild(s);
+
+  const btn      = form.querySelector('button[type="submit"]');
+  const origHTML = btn ? btn.innerHTML : '';
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    form.querySelectorAll('.form-err').forEach(el => el.remove());
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="inf-spinner" aria-hidden="true"></span>Enviando…'; }
+
+    try {
+      const r = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form)
+      });
+      const j = await r.json();
+      if (!r.ok || !j.success) throw new Error(j.message || 'Error');
+
+      // Éxito
+      form.style.display = 'none';
+      if (successEl) {
+        successEl.classList.add('show');
+        successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      form.reset();
+
+    } catch {
+      if (btn) { btn.disabled = false; btn.innerHTML = origHTML; }
+
+      const err = document.createElement('p');
+      err.className = 'form-err';
+      err.innerHTML = '❌ <strong>Error al enviar.</strong> Por favor, inténtalo de nuevo o llámanos al ' +
+        '<a href="tel:+34914719959" style="color:inherit;font-weight:700">91 471 99 59</a>.';
+      btn.insertAdjacentElement('afterend', err);
+    }
+  });
+})();

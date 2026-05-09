@@ -619,7 +619,12 @@
         </div>
       </div>
 
-      <form class="form-card" data-reveal="right" onsubmit="event.preventDefault(); alert('¡Gracias! Te contactaremos pronto.');">
+      <form class="form-card" id="contactoForm" data-reveal="right">
+        <!-- Web3Forms — obtén tu clave gratuita en https://web3forms.com -->
+        <input type="hidden" name="access_key" value="TU_CLAVE_WEB3FORMS_AQUI" />
+        <input type="hidden" name="subject" value="Solicitud de información — Colegio NSD" />
+        <input type="hidden" name="from_name" value="Web Colegio NSD" />
+        <input type="hidden" name="botcheck" style="display:none" />
         <!-- Cabecera visual -->
         <div class="form-card__header">
           <div class="form-card__header-ico"><i class="bi bi-chat-heart-fill"></i></div>
@@ -631,25 +636,26 @@
         <!-- Campos -->
         <div class="form-body">
           <div class="form-row">
-            <label>
+            <label for="cf-nombre">
               <i class="bi bi-person-fill lbl-ico"></i> Nombre y apellidos
-              <input type="text" required placeholder="Tu nombre completo" />
+              <input type="text" id="cf-nombre" name="nombre" required autocomplete="name" placeholder="Tu nombre completo" />
             </label>
           </div>
           <div class="form-row form-row--2">
-            <label>
+            <label for="cf-email">
               <i class="bi bi-envelope-fill lbl-ico"></i> Email
-              <input type="email" required placeholder="tu@email.com" />
+              <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder="tu@email.com" />
             </label>
-            <label>
+            <label for="cf-tel">
               <i class="bi bi-telephone-fill lbl-ico"></i> Teléfono
-              <input type="tel" placeholder="6XX XXX XXX" />
+              <input type="tel" id="cf-tel" name="telefono" autocomplete="tel" placeholder="6XX XXX XXX" />
             </label>
           </div>
           <div class="form-row">
-            <label>
+            <label for="cf-etapa">
               <i class="bi bi-mortarboard-fill lbl-ico"></i> Etapa de interés
-              <select>
+              <select id="cf-etapa" name="etapa">
+                <option value="">Selecciona etapa</option>
                 <option>Infantil 0–3</option>
                 <option>Infantil 3–6</option>
                 <option>Primaria</option>
@@ -660,12 +666,12 @@
           </div>
           <!-- Mensaje + política de privacidad en paralelo -->
           <div class="form-row--msg">
-            <label>
+            <label for="cf-msg">
               <i class="bi bi-chat-left-text-fill lbl-ico"></i> Mensaje
-              <textarea rows="5" placeholder="Cuéntanos qué necesitas…"></textarea>
+              <textarea id="cf-msg" name="mensaje" rows="5" placeholder="Cuéntanos qué necesitas…"></textarea>
             </label>
             <label class="form-privacy">
-              <input type="checkbox" required />
+              <input type="checkbox" name="rgpd" required />
               <i class="bi bi-shield-lock-fill"></i>
               <span>He leído y acepto la <a href="/privacidad.html" target="_blank" rel="noopener">política de privacidad</a></span>
             </label>
@@ -673,6 +679,14 @@
           <button type="submit" class="btn btn--primary btn--block magnetic">
             <i class="bi bi-send-fill"></i> Enviar solicitud
           </button>
+          <div class="form-status form-status--ok" id="contactoSuccess" hidden>
+            <i class="bi bi-check-circle-fill"></i>
+            <div><strong>¡Mensaje enviado!</strong><br>Te responderemos en menos de 24 horas hábiles. ¡Gracias por contactar con el Colegio NSD!</div>
+          </div>
+          <div class="form-status form-status--err" id="contactoError" hidden>
+            <i class="bi bi-x-circle-fill"></i>
+            <div><strong>Error al enviar.</strong> Por favor, inténtalo de nuevo o llámanos al <a href="tel:+34914719959">91 471 99 59</a>.</div>
+          </div>
         </div>
       </form>
     </div>
@@ -680,5 +694,6 @@
 
   <div id="site-footer"></div>
   <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/forms.js" defer></script>
 </body>
 </html>

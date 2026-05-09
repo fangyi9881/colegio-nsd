@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://www.colegionsdolores.es/contacto.html" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Contacto · Colegio NSD" />
-  <meta property="og:description" content="C/ Tordo, 9-15 · 28019 Madrid · 91 471 99 59 · secretaria@colegionsdolores.com" />
+  <meta property="og:description" content="C/ Tordo, 9-15 · 28019 Madrid · 91 471 99 59 · secretaria@colegionsdolores.es" />
   <link rel="icon" type="image/png" href="/assets/img/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -47,7 +47,7 @@
         <ul class="contact-list">
           <li><i class="bi bi-geo-alt"></i> <span>C/ Tordo, 9-15 · 28019 Madrid (Carabanchel)</span></li>
           <li><i class="bi bi-telephone"></i> <a href="tel:+34914719959">91 471 99 59</a></li>
-          <li><i class="bi bi-envelope"></i> <a href="mailto:secretaria@colegionsdolores.com">secretaria@colegionsdolores.com</a></li>
+          <li><i class="bi bi-envelope"></i> <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a></li>
           <li><i class="bi bi-clock"></i> <span>Secretaría: L–V de 9:00 a 14:00</span></li>
         </ul>
 
@@ -65,24 +65,30 @@
         </div>
       </div>
 
-      <form class="form-card" onsubmit="event.preventDefault(); alert('¡Gracias! Te contactaremos pronto.');">
+      <form class="form-card" id="contactoFormPage">
+        <!-- Web3Forms — obtén tu clave gratuita en https://web3forms.com -->
+        <input type="hidden" name="access_key" value="TU_CLAVE_WEB3FORMS_AQUI" />
+        <input type="hidden" name="subject" value="Contacto — Colegio NSD" />
+        <input type="hidden" name="from_name" value="Web Colegio NSD" />
+        <input type="hidden" name="botcheck" style="display:none" />
         <h3>Solicita información</h3>
         <div class="form-row">
-          <label>Nombre y apellidos
-            <input type="text" required placeholder="Tu nombre" />
+          <label for="cp-nombre">Nombre y apellidos
+            <input type="text" id="cp-nombre" name="nombre" required autocomplete="name" placeholder="Tu nombre completo" />
           </label>
         </div>
         <div class="form-row form-row--2">
-          <label>Email
-            <input type="email" required placeholder="tu@email.com" />
+          <label for="cp-email">Email
+            <input type="email" id="cp-email" name="email" required autocomplete="email" placeholder="tu@email.com" />
           </label>
-          <label>Teléfono
-            <input type="tel" placeholder="6XX XXX XXX" />
+          <label for="cp-tel">Teléfono
+            <input type="tel" id="cp-tel" name="telefono" autocomplete="tel" placeholder="6XX XXX XXX" />
           </label>
         </div>
         <div class="form-row">
-          <label>Etapa de interés
-            <select>
+          <label for="cp-etapa">Etapa de interés
+            <select id="cp-etapa" name="etapa">
+              <option value="">Selecciona etapa</option>
               <option>Infantil 0–3</option>
               <option>Infantil 3–6</option>
               <option>Primaria</option>
@@ -93,20 +99,29 @@
           </label>
         </div>
         <div class="form-row">
-          <label>Mensaje
-            <textarea rows="5" placeholder="Cuéntanos qué necesitas…"></textarea>
+          <label for="cp-msg">Mensaje
+            <textarea id="cp-msg" name="mensaje" rows="5" placeholder="Cuéntanos qué necesitas…"></textarea>
           </label>
         </div>
         <label class="form-check">
-          <input type="checkbox" required />
-          <span>Acepto la <a href="#">política de privacidad</a>.</span>
+          <input type="checkbox" name="rgpd" required />
+          <span>He leído y acepto la <a href="/privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.</span>
         </label>
         <button type="submit" class="btn btn--primary btn--block">Enviar solicitud</button>
+        <div class="form-status form-status--ok" id="contactoSuccessPage" hidden>
+          <i class="bi bi-check-circle-fill"></i>
+          <div><strong>¡Mensaje enviado!</strong><br>Te responderemos en menos de 24 horas hábiles. ¡Gracias!</div>
+        </div>
+        <div class="form-status form-status--err" id="contactoErrorPage" hidden>
+          <i class="bi bi-x-circle-fill"></i>
+          <div><strong>Error al enviar.</strong> Por favor, inténtalo de nuevo o llámanos al <a href="tel:+34914719959">91 471 99 59</a>.</div>
+        </div>
       </form>
     </div>
   </section>
 
   <div id="site-footer"></div>
   <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/forms.js" defer></script>
 </body>
 </html>
