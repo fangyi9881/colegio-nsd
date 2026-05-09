@@ -63,7 +63,15 @@
               <li><a href="/etapas/eso.html">ESO</a></li>
             </ul>
           </li>
-          <li><a href="/#servicios" data-link="servicios">Servicios</a></li>
+          <li class="has-dropdown">
+            <a href="/#servicios" data-link="servicios">Servicios <i class="bi bi-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="/servicios/comedor.html">Comedor escolar</a></li>
+              <li><a href="/#servicios">Extraescolares</a></li>
+              <li><a href="/#servicios">Madrugadores</a></li>
+              <li><a href="/#servicios">Transporte</a></li>
+            </ul>
+          </li>
           <li><a href="/blog/" data-link="blog">Blog</a></li>
           <li><a href="/contacto.html" data-link="contacto">Contacto</a></li>
           <li><a class="nav-cta magnetic" href="/admision.html"><i class="bi bi-mortarboard-fill"></i> Admisión</a></li>
@@ -97,6 +105,7 @@
         <li><a href="/centro/sobre-nosotros.html">El Centro</a></li>
         <li><a href="/etapas/primaria.html">Etapas</a></li>
         <li><a href="/centro/departamentos.html">Departamentos</a></li>
+        <li><a href="/servicios/comedor.html">Comedor</a></li>
         <li><a href="/blog/">Blog</a></li>
         <li><a href="/contacto.html">Contacto</a></li>
       </ul>

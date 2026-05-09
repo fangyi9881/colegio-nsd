@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="es" data-page="servicios">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Comedor Escolar · Menú Mayo 2026 · Colegio NSD</title>
+  <meta name="description" content="Menú del comedor escolar del Colegio NSD para mayo de 2026. Menú elaborado y evaluado por el Asesoramiento Nutricional de la Comunidad de Madrid." />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#0A5E24" />
+  <link rel="canonical" href="https://www.colegionsdolores.es/servicios/comedor.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Comedor Escolar · Menú Mayo 2026 · Colegio NSD" />
+  <meta property="og:description" content="Menú del comedor escolar del Colegio NSD para mayo de 2026, evaluado por el Asesoramiento Nutricional de la Comunidad de Madrid." />
+  <link rel="icon" type="image/png" href="/assets/img/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/pages.css" />
+  <style>
+    /* ── Comedor page-specific styles ── */
+    .menu-month-header {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 14px; margin: 0 0 28px;
+    }
+    .menu-month-header h2 {
+      font-family: var(--font-display); font-size: 1.5rem;
+      color: var(--ink-900); margin: 0;
+    }
+    .menu-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--green-100); color: var(--green-900);
+      font-size: .8rem; font-weight: 700;
+      padding: 6px 12px; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    .menu-badge i { color: var(--green-700); }
+
+    /* Week section */
+    .week-section { margin: 0 0 40px; }
+    .week-label {
+      font-size: .78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--ink-500);
+      border-bottom: 1px solid var(--ink-100);
+      padding-bottom: 8px; margin: 0 0 16px;
+    }
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 980px) {
+      .week-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .week-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Day card */
+    .day-card {
+      background: #fff; border: 1px solid var(--ink-100);
+      border-radius: 6px; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .day-card__head {
+      background: var(--green-700); color: #fff;
+      padding: 8px 12px;
+      display: flex; align-items: baseline; justify-content: space-between;
+    }
+    .day-card__weekday {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; opacity: .85;
+    }
+    .day-card__date {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
+    }
+    .day-card__body { padding: 12px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+    .day-card__row { display: flex; flex-direction: column; gap: 1px; }
+    .day-card__label {
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--ink-400);
+    }
+    .day-card__dish {
+      font-size: .84rem; color: var(--ink-800); line-height: 1.35;
+    }
+    .day-card__divider {
+      height: 1px; background: var(--ink-100); margin: 4px 0;
+    }
+    .day-card__extras {
+      display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px;
+    }
+    .day-card__tag {
+      font-size: .7rem; background: var(--ink-50); border: 1px solid var(--ink-100);
+      border-radius: 3px; padding: 2px 7px; color: var(--ink-600);
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .day-card__tag i { font-size: .65rem; }
+    .day-card__kcal {
+      margin-top: auto; padding-top: 8px;
+      border-top: 1px solid var(--ink-100);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 4px;
+    }
+    .day-card__kcal-num {
+      font-family: var(--font-display); font-size: 1.1rem; font-weight: 900;
+      color: var(--green-700);
+    }
+    .day-card__kcal-label { font-size: .68rem; color: var(--ink-400); font-weight: 600; }
+    .day-card__macros {
+      display: flex; gap: 6px; flex-wrap: wrap;
+    }
+    .macro {
+      font-size: .67rem; color: var(--ink-500);
+    }
+    .macro strong { color: var(--ink-800); }
+
+    /* Festivo card */
+    .day-card--festivo .day-card__head {
+      background: var(--yellow-500);
+    }
+    .day-card--festivo .day-card__body {
+      align-items: center; justify-content: center;
+      text-align: center; padding: 24px 12px;
+    }
+    .festivo-icon {
+      font-size: 1.8rem; color: var(--yellow-500); margin-bottom: 6px;
+    }
+    .festivo-text {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: .95rem; color: var(--ink-700); letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .festivo-note { font-size: .75rem; color: var(--ink-400); margin-top: 4px; }
+
+    /* Nutritional needs table */
+    .nutri-table {
+      width: 100%; border-collapse: collapse; font-size: .85rem; margin-top: 12px;
+    }
+    .nutri-table th {
+      background: var(--green-700); color: #fff;
+      font-size: .75rem; text-transform: uppercase; letter-spacing: .06em;
+      padding: 8px 10px; text-align: left;
+    }
+    .nutri-table td {
+      padding: 8px 10px; border-bottom: 1px solid var(--ink-100);
+      color: var(--ink-700);
+    }
+    .nutri-table tr:last-child td { border-bottom: none; }
+    .nutri-table tr:nth-child(odd) td { background: var(--ink-50); }
+
+    /* Info callout */
+    .callout {
+      background: var(--green-100); border-left: 4px solid var(--green-700);
+      border-radius: 0 6px 6px 0; padding: 14px 18px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .callout i { color: var(--green-700); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+    .callout p { margin: 0; font-size: .9rem; color: var(--ink-800); line-height: 1.55; }
+    .callout p + p { margin-top: 6px; }
+
+    /* Allergen notice */
+    .allergen-notice {
+      background: #FFF8E1; border: 1px solid #F9E08B;
+      border-radius: 6px; padding: 14px 18px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .allergen-notice i { color: #B87900; font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+    .allergen-notice p { margin: 0; font-size: .9rem; color: #5A4000; line-height: 1.55; }
+
+    /* Integral vs blanco badge */
+    .pan-integral { color: var(--green-700); }
+    .pan-blanco { color: var(--ink-500); }
+
+    /* Download link */
+    .menu-download {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--ink-50); border: 1px solid var(--ink-200);
+      border-radius: 4px; padding: 9px 16px;
+      font-size: .85rem; font-weight: 600; color: var(--ink-700);
+      text-decoration: none; transition: all .15s;
+    }
+    .menu-download:hover {
+      background: var(--green-700); color: #fff; border-color: var(--green-700);
+    }
+    .menu-download i { font-size: 1rem; }
+  </style>
+</head>
+<body id="top">
+  <div id="site-header"></div>
+
+  <section class="page-hero">
+    <div class="container page-hero__inner">
+      <div>
+        <nav class="crumbs" aria-label="Migas de pan">
+          <a href="/">Inicio</a> <i class="bi bi-chevron-right"></i>
+          <a href="/#servicios">Servicios</a> <i class="bi bi-chevron-right"></i>
+          <span>Comedor</span>
+        </nav>
+        <h1>Comedor Escolar</h1>
+        <p>Menú elaborado y supervisado por el Asesoramiento Nutricional de la Comunidad de Madrid, con productos frescos y equilibrados para el correcto desarrollo de nuestros alumnos.</p>
+      </div>
+      <div class="page-hero__meta">
+        <span class="meta"><i class="bi bi-calendar3"></i> Curso 2025–26</span>
+        <span class="meta"><i class="bi bi-award"></i> CAM Nutrición</span>
+        <span class="meta"><i class="bi bi-clock"></i> 13:30 – 15:00 h</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="container article">
+    <article class="prose">
+
+      <!-- Month header -->
+      <div class="menu-month-header">
+        <h2><i class="bi bi-calendar2-week" style="color:var(--green-700);margin-right:8px;"></i>Menú mayo 2026</h2>
+        <span class="menu-badge"><i class="bi bi-patch-check-fill"></i> Evaluado CAM</span>
+      </div>
+
+      <div class="callout" style="margin-bottom:28px;">
+        <i class="bi bi-info-circle-fill"></i>
+        <div>
+          <p>El menú del comedor cubre entre el <strong>40 y el 50 %</strong> de las necesidades nutricionales diarias del alumno. Para garantizar una alimentación completa, es importante acompañarlo de un <strong>desayuno abundante</strong> y una <strong>cena equilibrada</strong> con alimentos que no aparecieron en la comida.</p>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SEMANA 1  —  4 al 8 de mayo
+      ══════════════════════════════════════ -->
+      <div class="week-section">
+        <p class="week-label">Semana 1 &mdash; 4 al 8 de mayo</p>
+        <div class="week-grid">
+
+          <!-- Lunes 04/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Lunes</span>
+              <span class="day-card__date">4</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Espaguetis integrales con salsa de tomate</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Bacalao rebozado</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Pisto (verduras guisadas)</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag"><i class="bi bi-cup-hot"></i> Leche</span>
+                <span class="day-card__tag pan-blanco"><i class="bi bi-stars"></i> Pan blanco</span>
+              </div>
+              <div class="day-card__kcal">
+                <div>
+                  <div class="day-card__kcal-num">819 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                </div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>40g</strong></span>
+                  <span class="macro">L <strong>28g</strong></span>
+                  <span class="macro">HC <strong>94g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Martes 05/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Martes</span>
+              <span class="day-card__date">5</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Sopa de cocido con fideos ECO</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Cocido completo (garbanzos, carne y verdura)</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag pan-blanco"><i class="bi bi-stars"></i> Pan blanco</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">798 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>29g</strong></span>
+                  <span class="macro">L <strong>15g</strong></span>
+                  <span class="macro">HC <strong>134g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Miércoles 06/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Miércoles</span>
+              <span class="day-card__date">6</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Patatas guisadas</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Filete de merluza al horno</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Ensalada de lechuga</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-cup"></i> Yogur natural</span>
+                <span class="day-card__tag pan-integral"><i class="bi bi-stars"></i> Pan integral</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">517 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>27g</strong></span>
+                  <span class="macro">L <strong>8g</strong></span>
+                  <span class="macro">HC <strong>77g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Jueves 07/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Jueves</span>
+              <span class="day-card__date">7</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Judías pintas guisadas con arroz</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Tortilla de patatas</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Menestra de verduras guisadas</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag pan-blanco"><i class="bi bi-stars"></i> Pan blanco</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">899 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>38g</strong></span>
+                  <span class="macro">L <strong>16g</strong></span>
+                  <span class="macro">HC <strong>149g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Viernes 08/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Viernes</span>
+              <span class="day-card__date">8</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Puré de verduras</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Hamburguesas de pollo</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Guisantes rehogados</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag"><i class="bi bi-cup-hot"></i> Leche</span>
+                <span class="day-card__tag pan-integral"><i class="bi bi-stars"></i> Pan integral</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">699 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>43g</strong></span>
+                  <span class="macro">L <strong>17g</strong></span>
+                  <span class="macro">HC <strong>85g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /week-grid -->
+      </div><!-- /week-section -->
+
+
+      <!-- ══════════════════════════════════════
+           SEMANA 2  —  11 al 15 de mayo
+      ══════════════════════════════════════ -->
+      <div class="week-section">
+        <p class="week-label">Semana 2 &mdash; 11 al 15 de mayo</p>
+        <div class="week-grid">
+
+          <!-- Lunes 11/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Lunes</span>
+              <span class="day-card__date">11</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Macarrones integrales con salsa de tomate</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Filete de palometa al horno</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Champiñones rehogados</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag"><i class="bi bi-cup-hot"></i> Leche</span>
+                <span class="day-card__tag pan-blanco"><i class="bi bi-stars"></i> Pan blanco</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">621 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>35g</strong></span>
+                  <span class="macro">L <strong>12g</strong></span>
+                  <span class="macro">HC <strong>86g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Martes 12/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Martes</span>
+              <span class="day-card__date">12</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Crema de calabacín</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Cinta de lomo de cerdo a la plancha</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Ensalada de lechuga, tomate, maíz y atún</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag pan-blanco"><i class="bi bi-stars"></i> Pan blanco</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">739 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>43g</strong></span>
+                  <span class="macro">L <strong>23g</strong></span>
+                  <span class="macro">HC <strong>67g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Miércoles 13/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Miércoles</span>
+              <span class="day-card__date">13</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Sopa de cocido con fideos ECO</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Cocido completo (garbanzos, carne y verdura)</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-cup"></i> Yogur natural</span>
+                <span class="day-card__tag pan-integral"><i class="bi bi-stars"></i> Pan integral</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">856 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>33g</strong></span>
+                  <span class="macro">L <strong>16g</strong></span>
+                  <span class="macro">HC <strong>143g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Jueves 14/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Jueves</span>
+              <span class="day-card__date">14</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Arroz blanco con salsa de tomate</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Filete de merluza al horno</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Ensalada de lechuga</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag pan-blanco"><i class="bi bi-stars"></i> Pan blanco</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">638 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>25g</strong></span>
+                  <span class="macro">L <strong>4g</strong></span>
+                  <span class="macro">HC <strong>136g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Viernes 15/05 — FESTIVO -->
+          <div class="day-card day-card--festivo">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Viernes</span>
+              <span class="day-card__date">15</span>
+            </div>
+            <div class="day-card__body">
+              <div class="festivo-icon"><i class="bi bi-star-fill"></i></div>
+              <div class="festivo-text">Festivo</div>
+              <div class="festivo-note">San Isidro</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ══════════════════════════════════════
+           SEMANA 3  —  18 al 22 de mayo
+      ══════════════════════════════════════ -->
+      <div class="week-section">
+        <p class="week-label">Semana 3 &mdash; 18 al 22 de mayo</p>
+        <div class="week-grid">
+
+          <!-- Lunes 18/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Lunes</span>
+              <span class="day-card__date">18</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Espaguetis integrales con salsa de tomate</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Filete de palometa al horno</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Rodajas de tomate natural</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag"><i class="bi bi-cup-hot"></i> Leche</span>
+                <span class="day-card__tag pan-blanco"><i class="bi bi-stars"></i> Pan blanco</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">814 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>39g</strong></span>
+                  <span class="macro">L <strong>27g</strong></span>
+                  <span class="macro">HC <strong>99g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Martes 19/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Martes</span>
+              <span class="day-card__date">19</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Sopa de cocido con fideos ECO</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Cocido completo (garbanzos, carne y verdura)</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag pan-blanco"><i class="bi bi-stars"></i> Pan blanco</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">798 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>29g</strong></span>
+                  <span class="macro">L <strong>15g</strong></span>
+                  <span class="macro">HC <strong>134g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Miércoles 20/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Miércoles</span>
+              <span class="day-card__date">20</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Judías verdes rehogadas</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Pollo en salsa (cebolla, ajo y perejil)</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Champiñones rehogados</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-cup"></i> Yogur natural</span>
+                <span class="day-card__tag pan-integral"><i class="bi bi-stars"></i> Pan integral</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">575 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>36g</strong></span>
+                  <span class="macro">L <strong>9g</strong></span>
+                  <span class="macro">HC <strong>83g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Jueves 21/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Jueves</span>
+              <span class="day-card__date">21</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Judías blancas guisadas con verduras</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Tortilla francesa</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Menestra de verduras guisadas</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag pan-blanco"><i class="bi bi-stars"></i> Pan blanco</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">877 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>41g</strong></span>
+                  <span class="macro">L <strong>24g</strong></span>
+                  <span class="macro">HC <strong>121g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Viernes 22/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Viernes</span>
+              <span class="day-card__date">22</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Sopa de picadillo con fideos (jamón, pollo y huevo)</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Filete de merluza al horno</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Ensalada de pimientos rojos</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag"><i class="bi bi-cup-hot"></i> Leche</span>
+                <span class="day-card__tag pan-integral"><i class="bi bi-stars"></i> Pan integral</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">665 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>36g</strong></span>
+                  <span class="macro">L <strong>19g</strong></span>
+                  <span class="macro">HC <strong>77g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ══════════════════════════════════════
+           SEMANA 4  —  25 al 29 de mayo
+      ══════════════════════════════════════ -->
+      <div class="week-section">
+        <p class="week-label">Semana 4 &mdash; 25 al 29 de mayo</p>
+        <div class="week-grid">
+
+          <!-- Lunes 25/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Lunes</span>
+              <span class="day-card__date">25</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Macarrones integrales con salsa de tomate</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Bacalao rebozado</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Rodajas de tomate natural</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag"><i class="bi bi-cup-hot"></i> Leche</span>
+                <span class="day-card__tag pan-blanco"><i class="bi bi-stars"></i> Pan blanco</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">748 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>38g</strong></span>
+                  <span class="macro">L <strong>25g</strong></span>
+                  <span class="macro">HC <strong>87g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Martes 26/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Martes</span>
+              <span class="day-card__date">26</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Potaje de garbanzos y verduras</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Salchichas de pavo cocidas</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Ensalada de lechuga, tomate, maíz y atún</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag pan-blanco"><i class="bi bi-stars"></i> Pan blanco</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>27g</strong></span>
+                  <span class="macro">L <strong>26g</strong></span>
+                  <span class="macro">HC <strong>77g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Miércoles 27/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Miércoles</span>
+              <span class="day-card__date">27</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Judías verdes rehogadas</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Pollo en salsa (cebolla, ajo y perejil)</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Rodajas de tomate natural</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-cup"></i> Yogur natural</span>
+                <span class="day-card__tag pan-integral"><i class="bi bi-stars"></i> Pan integral</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">535 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>33g</strong></span>
+                  <span class="macro">L <strong>7g</strong></span>
+                  <span class="macro">HC <strong>82g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Jueves 28/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Jueves</span>
+              <span class="day-card__date">28</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Patatas guisadas</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Filete de merluza al horno</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Ensalada de lechuga, tomate, zanahoria, maíz y atún</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag pan-blanco"><i class="bi bi-stars"></i> Pan blanco</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">545 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>26g</strong></span>
+                  <span class="macro">L <strong>8g</strong></span>
+                  <span class="macro">HC <strong>68g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Viernes 29/05 -->
+          <div class="day-card">
+            <div class="day-card__head">
+              <span class="day-card__weekday">Viernes</span>
+              <span class="day-card__date">29</span>
+            </div>
+            <div class="day-card__body">
+              <div class="day-card__row">
+                <span class="day-card__label">1.º</span>
+                <span class="day-card__dish">Lentejas guisadas con chorizo</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__row">
+                <span class="day-card__label">2.º</span>
+                <span class="day-card__dish">Huevos cocidos</span>
+              </div>
+              <div class="day-card__row">
+                <span class="day-card__label">Guarnición</span>
+                <span class="day-card__dish">Ensalada de lechuga, tomate, maíz y atún</span>
+              </div>
+              <div class="day-card__divider"></div>
+              <div class="day-card__extras">
+                <span class="day-card__tag"><i class="bi bi-apple"></i> Fruta natural</span>
+                <span class="day-card__tag"><i class="bi bi-cup-hot"></i> Leche</span>
+                <span class="day-card__tag pan-integral"><i class="bi bi-stars"></i> Pan integral</span>
+              </div>
+              <div class="day-card__kcal">
+                <div class="day-card__kcal-num">764 <span style="font-size:.7rem;font-weight:600;color:var(--ink-400);">kcal</span></div>
+                <div class="day-card__macros">
+                  <span class="macro">P <strong>31g</strong></span>
+                  <span class="macro">L <strong>23g</strong></span>
+                  <span class="macro">HC <strong>86g</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <hr />
+
+      <h2>Necesidades nutricionales por edad</h2>
+      <p>La siguiente tabla recoge las necesidades nutricionales de referencia para niños y jóvenes de 4 a 15 años. La comida del comedor cubre aproximadamente el 40–50 % de estas necesidades diarias.</p>
+
+      <div class="schedule">
+        <table class="nutri-table">
+          <thead>
+            <tr>
+              <th>Edad</th>
+              <th>Calorías / día</th>
+              <th>Proteínas</th>
+              <th>Calcio</th>
+              <th>Hierro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>4–6 años</td><td>1 830 kcal</td><td>29 mg</td><td>500 mg</td><td>5–10 mg</td></tr>
+            <tr><td>7–9 años</td><td>2 190 kcal</td><td>35 mg</td><td>500 mg</td><td>5–10 mg</td></tr>
+            <tr><td>10–12 años</td><td>2 600 kcal</td><td>43 mg</td><td>600 mg</td><td>5–10 mg</td></tr>
+            <tr><td>13–15 años</td><td>2 900 kcal</td><td>53 mg</td><td>700 mg</td><td>9–18 mg</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Alérgenos</h2>
+      <div class="allergen-notice">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <p>Tenemos a su disposición la información completa sobre los alimentos alérgenos presentes en cada plato. Puede solicitarla en <strong>secretaría</strong> o contactando por correo a <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a>. Si su hijo tiene alguna alergia o intolerancia alimentaria, comuníquenoslo con antelación para poder ofrecerle una alternativa adecuada.</p>
+      </div>
+
+      <div class="article-footer">
+        <a href="/contacto.html" class="btn btn--primary"><i class="bi bi-envelope"></i> Contactar con el comedor</a>
+        <a href="/#servicios" class="btn btn--ghost"><i class="bi bi-arrow-left"></i> Todos los servicios</a>
+      </div>
+
+    </article>
+
+    <aside class="aside">
+      <div class="aside__card">
+        <h4>Otros servicios</h4>
+        <ul>
+          <li><a href="/#servicios">Actividades extraescolares <i class="bi bi-arrow-right"></i></a></li>
+          <li><a href="/#servicios">Madrugadores <i class="bi bi-arrow-right"></i></a></li>
+          <li><a href="/#servicios">Transporte escolar <i class="bi bi-arrow-right"></i></a></li>
+          <li><a href="/campamento-nsd/">Campamento NSD <i class="bi bi-arrow-right"></i></a></li>
+        </ul>
+      </div>
+
+      <div class="aside__card">
+        <h4>Horario comedor</h4>
+        <ul>
+          <li style="display:flex;gap:8px;align-items:center;font-size:.9rem;color:var(--ink-700);">
+            <i class="bi bi-clock" style="color:var(--green-700);"></i>
+            <span>13:30 – 15:00 h</span>
+          </li>
+          <li style="display:flex;gap:8px;align-items:center;font-size:.9rem;color:var(--ink-700);margin-top:8px;">
+            <i class="bi bi-calendar3" style="color:var(--green-700);"></i>
+            <span>De lunes a viernes</span>
+          </li>
+          <li style="display:flex;gap:8px;align-items:center;font-size:.9rem;color:var(--ink-700);margin-top:8px;">
+            <i class="bi bi-people" style="color:var(--green-700);"></i>
+            <span>Infantil, Primaria y ESO</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="aside__card">
+        <h4>Información nutricional</h4>
+        <p style="font-size:.88rem;color:var(--ink-600);margin:0 0 10px;">Menú evaluado por el <strong>Asesoramiento Nutricional de la Comunidad de Madrid</strong>.</p>
+        <p style="font-size:.88rem;color:var(--ink-600);margin:0;">Bebida siempre incluida: <strong>Agua</strong>.</p>
+      </div>
+
+      <div class="aside__card" style="background:linear-gradient(135deg,var(--green-700),var(--green-900));color:#fff;">
+        <h4 style="color:#fff;">¿Alguna duda?</h4>
+        <p style="color:#d6efd9;font-size:.9rem;margin:0 0 14px;">Contacta con nosotros para información sobre inscripciones o dietas especiales.</p>
+        <a href="/contacto.html" class="btn btn--ghost" style="background:var(--yellow-500);color:var(--ink-900);border:none;">Escribirnos</a>
+      </div>
+    </aside>
+
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="/assets/js/partials.js" defer></script>
+</body>
+</html>
