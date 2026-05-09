@@ -26,6 +26,7 @@
     '.form-status--err{background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.15);color:#dc2626}' +
     '.form-status a{color:inherit;font-weight:700;text-decoration:underline}' +
     '.form-status i{font-size:1.3rem;flex-shrink:0;line-height:1.2}' +
+    '.form-status[hidden]{display:none!important}' +
     '@keyframes _nsd-fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}';
   document.head.appendChild(style);
 
