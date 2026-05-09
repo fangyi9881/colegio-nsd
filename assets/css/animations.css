@@ -421,16 +421,41 @@
 .drawer__platform-btn {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   padding: 13px 10px; border-radius: 14px;
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.14);
-  color: rgba(255,255,255,.8); font-weight: 700; font-size: .88rem;
+  font-weight: 700; font-size: .88rem;
   transition: background .2s, border-color .2s, color .2s, transform .2s;
+  border: 1px solid transparent;
 }
-.drawer__platform-btn:hover {
-  background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.3);
-  color: #fff; transform: translateY(-2px);
-}
+.drawer__platform-btn:hover { transform: translateY(-2px); }
 .drawer__platform-btn i { font-size: 1.1rem; }
+
+/* Alexia — azul */
+.drawer__platform-btn:nth-child(1) {
+  background: rgba(59,130,246,.18); border-color: rgba(59,130,246,.35); color: #93c5fd;
+}
+.drawer__platform-btn:nth-child(1):hover {
+  background: rgba(59,130,246,.3); border-color: rgba(59,130,246,.6); color: #bfdbfe;
+}
+/* Raíces — verde */
+.drawer__platform-btn:nth-child(2) {
+  background: rgba(34,197,94,.16); border-color: rgba(34,197,94,.32); color: #86efac;
+}
+.drawer__platform-btn:nth-child(2):hover {
+  background: rgba(34,197,94,.28); border-color: rgba(34,197,94,.55); color: #bbf7d0;
+}
+/* Infantil NSD — rosa */
+.drawer__platform-btn:nth-child(3) {
+  background: rgba(244,114,182,.16); border-color: rgba(244,114,182,.32); color: #f9a8d4;
+}
+.drawer__platform-btn:nth-child(3):hover {
+  background: rgba(244,114,182,.28); border-color: rgba(244,114,182,.55); color: #fce7f3;
+}
+/* Campamento — ámbar */
+.drawer__platform-btn:nth-child(4) {
+  background: rgba(251,191,36,.16); border-color: rgba(251,191,36,.32); color: #fde68a;
+}
+.drawer__platform-btn:nth-child(4):hover {
+  background: rgba(251,191,36,.28); border-color: rgba(251,191,36,.55); color: #fef9c3;
+}
 
 /* ── Drawer footer ── */
 .drawer__footer {
