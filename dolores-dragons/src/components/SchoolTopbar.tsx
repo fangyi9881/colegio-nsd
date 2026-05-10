@@ -7,7 +7,10 @@ export default function SchoolTopbar() {
       fontSize: '.78rem',
       fontWeight: 600,
       color: 'rgba(255,255,255,.6)',
-      position: 'relative',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
       zIndex: 99999,
     }}>
       <div style={{
