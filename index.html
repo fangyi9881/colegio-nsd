@@ -36,7 +36,7 @@
   <link rel="preload" as="image" href="/assets/img/logo.png" fetchpriority="high" />
 
   <!-- Fuentes con display=swap para no bloquear render -->
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
   <link rel="stylesheet" href="/assets/css/animations.css" />
@@ -503,133 +503,6 @@
           <p>Acogida temprana para familias trabajadoras.</p>
         </a>
       </div>
-    </div>
-  </section>
-
-  <!-- DOLORES DRAGONS -->
-  <style>
-    #dragons-section {
-      position: relative;
-      overflow: hidden;
-      background: radial-gradient(ellipse at 60% 40%, #1a1500 0%, #080808 70%);
-      padding: 100px 20px 0;
-      text-align: center;
-    }
-    #dragons-section::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: url('https://i.imgur.com/OP6BbHs.png') center/320px no-repeat;
-      opacity: .04; pointer-events: none;
-    }
-    #dragons-section .dd-eyebrow {
-      display: inline-block;
-      background: rgba(212,175,55,.15); border: 1px solid rgba(212,175,55,.3);
-      color: #D4AF37; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-      padding: 5px 16px; border-radius: 99px; margin-bottom: 24px;
-    }
-    #dragons-section .dd-logo {
-      width: 120px; height: 120px; object-fit: contain; margin: 0 auto 24px; display: block;
-      filter: drop-shadow(0 0 32px rgba(212,175,55,.4));
-      animation: dd-pulse-glow 3s ease-in-out infinite;
-    }
-    @keyframes dd-pulse-glow {
-      0%,100% { filter: drop-shadow(0 0 24px rgba(212,175,55,.35)); }
-      50%      { filter: drop-shadow(0 0 48px rgba(212,175,55,.7)); }
-    }
-    #dragons-section .dd-h1 {
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(2.8rem, 8vw, 5.5rem); font-weight: 700;
-      color: #fff; letter-spacing: .05em; line-height: 1; margin-bottom: 8px;
-      text-shadow: 0 2px 40px rgba(0,0,0,.5);
-    }
-    #dragons-section .dd-h1 span { color: #D4AF37; }
-    #dragons-section .dd-sub {
-      font-size: clamp(1rem, 3vw, 1.25rem); color: #999;
-      max-width: 540px; margin: 16px auto 36px;
-      font-family: 'Inter', sans-serif;
-    }
-    #dragons-section .dd-actions {
-      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 0;
-    }
-    #dragons-section .dd-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 12px 28px; border-radius: 8px;
-      font-weight: 700; font-size: .95rem; text-decoration: none; transition: all .2s;
-      font-family: 'Inter', sans-serif;
-    }
-    #dragons-section .dd-btn--gold { background: #D4AF37; color: #080808; }
-    #dragons-section .dd-btn--gold:hover { background: #e8c84a; transform: translateY(-1px); }
-    #dragons-section .dd-btn--outline { background: transparent; color: #D4AF37; border: 1.5px solid rgba(212,175,55,.3); }
-    #dragons-section .dd-btn--outline:hover { background: rgba(212,175,55,.15); border-color: #D4AF37; }
-    #dragons-section .dd-stats {
-      display: flex; justify-content: center; margin-top: 56px; flex-wrap: wrap;
-      border-top: 1px solid rgba(212,175,55,.15);
-    }
-    #dragons-section .dd-stat {
-      padding: 20px 36px; border-left: 1px solid rgba(212,175,55,.15); text-align: center;
-    }
-    #dragons-section .dd-stat:first-child { border-left: none; }
-    #dragons-section .dd-stat-num {
-      font-family: 'Oswald', sans-serif; font-size: 2.2rem; font-weight: 700;
-      color: #D4AF37; line-height: 1;
-    }
-    #dragons-section .dd-stat-num--white { color: #fff; }
-    #dragons-section .dd-stat-lbl {
-      font-size: .78rem; color: #999; text-transform: uppercase; letter-spacing: .08em;
-      margin-top: 4px; font-family: 'Inter', sans-serif;
-    }
-    #dragons-section .dd-cta-bar {
-      background: rgba(212,175,55,.08);
-      border-top: 1px solid rgba(212,175,55,.15);
-      padding: 18px 20px;
-      margin-top: 0;
-      font-family: 'Inter', sans-serif;
-      font-size: .88rem;
-      color: #999;
-    }
-    #dragons-section .dd-cta-bar a {
-      color: #D4AF37; font-weight: 700; text-decoration: none; margin-left: 8px;
-    }
-    #dragons-section .dd-cta-bar a:hover { text-decoration: underline; }
-    @media (max-width: 480px) {
-      #dragons-section .dd-stat { padding: 16px 18px; }
-      #dragons-section .dd-stat-num { font-size: 1.7rem; }
-    }
-  </style>
-  <section id="dragons-section">
-    <span class="dd-eyebrow"><i class="bi bi-basketball"></i> &nbsp;Nueva Era · Temporada 25/26</span>
-    <img src="https://i.imgur.com/OP6BbHs.png" alt="Dolores Dragons Logo" class="dd-logo" />
-    <h2 class="dd-h1">DOLORES<br><span>DRAGONS</span></h2>
-    <p class="dd-sub">Pasión, esfuerzo y trabajo en equipo. El club de baloncesto del Colegio NSD, líderes de la 2ª Fase Cadete Femenino en la temporada 25/26.</p>
-    <div class="dd-actions">
-      <a href="/baloncesto-nsd/" class="dd-btn dd-btn--gold">
-        <i class="bi bi-basketball"></i> Ver el club
-      </a>
-      <a href="https://www.instagram.com/doloresdragons/" target="_blank" rel="noopener" class="dd-btn dd-btn--outline">
-        <i class="bi bi-instagram"></i> Síguenos
-      </a>
-    </div>
-    <div class="dd-stats">
-      <div class="dd-stat">
-        <div class="dd-stat-num">2</div>
-        <div class="dd-stat-lbl">Equipos</div>
-      </div>
-      <div class="dd-stat">
-        <div class="dd-stat-num dd-stat-num--white">1º</div>
-        <div class="dd-stat-lbl">Cadete 2ª Fase</div>
-      </div>
-      <div class="dd-stat">
-        <div class="dd-stat-num">25/26</div>
-        <div class="dd-stat-lbl">Temporada</div>
-      </div>
-      <div class="dd-stat">
-        <div class="dd-stat-num">68</div>
-        <div class="dd-stat-lbl">Años de historia</div>
-      </div>
-    </div>
-    <div class="dd-cta-bar">
-      Club de baloncesto del Colegio Nuestra Señora de los Dolores ·
-      <a href="/baloncesto-nsd/">Ver clasificaciones, equipos y mucho más <i class="bi bi-arrow-right"></i></a>
     </div>
   </section>
 
