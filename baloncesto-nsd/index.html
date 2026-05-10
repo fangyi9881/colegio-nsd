@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="https://i.imgur.com/OP6BbHs.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dolores Dragons</title>
+    <script>
+      (function() {
+        const originalFetch = window.fetch;
+        try {
+          Object.defineProperty(window, 'fetch', {
+            configurable: true,
+            enumerable: true,
+            get: function() { return originalFetch; },
+            set: function(v) { 
+              if (v !== originalFetch) {
+                console.warn('Attempted to overwrite window.fetch ignored'); 
+              }
+            }
+          });
+        } catch (e) {
+          // If it's already not configurable, we can't do much.
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/Program Files/Git/baloncesto-nsd/assets/index-jiPNqyao.js"></script>
+    <link rel="stylesheet" crossorigin href="/Program Files/Git/baloncesto-nsd/assets/index-CqipiszD.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+
