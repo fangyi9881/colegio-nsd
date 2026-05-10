@@ -4,8 +4,8 @@ import { Plus, Edit2, Trash2, X, Link as LinkIcon, Image as ImageIcon, Settings,
 import { Sponsor } from '../types';
 
 const defaultSponsors: Sponsor[] = [
-  { id: '1', name: 'NSD', logo: 'https://image2url.com/r2/default/images/1773275081572-81fef10c-b0a5-453b-9e30-c7aa468d543d.png', url: 'https://www.colegionsdolores.es/' },
-  { id: '2', name: 'Fan Tastiko', logo: 'https://image2url.com/r2/default/images/1773275111246-eae6afa4-88b8-425f-ad94-8c22cf137ec9.png', url: 'https://www.instagram.com/fan_tastiko/' },
+  { id: '1', name: 'NSD', logo: '/images/1773275081572-81fef10c-b0a5-453b-9e30-c7aa468d543d.png', url: 'https://www.colegionsdolores.es/' },
+  { id: '2', name: 'Fan Tastiko', logo: '/images/1773275111246-eae6afa4-88b8-425f-ad94-8c22cf137ec9.png', url: 'https://www.instagram.com/fan_tastiko/' },
 ];
 
 export default function SponsorsSection() {
