@@ -88,19 +88,23 @@ export default function SponsorsSection() {
   };
 
   return (
-    <section id="sponsors" className="py-12 md:py-16 bg-background relative overflow-hidden">
+    <section id="sponsors" className="py-16 md:py-20 bg-black relative overflow-hidden force-dark" style={{ borderTop: '1px solid rgba(212,175,55,0.12)' }}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between mb-8 md:mb-10">
+        <div className="flex items-center justify-between mb-10 md:mb-14">
           <div className="flex-1" />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center flex-1"
+            className="text-center flex-1 flex flex-col items-center gap-3"
           >
-            <h3 className="text-xs md:text-sm font-bold text-primary uppercase tracking-widest mb-2" style={{ fontFamily: 'var(--font-display)' }}>
-              Patrocinadores Oficiales
-            </h3>
+            <div className="flex items-center gap-4">
+              <div className="h-px w-8 bg-primary/40" />
+              <span className="text-primary/60 font-bold uppercase" style={{ fontSize: '0.57rem', letterSpacing: '0.34em' }}>
+                Patrocinadores Oficiales
+              </span>
+              <div className="h-px w-8 bg-primary/40" />
+            </div>
           </motion.div>
           <div className="flex-1 flex justify-end" />
         </div>
