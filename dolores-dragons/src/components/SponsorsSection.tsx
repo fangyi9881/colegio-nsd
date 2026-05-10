@@ -4,7 +4,7 @@ import { Plus, Edit2, Trash2, X, Link as LinkIcon, Image as ImageIcon, Settings,
 import { Sponsor } from '../types';
 
 const defaultSponsors: Sponsor[] = [
-  { id: '1', name: 'NSD', logo: '/images/1773275081572-81fef10c-b0a5-453b-9e30-c7aa468d543d.png', url: 'https://www.colegionsdolores.es/' },
+  { id: '1', name: 'NSD', logo: '/images/1773275081572-81fef10c-b0a5-453b-9e30-c7aa468d543d.png', url: 'https://fangyi9881.github.io/colegio-nsd/' },
   { id: '2', name: 'Fan Tastiko', logo: '/images/1773275111246-eae6afa4-88b8-425f-ad94-8c22cf137ec9.png', url: 'https://www.instagram.com/fan_tastiko/' },
 ];
 
@@ -21,7 +21,7 @@ export default function SponsorsSection() {
   const [url, setUrl] = useState('');
 
   useEffect(() => {
-    const savedSponsors = localStorage.getItem('dd_sponsors_v5');
+    const savedSponsors = localStorage.getItem('dd_sponsors_v6');
     if (savedSponsors && savedSponsors !== 'undefined') {
       try {
         setSponsors(JSON.parse(savedSponsors));
@@ -30,13 +30,13 @@ export default function SponsorsSection() {
       }
     } else {
       setSponsors(defaultSponsors);
-      localStorage.setItem('dd_sponsors_v5', JSON.stringify(defaultSponsors));
+      localStorage.setItem('dd_sponsors_v6', JSON.stringify(defaultSponsors));
     }
   }, []);
 
   const saveSponsors = (newSponsors: Sponsor[]) => {
     setSponsors(newSponsors);
-    localStorage.setItem('dd_sponsors_v5', JSON.stringify(newSponsors));
+    localStorage.setItem('dd_sponsors_v6', JSON.stringify(newSponsors));
   };
 
   const handleOpenModal = (sponsor?: Sponsor) => {

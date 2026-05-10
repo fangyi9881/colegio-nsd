@@ -44,7 +44,7 @@ export default function SchoolTopbar() {
         }}>
           🏫 Parte del{' '}
           <a
-            href="https://www.colegionsdolores.es/"
+            href="https://fangyi9881.github.io/colegio-nsd/"
             style={{ color: '#D4AF37', textDecoration: 'none', fontWeight: 800 }}
           >
             Colegio NSD
