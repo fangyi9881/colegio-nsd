@@ -1,354 +1,530 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Dolores Dragons · Club de Baloncesto</title>
-  <meta name="description" content="Dolores Dragons – Club de Baloncesto del Colegio NSD. Cadete Femenino y Alevín Mixto. Temporada 2025/26." />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <title>Dolores Dragons</title>
+  <meta name="description" content="Club de Baloncesto Dolores Dragons del Colegio NSD. Cadete Femenino y Alevín Mixto. Temporada 2025/26." />
   <meta name="theme-color" content="#D4AF37" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Dolores Dragons · Club de Baloncesto" />
-  <meta property="og:description" content="Club de Baloncesto del Colegio Nuestra Señora de los Dolores. Temporada 2025/26." />
-  <meta property="og:image" content="https://i.imgur.com/OP6BbHs.png" />
   <link rel="icon" type="image/png" href="https://i.imgur.com/OP6BbHs.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
   <style>
+    /* ── RESET & VARS ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --gold: #D4AF37;
-      --gold-light: #e8c84a;
-      --gold-dim: rgba(212,175,55,.15);
-      --gold-border: rgba(212,175,55,.3);
-      --black: #080808;
-      --dark: #0f0f0f;
-      --dark2: #181818;
-      --dark3: #222;
-      --ink: #e8e8e8;
-      --ink-dim: #999;
-      --radius: 12px;
-      --radius-sm: 8px;
+      --gold-light: #f0cc55;
+      --gold-dim: rgba(212,175,55,.12);
+      --gold-border: rgba(212,175,55,.25);
+      --gold-glow: rgba(212,175,55,.4);
+      --black: #000000;
+      --dark: #0a0a0a;
+      --dark2: #111111;
+      --dark3: #1a1a1a;
+      --dark4: #222222;
+      --ink: #ffffff;
+      --ink-dim: rgba(255,255,255,.6);
+      --ink-muted: rgba(255,255,255,.35);
+      --r: 8px;
+      --r-lg: 16px;
+    }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      background: var(--black);
+      color: var(--ink);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
     }
 
-    html { scroll-behavior: smooth; }
-    body { background: var(--black); color: var(--ink); font-family: 'Inter', sans-serif; line-height: 1.6; }
+    /* ── PRELOADER ── */
+    #preloader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--black);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity .5s ease .2s, visibility .5s ease .2s;
+    }
+    #preloader.hidden { opacity: 0; visibility: hidden; }
+    .preloader__logo {
+      width: 90px; height: 90px;
+      animation: spin 1.4s linear infinite;
+      filter: drop-shadow(0 0 30px var(--gold-glow));
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── TOPBAR ── */
-    .topbar {
-      background: var(--dark);
-      border-bottom: 1px solid var(--gold-border);
-      padding: 8px 0;
-      font-size: .78rem;
+    /* ── CURSOR ── */
+    .custom-cursor {
+      width: 20px; height: 20px; border: 2px solid var(--gold);
+      border-radius: 50%; position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      transition: transform .12s ease, opacity .2s;
+      transform: translate(-50%,-50%);
     }
-    .topbar__inner {
-      max-width: 1140px; margin: 0 auto; padding: 0 20px;
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    }
-    .topbar__left { display: flex; align-items: center; gap: 8px; color: var(--ink-dim); }
-    .topbar__left a { color: var(--gold); text-decoration: none; font-weight: 600; }
-    .topbar__left a:hover { text-decoration: underline; }
-    .topbar__social { display: flex; gap: 10px; }
-    .topbar__social a {
-      color: var(--ink-dim); text-decoration: none; display: flex; align-items: center; gap: 4px;
-      transition: color .2s;
-    }
-    .topbar__social a:hover { color: var(--gold); }
+    @media (hover: none) { .custom-cursor { display: none; } }
 
     /* ── NAV ── */
     .nav {
-      background: var(--dark);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(0,0,0,.85);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--gold-border);
-      position: sticky; top: 0; z-index: 100;
+      transition: background .3s;
     }
     .nav__inner {
-      max-width: 1140px; margin: 0 auto; padding: 0 20px;
-      display: flex; align-items: center; justify-content: space-between; height: 64px;
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px;
     }
     .nav__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .nav__brand img { width: 40px; height: 40px; object-fit: contain; }
-    .nav__brand-name { font-family: 'Oswald', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--gold); letter-spacing: .04em; }
+    .nav__brand-name {
+      font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.1rem;
+      color: var(--gold); letter-spacing: .05em;
+    }
     .nav__links { display: flex; gap: 4px; list-style: none; }
     .nav__links a {
-      color: var(--ink-dim); text-decoration: none; padding: 6px 14px; border-radius: var(--radius-sm);
-      font-size: .9rem; font-weight: 500; transition: color .2s, background .2s;
+      color: var(--ink-dim); text-decoration: none; padding: 6px 14px;
+      border-radius: var(--r); font-size: .85rem; font-weight: 500;
+      letter-spacing: .04em; transition: color .2s, background .2s;
     }
     .nav__links a:hover { color: var(--gold); background: var(--gold-dim); }
-    .nav__cta {
-      background: var(--gold); color: var(--black); font-weight: 700; font-size: .85rem;
-      padding: 8px 18px; border-radius: var(--radius-sm); text-decoration: none;
-      transition: background .2s; white-space: nowrap;
+    .nav__social { display: flex; gap: 14px; align-items: center; }
+    .nav__social a { color: var(--ink-muted); font-size: 1.05rem; text-decoration: none; transition: color .2s; }
+    .nav__social a:hover { color: var(--gold); }
+    .nav__join {
+      background: var(--gold); color: var(--black);
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: .82rem;
+      padding: 9px 20px; border-radius: var(--r); text-decoration: none;
+      letter-spacing: .04em; transition: background .2s, transform .15s;
     }
-    .nav__cta:hover { background: var(--gold-light); }
-    .nav__menu-btn { display: none; background: none; border: none; color: var(--ink); font-size: 1.5rem; cursor: pointer; }
+    .nav__join:hover { background: var(--gold-light); transform: scale(1.04); }
+    .nav__burger { display: none; background: none; border: none; color: var(--ink); font-size: 1.6rem; cursor: pointer; }
+    .nav__mobile {
+      display: none; position: fixed; inset: 0; top: 68px;
+      background: rgba(0,0,0,.97); backdrop-filter: blur(16px);
+      padding: 32px 24px; z-index: 99;
+      flex-direction: column; gap: 8px;
+    }
+    .nav__mobile.is-open { display: flex; }
+    .nav__mobile a {
+      color: var(--ink-dim); text-decoration: none; font-size: 1.15rem; font-weight: 500;
+      padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+      display: block; transition: color .2s;
+    }
+    .nav__mobile a:hover { color: var(--gold); }
 
     /* ── HERO ── */
     .hero {
-      position: relative; overflow: hidden;
-      background: radial-gradient(ellipse at 60% 40%, #1a1500 0%, var(--black) 70%);
-      padding: 100px 20px 80px;
-      text-align: center;
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      overflow: hidden; padding: 120px 24px 80px;
+      background: var(--black);
     }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: url('https://i.imgur.com/OP6BbHs.png') center/320px no-repeat;
-      opacity: .04; pointer-events: none;
+    .hero__bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(212,175,55,.08) 0%, transparent 70%);
     }
-    .hero__eyebrow {
-      display: inline-block; background: var(--gold-dim); border: 1px solid var(--gold-border);
-      color: var(--gold); font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-      padding: 5px 16px; border-radius: 99px; margin-bottom: 24px;
+    /* Ember particles */
+    .embers { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .ember {
+      position: absolute; bottom: -20px;
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--gold); opacity: 0;
+      animation: rise var(--dur, 4s) var(--delay, 0s) ease-in infinite;
     }
-    .hero__logo { width: 120px; height: 120px; object-fit: contain; margin: 0 auto 24px; display: block;
-      filter: drop-shadow(0 0 32px rgba(212,175,55,.4));
-      animation: pulse-glow 3s ease-in-out infinite;
+    @keyframes rise {
+      0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+      10%  { opacity: .8; }
+      90%  { opacity: .3; }
+      100% { transform: translateY(-100vh) translateX(var(--drift,20px)) scale(0); opacity: 0; }
     }
-    @keyframes pulse-glow {
-      0%,100% { filter: drop-shadow(0 0 24px rgba(212,175,55,.35)); }
-      50% { filter: drop-shadow(0 0 48px rgba(212,175,55,.7)); }
+    .hero__content { position: relative; z-index: 2; text-align: center; max-width: 720px; }
+    .hero__badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold-dim); border: 1px solid var(--gold-border);
+      color: var(--gold); font-size: .75rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 6px 18px; border-radius: 99px; margin-bottom: 28px;
+      animation: fade-down .8s ease .2s both;
     }
-    .hero h1 {
-      font-family: 'Oswald', sans-serif; font-size: clamp(2.8rem, 8vw, 5.5rem); font-weight: 700;
-      color: #fff; letter-spacing: .05em; line-height: 1; margin-bottom: 8px;
-      text-shadow: 0 2px 40px rgba(0,0,0,.5);
+    .hero__logo {
+      width: 140px; height: 140px; object-fit: contain;
+      margin: 0 auto 28px; display: block;
+      filter: drop-shadow(0 0 40px var(--gold-glow));
+      animation: fade-up .8s ease .4s both, float 4s ease-in-out 1.4s infinite;
     }
-    .hero h1 span { color: var(--gold); }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .hero__title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      font-weight: 900; line-height: 1;
+      color: var(--ink); letter-spacing: .06em;
+      text-shadow: 0 0 60px rgba(212,175,55,.2);
+      animation: fade-up .8s ease .5s both;
+      margin-bottom: 20px;
+    }
+    .hero__title span { color: var(--gold); display: block; }
     .hero__sub {
-      font-size: clamp(1rem, 3vw, 1.25rem); color: var(--ink-dim); max-width: 540px;
-      margin: 16px auto 36px;
+      font-size: clamp(.95rem, 2.5vw, 1.15rem);
+      color: var(--ink-dim); line-height: 1.7; margin-bottom: 36px;
+      animation: fade-up .8s ease .7s both;
     }
-    .hero__actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .hero__actions {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+      animation: fade-up .8s ease .9s both;
+    }
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 12px 28px; border-radius: var(--radius-sm);
-      font-weight: 700; font-size: .95rem; text-decoration: none; transition: all .2s;
+      padding: 13px 30px; border-radius: var(--r);
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: .9rem; letter-spacing: .04em;
+      text-decoration: none; cursor: pointer; transition: all .2s;
+      border: none;
     }
     .btn--gold { background: var(--gold); color: var(--black); }
-    .btn--gold:hover { background: var(--gold-light); transform: translateY(-1px); }
-    .btn--outline { background: transparent; color: var(--gold); border: 1.5px solid var(--gold-border); }
-    .btn--outline:hover { background: var(--gold-dim); border-color: var(--gold); }
-    .hero__stats { display: flex; gap: 0; justify-content: center; margin-top: 56px; flex-wrap: wrap; }
-    .hero__stat {
-      padding: 20px 36px; border-left: 1px solid var(--gold-border);
-      text-align: center;
+    .btn--gold:hover { background: var(--gold-light); transform: scale(1.04); }
+    .btn--outline {
+      background: transparent; color: var(--ink);
+      border: 1.5px solid rgba(255,255,255,.25);
     }
-    .hero__stat:first-child { border-left: none; }
-    .hero__stat-num { font-family: 'Oswald', sans-serif; font-size: 2.2rem; font-weight: 700; color: var(--gold); line-height: 1; }
-    .hero__stat-lbl { font-size: .78rem; color: var(--ink-dim); text-transform: uppercase; letter-spacing: .08em; margin-top: 4px; }
+    .btn--outline:hover { border-color: var(--gold); color: var(--gold); }
 
-    /* ── SECTIONS ── */
-    .section { padding: 80px 20px; max-width: 1140px; margin: 0 auto; }
-    .section--dark { background: var(--dark); padding: 80px 20px; max-width: 100%; }
-    .section--dark .section__inner { max-width: 1140px; margin: 0 auto; }
-    .section__tag {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--gold-dim); border: 1px solid var(--gold-border); color: var(--gold);
-      font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-      padding: 4px 12px; border-radius: 99px; margin-bottom: 12px;
+    /* Marquee strip */
+    .marquee-strip {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: var(--gold); overflow: hidden; height: 38px;
+      display: flex; align-items: center;
     }
-    .section__title { font-family: 'Oswald', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; color: #fff; margin-bottom: 8px; }
-    .section__lead { color: var(--ink-dim); max-width: 560px; margin-bottom: 40px; }
+    .marquee-track {
+      display: flex; white-space: nowrap;
+      animation: marquee 20s linear infinite;
+    }
+    .marquee-item {
+      font-family: 'Cinzel', serif; font-size: .75rem; font-weight: 700;
+      color: var(--black); letter-spacing: .12em; text-transform: uppercase;
+      padding: 0 28px;
+    }
+    .marquee-dot { color: rgba(0,0,0,.4); }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── SECTION BASE ── */
+    .section { padding: 90px 24px; position: relative; }
+    .section__inner { max-width: 1200px; margin: 0 auto; }
+    .section__glow {
+      position: absolute; pointer-events: none;
+      background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(212,175,55,.07) 0%, transparent 70%);
+      inset: 0;
+    }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--gold-dim); border: 1px solid var(--gold-border);
+      color: var(--gold); font-size: .7rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 99px; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700; color: var(--ink);
+      margin-bottom: 10px; line-height: 1.15;
+    }
+    .section-title span { color: var(--gold); }
+    .section-lead { color: var(--ink-dim); font-size: .95rem; max-width: 520px; }
+
+    /* ── NOTICIAS ── */
+    #noticias { background: var(--dark2); }
+    .news-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 20px; margin-top: 40px;
+    }
+    .news-card {
+      background: var(--dark3); border: 1px solid rgba(255,255,255,.06);
+      border-radius: var(--r-lg); overflow: hidden;
+      text-decoration: none; color: inherit;
+      transition: border-color .25s, transform .25s;
+      display: flex; flex-direction: column;
+    }
+    .news-card:hover { border-color: var(--gold-border); transform: translateY(-3px); }
+    .news-card--feat { grid-row: 1 / 3; }
+    .news-card__img {
+      width: 100%; aspect-ratio: 16/9; object-fit: cover;
+      background: var(--dark4);
+    }
+    .news-card--feat .news-card__img { aspect-ratio: 3/2; flex: 1; min-height: 220px; }
+    .news-card__body { padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .news-card__meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .news-cat {
+      background: var(--gold-dim); border: 1px solid var(--gold-border);
+      color: var(--gold); font-size: .65rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 99px;
+    }
+    .news-date { font-size: .75rem; color: var(--ink-muted); }
+    .news-card__title {
+      font-family: 'Cinzel', serif; font-size: 1.05rem; font-weight: 700;
+      color: var(--ink); line-height: 1.4;
+    }
+    .news-card--feat .news-card__title { font-size: 1.35rem; }
+    .news-card__summary { font-size: .85rem; color: var(--ink-dim); line-height: 1.6; }
+    .news-read {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--gold); font-size: .8rem; font-weight: 700;
+      margin-top: auto;
+    }
+
+    /* ── CALENDARIO ── */
+    #calendario { background: var(--dark); }
+    .cal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; }
+    .cal-panel {
+      background: var(--dark2); border: 1px solid rgba(255,255,255,.06);
+      border-radius: var(--r-lg); padding: 28px; overflow: hidden;
+    }
+    .cal-panel__title {
+      font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700;
+      color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 8px;
+    }
+    .match-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .match-item:last-child { border-bottom: none; }
+    .match-result {
+      width: 44px; height: 44px; border-radius: var(--r);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cinzel', serif; font-weight: 900; font-size: .85rem;
+      flex-shrink: 0;
+    }
+    .match-result--w { background: rgba(34,197,94,.15); color: #22c55e; border: 1px solid rgba(34,197,94,.25); }
+    .match-result--l { background: rgba(239,68,68,.15); color: #ef4444; border: 1px solid rgba(239,68,68,.25); }
+    .match-vs { font-size: .85rem; font-weight: 600; color: var(--ink); }
+    .match-score { font-size: .78rem; color: var(--gold); font-weight: 700; }
+    .match-meta { font-size: .72rem; color: var(--ink-muted); }
+    .next-match {
+      background: linear-gradient(135deg, rgba(212,175,55,.08), rgba(212,175,55,.04));
+      border: 1px solid var(--gold-border); border-radius: var(--r-lg); padding: 24px;
+    }
+    .next-match__label {
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 6px;
+    }
+    .next-match__teams {
+      font-family: 'Cinzel', serif; font-size: 1.05rem; font-weight: 700;
+      color: var(--ink); margin-bottom: 8px;
+    }
+    .next-match__details { font-size: .82rem; color: var(--ink-dim); display: grid; gap: 4px; }
+    .training-block { margin-top: 20px; }
+    .training-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .training-item:last-child { border-bottom: none; }
+    .training-cat { font-size: .85rem; font-weight: 600; color: var(--ink); }
+    .training-time {
+      font-size: .8rem; color: var(--gold); font-weight: 700;
+      background: var(--gold-dim); padding: 4px 10px; border-radius: 6px;
+    }
 
     /* ── CLASIFICACIÓN ── */
-    .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
-    .tab {
-      padding: 8px 20px; border-radius: var(--radius-sm); font-size: .9rem; font-weight: 600;
-      background: var(--dark2); border: 1px solid var(--dark3); color: var(--ink-dim);
-      cursor: pointer; transition: all .2s;
+    #clasificacion { background: var(--dark2); }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 32px; margin-bottom: 24px; }
+    .tab-btn {
+      padding: 9px 20px; border-radius: var(--r);
+      background: var(--dark3); border: 1px solid rgba(255,255,255,.08);
+      color: var(--ink-dim); font-family: 'Montserrat', sans-serif;
+      font-size: .82rem; font-weight: 600; cursor: pointer; transition: all .2s;
+      letter-spacing: .03em;
     }
-    .tab.is-active { background: var(--gold); color: var(--black); border-color: var(--gold); }
+    .tab-btn.active { background: var(--gold); color: var(--black); border-color: var(--gold); }
     .tab-panel { display: none; }
-    .tab-panel.is-active { display: block; }
-    .standings-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    .tab-panel.active { display: block; }
+    .standings-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    .standings-table thead tr { border-bottom: 1px solid rgba(255,255,255,.08); }
     .standings-table th {
-      text-align: left; padding: 10px 14px; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--ink-dim); border-bottom: 1px solid var(--dark3); font-weight: 600;
+      padding: 10px 12px; text-align: left;
+      font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ink-muted);
     }
     .standings-table th:not(:first-child):not(:nth-child(2)) { text-align: center; }
-    .standings-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,.04); }
+    .standings-table td { padding: 13px 12px; border-bottom: 1px solid rgba(255,255,255,.04); }
     .standings-table td:not(:first-child):not(:nth-child(2)) { text-align: center; }
-    .standings-table tr.is-us { background: var(--gold-dim); }
-    .standings-table tr.is-us td { color: #fff; }
-    .standings-table tr.is-us .team-name { color: var(--gold); font-weight: 700; }
-    .team-pos { font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--ink-dim); width: 36px; }
-    .standings-table tr.is-us .team-pos { color: var(--gold); }
+    .standings-table tr.us { background: rgba(212,175,55,.07); }
+    .standings-table tr.us .team-name { color: var(--gold); font-weight: 700; }
+    .pos { font-family: 'Cinzel', serif; font-weight: 700; color: var(--ink-muted); }
+    .standings-table tr.us .pos { color: var(--gold); }
     .pos-1 { color: var(--gold) !important; }
-    .badge-leader {
-      display: inline-block; background: var(--gold); color: var(--black);
-      font-size: .65rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
-      padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle;
+    .td-w { color: #22c55e; font-weight: 700; }
+    .td-l { color: #ef4444; font-weight: 700; }
+    .td-pts { font-weight: 700; color: var(--ink); }
+    .standings-table tr.us .td-pts { color: var(--gold); }
+    .us-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: var(--gold); color: var(--black);
+      font-size: .6rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 4px; margin-left: 8px;
     }
 
-    /* ── EQUIPOS GRID ── */
-    .equipos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-    .equipo-card {
-      background: var(--dark2); border: 1px solid var(--dark3); border-radius: var(--radius);
-      overflow: hidden; transition: border-color .2s;
-    }
-    .equipo-card:hover { border-color: var(--gold-border); }
-    .equipo-card__header {
-      background: linear-gradient(135deg, #1a1200, #2a1f00);
-      padding: 28px 24px; border-bottom: 1px solid var(--gold-border);
-      display: flex; align-items: center; gap: 16px;
-    }
-    .equipo-card__icon {
-      width: 56px; height: 56px; background: var(--gold-dim); border: 1.5px solid var(--gold-border);
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; color: var(--gold); flex-shrink: 0;
-    }
-    .equipo-card__name { font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; }
-    .equipo-card__cat { font-size: .8rem; color: var(--ink-dim); margin-top: 2px; }
-    .equipo-card__body { padding: 24px; }
-    .equipo-info { display: grid; gap: 12px; }
-    .equipo-info__row { display: flex; align-items: flex-start; gap: 12px; }
-    .equipo-info__icon { color: var(--gold); font-size: 1rem; margin-top: 2px; flex-shrink: 0; }
-    .equipo-info__label { font-size: .75rem; color: var(--ink-dim); text-transform: uppercase; letter-spacing: .06em; }
-    .equipo-info__val { font-size: .95rem; color: var(--ink); font-weight: 500; }
-
-    /* ── EQUIPACIONES ── */
-    .kits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    /* ── EQUIPACIÓN ── */
+    #equipacion { background: var(--dark); }
+    .kits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
     .kit-card {
-      background: var(--dark2); border: 1px solid var(--dark3); border-radius: var(--radius);
-      overflow: hidden; text-align: center;
+      border-radius: var(--r-lg); overflow: hidden;
+      border: 1px solid rgba(255,255,255,.07); cursor: pointer;
+      perspective: 1000px;
     }
-    .kit-card__visual {
-      height: 220px; display: flex; align-items: center; justify-content: center; font-size: 5rem;
-      position: relative; overflow: hidden;
+    .kit-card__inner {
+      position: relative; transition: transform .7s;
+      transform-style: preserve-3d;
     }
-    .kit-card__visual--home { background: linear-gradient(160deg, #0a0a0a 0%, #1a1200 100%); }
-    .kit-card__visual--away { background: linear-gradient(160deg, #f0f0e8 0%, #e8e0c0 100%); }
-    .kit-card__visual--away .kit-emoji { filter: invert(0); }
-    .kit-card__visual::after {
+    .kit-card.flipped .kit-card__inner { transform: rotateY(180deg); }
+    .kit-face, .kit-back {
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    }
+    .kit-back {
+      position: absolute; inset: 0; transform: rotateY(180deg);
+      background: var(--dark3); display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
+      padding: 32px;
+    }
+    .kit-face { background: var(--dark2); }
+    .kit-face__img {
+      width: 100%; aspect-ratio: 3/4; object-fit: contain;
+      background: var(--dark3); padding: 20px;
+    }
+    .kit-face__body { padding: 20px; border-top: 1px solid rgba(255,255,255,.06); }
+    .kit-face__name { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .kit-face__hint { font-size: .75rem; color: var(--ink-muted); margin-top: 4px; }
+    .kit-back__title { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); }
+    .kit-back__spec { font-size: .88rem; color: var(--ink-dim); display: flex; gap: 8px; align-items: center; }
+    .kit-back__spec i { color: var(--gold); }
+
+    /* ── HISTORIA ── */
+    #historia { background: var(--dark2); overflow: hidden; }
+    .history-scroll { display: flex; gap: 24px; overflow-x: auto; padding: 40px 0 20px; scrollbar-width: none; }
+    .history-scroll::-webkit-scrollbar { display: none; }
+    .history-card {
+      flex: 0 0 320px; background: var(--dark3);
+      border: 1px solid rgba(255,255,255,.07); border-radius: var(--r-lg);
+      padding: 32px; position: relative; overflow: hidden;
+      transition: border-color .25s;
+    }
+    .history-card:hover { border-color: var(--gold-border); }
+    .history-card::before {
       content: ''; position: absolute; inset: 0;
-      background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212,175,55,.04) 10px, rgba(212,175,55,.04) 11px);
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,.06), transparent 60%);
     }
-    .kit-label { padding: 16px; border-top: 1px solid var(--dark3); }
-    .kit-label__name { font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: #fff; font-weight: 700; }
-    .kit-label__colors { font-size: .8rem; color: var(--ink-dim); margin-top: 4px; }
-
-    /* ── TIMELINE ── */
-    .timeline { position: relative; padding-left: 24px; }
-    .timeline::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 2px; background: var(--dark3); }
-    .timeline-item { position: relative; margin-bottom: 32px; padding-left: 28px; }
-    .timeline-item::before {
-      content: ''; position: absolute; left: -32px; top: 6px;
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--dark3); border: 2px solid var(--dark3); transition: background .2s;
+    .history-year {
+      font-family: 'Cinzel', serif; font-size: 2.5rem; font-weight: 900;
+      color: var(--gold); line-height: 1; margin-bottom: 12px;
     }
-    .timeline-item:hover::before { background: var(--gold); border-color: var(--gold); }
-    .timeline-item.is-milestone::before { background: var(--gold); border-color: var(--gold); width: 14px; height: 14px; left: -34px; top: 4px; }
-    .timeline-year { font-family: 'Oswald', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--gold); line-height: 1; }
-    .timeline-desc { color: var(--ink-dim); font-size: .9rem; margin-top: 4px; }
-    .timeline-badge {
-      display: inline-block; background: var(--gold); color: var(--black);
-      font-size: .7rem; font-weight: 800; padding: 2px 10px; border-radius: 4px; margin-left: 8px;
-      vertical-align: middle;
+    .history-event {
+      font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700;
+      color: var(--ink); margin-bottom: 10px;
+    }
+    .history-desc { font-size: .85rem; color: var(--ink-dim); line-height: 1.7; }
+    .history-icon {
+      position: absolute; top: 24px; right: 24px;
+      font-size: 2rem; color: rgba(212,175,55,.2);
     }
 
-    /* ── APP CTA ── */
-    .app-cta {
-      background: linear-gradient(135deg, #1a1200 0%, #0f0d00 50%, #0a0a0f 100%);
-      border: 1px solid var(--gold-border); border-radius: var(--radius);
-      padding: 60px 40px; text-align: center; position: relative; overflow: hidden;
-    }
-    .app-cta::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .app-cta h2 { font-family: 'Oswald', sans-serif; font-size: clamp(1.6rem, 4vw, 2.4rem); color: #fff; margin-bottom: 12px; }
-    .app-cta p { color: var(--ink-dim); max-width: 500px; margin: 0 auto 28px; }
-    .app-features { display: flex; gap: 20px; justify-content: center; margin-bottom: 36px; flex-wrap: wrap; }
-    .app-feature { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: var(--ink-dim); }
-    .app-feature i { color: var(--gold); }
-
-    /* ── SPONSORS ── */
-    .sponsors-grid { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+    /* ── PATROCINADORES ── */
+    #patrocinadores { background: var(--dark); }
+    .sponsors-row { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 40px; }
     .sponsor-card {
-      background: var(--dark2); border: 1px solid var(--dark3); border-radius: var(--radius);
-      padding: 24px 32px; display: flex; flex-direction: column; align-items: center; gap: 12px;
-      text-decoration: none; transition: border-color .2s, transform .2s; min-width: 180px;
+      background: var(--dark2); border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r-lg); padding: 32px 40px;
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+      text-decoration: none; flex: 1; min-width: 200px;
+      transition: border-color .25s, transform .25s;
     }
-    .sponsor-card:hover { border-color: var(--gold-border); transform: translateY(-2px); }
-    .sponsor-card__name { font-weight: 700; font-size: 1.1rem; color: #fff; }
-    .sponsor-card__role { font-size: .78rem; color: var(--ink-dim); text-align: center; }
+    .sponsor-card:hover { border-color: var(--gold-border); transform: translateY(-3px); }
+    .sponsor-name { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .sponsor-role { font-size: .78rem; color: var(--ink-muted); text-align: center; }
+    .sponsor-logo { font-size: 2.8rem; color: var(--gold); }
 
     /* ── FOOTER ── */
-    .footer {
-      background: var(--dark); border-top: 1px solid var(--dark3);
-      padding: 48px 20px 24px;
+    footer {
+      background: var(--dark2); border-top: 1px solid rgba(255,255,255,.06);
+      padding: 64px 24px 28px;
     }
-    .footer__inner { max-width: 1140px; margin: 0 auto; }
-    .footer__top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-    .footer__brand { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .footer__brand img { width: 36px; height: 36px; object-fit: contain; }
-    .footer__brand-name { font-family: 'Oswald', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--gold); }
-    .footer__desc { font-size: .85rem; color: var(--ink-dim); max-width: 280px; }
-    .footer__col h5 { font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 14px; }
+    .footer__inner { max-width: 1200px; margin: 0 auto; }
+    .footer__grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; margin-bottom: 48px;
+    }
+    .footer__brand { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .footer__brand img { width: 38px; height: 38px; object-fit: contain; }
+    .footer__brand-name {
+      font-family: 'Cinzel', serif; font-weight: 700; font-size: 1rem;
+      color: var(--gold);
+    }
+    .footer__desc { font-size: .85rem; color: var(--ink-dim); line-height: 1.7; max-width: 280px; }
+    .footer__social { display: flex; gap: 14px; margin-top: 18px; }
+    .footer__social a { color: var(--ink-muted); font-size: 1.1rem; text-decoration: none; transition: color .2s; }
+    .footer__social a:hover { color: var(--gold); }
+    .footer__col h5 {
+      font-family: 'Cinzel', serif; font-size: .78rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--gold);
+      margin-bottom: 18px;
+    }
     .footer__col ul { list-style: none; display: grid; gap: 10px; }
-    .footer__col a { color: var(--ink-dim); text-decoration: none; font-size: .88rem; transition: color .2s; }
+    .footer__col a { color: var(--ink-dim); text-decoration: none; font-size: .85rem; transition: color .2s; }
     .footer__col a:hover { color: var(--gold); }
-    .footer__bottom { border-top: 1px solid var(--dark3); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-    .footer__copy { font-size: .8rem; color: var(--ink-dim); }
-    .footer__copy a { color: var(--gold); text-decoration: none; }
-
-    /* ── MOBILE DRAWER ── */
-    .drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 199; }
-    .drawer {
-      position: fixed; top: 0; right: -300px; width: 280px; height: 100vh; overflow-y: auto;
-      background: var(--dark); border-left: 1px solid var(--dark3); z-index: 200;
-      transition: right .3s; padding: 20px;
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,.06); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
     }
-    .drawer.is-open { right: 0; }
-    .drawer-overlay.is-open { display: block; }
-    .drawer__close { background: none; border: none; color: var(--ink); font-size: 1.5rem; cursor: pointer; margin-bottom: 20px; }
-    .drawer__links { list-style: none; display: grid; gap: 4px; margin-bottom: 20px; }
-    .drawer__links a { color: var(--ink-dim); text-decoration: none; padding: 10px 12px; display: block; border-radius: var(--radius-sm); font-weight: 500; }
-    .drawer__links a:hover { background: var(--dark2); color: var(--gold); }
-    .drawer__cta { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--gold); color: var(--black); font-weight: 700; padding: 14px; border-radius: var(--radius-sm); text-decoration: none; text-align: center; }
+    .footer__copy { font-size: .78rem; color: var(--ink-muted); }
+    .footer__legal { display: flex; gap: 16px; }
+    .footer__legal a { font-size: .75rem; color: var(--ink-muted); text-decoration: none; transition: color .2s; }
+    .footer__legal a:hover { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fade-down {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    [data-anim] { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+    [data-anim].visible { opacity: 1; transform: none; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .nav__links, .nav__cta { display: none; }
-      .nav__menu-btn { display: block; }
-      .hero { padding: 60px 20px 60px; }
-      .hero__stat { padding: 16px 20px; }
-      .hero__stat-num { font-size: 1.7rem; }
-      .footer__top { grid-template-columns: 1fr; gap: 28px; }
-      .app-cta { padding: 40px 24px; }
-      .section { padding: 56px 20px; }
-      .section--dark { padding: 56px 20px; }
-      .topbar__left span { display: none; }
+    @media (max-width: 900px) {
+      .nav__links, .nav__social, .nav__join { display: none; }
+      .nav__burger { display: block; }
+      .news-grid { grid-template-columns: 1fr; }
+      .news-card--feat { grid-row: auto; }
+      .cal-grid { grid-template-columns: 1fr; }
+      .kits-grid { grid-template-columns: 1fr; }
+      .footer__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
     }
-    @media (max-width: 480px) {
-      .hero__stats { flex-direction: column; gap: 0; }
-      .hero__stat { border-left: none; border-top: 1px solid var(--gold-border); }
-      .hero__stat:first-child { border-top: none; }
+    @media (max-width: 600px) {
+      .hero__title { font-size: clamp(2.4rem, 12vw, 3.5rem); }
+      .hero__logo { width: 100px; height: 100px; }
+      .footer__grid { grid-template-columns: 1fr; }
+      .footer__bottom { flex-direction: column; align-items: flex-start; }
+      .section { padding: 64px 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="topbar__inner">
-      <div class="topbar__left">
-        <span>Un club del</span>
-        <a href="https://www.colegionsdolores.es/" target="_blank">Colegio NSD</a>
-        <span>·</span>
-        <a href="tel:+34646794962"><i class="bi bi-whatsapp"></i> +34 646 794 962</a>
-      </div>
-      <div class="topbar__social">
-        <a href="https://www.instagram.com/doloresdragons/" target="_blank">
-          <i class="bi bi-instagram"></i> @doloresdragons
-        </a>
-      </div>
-    </div>
+  <!-- Custom cursor -->
+  <div class="custom-cursor" id="cursor"></div>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <img src="https://i.imgur.com/OP6BbHs.png" alt="" class="preloader__logo" />
   </div>
 
   <!-- NAV -->
@@ -359,292 +535,356 @@
         <span class="nav__brand-name">DOLORES DRAGONS</span>
       </a>
       <ul class="nav__links">
+        <li><a href="#noticias">Noticias</a></li>
+        <li><a href="#calendario">Calendario</a></li>
         <li><a href="#clasificacion">Clasificación</a></li>
-        <li><a href="#equipos">Equipos</a></li>
-        <li><a href="#equipaciones">Equipaciones</a></li>
+        <li><a href="#equipacion">Equipación</a></li>
         <li><a href="#historia">Historia</a></li>
-        <li><a href="#patrocinadores">Patrocinadores</a></li>
       </ul>
-      <a href="https://webdoloresdragons.vercel.app/" target="_blank" class="nav__cta">
-        <i class="bi bi-basketball"></i> App del Club
-      </a>
-      <button class="nav__menu-btn" id="menu-btn" aria-label="Abrir menú">
-        <i class="bi bi-list"></i>
-      </button>
+      <div class="nav__social">
+        <a href="https://www.instagram.com/doloresdragons/" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://wa.me/34646794962" target="_blank" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      </div>
+      <a href="https://www.colegionsdolores.es/servicios/extraescolares.html" class="nav__join">Únete al Club</a>
+      <button class="nav__burger" id="burger" aria-label="Menú"><i class="bi bi-list"></i></button>
     </div>
   </nav>
-
-  <!-- DRAWER -->
-  <div class="drawer-overlay" id="drawer-overlay"></div>
-  <div class="drawer" id="drawer">
-    <button class="drawer__close" id="drawer-close"><i class="bi bi-x-lg"></i></button>
-    <ul class="drawer__links">
-      <li><a href="#clasificacion">Clasificación</a></li>
-      <li><a href="#equipos">Equipos</a></li>
-      <li><a href="#equipaciones">Equipaciones</a></li>
-      <li><a href="#historia">Historia</a></li>
-      <li><a href="#patrocinadores">Patrocinadores</a></li>
-      <li><a href="https://www.colegionsdolores.es/">Colegio NSD</a></li>
-    </ul>
-    <a href="https://webdoloresdragons.vercel.app/" target="_blank" class="drawer__cta">
-      <i class="bi bi-basketball"></i> Abrir App del Club
-    </a>
+  <div class="nav__mobile" id="mobile-menu">
+    <a href="#noticias">Noticias</a>
+    <a href="#calendario">Calendario</a>
+    <a href="#clasificacion">Clasificación</a>
+    <a href="#equipacion">Equipación</a>
+    <a href="#historia">Historia</a>
+    <a href="#patrocinadores">Patrocinadores</a>
+    <a href="https://www.instagram.com/doloresdragons/" target="_blank"><i class="bi bi-instagram"></i> @doloresdragons</a>
+    <a href="https://wa.me/34646794962" target="_blank"><i class="bi bi-whatsapp"></i> +34 646 794 962</a>
   </div>
 
   <!-- HERO -->
-  <section class="hero">
-    <span class="hero__eyebrow">Nueva Era · Temporada 25/26</span>
-    <img src="https://i.imgur.com/OP6BbHs.png" alt="Dolores Dragons Logo" class="hero__logo" />
-    <h1>DOLORES<br><span>DRAGONS</span></h1>
-    <p class="hero__sub">Pasión, esfuerzo y trabajo en equipo. Únete a nuestro club y forma parte de la próxima generación de campeones.</p>
-    <div class="hero__actions">
-      <a href="https://webdoloresdragons.vercel.app/" target="_blank" class="btn btn--gold">
-        <i class="bi bi-basketball"></i> App del Club
-      </a>
-      <a href="https://www.instagram.com/doloresdragons/" target="_blank" class="btn btn--outline">
-        <i class="bi bi-instagram"></i> Síguenos
-      </a>
+  <section class="hero" id="inicio">
+    <div class="hero__bg"></div>
+    <div class="embers" id="embers"></div>
+    <div class="hero__content">
+      <span class="hero__badge"><i class="bi bi-fire"></i> Nueva Era · Temporada 25/26</span>
+      <img src="https://i.imgur.com/OP6BbHs.png" alt="Dolores Dragons" class="hero__logo" />
+      <h1 class="hero__title">DOLORES<span>DRAGONS</span></h1>
+      <p class="hero__sub">Pasión, esfuerzo y trabajo en equipo. El club de baloncesto del Colegio NSD, líderes de la 2ª Fase Cadete Femenino.</p>
+      <div class="hero__actions">
+        <a href="https://www.colegionsdolores.es/servicios/extraescolares.html" class="btn btn--gold"><i class="bi bi-basketball"></i> Únete al Club</a>
+        <a href="#calendario" class="btn btn--outline"><i class="bi bi-calendar3"></i> Próximos partidos</a>
+      </div>
     </div>
-    <div class="hero__stats">
-      <div class="hero__stat">
-        <div class="hero__stat-num">2</div>
-        <div class="hero__stat-lbl">Equipos</div>
+    <div class="marquee-strip">
+      <div class="marquee-track" id="marquee">
+        <span class="marquee-item">WE ARE DRAGONS <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">TEMPORADA 25/26 <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">LÍDERES 2ª FASE <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">CADETE FEMENINO <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">ALEVÍN MIXTO <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">COLEGIO NSD <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">WE ARE DRAGONS <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">TEMPORADA 25/26 <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">LÍDERES 2ª FASE <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">CADETE FEMENINO <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">ALEVÍN MIXTO <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">COLEGIO NSD <span class="marquee-dot">✦</span></span>
       </div>
-      <div class="hero__stat">
-        <div class="hero__stat-num" style="color:#fff">1º</div>
-        <div class="hero__stat-lbl">Cadete 2ª Fase</div>
+    </div>
+  </section>
+
+  <!-- NOTICIAS -->
+  <section class="section" id="noticias" style="background:var(--dark2);">
+    <div class="section__glow"></div>
+    <div class="section__inner">
+      <span class="section-tag" data-anim><i class="bi bi-newspaper"></i> Noticias</span>
+      <h2 class="section-title" data-anim>Últimas <span>noticias</span></h2>
+      <div class="news-grid" data-anim>
+        <!-- Destacada -->
+        <a href="#" class="news-card news-card--feat">
+          <img src="https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80&w=900&h=600" alt="" class="news-card__img" />
+          <div class="news-card__body">
+            <div class="news-card__meta">
+              <span class="news-cat">Club</span>
+              <span class="news-date"><i class="bi bi-calendar3"></i> 22 mar 2026</span>
+            </div>
+            <div class="news-card__title">Gran Victoria del Cadete Femenino ante Fundación Balia</div>
+            <div class="news-card__summary">Nuestras Dragons se imponen con autoridad (37-12) en un partido dominado de principio a fin. Nicole Atanassova, máxima anotadora con 11 puntos.</div>
+            <span class="news-read">Leer más <i class="bi bi-arrow-right"></i></span>
+          </div>
+        </a>
+        <!-- Columna secundaria -->
+        <a href="#" class="news-card">
+          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=700&h=400" alt="" class="news-card__img" />
+          <div class="news-card__body">
+            <div class="news-card__meta">
+              <span class="news-cat">Escuelas</span>
+              <span class="news-date"><i class="bi bi-calendar3"></i> 16 mar 2026</span>
+            </div>
+            <div class="news-card__title">Campaña de Inscripción 2025-2026: Únete a los Dragons</div>
+            <div class="news-card__summary">Toda la información oficial sobre categorías, horarios y tarifas. ¡Asegura tu plaza!</div>
+            <span class="news-read">Leer más <i class="bi bi-arrow-right"></i></span>
+          </div>
+        </a>
+        <a href="#" class="news-card">
+          <img src="https://images.unsplash.com/photo-1542652694-40abf526446e?auto=format&fit=crop&q=80&w=700&h=400" alt="" class="news-card__img" />
+          <div class="news-card__body">
+            <div class="news-card__meta">
+              <span class="news-cat">Club</span>
+              <span class="news-date"><i class="bi bi-calendar3"></i> 28 mar 2026</span>
+            </div>
+            <div class="news-card__title">El Descanso del Guerrero: Semana Santa y la Copa Primavera</div>
+            <div class="news-card__summary">Las aulas se vacían, pero la pasión no descansa. A la vuelta nos espera el desafío definitivo.</div>
+            <span class="news-read">Leer más <i class="bi bi-arrow-right"></i></span>
+          </div>
+        </a>
       </div>
-      <div class="hero__stat">
-        <div class="hero__stat-num">25/26</div>
-        <div class="hero__stat-lbl">Temporada</div>
-      </div>
-      <div class="hero__stat">
-        <div class="hero__stat-num">68</div>
-        <div class="hero__stat-lbl">Años de historia</div>
+    </div>
+  </section>
+
+  <!-- CALENDARIO -->
+  <section class="section" id="calendario" style="background:var(--dark);">
+    <div class="section__inner">
+      <span class="section-tag" data-anim><i class="bi bi-calendar3"></i> Calendario</span>
+      <h2 class="section-title" data-anim>Partidos y <span>Entrenamientos</span></h2>
+      <div class="cal-grid" data-anim>
+        <!-- Cadete Femenino -->
+        <div>
+          <div style="font-family:'Cinzel',serif;font-size:.9rem;font-weight:700;color:var(--gold);margin-bottom:16px;letter-spacing:.05em;">
+            <i class="bi bi-star-fill" style="margin-right:6px;"></i> CADETE FEMENINO
+          </div>
+          <div class="next-match" style="margin-bottom:20px;">
+            <div class="next-match__label"><i class="bi bi-clock"></i> Próximo partido · 11 abr 2026</div>
+            <div class="next-match__teams">J Cierva Amidecu <span style="color:var(--gold);">vs</span> Dolores Dragons</div>
+            <div class="next-match__details">
+              <span><i class="bi bi-geo-alt" style="color:var(--gold);margin-right:4px;"></i> Pab P1 Las Cruces · 12:45 h</span>
+              <span><i class="bi bi-trophy" style="color:var(--gold);margin-right:4px;"></i> Liga Cadete Femenina · 2ª Fase · Jornada 3</span>
+            </div>
+          </div>
+          <div class="cal-panel">
+            <div class="cal-panel__title"><i class="bi bi-clock-history"></i> Resultados recientes</div>
+            <div class="match-item">
+              <div class="match-result match-result--w">V</div>
+              <div>
+                <div class="match-vs">vs Revolution</div>
+                <div class="match-score">36 – 22</div>
+                <div class="match-meta">2ª Fase · J2</div>
+              </div>
+            </div>
+            <div class="match-item">
+              <div class="match-result match-result--w">V</div>
+              <div>
+                <div class="match-vs">vs Fundación Balia</div>
+                <div class="match-score">37 – 12</div>
+                <div class="match-meta">2ª Fase · J1</div>
+              </div>
+            </div>
+            <div class="match-item">
+              <div class="match-result match-result--l">D</div>
+              <div>
+                <div class="match-vs">vs Villa de Leganés</div>
+                <div class="match-score">24 – 30</div>
+                <div class="match-meta">1ª Fase · J11</div>
+              </div>
+            </div>
+            <div class="match-item">
+              <div class="match-result match-result--w">V</div>
+              <div>
+                <div class="match-vs">vs Fundación Balia</div>
+                <div class="match-score">24 – 12</div>
+                <div class="match-meta">1ª Fase · J10</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Alevín + Entrenamientos -->
+        <div>
+          <div style="font-family:'Cinzel',serif;font-size:.9rem;font-weight:700;color:var(--gold);margin-bottom:16px;letter-spacing:.05em;">
+            <i class="bi bi-lightning-fill" style="margin-right:6px;"></i> ALEVÍN MIXTO
+          </div>
+          <div class="cal-panel" style="margin-bottom:20px;">
+            <div class="cal-panel__title"><i class="bi bi-clock-history"></i> Resultados recientes</div>
+            <div class="match-item">
+              <div class="match-result match-result--l">D</div>
+              <div>
+                <div class="match-vs">vs Revolution</div>
+                <div class="match-score">21 – 46</div>
+                <div class="match-meta">1ª Fase</div>
+              </div>
+            </div>
+            <div class="match-item">
+              <div class="match-result match-result--w">V</div>
+              <div>
+                <div class="match-vs">vs Vedruna Carabanchel</div>
+                <div class="match-score">22 – 17</div>
+                <div class="match-meta">1ª Fase</div>
+              </div>
+            </div>
+            <div class="match-item">
+              <div class="match-result match-result--w">V</div>
+              <div>
+                <div class="match-vs">vs Colegio Luz Casanova</div>
+                <div class="match-score">32 – 14</div>
+                <div class="match-meta">1ª Fase</div>
+              </div>
+            </div>
+          </div>
+          <div class="cal-panel">
+            <div class="cal-panel__title"><i class="bi bi-stopwatch"></i> Entrenamientos semanales</div>
+            <div class="training-block">
+              <div class="training-item">
+                <span class="training-cat">Cadete Femenino</span>
+                <span class="training-time">Mar · Jue · 17:00–19:00</span>
+              </div>
+              <div class="training-item">
+                <span class="training-cat">Alevín Mixto</span>
+                <span class="training-time">Mar · Jue · 17:00–18:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- CLASIFICACIÓN -->
-  <section class="section--dark" id="clasificacion">
+  <section class="section" id="clasificacion" style="background:var(--dark2);">
+    <div class="section__glow"></div>
     <div class="section__inner">
-      <span class="section__tag"><i class="bi bi-trophy"></i> Clasificaciones</span>
-      <h2 class="section__title">Temporada 2025/26</h2>
-      <p class="section__lead">Resultados actualizados de nuestros equipos en la liga madrileña de baloncesto.</p>
-
-      <div class="tabs" role="tablist">
-        <button class="tab is-active" data-tab="cad-f2" role="tab">Cadete Fem · 2ª Fase</button>
-        <button class="tab" data-tab="cad-f1" role="tab">Cadete Fem · 1ª Fase</button>
-        <button class="tab" data-tab="ale" role="tab">Alevín Mixto · 1ª Fase</button>
+      <span class="section-tag" data-anim><i class="bi bi-trophy"></i> Clasificación</span>
+      <h2 class="section-title" data-anim>Temporada <span>2025/26</span></h2>
+      <div class="tabs" data-anim>
+        <button class="tab-btn active" data-tab="cad2">Cadete Fem · 2ª Fase</button>
+        <button class="tab-btn" data-tab="cad1">Cadete Fem · 1ª Fase</button>
+        <button class="tab-btn" data-tab="ale">Alevín Mixto</button>
+        <button class="tab-btn" data-tab="hist">24/25</button>
       </div>
 
       <!-- Cadete Femenino 2ª Fase -->
-      <div class="tab-panel is-active" id="tab-cad-f2">
-        <div style="overflow-x:auto">
+      <div class="tab-panel active" id="tab-cad2">
+        <div style="overflow-x:auto;">
           <table class="standings-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Equipo</th>
-                <th>PJ</th><th>G</th><th>P</th><th>Pts</th>
-              </tr>
-            </thead>
+            <thead><tr><th>#</th><th>Equipo</th><th>J</th><th>G</th><th>P</th><th>Pts</th></tr></thead>
             <tbody>
-              <tr class="is-us">
-                <td class="team-pos pos-1">1</td>
-                <td class="team-name">Dolores Dragons <span class="badge-leader">LÍDERES</span></td>
-                <td>2</td><td>2</td><td>0</td><td><strong style="color:var(--gold)">4</strong></td>
-              </tr>
-              <tr>
-                <td class="team-pos">2</td><td>—</td><td>2</td><td>1</td><td>1</td><td>3</td>
-              </tr>
-              <tr>
-                <td class="team-pos">3</td><td>—</td><td>2</td><td>1</td><td>1</td><td>3</td>
-              </tr>
-              <tr>
-                <td class="team-pos">4</td><td>—</td><td>2</td><td>0</td><td>2</td><td>2</td>
-              </tr>
+              <tr class="us"><td class="pos pos-1">1</td><td class="team-name">Dolores Dragons <span class="us-badge"><i class="bi bi-trophy-fill"></i> LÍDERES</span></td><td>2</td><td class="td-w">2</td><td class="td-l">0</td><td class="td-pts">4</td></tr>
+              <tr><td class="pos">2</td><td>REVOLUTION</td><td>2</td><td class="td-w">1</td><td class="td-l">1</td><td class="td-pts">3</td></tr>
+              <tr><td class="pos">3</td><td>Fundación Balia</td><td>2</td><td class="td-w">1</td><td class="td-l">1</td><td class="td-pts">3</td></tr>
+              <tr><td class="pos">4</td><td>J CIERVA AMIDECU CAD FEM</td><td>2</td><td class="td-w">0</td><td class="td-l">2</td><td class="td-pts">2</td></tr>
             </tbody>
           </table>
         </div>
-        <p style="font-size:.8rem;color:var(--ink-dim);margin-top:12px;"><i class="bi bi-info-circle"></i> 2 victorias · 0 derrotas en la segunda fase. ¡Vamos Dragons!</p>
       </div>
 
       <!-- Cadete Femenino 1ª Fase -->
-      <div class="tab-panel" id="tab-cad-f1">
-        <div style="overflow-x:auto">
+      <div class="tab-panel" id="tab-cad1">
+        <div style="overflow-x:auto;">
           <table class="standings-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Equipo</th>
-                <th>PJ</th><th>G</th><th>P</th><th>Pts</th>
-              </tr>
-            </thead>
+            <thead><tr><th>#</th><th>Equipo</th><th>J</th><th>G</th><th>P</th><th>Pts</th></tr></thead>
             <tbody>
-              <tr><td class="team-pos">1</td><td>—</td><td>11</td><td>11</td><td>0</td><td>22</td></tr>
-              <tr><td class="team-pos">2</td><td>—</td><td>11</td><td>9</td><td>2</td><td>20</td></tr>
-              <tr><td class="team-pos">3</td><td>—</td><td>11</td><td>8</td><td>3</td><td>19</td></tr>
-              <tr><td class="team-pos">4</td><td>—</td><td>11</td><td>8</td><td>3</td><td>19</td></tr>
-              <tr><td class="team-pos">5</td><td>—</td><td>11</td><td>7</td><td>4</td><td>18</td></tr>
-              <tr><td class="team-pos">6</td><td>—</td><td>11</td><td>6</td><td>5</td><td>17</td></tr>
-              <tr class="is-us">
-                <td class="team-pos">7</td>
-                <td class="team-name">Dolores Dragons</td>
-                <td>11</td><td>5</td><td>6</td><td><strong style="color:var(--gold)">16</strong></td>
-              </tr>
-              <tr><td class="team-pos">8</td><td>—</td><td>11</td><td>5</td><td>6</td><td>16</td></tr>
-              <tr><td class="team-pos">9</td><td>—</td><td>11</td><td>4</td><td>7</td><td>15</td></tr>
-              <tr><td class="team-pos">10</td><td>—</td><td>11</td><td>3</td><td>8</td><td>14</td></tr>
-              <tr><td class="team-pos">11</td><td>—</td><td>11</td><td>1</td><td>10</td><td>12</td></tr>
-              <tr><td class="team-pos">12</td><td>—</td><td>11</td><td>0</td><td>11</td><td>11</td></tr>
+              <tr><td class="pos pos-1">1</td><td>BJC</td><td>11</td><td class="td-w">11</td><td class="td-l">0</td><td class="td-pts">22</td></tr>
+              <tr><td class="pos">2</td><td>KENSINGTON SCHOOL 1</td><td>11</td><td class="td-w">10</td><td class="td-l">1</td><td class="td-pts">21</td></tr>
+              <tr><td class="pos">3</td><td>CB FEMENINO ALCORCÓN</td><td>11</td><td class="td-w">8</td><td class="td-l">3</td><td class="td-pts">19</td></tr>
+              <tr><td class="pos">4</td><td>KENSINGTON SCHOOL</td><td>11</td><td class="td-w">6</td><td class="td-l">5</td><td class="td-pts">17</td></tr>
+              <tr><td class="pos">5</td><td>LA DEHESA</td><td>11</td><td class="td-w">6</td><td class="td-l">5</td><td class="td-pts">17</td></tr>
+              <tr><td class="pos">6</td><td>LOS ANGELES</td><td>11</td><td class="td-w">6</td><td class="td-l">5</td><td class="td-pts">17</td></tr>
+              <tr class="us"><td class="pos">7</td><td class="team-name">Dolores Dragons</td><td>11</td><td class="td-w">5</td><td class="td-l">6</td><td class="td-pts">16</td></tr>
+              <tr><td class="pos">8</td><td>AMIDECU CAD FEM</td><td>11</td><td class="td-w">5</td><td class="td-l">6</td><td class="td-pts">16</td></tr>
+              <tr><td class="pos">9</td><td>VILLA DE LEGANÉS</td><td>11</td><td class="td-w">5</td><td class="td-l">6</td><td class="td-pts">16</td></tr>
+              <tr><td class="pos">10</td><td>REVOLUTION</td><td>11</td><td class="td-w">2</td><td class="td-l">9</td><td class="td-pts">13</td></tr>
+              <tr><td class="pos">11</td><td>Fundación Balia</td><td>11</td><td class="td-w">2</td><td class="td-l">9</td><td class="td-pts">13</td></tr>
+              <tr><td class="pos">12</td><td>J CIERVA AMIDECU CAD FEM</td><td>11</td><td class="td-w">0</td><td class="td-l">11</td><td class="td-pts">11</td></tr>
             </tbody>
           </table>
         </div>
-        <p style="font-size:.8rem;color:var(--ink-dim);margin-top:12px;"><i class="bi bi-info-circle"></i> Liga de 12 equipos · 5V-6D · 16 puntos · Clasificadas para 2ª Fase</p>
       </div>
 
-      <!-- Alevín Mixto 1ª Fase -->
+      <!-- Alevín Mixto -->
       <div class="tab-panel" id="tab-ale">
-        <div style="overflow-x:auto">
+        <div style="overflow-x:auto;">
           <table class="standings-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Equipo</th>
-                <th>PJ</th><th>G</th><th>P</th><th>Pts</th>
-              </tr>
-            </thead>
+            <thead><tr><th>#</th><th>Equipo</th><th>J</th><th>G</th><th>P</th><th>Pts</th></tr></thead>
             <tbody>
-              <tr><td class="team-pos">1</td><td>—</td><td>13</td><td>13</td><td>0</td><td>26</td></tr>
-              <tr><td class="team-pos">2</td><td>—</td><td>13</td><td>11</td><td>2</td><td>24</td></tr>
-              <tr><td class="team-pos">3</td><td>—</td><td>13</td><td>10</td><td>3</td><td>23</td></tr>
-              <tr><td class="team-pos">4</td><td>—</td><td>13</td><td>9</td><td>4</td><td>22</td></tr>
-              <tr><td class="team-pos">5</td><td>—</td><td>13</td><td>9</td><td>4</td><td>22</td></tr>
-              <tr><td class="team-pos">6</td><td>—</td><td>13</td><td>8</td><td>5</td><td>21</td></tr>
-              <tr><td class="team-pos">7</td><td>—</td><td>13</td><td>7</td><td>6</td><td>20</td></tr>
-              <tr><td class="team-pos">8</td><td>—</td><td>13</td><td>7</td><td>6</td><td>20</td></tr>
-              <tr><td class="team-pos">9</td><td>—</td><td>13</td><td>6</td><td>7</td><td>19</td></tr>
-              <tr class="is-us">
-                <td class="team-pos">10</td>
-                <td class="team-name">Dolores Dragons</td>
-                <td>13</td><td>5</td><td>8</td><td><strong style="color:var(--gold)">10</strong></td>
-              </tr>
-              <tr><td class="team-pos">11</td><td>—</td><td>13</td><td>4</td><td>9</td><td>9</td></tr>
-              <tr><td class="team-pos">12</td><td>—</td><td>13</td><td>3</td><td>10</td><td>8</td></tr>
-              <tr><td class="team-pos">13</td><td>—</td><td>13</td><td>1</td><td>12</td><td>6</td></tr>
-              <tr><td class="team-pos">14</td><td>—</td><td>13</td><td>0</td><td>13</td><td>5</td></tr>
+              <tr><td class="pos pos-1">1</td><td>REVOLUTION</td><td>13</td><td class="td-w">13</td><td class="td-l">0</td><td class="td-pts">26</td></tr>
+              <tr><td class="pos">2</td><td>CEIP PORTUGAL VERDE</td><td>13</td><td class="td-w">12</td><td class="td-l">1</td><td class="td-pts">24</td></tr>
+              <tr><td class="pos">3</td><td>CD LOURDES VERDE MBC ALE MIX</td><td>13</td><td class="td-w">10</td><td class="td-l">3</td><td class="td-pts">20</td></tr>
+              <tr><td class="pos">4</td><td>HA BASKET SESI</td><td>13</td><td class="td-w">10</td><td class="td-l">3</td><td class="td-pts">20</td></tr>
+              <tr><td class="pos">5</td><td>CDE Escolapios Aluche B</td><td>13</td><td class="td-w">8</td><td class="td-l">5</td><td class="td-pts">16</td></tr>
+              <tr><td class="pos">6</td><td>CEIP HERNAN CORTES NEGRO</td><td>13</td><td class="td-w">7</td><td class="td-l">6</td><td class="td-pts">14</td></tr>
+              <tr><td class="pos">7</td><td>HA BASKET</td><td>13</td><td class="td-w">7</td><td class="td-l">6</td><td class="td-pts">14</td></tr>
+              <tr><td class="pos">8</td><td>BARTOLOME COSSIO "B"</td><td>13</td><td class="td-w">6</td><td class="td-l">7</td><td class="td-pts">12</td></tr>
+              <tr><td class="pos">9</td><td>BOADILLA MONSTERS</td><td>12</td><td class="td-w">5</td><td class="td-l">7</td><td class="td-pts">10</td></tr>
+              <tr class="us"><td class="pos">10</td><td class="team-name">Dolores Dragons</td><td>13</td><td class="td-w">5</td><td class="td-l">8</td><td class="td-pts">10</td></tr>
+              <tr><td class="pos">11</td><td>Revolution B</td><td>13</td><td class="td-w">4</td><td class="td-l">9</td><td class="td-pts">8</td></tr>
+              <tr><td class="pos">12</td><td>Revolution Gamo Diana</td><td>13</td><td class="td-w">2</td><td class="td-l">11</td><td class="td-pts">4</td></tr>
+              <tr><td class="pos">13</td><td>CBC BASKET</td><td>13</td><td class="td-w">1</td><td class="td-l">12</td><td class="td-pts">2</td></tr>
+              <tr><td class="pos">14</td><td>Revolution Arenales</td><td>12</td><td class="td-w">0</td><td class="td-l">12</td><td class="td-pts">0</td></tr>
             </tbody>
           </table>
         </div>
-        <p style="font-size:.8rem;color:var(--ink-dim);margin-top:12px;"><i class="bi bi-info-circle"></i> Liga de 14 equipos · 5V-8D · 10 puntos</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- EQUIPOS -->
-  <section class="section" id="equipos">
-    <span class="section__tag"><i class="bi bi-people"></i> Nuestros equipos</span>
-    <h2 class="section__title">Los equipos</h2>
-    <p class="section__lead">Dos equipos que representan al Colegio NSD en la liga madrileña de baloncesto.</p>
-
-    <div class="equipos-grid">
-      <div class="equipo-card">
-        <div class="equipo-card__header">
-          <div class="equipo-card__icon"><i class="bi bi-star-fill"></i></div>
-          <div>
-            <div class="equipo-card__name">Cadete Femenino</div>
-            <div class="equipo-card__cat">Sub-16 · Femenino</div>
-          </div>
-        </div>
-        <div class="equipo-card__body">
-          <div class="equipo-info">
-            <div class="equipo-info__row">
-              <i class="bi bi-clock equipo-info__icon"></i>
-              <div>
-                <div class="equipo-info__label">Entrenamientos</div>
-                <div class="equipo-info__val">Martes y Jueves · 17:00 – 19:00 h</div>
-              </div>
-            </div>
-            <div class="equipo-info__row">
-              <i class="bi bi-trophy equipo-info__icon"></i>
-              <div>
-                <div class="equipo-info__label">Situación actual</div>
-                <div class="equipo-info__val" style="color:var(--gold)">Líderes de la 2ª Fase 🏆</div>
-              </div>
-            </div>
-            <div class="equipo-info__row">
-              <i class="bi bi-geo-alt equipo-info__icon"></i>
-              <div>
-                <div class="equipo-info__label">Pabellón</div>
-                <div class="equipo-info__val">Pabellón Colegio NSD · Madrid</div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
-      <div class="equipo-card">
-        <div class="equipo-card__header">
-          <div class="equipo-card__icon"><i class="bi bi-lightning-fill"></i></div>
-          <div>
-            <div class="equipo-card__name">Alevín Mixto</div>
-            <div class="equipo-card__cat">Sub-12 · Mixto</div>
-          </div>
-        </div>
-        <div class="equipo-card__body">
-          <div class="equipo-info">
-            <div class="equipo-info__row">
-              <i class="bi bi-clock equipo-info__icon"></i>
-              <div>
-                <div class="equipo-info__label">Entrenamientos</div>
-                <div class="equipo-info__val">Martes y Jueves · 17:00 – 18:00 h</div>
-              </div>
-            </div>
-            <div class="equipo-info__row">
-              <i class="bi bi-bar-chart equipo-info__icon"></i>
-              <div>
-                <div class="equipo-info__label">Situación actual</div>
-                <div class="equipo-info__val">10º · 5V-8D en 1ª Fase</div>
-              </div>
-            </div>
-            <div class="equipo-info__row">
-              <i class="bi bi-geo-alt equipo-info__icon"></i>
-              <div>
-                <div class="equipo-info__label">Pabellón</div>
-                <div class="equipo-info__val">Pabellón Colegio NSD · Madrid</div>
-              </div>
-            </div>
-          </div>
+      <!-- Histórico 24/25 -->
+      <div class="tab-panel" id="tab-hist">
+        <div style="overflow-x:auto;">
+          <table class="standings-table">
+            <thead><tr><th colspan="6" style="color:var(--gold);font-family:'Cinzel',serif;padding-bottom:8px;font-size:.8rem;">Cadete Femenino · 1ª Fase · Temporada 24/25</th></tr>
+            <tr><th>#</th><th>Equipo</th><th>J</th><th>G</th><th>P</th><th>Pts</th></tr></thead>
+            <tbody>
+              <tr class="us"><td class="pos">—</td><td class="team-name">Dolores Dragons</td><td>10</td><td class="td-w">9</td><td class="td-l">1</td><td class="td-pts">19</td></tr>
+            </tbody>
+          </table>
+          <table class="standings-table" style="margin-top:28px;">
+            <thead><tr><th colspan="6" style="color:var(--gold);font-family:'Cinzel',serif;padding-bottom:8px;font-size:.8rem;">Alevín Mixto · 1ª Fase · Temporada 24/25</th></tr>
+            <tr><th>#</th><th>Equipo</th><th>J</th><th>G</th><th>P</th><th>Pts</th></tr></thead>
+            <tbody>
+              <tr class="us"><td class="pos">—</td><td class="team-name">Dolores Dragons</td><td>10</td><td class="td-w">8</td><td class="td-l">2</td><td class="td-pts">18</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- EQUIPACIONES -->
-  <section class="section--dark" id="equipaciones">
+  <!-- EQUIPACIÓN -->
+  <section class="section" id="equipacion" style="background:var(--dark);">
     <div class="section__inner">
-      <span class="section__tag"><i class="bi bi-dribbble"></i> Equipaciones</span>
-      <h2 class="section__title">Nuestras equipaciones</h2>
-      <p class="section__lead">Negro y dorado. Los colores del dragón.</p>
-
-      <div class="kits-grid">
-        <div class="kit-card">
-          <div class="kit-card__visual kit-card__visual--home">
-            <span class="kit-emoji" style="filter:drop-shadow(0 0 20px rgba(212,175,55,.6))">🐲</span>
-          </div>
-          <div class="kit-label">
-            <div class="kit-label__name">Camiseta Local</div>
-            <div class="kit-label__colors">Negro · Dorado</div>
+      <span class="section-tag" data-anim><i class="bi bi-dribbble"></i> Equipación</span>
+      <h2 class="section-title" data-anim>Nuestras <span>equipaciones</span></h2>
+      <p class="section-lead" data-anim style="margin-bottom:0;">Haz clic en cada camiseta para ver las especificaciones.</p>
+      <div class="kits-grid" data-anim>
+        <div class="kit-card" id="kit1" onclick="this.classList.toggle('flipped')">
+          <div class="kit-card__inner">
+            <div class="kit-face">
+              <img src="https://image2url.com/images/1773444457996-29fa9f29-a365-4885-beb9-396db682d27f.png" alt="Camiseta Local" class="kit-face__img" onerror="this.style.background='#1a1200';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center';this.style.fontSize='5rem';this.alt='🐲';" />
+              <div class="kit-face__body">
+                <div class="kit-face__name">Camiseta Local · Primera</div>
+                <div class="kit-face__hint">Toca para ver detalles</div>
+              </div>
+            </div>
+            <div class="kit-back">
+              <div class="kit-back__title">PRIMERA EQUIPACIÓN</div>
+              <div class="kit-back__spec"><i class="bi bi-palette-fill"></i> Negro y Dorado</div>
+              <div class="kit-back__spec"><i class="bi bi-house-fill"></i> Equipación Local</div>
+              <div class="kit-back__spec"><i class="bi bi-shield-fill"></i> Temporada 2025/26</div>
+              <div class="kit-back__spec"><i class="bi bi-fire"></i> Dolores Dragons</div>
+            </div>
           </div>
         </div>
-        <div class="kit-card">
-          <div class="kit-card__visual kit-card__visual--away">
-            <span class="kit-emoji">🐲</span>
-          </div>
-          <div class="kit-label" style="background:var(--dark2)">
-            <div class="kit-label__name">Camiseta Visitante</div>
-            <div class="kit-label__colors">Blanco · Dorado</div>
+        <div class="kit-card" id="kit2" onclick="this.classList.toggle('flipped')">
+          <div class="kit-card__inner">
+            <div class="kit-face">
+              <img src="https://image2url.com/images/1773444438442-d08254e0-a581-4339-ad74-47e532f1de1a.png" alt="Camiseta Visitante" class="kit-face__img" onerror="this.style.background='#e8e0c0';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center';this.style.fontSize='5rem';this.alt='🐲';" />
+              <div class="kit-face__body">
+                <div class="kit-face__name">Camiseta Visitante · Segunda</div>
+                <div class="kit-face__hint">Toca para ver detalles</div>
+              </div>
+            </div>
+            <div class="kit-back">
+              <div class="kit-back__title">SEGUNDA EQUIPACIÓN</div>
+              <div class="kit-back__spec"><i class="bi bi-palette-fill"></i> Blanco y Dorado</div>
+              <div class="kit-back__spec"><i class="bi bi-globe2"></i> Equipación Visitante</div>
+              <div class="kit-back__spec"><i class="bi bi-shield-fill"></i> Temporada 2025/26</div>
+              <div class="kit-back__spec"><i class="bi bi-fire"></i> Dolores Dragons</div>
+            </div>
           </div>
         </div>
       </div>
@@ -652,137 +892,184 @@
   </section>
 
   <!-- HISTORIA -->
-  <section class="section" id="historia">
-    <span class="section__tag"><i class="bi bi-clock-history"></i> Historia</span>
-    <h2 class="section__title">Nuestra historia</h2>
-    <p class="section__lead">Casi 70 años de baloncesto en el Colegio Nuestra Señora de los Dolores.</p>
-
-    <div class="timeline">
-      <div class="timeline-item is-milestone">
-        <div class="timeline-year">1957</div>
-        <div class="timeline-desc">Fundación del Colegio Nuestra Señora de los Dolores. Nace el primer equipo de baloncesto escolar.</div>
+  <section class="section" id="historia" style="background:var(--dark2);">
+    <div class="section__glow"></div>
+    <div class="section__inner">
+      <span class="section-tag" data-anim><i class="bi bi-clock-history"></i> Historia</span>
+      <h2 class="section-title" data-anim>Nuestra <span>historia</span></h2>
+      <div class="history-scroll" data-anim>
+        <div class="history-card">
+          <div class="history-icon"><i class="bi bi-building"></i></div>
+          <div class="history-year">1957</div>
+          <div class="history-event">Fundación del Colegio</div>
+          <div class="history-desc">Fundación del Colegio Nuestra Señora de los Dolores en Carabanchel, Madrid. Nace la base de nuestra comunidad educativa y deportiva que se mantiene hasta hoy.</div>
+        </div>
+        <div class="history-card">
+          <div class="history-icon"><i class="bi bi-trophy"></i></div>
+          <div class="history-year">1957<br><span style="font-size:1.5rem;">– 2025</span></div>
+          <div class="history-event">Era NS Dolores</div>
+          <div class="history-desc">Décadas de competición, entrenamiento y formación bajo el nombre histórico de NS Dolores. Generaciones de jugadores formados en los valores del baloncesto y el deporte.</div>
+        </div>
+        <div class="history-card" style="border-color:var(--gold-border);">
+          <div class="history-icon" style="color:rgba(212,175,55,.5);"><i class="bi bi-fire"></i></div>
+          <div class="history-year" style="font-size:3rem;">2025</div>
+          <div class="history-event">Nueva Era <span style="color:var(--gold);">Dragons</span></div>
+          <div class="history-desc">Rebrand histórico para la temporada 2025-26: nuevo nombre, nuevo escudo y equipación oficial. Nace la era de los Dolores Dragons con una identidad renovada y ambición renovada.</div>
+        </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-year">1957 – 2025</div>
-        <div class="timeline-desc">Décadas de baloncesto bajo el nombre <strong style="color:var(--ink)">NS Dolores</strong>. Generaciones de jugadores formados en los valores del deporte y el esfuerzo.</div>
-      </div>
-      <div class="timeline-item is-milestone">
-        <div class="timeline-year">2025 <span class="timeline-badge">NUEVO</span></div>
-        <div class="timeline-desc">Rebrand histórico: el club adopta el nombre <strong style="color:var(--gold)">Dolores Dragons</strong> y presenta su nueva identidad visual, su app y una nueva era de competición.</div>
-      </div>
-      <div class="timeline-item is-milestone">
-        <div class="timeline-year">25/26</div>
-        <div class="timeline-desc">Primera temporada completa como Dolores Dragons. El equipo Cadete Femenino lidera la 2ª Fase de la liga madrileña.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- APP CTA -->
-  <section style="padding:0 20px 80px; max-width:1140px; margin:0 auto;">
-    <div class="app-cta">
-      <img src="https://i.imgur.com/OP6BbHs.png" alt="" style="width:72px;height:72px;object-fit:contain;margin:0 auto 20px;display:block;filter:drop-shadow(0 0 20px rgba(212,175,55,.5));" />
-      <h2>App oficial del club</h2>
-      <p>Clasificaciones en tiempo real, perfil de jugador, gamificación y mucho más. Toda la experiencia Dragons en una sola app.</p>
-      <div class="app-features">
-        <div class="app-feature"><i class="bi bi-trophy-fill"></i> Clasificaciones en vivo</div>
-        <div class="app-feature"><i class="bi bi-person-badge-fill"></i> Perfil de jugador</div>
-        <div class="app-feature"><i class="bi bi-star-fill"></i> Sistema de logros</div>
-        <div class="app-feature"><i class="bi bi-chat-dots-fill"></i> Comunidad del club</div>
-      </div>
-      <a href="https://webdoloresdragons.vercel.app/" target="_blank" class="btn btn--gold" style="font-size:1rem;padding:14px 36px;">
-        <i class="bi bi-basketball"></i> Abrir App del Club
-      </a>
     </div>
   </section>
 
   <!-- PATROCINADORES -->
-  <section class="section--dark" id="patrocinadores">
+  <section class="section" id="patrocinadores" style="background:var(--dark);">
     <div class="section__inner">
-      <span class="section__tag"><i class="bi bi-heart-fill"></i> Patrocinadores</span>
-      <h2 class="section__title">Nuestros patrocinadores</h2>
-      <p class="section__lead">Gracias a quienes hacen posible el baloncesto en el Colegio NSD.</p>
-
-      <div class="sponsors-grid">
+      <span class="section-tag" data-anim><i class="bi bi-heart-fill"></i> Patrocinadores</span>
+      <h2 class="section-title" data-anim>Nuestros <span>patrocinadores</span></h2>
+      <p class="section-lead" data-anim>Gracias a quienes hacen posible el baloncesto en el Colegio NSD.</p>
+      <div class="sponsors-row" data-anim>
         <a href="https://www.colegionsdolores.es/" target="_blank" class="sponsor-card">
-          <i class="bi bi-building" style="font-size:2.5rem;color:var(--gold);"></i>
-          <div class="sponsor-card__name">Colegio NSD</div>
-          <div class="sponsor-card__role">Patrocinador principal · Instalaciones</div>
+          <div class="sponsor-logo"><i class="bi bi-building"></i></div>
+          <div class="sponsor-name">Colegio NSD</div>
+          <div class="sponsor-role">Patrocinador principal · Instalaciones y formación</div>
         </a>
         <a href="https://www.instagram.com/" target="_blank" class="sponsor-card">
-          <i class="bi bi-cup-hot-fill" style="font-size:2.5rem;color:var(--gold);"></i>
-          <div class="sponsor-card__name">Fan Tastiko</div>
-          <div class="sponsor-card__role">Patrocinador oficial</div>
+          <div class="sponsor-logo"><i class="bi bi-cup-hot-fill"></i></div>
+          <div class="sponsor-name">Fan Tastiko</div>
+          <div class="sponsor-role">Patrocinador oficial</div>
         </a>
       </div>
-
-      <p style="margin-top:32px;font-size:.85rem;color:var(--ink-dim);">
+      <p style="margin-top:32px;font-size:.85rem;color:var(--ink-dim);" data-anim>
         ¿Quieres patrocinar a los Dolores Dragons?
-        <a href="https://wa.me/34646794962" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:600;"> Contáctanos por WhatsApp <i class="bi bi-arrow-right"></i></a>
+        <a href="https://wa.me/34646794962" target="_blank" style="color:var(--gold);font-weight:700;text-decoration:none;margin-left:6px;">
+          Escríbenos por WhatsApp <i class="bi bi-arrow-right"></i>
+        </a>
       </p>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer>
     <div class="footer__inner">
-      <div class="footer__top">
+      <div class="footer__grid">
         <div>
           <div class="footer__brand">
             <img src="https://i.imgur.com/OP6BbHs.png" alt="Dolores Dragons" />
             <span class="footer__brand-name">DOLORES DRAGONS</span>
           </div>
-          <p class="footer__desc">Club de baloncesto del Colegio Nuestra Señora de los Dolores. Madrid · Temporada 2025/26.</p>
+          <p class="footer__desc">Club de baloncesto del Colegio Nuestra Señora de los Dolores. Carabanchel, Madrid. Formando campeones desde 1957.</p>
+          <div class="footer__social">
+            <a href="https://www.instagram.com/doloresdragons/" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://wa.me/34646794962" target="_blank" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            <a href="https://www.colegionsdolores.es/" target="_blank" aria-label="Colegio NSD"><i class="bi bi-building"></i></a>
+          </div>
         </div>
         <div class="footer__col">
-          <h5>Club</h5>
+          <h5>El Club</h5>
+          <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#noticias">Noticias</a></li>
+            <li><a href="#historia">Historia</a></li>
+            <li><a href="#calendario">Calendario</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h5>Competición</h5>
           <ul>
             <li><a href="#clasificacion">Clasificación</a></li>
-            <li><a href="#equipos">Equipos</a></li>
-            <li><a href="#equipaciones">Equipaciones</a></li>
-            <li><a href="#historia">Historia</a></li>
+            <li><a href="#calendario">Partidos</a></li>
+            <li><a href="#equipacion">Equipación</a></li>
+            <li><a href="#patrocinadores">Patrocinadores</a></li>
           </ul>
         </div>
         <div class="footer__col">
           <h5>Contacto</h5>
           <ul>
-            <li><a href="https://www.instagram.com/doloresdragons/" target="_blank"><i class="bi bi-instagram"></i> @doloresdragons</a></li>
-            <li><a href="https://wa.me/34646794962" target="_blank"><i class="bi bi-whatsapp"></i> +34 646 794 962</a></li>
-            <li><a href="https://www.colegionsdolores.es/" target="_blank"><i class="bi bi-building"></i> Colegio NSD</a></li>
+            <li><a href="https://www.instagram.com/doloresdragons/" target="_blank"><i class="bi bi-instagram" style="margin-right:6px;"></i> @doloresdragons</a></li>
+            <li><a href="https://wa.me/34646794962" target="_blank"><i class="bi bi-whatsapp" style="margin-right:6px;"></i> +34 646 794 962</a></li>
+            <li><a href="https://www.colegionsdolores.es/" target="_blank"><i class="bi bi-building" style="margin-right:6px;"></i> Colegio NSD</a></li>
           </ul>
         </div>
       </div>
       <div class="footer__bottom">
-        <p class="footer__copy">© 2025 Dolores Dragons · <a href="https://www.colegionsdolores.es/">Colegio NSD</a></p>
-        <a href="https://webdoloresdragons.vercel.app/" target="_blank" class="btn btn--outline" style="padding:7px 16px;font-size:.82rem;">
-          <i class="bi bi-basketball"></i> App del Club
-        </a>
+        <p class="footer__copy">© <span id="year"></span> Dolores Dragons · Colegio NSD · #WEAREDRAGONS</p>
+        <div class="footer__legal">
+          <a href="https://www.colegionsdolores.es/privacidad.html">Privacidad</a>
+          <a href="https://www.colegionsdolores.es/aviso-legal.html">Aviso legal</a>
+        </div>
       </div>
     </div>
   </footer>
 
   <script>
+    // Preloader
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('hidden');
+      }, 1200);
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button, .kit-card').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%,-50%) scale(2)');
+      el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%,-50%) scale(1)');
+    });
+
+    // Embers
+    const embers = document.getElementById('embers');
+    const count = window.innerWidth < 600 ? 10 : 20;
+    for (let i = 0; i < count; i++) {
+      const e = document.createElement('div');
+      e.className = 'ember';
+      e.style.left = Math.random() * 100 + '%';
+      e.style.setProperty('--dur', (3 + Math.random() * 4) + 's');
+      e.style.setProperty('--delay', (Math.random() * 6) + 's');
+      e.style.setProperty('--drift', ((Math.random() - .5) * 80) + 'px');
+      e.style.width = e.style.height = (2 + Math.random() * 3) + 'px';
+      embers.appendChild(e);
+    }
+
+    // Mobile nav
+    const burger = document.getElementById('burger');
+    const menu = document.getElementById('mobile-menu');
+    burger.addEventListener('click', () => {
+      menu.classList.toggle('is-open');
+      burger.innerHTML = menu.classList.contains('is-open')
+        ? '<i class="bi bi-x-lg"></i>' : '<i class="bi bi-list"></i>';
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      menu.classList.remove('is-open');
+      burger.innerHTML = '<i class="bi bi-list"></i>';
+    }));
+
     // Tabs
-    document.querySelectorAll('.tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('is-active'));
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('is-active'));
-        tab.classList.add('is-active');
-        const target = 'tab-' + tab.dataset.tab;
-        document.getElementById(target).classList.add('is-active');
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
       });
     });
 
-    // Mobile drawer
-    const menuBtn = document.getElementById('menu-btn');
-    const drawer = document.getElementById('drawer');
-    const overlay = document.getElementById('drawer-overlay');
-    const closeBtn = document.getElementById('drawer-close');
-    function openDrawer() { drawer.classList.add('is-open'); overlay.classList.add('is-open'); }
-    function closeDrawer() { drawer.classList.remove('is-open'); overlay.classList.remove('is-open'); }
-    menuBtn.addEventListener('click', openDrawer);
-    closeBtn.addEventListener('click', closeDrawer);
-    overlay.addEventListener('click', closeDrawer);
-    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+    // Scroll animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          e.target.style.transitionDelay = (i * 0.08) + 's';
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-anim]').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
