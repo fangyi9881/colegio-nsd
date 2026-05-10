@@ -594,7 +594,7 @@ body { overflow-x: hidden; }
   border-radius: var(--radius-lg);
   background:
     linear-gradient(180deg, rgba(0,0,0,.0) 60%, rgba(0,0,0,.3) 100%),
-    url('https://images.unsplash.com/photo-1577896851231-70ef18881754?w=900&auto=format&fit=crop') center/cover;
+    url('../img/historia.jpg') center/cover;
   box-shadow: var(--shadow);
 }
 .img-stack__accent {
