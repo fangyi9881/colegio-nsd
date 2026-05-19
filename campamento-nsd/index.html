@@ -2,7 +2,7 @@
 <html lang="es" data-page="inicio">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Campamento Urbano NSD · Verano 2026 · Carabanchel, Madrid</title>
   <meta name="description" content="Campamento Urbano del Colegio Nuestra Señora de los Dolores. Del 22 de junio al 31 de julio. A partir de 3 años. Deportes, piscina, talleres, cocina, baile y mucho más en Carabanchel, Madrid." />
   <meta name="keywords" content="campamento urbano Madrid, campamento verano Carabanchel, campamento NSD, campamento colegio Dolores, campamento niños Madrid 2026" />
@@ -10,11 +10,15 @@
   <meta property="og:description" content="¡El mejor verano de tu vida! Del 22 junio al 31 julio. A partir de 3 años. Inscripción por semanas." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://www.colegionsdolores.es/assets/img/og-cover.svg" />
-  <meta property="og:url" content="https://www.colegionsdolores.es/campamento-nsd/" />
+  <meta property="og:url" content="https://campamento-nsd.vercel.app" />
   <meta property="og:locale" content="es_ES" />
-  <link rel="canonical" href="https://www.colegionsdolores.es/campamento-nsd/" />
+  <link rel="canonical" href="https://campamento-nsd.vercel.app" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="theme-color" content="#0AAFDB" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Campamento Urbano NSD · Verano 2026" />
+  <meta name="twitter:description" content="¡El mejor verano de tu vida! Del 22 junio al 31 julio. A partir de 3 años. Inscripción por semanas." />
+  <meta name="twitter:image" content="https://www.colegionsdolores.es/assets/img/og-cover.svg" />
 
   <script type="application/ld+json">
   {
@@ -22,11 +26,11 @@
     "@type": "SportsOrganization",
     "name": "Campamento Urbano NSD",
     "description": "Campamento urbano de verano para niños de 3 a 12 años en Carabanchel, Madrid. Deportes, piscina, talleres, cocina, baile y actividades en inglés.",
-    "url": "https://www.colegionsdolores.es/campamento-nsd/",
+    "url": "https://campamento-nsd.vercel.app",
     "parentOrganization": {
       "@type": "School",
       "name": "Colegio Nuestra Señora de los Dolores",
-      "url": "https://www.colegionsdolores.es/"
+      "url": "https://colegio-nsd.vercel.app"
     },
     "address": {
       "@type": "PostalAddress",
@@ -64,10 +68,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet" />
 
-  <base href="/campamento-nsd/" />
+
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
+  <a href="#actividades" class="skip-link">Saltar al contenido principal</a>
 
   <!-- ===== TOPBAR ===== -->
   <div class="topbar">
@@ -76,7 +81,7 @@
         <a href="tel:+34914719959" aria-label="Teléfono"><i class="bi bi-telephone-fill"></i><span class="topbar__txt">91 471 99 59</span></a>
         <a href="mailto:secretaria@colegionsdolores.es" aria-label="Email"><i class="bi bi-envelope-fill"></i><span class="topbar__txt">secretaria@colegionsdolores.es</span></a>
       </div>
-      <span class="topbar__pill"><i class="bi bi-house-fill"></i> <span class="topbar__pill-txt">Parte del</span> <a href="../">Colegio NSD</a></span>
+      <span class="topbar__pill"><i class="bi bi-house-fill"></i> <span class="topbar__pill-txt">Parte del</span> <a href="https://colegio-nsd.vercel.app">Colegio NSD</a></span>
       <span class="topbar__note">☀️ <strong>Verano 2026</strong> · Inscripciones abiertas</span>
     </div>
   </div>
@@ -111,7 +116,7 @@
   </header>
 
   <!-- ===== DRAWER MÓVIL ===== -->
-  <aside class="drawer" id="drawer" aria-hidden="true">
+  <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Menú de navegación móvil">
     <ul>
       <li><a href="#inicio">Inicio <i class="bi bi-arrow-right"></i></a></li>
       <li><a href="#actividades">Actividades <i class="bi bi-arrow-right"></i></a></li>
@@ -510,7 +515,7 @@
       <div>
         <h5>Información</h5>
         <ul>
-          <li><a href="../">Web del Colegio</a></li>
+          <li><a href="https://colegio-nsd.vercel.app">Web del Colegio</a></li>
           <li><a href="privacidad.html">Política de privacidad</a></li>
           <li><a href="aviso-legal.html">Aviso legal</a></li>
           <li><a href="accesibilidad.html">Accesibilidad</a></li>
@@ -521,7 +526,7 @@
         <ul class="footer__contact">
           <li><i class="bi bi-geo-alt"></i> C/ Tordo, 15 · 28019 Madrid</li>
           <li><i class="bi bi-telephone"></i> 914 719 959</li>
-          <li><i class="bi bi-envelope"></i> secretaria@colegionsdolores.com</li>
+          <li><i class="bi bi-envelope"></i> secretaria@colegionsdolores.es</li>
         </ul>
       </div>
     </div>
@@ -539,7 +544,7 @@
   </footer>
 
   <!-- Mobile CTA -->
-  <div class="mobile-cta-bar" id="mobileCta" aria-hidden="true">
+  <div class="mobile-cta-bar" id="mobileCta" aria-label="Acciones rápidas móvil">
     <a href="tel:+34914719959" class="cta-call"><i class="bi bi-telephone-fill"></i><span>Llamar</span></a>
     <a href="#inscripcion" class="cta-visit"><i class="bi bi-lightning-charge-fill"></i><span>¡Me apunto!</span></a>
   </div>

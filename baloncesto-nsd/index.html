@@ -1,10 +1,62 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="https://i.imgur.com/OP6BbHs.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dolores Dragons</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/dragon-logo.png" />
+    <link rel="apple-touch-icon" href="/images/dragon-logo.png" />
+
+    <!-- Primary Meta -->
+    <title>Dolores Dragons | Club de Baloncesto · Madrid</title>
+    <meta name="description" content="Dolores Dragons, el club de baloncesto más exclusivo y selecto de Madrid. Fundado en 1957. Únete a la Guarida del Dragón." />
+    <meta name="keywords" content="Dolores Dragons, baloncesto Madrid, club baloncesto, basketball Madrid, NSD, colegio Nuestra Señora de las Delicias" />
+    <meta name="author" content="Dolores Dragons" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#D4AF37" />
+    <link rel="canonical" href="https://doloresdragons.com" />
+
+    <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://doloresdragons.com" />
+    <meta property="og:title" content="Dolores Dragons | Club de Baloncesto · Madrid" />
+    <meta property="og:description" content="El club de baloncesto más exclusivo de Madrid. Fundado en 1957. Trivia, ranking y mucho más en La Guarida del Dragón." />
+    <meta property="og:image" content="https://doloresdragons.com/images/dragon-logo.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:site_name" content="Dolores Dragons" />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Dolores Dragons | Club de Baloncesto · Madrid" />
+    <meta name="twitter:description" content="El club de baloncesto más exclusivo de Madrid. Fundado en 1957." />
+    <meta name="twitter:image" content="https://doloresdragons.com/images/dragon-logo.png" />
+
+    <!-- Structured Data: SportsOrganization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SportsOrganization",
+      "name": "Dolores Dragons",
+      "alternateName": "Club Baloncesto Dolores Dragons",
+      "description": "Club de baloncesto exclusivo fundado en 1957 en Madrid, España.",
+      "url": "https://doloresdragons.com",
+      "logo": "https://doloresdragons.com/images/dragon-logo.png",
+      "foundingDate": "1957",
+      "sport": "Basketball",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Madrid",
+        "addressCountry": "ES"
+      },
+      "sameAs": [
+        "https://www.instagram.com/doloresdragons/"
+      ]
+    }
+    </script>
+
     <script>
       (function() {
         const originalFetch = window.fetch;
@@ -13,22 +65,19 @@
             configurable: true,
             enumerable: true,
             get: function() { return originalFetch; },
-            set: function(v) { 
+            set: function(v) {
               if (v !== originalFetch) {
-                console.warn('Attempted to overwrite window.fetch ignored'); 
+                console.warn('Attempted to overwrite window.fetch ignored');
               }
             }
           });
-        } catch (e) {
-          // If it's already not configurable, we can't do much.
-        }
+        } catch (e) {}
       })();
     </script>
-    <script type="module" crossorigin src="/baloncesto-nsd/assets/index-BomrwBMd.js"></script>
-    <link rel="stylesheet" crossorigin href="/baloncesto-nsd/assets/index-D2DPoK1K.css">
+    <script type="module" crossorigin src="/assets/index-Dk18WAzY.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DCnRfije.css">
   </head>
   <body>
     <div id="root"></div>
   </body>
 </html>
-

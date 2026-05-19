@@ -44,7 +44,7 @@ export default function SchoolTopbar() {
         }}>
           🏫 Parte del{' '}
           <a
-            href="https://fangyi9881.github.io/colegio-nsd/"
+            href="https://colegio-nsd.vercel.app"
             style={{ color: '#D4AF37', textDecoration: 'none', fontWeight: 800 }}
           >
             Colegio NSD

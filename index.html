@@ -2,7 +2,7 @@
 <html lang="es" data-page="home">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Colegio NSD · Nuestra Señora de los Dolores · Centro Concertado Bilingüe en Carabanchel</title>
   <meta name="description" content="Colegio NSD (Nuestra Señora de los Dolores). Centro concertado bilingüe en Carabanchel (Madrid). Educación Infantil, Primaria y ESO. Más de 65 años formando personas." />
   <meta name="keywords" content="colegio Carabanchel, colegio concertado Madrid, colegio bilingüe, NSD, Nuestra Señora de los Dolores, educación infantil, primaria, ESO, Colegio Tordo Madrid" />
@@ -36,7 +36,7 @@
   <link rel="preload" as="image" href="/assets/img/logo.png" fetchpriority="high" />
 
   <!-- Fuentes con display=swap para no bloquear render -->
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
   <link rel="stylesheet" href="/assets/css/animations.css" />
@@ -69,6 +69,7 @@
   </script>
 </head>
 <body id="top">
+  <a href="#nosotros" class="skip-link">Saltar al contenido principal</a>
 
   <div id="site-header"></div>
 
@@ -244,7 +245,7 @@
           <span class="stage__age">0 – 3 años</span>
           <h3>Escuela Infantil NSD</h3>
           <p>Escuela infantil con <strong>6 unidades</strong>. Centro acogido a las <strong>becas de la Comunidad de Madrid</strong>. Visita su web dedicada.</p>
-          <a href="/infantil-nsd/" class="stage__link">Visitar web <i class="bi bi-arrow-up-right"></i></a>
+          <a href="https://infantil-nsd.vercel.app" class="stage__link">Visitar web <i class="bi bi-arrow-up-right"></i></a>
         </article>
 
         <article class="stage tilt shine" data-tilt data-reveal="zoom" data-reveal-delay="2">
@@ -285,60 +286,60 @@
     <!-- mosaico marquee de imágenes -->
     <div style="overflow:hidden;">
       <div class="gallery-marquee">
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1551038247-3d9af20df552?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Conciertos, actuaciones y talleres que reúnen a toda la comunidad educativa" style="background-image:url('https://images.unsplash.com/photo-1551038247-3d9af20df552?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-palette2"></i></span>
           <span>Semana Cultural</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Baloncesto, atletismo, fútbol sala y competiciones escolares entre colegios" style="background-image:url('https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-trophy"></i></span>
           <span>Deportes</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Programación y construcción de robots desde Primaria hasta ESO" style="background-image:url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-robot"></i></span>
           <span>Robótica</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Banda escolar, percusión y talleres de música para todos los cursos" style="background-image:url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-music-note-beamed"></i></span>
           <span>Música</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1577896851231-70ef18881754?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Cerámica, teatro y manualidades para despertar la creatividad de cada alumno" style="background-image:url('https://images.unsplash.com/photo-1577896851231-70ef18881754?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-tools"></i></span>
           <span>Talleres</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Viajes culturales y de aventura por España y Europa a lo largo del curso" style="background-image:url('https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-compass"></i></span>
           <span>Excursiones</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Experimentos, feria de ciencias y olimpiadas del conocimiento" style="background-image:url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-eyedropper"></i></span>
           <span>Ciencia</span>
         </div>
         <!-- duplicado -->
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1551038247-3d9af20df552?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Conciertos, actuaciones y talleres que reúnen a toda la comunidad educativa" style="background-image:url('https://images.unsplash.com/photo-1551038247-3d9af20df552?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-palette2"></i></span>
           <span>Semana Cultural</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Baloncesto, atletismo, fútbol sala y competiciones escolares entre colegios" style="background-image:url('https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-trophy"></i></span>
           <span>Deportes</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Programación y construcción de robots desde Primaria hasta ESO" style="background-image:url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-robot"></i></span>
           <span>Robótica</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Banda escolar, percusión y talleres de música para todos los cursos" style="background-image:url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-music-note-beamed"></i></span>
           <span>Música</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1577896851231-70ef18881754?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Cerámica, teatro y manualidades para despertar la creatividad de cada alumno" style="background-image:url('https://images.unsplash.com/photo-1577896851231-70ef18881754?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-tools"></i></span>
           <span>Talleres</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Viajes culturales y de aventura por España y Europa a lo largo del curso" style="background-image:url('https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-compass"></i></span>
           <span>Excursiones</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Experimentos, feria de ciencias y olimpiadas del conocimiento" style="background-image:url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-eyedropper"></i></span>
           <span>Ciencia</span>
         </div>
@@ -347,60 +348,60 @@
 
     <div style="overflow:hidden;margin-top:18px;">
       <div class="gallery-marquee gallery-marquee--reverse">
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Convivencias, voluntariado y acompañamiento espiritual durante el curso" style="background-image:url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-heart-pulse"></i></span>
           <span>Pastoral</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1564429097439-e5cbf2b3a8e8?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Espacios de juego y relación entre alumnos de todas las edades" style="background-image:url('https://images.unsplash.com/photo-1564429097439-e5cbf2b3a8e8?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-tree"></i></span>
           <span>Patio</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="El coro NSD actúa en eventos y certámenes musicales de la ciudad" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-mic"></i></span>
           <span>Coro</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Bilingüismo real con profesorado nativo desde los 3 años" style="background-image:url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-translate"></i></span>
           <span>Inglés</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Pintura, escultura y expresión plástica con exposiciones propias" style="background-image:url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-brush"></i></span>
           <span>Arte</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Aulas digitales y formación en competencias del siglo XXI" style="background-image:url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-laptop"></i></span>
           <span>Tecnología</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1530021232320-687d8e3dba54?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Reconocimientos académicos, deportivos y artísticos para nuestros alumnos" style="background-image:url('https://images.unsplash.com/photo-1530021232320-687d8e3dba54?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-award"></i></span>
           <span>Premios</span>
         </div>
         <!-- duplicado -->
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Convivencias, voluntariado y acompañamiento espiritual durante el curso" style="background-image:url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-heart-pulse"></i></span>
           <span>Pastoral</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1564429097439-e5cbf2b3a8e8?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Espacios de juego y relación entre alumnos de todas las edades" style="background-image:url('https://images.unsplash.com/photo-1564429097439-e5cbf2b3a8e8?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-tree"></i></span>
           <span>Patio</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="El coro NSD actúa en eventos y certámenes musicales de la ciudad" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-mic"></i></span>
           <span>Coro</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Bilingüismo real con profesorado nativo desde los 3 años" style="background-image:url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-translate"></i></span>
           <span>Inglés</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Pintura, escultura y expresión plástica con exposiciones propias" style="background-image:url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-brush"></i></span>
           <span>Arte</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Aulas digitales y formación en competencias del siglo XXI" style="background-image:url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-laptop"></i></span>
           <span>Tecnología</span>
         </div>
-        <div class="gallery-tile" style="background-image:url('https://images.unsplash.com/photo-1530021232320-687d8e3dba54?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Reconocimientos académicos, deportivos y artísticos para nuestros alumnos" style="background-image:url('https://images.unsplash.com/photo-1530021232320-687d8e3dba54?w=600&q=80&auto=format&fit=crop');">
           <span class="gallery-tile__icon"><i class="bi bi-award"></i></span>
           <span>Premios</span>
         </div>
@@ -461,12 +462,12 @@
       </header>
 
       <div class="services">
-        <a href="https://web2.alexiaedu.com/" target="_blank" rel="noopener" class="service shine" data-reveal="zoom" data-reveal-delay="1">
+        <a href="https://web2.alexiaedu.com/" class="service shine" data-reveal="zoom" data-reveal-delay="1">
           <div class="service__ic"><i class="bi bi-person-vcard"></i></div>
           <h4>Alexia</h4>
           <p>Plataforma de comunicación con las familias.</p>
         </a>
-        <a href="https://raices.madrid.org/" target="_blank" rel="noopener" class="service shine" data-reveal="zoom" data-reveal-delay="2">
+        <a href="https://raices.madrid.org/" class="service shine" data-reveal="zoom" data-reveal-delay="2">
           <div class="service__ic"><i class="bi bi-tree"></i></div>
           <h4>Raíces</h4>
           <p>Gestión académica de la Comunidad de Madrid.</p>
@@ -486,7 +487,7 @@
           <h4>Extraescolares</h4>
           <p>Idiomas, deportes, música, robótica…</p>
         </a>
-        <a href="/campamento-nsd/" class="service service--featured shine" data-reveal="zoom" data-reveal-delay="6">
+        <a href="https://campamento-nsd.vercel.app" class="service service--featured shine" data-reveal="zoom" data-reveal-delay="6">
           <span class="service__ribbon"><i class="bi bi-stars"></i> Web propia</span>
           <div class="service__ic"><i class="bi bi-sun-fill"></i></div>
           <h4>Campamento de verano</h4>
@@ -523,10 +524,10 @@
           El club de baloncesto del Colegio NSD lleva más de 68 años compitiendo con pasión. En la temporada 25/26 nuestro equipo Cadete Femenino lidera su fase de competición.
         </p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px;">
-          <a href="/baloncesto-nsd/" style="display:inline-flex;align-items:center;gap:8px;background:#D4AF37;color:#080808;font-weight:700;font-size:.9rem;padding:12px 24px;border-radius:8px;text-decoration:none;">
+          <a href="https://baloncesto-nsd.vercel.app" style="display:inline-flex;align-items:center;gap:8px;background:#D4AF37;color:#080808;font-weight:700;font-size:.9rem;padding:12px 24px;border-radius:8px;text-decoration:none;">
             <i class="bi bi-basketball"></i> Ver el club
           </a>
-          <a href="https://www.instagram.com/doloresdragons/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#D4AF37;border:1.5px solid rgba(212,175,55,.3);font-weight:600;font-size:.9rem;padding:12px 20px;border-radius:8px;text-decoration:none;">
+          <a href="https://www.instagram.com/doloresdragons/" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#D4AF37;border:1.5px solid rgba(212,175,55,.3);font-weight:600;font-size:.9rem;padding:12px 20px;border-radius:8px;text-decoration:none;">
             <i class="bi bi-instagram"></i> @doloresdragons
           </a>
         </div>
@@ -574,7 +575,7 @@
               </div>
             </div>
           </div>
-          <a href="/baloncesto-nsd/" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#D4AF37;color:#080808;font-weight:700;font-size:.88rem;padding:11px;border-radius:8px;text-decoration:none;">
+          <a href="https://baloncesto-nsd.vercel.app" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#D4AF37;color:#080808;font-weight:700;font-size:.88rem;padding:11px;border-radius:8px;text-decoration:none;">
             Conoce el club <i class="bi bi-arrow-right"></i>
           </a>
         </div>
@@ -755,7 +756,7 @@
             <label class="form-privacy">
               <input type="checkbox" name="rgpd" required />
               <i class="bi bi-shield-lock-fill"></i>
-              <span>He leído y acepto la <a href="/privacidad.html" target="_blank" rel="noopener">política de privacidad</a></span>
+              <span>He leído y acepto la <a href="/privacidad.html">política de privacidad</a></span>
             </label>
           </div>
           <button type="submit" class="btn btn--primary btn--block magnetic">

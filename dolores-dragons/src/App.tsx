@@ -33,13 +33,13 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 2200);
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <GamificationProvider>
-      <Router basename="/baloncesto-nsd">
+      <Router>
         <SchoolTopbar />
         <CustomCursor />
         <ScrollToTop />
@@ -57,24 +57,46 @@ export default function App() {
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="relative flex items-center justify-center"
+                className="relative flex flex-col items-center justify-center gap-8"
               >
-                {/* Optimized glow effect using radial gradient instead of expensive CSS blur */}
-                <div className="absolute w-64 h-64 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.25)_0%,transparent_70%)] rounded-full pointer-events-none" />
-                
-                <motion.div 
+                {/* Ambient glow */}
+                <div className="absolute w-72 h-72 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.18)_0%,transparent_70%)] rounded-full pointer-events-none" />
+
+                <motion.div
                   animate={{ rotateY: 360 }}
                   transition={{ duration: 2.5, ease: "linear", repeat: Infinity }}
                   className="w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center relative z-10"
                   style={{ transformStyle: "preserve-3d", willChange: "transform" }}
                 >
-                  <img 
-                    src="https://i.imgur.com/OP6BbHs.png" 
-                    alt="DD Logo" 
+                  <img
+                    src="/images/dragon-logo.png"
+                    alt="DD Logo"
                     className="w-full h-full object-contain"
                     style={{ willChange: "transform" }}
-                    referrerPolicy="no-referrer" 
+                    referrerPolicy="no-referrer"
                   />
+                </motion.div>
+
+                {/* Club name under logo */}
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.5 }}
+                  className="flex flex-col items-center gap-2"
+                >
+                  <p
+                    className="text-white font-black uppercase tracking-[0.25em]"
+                    style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem' }}
+                  >
+                    Dolores Dragons
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="h-px w-8 bg-primary/45" />
+                    <span className="text-primary/55 font-bold uppercase" style={{ fontSize: '0.45rem', letterSpacing: '0.32em' }}>
+                      Est. 1957 · Madrid
+                    </span>
+                    <div className="h-px w-8 bg-primary/45" />
+                  </div>
                 </motion.div>
               </motion.div>
             </motion.div>

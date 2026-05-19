@@ -341,7 +341,7 @@ export default function NewsSection() {
                         </span>
                       ))}
                     </div>
-                    <img src="https://i.imgur.com/OP6BbHs.png" alt="Logo" className="w-8 h-8 object-contain" referrerPolicy="no-referrer" />
+                    <img src="/images/dragon-logo.png" alt="Logo" className="w-8 h-8 object-contain" referrerPolicy="no-referrer" />
                   </div>
                 </div>
               </div>

@@ -7,17 +7,17 @@ export const mockTeams: Team[] = [
     category: 'Cadete Femenino',
     coach: 'Yefangyi Hu García',
     season: '25/26',
-    teamPhoto: 'https://images.unsplash.com/photo-1515523110800-9415d13b84a8?q=80&w=2000&auto=format&fit=crop',
+    teamPhoto: '/images/team-cadete.jpg',
     roster: [
       { id: 'cf6', name: 'MERINERO PEINADO, PAULA', number: 4, position: 'Base', birthday: '02/11', image: '/images/1774270739811-a8c779e2-6dee-403f-8be2-0ccd3e1d9c25.png' },
       { id: 'cf7', name: 'RODRIGUEZ ZEPEDA, ANGELLY RAQUEL', number: 15, position: 'Base', birthday: '19/03', image: '/images/1774270950947-4cd2082b-f800-43e6-afea-f322604b6f0e.png' },
       { id: 'cf4', name: 'LOPEZ LOPEZ-CORONA, ZAIRA', number: 11, position: 'Escolta', birthday: '30/03', image: '/images/1774272984111-d68027b7-102c-48cc-9e3c-39af331c44f8.png' },
       { id: 'cf9', name: 'SANAITAN TORBISCO, JIMENA BELEN', number: 12, position: 'Escolta', birthday: '31/03', image: '/images/1774271679521-61d858e5-6ec8-404b-8bb6-37afa5597c66.png' },
-      { id: 'cf1', name: 'ATANASSOVA, NICOLE', number: 6, position: 'Alero', birthday: '05/10', image: 'https://cdn.phototourl.com/member/2026-03-23-2def7410-2490-4723-8c1c-d0eaa8455ba7.png' },
-      { id: 'cf2', name: 'CAMPOVERDE ILLANES, NAOMI', number: 30, position: 'Alero', birthday: '20/12', image: 'https://cdn.phototourl.com/member/2026-03-23-52230b72-a1b9-4170-98a8-2e7d9f9a6303.png' },
+      { id: 'cf1', name: 'ATANASSOVA, NICOLE', number: 6, position: 'Alero', birthday: '05/10', image: '/images/player-atanassova.png' },
+      { id: 'cf2', name: 'CAMPOVERDE ILLANES, NAOMI', number: 30, position: 'Alero', birthday: '20/12', image: '/images/player-campoverde.png' },
       { id: 'cf8', name: 'RODRIGUEZ JARAMILLO, CAMILA', number: 24, position: 'Ala-Pívot', birthday: '06/06', image: '/images/1774273075479-66e0748e-936c-491f-a1cd-e97527e2180a.png' },
       { id: 'cf3', name: 'CLOVES DE FRANÇA, SOPHIA', number: 8, position: 'Pívot', birthday: '27/08', image: '/images/1774273259066-a57105d9-772d-4b94-b69b-7b67462fe2c9.png', zoom: 1.25 },
-      { id: 'cf5', name: 'LUDEÑA SARANGO, NOELIA', number: 0, position: 'Pívot', birthday: '04/12', image: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=500&auto=format&fit=crop' },
+      { id: 'cf5', name: 'LUDEÑA SARANGO, NOELIA', number: 0, position: 'Pívot', birthday: '04/12', image: '/images/player-placeholder.jpg' },
     ]
   },
   {
@@ -26,9 +26,9 @@ export const mockTeams: Team[] = [
     category: 'Alevín Mixto',
     coach: 'Yefangyi Hu García',
     season: '25/26',
-    teamPhoto: 'https://images.unsplash.com/photo-1518063319789-7217e6706b04?q=80&w=2000&auto=format&fit=crop',
+    teamPhoto: '/images/team-alevin.jpg',
     roster: [
-      { id: 'am1', name: 'AUZMENDI GONZÁLEZ, SARA', number: 4, position: 'Base', birthday: '18/04', image: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=500&auto=format&fit=crop' },
+      { id: 'am1', name: 'AUZMENDI GONZÁLEZ, SARA', number: 4, position: 'Base', birthday: '18/04', image: '/images/player-placeholder.jpg' },
       { id: 'am2', name: 'TORRESANO, MIGUEL', number: 5, position: 'Base', birthday: '13/02', image: '/images/1774273562131-bed342fb-c13e-4c6f-bfb3-9285e428fab2.png' },
       { id: 'am3', name: 'MERINERO PEINADO, SARA', number: 8, position: 'Escolta', birthday: '24/07', image: '/images/1774273731624-db124657-b670-4721-8dcd-64d61dba4dfc.png' },
       { id: 'am4', name: 'PROAÑO QUINAUCHO, SARA GUADALUPE', number: 9, position: 'Escolta', birthday: '20/09', image: '/images/1774298222077-1bf79cf9-1a42-48f3-bdf3-bc950736e4dd.png' },
@@ -45,7 +45,7 @@ export const mockTeams: Team[] = [
     category: 'Cadete Femenino',
     coach: 'Yefangyi Hu García',
     season: '24/25',
-    teamPhoto: 'https://images.unsplash.com/photo-1515523110800-9415d13b84a8?q=80&w=2000&auto=format&fit=crop',
+    teamPhoto: '/images/team-cadete.jpg',
     roster: [
       { id: 'cf6_24', name: 'MERINERO PEINADO, PAULA', number: 4, position: 'Base', image: '/images/1774270739811-a8c779e2-6dee-403f-8be2-0ccd3e1d9c25.png' },
       { id: 'cf7_24', name: 'RODRIGUEZ ZEPEDA, ANGELLY RAQUEL', number: 15, position: 'Base', image: '/images/1774270950947-4cd2082b-f800-43e6-afea-f322604b6f0e.png' },

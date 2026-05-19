@@ -148,12 +148,12 @@
 
 /* ===== Animated gradient text ===== */
 .text-gradient-anim {
-  background: linear-gradient(120deg, #0A5E24 0%, #C9A042 35%, #0A5E24 70%, #C9A042 100%);
+  background: linear-gradient(120deg, #0A4A1E 0%, #BF8C00 30%, #D4A010 50%, #0A4A1E 75%, #BF8C00 100%);
   background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: gradShift 8s ease-in-out infinite;
+  animation: gradShift 7s ease-in-out infinite;
   will-change: background-position;
 }
 @keyframes gradShift {
@@ -188,13 +188,38 @@
   flex: none;
 }
 .gallery-tile:hover { transform: scale(1.04); box-shadow: var(--shadow-lg); z-index: 2; }
-.gallery-tile span {
+
+/* Overlay oscuro + descripción al hacer hover */
+.gallery-tile::after {
+  content: attr(data-desc);
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0);
+  color: transparent;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 18px 20px;
+  font-size: .74rem; font-weight: 500; line-height: 1.55;
+  border-radius: 22px;
+  z-index: 2;
+  transition: background .3s ease, color .25s ease .06s;
+  pointer-events: none;
+}
+.gallery-tile:hover::after {
+  background: rgba(0, 0, 0, .58);
+  color: rgba(255, 255, 255, .92);
+}
+
+/* Ocultar la etiqueta-píldora al hacer hover (la sustituye la descripción) */
+.gallery-tile span:not(.gallery-tile__icon) {
   position: absolute; left: 14px; bottom: 14px;
   background: rgba(0,0,0,.5); color: #fff;
   padding: 6px 12px; border-radius: 999px;
   font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
   backdrop-filter: blur(8px);
+  transition: opacity .2s ease;
+  z-index: 3;
 }
+.gallery-tile:hover span:not(.gallery-tile__icon) { opacity: 0; }
 
 /* ===== Sticky bottom CTA (mobile) — GRID 2 columnas idénticas ===== */
 .mobile-cta-bar {
@@ -279,7 +304,7 @@
 
 .hamburger-x {
   width: 48px; height: 48px;
-  display: none;
+  display: flex;
   border: 1.5px solid var(--ink-100);
   background: #fff; border-radius: 14px;
   position: relative; cursor: pointer;
@@ -326,8 +351,6 @@
 .hamburger-x.is-open span:nth-child(1) { top: 23px; transform: rotate(45deg); }
 .hamburger-x.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .hamburger-x.is-open span:nth-child(3) { top: 23px; transform: rotate(-45deg); }
-
-@media (max-width: 980px) { .hamburger-x { display: block; } }
 
 /* ===== Mobile drawer (full-screen overlay menu) ===== */
 /* ── Drawer backdrop ── */

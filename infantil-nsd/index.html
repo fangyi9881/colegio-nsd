@@ -2,20 +2,23 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- BASE: cambiar a "/infantil-nsd/" al desplegar en dominio propio -->
   <title>Escuela Infantil NSD · Guardería 0–3 años en Carabanchel, Madrid</title>
   <meta name="description" content="Escuela infantil y guardería para niños de 0 a 3 años en Carabanchel. Becas de la Comunidad de Madrid, bilingüe, comedor propio y equipo de educadoras tituladas." />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta name="theme-color" content="#8B5CF6" />
-  <link rel="canonical" href="https://www.colegionsdolores.es/infantil-nsd/" />
+  <meta name="theme-color" content="#1A7A48" />
+  <link rel="canonical" href="https://infantil-nsd.vercel.app" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Escuela Infantil NSD · Guardería 0–3 años en Carabanchel" />
   <meta property="og:description" content="Guardería 0–3 años con becas CM, bilingüe y comedor propio en Carabanchel, Madrid." />
   <meta property="og:image" content="https://www.colegionsdolores.es/assets/img/og-cover.svg" />
-  <meta property="og:url" content="https://www.colegionsdolores.es/infantil-nsd/" />
+  <meta property="og:url" content="https://infantil-nsd.vercel.app" />
   <meta property="og:locale" content="es_ES" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Escuela Infantil NSD · Guardería 0–3 años en Carabanchel" />
+  <meta name="twitter:description" content="Guardería 0–3 años con becas CM, bilingüe y comedor propio en Carabanchel, Madrid." />
+  <meta name="twitter:image" content="https://www.colegionsdolores.es/assets/img/og-cover.svg" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍼</text></svg>" />
 
   <script type="application/ld+json">
@@ -24,14 +27,14 @@
     "@type": "ChildCare",
     "name": "Escuela Infantil NSD",
     "description": "Escuela infantil y guardería para niños de 0 a 3 años en Carabanchel, Madrid. Becas Comunidad de Madrid, bilingüe y comedor propio.",
-    "url": "https://www.colegionsdolores.es/infantil-nsd/",
+    "url": "https://infantil-nsd.vercel.app",
     "telephone": "+34914719959",
     "email": "secretaria@colegionsdolores.es",
     "priceRange": "€-€€ (becas CM disponibles)",
     "parentOrganization": {
       "@type": "School",
       "name": "Colegio Nuestra Señora de los Dolores",
-      "url": "https://www.colegionsdolores.es/"
+      "url": "https://colegio-nsd.vercel.app"
     },
     "address": {
       "@type": "PostalAddress",
@@ -63,10 +66,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-  <base href="/infantil-nsd/" />
+
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
+  <a href="#propuesta" class="skip-link">Saltar al contenido principal</a>
 
   <div id="progress-bar"></div>
   <div id="cursor-ring"></div>
@@ -78,7 +82,7 @@
         <a href="tel:+34914719959" aria-label="Teléfono"><span class="topbar__ico">📞</span><span class="topbar__txt">91 471 99 59</span></a>
         <a href="mailto:secretaria@colegionsdolores.es" aria-label="Email"><span class="topbar__ico">✉️</span><span class="topbar__txt">secretaria@colegionsdolores.es</span></a>
       </div>
-      <span class="topbar__pill">🏫 Parte del <a href="../">Colegio NSD</a></span>
+      <span class="topbar__pill">🏫 Parte del <a href="https://colegio-nsd.vercel.app">Colegio NSD</a></span>
       <span class="topbar__note">⭐ <strong style="color:#fff">Becas Comunidad de Madrid</strong> disponibles</span>
     </div>
   </div>
@@ -107,7 +111,7 @@
   </nav>
 
   <!-- ── DRAWER ─────────────────────────────── -->
-  <div class="drawer" id="drawer" role="dialog" aria-label="Menú móvil">
+  <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menú móvil">
     <div class="drawer__overlay" id="drawer-overlay"></div>
     <div class="drawer__panel">
       <button class="drawer__close" id="drawer-close" aria-label="Cerrar">✕</button>
@@ -117,7 +121,7 @@
         <a href="#servicios">Servicios</a>
         <a href="#testimonios">Familias</a>
         <a href="#becas">Becas CM</a>
-        <a href="../">← Colegio NSD</a>
+        <a href="https://colegio-nsd.vercel.app">← Colegio NSD</a>
       </div>
       <a href="#inscripcion" class="drawer__cta">🍼 Reservar plaza ahora</a>
     </div>
@@ -315,7 +319,7 @@
           <h3>⏰ Horario tipo</h3>
           <table class="horario-table">
             <thead>
-              <tr><th>Hora</th><th>Actividad</th></tr>
+              <tr><th scope="col">Hora</th><th scope="col">Actividad</th></tr>
             </thead>
             <tbody>
               <tr><td>07:30 – 09:00</td><td>🌅 Aula matinal y acogida</td></tr>
@@ -327,7 +331,7 @@
               <tr><td>16:00 – 17:00</td><td>📚 Salida y tarde</td></tr>
             </tbody>
           </table>
-          <p style="margin-top:16px;font-size:.82rem;color:var(--ink-soft);">
+          <p style="margin-top:16px;font-size:.82rem;color:var(--ink);">
             * Horario orientativo. El horario de siesta se adapta a cada bebé.
           </p>
         </div>
@@ -401,34 +405,34 @@
         </p>
       </div>
       <div class="galeria__grid">
-        <a class="galeria__item galeria__item--big" data-reveal>
+        <div class="galeria__item galeria__item--big" data-reveal>
           <img src="https://images.unsplash.com/photo-1560785496-3c9d27877182?w=900&q=80&auto=format&fit=crop" alt="Niña jugando con bloques de colores" loading="lazy" decoding="async" />
           <span class="galeria__caption"><i>🧩</i> Aprendizaje por el juego</span>
-        </a>
-        <a class="galeria__item" data-reveal data-delay="1">
+        </div>
+        <div class="galeria__item" data-reveal data-delay="1">
           <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&q=80&auto=format&fit=crop" alt="Cuentacuentos en el aula" loading="lazy" decoding="async" />
           <span class="galeria__caption"><i>📚</i> Cuentacuentos</span>
-        </a>
-        <a class="galeria__item" data-reveal data-delay="2">
+        </div>
+        <div class="galeria__item" data-reveal data-delay="2">
           <img src="https://images.unsplash.com/photo-1567448400815-59d5a71b1a6c?w=600&q=80&auto=format&fit=crop" alt="Patio exterior con juegos infantiles" loading="lazy" decoding="async" />
           <span class="galeria__caption"><i>🌳</i> Patio y aire libre</span>
-        </a>
-        <a class="galeria__item" data-reveal data-delay="3">
+        </div>
+        <div class="galeria__item" data-reveal data-delay="3">
           <img src="https://images.unsplash.com/photo-1597413545419-4013431dbfec?w=600&q=80&auto=format&fit=crop" alt="Taller de pintura y manualidades" loading="lazy" decoding="async" />
           <span class="galeria__caption"><i>🎨</i> Talleres creativos</span>
-        </a>
-        <a class="galeria__item galeria__item--tall" data-reveal data-delay="4">
+        </div>
+        <div class="galeria__item galeria__item--tall" data-reveal data-delay="4">
           <img src="https://images.unsplash.com/photo-1607453998774-d533f65dac99?w=900&q=80&auto=format&fit=crop" alt="Comedor escolar con menú saludable" loading="lazy" decoding="async" />
           <span class="galeria__caption"><i>🥗</i> Comedor propio</span>
-        </a>
-        <a class="galeria__item" data-reveal data-delay="5">
+        </div>
+        <div class="galeria__item" data-reveal data-delay="5">
           <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=600&q=80&auto=format&fit=crop" alt="Sesión de música infantil" loading="lazy" decoding="async" />
           <span class="galeria__caption"><i>🎵</i> Música</span>
-        </a>
-        <a class="galeria__item" data-reveal data-delay="6">
+        </div>
+        <div class="galeria__item" data-reveal data-delay="6">
           <img src="https://images.unsplash.com/photo-1595454223600-2bd2c5e0d2c8?w=600&q=80&auto=format&fit=crop" alt="Espacios seguros adaptados a bebés" loading="lazy" decoding="async" />
           <span class="galeria__caption"><i>🛡️</i> Espacios seguros</span>
-        </a>
+        </div>
       </div>
     </div>
   </section>
@@ -456,10 +460,10 @@
             <span class="idioma-pill"><span class="idioma-pill__flag">🖍️</span> Arts &amp; Crafts</span>
             <span class="idioma-pill"><span class="idioma-pill__flag">🌤️</span> Daily Routines</span>
           </div>
-          <p style="margin-top:24px; font-size:.9rem; color:var(--ink-soft);" data-reveal data-delay="4">
+          <p style="margin-top:24px; font-size:.9rem; color:var(--ink);" data-reveal data-delay="4">
             Al pasar al <strong>II Ciclo de Infantil (3–6 años)</strong> en el Colegio NSD, los niños ya llevan una base sólida en inglés dentro del programa bilingüe oficial de la Comunidad de Madrid.
           </p>
-          <a href="../etapas/infantil-3-6.html" class="btn btn--secondary" style="margin-top:24px;" data-reveal data-delay="5">
+          <a href="https://colegio-nsd.vercel.app/etapas/infantil-3-6.html" class="btn btn--secondary" style="margin-top:24px;" data-reveal data-delay="5">
             Ver Infantil 3–6 años →
           </a>
         </div>
@@ -698,7 +702,7 @@
         <a href="#servicios">Servicios</a>
         <a href="#becas">Becas CM</a>
         <a href="#inscripcion">Reservar plaza</a>
-        <a href="../">← Colegio NSD</a>
+        <a href="https://colegio-nsd.vercel.app">← Colegio NSD</a>
       </div>
       <div>
         <h4>Contacto</h4>

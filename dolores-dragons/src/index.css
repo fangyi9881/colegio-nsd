@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  
+  --color-text: var(--text-color);
+  --color-text-muted: var(--text-muted);
+
+  --color-white: var(--theme-white);
+  --color-black: var(--theme-black);
+
+  --font-sans: 'Montserrat', system-ui, sans-serif;
+  --font-display: 'Cinzel', serif;
+}
+
+:root {
+  --primary: #D4AF37;
+  --secondary: #FFFFFF;
+  --accent: #FDE047;
+  
+  --background: #000000;
+  --surface: #000000;
+  
+  --text-color: #FFFFFF;
+  --text-muted: #A3A3A3;
+
+  --theme-white: #FFFFFF;
+  --theme-black: #000000;
+  --opponent-line: #FFFFFF;
+}
+
+/* Tema siempre negro y dorado — sin override por preferencia del sistema */
+
+.force-dark {
+  --background: #000000 !important;
+  --surface: #111111 !important;
+  --text-color: #FFFFFF !important;
+  --text-muted: #A3A3A3 !important;
+  --theme-white: #FFFFFF !important;
+  --theme-black: #000000 !important;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Premium thin gold scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212,175,55,0.28) transparent;
+}
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.28); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(212,175,55,0.55); }
+
+/* Animated gold shimmer for headings */
+@keyframes gold-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.text-gold-shimmer {
+  background: linear-gradient(90deg, #96780A 0%, #C8A227 22%, #FDE047 50%, #C8A227 78%, #96780A 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gold-shimmer 6s linear infinite;
+}
+
+/* Subtle scan-line grain overlay — luxury cinematic texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  animation: scan-drift 8s linear infinite;
+}
+
+@keyframes scan-drift {
+  from { background-position: 0 0; }
+  to { background-position: 0 120px; }
+}

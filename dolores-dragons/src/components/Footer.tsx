@@ -67,7 +67,7 @@ export default function Footer({ onOpenJoinForm, onOpenLegal }: FooterProps) {
           <div className="lg:col-span-1">
             <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-3 mb-4 md:mb-6">
               <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center shrink-0">
-                <img src="https://i.imgur.com/OP6BbHs.png" alt="DD Logo" className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(212,175,55,0.4)]" referrerPolicy="no-referrer" />
+                <img src="/images/dragon-logo.png" alt="DD Logo" className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(212,175,55,0.4)]" referrerPolicy="no-referrer" />
               </div>
               <span className="text-xl md:text-2xl font-bold text-white uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>
                 Dolores Dragons

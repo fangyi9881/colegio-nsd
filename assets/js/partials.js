@@ -47,34 +47,49 @@
       <nav class="nav" id="primaryNav" aria-label="Principal">
         <ul>
           <li><a href="/" data-link="home">Inicio</a></li>
+
           <li class="has-dropdown">
-            <a href="/centro/sobre-nosotros.html" data-link="centro">El Centro <i class="bi bi-chevron-down"></i></a>
+            <a href="/centro/sobre-nosotros.html" data-link="centro">El Centro <i class="bi bi-chevron-down dd-arrow"></i></a>
             <ul class="dropdown">
-              <li><a href="/centro/sobre-nosotros.html">Sobre Nosotros</a></li>
-              <li><a href="/centro/sobre-nosotros.html#valores">Misión y Valores</a></li>
-              <li><a href="/centro/departamentos.html">Departamentos</a></li>
+              <li><a href="/centro/sobre-nosotros.html"><i class="bi bi-building dd-icon"></i>Sobre Nosotros</a></li>
+              <li><a href="/centro/sobre-nosotros.html#valores"><i class="bi bi-heart dd-icon"></i>Misión y Valores</a></li>
+              <li><a href="/centro/departamentos.html"><i class="bi bi-people dd-icon"></i>Departamentos</a></li>
+              <li><div class="dropdown-divider"></div></li>
+              <li><a href="/admision.html"><i class="bi bi-mortarboard dd-icon"></i>Admisión</a></li>
+              <li><a href="/contacto.html"><i class="bi bi-envelope dd-icon"></i>Contacto</a></li>
             </ul>
           </li>
+
           <li class="has-dropdown">
-            <a href="/infantil-nsd/" data-link="etapas">Etapas <i class="bi bi-chevron-down"></i></a>
+            <a href="/etapas/primaria.html" data-link="etapas">Etapas <i class="bi bi-chevron-down dd-arrow"></i></a>
             <ul class="dropdown">
-              <li><a href="/infantil-nsd/">Infantil 0–3 🍼</a></li>
-              <li><a href="/etapas/infantil-3-6.html">Infantil 3–6</a></li>
-              <li><a href="/etapas/primaria.html">Primaria</a></li>
-              <li><a href="/etapas/eso.html">ESO</a></li>
+              <li><a href="https://infantil-nsd.vercel.app"><i class="bi bi-balloon-heart dd-icon"></i>Infantil 0–3</a></li>
+              <li><a href="/etapas/infantil-3-6.html"><i class="bi bi-stars dd-icon"></i>Infantil 3–6</a></li>
+              <li><a href="/etapas/primaria.html"><i class="bi bi-book dd-icon"></i>Educación Primaria</a></li>
+              <li><a href="/etapas/eso.html"><i class="bi bi-laptop dd-icon"></i>E.S.O.</a></li>
             </ul>
           </li>
+
           <li class="has-dropdown">
-            <a href="/#servicios" data-link="servicios">Servicios <i class="bi bi-chevron-down"></i></a>
+            <a href="/#servicios" data-link="servicios">Servicios <i class="bi bi-chevron-down dd-arrow"></i></a>
             <ul class="dropdown">
-              <li><a href="/servicios/comedor.html">Comedor escolar</a></li>
-              <li><a href="/servicios/extraescolares.html">Extraescolares</a></li>
-              <li><a href="/servicios/extraescolares.html">Madrugadores</a></li>
-              <li><a href="/#servicios">Transporte</a></li>
+              <li><a href="/servicios/comedor.html"><i class="bi bi-egg-fried dd-icon"></i>Comedor Escolar</a></li>
+              <li><a href="/servicios/extraescolares.html"><i class="bi bi-trophy dd-icon"></i>Extraescolares</a></li>
+              <li><a href="/servicios/extraescolares.html"><i class="bi bi-sunrise dd-icon"></i>Madrugadores</a></li>
+              <li><a href="/#servicios"><i class="bi bi-bus-front dd-icon"></i>Transporte Escolar</a></li>
             </ul>
           </li>
-          <li><a href="/blog/" data-link="blog">Blog</a></li>
-          <li><a href="/contacto.html" class="nav-sv" data-link="secretaria"><i class="bi bi-person-lines-fill"></i> Secretaría Virtual</a></li>
+
+          <li class="has-dropdown">
+            <a href="https://dolores-dragons.vercel.app" data-link="actividades">Comunidad <i class="bi bi-chevron-down dd-arrow"></i></a>
+            <ul class="dropdown">
+              <li><a href="https://dolores-dragons.vercel.app"><i class="bi bi-dribbble dd-icon"></i>Baloncesto NSD</a></li>
+              <li><a href="https://campamento-nsd.vercel.app"><i class="bi bi-sun dd-icon"></i>Campamento NSD</a></li>
+              <li><div class="dropdown-divider"></div></li>
+              <li><a href="/blog/"><i class="bi bi-newspaper dd-icon"></i>Blog y Noticias</a></li>
+            </ul>
+          </li>
+
           <li><a class="nav-cta magnetic" href="/admision.html"><i class="bi bi-mortarboard-fill"></i> Admisión</a></li>
         </ul>
       </nav>
@@ -101,29 +116,56 @@
     </div>
 
     <nav class="drawer__nav">
-      <ul>
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/centro/sobre-nosotros.html">El Centro</a></li>
-        <li><a href="/etapas/primaria.html">Etapas</a></li>
-        <li><a href="/centro/departamentos.html">Departamentos</a></li>
-        <li><a href="/servicios/comedor.html">Comedor</a></li>
-        <li><a href="/servicios/extraescolares.html">Extraescolares</a></li>
-        <li><a href="/blog/">Blog</a></li>
-        <li><a href="/contacto.html">Secretaría Virtual</a></li>
-        <li><a href="/contacto.html">Contacto</a></li>
+      <ul style="list-style:none;padding:0;margin:0;">
+        <li><a href="/" class="drawer__link"><i class="bi bi-house"></i> Inicio</a></li>
+
+        <li class="drawer__has-sub">
+          <button class="drawer__sub-toggle"><span><i class="bi bi-building" style="margin-right:8px;color:var(--green-400)"></i>El Centro</span><i class="bi bi-chevron-down dd-arrow"></i></button>
+          <ul class="drawer__sub">
+            <li><a href="/centro/sobre-nosotros.html"><i class="bi bi-info-circle"></i> Sobre Nosotros</a></li>
+            <li><a href="/centro/sobre-nosotros.html#valores"><i class="bi bi-heart"></i> Misión y Valores</a></li>
+            <li><a href="/centro/departamentos.html"><i class="bi bi-people"></i> Departamentos</a></li>
+          </ul>
+        </li>
+
+        <li class="drawer__has-sub">
+          <button class="drawer__sub-toggle"><span><i class="bi bi-mortarboard" style="margin-right:8px;color:var(--green-400)"></i>Etapas</span><i class="bi bi-chevron-down dd-arrow"></i></button>
+          <ul class="drawer__sub">
+            <li><a href="https://infantil-nsd.vercel.app">🍼 Infantil 0–3</a></li>
+            <li><a href="/etapas/infantil-3-6.html"><i class="bi bi-stars"></i> Infantil 3–6</a></li>
+            <li><a href="/etapas/primaria.html"><i class="bi bi-book"></i> Educación Primaria</a></li>
+            <li><a href="/etapas/eso.html"><i class="bi bi-laptop"></i> E.S.O.</a></li>
+          </ul>
+        </li>
+
+        <li class="drawer__has-sub">
+          <button class="drawer__sub-toggle"><span><i class="bi bi-grid" style="margin-right:8px;color:var(--green-400)"></i>Servicios</span><i class="bi bi-chevron-down dd-arrow"></i></button>
+          <ul class="drawer__sub">
+            <li><a href="/servicios/comedor.html"><i class="bi bi-egg-fried"></i> Comedor Escolar</a></li>
+            <li><a href="/servicios/extraescolares.html"><i class="bi bi-trophy"></i> Extraescolares</a></li>
+            <li><a href="/servicios/extraescolares.html"><i class="bi bi-sunrise"></i> Madrugadores</a></li>
+            <li><a href="/#servicios"><i class="bi bi-bus-front"></i> Transporte</a></li>
+          </ul>
+        </li>
+
+        <li class="drawer__has-sub">
+          <button class="drawer__sub-toggle"><span><i class="bi bi-people-fill" style="margin-right:8px;color:var(--green-400)"></i>Comunidad</span><i class="bi bi-chevron-down dd-arrow"></i></button>
+          <ul class="drawer__sub">
+            <li><a href="https://dolores-dragons.vercel.app">🏀 Baloncesto NSD</a></li>
+            <li><a href="https://campamento-nsd.vercel.app">⛺ Campamento NSD</a></li>
+            <li><a href="/blog/"><i class="bi bi-newspaper"></i> Blog y Noticias</a></li>
+          </ul>
+        </li>
+
+        <li><a href="/contacto.html" class="drawer__link"><i class="bi bi-envelope"></i> Contacto</a></li>
       </ul>
-      <div class="drawer__platforms">
+
+      <div class="drawer__platforms" style="margin-top:12px;">
         <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx" target="_blank" rel="noopener noreferrer" class="drawer__platform-btn">
           <i class="bi bi-person-badge"></i> Alexia
         </a>
         <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="drawer__platform-btn">
           <i class="bi bi-tree"></i> Raíces
-        </a>
-        <a href="/infantil-nsd/" class="drawer__platform-btn">
-          <i class="bi bi-balloon-heart"></i> Infantil NSD
-        </a>
-        <a href="/campamento-nsd/" class="drawer__platform-btn">
-          <i class="bi bi-sun-fill"></i> Campamento
         </a>
       </div>
 
@@ -187,8 +229,8 @@
         <ul>
           <li><a href="https://web2.alexiaedu.com/" target="_blank" rel="noopener noreferrer">Alexia (familias)</a></li>
           <li><a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer">Raíces</a></li>
-          <li><a href="/campamento-nsd/">Campamento NSD</a></li>
-          <li><a href="/infantil-nsd/">Escuela Infantil 0–3</a></li>
+          <li><a href="https://campamento-nsd.vercel.app">Campamento NSD</a></li>
+          <li><a href="https://infantil-nsd.vercel.app">Escuela Infantil 0–3</a></li>
         </ul>
       </div>
 
@@ -315,6 +357,26 @@
 
   // Mobile CTA: simplemente referenciar el elemento, el handler unificado se ocupa
   mobileCtaEl = document.getElementById('mobileCta');
+
+  // ── Dropdown hover delay (160ms grace period before close) ──────────────
+  document.querySelectorAll('.has-dropdown').forEach(li => {
+    let closeTimer;
+    const open  = () => { clearTimeout(closeTimer); li.classList.add('is-open'); };
+    const close = () => { closeTimer = setTimeout(() => li.classList.remove('is-open'), 160); };
+    li.addEventListener('mouseenter', open);
+    li.addEventListener('mouseleave', close);
+  });
+
+  // ── Drawer accordion (expandable sections) ──────────────────────────────
+  document.querySelectorAll('.drawer__sub-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const li = btn.closest('.drawer__has-sub');
+      const wasOpen = li.classList.contains('is-open');
+      // close all
+      document.querySelectorAll('.drawer__has-sub.is-open').forEach(el => el.classList.remove('is-open'));
+      if (!wasOpen) li.classList.add('is-open');
+    });
+  });
 
   // ── Contadores animados ─────────────────────────────────
   function animateCounter(el) {
@@ -578,7 +640,7 @@
               Usamos cookies propias <strong>estrictamente necesarias</strong> para que el sitio funcione.
               Con tu permiso también usaríamos cookies <strong>analíticas</strong> y de <strong>preferencias</strong>
               para mejorar tu experiencia. Puedes personalizar tu elección o aceptar todas.
-              <a href="/cookies.html" target="_blank" rel="noopener">Política de cookies</a>.
+              <a href="/cookies.html">Política de cookies</a>.
             </p>
           </div>
           <div class="ck-btns">

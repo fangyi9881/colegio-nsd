@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Home, Newspaper, Users, Calendar, Instagram, MessageCircle, ChevronRight, Phone, LogIn, User as UserIcon, Flame } from 'lucide-react';
+import { Menu, X, Home, Newspaper, Users, Calendar, Instagram, MessageCircle, ChevronRight, LogIn, User as UserIcon, Flame } from 'lucide-react';
+import AuthModal from './AuthModal';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useBackToClose } from '../hooks/useBackToClose';
 import { useAuth } from '../contexts/AuthContext';
@@ -16,6 +17,7 @@ export default function Navbar({ onOpenJoinForm }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isGuaridaOpen, setIsGuaridaOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { currentUser, userProfile, signInWithGoogle, loading } = useAuth();
@@ -84,23 +86,25 @@ export default function Navbar({ onOpenJoinForm }: NavbarProps) {
       }
     }, 100);
   };
-  const handleLogin = async () => {
-    try {
-      await signInWithGoogle();
-    } catch (error) {
-      console.error('Login failed', error);
-    }
-  };
+  const handleLogin = () => setIsAuthOpen(true);
 
   return (
     <>
-      <nav className="fixed top-[34px] left-0 right-0 z-50 bg-background/80 backdrop-blur-md force-dark">
+      <nav
+        className="fixed top-[34px] left-0 right-0 z-50 force-dark"
+        style={{
+          background: 'rgba(0,0,0,0.82)',
+          backdropFilter: 'blur(22px)',
+          WebkitBackdropFilter: 'blur(22px)',
+          borderBottom: '1px solid rgba(212,175,55,0.14)',
+        }}
+      >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" onClick={(e) => { if (location.pathname === '/') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }} className="flex items-center gap-2 sm:gap-3">
             <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center shrink-0">
-              <img src="https://i.imgur.com/OP6BbHs.png" alt="DD Logo" className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]" referrerPolicy="no-referrer" />
+              <img src="/images/dragon-logo.png" alt="DD Logo" className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]" referrerPolicy="no-referrer" />
             </div>
             <span className="text-base sm:text-xl font-bold text-white uppercase tracking-wider block leading-tight whitespace-nowrap" style={{ fontFamily: 'var(--font-display)' }}>
               Dolores Dragons
@@ -330,16 +334,19 @@ export default function Navbar({ onOpenJoinForm }: NavbarProps) {
       </AnimatePresence>
     </nav>
 
-    {/* User Profile Modal */}
-    <UserProfileModal 
-      isOpen={isProfileModalOpen} 
-      onClose={() => setIsProfileModalOpen(false)} 
+    <UserProfileModal
+      isOpen={isProfileModalOpen}
+      onClose={() => setIsProfileModalOpen(false)}
     />
 
-    {/* Guarida Modal */}
     <GuaridaModal
       isOpen={isGuaridaOpen}
       onClose={() => setIsGuaridaOpen(false)}
+    />
+
+    <AuthModal
+      isOpen={isAuthOpen}
+      onClose={() => setIsAuthOpen(false)}
     />
     </>
   );
