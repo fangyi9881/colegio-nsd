@@ -211,4 +211,16 @@
     });
   }
 
+  // Schedule tabs
+  document.querySelectorAll('.sched-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tab.closest('.sched-tabs').querySelectorAll('.sched-tab').forEach(t => t.classList.remove('is-active'));
+      tab.closest('.sched-tabs').querySelectorAll('.sched-panel').forEach(p => p.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      const panel = document.getElementById('tab-' + target);
+      if (panel) panel.classList.add('is-active');
+    });
+  });
+
 })();

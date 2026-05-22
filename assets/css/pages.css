@@ -463,5 +463,4 @@
   .team-card:hover { border-color: var(--green-700); }
   .team-card__name { color: #ECEFEC; }
   .team-card__bio { color: var(--ink-300); }
-  .team-card__contact { color: var(--ink-300); border-top-color: #2A3A30; }
-}
+  .team-card__contact { colo

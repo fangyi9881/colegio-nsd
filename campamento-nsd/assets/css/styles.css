@@ -568,7 +568,7 @@ input, select, textarea { font: inherit; }
   letter-spacing: .5px;
 }
 .marquee-track span::after {
-  content: 'Â·';
+  content: '·';
   margin-left: 28px;
   opacity: .6;
 }
@@ -1183,4 +1183,60 @@ body { overflow-x: hidden; }
   text-decoration: none;
   transition: top .15s;
 }
+
+/* ============== TEMÁTICAS SEMANALES ============== */
+.tematicas { margin-top: 56px; text-align: center; }
+.tematicas__intro { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 20px; }
+.tematicas__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.tematica-pill {
+  display: flex; align-items: center; gap: 8px;
+  background: #fff; border: 2px solid var(--sky-light);
+  border-radius: 50px; padding: 8px 18px;
+  font-family: var(--font-fun); font-size: 1rem; color: var(--sky-dark);
+  box-shadow: 0 2px 8px rgba(10,175,219,.1);
+  transition: transform .15s, box-shadow .15s;
+}
+.tematica-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(10,175,219,.18); }
+.tematica-pill__num {
+  background: var(--sky); color: #fff;
+  font-family: var(--font-body); font-size: .72rem; font-weight: 800;
+  border-radius: 50px; padding: 2px 8px; letter-spacing: .04em;
+}
+
+/* ============== HORARIO TABLAS ============== */
+.sched-tabs { margin-top: 40px; }
+.sched-tabs__header { display: flex; gap: 8px; margin-bottom: 0; flex-wrap: wrap; }
+.sched-tab {
+  padding: 10px 22px; border: 2px solid var(--sky-light); background: #fff;
+  border-radius: 10px 10px 0 0; font-family: var(--font-fun); font-size: .95rem;
+  color: var(--sky-dark); cursor: pointer; transition: all .15s; border-bottom: none;
+}
+.sched-tab.is-active { background: var(--sky); color: #fff; border-color: var(--sky); }
+.sched-panel { display: none; background: #fff; border: 2px solid var(--sky-light); border-radius: 0 10px 10px 10px; padding: 20px; }
+.sched-panel.is-active { display: block; }
+.sched-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.sched-table { width: 100%; border-collapse: collapse; font-size: .82rem; min-width: 560px; }
+.sched-table th {
+  background: var(--sky); color: #fff; padding: 9px 10px;
+  text-align: center; font-family: var(--font-fun); font-weight: 400; font-size: .88rem;
+}
+.sched-table th:first-child { background: var(--sky-dark); border-radius: 6px 0 0 0; }
+.sched-table td { padding: 8px 10px; text-align: center; border-bottom: 1px solid #e8f5fb; color: #444; }
+.sched-table td:first-child { font-weight: 700; color: var(--sky-dark); white-space: nowrap; background: #f0faff; }
+.sched-tr--common td { background: #fffbf0 !important; color: #a07000 !important; font-weight: 600; }
+.sched-tr--common td:first-child { background: #fff3cc !important; }
+.sched-table tr:last-child td { border-bottom: none; }
+.sched-note { margin-top: 12px; font-size: .83rem; color: #666; background: #fffbf0; border-left: 3px solid var(--yellow); padding: 8px 12px; border-radius: 0 6px 6px 0; }
+
+/* ============== PRECIO A CONSULTAR ============== */
+.precio-callout {
+  display: flex; align-items: center; gap: 14px;
+  background: linear-gradient(135deg, var(--sky-light) 0%, #e8fff0 100%);
+  border: 2px solid var(--sky-light); border-radius: 14px;
+  padding: 18px 24px; margin-top: 24px; margin-bottom: 8px;
+}
+.precio-callout__icon { font-size: 2rem; flex-shrink: 0; }
+.precio-callout__text strong { display: block; font-size: 1rem; color: var(--sky-dark); margin-bottom: 2px; }
+.precio-callout__text span { font-size: .88rem; color: #555; }
+@media (max-width: 480px) { .precio-callout { flex-direction: column; text-align: center; } }
 .skip-link:focus { top: 0; }
