@@ -6,6 +6,11 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Accessibility: hide decorative Bootstrap Icons from screen readers
+  document.querySelectorAll('i[class*="bi-"]').forEach(el => el.setAttribute('aria-hidden', 'true'));
+  // Accessibility: emoji icon containers — adjacent text conveys meaning
+  document.querySelectorAll('.act-card__icon,.float-card__icon,.horario-card__icon,.porque-item__icon,.precio-callout__icon').forEach(el => el.setAttribute('aria-hidden', 'true'));
+
   // Año footer
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -41,13 +46,36 @@
       drawer.classList.toggle('is-open', open);
       burger.classList.toggle('is-open', open);
       burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
       drawer.setAttribute('aria-hidden', String(!open));
       document.body.style.overflow = open ? 'hidden' : '';
+      if (open) {
+        const firstFocusable = drawer.querySelector('a[href], button');
+        if (firstFocusable) firstFocusable.focus();
+      } else {
+        burger.focus();
+      }
     };
     burger.addEventListener('click', () => toggle(!drawer.classList.contains('is-open')));
-    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
+    drawer.querySelectorAll('a, button').forEach(el => {
+      if (el.id !== 'drawerClose') el.addEventListener('click', () => toggle(false));
+    });
+    const closeBtn = document.getElementById('drawerClose');
+    if (closeBtn) closeBtn.addEventListener('click', () => toggle(false));
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && drawer.classList.contains('is-open')) toggle(false);
+    });
+    // Focus trap inside drawer
+    drawer.addEventListener('keydown', e => {
+      if (!drawer.classList.contains('is-open') || e.key !== 'Tab') return;
+      const focusable = [...drawer.querySelectorAll('a[href], button')].filter(el => !el.hasAttribute('disabled'));
+      if (!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     });
   }
 
@@ -170,13 +198,14 @@
   if (form) {
     const btn = form.querySelector('button[type="submit"]');
     const origHTML = btn ? btn.innerHTML : '';
+    const statusEl = document.getElementById('form-status');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
 
-      // Eliminar mensajes previos
       form.querySelectorAll('.form-msg').forEach(el => el.remove());
+      if (statusEl) statusEl.textContent = '';
 
       if (btn) { btn.disabled = true; btn.innerHTML = '<span class="btn-spinner" aria-hidden="true"></span>Enviando…'; }
 
@@ -188,24 +217,25 @@
         const j = await r.json();
         if (!r.ok || !j.success) throw new Error(j.message || 'Error');
 
-        // Éxito
         if (btn) {
-          btn.innerHTML = '<i class="bi bi-check-circle-fill"></i> ¡Solicitud enviada! Te contactamos pronto 🎉';
+          btn.innerHTML = '<i class="bi bi-check-circle-fill" aria-hidden="true"></i> ¡Solicitud enviada! Te contactamos pronto';
           btn.style.cssText = 'background:var(--green-mid,#16a34a);cursor:default;';
         }
+        if (statusEl) statusEl.textContent = 'Solicitud enviada correctamente. Te contactaremos pronto.';
         form.reset();
 
         const msg = document.createElement('p');
         msg.className = 'form-msg form-msg--ok';
-        msg.innerHTML = '✅ <strong>¡Recibido!</strong> Nos pondremos en contacto contigo en menos de 48 h para confirmar disponibilidad.';
+        msg.innerHTML = '<strong>¡Recibido!</strong> Nos pondremos en contacto contigo en menos de 48 h para confirmar disponibilidad.';
         btn.insertAdjacentElement('afterend', msg);
 
       } catch {
         if (btn) { btn.disabled = false; btn.innerHTML = origHTML; btn.style.cssText = ''; }
+        if (statusEl) statusEl.textContent = 'Error al enviar. Por favor, inténtalo de nuevo o llámanos al 91 471 99 59.';
 
         const msg = document.createElement('p');
         msg.className = 'form-msg form-msg--err';
-        msg.innerHTML = '❌ <strong>Error al enviar.</strong> Inténtalo de nuevo o llámanos al <a href="tel:+34914719959" style="color:inherit;font-weight:700">91 471 99 59</a>.';
+        msg.innerHTML = '<strong>Error al enviar.</strong> Inténtalo de nuevo o llámanos al <a href="tel:+34914719959" style="color:inherit;font-weight:700">91 471 99 59</a>.';
         btn.insertAdjacentElement('afterend', msg);
       }
     });

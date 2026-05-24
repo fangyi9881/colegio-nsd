@@ -1239,4 +1239,42 @@ body { overflow-x: hidden; }
 .precio-callout__text strong { display: block; font-size: 1rem; color: var(--sky-dark); margin-bottom: 2px; }
 .precio-callout__text span { font-size: .88rem; color: #555; }
 @media (max-width: 480px) { .precio-callout { flex-direction: column; text-align: center; } }
-.skip-link:focus { top: 0; }
+.skip-link:focus { top: 0; outline: 3px solid var(--sun); outline-offset: 2px; }
+
+/* ============== ACCESIBILIDAD ============== */
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.form__required-note {
+  font-size: .82rem; color: #555;
+  margin-bottom: 12px;
+}
+
+/* Botón cerrar del drawer móvil */
+.drawer__close {
+  position: absolute; top: 16px; right: 16px;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; border: none;
+  background: rgba(255,255,255,.15); color: white;
+  font-size: 1.1rem; cursor: pointer;
+  transition: background .2s;
+}
+.drawer__close:hover { background: rgba(255,255,255,.3); }
+.drawer__close:focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; }
+
+/* prefers-reduced-motion: detiene todas las animaciones CSS */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track { animation: none; }
+  .hero__blob { animation: none; }
+  .hero__scroll-dot { animation: none; }
+}
