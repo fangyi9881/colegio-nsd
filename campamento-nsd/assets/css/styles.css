@@ -464,11 +464,12 @@ input, select, textarea { font: inherit; }
   aspect-ratio: 4/4.5;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  background:
-    linear-gradient(180deg, transparent 40%, rgba(0,0,0,.3) 100%),
-    url('https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=900&auto=format&fit=crop') center/cover;
   border: 4px solid white;
   box-shadow: 0 0 0 3px var(--sky);
+  width: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
 }
 
 /* Float cards */
@@ -985,6 +986,29 @@ input, select, textarea { font: inherit; }
   .mobile-cta-bar a i { font-size: .95rem; }
 }
 
+/* ============== GALERÍA ============== */
+.galeria__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 40px;
+}
+.galeria__img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s;
+  cursor: zoom-in;
+}
+.galeria__img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 28px rgba(0,0,0,.18);
+  z-index: 1;
+  position: relative;
+}
+.galeria__img--tall { grid-row: span 2; aspect-ratio: auto; height: 100%; }
+
 /* ============== RESPONSIVE ============== */
 @media (max-width: 980px) {
   .hero__grid { grid-template-columns: 1fr; gap: 60px; }
@@ -992,6 +1016,7 @@ input, select, textarea { font: inherit; }
   .hero__photo { aspect-ratio: 4/3.8; }
   .act-grid { grid-template-columns: repeat(2, 1fr); }
   .porque__grid { grid-template-columns: repeat(2, 1fr); }
+  .galeria__grid { grid-template-columns: repeat(3, 1fr); }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
   /* InscripciÃ³n: info de 4 a 2 columnas, form+mapa apilados */
   .inscripcion__info { grid-template-columns: repeat(2, 1fr); }
@@ -1024,6 +1049,8 @@ input, select, textarea { font: inherit; }
 @media (max-width: 540px) {
   .act-grid { grid-template-columns: 1fr; }
   .porque__grid { grid-template-columns: 1fr; }
+  .galeria__grid { grid-template-columns: repeat(2, 1fr); }
+  .galeria__img--tall { grid-row: span 1; aspect-ratio: 1; height: auto; }
   .stats__grid { grid-template-columns: repeat(2, 1fr); }
   .footer__grid { grid-template-columns: 1fr; }
   .form__row { grid-template-columns: 1fr; }
