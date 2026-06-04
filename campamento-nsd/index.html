@@ -205,6 +205,7 @@
               </div>
             </div>
           </div>
+          <img src="assets/img/camp/camp-03.jpg" alt="Actividades y talleres en el Campamento Urbano NSD Carabanchel" class="hero__photo-secondary" loading="eager" decoding="async" />
         </div>
       </div>
 
@@ -504,8 +505,8 @@
           <div class="precio-callout">
             <div class="precio-callout__icon">💶</div>
             <div class="precio-callout__text">
-              <strong>¿Cuánto cuesta? Te lo contamos al contactar</strong>
-              <span>Rellena el formulario o llámanos y te enviamos toda la información de precios y disponibilidad sin compromiso.</span>
+              <strong>¿Cuánto cuesta? Te lo contamos al llamar</strong>
+              <span>Llámanos o escríbenos y te enviamos toda la información de precios y disponibilidad sin compromiso.</span>
             </div>
           </div>
         </div>
@@ -541,60 +542,41 @@
 
         <!-- Formulario + Mapa lado a lado -->
         <div class="inscripcion__grid" id="contacto">
-          <div class="form-card" data-reveal data-reveal-delay="1">
-            <h3>Solicitar información</h3>
-            <p>Déjanos tus datos y te contactamos enseguida.</p>
-            <form class="form" id="inscripcionForm" novalidate>
-              <!-- Web3Forms — obtén tu clave gratuita en https://web3forms.com -->
-              <input type="hidden" name="access_key" value="206c83e1-a7f9-485a-9c91-46e8a892f6f4" />
-              <input type="hidden" name="subject" value="Inscripción Campamento Urbano NSD — Verano 2026" />
-              <input type="hidden" name="from_name" value="Web Campamento NSD" />
-              <input type="hidden" name="botcheck" style="display:none" />
-              <p class="form__required-note">Los campos marcados con <span aria-hidden="true">*</span><span class="visually-hidden"> asterisco</span> son obligatorios.</p>
-              <div class="form__group">
-                <label for="nombre">Nombre del padre/madre/tutor *</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required />
+          <div class="contact-card" data-reveal data-reveal-delay="1">
+            <h3>¿Hablamos?</h3>
+            <p>Escríbenos o llámanos y te explicamos todo sin compromiso.</p>
+            <div class="contact-card__actions">
+              <a href="tel:+34914719959" class="contact-action contact-action--primary">
+                <span class="contact-action__icon"><i class="bi bi-telephone-fill"></i></span>
+                <span class="contact-action__text">
+                  <strong>914 719 959</strong>
+                  <small>Llamar ahora</small>
+                </span>
+              </a>
+              <a href="tel:+34914718954" class="contact-action contact-action--primary">
+                <span class="contact-action__icon"><i class="bi bi-telephone-fill"></i></span>
+                <span class="contact-action__text">
+                  <strong>914 718 954</strong>
+                  <small>Llamar ahora</small>
+                </span>
+              </a>
+              <a href="mailto:secretaria@colegionsdolores.es" class="contact-action contact-action--secondary">
+                <span class="contact-action__icon"><i class="bi bi-envelope-fill"></i></span>
+                <span class="contact-action__text">
+                  <strong>Enviar email</strong>
+                  <small>secretaria@colegionsdolores.es</small>
+                </span>
+              </a>
+            </div>
+            <div class="contact-card__hours">
+              <i class="bi bi-clock-fill"></i>
+              <div>
+                <strong>Secretaría presencial</strong>
+                <span>L, X, V · 9:30–12:00</span>
+                <span>M, J · 15:30–18:00</span>
+                <em>Junio–Septiembre: consultar variaciones</em>
               </div>
-              <div class="form__group">
-                <label for="email">Email *</label>
-                <input type="email" id="email" name="email" placeholder="tu@email.com" required />
-              </div>
-              <div class="form__group">
-                <label for="telefono">Teléfono *</label>
-                <input type="tel" id="telefono" name="telefono" placeholder="600 000 000" required />
-              </div>
-              <div class="form__row">
-                <div class="form__group">
-                  <label for="edad">Edad del niño/a *</label>
-                  <select id="edad" name="edad" required>
-                    <option value="">Seleccionar</option>
-                    <option>3 – 5 años (Infantil)</option>
-                    <option>6 – 8 años (1º–3º Primaria)</option>
-                    <option>9 – 12 años (4º–6º Primaria)</option>
-                  </select>
-                </div>
-                <div class="form__group">
-                  <label for="horario">Horario preferido</label>
-                  <select id="horario" name="horario">
-                    <option value="">Seleccionar</option>
-                    <option>Jornada media (8–14h)</option>
-                    <option>Jornada completa (8–17h)</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form__group">
-                <label for="mensaje">Consulta o semanas de interés</label>
-                <textarea id="mensaje" name="mensaje" rows="3" placeholder="¿Qué semanas te interesan? ¿Alguna pregunta?"></textarea>
-              </div>
-              <div class="form__check">
-                <input type="checkbox" id="rgpd" name="rgpd" required />
-                <label for="rgpd">He leído y acepto la <a href="privacidad.html" target="_blank">política de privacidad</a>. Los datos facilitados serán tratados por el C.C. Ntra. Sra. de los Dolores para gestionar tu solicitud de inscripción (base legal: consentimiento, Art. 6.1.a RGPD).</label>
-              </div>
-              <button type="submit" class="btn btn--primary btn--full magnetic">
-                <i class="bi bi-send-fill"></i> Enviar solicitud
-              </button>
-              <div id="form-status" role="status" aria-live="polite" aria-atomic="true" class="visually-hidden"></div>
-            </form>
+            </div>
           </div>
 
           <div class="inscripcion__map" data-reveal data-reveal-delay="2">
