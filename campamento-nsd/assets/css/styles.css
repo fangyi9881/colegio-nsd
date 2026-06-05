@@ -480,7 +480,7 @@ input, select, textarea { font: inherit; }
   box-shadow: 0 0 0 3px var(--sky);
   width: 100%;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center 35%;
   display: block;
 }
 
