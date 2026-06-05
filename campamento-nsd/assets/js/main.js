@@ -241,6 +241,68 @@
     });
   }
 
+  // ── Lightbox galería ──────────────────────────────────────
+  (function () {
+    const imgs = [...document.querySelectorAll('.galeria__img')];
+    if (!imgs.length) return;
+
+    const lb = document.createElement('div');
+    lb.className = 'lb';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', 'Foto ampliada');
+    lb.setAttribute('aria-hidden', 'true');
+    lb.innerHTML =
+      '<button class="lb__close" aria-label="Cerrar foto"><i class="bi bi-x-lg" aria-hidden="true"></i></button>' +
+      '<button class="lb__prev" aria-label="Foto anterior"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>' +
+      '<img class="lb__img" src="" alt="" />' +
+      '<button class="lb__next" aria-label="Foto siguiente"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>';
+    document.body.appendChild(lb);
+
+    const lbImg = lb.querySelector('.lb__img');
+    let cur = 0;
+
+    const show = (idx) => {
+      cur = ((idx % imgs.length) + imgs.length) % imgs.length;
+      lbImg.src = imgs[cur].src;
+      lbImg.alt = imgs[cur].alt;
+    };
+    const open = (idx) => {
+      show(idx);
+      lb.classList.add('is-open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      lb.querySelector('.lb__close').focus();
+    };
+    const close = () => {
+      lb.classList.remove('is-open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      imgs[cur].focus();
+    };
+
+    imgs.forEach((img, i) => {
+      img.setAttribute('tabindex', '0');
+      img.setAttribute('role', 'button');
+      img.addEventListener('click', () => open(i));
+      img.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
+      });
+    });
+
+    lb.querySelector('.lb__close').addEventListener('click', close);
+    lb.querySelector('.lb__prev').addEventListener('click', () => show(cur - 1));
+    lb.querySelector('.lb__next').addEventListener('click', () => show(cur + 1));
+    lb.addEventListener('click', e => { if (e.target === lb) close(); });
+
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('is-open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') show(cur - 1);
+      if (e.key === 'ArrowRight') show(cur + 1);
+    });
+  })();
+
   // Schedule tabs
   document.querySelectorAll('.sched-tab').forEach(tab => {
     tab.addEventListener('click', () => {
