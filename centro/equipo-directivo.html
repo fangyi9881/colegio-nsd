@@ -66,110 +66,112 @@
         <p data-reveal data-reveal-delay="2">Cuatro personas al frente de las tres etapas y de la secretaría. Pulsa en cada una para ver de qué se ocupa y cómo contactarla.</p>
       </header>
 
-      <ul class="equipo" data-equipo>
-        <li class="equipo__item">
-          <button type="button" class="equipo__ficha" aria-expanded="false">
-            <span class="equipo__avatar" aria-hidden="true"><span>JB</span></span>
-            <span class="equipo__txt">
-              <span class="equipo__nombre">Jesús Blázquez del Mazo</span>
-              <span class="equipo__cargo">Director pedagógico · Infantil y Primaria</span>
-            </span>
-            <i class="bi bi-chevron-down equipo__flecha" aria-hidden="true"></i>
-          </button>
-          <div class="equipo__detalle" hidden>
-            <div class="equipo__cuerpo">
-            <p>Dirige el proyecto pedagógico de Educación Infantil y de Educación Primaria: programaciones, seguimiento de los tutores y coordinación entre las dos etapas.</p>
-            <ul class="equipo__datos">
-              <li><i class="bi bi-people" aria-hidden="true"></i> Infantil (3–6 años) y Primaria</li>
-              <li><i class="bi bi-calendar-check" aria-hidden="true"></i> Reuniones con cita previa en secretaría</li>
-            </ul>
-            <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Pedir cita</a>
-            </div>
-            <div class="hueco hueco--color-1 equipo__foto" aria-hidden="true">
-              <i class="bi bi-person-bounding-box" aria-hidden="true"></i>
-              <strong>Jesús</strong>
-            </div>
-          </div>
-        </li>
+      <div class="organigrama" data-equipo>
 
-        <li class="equipo__item">
-          <button type="button" class="equipo__ficha" aria-expanded="false">
-            <span class="equipo__avatar" aria-hidden="true"><span>JR</span></span>
-            <span class="equipo__txt">
-              <span class="equipo__nombre">Jesús Romero Domínguez</span>
-              <span class="equipo__cargo">Director pedagógico · E.S.O.</span>
-            </span>
-            <i class="bi bi-chevron-down equipo__flecha" aria-hidden="true"></i>
-          </button>
-          <div class="equipo__detalle" hidden>
-            <div class="equipo__cuerpo">
-            <p>Dirige la Educación Secundaria Obligatoria: optativas, orientación académica, evaluación y el paso de Primaria a la ESO.</p>
-            <ul class="equipo__datos">
-              <li><i class="bi bi-mortarboard" aria-hidden="true"></i> De 1.º a 4.º de la ESO</li>
-              <li><i class="bi bi-calendar-check" aria-hidden="true"></i> Reuniones con cita previa en secretaría</li>
-            </ul>
-            <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Pedir cita</a>
-            </div>
-            <div class="hueco hueco--color-2 equipo__foto" aria-hidden="true">
-              <i class="bi bi-person-bounding-box" aria-hidden="true"></i>
-              <strong>Jesús</strong>
-            </div>
-          </div>
-        </li>
+        <div class="organigrama__tier organigrama__tier--direccion">
+          <p class="organigrama__etiqueta"><i class="bi bi-diagram-2" aria-hidden="true"></i> Dirección</p>
+          <div class="organigrama__fila">
 
-        <li class="equipo__item">
-          <button type="button" class="equipo__ficha" aria-expanded="false">
-            <span class="equipo__avatar" aria-hidden="true"><span>MC</span></span>
-            <span class="equipo__txt">
-              <span class="equipo__nombre">Mariano Caballero Espericueta</span>
-              <span class="equipo__cargo">Jefe de estudios del centro</span>
-            </span>
-            <i class="bi bi-chevron-down equipo__flecha" aria-hidden="true"></i>
-          </button>
-          <div class="equipo__detalle" hidden>
-            <div class="equipo__cuerpo">
-            <p>Organiza el día a día del colegio: horarios, sustituciones, convivencia y la coordinación entre los equipos docentes de las tres etapas. Es además el representante del equipo directivo en el programa Código Escuela 4.0.</p>
-            <ul class="equipo__datos">
-              <li><i class="bi bi-diagram-3" aria-hidden="true"></i> Las tres etapas</li>
-              <li><i class="bi bi-cpu" aria-hidden="true"></i> Código Escuela 4.0</li>
-            </ul>
-            <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Pedir cita</a>
-            </div>
-            <div class="hueco hueco--color-3 equipo__foto" aria-hidden="true">
-              <i class="bi bi-person-bounding-box" aria-hidden="true"></i>
-              <strong>Mariano</strong>
-            </div>
-          </div>
-        </li>
+            <article class="dir-card dir-card--principal">
+              <button type="button" class="dir-card__ficha" aria-expanded="false" aria-controls="dir-jesus-b">
+                <span class="dir-card__medio">
+                  <span class="hueco hueco--color-1" aria-hidden="true"><i class="bi bi-person-bounding-box" aria-hidden="true"></i></span>
+                </span>
+                <span class="dir-card__cuerpo">
+                  <span class="dir-card__nombre">Jesús Blázquez del Mazo</span>
+                  <span class="dir-card__cargo">Director pedagógico · Infantil y Primaria</span>
+                  <i class="bi bi-chevron-down dir-card__flecha" aria-hidden="true"></i>
+                </span>
+              </button>
+              <div class="dir-card__detalle" id="dir-jesus-b" hidden>
+                <p>Dirige el proyecto pedagógico de Educación Infantil y de Educación Primaria: programaciones, seguimiento de los tutores y coordinación entre las dos etapas.</p>
+                <ul class="equipo__datos">
+                  <li><i class="bi bi-people" aria-hidden="true"></i> Infantil (3–6 años) y Primaria</li>
+                  <li><i class="bi bi-calendar-check" aria-hidden="true"></i> Reuniones con cita previa en secretaría</li>
+                </ul>
+                <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Pedir cita</a>
+              </div>
+            </article>
 
-        <li class="equipo__item">
-          <button type="button" class="equipo__ficha" aria-expanded="false">
-            <span class="equipo__avatar" aria-hidden="true"><span>LH</span></span>
-            <span class="equipo__txt">
-              <span class="equipo__nombre">Laura Hidalgo Macías</span>
-              <span class="equipo__cargo">Secretaria</span>
-            </span>
-            <i class="bi bi-chevron-down equipo__flecha" aria-hidden="true"></i>
-          </button>
-          <div class="equipo__detalle" hidden>
-            <div class="equipo__cuerpo">
-            <p>Es la primera puerta del colegio: admisión, matrícula, documentación, certificados, becas y cualquier gestión administrativa de las familias.</p>
-            <ul class="equipo__datos">
-              <li><i class="bi bi-telephone" aria-hidden="true"></i> <a href="tel:+34914719959">91 471 99 59</a></li>
-              <li><i class="bi bi-envelope" aria-hidden="true"></i> <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a></li>
-              <li><i class="bi bi-clock-history" aria-hidden="true"></i> <a href="/familias#secretaria">Horario de atención</a></li>
-            </ul>
-            <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Escribir a secretaría</a>
-            </div>
-            <div class="hueco hueco--color-5 equipo__foto" aria-hidden="true">
-              <i class="bi bi-person-bounding-box" aria-hidden="true"></i>
-              <strong>Laura</strong>
-            </div>
-          </div>
-        </li>
-      </ul>
+            <article class="dir-card dir-card--principal">
+              <button type="button" class="dir-card__ficha" aria-expanded="false" aria-controls="dir-jesus-r">
+                <span class="dir-card__medio">
+                  <span class="hueco hueco--color-2" aria-hidden="true"><i class="bi bi-person-bounding-box" aria-hidden="true"></i></span>
+                </span>
+                <span class="dir-card__cuerpo">
+                  <span class="dir-card__nombre">Jesús Romero Domínguez</span>
+                  <span class="dir-card__cargo">Director pedagógico · E.S.O.</span>
+                  <i class="bi bi-chevron-down dir-card__flecha" aria-hidden="true"></i>
+                </span>
+              </button>
+              <div class="dir-card__detalle" id="dir-jesus-r" hidden>
+                <p>Dirige la Educación Secundaria Obligatoria: optativas, orientación académica, evaluación y el paso de Primaria a la ESO.</p>
+                <ul class="equipo__datos">
+                  <li><i class="bi bi-mortarboard" aria-hidden="true"></i> De 1.º a 4.º de la ESO</li>
+                  <li><i class="bi bi-calendar-check" aria-hidden="true"></i> Reuniones con cita previa en secretaría</li>
+                </ul>
+                <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Pedir cita</a>
+              </div>
+            </article>
 
-      <p class="equipo__nota"><i class="bi bi-camera" aria-hidden="true"></i> Las fotografías del equipo están pendientes: mientras llegan, cada ficha se identifica con sus iniciales.</p>
+          </div>
+        </div>
+
+        <div class="organigrama__conector" aria-hidden="true"><span></span></div>
+
+        <div class="organigrama__tier organigrama__tier--gestion">
+          <p class="organigrama__etiqueta organigrama__etiqueta--suave"><i class="bi bi-diagram-3" aria-hidden="true"></i> Equipo de gestión</p>
+          <div class="organigrama__fila">
+
+            <article class="dir-card">
+              <button type="button" class="dir-card__ficha" aria-expanded="false" aria-controls="dir-mariano">
+                <span class="dir-card__medio">
+                  <span class="hueco hueco--color-3" aria-hidden="true"><i class="bi bi-person-bounding-box" aria-hidden="true"></i></span>
+                </span>
+                <span class="dir-card__cuerpo">
+                  <span class="dir-card__nombre">Mariano Caballero Espericueta</span>
+                  <span class="dir-card__cargo">Jefe de estudios del centro</span>
+                  <i class="bi bi-chevron-down dir-card__flecha" aria-hidden="true"></i>
+                </span>
+              </button>
+              <div class="dir-card__detalle" id="dir-mariano" hidden>
+                <p>Organiza el día a día del colegio: horarios, sustituciones, convivencia y la coordinación entre los equipos docentes de las tres etapas. Es además el representante del equipo directivo en el programa Código Escuela 4.0.</p>
+                <ul class="equipo__datos">
+                  <li><i class="bi bi-diagram-3" aria-hidden="true"></i> Las tres etapas</li>
+                  <li><i class="bi bi-cpu" aria-hidden="true"></i> Código Escuela 4.0</li>
+                </ul>
+                <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Pedir cita</a>
+              </div>
+            </article>
+
+            <article class="dir-card">
+              <button type="button" class="dir-card__ficha" aria-expanded="false" aria-controls="dir-laura">
+                <span class="dir-card__medio">
+                  <span class="hueco hueco--color-5" aria-hidden="true"><i class="bi bi-person-bounding-box" aria-hidden="true"></i></span>
+                </span>
+                <span class="dir-card__cuerpo">
+                  <span class="dir-card__nombre">Laura Hidalgo Macías</span>
+                  <span class="dir-card__cargo">Secretaria</span>
+                  <i class="bi bi-chevron-down dir-card__flecha" aria-hidden="true"></i>
+                </span>
+              </button>
+              <div class="dir-card__detalle" id="dir-laura" hidden>
+                <p>Es la primera puerta del colegio: admisión, matrícula, documentación, certificados, becas y cualquier gestión administrativa de las familias.</p>
+                <ul class="equipo__datos">
+                  <li><i class="bi bi-telephone" aria-hidden="true"></i> <a href="tel:+34914719959">91 471 99 59</a></li>
+                  <li><i class="bi bi-envelope" aria-hidden="true"></i> <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a></li>
+                  <li><i class="bi bi-clock-history" aria-hidden="true"></i> <a href="/familias#secretaria">Horario de atención</a></li>
+                </ul>
+                <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Escribir a secretaría</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+
+      <p class="equipo__nota"><i class="bi bi-camera" aria-hidden="true"></i> Las fotografías del equipo están pendientes: mientras llegan, cada ficha se identifica con un icono.</p>
     </div>
   </section>
 

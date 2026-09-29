@@ -2801,6 +2801,55 @@ p a:not([class]), .legal li a:not([class]) {
   .equipo__avatar { width: 46px; height: 46px; font-size: .92rem; }
 }
 
+/* Organigrama del equipo directivo: la direccion se separa del resto
+   (banda con fondo propio) y las fichas llevan la imagen por delante,
+   con los datos debajo. Mismo patron de "toda la tarjeta es el enlace"
+   que el carrusel de noticias, pero con expansion en vez de enlace. */
+.organigrama__tier--direccion {
+  background: var(--green-50, #F0FDF4); border: 1px solid var(--green-100);
+  border-radius: var(--radius-lg); padding: 30px 22px 34px;
+}
+.organigrama__etiqueta {
+  margin: 0 0 20px; text-align: center; font-size: .72rem; font-weight: 800;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--green-700);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.organigrama__etiqueta--suave { color: var(--ink-500); }
+.organigrama__fila { display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; }
+.organigrama__conector { display: flex; justify-content: center; }
+.organigrama__conector span { width: 2px; height: 30px; background: var(--border-strong); }
+.organigrama__tier--gestion { padding-top: 26px; }
+
+.dir-card {
+  width: min(260px, 100%); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  background: var(--surface-raised); overflow: hidden; box-shadow: var(--shadow-sm);
+  transition: border-color .25s, box-shadow .25s, transform .25s;
+}
+.dir-card:hover { border-color: var(--green-400); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.dir-card--principal { width: min(280px, 100%); }
+.dir-card__ficha {
+  all: unset; box-sizing: border-box; display: flex; flex-direction: column;
+  width: 100%; cursor: pointer; font-family: inherit; color: inherit;
+}
+.dir-card__medio { position: relative; aspect-ratio: 4 / 5; }
+.dir-card--principal .dir-card__medio { aspect-ratio: 1 / 1; }
+.dir-card__medio .hueco { position: absolute; inset: 0; border-radius: 0; border: 0; aspect-ratio: auto; }
+.dir-card__cuerpo { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 16px 44px 16px 18px; }
+.dir-card__nombre { font-family: var(--font-display); font-size: 1.02rem; color: var(--ink-900); line-height: 1.3; }
+.dir-card--principal .dir-card__nombre { font-size: 1.1rem; }
+.dir-card__cargo { font-size: .82rem; color: var(--ink-500); line-height: 1.4; }
+.dir-card__flecha {
+  position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+  color: var(--green-700); transition: transform .25s;
+}
+.dir-card__ficha[aria-expanded="true"] .dir-card__flecha { transform: translateY(-50%) rotate(180deg); }
+.dir-card__ficha[aria-expanded="true"] { background: var(--green-50, #F0FDF4); }
+.dir-card__detalle { padding: 2px 18px 20px; }
+.dir-card__detalle p { margin: 0 0 14px; font-size: .9rem; line-height: 1.65; color: var(--ink-600); }
+@media (max-width: 480px) {
+  .dir-card, .dir-card--principal { width: 100%; max-width: 320px; }
+}
+
 /* =========================================================
    DEPARTAMENTOS
    ---------------------------------------------------------
@@ -2848,6 +2897,54 @@ p a:not([class]), .legal li a:not([class]) {
 @media (max-width: 860px) {
   .dep__detalle { grid-template-columns: 1fr; padding: 6px 18px 18px; }
 }
+
+/* Departamentos agrupados por categoria, en paneles con imagen por
+   delante (foto real cuando existe; si no, el mismo recuadro de color
+   que el resto del ecosistema) y el icono del area como insignia. */
+.dep-categorias { display: flex; flex-direction: column; gap: 34px; }
+.dep-categoria__titulo {
+  display: flex; align-items: center; gap: 9px; margin: 0 0 16px;
+  font-family: var(--font-display); font-size: 1.05rem; color: var(--ink-800);
+  padding-bottom: 10px; border-bottom: 1px solid var(--border);
+}
+.dep-categoria__titulo i { color: var(--green-700); font-size: 1.1rem; }
+.dep-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+
+.dep-card {
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  background: var(--surface-raised); overflow: hidden;
+  transition: border-color .25s, box-shadow .25s, transform .25s;
+}
+.dep-card:hover { border-color: var(--green-400); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.dep-card__ficha {
+  all: unset; box-sizing: border-box; display: flex; flex-direction: column;
+  width: 100%; cursor: pointer; font-family: inherit; color: inherit; position: relative;
+}
+.dep-card__medio { position: relative; aspect-ratio: 4 / 3; }
+.dep-card__medio .hueco, .dep-card__medio .foto-real {
+  position: absolute; inset: 0; border-radius: 0; border: 0; aspect-ratio: auto;
+}
+.dep-card__icono {
+  position: absolute; left: 12px; bottom: 12px; width: 42px; height: 42px; border-radius: 12px;
+  display: grid; place-items: center; font-size: 1.15rem; color: #fff;
+  box-shadow: 0 4px 10px -2px rgba(0,0,0,.35);
+}
+.dep-card__icono--color-1 { background: linear-gradient(140deg, #1A7040, #5EBF78); }
+.dep-card__icono--color-2 { background: linear-gradient(140deg, #1D4E89, #5A9BD8); }
+.dep-card__icono--color-3 { background: linear-gradient(140deg, #7B2D8E, #C86BD8); }
+.dep-card__icono--color-4 { background: linear-gradient(140deg, #B23A48, #F08A8A); }
+.dep-card__icono--color-5 { background: linear-gradient(140deg, #9A5B00, #F0B95C); }
+.dep-card__icono--color-6 { background: linear-gradient(140deg, #17697E, #5FC2D8); }
+.dep-card__cuerpo { display: flex; flex-direction: column; gap: 5px; padding: 16px 40px 16px 18px; }
+.dep-card__nombre { font-family: var(--font-display); font-size: 1.02rem; color: var(--ink-900); line-height: 1.3; }
+.dep-card__resumen { font-size: .85rem; line-height: 1.55; color: var(--ink-600); }
+.dep-card__flecha {
+  position: absolute; right: 16px; top: 16px; color: var(--green-700); transition: transform .25s;
+}
+.dep-card__ficha[aria-expanded="true"] .dep-card__flecha { transform: rotate(180deg); }
+.dep-card__ficha[aria-expanded="true"] .dep-card__cuerpo { background: var(--green-50, #F0FDF4); }
+.dep-card__detalle { padding: 0 18px 18px; }
+.dep-card__detalle .dep__datos { margin: 0 0 12px; }
 
 /* Recuadros de color a la espera de foto. Mismos tonos que en la escuela
    infantil, para que todo el ecosistema hable el mismo idioma. */

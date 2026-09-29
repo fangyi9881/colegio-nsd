@@ -59,254 +59,255 @@
         <p>Cada departamento está formado por profesores especialistas que coordinan la enseñanza de su área desde Infantil/Primaria hasta 4.º de ESO.</p>
       </header>
 
-      <ul class="dep" data-acordeon>
-        <li class="dep__item">
-          <button type="button" class="dep__ficha" aria-expanded="false">
-            <span class="dep__icono dep__icono--color-1" aria-hidden="true"><i class="bi bi-translate"></i></span>
-            <span class="dep__txt">
-              <span class="dep__nombre">Inglés</span>
-              <span class="dep__resumen">Programa Bilingüe oficial de la Comunidad de Madrid, con profesorado especialista y auxiliares de conversación.</span>
+      <div class="dep-categorias">
+      <div class="dep-categoria">
+        <h3 class="dep-categoria__titulo"><i class="bi bi-translate" aria-hidden="true"></i> Idiomas</h3>
+        <div class="dep-grid" data-acordeon>
+        <article class="dep-card">
+          <button type="button" class="dep-card__ficha" aria-expanded="false" aria-controls="dep-ingles">
+            <span class="dep-card__medio">
+              <picture class="foto-real">
+                <source type="image/webp" srcset="/assets/img/fotos/cartel-bilingue-800.webp 800w, /assets/img/fotos/cartel-bilingue-1400.webp 1400w" sizes="(max-width: 640px) 90vw, 320px" />
+                <img src="/assets/img/fotos/cartel-bilingue-800.webp" alt="Placa de centro concertado bilingüe autorizado por la Comunidad de Madrid, B.O.C.M. Orden 2476/2014" width="800" height="1000" loading="lazy" decoding="async" />
+              </picture>
+              <span class="dep-card__icono dep-card__icono--color-1" aria-hidden="true"><i class="bi bi-translate"></i></span>
             </span>
-            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+            <span class="dep-card__cuerpo">
+              <span class="dep-card__nombre">Inglés</span>
+              <span class="dep-card__resumen">Programa Bilingüe oficial de la Comunidad de Madrid, con profesorado especialista y auxiliares de conversación.</span>
+            </span>
+            <i class="bi bi-chevron-down dep-card__flecha" aria-hidden="true"></i>
           </button>
-          <div class="dep__detalle" hidden>
-            <div class="dep__cuerpo">
-              <ul class="dep__datos">
+          <div class="dep-card__detalle" id="dep-ingles" hidden>
+            <ul class="dep__datos">
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Infantil, Primaria y E.S.O.</li>
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Preparación de los exámenes Cambridge</li>
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Centro examinador autorizado</li>
-              </ul>
-              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
-            </div>
-            <picture class="foto-real">
-            <source type="image/webp" srcset="/assets/img/fotos/cartel-bilingue-800.webp 800w, /assets/img/fotos/cartel-bilingue-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 460px" />
-            <img src="/assets/img/fotos/cartel-bilingue-800.webp" alt="Placa de centro concertado bilingüe autorizado por la Comunidad de Madrid, B.O.C.M. Orden 2476/2014" width="800" height="1000" loading="lazy" decoding="async" />
-          </picture>
+            </ul>
+            <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
           </div>
-        </li>
-        <li class="dep__item">
-          <button type="button" class="dep__ficha" aria-expanded="false">
-            <span class="dep__icono dep__icono--color-2" aria-hidden="true"><i class="bi bi-calculator"></i></span>
-            <span class="dep__txt">
-              <span class="dep__nombre">Matemáticas</span>
-              <span class="dep__resumen">Metodología manipulativa, resolución de problemas y razonamiento lógico desde los primeros cursos.</span>
+        </article>
+        <article class="dep-card">
+          <button type="button" class="dep-card__ficha" aria-expanded="false" aria-controls="dep-frances">
+            <span class="dep-card__medio">
+              <span class="hueco hueco--color-1" aria-hidden="true"><i class="bi bi-chat-quote" aria-hidden="true"></i></span>
+              <span class="dep-card__icono dep-card__icono--color-1" aria-hidden="true"><i class="bi bi-chat-quote"></i></span>
             </span>
-            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+            <span class="dep-card__cuerpo">
+              <span class="dep-card__nombre">Francés</span>
+              <span class="dep-card__resumen">Segunda lengua extranjera en la E.S.O., con preparación de los exámenes oficiales DELF.</span>
+            </span>
+            <i class="bi bi-chevron-down dep-card__flecha" aria-hidden="true"></i>
           </button>
-          <div class="dep__detalle" hidden>
-            <div class="dep__cuerpo">
-              <ul class="dep__datos">
+          <div class="dep-card__detalle" id="dep-frances" hidden>
+            <ul class="dep__datos">
+                <li><i class="bi bi-check2" aria-hidden="true"></i> E.S.O.</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Exámenes DELF</li>
+            </ul>
+            <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
+          </div>
+        </article>
+        </div>
+      </div>
+
+      <div class="dep-categoria">
+        <h3 class="dep-categoria__titulo"><i class="bi bi-cpu" aria-hidden="true"></i> Ciencias y Tecnología</h3>
+        <div class="dep-grid" data-acordeon>
+        <article class="dep-card">
+          <button type="button" class="dep-card__ficha" aria-expanded="false" aria-controls="dep-matematicas">
+            <span class="dep-card__medio">
+              <span class="hueco hueco--color-2" aria-hidden="true"><i class="bi bi-calculator" aria-hidden="true"></i></span>
+              <span class="dep-card__icono dep-card__icono--color-2" aria-hidden="true"><i class="bi bi-calculator"></i></span>
+            </span>
+            <span class="dep-card__cuerpo">
+              <span class="dep-card__nombre">Matemáticas</span>
+              <span class="dep-card__resumen">Metodología manipulativa, resolución de problemas y razonamiento lógico desde los primeros cursos.</span>
+            </span>
+            <i class="bi bi-chevron-down dep-card__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="dep-card__detalle" id="dep-matematicas" hidden>
+            <ul class="dep__datos">
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Primaria y E.S.O.</li>
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Material manipulativo en Primaria</li>
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Resolución de problemas</li>
-              </ul>
-              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
-            </div>
-            <div class="hueco hueco--color-2 dep__foto">
-              <i class="bi bi-camera" aria-hidden="true"></i>
-              <strong>Matemáticas</strong>
-              <span>Aquí irá una foto del departamento o de su aula.</span>
-            </div>
+            </ul>
+            <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
           </div>
-        </li>
-        <li class="dep__item">
-          <button type="button" class="dep__ficha" aria-expanded="false">
-            <span class="dep__icono dep__icono--color-3" aria-hidden="true"><i class="bi bi-flask"></i></span>
-            <span class="dep__txt">
-              <span class="dep__nombre">Ciencias</span>
-              <span class="dep__resumen">Biology &amp; Geology y Physics &amp; Chemistry, con prácticas en el laboratorio del centro.</span>
+        </article>
+        <article class="dep-card">
+          <button type="button" class="dep-card__ficha" aria-expanded="false" aria-controls="dep-ciencias">
+            <span class="dep-card__medio">
+              <span class="hueco hueco--color-3" aria-hidden="true"><i class="bi bi-flask" aria-hidden="true"></i></span>
+              <span class="dep-card__icono dep-card__icono--color-3" aria-hidden="true"><i class="bi bi-flask"></i></span>
             </span>
-            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+            <span class="dep-card__cuerpo">
+              <span class="dep-card__nombre">Ciencias</span>
+              <span class="dep-card__resumen">Biology & Geology y Physics & Chemistry, con prácticas en el laboratorio del centro.</span>
+            </span>
+            <i class="bi bi-chevron-down dep-card__flecha" aria-hidden="true"></i>
           </button>
-          <div class="dep__detalle" hidden>
-            <div class="dep__cuerpo">
-              <ul class="dep__datos">
+          <div class="dep-card__detalle" id="dep-ciencias" hidden>
+            <ul class="dep__datos">
                 <li><i class="bi bi-check2" aria-hidden="true"></i> E.S.O.</li>
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Laboratorio propio</li>
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Parte de las clases en inglés</li>
-              </ul>
-              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
-            </div>
-            <div class="hueco hueco--color-3 dep__foto">
-              <i class="bi bi-camera" aria-hidden="true"></i>
-              <strong>Ciencias</strong>
-              <span>Aquí irá una foto del departamento o de su aula.</span>
-            </div>
+            </ul>
+            <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
           </div>
-        </li>
-        <li class="dep__item">
-          <button type="button" class="dep__ficha" aria-expanded="false">
-            <span class="dep__icono dep__icono--color-4" aria-hidden="true"><i class="bi bi-book"></i></span>
-            <span class="dep__txt">
-              <span class="dep__nombre">Lengua Española</span>
-              <span class="dep__resumen">Comprensión lectora, expresión oral y escrita, y animación a la lectura con la biblioteca del centro.</span>
+        </article>
+        <article class="dep-card">
+          <button type="button" class="dep-card__ficha" aria-expanded="false" aria-controls="dep-tecnologia">
+            <span class="dep-card__medio">
+              <span class="hueco hueco--color-6" aria-hidden="true"><i class="bi bi-cpu" aria-hidden="true"></i></span>
+              <span class="dep-card__icono dep-card__icono--color-6" aria-hidden="true"><i class="bi bi-cpu"></i></span>
             </span>
-            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
-          </button>
-          <div class="dep__detalle" hidden>
-            <div class="dep__cuerpo">
-              <ul class="dep__datos">
-                <li><i class="bi bi-check2" aria-hidden="true"></i> Primaria y E.S.O.</li>
-                <li><i class="bi bi-check2" aria-hidden="true"></i> Biblioteca escolar</li>
-                <li><i class="bi bi-check2" aria-hidden="true"></i> Plan lector</li>
-              </ul>
-              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
-            </div>
-            <div class="hueco hueco--color-4 dep__foto">
-              <i class="bi bi-camera" aria-hidden="true"></i>
-              <strong>Lengua Española</strong>
-              <span>Aquí irá una foto del departamento o de su aula.</span>
-            </div>
-          </div>
-        </li>
-        <li class="dep__item">
-          <button type="button" class="dep__ficha" aria-expanded="false">
-            <span class="dep__icono dep__icono--color-5" aria-hidden="true"><i class="bi bi-globe-europe-africa"></i></span>
-            <span class="dep__txt">
-              <span class="dep__nombre">Geografía e Historia</span>
-              <span class="dep__resumen">Geography &amp; History dentro del programa bilingüe, con proyectos de patrimonio y ciudadanía.</span>
+            <span class="dep-card__cuerpo">
+              <span class="dep-card__nombre">Tecnología</span>
+              <span class="dep-card__resumen">Robótica, programación e impresión 3D en el aula taller, dentro del programa Código Escuela 4.0.</span>
             </span>
-            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+            <i class="bi bi-chevron-down dep-card__flecha" aria-hidden="true"></i>
           </button>
-          <div class="dep__detalle" hidden>
-            <div class="dep__cuerpo">
-              <ul class="dep__datos">
-                <li><i class="bi bi-check2" aria-hidden="true"></i> E.S.O.</li>
-                <li><i class="bi bi-check2" aria-hidden="true"></i> Parte de las clases en inglés</li>
-                <li><i class="bi bi-check2" aria-hidden="true"></i> Salidas culturales</li>
-              </ul>
-              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
-            </div>
-            <div class="hueco hueco--color-5 dep__foto">
-              <i class="bi bi-camera" aria-hidden="true"></i>
-              <strong>Geografía e Historia</strong>
-              <span>Aquí irá una foto del departamento o de su aula.</span>
-            </div>
-          </div>
-        </li>
-        <li class="dep__item">
-          <button type="button" class="dep__ficha" aria-expanded="false">
-            <span class="dep__icono dep__icono--color-6" aria-hidden="true"><i class="bi bi-cpu"></i></span>
-            <span class="dep__txt">
-              <span class="dep__nombre">Tecnología</span>
-              <span class="dep__resumen">Robótica, programación e impresión 3D en el aula taller, dentro del programa Código Escuela 4.0.</span>
-            </span>
-            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
-          </button>
-          <div class="dep__detalle" hidden>
-            <div class="dep__cuerpo">
-              <ul class="dep__datos">
+          <div class="dep-card__detalle" id="dep-tecnologia" hidden>
+            <ul class="dep__datos">
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Primaria y E.S.O.</li>
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Aula taller</li>
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Código Escuela 4.0</li>
-              </ul>
-              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
-            </div>
-            <div class="hueco hueco--color-6 dep__foto">
-              <i class="bi bi-camera" aria-hidden="true"></i>
-              <strong>Tecnología</strong>
-              <span>Aquí irá una foto del departamento o de su aula.</span>
-            </div>
+            </ul>
+            <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
           </div>
-        </li>
-        <li class="dep__item">
-          <button type="button" class="dep__ficha" aria-expanded="false">
-            <span class="dep__icono dep__icono--color-1" aria-hidden="true"><i class="bi bi-chat-quote"></i></span>
-            <span class="dep__txt">
-              <span class="dep__nombre">Francés</span>
-              <span class="dep__resumen">Segunda lengua extranjera en la E.S.O., con preparación de los exámenes oficiales DELF.</span>
+        </article>
+        </div>
+      </div>
+
+      <div class="dep-categoria">
+        <h3 class="dep-categoria__titulo"><i class="bi bi-journal-bookmark" aria-hidden="true"></i> Humanidades</h3>
+        <div class="dep-grid" data-acordeon>
+        <article class="dep-card">
+          <button type="button" class="dep-card__ficha" aria-expanded="false" aria-controls="dep-lengua">
+            <span class="dep-card__medio">
+              <span class="hueco hueco--color-4" aria-hidden="true"><i class="bi bi-book" aria-hidden="true"></i></span>
+              <span class="dep-card__icono dep-card__icono--color-4" aria-hidden="true"><i class="bi bi-book"></i></span>
             </span>
-            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+            <span class="dep-card__cuerpo">
+              <span class="dep-card__nombre">Lengua Española</span>
+              <span class="dep-card__resumen">Comprensión lectora, expresión oral y escrita, y animación a la lectura con la biblioteca del centro.</span>
+            </span>
+            <i class="bi bi-chevron-down dep-card__flecha" aria-hidden="true"></i>
           </button>
-          <div class="dep__detalle" hidden>
-            <div class="dep__cuerpo">
-              <ul class="dep__datos">
+          <div class="dep-card__detalle" id="dep-lengua" hidden>
+            <ul class="dep__datos">
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Primaria y E.S.O.</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Biblioteca escolar</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Plan lector</li>
+            </ul>
+            <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
+          </div>
+        </article>
+        <article class="dep-card">
+          <button type="button" class="dep-card__ficha" aria-expanded="false" aria-controls="dep-geografia">
+            <span class="dep-card__medio">
+              <span class="hueco hueco--color-5" aria-hidden="true"><i class="bi bi-globe-europe-africa" aria-hidden="true"></i></span>
+              <span class="dep-card__icono dep-card__icono--color-5" aria-hidden="true"><i class="bi bi-globe-europe-africa"></i></span>
+            </span>
+            <span class="dep-card__cuerpo">
+              <span class="dep-card__nombre">Geografía e Historia</span>
+              <span class="dep-card__resumen">Geography & History dentro del programa bilingüe, con proyectos de patrimonio y ciudadanía.</span>
+            </span>
+            <i class="bi bi-chevron-down dep-card__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="dep-card__detalle" id="dep-geografia" hidden>
+            <ul class="dep__datos">
                 <li><i class="bi bi-check2" aria-hidden="true"></i> E.S.O.</li>
-                <li><i class="bi bi-check2" aria-hidden="true"></i> Exámenes DELF</li>
-              </ul>
-              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
-            </div>
-            <div class="hueco hueco--color-1 dep__foto">
-              <i class="bi bi-camera" aria-hidden="true"></i>
-              <strong>Francés</strong>
-              <span>Aquí irá una foto del departamento o de su aula.</span>
-            </div>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Parte de las clases en inglés</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Salidas culturales</li>
+            </ul>
+            <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
           </div>
-        </li>
-        <li class="dep__item">
-          <button type="button" class="dep__ficha" aria-expanded="false">
-            <span class="dep__icono dep__icono--color-3" aria-hidden="true"><i class="bi bi-bicycle"></i></span>
-            <span class="dep__txt">
-              <span class="dep__nombre">Educación Física</span>
-              <span class="dep__resumen">Deporte escolar y hábitos saludables, con 1.500 m² de instalaciones deportivas y equipos en la liga del distrito.</span>
+        </article>
+        </div>
+      </div>
+
+      <div class="dep-categoria">
+        <h3 class="dep-categoria__titulo"><i class="bi bi-palette" aria-hidden="true"></i> Arte y Deporte</h3>
+        <div class="dep-grid" data-acordeon>
+        <article class="dep-card">
+          <button type="button" class="dep-card__ficha" aria-expanded="false" aria-controls="dep-artistico">
+            <span class="dep-card__medio">
+              <picture class="foto-real">
+                <source type="image/webp" srcset="/assets/img/fotos/mural-800.webp 800w, /assets/img/fotos/mural-1400.webp 1400w" sizes="(max-width: 640px) 90vw, 320px" />
+                <img src="/assets/img/fotos/mural-800.webp" alt="Mural colectivo pintado entre todos sobre papel continuo" width="800" height="1000" loading="lazy" decoding="async" />
+              </picture>
+              <span class="dep-card__icono dep-card__icono--color-5" aria-hidden="true"><i class="bi bi-palette"></i></span>
             </span>
-            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
-          </button>
-          <div class="dep__detalle" hidden>
-            <div class="dep__cuerpo">
-              <ul class="dep__datos">
-                <li><i class="bi bi-check2" aria-hidden="true"></i> Infantil, Primaria y E.S.O.</li>
-                <li><i class="bi bi-check2" aria-hidden="true"></i> Pista, gimnasio y patios</li>
-                <li><i class="bi bi-check2" aria-hidden="true"></i> Equipos en competición</li>
-              </ul>
-              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
-            </div>
-            <picture class="foto-real">
-            <source type="image/webp" srcset="/assets/img/fotos/gimnasio-800.webp 800w, /assets/img/fotos/gimnasio-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 460px" />
-            <img src="/assets/img/fotos/gimnasio-800.webp" alt="Gimnasio del colegio, con el suelo de parqué y las espalderas en la pared" width="800" height="1000" loading="lazy" decoding="async" />
-          </picture>
-          </div>
-        </li>
-        <li class="dep__item">
-          <button type="button" class="dep__ficha" aria-expanded="false">
-            <span class="dep__icono dep__icono--color-5" aria-hidden="true"><i class="bi bi-palette"></i></span>
-            <span class="dep__txt">
-              <span class="dep__nombre">Departamento Artístico</span>
-              <span class="dep__resumen">Música y Plástica, con proyectos artísticos que atraviesan las etapas y actividades en la Semana Cultural.</span>
+            <span class="dep-card__cuerpo">
+              <span class="dep-card__nombre">Departamento Artístico</span>
+              <span class="dep-card__resumen">Música y Plástica, con proyectos artísticos que atraviesan las etapas y actividades en la Semana Cultural.</span>
             </span>
-            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+            <i class="bi bi-chevron-down dep-card__flecha" aria-hidden="true"></i>
           </button>
-          <div class="dep__detalle" hidden>
-            <div class="dep__cuerpo">
-              <ul class="dep__datos">
+          <div class="dep-card__detalle" id="dep-artistico" hidden>
+            <ul class="dep__datos">
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Infantil, Primaria y E.S.O.</li>
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Semana Cultural</li>
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Murales y exposiciones</li>
-              </ul>
-              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
-            </div>
-            <picture class="foto-real">
-            <source type="image/webp" srcset="/assets/img/fotos/mural-800.webp 800w, /assets/img/fotos/mural-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 460px" />
-            <img src="/assets/img/fotos/mural-800.webp" alt="Mural colectivo pintado entre todos sobre papel continuo" width="800" height="1000" loading="lazy" decoding="async" />
-          </picture>
+            </ul>
+            <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
           </div>
-        </li>
-        <li class="dep__item">
-          <button type="button" class="dep__ficha" aria-expanded="false">
-            <span class="dep__icono dep__icono--color-4" aria-hidden="true"><i class="bi bi-heart-pulse"></i></span>
-            <span class="dep__txt">
-              <span class="dep__nombre">Orientación y Gabinete Psicopedagógico</span>
-              <span class="dep__resumen">Dos profesionales de la psicopedagogía: detección temprana de dificultades de aprendizaje, apoyo y orientación académica.</span>
+        </article>
+        <article class="dep-card">
+          <button type="button" class="dep-card__ficha" aria-expanded="false" aria-controls="dep-ef">
+            <span class="dep-card__medio">
+              <picture class="foto-real">
+                <source type="image/webp" srcset="/assets/img/fotos/gimnasio-800.webp 800w, /assets/img/fotos/gimnasio-1400.webp 1400w" sizes="(max-width: 640px) 90vw, 320px" />
+                <img src="/assets/img/fotos/gimnasio-800.webp" alt="Gimnasio del colegio, con el suelo de parqué y las espalderas en la pared" width="800" height="1000" loading="lazy" decoding="async" />
+              </picture>
+              <span class="dep-card__icono dep-card__icono--color-3" aria-hidden="true"><i class="bi bi-bicycle"></i></span>
             </span>
-            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+            <span class="dep-card__cuerpo">
+              <span class="dep-card__nombre">Educación Física</span>
+              <span class="dep-card__resumen">Deporte escolar y hábitos saludables, con 1.500 m² de instalaciones deportivas y equipos en la liga del distrito.</span>
+            </span>
+            <i class="bi bi-chevron-down dep-card__flecha" aria-hidden="true"></i>
           </button>
-          <div class="dep__detalle" hidden>
-            <div class="dep__cuerpo">
-              <ul class="dep__datos">
+          <div class="dep-card__detalle" id="dep-ef" hidden>
+            <ul class="dep__datos">
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Infantil, Primaria y E.S.O.</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Pista, gimnasio y patios</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Equipos en competición</li>
+            </ul>
+            <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
+          </div>
+        </article>
+        </div>
+      </div>
+
+      <div class="dep-categoria">
+        <h3 class="dep-categoria__titulo"><i class="bi bi-heart-pulse" aria-hidden="true"></i> Orientación y Apoyo</h3>
+        <div class="dep-grid" data-acordeon>
+        <article class="dep-card">
+          <button type="button" class="dep-card__ficha" aria-expanded="false" aria-controls="dep-orientacion">
+            <span class="dep-card__medio">
+              <span class="hueco hueco--color-4" aria-hidden="true"><i class="bi bi-heart-pulse" aria-hidden="true"></i></span>
+              <span class="dep-card__icono dep-card__icono--color-4" aria-hidden="true"><i class="bi bi-heart-pulse"></i></span>
+            </span>
+            <span class="dep-card__cuerpo">
+              <span class="dep-card__nombre">Orientación y Gabinete Psicopedagógico</span>
+              <span class="dep-card__resumen">Dos profesionales de la psicopedagogía: detección temprana de dificultades de aprendizaje, apoyo y orientación académica.</span>
+            </span>
+            <i class="bi bi-chevron-down dep-card__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="dep-card__detalle" id="dep-orientacion" hidden>
+            <ul class="dep__datos">
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Las tres etapas</li>
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Detección temprana</li>
                 <li><i class="bi bi-check2" aria-hidden="true"></i> Orientación académica</li>
-              </ul>
-              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
-            </div>
-            <div class="hueco hueco--color-4 dep__foto">
-              <i class="bi bi-camera" aria-hidden="true"></i>
-              <strong>Orientación y Gabinete Psicopedagógico</strong>
-              <span>Aquí irá una foto del departamento o de su aula.</span>
-            </div>
+            </ul>
+            <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
           </div>
-        </li>
-      </ul>
+        </article>
+        </div>
+      </div>
+      </div>
     </div>
   </section>
 
