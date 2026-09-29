@@ -172,7 +172,7 @@ window.NSD_NOTICIAS = [
     categoria: 'comunicados',
     tipo: 'comunicado',
     resumen: 'Las circulares y avisos del colegio se envían a través de la plataforma Alexia. Conviene tener la app instalada y las notificaciones activadas.',
-    url: 'https://web2.alexiaedu.com/ACWeb/LogOn.aspx'
+    texto: 'Alexia es la plataforma oficial de comunicación del centro: convocatorias, autorizaciones, notas y avisos del día a día llegan ahí, no por email ni por WhatsApp. Se puede entrar desde la propia web del colegio (enlace en el pie de página) o desde la app móvil, disponible para iOS y Android.'
   },
   {
     fecha: '2024-04-04',
