@@ -100,8 +100,17 @@
       background: #0B3A18; color: #fff; border-right: 1px solid rgba(255,255,255,.16);
     }
     .menu-tabla thead th:last-child { border-right: 0; }
-    .menu-dia { display: block; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: #D6E8DA; }
+    .menu-dia { display: flex; align-items: center; gap: 6px; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: #D6E8DA; }
     .menu-num { display: block; font-family: var(--font-display); font-size: 1.25rem; line-height: 1.1; }
+    /* La columna de hoy se destaca en dorado (mismo tono que la insignia
+       "Nuevo" de las noticias) y se recalcula sola en cada carga: no hay
+       fecha fija que actualizar a mano. */
+    .menu-tabla thead th.es-hoy { background: var(--gold-400); }
+    .menu-tabla thead th.es-hoy .menu-dia, .menu-tabla thead th.es-hoy .menu-num { color: #241a00; }
+    .menu-hoy-eti {
+      display: inline-flex; align-items: center; padding: 1px 7px; border-radius: 999px;
+      background: #241a00; color: var(--gold-400); font-size: .62rem; font-weight: 800; letter-spacing: .06em;
+    }
     .menu-tabla tbody th {
       width: 128px; padding: 11px 14px; text-align: left; vertical-align: top;
       font-size: .76rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
@@ -114,10 +123,12 @@
     }
     .menu-tabla tbody td:last-child { border-right: 0; }
     .menu-tabla tbody tr:last-child td, .menu-tabla tbody tr:last-child th { border-bottom: 0; }
+    .menu-tabla tbody td.es-hoy { background: var(--gold-50, #FFFBEB); border-right-color: var(--gold-200, #FDE68A); border-left: 1px solid var(--gold-200, #FDE68A); }
     .menu-vacia { color: var(--ink-300); }
     .menu-extra { display: block; font-size: .8rem; color: var(--ink-500); }
     .menu-extra em { font-style: normal; }   /* sin opacidad: bajaba del 4.5:1 */
     .menu-energia td { background: var(--surface-sunken); font-size: .8rem; color: var(--ink-600); }
+    .menu-energia td.es-hoy { background: var(--gold-50, #FFFBEB); }
     .menu-energia strong { color: var(--ink-900); font-size: .92rem; }
     .menu-macros { display: block; font-size: .72rem; color: var(--ink-500); }
     .menu-pie { margin-top: 6px; font-size: .86rem; color: var(--ink-500); }
