@@ -2,25 +2,37 @@
 <html lang="es" data-page="centro">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script src="/assets/js/theme-init.js"></script>
   <title>Equipo Directivo · Colegio NSD</title>
   <meta name="description" content="Conoce al Equipo Directivo del Colegio Nuestra Señora de los Dolores: dirección, jefaturas de etapa, coordinación pedagógica y pastoral." />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="theme-color" content="#1FA42C" />
-  <link rel="canonical" href="https://www.colegionsdolores.es/centro/equipo-directivo.html" />
+  <link rel="canonical" href="https://colegio-nsd.vercel.app/centro/equipo-directivo" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Equipo Directivo · Colegio NSD" />
   <meta property="og:description" content="Las personas que lideran el proyecto educativo del Colegio NSD." />
   <link rel="icon" type="image/png" href="/assets/img/logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
   <link rel="stylesheet" href="/assets/css/pages.css" />
+  <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
+  <meta property="og:url" content="https://colegio-nsd.vercel.app/centro/equipo-directivo" />
+  <meta property="og:image" content="https://colegio-nsd.vercel.app/assets/img/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Colegio NSD" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
 </head>
 <body id="top">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
   <div id="site-header"></div>
+
+  <main id="contenido">
 
   <!-- HERO -->
   <section class="page-hero">
@@ -28,7 +40,7 @@
       <div>
         <nav class="crumbs" aria-label="Migas de pan">
           <a href="/">Inicio</a> <i class="bi bi-chevron-right"></i>
-          <a href="/centro/sobre-nosotros.html">Centro</a> <i class="bi bi-chevron-right"></i>
+          <a href="/centro/sobre-nosotros">Centro</a> <i class="bi bi-chevron-right"></i>
           <span>Equipo Directivo</span>
         </nav>
         <h1>Las personas que lideran el proyecto.</h1>
@@ -36,169 +48,172 @@
       </div>
       <div class="page-hero__meta">
         <span class="meta"><i class="bi bi-mortarboard"></i> +180 años de experiencia conjunta</span>
-        <span class="meta"><i class="bi bi-people"></i> 8 miembros</span>
+        <span class="meta"><i class="bi bi-people" aria-hidden="true"></i> 4 personas</span>
         <span class="meta"><i class="bi bi-calendar-check"></i> Atención directa a familias</span>
       </div>
     </div>
   </section>
 
-  <!-- DIRECTOR DESTACADO -->
-  <section class="section">
+  <!-- EQUIPO DIRECTIVO
+       Los nombres y cargos son los que publica el propio centro. Las fichas
+       se despliegan al pulsarlas: la foto entrará donde ahora van las
+       iniciales, en cuanto el colegio las mande. -->
+  <section class="section" id="equipo-directivo">
     <div class="container">
       <header class="section__head">
-        <span class="eyebrow">Dirección</span>
-        <h2>Al frente del proyecto educativo</h2>
-        <p>La dirección del centro es el punto de contacto principal entre el proyecto educativo, el equipo docente y las familias.</p>
+        <span class="eyebrow" data-reveal>Equipo directivo</span>
+        <h2 data-reveal data-reveal-delay="1">Quién dirige el colegio</h2>
+        <p data-reveal data-reveal-delay="2">Cuatro personas al frente de las tres etapas y de la secretaría. Pulsa en cada una para ver de qué se ocupa y cómo contactarla.</p>
       </header>
 
-      <article class="team-lead">
-        <div class="team-lead__photo" aria-hidden="true">
-          <!-- TODO: reemplazar por <img src="/assets/img/equipo/director.jpg" alt="Marta Álvarez Pérez"> -->
-          <span class="team-lead__initials">MA</span>
-        </div>
-        <div class="team-lead__body">
-          <span class="eyebrow">Directora General</span>
-          <h3>Marta Álvarez Pérez</h3>
-          <p class="team-lead__lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac volutpat lectus. Educadora desde hace más de 25 años, lidera el proyecto pedagógico del Colegio NSD desde 2018, con el foco puesto en una educación que combina exigencia académica, formación humana y cercanía con las familias.</p>
-          <ul class="team-lead__facts">
-            <li><i class="bi bi-mortarboard-fill"></i> Lic. en Pedagogía · UCM</li>
-            <li><i class="bi bi-award-fill"></i> Máster en Dirección de Centros Educativos</li>
-            <li><i class="bi bi-clock-history"></i> 25+ años de experiencia docente</li>
-            <li><i class="bi bi-translate"></i> Bilingüe ES / EN</li>
-          </ul>
-          <div class="team-lead__actions">
-            <a href="mailto:direccion@colegionsdolores.es" class="btn btn--primary"><i class="bi bi-envelope"></i> Contactar con dirección</a>
-            <a href="/contacto.html" class="btn btn--ghost"><i class="bi bi-calendar-check"></i> Solicitar reunión</a>
+      <ul class="equipo" data-equipo>
+        <li class="equipo__item">
+          <button type="button" class="equipo__ficha" aria-expanded="false">
+            <span class="equipo__avatar" aria-hidden="true"><span>JB</span></span>
+            <span class="equipo__txt">
+              <span class="equipo__nombre">Jesús Blázquez del Mazo</span>
+              <span class="equipo__cargo">Director pedagógico · Infantil y Primaria</span>
+            </span>
+            <i class="bi bi-chevron-down equipo__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="equipo__detalle" hidden>
+            <div class="equipo__cuerpo">
+            <p>Dirige el proyecto pedagógico de Educación Infantil y de Educación Primaria: programaciones, seguimiento de los tutores y coordinación entre las dos etapas.</p>
+            <ul class="equipo__datos">
+              <li><i class="bi bi-people" aria-hidden="true"></i> Infantil (3–6 años) y Primaria</li>
+              <li><i class="bi bi-calendar-check" aria-hidden="true"></i> Reuniones con cita previa en secretaría</li>
+            </ul>
+            <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Pedir cita</a>
+            </div>
+            <div class="hueco hueco--color-1 equipo__foto" aria-hidden="true">
+              <i class="bi bi-person-bounding-box" aria-hidden="true"></i>
+              <strong>Jesús</strong>
+            </div>
           </div>
-        </div>
-      </article>
+        </li>
+
+        <li class="equipo__item">
+          <button type="button" class="equipo__ficha" aria-expanded="false">
+            <span class="equipo__avatar" aria-hidden="true"><span>JR</span></span>
+            <span class="equipo__txt">
+              <span class="equipo__nombre">Jesús Romero Domínguez</span>
+              <span class="equipo__cargo">Director pedagógico · E.S.O.</span>
+            </span>
+            <i class="bi bi-chevron-down equipo__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="equipo__detalle" hidden>
+            <div class="equipo__cuerpo">
+            <p>Dirige la Educación Secundaria Obligatoria: optativas, orientación académica, evaluación y el paso de Primaria a la ESO.</p>
+            <ul class="equipo__datos">
+              <li><i class="bi bi-mortarboard" aria-hidden="true"></i> De 1.º a 4.º de la ESO</li>
+              <li><i class="bi bi-calendar-check" aria-hidden="true"></i> Reuniones con cita previa en secretaría</li>
+            </ul>
+            <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Pedir cita</a>
+            </div>
+            <div class="hueco hueco--color-2 equipo__foto" aria-hidden="true">
+              <i class="bi bi-person-bounding-box" aria-hidden="true"></i>
+              <strong>Jesús</strong>
+            </div>
+          </div>
+        </li>
+
+        <li class="equipo__item">
+          <button type="button" class="equipo__ficha" aria-expanded="false">
+            <span class="equipo__avatar" aria-hidden="true"><span>MC</span></span>
+            <span class="equipo__txt">
+              <span class="equipo__nombre">Mariano Caballero Espericueta</span>
+              <span class="equipo__cargo">Jefe de estudios del centro</span>
+            </span>
+            <i class="bi bi-chevron-down equipo__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="equipo__detalle" hidden>
+            <div class="equipo__cuerpo">
+            <p>Organiza el día a día del colegio: horarios, sustituciones, convivencia y la coordinación entre los equipos docentes de las tres etapas. Es además el representante del equipo directivo en el programa Código Escuela 4.0.</p>
+            <ul class="equipo__datos">
+              <li><i class="bi bi-diagram-3" aria-hidden="true"></i> Las tres etapas</li>
+              <li><i class="bi bi-cpu" aria-hidden="true"></i> Código Escuela 4.0</li>
+            </ul>
+            <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Pedir cita</a>
+            </div>
+            <div class="hueco hueco--color-3 equipo__foto" aria-hidden="true">
+              <i class="bi bi-person-bounding-box" aria-hidden="true"></i>
+              <strong>Mariano</strong>
+            </div>
+          </div>
+        </li>
+
+        <li class="equipo__item">
+          <button type="button" class="equipo__ficha" aria-expanded="false">
+            <span class="equipo__avatar" aria-hidden="true"><span>LH</span></span>
+            <span class="equipo__txt">
+              <span class="equipo__nombre">Laura Hidalgo Macías</span>
+              <span class="equipo__cargo">Secretaria</span>
+            </span>
+            <i class="bi bi-chevron-down equipo__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="equipo__detalle" hidden>
+            <div class="equipo__cuerpo">
+            <p>Es la primera puerta del colegio: admisión, matrícula, documentación, certificados, becas y cualquier gestión administrativa de las familias.</p>
+            <ul class="equipo__datos">
+              <li><i class="bi bi-telephone" aria-hidden="true"></i> <a href="tel:+34914719959">91 471 99 59</a></li>
+              <li><i class="bi bi-envelope" aria-hidden="true"></i> <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a></li>
+              <li><i class="bi bi-clock-history" aria-hidden="true"></i> <a href="/familias#secretaria">Horario de atención</a></li>
+            </ul>
+            <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Escribir a secretaría</a>
+            </div>
+            <div class="hueco hueco--color-5 equipo__foto" aria-hidden="true">
+              <i class="bi bi-person-bounding-box" aria-hidden="true"></i>
+              <strong>Laura</strong>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <p class="equipo__nota"><i class="bi bi-camera" aria-hidden="true"></i> Las fotografías del equipo están pendientes: mientras llegan, cada ficha se identifica con sus iniciales.</p>
     </div>
   </section>
 
-  <!-- GRID EQUIPO -->
-  <section class="section section--soft" id="equipo-directivo">
+  <!-- II CICLO DE INFANTIL -->
+  <section class="section section--soft" id="infantil">
     <div class="container">
       <header class="section__head">
-        <span class="eyebrow">Equipo Directivo</span>
-        <h2>Jefaturas, coordinación y administración</h2>
-        <p>Un equipo coordinado en torno a un mismo proyecto. Cada miembro lidera un área y mantiene una comunicación cercana con las familias.</p>
+        <span class="eyebrow" data-reveal>Educación Infantil</span>
+        <h2 data-reveal data-reveal-delay="1">El equipo del segundo ciclo</h2>
+        <p data-reveal data-reveal-delay="2">De 3 a 6 años, con una coordinadora de etapa y las tutoras de cada aula.</p>
       </header>
 
-      <div class="team-grid">
-        <article class="team-card">
-          <div class="team-card__photo" aria-hidden="true">
-            <span class="team-card__initials">JR</span>
-          </div>
-          <div class="team-card__body">
-            <h4 class="team-card__name">Javier Ruiz Castaño</h4>
-            <p class="team-card__role">Director Pedagógico</p>
-            <p class="team-card__bio">Coordina el proyecto pedagógico global y vela por la coherencia metodológica entre etapas. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <a href="mailto:pedagogica@colegionsdolores.es" class="team-card__contact">
-              <i class="bi bi-envelope"></i> pedagogica@colegionsdolores.es
-            </a>
-          </div>
-        </article>
-
-        <article class="team-card">
-          <div class="team-card__photo" aria-hidden="true">
-            <span class="team-card__initials">SH</span>
-          </div>
-          <div class="team-card__body">
-            <h4 class="team-card__name">Sonia Hervás Lobo</h4>
-            <p class="team-card__role">Jefa de Estudios · Infantil</p>
-            <p class="team-card__bio">Lidera el proyecto de la etapa de Educación Infantil (1-6 años). Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-            <a href="mailto:infantil@colegionsdolores.es" class="team-card__contact">
-              <i class="bi bi-envelope"></i> infantil@colegionsdolores.es
-            </a>
-          </div>
-        </article>
-
-        <article class="team-card">
-          <div class="team-card__photo" aria-hidden="true">
-            <span class="team-card__initials">RM</span>
-          </div>
-          <div class="team-card__body">
-            <h4 class="team-card__name">Raquel Muñoz Soler</h4>
-            <p class="team-card__role">Jefa de Estudios · Primaria</p>
-            <p class="team-card__bio">Coordina los seis cursos de Primaria, el plan lector y el seguimiento académico. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <a href="mailto:primaria@colegionsdolores.es" class="team-card__contact">
-              <i class="bi bi-envelope"></i> primaria@colegionsdolores.es
-            </a>
-          </div>
-        </article>
-
-        <article class="team-card">
-          <div class="team-card__photo" aria-hidden="true">
-            <span class="team-card__initials">LF</span>
-          </div>
-          <div class="team-card__body">
-            <h4 class="team-card__name">Luis Fernández Ortega</h4>
-            <p class="team-card__role">Jefe de Estudios · Secundaria</p>
-            <p class="team-card__bio">Responsable del proyecto académico de la ESO y el acompañamiento tutorial de las familias. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <a href="mailto:eso@colegionsdolores.es" class="team-card__contact">
-              <i class="bi bi-envelope"></i> eso@colegionsdolores.es
-            </a>
-          </div>
-        </article>
-
-        <article class="team-card">
-          <div class="team-card__photo" aria-hidden="true">
-            <span class="team-card__initials">SL</span>
-          </div>
-          <div class="team-card__body">
-            <h4 class="team-card__name">Sergio López Vidal</h4>
-            <p class="team-card__role">Coord. Programa Bilingüe</p>
-            <p class="team-card__bio">Coordina el Programa Bilingüe oficial de la CAM, los auxiliares de conversación y los exámenes Cambridge. Lorem ipsum dolor sit amet.</p>
-            <a href="mailto:bilingual@colegionsdolores.es" class="team-card__contact">
-              <i class="bi bi-envelope"></i> bilingual@colegionsdolores.es
-            </a>
-          </div>
-        </article>
-
-        <article class="team-card">
-          <div class="team-card__photo" aria-hidden="true">
-            <span class="team-card__initials">PT</span>
-          </div>
-          <div class="team-card__body">
-            <h4 class="team-card__name">Pilar Torres Galán</h4>
-            <p class="team-card__role">Orientación y Pastoral</p>
-            <p class="team-card__bio">Lidera el Departamento de Orientación y el plan de Pastoral, atención emocional y convivencia. Lorem ipsum dolor sit amet, consectetur.</p>
-            <a href="mailto:orientacion@colegionsdolores.es" class="team-card__contact">
-              <i class="bi bi-envelope"></i> orientacion@colegionsdolores.es
-            </a>
-          </div>
-        </article>
-
-        <article class="team-card">
-          <div class="team-card__photo" aria-hidden="true">
-            <span class="team-card__initials">AG</span>
-          </div>
-          <div class="team-card__body">
-            <h4 class="team-card__name">Alberto Gil Romero</h4>
-            <p class="team-card__role">Administración y Secretaría</p>
-            <p class="team-card__bio">Gestión administrativa del centro, expedientes, matrículas, becas y comunicación con la Consejería. Lorem ipsum dolor sit amet.</p>
-            <a href="mailto:secretaria@colegionsdolores.es" class="team-card__contact">
-              <i class="bi bi-envelope"></i> secretaria@colegionsdolores.es
-            </a>
-          </div>
-        </article>
-
-        <article class="team-card">
-          <div class="team-card__photo" aria-hidden="true">
-            <span class="team-card__initials">CN</span>
-          </div>
-          <div class="team-card__body">
-            <h4 class="team-card__name">Cristina Navarro Sanz</h4>
-            <p class="team-card__role">Coord. Innovación y TIC</p>
-            <p class="team-card__bio">Coordina el plan digital, robótica, aulas digitales y la formación tecnológica del claustro. Lorem ipsum dolor sit amet.</p>
-            <a href="mailto:innovacion@colegionsdolores.es" class="team-card__contact">
-              <i class="bi bi-envelope"></i> innovacion@colegionsdolores.es
-            </a>
-          </div>
-        </article>
-      </div>
+      <ul class="equipo equipo--simple">
+        <li class="equipo__item equipo__item--plano">
+          <span class="equipo__avatar" aria-hidden="true"><span>LR</span></span>
+          <span class="equipo__txt">
+            <span class="equipo__nombre">Laura Ruiz Yerpes</span>
+            <span class="equipo__cargo">Coordinadora de Educación Infantil</span>
+          </span>
+        </li>
+        <li class="equipo__item equipo__item--plano">
+          <span class="equipo__avatar" aria-hidden="true"><span>NB</span></span>
+          <span class="equipo__txt"><span class="equipo__nombre">Noelia del Burgo Rodríguez</span><span class="equipo__cargo">Profesora</span></span>
+        </li>
+        <li class="equipo__item equipo__item--plano">
+          <span class="equipo__avatar" aria-hidden="true"><span>MC</span></span>
+          <span class="equipo__txt"><span class="equipo__nombre">M.ª Carmen Caballero Puerto</span><span class="equipo__cargo">Profesora</span></span>
+        </li>
+        <li class="equipo__item equipo__item--plano">
+          <span class="equipo__avatar" aria-hidden="true"><span>YG</span></span>
+          <span class="equipo__txt"><span class="equipo__nombre">Yolanda González Burgos</span><span class="equipo__cargo">Profesora</span></span>
+        </li>
+        <li class="equipo__item equipo__item--plano">
+          <span class="equipo__avatar" aria-hidden="true"><span>EP</span></span>
+          <span class="equipo__txt"><span class="equipo__nombre">Elena Peinado del Río</span><span class="equipo__cargo">Profesora</span></span>
+        </li>
+        <li class="equipo__item equipo__item--plano">
+          <span class="equipo__avatar" aria-hidden="true"><span>JS</span></span>
+          <span class="equipo__txt"><span class="equipo__nombre">Jennifer Soto Genova</span><span class="equipo__cargo">Profesora</span></span>
+        </li>
+      </ul>
     </div>
   </section>
+
 
   <!-- COMPROMISO -->
   <section class="section">
@@ -212,8 +227,8 @@
       <div class="values">
         <div class="value">
           <i class="bi bi-shield-check"></i>
-          <h4>Cercanía con las familias</h4>
-          <p>Atención personalizada, reuniones bajo cita y respuesta a las consultas en menos de 48 horas laborables.</p>
+          <h3>Cercanía con las familias</h3>
+          <p>Atención personalizada, reuniones bajo cita y respuesta a las consultas en menos de 24 horas hábiles.</p>
         </div>
         <div class="value">
           <i class="bi bi-mortarboard"></i>
@@ -238,13 +253,16 @@
         <p>Solicita una visita personalizada con el equipo directivo y resuelve cualquier duda sobre nuestro proyecto educativo.</p>
       </div>
       <div class="cta__actions">
-        <a href="/contacto.html" class="btn btn--primary btn--lg"><i class="bi bi-calendar-check"></i> Solicitar visita</a>
-        <a href="/admision.html" class="btn btn--ghost btn--lg">Ver admisión</a>
+        <a href="/contacto" class="btn btn--primary btn--lg"><i class="bi bi-chat-dots" aria-hidden="true"></i> Contacto</a>
+        <a href="/admision" class="btn btn--ghost btn--lg"><i class="bi bi-mortarboard" aria-hidden="true"></i> Admisión</a>
       </div>
     </div>
   </section>
+  </main>
 
   <div id="site-footer"></div>
+  <script src="/assets/js/equipo.js" defer></script>
   <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/nsd-arriba.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es" data-page="legal">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script src="/assets/js/theme-init.js"></script>
+  <title>Página no encontrada · Colegio NSD</title>
+  <meta name="description" content="Esta página del Colegio NSD no existe o ha cambiado de sitio. Desde aquí podéis ir a admisión, etapas, servicios o contacto." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="icon" type="image/png" href="/assets/img/logo.png" />
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
+  <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
+  <style>
+    .perdido { max-width: 720px; margin: 90px auto 110px; padding: 0 24px; text-align: center; }
+    @media (max-width: 720px) { .perdido { margin: 60px auto 80px; padding: 0 20px; } }
+    .perdido__num {
+      font-family: 'Fraunces', serif; font-weight: 900; line-height: 1;
+      font-size: clamp(4.5rem, 16vw, 8rem); letter-spacing: -.04em;
+      background: linear-gradient(120deg, var(--green-700) 0%, var(--oro-titular, #B87900) 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      margin-bottom: 10px;
+    }
+    .perdido h1 { font-family: 'Fraunces', serif; font-size: clamp(1.5rem, 4vw, 2.1rem); color: var(--ink-900); margin-bottom: 14px; }
+    .perdido p:not(.perdido__num) { font-size: 1rem; color: var(--ink-600); line-height: 1.8; max-width: 52ch; margin: 0 auto 30px; }
+    .perdido__botones { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 44px; }
+    .perdido__mapa { text-align: left; border-top: 1px solid var(--border); padding-top: 30px; }
+    .perdido__mapa h2 { font-family: 'Fraunces', serif; font-size: 1.05rem; color: var(--ink-900); margin-bottom: 16px; text-align: center; }
+    .perdido__lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+    .perdido__lista a {
+      display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 12px 16px;
+      border: 1px solid var(--border); border-radius: 12px; background: var(--surface-raised);
+      color: var(--ink-800); text-decoration: none; font-weight: 600; font-size: .92rem;
+      transition: border-color .2s, transform .15s;
+    }
+    .perdido__lista a:hover { border-color: var(--green-700); transform: translateY(-1px); }
+    .perdido__lista i { color: var(--green-700); font-size: 1.1rem; }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div id="site-header"></div>
+
+  <main class="perdido" id="contenido">
+    <p class="perdido__num" aria-hidden="true">404</p>
+    <h1>Esta página no existe</h1>
+    <p>Puede que el enlace esté anticuado o que la dirección tenga una errata. Desde aquí llegas a lo que se suele buscar; si no, secretaría te ayuda.</p>
+    <div class="perdido__botones">
+      <a class="btn btn--primary" href="/"><i class="bi bi-house" aria-hidden="true"></i> Ir al inicio</a>
+      <a class="btn btn--ghost" href="/contacto"><i class="bi bi-chat-dots" aria-hidden="true"></i> Escribir a secretaría</a>
+    </div>
+    <div class="perdido__mapa">
+      <h2>O ve directamente a…</h2>
+      <ul class="perdido__lista">
+        <li><a href="/admision"><i class="bi bi-mortarboard" aria-hidden="true"></i> Admisión</a></li>
+        <li><a href="/etapas"><i class="bi bi-diagram-3" aria-hidden="true"></i> Etapas</a></li>
+        <li><a href="/servicios"><i class="bi bi-cup-hot" aria-hidden="true"></i> Servicios</a></li>
+        <li><a href="/familias/documentacion"><i class="bi bi-file-earmark-text" aria-hidden="true"></i> Documentación</a></li>
+        <li><a href="/centro"><i class="bi bi-building" aria-hidden="true"></i> El centro</a></li>
+        <li><a href="/blog"><i class="bi bi-newspaper" aria-hidden="true"></i> Blog y noticias</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/nsd-arriba.js" defer></script>
+</body>
+</html>

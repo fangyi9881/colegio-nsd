@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script src="/assets/js/theme-init.js"></script>
+  <title>Madrugadores · Colegio NSD</title>
+  <meta name="description" content="Madrugadores en el Colegio NSD: entrada desde las 7:30, con desayuno opcional y bilingüismo incluido, 12 € el día, para todas las etapas." />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#F5F1EA" />
+  <link rel="canonical" href="https://colegio-nsd.vercel.app/servicios/madrugadores" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Madrugadores · Colegio NSD" />
+  <meta property="og:description" content="Madrugadores en el Colegio NSD: entrada desde las 7:30, con desayuno opcional y bilingüismo incluido, 12 € el día, para todas las etapas." />
+  <meta property="og:url" content="https://colegio-nsd.vercel.app/servicios/madrugadores" />
+  <meta property="og:image" content="https://colegio-nsd.vercel.app/assets/img/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Colegio NSD" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/png" href="/assets/img/logo.png" />
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
+  <link rel="stylesheet" href="/assets/css/pages.css" />
+  <link rel="stylesheet" href="/assets/css/secciones.css" />
+
+  <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
+</head>
+<body id="top">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div id="site-header"></div>
+
+  <main id="contenido">
+
+  <section class="page-hero">
+    <div class="container page-hero__inner">
+      <div>
+        <nav class="crumbs" aria-label="Migas de pan"><a href="/">Inicio</a> <i class="bi bi-chevron-right" aria-hidden="true"></i> <span>Madrugadores</span></nav>
+        <h1>Madrugadores</h1>
+        <p>Entrada desde las 7:30, con desayuno opcional y una hora de inglés antes de clase. Para que el horario del trabajo no decida el del colegio.</p>
+      </div>
+      <div class="page-hero__meta">
+        <span class="meta"><i class="bi bi-sunrise" aria-hidden="true"></i> Desde las 7:30</span>
+        <span class="meta"><i class="bi bi-tag" aria-hidden="true"></i> 12 € el día</span>
+        <span class="meta"><i class="bi bi-people" aria-hidden="true"></i> Todas las etapas</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container madru-hero">
+      <div>
+        <h2>Una mañana sin prisas</h2>
+        <p>Los alumnos llegan al colegio desde las 7:30, con desayuno opcional. En Infantil y Primaria, a las 8:55 empieza el bilingüismo extraescolar y a las 9:50 la clase, sin salir del edificio. En ESO, las clases empiezan a las 8:30.</p>
+        <ol class="jornada" aria-label="Una mañana de Primaria con Madrugadores">
+          <li class="es-servicio"><span class="jornada__hora">7:30</span><span class="jornada__punto" aria-hidden="true"></span><span class="jornada__txt"><strong>Llegada y desayuno</strong><span>Entrada en el colegio, con desayuno opcional, antes del horario de clase.</span></span></li>
+          <li class="es-servicio"><span class="jornada__hora">8:55</span><span class="jornada__punto" aria-hidden="true"></span><span class="jornada__txt"><strong>Una hora de inglés</strong><span>Infantil: vocabulario, canciones y juegos. Primaria: preparación de los exámenes de Cambridge.</span></span></li>
+          <li><span class="jornada__hora">9:50</span><span class="jornada__punto" aria-hidden="true"></span><span class="jornada__txt"><strong>A clase</strong><span>Sin cambiar de edificio.</span></span></li>
+        </ol>
+      </div>
+      <aside class="madru-precio" aria-label="Precio de Madrugadores">
+        <div class="madru-precio__cifra"><b>12 €</b><span>el día</span></div>
+        <ul>
+          <li><i class="bi bi-check2-circle" aria-hidden="true"></i> Entrada desde las 7:30</li>
+          <li><i class="bi bi-check2-circle" aria-hidden="true"></i> Bilingüismo incluido</li>
+          <li><i class="bi bi-check2-circle" aria-hidden="true"></i> Solo pagáis los días que lo uséis</li>
+        </ul>
+        <div class="madru-calc">
+          <label id="madruDiasLabel">¿Cuántos días a la semana?</label>
+          <div class="madru-dias" role="group" aria-labelledby="madruDiasLabel">
+            <button type="button" data-dias="1" aria-pressed="false">1</button>
+            <button type="button" data-dias="2" aria-pressed="false">2</button>
+            <button type="button" data-dias="3" aria-pressed="true">3</button>
+            <button type="button" data-dias="4" aria-pressed="false">4</button>
+            <button type="button" data-dias="5" aria-pressed="false">5</button>
+          </div>
+          <p class="madru-calc__res" id="madruRes" aria-live="polite">3 días: <strong>36 €</strong> a la semana</p>
+          <p class="madru-calc__nota">Unos <span id="madruMes">144 €</span> en un mes de 4 semanas. Si lo vais a usar a diario, preguntad en secretaría por la ampliación de horario mensual.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <header class="section__head section__head--left"><h2>Por qué lo eligen las familias</h2></header>
+      <div class="razones">
+        <article class="razon"><i class="bi bi-briefcase" aria-hidden="true"></i><div><h3>Concilia sin carreras</h3><p>Dejarlos a las 7:30 permite llegar al trabajo a tiempo sin depender de nadie más.</p></div></article>
+        <article class="razon"><i class="bi bi-translate" aria-hidden="true"></i><div><h3>Una hora de inglés que ya cuenta</h3><p>El tiempo de espera se convierte en bilingüismo: vocabulario en Infantil y Cambridge en Primaria.</p></div></article>
+        <article class="razon"><i class="bi bi-calendar2-week" aria-hidden="true"></i><div><h3>Por días, no por meses</h3><p>12 € el día que lo necesitéis: una reunión temprana, una semana complicada o todo el curso.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container resumen">
+      <div>
+        <h2>¿Necesitáis más horas?</h2>
+        <p>Además de Madrugadores, el colegio ofrece ampliación de horario por meses o por días sueltos.</p>
+        <p class="nota-secretaria"><i class="bi bi-info-circle" aria-hidden="true"></i><span>La franja exacta de cada ampliación se concreta en secretaría según la etapa.</span></p>
+      </div>
+      <div class="table-wrap">
+        <table class="horario-mini">
+          <caption class="sr-only">Precios de la ampliación de horario</caption>
+          <thead><tr><th scope="col">Ampliación</th><th scope="col">Al mes</th><th scope="col">Día suelto</th></tr></thead>
+          <tbody>
+            <tr><td>Media hora</td><td>20 €</td><td>5 €</td></tr>
+            <tr><td>Una hora</td><td>40 €</td><td>8 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container" style="max-width:820px">
+      <header class="section__head section__head--left"><h2>Preguntas frecuentes</h2></header>
+      <div class="faq">
+        <details><summary>¿Hay que apuntarse todo el mes?</summary><p>No. Madrugadores se paga por día: 12 € cada día que lo uséis. Si lo vais a necesitar a diario, en secretaría os explican la ampliación de horario mensual.</p></details>
+        <details><summary>¿Para qué etapas es?</summary><p>Para todas. En Infantil y Primaria incluye la hora de bilingüismo de las 8:55; en ESO cubre el tiempo hasta el inicio de las clases a las 8:30.</p></details>
+        <details><summary>¿Se puede combinar con extraescolares y comedor?</summary><p>Sí. Podéis calcular el precio de todo junto en el <a href="/servicios/extraescolares#simulador">simulador de extraescolares</a>.</p></details>
+        <details><summary>¿Cómo nos apuntamos?</summary><p>En secretaría, por teléfono (91 471 99 59) o desde la Secretaría Virtual.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container cta__inner">
+      <div>
+        <h2>Empezad mañana a las 7:30.</h2>
+        <p>Basta con avisar en secretaría.</p>
+      </div>
+      <div class="cta__actions">
+        <a href="/contacto" class="btn btn--primary btn--lg"><i class="bi bi-chat-dots" aria-hidden="true"></i> Contacto</a>
+        <a href="/admision" class="btn btn--ghost btn--lg"><i class="bi bi-mortarboard" aria-hidden="true"></i> Admisión</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/nsd-arriba.js" defer></script>
+  <script src="/assets/js/madrugadores.js" defer></script>
+</body>
+</html>

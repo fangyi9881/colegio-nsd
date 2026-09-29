@@ -1,32 +1,44 @@
 ﻿<!doctype html>
 <html lang="es" data-page="centro">
 <head>
-  <meta charset="utf-8" />  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta charset="utf-8" />  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script src="/assets/js/theme-init.js"></script>
   <title>Departamentos · Colegio NSD</title>
   <meta name="description" content="Departamentos didácticos del Colegio NSD: Inglés, Matemáticas, Ciencias, Lengua, Tecnología, Educación Física, Orientación y más." />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="theme-color" content="#1FA42C" />
-  <link rel="canonical" href="https://www.colegionsdolores.es/centro/departamentos.html" />
+  <link rel="canonical" href="https://colegio-nsd.vercel.app/centro/departamentos" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Departamentos · Colegio NSD" />
   <meta property="og:description" content="Equipos docentes especializados que vertebran el proyecto académico del centro." />
   <link rel="icon" type="image/png" href="/assets/img/logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
   <link rel="stylesheet" href="/assets/css/pages.css" />
+  <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
+  <meta property="og:url" content="https://colegio-nsd.vercel.app/centro/departamentos" />
+  <meta property="og:image" content="https://colegio-nsd.vercel.app/assets/img/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Colegio NSD" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
 </head>
 <body id="top">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
   <div id="site-header"></div>
+
+  <main id="contenido">
 
   <section class="page-hero">
     <div class="container page-hero__inner">
       <div>
         <nav class="crumbs" aria-label="Migas de pan">
           <a href="/">Inicio</a> <i class="bi bi-chevron-right"></i>
-          <a href="/centro/sobre-nosotros.html">El Centro</a> <i class="bi bi-chevron-right"></i>
+          <a href="/centro/sobre-nosotros">El Centro</a> <i class="bi bi-chevron-right"></i>
           <span>Departamentos</span>
         </nav>
         <h1>Departamentos didácticos</h1>
@@ -47,127 +59,254 @@
         <p>Cada departamento está formado por profesores especialistas que coordinan la enseñanza de su área desde Infantil/Primaria hasta 4.º de ESO.</p>
       </header>
 
-      <div class="dept-grid">
-        <article class="dept">
-          <div class="dept__head">
-            <div class="dept__icon"><i class="bi bi-translate"></i></div>
-            <h3>Inglés</h3>
+      <ul class="dep" data-acordeon>
+        <li class="dep__item">
+          <button type="button" class="dep__ficha" aria-expanded="false">
+            <span class="dep__icono dep__icono--color-1" aria-hidden="true"><i class="bi bi-translate"></i></span>
+            <span class="dep__txt">
+              <span class="dep__nombre">Inglés</span>
+              <span class="dep__resumen">Programa Bilingüe oficial de la Comunidad de Madrid, con profesorado especialista y auxiliares de conversación.</span>
+            </span>
+            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="dep__detalle" hidden>
+            <div class="dep__cuerpo">
+              <ul class="dep__datos">
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Infantil, Primaria y E.S.O.</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Preparación de los exámenes Cambridge</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Centro examinador autorizado</li>
+              </ul>
+              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
+            </div>
+            <picture class="foto-real">
+            <source type="image/webp" srcset="/assets/img/fotos/cartel-bilingue-800.webp 800w, /assets/img/fotos/cartel-bilingue-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 460px" />
+            <img src="/assets/img/fotos/cartel-bilingue-800.webp" alt="Placa de centro concertado bilingüe autorizado por la Comunidad de Madrid, B.O.C.M. Orden 2476/2014" width="800" height="1000" loading="lazy" decoding="async" />
+          </picture>
           </div>
-          <p>Programa Bilingüe oficial. Profesorado nativo, certificaciones Cambridge desde Primaria hasta B2.</p>
-          <div class="dept__meta">
-            <span><i class="bi bi-people"></i> 12 docentes</span>
-            <span><i class="bi bi-award"></i> Cambridge</span>
+        </li>
+        <li class="dep__item">
+          <button type="button" class="dep__ficha" aria-expanded="false">
+            <span class="dep__icono dep__icono--color-2" aria-hidden="true"><i class="bi bi-calculator"></i></span>
+            <span class="dep__txt">
+              <span class="dep__nombre">Matemáticas</span>
+              <span class="dep__resumen">Metodología manipulativa, resolución de problemas y razonamiento lógico desde los primeros cursos.</span>
+            </span>
+            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="dep__detalle" hidden>
+            <div class="dep__cuerpo">
+              <ul class="dep__datos">
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Primaria y E.S.O.</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Material manipulativo en Primaria</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Resolución de problemas</li>
+              </ul>
+              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
+            </div>
+            <div class="hueco hueco--color-2 dep__foto">
+              <i class="bi bi-camera" aria-hidden="true"></i>
+              <strong>Matemáticas</strong>
+              <span>Aquí irá una foto del departamento o de su aula.</span>
+            </div>
           </div>
-        </article>
-
-        <article class="dept">
-          <div class="dept__head">
-            <div class="dept__icon"><i class="bi bi-calculator"></i></div>
-            <h3>Matemáticas</h3>
+        </li>
+        <li class="dep__item">
+          <button type="button" class="dep__ficha" aria-expanded="false">
+            <span class="dep__icono dep__icono--color-3" aria-hidden="true"><i class="bi bi-flask"></i></span>
+            <span class="dep__txt">
+              <span class="dep__nombre">Ciencias</span>
+              <span class="dep__resumen">Biology &amp; Geology y Physics &amp; Chemistry, con prácticas en el laboratorio del centro.</span>
+            </span>
+            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="dep__detalle" hidden>
+            <div class="dep__cuerpo">
+              <ul class="dep__datos">
+                <li><i class="bi bi-check2" aria-hidden="true"></i> E.S.O.</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Laboratorio propio</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Parte de las clases en inglés</li>
+              </ul>
+              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
+            </div>
+            <div class="hueco hueco--color-3 dep__foto">
+              <i class="bi bi-camera" aria-hidden="true"></i>
+              <strong>Ciencias</strong>
+              <span>Aquí irá una foto del departamento o de su aula.</span>
+            </div>
           </div>
-          <p>Metodología manipulativa, resolución de problemas y razonamiento lógico desde Primaria.</p>
-          <div class="dept__meta">
-            <span><i class="bi bi-people"></i> 6 docentes</span>
-            <span><i class="bi bi-mortarboard"></i> Primaria + ESO</span>
+        </li>
+        <li class="dep__item">
+          <button type="button" class="dep__ficha" aria-expanded="false">
+            <span class="dep__icono dep__icono--color-4" aria-hidden="true"><i class="bi bi-book"></i></span>
+            <span class="dep__txt">
+              <span class="dep__nombre">Lengua Española</span>
+              <span class="dep__resumen">Comprensión lectora, expresión oral y escrita, y animación a la lectura con la biblioteca del centro.</span>
+            </span>
+            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="dep__detalle" hidden>
+            <div class="dep__cuerpo">
+              <ul class="dep__datos">
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Primaria y E.S.O.</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Biblioteca escolar</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Plan lector</li>
+              </ul>
+              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
+            </div>
+            <div class="hueco hueco--color-4 dep__foto">
+              <i class="bi bi-camera" aria-hidden="true"></i>
+              <strong>Lengua Española</strong>
+              <span>Aquí irá una foto del departamento o de su aula.</span>
+            </div>
           </div>
-        </article>
-
-        <article class="dept">
-          <div class="dept__head">
-            <div class="dept__icon"><i class="bi bi-flask"></i></div>
-            <h3>Ciencias</h3>
+        </li>
+        <li class="dep__item">
+          <button type="button" class="dep__ficha" aria-expanded="false">
+            <span class="dep__icono dep__icono--color-5" aria-hidden="true"><i class="bi bi-globe-europe-africa"></i></span>
+            <span class="dep__txt">
+              <span class="dep__nombre">Geografía e Historia</span>
+              <span class="dep__resumen">Geography &amp; History dentro del programa bilingüe, con proyectos de patrimonio y ciudadanía.</span>
+            </span>
+            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="dep__detalle" hidden>
+            <div class="dep__cuerpo">
+              <ul class="dep__datos">
+                <li><i class="bi bi-check2" aria-hidden="true"></i> E.S.O.</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Parte de las clases en inglés</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Salidas culturales</li>
+              </ul>
+              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
+            </div>
+            <div class="hueco hueco--color-5 dep__foto">
+              <i class="bi bi-camera" aria-hidden="true"></i>
+              <strong>Geografía e Historia</strong>
+              <span>Aquí irá una foto del departamento o de su aula.</span>
+            </div>
           </div>
-          <p>Biology &amp; Geology y Physics &amp; Chemistry. Trabajo en laboratorio y proyectos científicos.</p>
-          <div class="dept__meta">
-            <span><i class="bi bi-people"></i> 5 docentes</span>
-            <span><i class="bi bi-house-gear"></i> Laboratorios propios</span>
+        </li>
+        <li class="dep__item">
+          <button type="button" class="dep__ficha" aria-expanded="false">
+            <span class="dep__icono dep__icono--color-6" aria-hidden="true"><i class="bi bi-cpu"></i></span>
+            <span class="dep__txt">
+              <span class="dep__nombre">Tecnología</span>
+              <span class="dep__resumen">Robótica, programación e impresión 3D en el aula taller, dentro del programa Código Escuela 4.0.</span>
+            </span>
+            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="dep__detalle" hidden>
+            <div class="dep__cuerpo">
+              <ul class="dep__datos">
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Primaria y E.S.O.</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Aula taller</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Código Escuela 4.0</li>
+              </ul>
+              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
+            </div>
+            <div class="hueco hueco--color-6 dep__foto">
+              <i class="bi bi-camera" aria-hidden="true"></i>
+              <strong>Tecnología</strong>
+              <span>Aquí irá una foto del departamento o de su aula.</span>
+            </div>
           </div>
-        </article>
-
-        <article class="dept">
-          <div class="dept__head">
-            <div class="dept__icon"><i class="bi bi-book"></i></div>
-            <h3>Lengua Española</h3>
+        </li>
+        <li class="dep__item">
+          <button type="button" class="dep__ficha" aria-expanded="false">
+            <span class="dep__icono dep__icono--color-1" aria-hidden="true"><i class="bi bi-chat-quote"></i></span>
+            <span class="dep__txt">
+              <span class="dep__nombre">Francés</span>
+              <span class="dep__resumen">Segunda lengua extranjera en la E.S.O., con preparación de los exámenes oficiales DELF.</span>
+            </span>
+            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="dep__detalle" hidden>
+            <div class="dep__cuerpo">
+              <ul class="dep__datos">
+                <li><i class="bi bi-check2" aria-hidden="true"></i> E.S.O.</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Exámenes DELF</li>
+              </ul>
+              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
+            </div>
+            <div class="hueco hueco--color-1 dep__foto">
+              <i class="bi bi-camera" aria-hidden="true"></i>
+              <strong>Francés</strong>
+              <span>Aquí irá una foto del departamento o de su aula.</span>
+            </div>
           </div>
-          <p>Comprensión lectora, expresión oral y escrita. Animación a la lectura y biblioteca escolar.</p>
-          <div class="dept__meta">
-            <span><i class="bi bi-people"></i> 6 docentes</span>
-            <span><i class="bi bi-bookshelf"></i> Biblioteca</span>
+        </li>
+        <li class="dep__item">
+          <button type="button" class="dep__ficha" aria-expanded="false">
+            <span class="dep__icono dep__icono--color-3" aria-hidden="true"><i class="bi bi-bicycle"></i></span>
+            <span class="dep__txt">
+              <span class="dep__nombre">Educación Física</span>
+              <span class="dep__resumen">Deporte escolar y hábitos saludables, con 1.500 m² de instalaciones deportivas y equipos en la liga del distrito.</span>
+            </span>
+            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="dep__detalle" hidden>
+            <div class="dep__cuerpo">
+              <ul class="dep__datos">
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Infantil, Primaria y E.S.O.</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Pista, gimnasio y patios</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Equipos en competición</li>
+              </ul>
+              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
+            </div>
+            <picture class="foto-real">
+            <source type="image/webp" srcset="/assets/img/fotos/gimnasio-800.webp 800w, /assets/img/fotos/gimnasio-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 460px" />
+            <img src="/assets/img/fotos/gimnasio-800.webp" alt="Gimnasio del colegio, con el suelo de parqué y las espalderas en la pared" width="800" height="1000" loading="lazy" decoding="async" />
+          </picture>
           </div>
-        </article>
-
-        <article class="dept">
-          <div class="dept__head">
-            <div class="dept__icon"><i class="bi bi-globe-europe-africa"></i></div>
-            <h3>Geografía e Historia</h3>
+        </li>
+        <li class="dep__item">
+          <button type="button" class="dep__ficha" aria-expanded="false">
+            <span class="dep__icono dep__icono--color-5" aria-hidden="true"><i class="bi bi-palette"></i></span>
+            <span class="dep__txt">
+              <span class="dep__nombre">Departamento Artístico</span>
+              <span class="dep__resumen">Música y Plástica, con proyectos artísticos que atraviesan las etapas y actividades en la Semana Cultural.</span>
+            </span>
+            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="dep__detalle" hidden>
+            <div class="dep__cuerpo">
+              <ul class="dep__datos">
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Infantil, Primaria y E.S.O.</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Semana Cultural</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Murales y exposiciones</li>
+              </ul>
+              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
+            </div>
+            <picture class="foto-real">
+            <source type="image/webp" srcset="/assets/img/fotos/mural-800.webp 800w, /assets/img/fotos/mural-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 460px" />
+            <img src="/assets/img/fotos/mural-800.webp" alt="Mural colectivo pintado entre todos sobre papel continuo" width="800" height="1000" loading="lazy" decoding="async" />
+          </picture>
           </div>
-          <p>Geography &amp; History en inglés. Proyectos de patrimonio, ciudadanía y pensamiento crítico.</p>
-          <div class="dept__meta">
-            <span><i class="bi bi-people"></i> 4 docentes</span>
-            <span><i class="bi bi-translate"></i> En inglés</span>
+        </li>
+        <li class="dep__item">
+          <button type="button" class="dep__ficha" aria-expanded="false">
+            <span class="dep__icono dep__icono--color-4" aria-hidden="true"><i class="bi bi-heart-pulse"></i></span>
+            <span class="dep__txt">
+              <span class="dep__nombre">Orientación y Gabinete Psicopedagógico</span>
+              <span class="dep__resumen">Dos profesionales de la psicopedagogía: detección temprana de dificultades de aprendizaje, apoyo y orientación académica.</span>
+            </span>
+            <i class="bi bi-chevron-down dep__flecha" aria-hidden="true"></i>
+          </button>
+          <div class="dep__detalle" hidden>
+            <div class="dep__cuerpo">
+              <ul class="dep__datos">
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Las tres etapas</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Detección temprana</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Orientación académica</li>
+              </ul>
+              <p class="dep__equipo"><i class="bi bi-people" aria-hidden="true"></i> El profesorado de este departamento se publicará en cuanto el centro lo facilite.</p>
+            </div>
+            <div class="hueco hueco--color-4 dep__foto">
+              <i class="bi bi-camera" aria-hidden="true"></i>
+              <strong>Orientación y Gabinete Psicopedagógico</strong>
+              <span>Aquí irá una foto del departamento o de su aula.</span>
+            </div>
           </div>
-        </article>
-
-        <article class="dept">
-          <div class="dept__head">
-            <div class="dept__icon"><i class="bi bi-cpu"></i></div>
-            <h3>Tecnología</h3>
-          </div>
-          <p>Robótica, programación, impresión 3D y proyectos STEAM en aula taller.</p>
-          <div class="dept__meta">
-            <span><i class="bi bi-people"></i> 3 docentes</span>
-            <span><i class="bi bi-tools"></i> Aula taller</span>
-          </div>
-        </article>
-
-        <article class="dept">
-          <div class="dept__head">
-            <div class="dept__icon"><i class="bi bi-translate"></i></div>
-            <h3>Francés</h3>
-          </div>
-          <p>Segunda lengua extranjera en ESO. Intercambios y preparación de exámenes oficiales DELF.</p>
-          <div class="dept__meta">
-            <span><i class="bi bi-people"></i> 2 docentes</span>
-            <span><i class="bi bi-award"></i> DELF</span>
-          </div>
-        </article>
-
-        <article class="dept">
-          <div class="dept__head">
-            <div class="dept__icon"><i class="bi bi-bicycle"></i></div>
-            <h3>Educación Física</h3>
-          </div>
-          <p>Deporte escolar, escuelas deportivas y promoción de hábitos saludables.</p>
-          <div class="dept__meta">
-            <span><i class="bi bi-people"></i> 5 docentes</span>
-            <span><i class="bi bi-trophy"></i> Equipos federados</span>
-          </div>
-        </article>
-
-        <article class="dept">
-          <div class="dept__head">
-            <div class="dept__icon"><i class="bi bi-palette"></i></div>
-            <h3>Departamento Artístico</h3>
-          </div>
-          <p>Música, Plástica y proyectos artísticos transversales. Coro y conjunto instrumental.</p>
-          <div class="dept__meta">
-            <span><i class="bi bi-people"></i> 4 docentes</span>
-            <span><i class="bi bi-music-note"></i> Coro</span>
-          </div>
-        </article>
-
-        <article class="dept" style="background:linear-gradient(135deg,#fff,#f1faf3);border-color:var(--green-100);">
-          <div class="dept__head">
-            <div class="dept__icon" style="background:#fff;"><i class="bi bi-heart"></i></div>
-            <h3>Orientación</h3>
-          </div>
-          <p>Acompañamiento psicopedagógico, atención a la diversidad, orientación académica y profesional.</p>
-          <div class="dept__meta">
-            <span><i class="bi bi-people"></i> 3 profesionales</span>
-            <span><i class="bi bi-shield-check"></i> Atención individual</span>
-          </div>
-        </article>
-      </div>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -182,7 +321,7 @@
       <div class="highlight-grid" style="margin-top:0;">
         <div class="highlight">
           <i class="bi bi-search"></i>
-          <h4>Detección y evaluación</h4>
+          <h3>Detección y evaluación</h3>
           <p>Evaluación psicopedagógica para detectar necesidades específicas de aprendizaje.</p>
         </div>
         <div class="highlight">
@@ -198,8 +337,11 @@
       </div>
     </div>
   </section>
+  </main>
 
   <div id="site-footer"></div>
+  <script src="/assets/js/equipo.js" defer></script>
   <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/nsd-arriba.js" defer></script>
 </body>
 </html>

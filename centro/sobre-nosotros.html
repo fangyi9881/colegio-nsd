@@ -1,25 +1,38 @@
 ﻿<!doctype html>
 <html lang="es" data-page="centro">
 <head>
-  <meta charset="utf-8" />  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta charset="utf-8" />  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script src="/assets/js/theme-init.js"></script>
   <title>Sobre Nosotros · Colegio NSD</title>
   <meta name="description" content="Conoce el Colegio NSD: historia desde 1957, misión, valores, equipo y proyecto educativo en Carabanchel." />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="theme-color" content="#1FA42C" />
-  <link rel="canonical" href="https://www.colegionsdolores.es/centro/sobre-nosotros.html" />
+  <link rel="canonical" href="https://colegio-nsd.vercel.app/centro/sobre-nosotros" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Sobre Nosotros · Colegio NSD" />
   <meta property="og:description" content="Historia, misión y valores del Colegio Nuestra Señora de los Dolores." />
   <link rel="icon" type="image/png" href="/assets/img/logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
   <link rel="stylesheet" href="/assets/css/pages.css" />
+  <link rel="stylesheet" href="/assets/css/secciones.css" />
+  <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
+  <meta property="og:url" content="https://colegio-nsd.vercel.app/centro/sobre-nosotros" />
+  <meta property="og:image" content="https://colegio-nsd.vercel.app/assets/img/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Colegio NSD" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
 </head>
 <body id="top">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
   <div id="site-header"></div>
+
+  <main id="contenido">
 
   <section class="page-hero">
     <div class="container page-hero__inner">
@@ -65,46 +78,15 @@
     </div>
   </section>
 
-  <section class="section section--soft" id="valores">
-    <div class="container">
-      <header class="section__head">
-        <span class="eyebrow">Misión y Valores</span>
+  <section class="section section--soft">
+    <div class="container resumen">
+      <div>
         <h2>Educamos personas, inspiramos futuros</h2>
-        <p>Nuestro proyecto educativo se sustenta sobre cuatro pilares que vertebran cada decisión y cada actuación.</p>
-      </header>
-
-      <div class="values">
-        <div class="value">
-          <i class="bi bi-heart"></i>
-          <h4>Cuidado integral</h4>
-          <p>Atendemos a la persona en su conjunto: lo académico, lo emocional y lo relacional.</p>
-        </div>
-        <div class="value">
-          <i class="bi bi-lightbulb"></i>
-          <h4>Excelencia y exigencia</h4>
-          <p>Buscamos lo mejor de cada alumno, con expectativas altas y acompañamiento cercano.</p>
-        </div>
-        <div class="value">
-          <i class="bi bi-globe2"></i>
-          <h4>Apertura al mundo</h4>
-          <p>El bilingüismo, el pensamiento crítico y la cultura como ventanas a una vida más rica.</p>
-        </div>
-        <div class="value">
-          <i class="bi bi-people"></i>
-          <h4>Comunidad y familia</h4>
-          <p>Trabajar codo con codo con las familias para construir un espacio de confianza.</p>
-        </div>
-        <div class="value">
-          <i class="bi bi-shield-check"></i>
-          <h4>Convivencia y respeto</h4>
-          <p>Plan de convivencia, prevención del acoso y educación en valores.</p>
-        </div>
-        <div class="value">
-          <i class="bi bi-cpu"></i>
-          <h4>Innovación pedagógica</h4>
-          <p>Nuevas metodologías, robótica, evaluación competencial y aulas digitales.</p>
-        </div>
+        <p>Seis principios guían el proyecto del colegio: cuidado integral, exigencia, apertura al mundo, familia, convivencia e innovación.</p>
       </div>
+      <ul class="indice">
+        <li><a href="/centro/mision-valores"><span class="indice__ico" aria-hidden="true"><i class="bi bi-heart"></i></span><span><h3>Misión y valores</h3><p>Los seis principios y dónde se notan en el día a día.</p></span><span class="indice__ir">Entrar <i class="bi bi-arrow-right" aria-hidden="true"></i></span></a></li>
+      </ul>
     </div>
   </section>
 
@@ -117,12 +99,9 @@
       </header>
 
       <div class="faculty">
-        <div class="teacher"><div class="teacher__avatar">MA</div><div><h4>Marta Álvarez</h4><small>Dirección Pedagógica</small></div></div>
-        <div class="teacher"><div class="teacher__avatar">JR</div><div><h4>Javier Ruiz</h4><small>Jefatura de Estudios ESO</small></div></div>
-        <div class="teacher"><div class="teacher__avatar">SH</div><div><h4>Sonia Hervás</h4><small>Coord. Primaria</small></div></div>
-        <div class="teacher"><div class="teacher__avatar">RM</div><div><h4>Raquel Muñoz</h4><small>Tutora 4.º Primaria</small></div></div>
-        <div class="teacher"><div class="teacher__avatar">LF</div><div><h4>Luis Fdez. Ortega</h4><small>Dpto. Matemáticas</small></div></div>
-        <div class="teacher"><div class="teacher__avatar">SL</div><div><h4>Sergio López</h4><small>Dpto. Inglés</small></div></div>
+        <a class="teacher" href="/centro/equipo-directivo"><div class="teacher__avatar" aria-hidden="true"><i class="bi bi-people"></i></div><div><h3>Equipo directivo</h3><small>Quién dirige el colegio y cómo contactar</small></div></a>
+        <a class="teacher" href="/centro/departamentos"><div class="teacher__avatar" aria-hidden="true"><i class="bi bi-diagram-3"></i></div><div><h3>Departamentos</h3><small>Áreas didácticas por etapa</small></div></a>
+        <a class="teacher" href="/contacto"><div class="teacher__avatar" aria-hidden="true"><i class="bi bi-chat-dots"></i></div><div><h3>Tutorías</h3><small>Se piden a través de secretaría o de Alexia</small></div></a>
       </div>
     </div>
   </section>
@@ -135,13 +114,15 @@
         <p>Reserva una visita personalizada con el equipo directivo.</p>
       </div>
       <div class="cta__actions">
-        <a href="/contacto.html" class="btn btn--primary btn--lg"><i class="bi bi-calendar-check"></i> Solicitar visita</a>
-        <a href="/admision.html" class="btn btn--ghost btn--lg">Ver admisión</a>
+        <a href="/contacto" class="btn btn--primary btn--lg"><i class="bi bi-chat-dots" aria-hidden="true"></i> Contacto</a>
+        <a href="/admision" class="btn btn--ghost btn--lg"><i class="bi bi-mortarboard" aria-hidden="true"></i> Admisión</a>
       </div>
     </div>
   </section>
+  </main>
 
   <div id="site-footer"></div>
   <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/nsd-arriba.js" defer></script>
 </body>
 </html>

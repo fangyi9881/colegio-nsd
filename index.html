@@ -2,44 +2,45 @@
 <html lang="es" data-page="home">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Colegio NSD · Nuestra Señora de los Dolores · Centro Concertado Bilingüe en Carabanchel</title>
-  <meta name="description" content="Colegio NSD (Nuestra Señora de los Dolores). Centro concertado bilingüe en Carabanchel (Madrid). Educación Infantil, Primaria y ESO. Más de 65 años formando personas." />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script src="/assets/js/theme-init.js"></script>
+  <title>Colegio Ntra. Sra. de los Dolores · Carabanchel, Madrid</title>
+  <meta name="description" content="Colegio concertado bilingüe en Carabanchel (Madrid). Escuela Infantil, Primaria y ESO, de 0 años a 4.º. Más de 65 años en el barrio." />
   <meta name="keywords" content="colegio Carabanchel, colegio concertado Madrid, colegio bilingüe, NSD, Nuestra Señora de los Dolores, educación infantil, primaria, ESO, Colegio Tordo Madrid" />
   <meta name="author" content="Colegio Nuestra Señora de los Dolores" />
   <meta name="robots" content="index, follow" />
+  <!-- Verificaciones heredadas de la web antigua: no borrar, sostienen la propiedad en Search Console y Bing -->
+  <meta name="google-site-verification" content="c0vqlFdiYcHoiuPzGTQmh9w6mbIW3ty_z7m63hAYo_Q" />
+  <meta name="msvalidate.01" content="0B054318505A20778C066E50B7F12922" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="theme-color" content="#1FA42C" />
-  <link rel="canonical" href="https://www.colegionsdolores.es/" />
+  <link rel="canonical" href="https://colegio-nsd.vercel.app/" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Colegio NSD" />
   <meta property="og:locale" content="es_ES" />
-  <meta property="og:title" content="Colegio NSD · Centro Concertado Bilingüe en Carabanchel" />
-  <meta property="og:description" content="Educamos personas, inspiramos futuros. Centro bilingüe desde 2004 con más de 65 años de historia en Carabanchel." />
-  <meta property="og:url" content="https://www.colegionsdolores.es/" />
-  <meta property="og:image" content="https://www.colegionsdolores.es/assets/img/og-cover.svg" />
+  <meta property="og:title" content="Colegio Ntra. Sra. de los Dolores · Carabanchel, Madrid" />
+  <meta property="og:description" content="Colegio concertado bilingüe en Carabanchel (Madrid). Escuela Infantil, Primaria y ESO, de 0 años a 4.º. Más de 65 años en el barrio." />
+  <meta property="og:url" content="https://colegio-nsd.vercel.app/" />
+  <meta property="og:image" content="https://colegio-nsd.vercel.app/assets/img/og-cover.png" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@colegio_nsd" />
 
   <link rel="icon" type="image/png" href="/assets/img/logo.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
 
-  <!-- Preconnect a CDNs criticos para reducir latencia -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 
   <!-- Preload del logo (LCP critico) -->
   <link rel="preload" as="image" href="/assets/img/logo.png" fetchpriority="high" />
 
-  <!-- Fuentes con display=swap para no bloquear render -->
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Fuentes e iconos servidos desde la propia web (sin Google Fonts ni jsDelivr) -->
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
   <link rel="stylesheet" href="/assets/css/animations.css" />
+  <link rel="stylesheet" href="/assets/css/nsd-portada.css" />
+  <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
 
   <script type="application/ld+json">
   {
@@ -47,19 +48,35 @@
     "@type": "School",
     "name": "Colegio Nuestra Señora de los Dolores",
     "alternateName": "Colegio NSD",
-    "url": "https://www.colegionsdolores.es/",
-    "logo": "https://www.colegionsdolores.es/assets/img/logo.png",
+    "url": "https://colegio-nsd.vercel.app/",
+    "logo": "https://colegio-nsd.vercel.app/assets/img/logo.png",
     "telephone": "+34914719959",
     "email": "secretaria@colegionsdolores.es",
     "foundingDate": "1957",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "C/ Nuestra Señora de los Dolores, s/n",
+      "streetAddress": "C/ Tordo, 15",
       "addressLocality": "Madrid",
-      "addressRegion": "Carabanchel",
+      "addressRegion": "Comunidad de Madrid",
       "postalCode": "28019",
       "addressCountry": "ES"
     },
+    "geo": { "@type": "GeoCoordinates", "latitude": 40.3926307, "longitude": -3.7339244 },
+    "areaServed": { "@type": "Place", "name": "Carabanchel, Madrid" },
+    "description": "Colegio concertado en Carabanchel (Madrid) desde 1957, con Educación Infantil, Primaria y ESO, comedor propio, extraescolares y programa bilingüe.",
+    "hasMap": "https://www.google.com/maps/search/?api=1&query=Calle+del+Tordo+15%2C+28019+Madrid",
+    "contactPoint": [{
+      "@type": "ContactPoint",
+      "contactType": "Secretaría",
+      "telephone": "+34914719959",
+      "email": "secretaria@colegionsdolores.es",
+      "availableLanguage": ["es"],
+      "areaServed": "ES"
+    }],
+    "subOrganization": [
+      { "@type": "ChildCare", "name": "Escuela Infantil NSD", "url": "https://infantil-nsd.vercel.app/" },
+      { "@type": "Organization", "name": "Campamento Urbano NSD", "url": "https://campamento-nsd.vercel.app/" }
+    ],
     "sameAs": [
       "https://www.instagram.com/colegionsdolores/",
       "https://www.youtube.com/@colegionsd6473",
@@ -69,9 +86,12 @@
   </script>
 </head>
 <body id="top">
-  <a href="#nosotros" class="skip-link">Saltar al contenido principal</a>
+  <a href="#contenido" class="skip-link">Saltar al contenido principal</a>
 
   <div id="site-header"></div>
+  <section class="barra-hoy" data-barra-hoy data-web="colegio" aria-label="Hoy en el colegio" hidden></section>
+
+  <main id="contenido">
 
   <!-- HERO premium -->
   <section class="hero" id="inicio">
@@ -83,13 +103,13 @@
     <div class="container hero__grid">
       <div class="hero__content">
         <span class="badge-pill" data-reveal data-reveal-delay="1"><i class="bi bi-stars"></i> Centro bilingüe desde 2004</span>
-        <h1 data-reveal data-reveal-delay="2">Educamos personas,<br/><span class="text-gradient-anim">inspiramos futuros.</span></h1>
+        <div class="hero__titular"><h1 data-reveal data-reveal-delay="2">Educamos personas,<br/><span class="text-gradient-anim">inspiramos futuros.</span></h1></div>
         <p class="lead" data-reveal data-reveal-delay="3">
-          Colegio concertado en Carabanchel con más de <strong>68 años</strong> de historia.
+          Colegio concertado en Carabanchel con más de <strong>65 años</strong> de historia.
           Una propuesta educativa <strong>bilingüe, innovadora y cercana</strong>, desde los 0 años hasta 4º de la ESO.
         </p>
         <div class="hero__cta" data-reveal data-reveal-delay="4">
-          <a href="admision.html" class="btn btn--primary magnetic"><i class="bi bi-mortarboard-fill"></i> Solicita información</a>
+          <a href="/admision" class="btn btn--primary magnetic"><i class="bi bi-mortarboard-fill"></i> Solicita información</a>
           <a href="#nosotros" class="btn btn--ghost magnetic">Conoce el centro <i class="bi bi-arrow-right"></i></a>
         </div>
         <ul class="hero__chips" data-reveal data-reveal-delay="5">
@@ -102,7 +122,54 @@
 
       <div class="hero__card" data-reveal="zoom" data-reveal-delay="3">
         <div class="hero__card-inner tilt" data-tilt>
-          <div class="hero__photo"></div>
+          <div class="hero__photo">
+            <div class="rotafotos rotafotos--relleno" data-rotafotos data-intervalo="5500" data-visor-grupo role="region" aria-label="Fotos del colegio">
+              <ul class="rotafotos__pista">
+              <li class="rotafotos__lam">
+                <picture>
+                  <source type="image/webp" srcset="/assets/img/fotos/fachada-color-800.webp 800w, /assets/img/fotos/fachada-color-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 500px" />
+                  <img src="/assets/img/fotos/fachada-color-800.webp" alt="Fachada del colegio, con las lamas de colores y el rótulo «Colegio Nuestra Señora de los Dolores»" width="800" height="1000" fetchpriority="high" decoding="async" />
+                </picture>
+              </li>
+              <li class="rotafotos__lam">
+                <picture>
+                  <source type="image/webp" srcset="/assets/img/fotos/patio-lamas-800.webp 800w, /assets/img/fotos/patio-lamas-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 500px" />
+                  <img src="/assets/img/fotos/patio-lamas-800.webp" alt="Patio del colegio en el recreo, con la canasta y la fachada de lamas al fondo" width="800" height="1000" loading="lazy" decoding="async" />
+                </picture>
+              </li>
+              <li class="rotafotos__lam">
+                <picture>
+                  <source type="image/webp" srcset="/assets/img/fotos/carnaval-800.webp 800w, /assets/img/fotos/carnaval-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 500px" />
+                  <img src="/assets/img/fotos/carnaval-800.webp" alt="Alumnos disfrazados sentados en el patio durante el carnaval" width="800" height="1000" loading="lazy" decoding="async" />
+                </picture>
+              </li>
+              <li class="rotafotos__lam">
+                <picture>
+                  <source type="image/webp" srcset="/assets/img/fotos/patio-800.webp 800w, /assets/img/fotos/patio-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 500px" />
+                  <img src="/assets/img/fotos/patio-800.webp" alt="Grupo de niños jugando en el patio del colegio" width="800" height="1000" loading="lazy" decoding="async" />
+                </picture>
+              </li>
+              <li class="rotafotos__lam">
+                <picture>
+                  <source type="image/webp" srcset="/assets/img/fotos/mural-800.webp 800w, /assets/img/fotos/mural-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 500px" />
+                  <img src="/assets/img/fotos/mural-800.webp" alt="Mural colectivo pintado entre todos sobre papel continuo" width="800" height="1000" loading="lazy" decoding="async" />
+                </picture>
+              </li>
+              <li class="rotafotos__lam">
+                <picture>
+                  <source type="image/webp" srcset="/assets/img/fotos/huerto-800.webp 800w, /assets/img/fotos/huerto-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 500px" />
+                  <img src="/assets/img/fotos/huerto-800.webp" alt="Huerto del colegio, con jardineras de madera, macetas y botellas recicladas en la valla" width="800" height="1000" loading="lazy" decoding="async" />
+                </picture>
+              </li>
+              <li class="rotafotos__lam">
+                <picture>
+                  <source type="image/webp" srcset="/assets/img/fotos/aula-800.webp 800w, /assets/img/fotos/aula-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 500px" />
+                  <img src="/assets/img/fotos/aula-800.webp" alt="Dibujo de un cohete decorado con gomets sobre la mesa de un aula" width="800" height="1000" loading="lazy" decoding="async" />
+                </picture>
+              </li>
+              </ul>
+            </div>
+          </div>
           <div class="hero__floating">
             <div class="float-card float-card--1 tilt__lift">
               <div class="float-card__icon" style="background:#FFF3B0;color:#B87900;"><i class="bi bi-bookmark-heart"></i></div>
@@ -127,34 +194,19 @@
             </div>
           </div>
         </div>
+        <p class="hero__credito">Fotos del colegio, cedidas por el centro. Las del patio, el gimnasio, los talleres y las aulas se hicieron durante el campamento de verano; en esas, las caras van tapadas.</p>
       </div>
     </div>
 
     <a href="#datos" class="hero__scroll" aria-label="Bajar a la siguiente sección">
       <span></span>
     </a>
-  </section>
-
-  <!-- MARQUEE de palabras clave -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__track" id="marqueeTrack">
-      <span class="marquee__item">Bilingües <span class="marquee__star"></span></span>
-      <span class="marquee__item">Innovadores <span class="marquee__star"></span></span>
-      <span class="marquee__item">Cercanos <span class="marquee__star"></span></span>
-      <span class="marquee__item">Creativos <span class="marquee__star"></span></span>
-      <span class="marquee__item">Familia <span class="marquee__star"></span></span>
-      <span class="marquee__item">Carabanchel <span class="marquee__star"></span></span>
-      <span class="marquee__item">Desde 1957 <span class="marquee__star"></span></span>
-      <!-- duplicado para loop sin saltos -->
-      <span class="marquee__item">Bilingües <span class="marquee__star"></span></span>
-      <span class="marquee__item">Innovadores <span class="marquee__star"></span></span>
-      <span class="marquee__item">Cercanos <span class="marquee__star"></span></span>
-      <span class="marquee__item">Creativos <span class="marquee__star"></span></span>
-      <span class="marquee__item">Familia <span class="marquee__star"></span></span>
-      <span class="marquee__item">Carabanchel <span class="marquee__star"></span></span>
-      <span class="marquee__item">Desde 1957 <span class="marquee__star"></span></span>
+    <!-- Cinta de la portada: decorativa (su texto va oculto a lectores de pantalla), repite datos que ya están en la página. Lleva botón de pausa. -->
+    <div class="cinta" id="cinta-portada">
+      <button type="button" class="pausa-mov" data-pausa="cinta-portada" aria-pressed="false" aria-label="Pausar la cinta en movimiento"><svg class="pausa-mov__pausa" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg><svg class="pausa-mov__play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5Z"/></svg></button>
+      <div class="cinta__pista" aria-hidden="true"><div class="cinta__grupo"><span class="cinta__item">Colegio NSD</span><span class="cinta__item">Carabanchel, Madrid</span><span class="cinta__item">Concertado</span><span class="cinta__item">Bilingüe desde 2004</span><span class="cinta__item">De 0 años a 4.º de ESO</span><span class="cinta__item">Desde 1957</span><span class="cinta__item">Colegio NSD</span><span class="cinta__item">Carabanchel, Madrid</span><span class="cinta__item">Concertado</span><span class="cinta__item">Bilingüe desde 2004</span><span class="cinta__item">De 0 años a 4.º de ESO</span><span class="cinta__item">Desde 1957</span></div><div class="cinta__grupo"><span class="cinta__item">Colegio NSD</span><span class="cinta__item">Carabanchel, Madrid</span><span class="cinta__item">Concertado</span><span class="cinta__item">Bilingüe desde 2004</span><span class="cinta__item">De 0 años a 4.º de ESO</span><span class="cinta__item">Desde 1957</span><span class="cinta__item">Colegio NSD</span><span class="cinta__item">Carabanchel, Madrid</span><span class="cinta__item">Concertado</span><span class="cinta__item">Bilingüe desde 2004</span><span class="cinta__item">De 0 años a 4.º de ESO</span><span class="cinta__item">Desde 1957</span></div></div>
     </div>
-  </div>
+  </section>
 
   <!-- DATOS -->
   <section class="stats" id="datos">
@@ -193,6 +245,28 @@
     </div>
   </section>
 
+  <!-- MARQUEE de palabras clave -->
+  <div class="marquee" id="marquee-valores">
+    <button type="button" class="pausa-mov" data-pausa="marquee-valores" aria-pressed="false" aria-label="Pausar las palabras en movimiento"><svg class="pausa-mov__pausa" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg><svg class="pausa-mov__play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5Z"/></svg></button>
+    <div class="marquee__track" id="marqueeTrack" aria-hidden="true">
+      <span class="marquee__item">Bilingües <span class="marquee__star"></span></span>
+      <span class="marquee__item">Innovadores <span class="marquee__star"></span></span>
+      <span class="marquee__item">Cercanos <span class="marquee__star"></span></span>
+      <span class="marquee__item">Creativos <span class="marquee__star"></span></span>
+      <span class="marquee__item">Familia <span class="marquee__star"></span></span>
+      <span class="marquee__item">Carabanchel <span class="marquee__star"></span></span>
+      <span class="marquee__item">Desde 1957 <span class="marquee__star"></span></span>
+      <!-- duplicado para loop sin saltos -->
+      <span class="marquee__item">Bilingües <span class="marquee__star"></span></span>
+      <span class="marquee__item">Innovadores <span class="marquee__star"></span></span>
+      <span class="marquee__item">Cercanos <span class="marquee__star"></span></span>
+      <span class="marquee__item">Creativos <span class="marquee__star"></span></span>
+      <span class="marquee__item">Familia <span class="marquee__star"></span></span>
+      <span class="marquee__item">Carabanchel <span class="marquee__star"></span></span>
+      <span class="marquee__item">Desde 1957 <span class="marquee__star"></span></span>
+    </div>
+  </div>
+
   <!-- SOBRE NOSOTROS -->
   <section class="section" id="nosotros">
     <div class="container two-col">
@@ -223,14 +297,31 @@
           <li><i class="bi bi-check-circle-fill"></i> Centro concertado por la Comunidad de Madrid</li>
           <li><i class="bi bi-check-circle-fill"></i> Programa Bilingüe oficial desde 2004</li>
           <li><i class="bi bi-check-circle-fill"></i> Atención a la diversidad y orientación personalizada</li>
-          <li><i class="bi bi-check-circle-fill"></i> Más de 30 actividades extraescolares</li>
+          <li><i class="bi bi-check-circle-fill"></i> 14 actividades extraescolares</li>
         </ul>
       </div>
     </div>
   </section>
 
+  <!-- NOTICIAS · sale de noticias-datos.js, igual que el blog -->
+  <section class="section section--soft" id="noticias">
+    <div class="container">
+      <header class="section__head between">
+        <div>
+          <span class="eyebrow" data-reveal>Actualidad</span>
+          <h2 data-reveal data-reveal-delay="1">Lo último del colegio</h2>
+          <p data-reveal data-reveal-delay="2">Lo mismo que se publica en el blog. Filtra por sección para ver solo lo que os toca.</p>
+        </div>
+        <a href="/blog" class="btn btn--link magnetic">Ver todas las noticias <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+      </header>
+      <div data-actualidad>
+        <p><a href="/blog">Ver el blog y las noticias del colegio</a>.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ETAPAS -->
-  <section class="section section--soft" id="etapas">
+  <section class="section" id="etapas">
     <div class="container">
       <header class="section__head">
         <span class="eyebrow" data-reveal>Etapas educativas</span>
@@ -244,7 +335,7 @@
           <div class="stage__icon" style="--c:#FF8FB1;"><i class="bi bi-balloon-heart"></i></div>
           <span class="stage__age">0 – 3 años</span>
           <h3>Escuela Infantil NSD</h3>
-          <p>Escuela infantil con <strong>6 unidades</strong>. Centro acogido a las <strong>becas de la Comunidad de Madrid</strong>. Visita su web dedicada.</p>
+          <p>De 4 meses a 3 años, con <strong>6 unidades</strong>, inglés desde los 12 meses y <strong>becas de la Comunidad de Madrid</strong>.</p>
           <a href="https://infantil-nsd.vercel.app" class="stage__link">Visitar web <i class="bi bi-arrow-up-right"></i></a>
         </article>
 
@@ -253,7 +344,7 @@
           <span class="stage__age">3 – 6 años</span>
           <h3>II Ciclo de Infantil</h3>
           <p><strong>6 unidades concertadas</strong> con la Comunidad de Madrid. Inicio del programa bilingüe.</p>
-          <a href="etapas/infantil-3-6.html" class="stage__link">Descubrir <i class="bi bi-arrow-right"></i></a>
+          <a href="/etapas/infantil-3-6" class="stage__link">Descubrir <i class="bi bi-arrow-right"></i></a>
         </article>
 
         <article class="stage tilt shine" data-tilt data-reveal="zoom" data-reveal-delay="3">
@@ -261,7 +352,7 @@
           <span class="stage__age">6 – 12 años</span>
           <h3>Educación Primaria</h3>
           <p><strong>12 unidades concertadas</strong>. Bilingüismo, ciencia, arte y deporte como pilares de aprendizaje.</p>
-          <a href="etapas/primaria.html" class="stage__link">Descubrir <i class="bi bi-arrow-right"></i></a>
+          <a href="/etapas/primaria" class="stage__link">Descubrir <i class="bi bi-arrow-right"></i></a>
         </article>
 
         <article class="stage tilt shine" data-tilt data-reveal="zoom" data-reveal-delay="4">
@@ -269,7 +360,7 @@
           <span class="stage__age">12 – 16 años</span>
           <h3>ESO</h3>
           <p><strong>8 unidades concertadas</strong>. Programa <em>4º ESO + Empresa</em> y orientación académica y profesional.</p>
-          <a href="etapas/eso.html" class="stage__link">Descubrir <i class="bi bi-arrow-right"></i></a>
+          <a href="/etapas/eso" class="stage__link">Descubrir <i class="bi bi-arrow-right"></i></a>
         </article>
       </div>
     </div>
@@ -279,131 +370,124 @@
   <section class="life-strip" id="vida">
     <div class="container life-strip__head">
       <span class="eyebrow eyebrow--light" data-reveal>Vida del cole</span>
-      <h2 data-reveal data-reveal-delay="1">Más que clase. <span style="color:var(--yellow-500);">Mucho más.</span></h2>
-      <p data-reveal data-reveal-delay="2">Conciertos, deporte, arte, ciencia, viajes, semana cultural, robótica… El cole también es un sitio donde pasan cosas chulas.</p>
+      <h2 data-reveal data-reveal-delay="1">Más que clase. <span style="color:var(--gold-300);">Mucho más.</span></h2>
+      <p data-reveal data-reveal-delay="2">Carnaval, huerto, deporte, talleres, salidas, semana cultural… El cole también es un sitio donde pasan cosas chulas. Estas fotos son de aquí.</p>
     </div>
 
     <!-- mosaico marquee de imágenes -->
+    <div class="container life-strip__pausa">
+      <button type="button" class="pausa-mov" data-pausa="galeria-fila-1 galeria-fila-2" aria-pressed="false"><svg class="pausa-mov__pausa" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg><svg class="pausa-mov__play" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5Z"/></svg><span class="pausa-mov__txt">Pausar las fotos en movimiento</span></button>
+    </div>
     <div style="overflow:hidden;">
-      <div class="gallery-marquee">
-        <div class="gallery-tile" data-desc="Conciertos, actuaciones y talleres que reúnen a toda la comunidad educativa" style="background-image:url('https://images.unsplash.com/photo-1551038247-3d9af20df552?w=600&q=80&auto=format&fit=crop');">
+      <div class="gallery-marquee" id="galeria-fila-1">
+        <div class="gallery-tile" data-desc="Un día de disfraces en el patio, de Infantil a ESO" style="background-image:url('/assets/img/fotos/carnaval-800.webp');">
           <span class="gallery-tile__icon"><i class="bi bi-palette2"></i></span>
-          <span>Semana Cultural</span>
+          <span>Carnaval</span>
         </div>
-        <div class="gallery-tile" data-desc="Baloncesto, atletismo, fútbol sala y competiciones escolares entre colegios" style="background-image:url('https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="El patio entre clase y clase, con la canasta y el edificio de fondo" style="background-image:url('/assets/img/fotos/patio-lamas-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-people"></i></span>
+          <span>El recreo</span>
+        </div>
+        <div class="gallery-tile" data-desc="Canastas, portería y el escudo del colegio pintado en la pared" style="background-image:url('/assets/img/fotos/pista-800.webp');">
           <span class="gallery-tile__icon"><i class="bi bi-trophy"></i></span>
-          <span>Deportes</span>
+          <span>Deporte</span>
         </div>
-        <div class="gallery-tile" data-desc="Programación y construcción de robots desde Primaria hasta ESO" style="background-image:url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-robot"></i></span>
-          <span>Robótica</span>
+        <div class="gallery-tile" data-desc="Jardineras, macetas y botellas recicladas en la valla, cuidadas por los alumnos" style="background-image:url('/assets/img/fotos/huerto-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-flower1"></i></span>
+          <span>El huerto</span>
         </div>
-        <div class="gallery-tile" data-desc="Banda escolar, percusión y talleres de música para todos los cursos" style="background-image:url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-music-note-beamed"></i></span>
-          <span>Música</span>
-        </div>
-        <div class="gallery-tile" data-desc="Cerámica, teatro y manualidades para despertar la creatividad de cada alumno" style="background-image:url('https://images.unsplash.com/photo-1577896851231-70ef18881754?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-tools"></i></span>
+        <div class="gallery-tile" data-desc="Papel continuo en el suelo y un mural que se pinta entre todos" style="background-image:url('/assets/img/fotos/mural-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-brush"></i></span>
           <span>Talleres</span>
         </div>
-        <div class="gallery-tile" data-desc="Viajes culturales y de aventura por España y Europa a lo largo del curso" style="background-image:url('https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-compass"></i></span>
-          <span>Excursiones</span>
+        <div class="gallery-tile" data-desc="Circuitos de psicomotricidad, clases de Infantil y extraescolares cuando llueve" style="background-image:url('/assets/img/fotos/gimnasio-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-bicycle"></i></span>
+          <span>El gimnasio</span>
         </div>
-        <div class="gallery-tile" data-desc="Experimentos, feria de ciencias y olimpiadas del conocimiento" style="background-image:url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-eyedropper"></i></span>
-          <span>Ciencia</span>
-        </div>
-        <!-- duplicado -->
-        <div class="gallery-tile" data-desc="Conciertos, actuaciones y talleres que reúnen a toda la comunidad educativa" style="background-image:url('https://images.unsplash.com/photo-1551038247-3d9af20df552?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Un día de disfraces en el patio, de Infantil a ESO" style="background-image:url('/assets/img/fotos/carnaval-800.webp');">
           <span class="gallery-tile__icon"><i class="bi bi-palette2"></i></span>
-          <span>Semana Cultural</span>
+          <span>Carnaval</span>
         </div>
-        <div class="gallery-tile" data-desc="Baloncesto, atletismo, fútbol sala y competiciones escolares entre colegios" style="background-image:url('https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="El patio entre clase y clase, con la canasta y el edificio de fondo" style="background-image:url('/assets/img/fotos/patio-lamas-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-people"></i></span>
+          <span>El recreo</span>
+        </div>
+        <div class="gallery-tile" data-desc="Canastas, portería y el escudo del colegio pintado en la pared" style="background-image:url('/assets/img/fotos/pista-800.webp');">
           <span class="gallery-tile__icon"><i class="bi bi-trophy"></i></span>
-          <span>Deportes</span>
+          <span>Deporte</span>
         </div>
-        <div class="gallery-tile" data-desc="Programación y construcción de robots desde Primaria hasta ESO" style="background-image:url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-robot"></i></span>
-          <span>Robótica</span>
+        <div class="gallery-tile" data-desc="Jardineras, macetas y botellas recicladas en la valla, cuidadas por los alumnos" style="background-image:url('/assets/img/fotos/huerto-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-flower1"></i></span>
+          <span>El huerto</span>
         </div>
-        <div class="gallery-tile" data-desc="Banda escolar, percusión y talleres de música para todos los cursos" style="background-image:url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-music-note-beamed"></i></span>
-          <span>Música</span>
-        </div>
-        <div class="gallery-tile" data-desc="Cerámica, teatro y manualidades para despertar la creatividad de cada alumno" style="background-image:url('https://images.unsplash.com/photo-1577896851231-70ef18881754?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-tools"></i></span>
+        <div class="gallery-tile" data-desc="Papel continuo en el suelo y un mural que se pinta entre todos" style="background-image:url('/assets/img/fotos/mural-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-brush"></i></span>
           <span>Talleres</span>
         </div>
-        <div class="gallery-tile" data-desc="Viajes culturales y de aventura por España y Europa a lo largo del curso" style="background-image:url('https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-compass"></i></span>
-          <span>Excursiones</span>
-        </div>
-        <div class="gallery-tile" data-desc="Experimentos, feria de ciencias y olimpiadas del conocimiento" style="background-image:url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-eyedropper"></i></span>
-          <span>Ciencia</span>
+        <div class="gallery-tile" data-desc="Circuitos de psicomotricidad, clases de Infantil y extraescolares cuando llueve" style="background-image:url('/assets/img/fotos/gimnasio-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-bicycle"></i></span>
+          <span>El gimnasio</span>
         </div>
       </div>
     </div>
 
     <div style="overflow:hidden;margin-top:18px;">
-      <div class="gallery-marquee gallery-marquee--reverse">
-        <div class="gallery-tile" data-desc="Convivencias, voluntariado y acompañamiento espiritual durante el curso" style="background-image:url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600&q=80&auto=format&fit=crop');">
+      <div class="gallery-marquee gallery-marquee--reverse" id="galeria-fila-2">
+        <div class="gallery-tile" data-desc="Un curso que termina, sobre el escenario del salón de actos" style="background-image:url('/assets/img/fotos/diplomas-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-mortarboard"></i></span>
+          <span>Diplomas</span>
+        </div>
+        <div class="gallery-tile" data-desc="Alumnas del colegio en un acto de Cruz Roja. Foto del archivo del centro" style="background-image:url('/assets/img/fotos/solidaridad-800.webp');">
           <span class="gallery-tile__icon"><i class="bi bi-heart-pulse"></i></span>
-          <span>Pastoral</span>
+          <span>Solidaridad</span>
         </div>
-        <div class="gallery-tile" data-desc="Espacios de juego y relación entre alumnos de todas las edades" style="background-image:url('https://images.unsplash.com/photo-1564429097439-e5cbf2b3a8e8?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Colchonetas, pelotas y aros en la sala de psicomotricidad" style="background-image:url('/assets/img/fotos/psicomotricidad-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-balloon-heart"></i></span>
+          <span>Los más pequeños</span>
+        </div>
+        <div class="gallery-tile" data-desc="Un cohete de gomets sobre la mesa: lo que sale de una mañana de clase" style="background-image:url('/assets/img/fotos/aula-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-journal-text"></i></span>
+          <span>Las aulas</span>
+        </div>
+        <div class="gallery-tile" data-desc="Las lamas de colores de la calle Tordo, con el nombre del colegio" style="background-image:url('/assets/img/fotos/fachada-color-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-building"></i></span>
+          <span>La fachada</span>
+        </div>
+        <div class="gallery-tile" data-desc="El otro frente, con las siglas NSD sobre el patio" style="background-image:url('/assets/img/fotos/fachada-nsd-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-buildings"></i></span>
+          <span>El edificio</span>
+        </div>
+        <div class="gallery-tile" data-desc="Espacios de juego y relación entre alumnos de todas las edades" style="background-image:url('/assets/img/fotos/patio-800.webp');">
           <span class="gallery-tile__icon"><i class="bi bi-tree"></i></span>
-          <span>Patio</span>
+          <span>El patio</span>
         </div>
-        <div class="gallery-tile" data-desc="El coro NSD actúa en eventos y certámenes musicales de la ciudad" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-mic"></i></span>
-          <span>Coro</span>
+        <div class="gallery-tile" data-desc="Un curso que termina, sobre el escenario del salón de actos" style="background-image:url('/assets/img/fotos/diplomas-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-mortarboard"></i></span>
+          <span>Diplomas</span>
         </div>
-        <div class="gallery-tile" data-desc="Bilingüismo real con profesorado nativo desde los 3 años" style="background-image:url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-translate"></i></span>
-          <span>Inglés</span>
-        </div>
-        <div class="gallery-tile" data-desc="Pintura, escultura y expresión plástica con exposiciones propias" style="background-image:url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-brush"></i></span>
-          <span>Arte</span>
-        </div>
-        <div class="gallery-tile" data-desc="Aulas digitales y formación en competencias del siglo XXI" style="background-image:url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-laptop"></i></span>
-          <span>Tecnología</span>
-        </div>
-        <div class="gallery-tile" data-desc="Reconocimientos académicos, deportivos y artísticos para nuestros alumnos" style="background-image:url('https://images.unsplash.com/photo-1530021232320-687d8e3dba54?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-award"></i></span>
-          <span>Premios</span>
-        </div>
-        <!-- duplicado -->
-        <div class="gallery-tile" data-desc="Convivencias, voluntariado y acompañamiento espiritual durante el curso" style="background-image:url('https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Alumnas del colegio en un acto de Cruz Roja. Foto del archivo del centro" style="background-image:url('/assets/img/fotos/solidaridad-800.webp');">
           <span class="gallery-tile__icon"><i class="bi bi-heart-pulse"></i></span>
-          <span>Pastoral</span>
+          <span>Solidaridad</span>
         </div>
-        <div class="gallery-tile" data-desc="Espacios de juego y relación entre alumnos de todas las edades" style="background-image:url('https://images.unsplash.com/photo-1564429097439-e5cbf2b3a8e8?w=600&q=80&auto=format&fit=crop');">
+        <div class="gallery-tile" data-desc="Colchonetas, pelotas y aros en la sala de psicomotricidad" style="background-image:url('/assets/img/fotos/psicomotricidad-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-balloon-heart"></i></span>
+          <span>Los más pequeños</span>
+        </div>
+        <div class="gallery-tile" data-desc="Un cohete de gomets sobre la mesa: lo que sale de una mañana de clase" style="background-image:url('/assets/img/fotos/aula-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-journal-text"></i></span>
+          <span>Las aulas</span>
+        </div>
+        <div class="gallery-tile" data-desc="Las lamas de colores de la calle Tordo, con el nombre del colegio" style="background-image:url('/assets/img/fotos/fachada-color-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-building"></i></span>
+          <span>La fachada</span>
+        </div>
+        <div class="gallery-tile" data-desc="El otro frente, con las siglas NSD sobre el patio" style="background-image:url('/assets/img/fotos/fachada-nsd-800.webp');">
+          <span class="gallery-tile__icon"><i class="bi bi-buildings"></i></span>
+          <span>El edificio</span>
+        </div>
+        <div class="gallery-tile" data-desc="Espacios de juego y relación entre alumnos de todas las edades" style="background-image:url('/assets/img/fotos/patio-800.webp');">
           <span class="gallery-tile__icon"><i class="bi bi-tree"></i></span>
-          <span>Patio</span>
-        </div>
-        <div class="gallery-tile" data-desc="El coro NSD actúa en eventos y certámenes musicales de la ciudad" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-mic"></i></span>
-          <span>Coro</span>
-        </div>
-        <div class="gallery-tile" data-desc="Bilingüismo real con profesorado nativo desde los 3 años" style="background-image:url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-translate"></i></span>
-          <span>Inglés</span>
-        </div>
-        <div class="gallery-tile" data-desc="Pintura, escultura y expresión plástica con exposiciones propias" style="background-image:url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-brush"></i></span>
-          <span>Arte</span>
-        </div>
-        <div class="gallery-tile" data-desc="Aulas digitales y formación en competencias del siglo XXI" style="background-image:url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-laptop"></i></span>
-          <span>Tecnología</span>
-        </div>
-        <div class="gallery-tile" data-desc="Reconocimientos académicos, deportivos y artísticos para nuestros alumnos" style="background-image:url('https://images.unsplash.com/photo-1530021232320-687d8e3dba54?w=600&q=80&auto=format&fit=crop');">
-          <span class="gallery-tile__icon"><i class="bi bi-award"></i></span>
-          <span>Premios</span>
+          <span>El patio</span>
         </div>
       </div>
     </div>
@@ -420,7 +504,7 @@
       <div class="values">
         <div class="value tilt" data-tilt data-reveal="zoom" data-reveal-delay="1">
           <i class="bi bi-translate"></i>
-          <h4>Bilingüismo real</h4>
+          <h3>Bilingüismo real</h3>
           <p>Programa oficial bilingüe desde 2004 con profesorado nativo y certificaciones Cambridge.</p>
         </div>
         <div class="value tilt" data-tilt data-reveal="zoom" data-reveal-delay="2">
@@ -458,13 +542,13 @@
       <header class="section__head section__head--light">
         <span class="eyebrow eyebrow--light" data-reveal>Servicios</span>
         <h2 data-reveal data-reveal-delay="1">Todo lo que necesitas, en un solo colegio</h2>
-        <p data-reveal data-reveal-delay="2">Comedor saludable, transporte, gestión online y un sinfín de actividades para conciliar y crecer.</p>
+        <p data-reveal data-reveal-delay="2">Comedor saludable, aula matinal, gestión online y un sinfín de actividades para conciliar y crecer.</p>
       </header>
 
       <div class="services">
         <a href="https://web2.alexiaedu.com/" class="service shine" data-reveal="zoom" data-reveal-delay="1">
           <div class="service__ic"><i class="bi bi-person-vcard"></i></div>
-          <h4>Alexia</h4>
+          <h3>Alexia</h3>
           <p>Plataforma de comunicación con las familias.</p>
         </a>
         <a href="https://raices.madrid.org/" class="service shine" data-reveal="zoom" data-reveal-delay="2">
@@ -472,17 +556,17 @@
           <h4>Raíces</h4>
           <p>Gestión académica de la Comunidad de Madrid.</p>
         </a>
-        <a href="/servicios/comedor.html" class="service shine" data-reveal="zoom" data-reveal-delay="3">
+        <a href="/servicios/comedor" class="service shine" data-reveal="zoom" data-reveal-delay="3">
           <div class="service__ic"><i class="bi bi-egg-fried"></i></div>
           <h4>Comedor</h4>
           <p>Menús saludables avalados por nutricionistas.</p>
         </a>
-        <a href="#" class="service shine" data-reveal="zoom" data-reveal-delay="4">
+        <a href="/familias/documentacion?q=libros" class="service shine" data-reveal="zoom" data-reveal-delay="4">
           <div class="service__ic"><i class="bi bi-journal-bookmark"></i></div>
           <h4>Libros de texto</h4>
-          <p>Listados oficiales del curso 2026-2027.</p>
+          <p>Listados por curso en el centro de documentación.</p>
         </a>
-        <a href="/servicios/extraescolares.html" class="service shine" data-reveal="zoom" data-reveal-delay="5">
+        <a href="/servicios/extraescolares" class="service shine" data-reveal="zoom" data-reveal-delay="5">
           <div class="service__ic"><i class="bi bi-bicycle"></i></div>
           <h4>Extraescolares</h4>
           <p>Idiomas, deportes, música, robótica…</p>
@@ -493,12 +577,12 @@
           <h4>Campamento de verano</h4>
           <p>Más de 10 años conciliando familia y trabajo. Visita la web del campamento.</p>
         </a>
-        <a href="/servicios/extraescolares.html" class="service shine" data-reveal="zoom" data-reveal-delay="7">
+        <a href="/servicios/madrugadores" class="service shine" data-reveal="zoom" data-reveal-delay="7">
           <div class="service__ic"><i class="bi bi-cup-hot"></i></div>
           <h4>Desayunos escolares</h4>
           <p>Para empezar el día con energía.</p>
         </a>
-        <a href="/servicios/extraescolares.html" class="service shine" data-reveal="zoom" data-reveal-delay="8">
+        <a href="/servicios/madrugadores" class="service shine" data-reveal="zoom" data-reveal-delay="8">
           <div class="service__ic"><i class="bi bi-bus-front"></i></div>
           <h4>Aula matinal</h4>
           <p>Acogida temprana para familias trabajadoras.</p>
@@ -507,77 +591,113 @@
     </div>
   </section>
 
+  <!-- AGENDA -->
+  <section class="section" id="agenda">
+    <div class="container">
+      <header class="section__head between">
+        <div>
+          <span class="eyebrow">Agenda</span>
+          <h2>Qué pasa estos días</h2>
+        </div>
+        <a href="/familias#agenda" class="btn btn--link">Agenda completa <i class="bi bi-arrow-right"></i></a>
+      </header>
+      <div data-agenda="compacta">
+        <p><a href="/familias#agenda">Consulta las próximas fechas del curso</a>.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- DOLORES DRAGONS -->
-  <section style="background:#080808;padding:80px 0;position:relative;overflow:hidden;">
+  <section class="dragons2" style="background:#080808;padding:80px 0;position:relative;overflow:hidden;">
     <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(212,175,55,.07) 0%,transparent 65%);pointer-events:none;"></div>
-    <div style="position:absolute;inset:0;background:url('https://i.imgur.com/OP6BbHs.png') center/300px no-repeat;opacity:.03;pointer-events:none;"></div>
+    <div style="position:absolute;inset:0;background:url('/images/dragon-logo.png') center/300px no-repeat;opacity:.03;pointer-events:none;"></div>
     <div id="dragons-section-grid" class="container" style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
 
       <div>
-        <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.28);color:#D4AF37;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:99px;margin-bottom:18px;">
-          <i class="bi bi-basketball"></i> Club de Baloncesto
+        <span class="dragons2__sello" style="display:inline-flex;align-items:center;gap:7px;background:rgba(212,175,55,.14);border:1px solid rgba(212,175,55,.34);color:#E8C97A;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:6px 15px;border-radius:99px;margin-bottom:18px;">
+          <span class="dragons2__latido" style="width:7px;height:7px;border-radius:50%;background:#E8C97A;display:inline-block;"></span>
+          Inscripciones abiertas · Temporada 2026-27
         </span>
-        <h2 style="font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:16px;">
-          Somos los<br><span style="color:#D4AF37;">Dolores Dragons</span>
+        <h2 class="dragons2__titulo" style="font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:16px;">
+          Estamos montando<br><span class="dragons2__oro" style="color:#E8C97A;">la nueva temporada</span>
         </h2>
-        <p style="color:rgba(255,255,255,.6);font-size:1rem;line-height:1.7;margin-bottom:28px;max-width:460px;">
-          El club de baloncesto del Colegio NSD lleva más de 68 años compitiendo con pasión. En la temporada 25/26 nuestro equipo Cadete Femenino lidera su fase de competición.
+        <p style="color:rgba(255,255,255,.78);font-size:1.02rem;line-height:1.7;margin-bottom:18px;max-width:470px;">
+          Los <strong style="color:#fff;">Dolores Dragons</strong> vuelven en <strong style="color:#fff;">octubre</strong>,
+          y esta vez queremos que la pista se llene. Estamos preparando equipos, horarios y competición
+          para el nuevo curso.
+        </p>
+        <p style="color:rgba(255,255,255,.7);font-size:.98rem;line-height:1.7;margin-bottom:28px;max-width:470px;">
+          <strong style="color:#E8C97A;">Da igual la edad y da igual el nivel.</strong> Desde los que nunca han
+          cogido un balón hasta los que ya compiten, y desde los 4 años de Babybasket hasta los equipos
+          de adultos y veteranos. Si te apetece probar, este es el momento.
         </p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px;">
-          <a href="https://baloncesto-nsd.vercel.app" style="display:inline-flex;align-items:center;gap:8px;background:#D4AF37;color:#080808;font-weight:700;font-size:.9rem;padding:12px 24px;border-radius:8px;text-decoration:none;">
+          <a href="/contacto" class="dragons2__boton" style="display:inline-flex;align-items:center;gap:8px;background:#E8C97A;color:#080808;font-weight:800;font-size:.92rem;padding:13px 24px;border-radius:8px;text-decoration:none;">
+            <i class="bi bi-person-plus-fill"></i> Quiero apuntarme
+          </a>
+          <a href="https://dolores-dragons.vercel.app" target="_blank" rel="noopener noreferrer" class="dragons2__boton dragons2__boton--linea" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#E8C97A;border:1.5px solid rgba(212,175,55,.42);font-weight:700;font-size:.9rem;padding:13px 20px;border-radius:8px;text-decoration:none;">
             <i class="bi bi-basketball"></i> Ver el club
           </a>
-          <a href="https://www.instagram.com/doloresdragons/" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#D4AF37;border:1.5px solid rgba(212,175,55,.3);font-weight:600;font-size:.9rem;padding:12px 20px;border-radius:8px;text-decoration:none;">
-            <i class="bi bi-instagram"></i> @doloresdragons
-          </a>
         </div>
-        <div style="display:flex;border-top:1px solid rgba(212,175,55,.12);padding-top:24px;gap:0;">
-          <div style="padding-right:28px;border-right:1px solid rgba(212,175,55,.12);">
-            <div style="font-size:2rem;font-weight:900;color:#D4AF37;line-height:1;">2</div>
-            <div style="font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;">Equipos</div>
+        <div style="display:flex;border-top:1px solid rgba(212,175,55,.14);padding-top:24px;gap:0;flex-wrap:wrap;">
+          <div style="padding-right:28px;border-right:1px solid rgba(212,175,55,.14);">
+            <div class="dragons2__cifra" style="font-size:2rem;font-weight:900;color:#E8C97A;line-height:1;">9</div>
+            <div style="font-size:.72rem;color:rgba(255,255,255,.72);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;">Categorías</div>
           </div>
-          <div style="padding:0 28px;border-right:1px solid rgba(212,175,55,.12);">
-            <div style="font-size:2rem;font-weight:900;color:#fff;line-height:1;">1º</div>
-            <div style="font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;">Cadete 2ª Fase</div>
+          <div style="padding:0 28px;border-right:1px solid rgba(212,175,55,.14);">
+            <div class="dragons2__cifra" style="font-size:2rem;font-weight:900;color:#fff;line-height:1;">4+</div>
+            <div style="font-size:.72rem;color:rgba(255,255,255,.72);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;">Años, sin tope</div>
           </div>
           <div style="padding-left:28px;">
-            <div style="font-size:2rem;font-weight:900;color:#D4AF37;line-height:1;">68</div>
-            <div style="font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;">Años de historia</div>
+            <div class="dragons2__cifra" style="font-size:2rem;font-weight:900;color:#E8C97A;line-height:1;">60</div>
+            <div style="font-size:.72rem;color:rgba(255,255,255,.72);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;">Años de historia</div>
           </div>
         </div>
       </div>
 
       <div style="display:flex;justify-content:center;">
-        <div style="background:linear-gradient(135deg,#141100,#1a1500);border:1px solid rgba(212,175,55,.2);border-radius:20px;padding:36px;text-align:center;width:100%;max-width:340px;">
-          <img src="https://i.imgur.com/OP6BbHs.png" alt="Dolores Dragons" style="width:100px;height:100px;object-fit:contain;margin:0 auto 18px;display:block;filter:drop-shadow(0 0 20px rgba(212,175,55,.4));" />
-          <div style="font-family:'Fraunces',serif;font-size:1.35rem;font-weight:900;color:#fff;margin-bottom:4px;">DOLORES DRAGONS</div>
-          <div style="font-size:.75rem;color:#D4AF37;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:22px;">Temporada 2025/26</div>
-          <div style="display:grid;gap:8px;text-align:left;margin-bottom:18px;">
-            <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border-radius:7px;padding:9px 13px;">
-              <i class="bi bi-people-fill" style="color:#D4AF37;"></i>
+        <div class="dragons2__tarjeta" style="background:linear-gradient(135deg,#141100,#1a1500);border:1px solid rgba(212,175,55,.24);border-radius:20px;padding:34px;width:100%;max-width:360px;">
+          <img class="dragons2__escudo" src="/images/dragon-logo.png" alt="Escudo del club Dolores Dragons" width="92" height="92" style="width:92px;height:92px;object-fit:contain;margin:0 auto 16px;display:block;" />
+          <div style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900;color:#fff;text-align:center;margin-bottom:4px;">DOLORES DRAGONS</div>
+          <div style="font-size:.74rem;color:#E8C97A;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:center;margin-bottom:22px;">Temporada 2026/27</div>
+
+          <div style="display:grid;gap:7px;margin-bottom:18px;">
+            <div class="dragons2__fila" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border-radius:8px;padding:9px 13px;">
+              <i class="bi bi-people-fill" style="color:#E8C97A;font-size:.95rem;"></i>
               <div>
-                <div style="font-size:.68rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;">Equipos competición</div>
-                <div style="color:#fff;font-weight:700;font-size:.88rem;">Cadete Femenino · Alevín Mixto</div>
+                <div style="font-size:.66rem;color:rgba(255,255,255,.62);text-transform:uppercase;letter-spacing:.06em;">Categorías</div>
+                <div style="color:#fff;font-weight:700;font-size:.85rem;">De Babybasket a Sénior</div>
               </div>
             </div>
-            <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border-radius:7px;padding:9px 13px;">
-              <i class="bi bi-clock-fill" style="color:#D4AF37;"></i>
+            <div class="dragons2__fila" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border-radius:8px;padding:9px 13px;">
+              <i class="bi bi-clock-fill" style="color:#E8C97A;font-size:.95rem;"></i>
               <div>
-                <div style="font-size:.68rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;">Entrenamientos</div>
-                <div style="color:#fff;font-weight:700;font-size:.88rem;">Martes y Jueves · desde 17:00 h</div>
+                <div style="font-size:.66rem;color:rgba(255,255,255,.62);text-transform:uppercase;letter-spacing:.06em;">Entrenamientos</div>
+                <div style="color:#fff;font-weight:700;font-size:.85rem;">Martes y jueves · desde 17:00</div>
               </div>
             </div>
-            <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border-radius:7px;padding:9px 13px;">
-              <i class="bi bi-mortarboard-fill" style="color:#D4AF37;"></i>
+            <div class="dragons2__fila" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border-radius:8px;padding:9px 13px;">
+              <i class="bi bi-trophy-fill" style="color:#E8C97A;font-size:.95rem;"></i>
               <div>
-                <div style="font-size:.68rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;">Escuelas deportivas</div>
-                <div style="color:#fff;font-weight:700;font-size:.88rem;">Desde Infantil hasta ESO · 44€/mes</div>
+                <div style="font-size:.66rem;color:rgba(255,255,255,.62);text-transform:uppercase;letter-spacing:.06em;">Competición</div>
+                <div style="color:#fff;font-weight:700;font-size:.85rem;">Sábados · Carabanchel y Latina</div>
+              </div>
+            </div>
+            <div class="dragons2__fila dragons2__fila--cuota" style="display:flex;align-items:center;gap:10px;background:rgba(232,201,122,.1);border:1px solid rgba(212,175,55,.22);border-radius:8px;padding:9px 13px;">
+              <i class="bi bi-tag-fill" style="color:#E8C97A;font-size:.95rem;"></i>
+              <div>
+                <div style="font-size:.66rem;color:rgba(255,255,255,.62);text-transform:uppercase;letter-spacing:.06em;">Cuota</div>
+                <div style="color:#fff;font-weight:700;font-size:.85rem;">35 €/mes · de octubre a mayo</div>
               </div>
             </div>
           </div>
-          <a href="https://baloncesto-nsd.vercel.app" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#D4AF37;color:#080808;font-weight:700;font-size:.88rem;padding:11px;border-radius:8px;text-decoration:none;">
-            Conoce el club <i class="bi bi-arrow-right"></i>
+
+          <a href="/contacto" class="dragons2__boton dragons2__boton--ancho" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#E8C97A;color:#080808;font-weight:800;font-size:.9rem;padding:12px;border-radius:8px;text-decoration:none;">
+            Reservar plaza <i class="bi bi-arrow-right"></i>
           </a>
+          <p style="font-size:.72rem;color:rgba(255,255,255,.58);text-align:center;margin:12px 0 0;line-height:1.5;">
+            Plazas limitadas por categoría.<br />Te escribimos para contarte los detalles.
+          </p>
         </div>
       </div>
 
@@ -589,78 +709,132 @@
     </style>
   </section>
 
-  <!-- NOTICIAS -->
-  <section class="section" id="noticias">
+
+
+  <!-- CONTACTO -->
+  <section class="section section--soft" id="contacto">
     <div class="container">
-      <header class="section__head between">
-        <div>
-          <span class="eyebrow" data-reveal>Actualidad</span>
-          <h2 data-reveal data-reveal-delay="1">Últimas noticias</h2>
-        </div>
-        <a href="blog/" class="btn btn--link magnetic">Ver todas <i class="bi bi-arrow-right"></i></a>
+      <header class="section__head">
+        <span class="eyebrow">Admisión y contacto</span>
+        <h2>Conocer el colegio, en tres pasos</h2>
+        <p>Te contestamos en menos de 24 horas hábiles con la información de admisión, etapas y servicios. Si lo prefieres, llama a secretaría.</p>
       </header>
-
-      <div class="news">
-        <article class="news__item news__item--feat tilt" data-tilt data-reveal>
-          <a href="blog/xxxvi-semana-cultural.html" class="news__img" style="background-image:linear-gradient(rgba(15,94,22,.15),rgba(15,94,22,.45)), url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&q=80&auto=format&fit=crop');">
-            <span class="news__cat">Cultura</span>
-          </a>
-          <div class="news__body">
-            <div class="news__meta">
-              <span><i class="bi bi-calendar3"></i> 23 marzo 2025</span>
-              <span><i class="bi bi-clock"></i> 4 min lectura</span>
-              <span><i class="bi bi-tag"></i> Comunidad</span>
+      <ol class="steps">
+        <li class="step"><h3>Escribe o llama</h3><p>Con el formulario de al lado o llamando a secretaría, en horario de atención.</p></li>
+        <li class="step"><h3>Visita el colegio</h3><p>Te enseñamos las aulas y las instalaciones y resolvemos tus dudas con el equipo directivo.</p></li>
+        <li class="step"><h3>Formaliza la plaza</h3><p>En secretaría, siguiendo el calendario oficial de admisión de la Comunidad de Madrid.</p></li>
+      </ol>
+      <div class="contacta">
+        <div class="contacta__accion">
+          <form class="form-card" id="contactoFormHome" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="206c83e1-a7f9-485a-9c91-46e8a892f6f4" />
+            <input type="hidden" name="subject" value="Solicitud de información — Colegio NSD" />
+            <input type="hidden" name="from_name" value="Web Colegio NSD" />
+            <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+            <div class="form-card__header">
+              <span class="form-card__header-ico"><i class="bi bi-chat-dots-fill" aria-hidden="true"></i></span>
+              <div class="form-card__header-text">
+                <h3>Solicita información</h3>
+                <p class="form-card__header-sub">Te respondemos en menos de 24 h hábiles · Sin compromiso</p>
+              </div>
             </div>
-            <h3><a href="blog/xxxvi-semana-cultural.html">XXXVI Semana Cultural</a></h3>
-            <p>Una semana llena de talleres, conciertos, gymkanas y actividades intercicladas para celebrar la cultura del colegio.</p>
-            <a href="blog/xxxvi-semana-cultural.html" class="btn btn--link">Leer más <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </article>
-
-        <article class="news__item tilt" data-tilt data-reveal data-reveal-delay="2">
-          <a href="blog/boletin-25-26.html" class="news__img" style="background-image:linear-gradient(rgba(184,121,0,.1),rgba(184,121,0,.5)), url('https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=900&q=80&auto=format&fit=crop');">
-            <span class="news__cat">Familias</span>
-          </a>
-          <div class="news__body">
-            <div class="news__meta">
-              <span><i class="bi bi-calendar3"></i> 1 sept 2025</span>
-              <span><i class="bi bi-clock"></i> 6 min</span>
+            <div class="form-body">
+              <div class="form-row">
+                <label for="Home-nombre">Nombre y apellidos
+                  <input type="text" id="Home-nombre" name="nombre" required autocomplete="name" placeholder="Tu nombre completo" />
+                </label>
+              </div>
+              <div class="form-row form-row--2">
+                <label for="Home-email">Email
+                  <input type="email" id="Home-email" name="email" required autocomplete="email" placeholder="tu@email.com" />
+                </label>
+                <label for="Home-tel">Teléfono
+                  <input type="tel" id="Home-tel" name="telefono" autocomplete="tel" placeholder="6XX XXX XXX" />
+                </label>
+              </div>
+              <div class="form-row">
+                <label for="Home-etapa">Etapa de interés
+                  <select id="Home-etapa" name="etapa">
+                    <option value="">Selecciona etapa</option>
+                    <option>Infantil 0–3</option>
+                    <option>Infantil 3–6</option>
+                    <option>Primaria</option>
+                    <option>ESO</option>
+                    <option>Visita guiada</option>
+                    <option>Otra</option>
+                  </select>
+                </label>
+              </div>
+              <div class="form-row">
+                <label for="Home-msg">Mensaje
+                  <textarea id="Home-msg" name="mensaje" rows="6" placeholder="Cuéntanos qué necesitas…"></textarea>
+                </label>
+              </div>
+              <div class="aviso-datos">
+                <p class="aviso-datos__titulo">Información básica sobre protección de datos</p>
+                <dl>
+                  <div><dt>Responsable</dt><dd>Colegio Ntra. Sra. de los Dolores, S.L.</dd></div>
+                  <div><dt>Finalidad</dt><dd>Atender la consulta y, si se pide, informar sobre el proceso de admisión o concertar una visita.</dd></div>
+                  <div><dt>Legitimación</dt><dd>Consentimiento de la persona interesada (art. 6.1.a RGPD).</dd></div>
+                  <div><dt>Destinatarios</dt><dd>Web3Forms (servicio de envío de formularios) y Vercel (alojamiento de la web), como encargados del tratamiento, con garantías para las transferencias internacionales. No se ceden datos a terceros salvo obligación legal.</dd></div>
+                  <div><dt>Derechos</dt><dd>Acceso, rectificación, supresión, oposición, limitación, portabilidad y retirada del consentimiento en <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a>.</dd></div>
+                  <div><dt>Más información</dt><dd><a href="/privacidad">Política de privacidad</a></dd></div>
+                </dl>
+              </div>
+              <label class="form-check">
+                <input type="checkbox" name="rgpd" required />
+                <span>He leído y acepto la <a href="/privacidad" target="_blank" rel="noopener">política de privacidad</a>.</span>
+              </label>
+              <button type="submit" class="btn btn--primary btn--block">Enviar solicitud</button>
+              <p class="form-nota">Secretaría responde en menos de 24 horas hábiles. Si lo prefieres, llama al <a href="tel:+34914719959">91 471 99 59</a> en horario de atención, aquí al lado.</p>
+              <div class="form-status form-status--ok" id="contactoSuccessHome" role="status" hidden>
+                <i class="bi bi-check-circle-fill"></i>
+                <div><strong>¡Mensaje enviado!</strong><br>Te responderemos en menos de 24 horas hábiles. ¡Gracias!</div>
+              </div>
+              <div class="form-status form-status--err" id="contactoErrorHome" role="alert" hidden>
+                <i class="bi bi-x-circle-fill"></i>
+                <div><strong>Error al enviar.</strong> Inténtalo de nuevo o llámanos al <a href="tel:+34914719959">91 471 99 59</a>.</div>
+              </div>
             </div>
-            <h3><a href="blog/boletin-25-26.html">Boletín informativo 2025-2026</a></h3>
-            <p>Toda la información clave del nuevo curso, organización y calendario.</p>
-            <a href="blog/boletin-25-26.html" class="btn btn--link">Leer más <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </article>
+          </form>
+        </div>
 
-        <article class="news__item tilt" data-tilt data-reveal data-reveal-delay="3">
-          <a href="blog/4eso-empresa.html" class="news__img" style="background-image:linear-gradient(rgba(91,77,227,.15),rgba(91,77,227,.5)), url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&q=80&auto=format&fit=crop');">
-            <span class="news__cat">ESO</span>
-          </a>
-          <div class="news__body">
-            <div class="news__meta">
-              <span><i class="bi bi-calendar3"></i> 26 marzo 2025</span>
-              <span><i class="bi bi-clock"></i> 3 min</span>
+        <div class="contacta__datos">
+          <span class="eyebrow">Datos de contacto</span>
+          <h2>Estamos en Carabanchel.</h2>
+          <p>Muy cerca del Metro Vista Alegre. Te esperamos.</p>
+          <ul class="contact-list">
+            <li><i class="bi bi-geo-alt"></i> <span>C/ Tordo, 15 · 28019 Madrid (Carabanchel)</span></li>
+            <li><i class="bi bi-telephone"></i> <a href="tel:+34914719959">91 471 99 59</a></li>
+            <li><i class="bi bi-envelope"></i> <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a></li>
+          </ul>
+          <div class="contacta__horario">
+            <h3><i class="bi bi-clock-history" aria-hidden="true"></i> Horario de secretaría</h3>
+            <div class="tabla-marco">
+              <table class="tabla">
+                <thead><tr><th scope="col">Periodo</th><th scope="col">L, X y V</th><th scope="col">M y J</th></tr></thead>
+                <tbody>
+                  <tr><td>Sept. y junio</td><td>9:15 – 12:30</td><td>16:00 – 18:30</td></tr>
+                  <tr><td>Oct. a mayo</td><td>9:15 – 12:00</td><td>15:15 – 18:00</td></tr>
+                  <tr><td>Julio</td><td>9:15 – 13:00</td><td>9:15 – 13:00</td></tr>
+                </tbody>
+              </table>
             </div>
-            <h3><a href="blog/4eso-empresa.html">4º de ESO + Empresa</a></h3>
-            <p>Nuestros alumnos de 4º conectan con el mundo laboral a través de empresas colaboradoras.</p>
-            <a href="blog/4eso-empresa.html" class="btn btn--link">Leer más <i class="bi bi-arrow-right"></i></a>
           </div>
-        </article>
-
-        <article class="news__item tilt" data-tilt data-reveal data-reveal-delay="4">
-          <a href="blog/" class="news__img" style="background-image:linear-gradient(rgba(255,143,177,.1),rgba(255,143,177,.5)), url('https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=900&q=80&auto=format&fit=crop');">
-            <span class="news__cat">Salud</span>
-          </a>
-          <div class="news__body">
-            <div class="news__meta">
-              <span><i class="bi bi-calendar3"></i> 13 enero 2025</span>
-              <span><i class="bi bi-clock"></i> 2 min</span>
+          <div class="map-card">
+            <div class="mapa-diferido" data-mapa-src="https://maps.google.com/maps?q=Calle%20del%20Tordo%2015%2C%2028019%20Madrid&amp;z=15&amp;output=embed" data-mapa-titulo="Mapa con la ubicación del Colegio NSD">
+              <div class="mapa-diferido__ficha">
+                <svg class="mapa-diferido__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <p class="mapa-diferido__dir"><strong>Colegio Ntra. Sra. de los Dolores</strong>C/ Tordo, 15 · 28019 Madrid (Carabanchel)</p>
+                <div class="mapa-diferido__botones">
+                  <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Calle+del+Tordo+15%2C+28019+Madrid" target="_blank" rel="noopener noreferrer">Cómo llegar <span class="sr-only">(abre Google Maps en una pestaña nueva)</span></a>
+                  <button type="button" class="btn btn--ghost mapa-diferido__cargar" hidden>Cargar mapa interactivo</button>
+                </div>
+                <p class="mapa-diferido__aviso">El mapa interactivo es de Google: solo se carga si se pulsa el botón y, al hacerlo, Google recibe la dirección IP del dispositivo y puede instalar cookies. <a href="/cookies">Más información</a>.</p>
+              </div>
             </div>
-            <h3><a href="blog/">Programa de Leche y Fruta de la UE</a></h3>
-            <p>Volvemos a participar en este programa europeo para promover hábitos saludables.</p>
-            <a href="blog/" class="btn btn--link">Leer más <i class="bi bi-arrow-right"></i></a>
           </div>
-        </article>
+        </div>
       </div>
     </div>
   </section>
@@ -669,114 +843,31 @@
   <section class="cta" id="admision">
     <div class="container cta__inner">
       <div>
-        <span class="eyebrow eyebrow--light" data-reveal>Admisión 2026–2027</span>
+        <span class="eyebrow eyebrow--light" data-reveal>Admisión 2027–2028</span>
         <h2 data-reveal data-reveal-delay="1">¿Quieres conocer el colegio en persona?</h2>
         <p data-reveal data-reveal-delay="2">Reserva una visita guiada y descubre nuestras aulas, instalaciones y proyecto educativo.</p>
       </div>
-      <div class="cta__actions" data-reveal data-reveal-delay="3">
-        <a href="contacto.html" class="btn btn--primary btn--lg magnetic"><i class="bi bi-calendar-check"></i> Solicitar visita</a>
-        <a href="admision.html" class="btn btn--ghost btn--lg magnetic">Ver admisión</a>
+      <div class="cta__actions">
+        <a href="/contacto" class="btn btn--primary btn--lg"><i class="bi bi-chat-dots" aria-hidden="true"></i> Contacto</a>
+        <a href="/admision" class="btn btn--ghost btn--lg"><i class="bi bi-mortarboard" aria-hidden="true"></i> Admisión</a>
       </div>
     </div>
   </section>
 
-  <!-- CONTACTO -->
-  <section class="section" id="contacto">
-    <div class="container two-col two-col--reverse">
-      <div class="two-col__content">
-        <span class="eyebrow" data-reveal>Contacto</span>
-        <h2 data-reveal data-reveal-delay="1">Hablemos.</h2>
-        <p data-reveal data-reveal-delay="2">Resolvemos tus dudas sobre admisión, etapas, servicios o cualquier información que necesites.</p>
-
-        <ul class="contact-list" data-reveal data-reveal-delay="3">
-          <li><i class="bi bi-geo-alt"></i> <span>C/ Nuestra Señora de los Dolores, s/n · 28019 Madrid (Carabanchel)</span></li>
-          <li><i class="bi bi-telephone"></i> <a href="tel:+34914719959">91 471 99 59</a> · <a href="tel:+34914718954">91 471 89 54</a></li>
-          <li><i class="bi bi-envelope"></i> <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a></li>
-          <li><i class="bi bi-clock"></i> <span>Secretaría: L–V de 9:00 a 14:00</span></li>
-        </ul>
-
-        <div class="contact-social" data-reveal data-reveal-delay="4">
-          <a href="https://www.instagram.com/colegionsdolores/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-          <a href="https://www.youtube.com/@colegionsd6473" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-          <a href="https://www.facebook.com/colegioNSD" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-        </div>
-      </div>
-
-      <form class="form-card" id="contactoForm" data-reveal="right">
-        <!-- Web3Forms — obtén tu clave gratuita en https://web3forms.com -->
-        <input type="hidden" name="access_key" value="206c83e1-a7f9-485a-9c91-46e8a892f6f4" />
-        <input type="hidden" name="subject" value="Solicitud de información — Colegio NSD" />
-        <input type="hidden" name="from_name" value="Web Colegio NSD" />
-        <input type="hidden" name="botcheck" style="display:none" />
-        <!-- Cabecera visual -->
-        <div class="form-card__header">
-          <div class="form-card__header-ico"><i class="bi bi-chat-heart-fill"></i></div>
-          <div class="form-card__header-text">
-            <h3>Solicita información</h3>
-            <p class="form-card__header-sub">Te respondemos en menos de 24 h · Sin compromiso</p>
-          </div>
-        </div>
-        <!-- Campos -->
-        <div class="form-body">
-          <div class="form-row">
-            <label for="cf-nombre">
-              <i class="bi bi-person-fill lbl-ico"></i> Nombre y apellidos
-              <input type="text" id="cf-nombre" name="nombre" required autocomplete="name" placeholder="Tu nombre completo" />
-            </label>
-          </div>
-          <div class="form-row form-row--2">
-            <label for="cf-email">
-              <i class="bi bi-envelope-fill lbl-ico"></i> Email
-              <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder="tu@email.com" />
-            </label>
-            <label for="cf-tel">
-              <i class="bi bi-telephone-fill lbl-ico"></i> Teléfono
-              <input type="tel" id="cf-tel" name="telefono" autocomplete="tel" placeholder="6XX XXX XXX" />
-            </label>
-          </div>
-          <div class="form-row">
-            <label for="cf-etapa">
-              <i class="bi bi-mortarboard-fill lbl-ico"></i> Etapa de interés
-              <select id="cf-etapa" name="etapa">
-                <option value="">Selecciona etapa</option>
-                <option>Infantil 0–3</option>
-                <option>Infantil 3–6</option>
-                <option>Primaria</option>
-                <option>ESO</option>
-                <option>Otra</option>
-              </select>
-            </label>
-          </div>
-          <!-- Mensaje + política de privacidad en paralelo -->
-          <div class="form-row--msg">
-            <label for="cf-msg">
-              <i class="bi bi-chat-left-text-fill lbl-ico"></i> Mensaje
-              <textarea id="cf-msg" name="mensaje" rows="5" placeholder="Cuéntanos qué necesitas…"></textarea>
-            </label>
-            <label class="form-privacy">
-              <input type="checkbox" name="rgpd" required />
-              <i class="bi bi-shield-lock-fill"></i>
-              <span>He leído y acepto la <a href="/privacidad.html">política de privacidad</a></span>
-            </label>
-          </div>
-          <button type="submit" class="btn btn--primary btn--block magnetic">
-            <i class="bi bi-send-fill"></i> Enviar solicitud
-          </button>
-          <div class="form-status form-status--ok" id="contactoSuccess" hidden>
-            <i class="bi bi-check-circle-fill"></i>
-            <div><strong>¡Mensaje enviado!</strong><br>Te responderemos en menos de 24 horas hábiles. ¡Gracias por contactar con el Colegio NSD!</div>
-          </div>
-          <div class="form-status form-status--err" id="contactoError" hidden>
-            <i class="bi bi-x-circle-fill"></i>
-            <div><strong>Error al enviar.</strong> Por favor, inténtalo de nuevo o llámanos al <a href="tel:+34914719959">91 471 99 59</a>.</div>
-          </div>
-        </div>
-      </form>
-    </div>
-  </section>
+  </main>
 
   <div id="site-footer"></div>
+  <script src="/assets/js/calendario-datos.js" defer></script>
+  <script src="/assets/js/noticias-datos.js" defer></script>
+  <script src="/assets/js/nsd-spring.js" defer></script>
+  <script src="/assets/js/nsd-hoy.js" defer></script>
+  <script src="/assets/js/home-noticias.js" defer></script>
+  <script src="/assets/js/agenda.js" defer></script>
+  <script src="/assets/js/nsd-fotos.js" defer></script>
+  <script src="/assets/js/nsd-visor.js" defer></script>
   <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/nsd-arriba.js" defer></script>
+  <script src="/assets/js/nsd-mapa.js" defer></script>
   <script src="/assets/js/forms.js" defer></script>
 </body>
 </html>

@@ -1,621 +1,320 @@
-﻿<!doctype html>
-<html lang="es" data-page="servicios">
+<!doctype html>
+<html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Actividades Extraescolares · Colegio NSD</title>
-  <meta name="description" content="Actividades extraescolares del Colegio NSD: deportes, bilingüe, informática, baile, judo y escuelas deportivas. Desde 44 €/mes con descuentos familiares. Curso 2025–26." />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script src="/assets/js/theme-init.js"></script>
+  <title>Extraescolares · Colegio NSD</title>
+  <meta name="description" content="Extraescolares 2026-27 del Colegio NSD: 14 actividades por tipo (deporte, idiomas, arte, tecnología y estudio) y un simulador con el precio de vuestra combinación." />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta name="theme-color" content="#0A5E24" />
-  <link rel="canonical" href="https://www.colegionsdolores.es/servicios/extraescolares.html" />
+  <meta name="theme-color" content="#F5F1EA" />
+  <link rel="canonical" href="https://colegio-nsd.vercel.app/servicios/extraescolares" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Actividades Extraescolares · Colegio NSD" />
-  <meta property="og:description" content="Deportes, bilingüe, informática, baile, judo y escuelas deportivas. Descuentos para familias numerosas." />
+  <meta property="og:title" content="Extraescolares · Colegio NSD" />
+  <meta property="og:description" content="Extraescolares 2026-27 del Colegio NSD: 14 actividades por tipo (deporte, idiomas, arte, tecnología y estudio) y un simulador con el precio de vuestra combinación." />
+  <meta property="og:url" content="https://colegio-nsd.vercel.app/servicios/extraescolares" />
+  <meta property="og:image" content="https://colegio-nsd.vercel.app/assets/img/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Colegio NSD" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" href="/assets/img/logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
   <link rel="stylesheet" href="/assets/css/pages.css" />
-  <style>
-    /* ── Stats bar ── */
-    .stats-bar {
-      background: var(--green-900); padding: 22px 0;
-      border-bottom: 3px solid var(--yellow-500);
-    }
-    .stats-bar__inner {
-      display: flex; justify-content: space-around; flex-wrap: wrap; gap: 18px;
-    }
-    .stat-item { text-align: center; }
-    .stat-num {
-      font-family: var(--font-display); font-size: 2.2rem; font-weight: 900;
-      color: var(--yellow-500); line-height: 1; display: block;
-    }
-    .stat-label {
-      font-size: .75rem; color: rgba(255,255,255,.7);
-      text-transform: uppercase; letter-spacing: .08em;
-      margin-top: 4px; display: block;
-    }
+  <link rel="stylesheet" href="/assets/css/secciones.css" />
 
-    /* ── Activity cards ── */
-    .act-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
-      margin: 0 0 44px;
-    }
-    @media (max-width: 880px) { .act-grid { grid-template-columns: 1fr; } }
-
-    .act-card {
-      background: #fff; border: 1px solid var(--ink-100);
-      border-radius: var(--radius-lg); overflow: hidden;
-      display: flex; flex-direction: column;
-      transition: transform .25s, box-shadow .25s;
-    }
-    .act-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
-
-    .act-card__visual {
-      height: 130px; position: relative;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .act-card__visual::after {
-      content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.18);
-    }
-    .act-card__visual i {
-      font-size: 3.8rem; color: #fff; position: relative; z-index: 1;
-      filter: drop-shadow(0 3px 10px rgba(0,0,0,.35));
-      animation: float-icon 4s ease-in-out infinite;
-    }
-    .act-card:nth-child(2) .act-card__visual i { animation-delay: .5s; }
-    .act-card:nth-child(3) .act-card__visual i { animation-delay: 1s; }
-    .act-card:nth-child(4) .act-card__visual i { animation-delay: 1.5s; }
-    .act-card:nth-child(5) .act-card__visual i { animation-delay: 2s; }
-    .act-card:nth-child(6) .act-card__visual i { animation-delay: 2.5s; }
-
-    @keyframes float-icon {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .act-card__body {
-      padding: 18px 20px; flex: 1; display: flex; flex-direction: column;
-    }
-    .act-card__body h3 {
-      font-family: var(--font-display); font-size: 1.05rem;
-      color: var(--ink-900); margin: 0 0 8px;
-    }
-    .act-card__body p {
-      font-size: .88rem; color: var(--ink-600); margin: 0; flex: 1; line-height: 1.55;
-    }
-
-    .act-price-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: var(--green-700); color: #fff;
-      font-size: .78rem; font-weight: 700;
-      padding: 4px 10px; border-radius: 999px;
-      margin-bottom: 10px; align-self: flex-start;
-    }
-    .act-price-badge--alt { background: var(--yellow-500); color: var(--ink-900); }
-
-    .act-card__meta {
-      margin-top: auto; border-top: 2px solid var(--ink-100);
-      padding-top: 12px; margin-bottom: 0;
-      display: flex; flex-wrap: wrap; gap: 8px;
-    }
-    .act-card__meta span {
-      font-size: .78rem; color: var(--ink-500);
-      display: inline-flex; align-items: center; gap: 4px;
-    }
-    .act-card__meta i { color: var(--green-700); }
-
-    /* ── Promotions section ── */
-    .promos-block {
-      background: linear-gradient(135deg, var(--green-900) 0%, #0a3d17 50%, #062c12 100%);
-      border-radius: var(--radius-xl); padding: 38px 32px; margin: 0 0 44px;
-      position: relative; overflow: hidden;
-    }
-    .promos-block::before {
-      content: '';
-      position: absolute; top: -80px; right: -80px;
-      width: 260px; height: 260px;
-      background: radial-gradient(circle, rgba(201,160,66,.22), transparent 70%);
-      border-radius: 50%; pointer-events: none;
-    }
-    .promos-block::after {
-      content: '';
-      position: absolute; bottom: -60px; left: -30px;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(255,255,255,.06), transparent 70%);
-      border-radius: 50%; pointer-events: none;
-    }
-    .promos-block__header {
-      text-align: center; margin-bottom: 30px; position: relative; z-index: 1;
-    }
-    .promo-eyebrow {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--yellow-500); color: var(--ink-900);
-      font-size: .72rem; font-weight: 800; text-transform: uppercase;
-      letter-spacing: .1em; padding: 5px 16px; border-radius: 999px;
-      margin-bottom: 12px;
-    }
-    .promos-block__header h2 {
-      font-family: var(--font-display); color: #fff;
-      font-size: 1.75rem; margin: 0 0 6px;
-    }
-    .promos-block__header p { color: rgba(255,255,255,.65); margin: 0; font-size: .95rem; }
-
-    .promos-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-      position: relative; z-index: 1;
-    }
-    @media (max-width: 720px) { .promos-grid { grid-template-columns: 1fr; } }
-
-    .promo-card {
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
-      border-radius: var(--radius-lg); padding: 28px 22px; text-align: center;
-      transition: background .2s, transform .2s;
-    }
-    .promo-card:hover { background: rgba(255,255,255,.14); transform: translateY(-4px); }
-
-    .promo-emoji { font-size: 2rem; display: block; margin-bottom: 10px; }
-
-    .promo-amount {
-      font-family: var(--font-display); font-size: 3rem; font-weight: 900;
-      line-height: 1; display: block; margin-bottom: 6px;
-      background: linear-gradient(135deg, #e8b93a, #c9a042);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: promo-pulse 2.8s ease-in-out infinite;
-    }
-    .promo-amount--free {
-      font-size: 1.9rem;
-      background: linear-gradient(135deg, #4ade80, #16a34a);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    @keyframes promo-pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: .85; transform: scale(1.04); }
-    }
-
-    .promo-card h3 {
-      color: #fff; font-family: var(--font-display); font-size: 1rem; margin: 0 0 6px;
-    }
-    .promo-card p { color: rgba(255,255,255,.62); font-size: .82rem; margin: 0; line-height: 1.45; }
-
-    /* ── Sport cards ── */
-    .sport-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
-      margin: 22px 0 24px;
-    }
-    @media (max-width: 880px) { .sport-grid { grid-template-columns: 1fr; } }
-
-    .sport-card {
-      border: 1px solid var(--ink-100); border-radius: var(--radius-lg);
-      overflow: hidden; display: flex; flex-direction: column;
-    }
-    .sport-card__img {
-      height: 110px; display: flex; align-items: center; justify-content: center;
-      position: relative;
-    }
-    .sport-card__img::after {
-      content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.22);
-    }
-    .sport-card__img i {
-      font-size: 2.8rem; color: #fff; position: relative; z-index: 1;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,.3));
-    }
-    .sport-card__body {
-      padding: 16px 18px; background: #fff; flex: 1; display: flex; flex-direction: column;
-    }
-    .sport-card__body h4 {
-      font-family: var(--font-display); margin: 0 0 6px; font-size: 1rem;
-    }
-    .sport-card__body p {
-      font-size: .85rem; color: var(--ink-600); margin: 0; flex: 1; line-height: 1.55;
-    }
-    .sport-card__tag {
-      display: inline-block; margin-top: 10px;
-      background: var(--green-100); color: var(--green-700);
-      font-size: .75rem; font-weight: 700; padding: 3px 10px; border-radius: 999px;
-    }
-
-    /* ── Callout ── */
-    .callout {
-      background: var(--green-100); border-left: 4px solid var(--green-700);
-      border-radius: 0 6px 6px 0; padding: 14px 18px;
-      display: flex; gap: 12px; align-items: flex-start; margin: 24px 0;
-    }
-    .callout i { color: var(--green-700); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
-    .callout p { margin: 0; font-size: .9rem; color: var(--ink-800); line-height: 1.55; }
-
-    /* ── Schedule ── */
-    .multi-cell { font-size: .78rem; line-height: 1.7; }
-  </style>
+  <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
 </head>
 <body id="top">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
   <div id="site-header"></div>
 
-  <!-- ═══════════════════════════════════════
-       PAGE HERO
-  ═══════════════════════════════════════ -->
+  <main id="contenido">
+
   <section class="page-hero">
     <div class="container page-hero__inner">
       <div>
-        <nav class="crumbs" aria-label="Migas de pan">
-          <a href="/">Inicio</a> <i class="bi bi-chevron-right"></i>
-          <a href="/#servicios">Servicios</a> <i class="bi bi-chevron-right"></i>
-          <span>Extraescolares</span>
-        </nav>
-        <h1>Actividades Extraescolares</h1>
-        <p>Deportes, idiomas, robótica, baile y más. Ampliamos el día lectivo con propuestas para que cada alumno encuentre su pasión — con descuentos para familias.</p>
+        <nav class="crumbs" aria-label="Migas de pan"><a href="/">Inicio</a> <i class="bi bi-chevron-right" aria-hidden="true"></i> <span>Extraescolares</span></nav>
+        <h1>Actividades extraescolares</h1>
+        <p>Catorce actividades de octubre a mayo, por la mañana, a mediodía y por la tarde. Montad vuestra combinación y ved el precio al momento.</p>
       </div>
       <div class="page-hero__meta">
-        <span class="meta"><i class="bi bi-grid-3x3-gap"></i> 7 actividades · 2025–26</span>
-        <span class="meta"><i class="bi bi-tag"></i> Desde 44 €/mes</span>
-        <span class="meta"><i class="bi bi-people"></i> 3 – 18 años</span>
+        <span class="meta"><i class="bi bi-grid-3x3-gap" aria-hidden="true"></i> 14 actividades · 2026–27</span>
+        <span class="meta"><i class="bi bi-tag" aria-hidden="true"></i> Desde 35 €/mes</span>
+        <span class="meta"><i class="bi bi-calendar3" aria-hidden="true"></i> De octubre a mayo</span>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════
-       STATS BAR
-  ═══════════════════════════════════════ -->
-  <div class="stats-bar">
-    <div class="container stats-bar__inner">
-      <div class="stat-item">
-        <span class="stat-num">7</span>
-        <span class="stat-label">Actividades</span>
+  <section class="section" id="tarifas">
+    <div class="container">
+      <div class="promos">
+        <div class="promos__cab">
+          <span class="promos__sello"><i class="bi bi-tags-fill" aria-hidden="true"></i> Tarifas 2026–27</span>
+          <h2>Elegid la combinación que mejor os venga</h2>
+          <p>Cuantas más actividades, menos cuesta cada una.</p>
+        </div>
+        <div class="promos__rejilla">
+          <article class="promo promo--destacada">
+            <span class="promo__letra">Opción A</span>
+            <span class="promo__precio">95 €<small>/mes</small></span>
+            <p>Bilingüismo + 1 actividad</p>
+          </article>
+          <article class="promo">
+            <span class="promo__letra">Opción B</span>
+            <span class="promo__precio">125 €<small>/mes</small></span>
+            <p>Bilingüismo + 2 actividades</p>
+          </article>
+          <article class="promo">
+            <span class="promo__letra">Opción C</span>
+            <span class="promo__precio">70 €<small>/mes</small></span>
+            <p>Dos actividades a elegir (excepto Bilingüismo)</p>
+          </article>
+          <article class="promo">
+            <span class="promo__letra">Opción D</span>
+            <span class="promo__precio">35 €<small>/mes</small></span>
+            <p>Por actividad: Fútbol Sala, Predeporte o Baloncesto</p>
+          </article>
+        </div>
+        <div class="promos__sueltas">
+          <div><span>Bilingüismo suelto</span><strong>63 €/mes</strong></div>
+          <div><span>Otras actividades sueltas</span><strong>44 €/mes</strong></div>
+          <div><span>Fútbol Sala · Baloncesto · Predeporte</span><strong>35 €/mes</strong></div>
+          <div><span>Madrugadores, desde las 7:30</span><strong>12 €/día</strong></div>
+        </div>
       </div>
-      <div class="stat-item">
-        <span class="stat-num">44 €</span>
-        <span class="stat-label">precio / mes</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num">50%</span>
-        <span class="stat-label">dto. 2.º hermano</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num">3+</span>
-        <span class="stat-label">años mínimo</span>
+      <div class="tarifas__notas">
+        <p><i class="bi bi-person-check" aria-hidden="true"></i> Los descuentos son <strong>individuales</strong>: se aplican a cada alumno por separado.</p>
+        <p><i class="bi bi-calendar-x" aria-hidden="true"></i> Quien se da de baja durante el curso y vuelve pierde el descuento y paga el precio vigente.</p>
+        <p><i class="bi bi-gift" aria-hidden="true"></i> <strong>Judogui gratis</strong> para quien se apunta por primera vez a Judo.</p>
+        <p><i class="bi bi-receipt" aria-hidden="true"></i> Servicios complementarios de cuota anual, de carácter voluntario: Gabinete Pedagógico 33 € (diciembre), seguro de accidentes 26 € y app Alexia Familias 26 € (octubre). La enseñanza en las etapas concertadas es gratuita.</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <section class="container article">
-    <article class="prose">
+  <section class="section section--soft sim-seccion" id="simulador">
+    <div class="container">
+      <header class="section__head section__head--left">
+        <h2>Montad vuestra semana</h2>
+        <p>Elegid la etapa y añadid actividades. El precio se calcula con la opción más barata de las tarifas 2026-27, y lo que choca de horario se bloquea solo.</p>
+      </header>
 
-      <p class="lead">De lunes a viernes, antes de clase, al mediodía y por la tarde. Inscripción a través de Secretaría o la secretaría virtual en colegionsdolores.es.</p>
-
-      <!-- ═══════════════════════════════════════
-           ACTIVIDADES — tarjetas visuales
-      ═══════════════════════════════════════ -->
-      <h2>Actividades del curso 2025–26</h2>
-
-      <div class="act-grid">
-
-        <!-- Madrugadores -->
-        <div class="act-card" id="madrugadores">
-          <div class="act-card__visual" style="background: linear-gradient(135deg, #f59e0b, #b45309);">
-            <i class="bi bi-sunrise"></i>
+      <div class="sim">
+        <div class="sim__col">
+          <div class="sim__barra" aria-hidden="true">
+            <span><strong data-sim-total>0 €</strong> al mes · <span data-sim-num>0 actividades</span></span>
+            <a href="#simResumen" tabindex="-1">Ver resumen <i class="bi bi-arrow-down" aria-hidden="true"></i></a>
           </div>
-          <div class="act-card__body">
-            <h3>Madrugadores y Acogida Tarde</h3>
-            <p>Servicio de acogida antes y después de clase para conciliar los horarios familiares. Disponible todos los días lectivos.</p>
-            <div class="act-card__meta">
-              <span><i class="bi bi-clock"></i> 7:00–9:00 h · 17:00–19:00 h</span>
-              <span><i class="bi bi-people"></i> Todos los alumnos</span>
+          <h3 class="sim__paso"><span>1</span> Etapa</h3>
+          <div class="sim-etapas" id="simEtapas" role="group" aria-label="Etapa del alumno"></div>
+
+          <h3 class="sim__paso"><span>2</span> Actividades</h3>
+          <div class="sim__filtros">
+            <div class="sim-tipos" id="simTipos" role="group" aria-label="Filtrar por tipo de actividad"></div>
+            <label class="sim-encaja"><input type="checkbox" id="simEncaja" /> Solo lo que encaja</label>
+          </div>
+          <div id="simLista">
+          <section class="sim-grupo">
+            <h3 class="sim-grupo__titulo"><i class="bi bi-dribbble" aria-hidden="true"></i> Deporte</h3>
+            <div class="sim-grupo__lista">
+              <article class="act act--dragons">
+                <div class="act__cab"><div class="act__titulo"><h4>Baloncesto · Dolores Dragons</h4><span class="act__precio">35 €/mes</span></div></div>
+                <p>El club de baloncesto del colegio. Entrenamientos en la pista del cole y partidos los sábados por la mañana en Carabanchel y Latina.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> Primaria 1.º–3.º: M y J 17:00–18:00 · Primaria 4.º–6.º: M y J 17:00–18:00 · ESO: M y J 18:00–19:00</p>
+              </article>
+              <article class="act">
+                <div class="act__cab"><div class="act__titulo"><h4>Fútbol Sala</h4><span class="act__precio">35 €/mes</span></div></div>
+                <p>Escuela deportiva con equipos en competición oficial los sábados por la mañana.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> Primaria 1.º–3.º: L y X 17:00–18:00 · Primaria 4.º–6.º: L y X 17:00–18:00 · ESO: L y X 18:00–19:00</p>
+              </article>
+              <article class="act">
+                <div class="act__cab"><div class="act__titulo"><h4>Predeporte</h4><span class="act__precio">35 €/mes</span></div></div>
+                <p>Habilidades motrices, coordinación y trabajo en equipo a través del juego: la entrada al baloncesto y al fútbol.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> Infantil: L y X 17:00–18:00 o M y J 17:00–18:00</p>
+              </article>
+              <article class="act">
+                <div class="act__cab"><div class="act__titulo"><h4>Escuela de Judo</h4><span class="act__precio">44 €/mes</span></div></div>
+                <p>Iniciación desde los 4 años, competición oficial en Primaria y preparación de cinturones.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> Infantil: M y J 17:00–18:00 · Primaria 1.º–3.º: M y J 17:00–18:00 · Primaria 4.º–6.º: M y J 17:00–18:00</p>
+              </article>
             </div>
+          </section>
+          <section class="sim-grupo">
+            <h3 class="sim-grupo__titulo"><i class="bi bi-translate" aria-hidden="true"></i> Idiomas</h3>
+            <div class="sim-grupo__lista">
+              <article class="act">
+                <div class="act__cab"><div class="act__titulo"><h4>Programa de Bilingüismo</h4><span class="act__precio">63 €/mes</span></div></div>
+                <p>Una hora de inglés cada mañana antes de clase, de lunes a viernes.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> Infantil: L a V 8:55–9:50 · Primaria 1.º–3.º: L a V 8:55–9:50 · Primaria 4.º–6.º: L a V 8:55–9:50</p>
+              </article>
+              <article class="act">
+                <div class="act__cab"><div class="act__titulo"><h4>Bilingüismo ESO · Cambridge</h4><span class="act__precio">Precio en secretaría</span></div></div>
+                <p>Preparación de los títulos oficiales de Cambridge, adaptada a cada curso.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> ESO: L a V 12:30–13:25</p>
+              </article>
+              <article class="act">
+                <div class="act__cab"><div class="act__titulo"><h4>Academia de inglés</h4><span class="act__precio">44 €/mes</span></div></div>
+                <p>Inglés de forma natural y dinámica, adaptado a cada edad.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> Primaria 1.º–3.º: M y J 17:00–18:00 · Primaria 4.º–6.º: M y J 17:00–18:00 · ESO: M y J 17:00–18:00</p>
+              </article>
+            </div>
+          </section>
+          <section class="sim-grupo">
+            <h3 class="sim-grupo__titulo"><i class="bi bi-palette" aria-hidden="true"></i> Arte, música y escena</h3>
+            <div class="sim-grupo__lista">
+              <article class="act">
+                <div class="act__cab"><div class="act__titulo"><h4>Escuela de Música</h4><span class="act__precio">44 €/mes</span></div></div>
+                <p>Del movimiento y la canción en Infantil a la banda de rock en Secundaria.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> Infantil: L y X 14:00–15:00 · Primaria 1.º–3.º: M y J 14:00–15:00 · Primaria 4.º–6.º: M y J 14:00–15:00 · ESO: L y X 17:00–18:00</p>
+              </article>
+              <article class="act">
+                <div class="act__cab"><div class="act__titulo"><h4>Pintura y manualidades</h4><span class="act__precio">44 €/mes</span></div></div>
+                <p>Jabones naturales, barro, dibujo, pulseras, velas y experimentos con fragancias.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> Infantil: M y J 14:00–15:00 · Primaria 1.º–3.º: M y J 17:00–18:00 · Primaria 4.º–6.º: M y J 17:00–18:00</p>
+              </article>
+              <article class="act">
+                <div class="act__cab"><div class="act__titulo"><h4>Teatro</h4><span class="act__precio">44 €/mes</span></div></div>
+                <p>Técnicas de actuación, expresión corporal y trabajo en equipo.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> Primaria 1.º–3.º: M y J 17:00–18:00 · Primaria 4.º–6.º: M y J 17:00–18:00 · ESO: M y J 17:00–18:00</p>
+              </article>
+              <article class="act">
+                <div class="act__cab"><div class="act__titulo"><h4>Baile moderno</h4><span class="act__precio">44 €/mes</span></div></div>
+                <p>Coreografías actuales para ganar coordinación, ritmo y expresión corporal.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> Infantil: L y X 17:00–18:00 · Primaria 1.º–3.º: L y X 17:00–18:00 · Primaria 4.º–6.º: L y X 17:00–18:00</p>
+              </article>
+            </div>
+          </section>
+          <section class="sim-grupo">
+            <h3 class="sim-grupo__titulo"><i class="bi bi-cpu" aria-hidden="true"></i> Tecnología y lógica</h3>
+            <div class="sim-grupo__lista">
+              <article class="act">
+                <div class="act__cab"><div class="act__titulo"><h4>Robótica</h4><span class="act__precio">44 €/mes</span></div></div>
+                <p>Manejo y programación de robots: lógica, resolución de problemas y trabajo en equipo.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> Primaria 1.º–3.º: M y J 17:00–18:00 · Primaria 4.º–6.º: M y J 17:00–18:00</p>
+              </article>
+              <article class="act">
+                <div class="act__cab"><div class="act__titulo"><h4>Informática</h4><span class="act__precio">44 €/mes</span></div></div>
+                <p>Ofimática, Canva y creación de videojuegos con Scratch.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> Primaria 1.º–3.º: M y J 14:00–15:00 · Primaria 4.º–6.º: L y X 14:00–15:00</p>
+              </article>
+              <article class="act">
+                <div class="act__cab"><div class="act__titulo"><h4>Ajedrez</h4><span class="act__precio">44 €/mes</span></div></div>
+                <p>De la base a las estrategias de torneo: lógica, memoria y concentración.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> Primaria 1.º–3.º: L y X 17:00–18:00 · Primaria 4.º–6.º: L y X 17:00–18:00</p>
+              </article>
+            </div>
+          </section>
+          <section class="sim-grupo">
+            <h3 class="sim-grupo__titulo"><i class="bi bi-journal-check" aria-hidden="true"></i> Estudio</h3>
+            <div class="sim-grupo__lista">
+              <article class="act">
+                <div class="act__cab"><div class="act__titulo"><h4>Refuerzo y apoyo escolar</h4><span class="act__precio">44 €/mes</span></div></div>
+                <p>Grupos reducidos para hacer las tareas, reforzar contenidos y coger hábitos de estudio.</p>
+                <p class="act__hora"><i class="bi bi-clock" aria-hidden="true"></i> Primaria 1.º–3.º: L y X 17:00–18:00 · Primaria 4.º–6.º: L y X 17:00–18:00 · ESO: L y X 17:00–18:00</p>
+              </article>
+            </div>
+          </section>
           </div>
         </div>
 
-        <!-- Bilingüe Extraescolar -->
-        <div class="act-card" id="bilinguee">
-          <div class="act-card__visual" style="background: linear-gradient(135deg, #3b82f6, #1e40af);">
-            <i class="bi bi-translate"></i>
+        <aside class="sim__resumen" id="simResumen" aria-labelledby="simResumenTitulo">
+          <div class="sim__total">
+            <h3 id="simResumenTitulo">Vuestra combinación</h3>
+            <p><strong data-sim-total>0 €</strong><span>al mes</span></p>
+            <small data-sim-num>0 actividades</small>
           </div>
-          <div class="act-card__body">
-            <span class="act-price-badge act-price-badge--alt"><i class="bi bi-tag-fill"></i> 63 €/mes</span>
-            <h3>Actividades Bilingües</h3>
-            <p><strong>Infantil:</strong> Vocabulary, Song &amp; Games, Creativity, BEDA Preparation (5 años), Short Stories.<br>
-               <strong>1.º–3.º Primaria:</strong> Cambridge prep, Comprensión lectora, Natural Workshop.<br>
-               <strong>4.º–6.º Primaria:</strong> Cambridge prep, Natural Workshop, Sports.</p>
-            <div class="act-card__meta">
-              <span><i class="bi bi-clock"></i> 9:00–9:50 h</span>
-              <span><i class="bi bi-people"></i> Infantil y Primaria</span>
-            </div>
+          <div class="sim__vacio" id="simVacio">
+            <i class="bi bi-hand-index" aria-hidden="true"></i>
+            <p>Añadid actividades de la lista: aquí aparecerán el precio, la semana y lo que os ahorráis.</p>
           </div>
-        </div>
-
-        <!-- Informática y Robótica -->
-        <div class="act-card" id="informatica">
-          <div class="act-card__visual" style="background: linear-gradient(135deg, #7c3aed, #4c1d95);">
-            <i class="bi bi-cpu-fill"></i>
+          <div id="simDetalle" hidden>
+            <ul class="sim-elegidas" id="simElegidas"></ul>
+            <h4>Precio</h4>
+            <ul class="sim-desglose" id="simDesglose"></ul>
+            <p class="sim-ahorro" id="simAhorro" hidden></p>
+            <h4>Vuestra semana</h4>
+            <div id="simSemana"></div>
           </div>
-          <div class="act-card__body">
-            <span class="act-price-badge"><i class="bi bi-tag-fill"></i> 44 €/mes</span>
-            <h3>Informática y Robótica</h3>
-            <p><strong>Gr. A (4.º–6.º):</strong> Scratch, robótica TRUE TRUE, Canva, Word/Excel/PowerPoint. Lun y Mié.<br>
-               <strong>Gr. B (1.º–3.º):</strong> Iniciación informática, PowerPoint, Canva/Publisher, CodeSpark. Mar y Jue.<br>
-               Máx. 12 alumnos por grupo. Profesor: Sergio del Pino.</p>
-            <div class="act-card__meta">
-              <span><i class="bi bi-clock"></i> 14:00–15:00 h</span>
-              <span><i class="bi bi-people"></i> 1.º–6.º Primaria</span>
-            </div>
+          <div class="sim-madru">
+            <h4>¿Madrugadores? <small>12 € el día</small></h4>
+            <div class="sim-madru__dias" id="simMadru" role="group" aria-label="Días de Madrugadores a la semana"></div>
           </div>
-        </div>
-
-        <!-- Academia de Estudio -->
-        <div class="act-card" id="academia">
-          <div class="act-card__visual" style="background: linear-gradient(135deg, #f97316, #9a3412);">
-            <i class="bi bi-book-half"></i>
+          <div class="sim-recs" id="simRecs" hidden>
+            <h4>Os puede interesar</h4>
+            <ul id="simRecsLista"></ul>
           </div>
-          <div class="act-card__body">
-            <span class="act-price-badge"><i class="bi bi-tag-fill"></i> 44 €/mes</span>
-            <h3>Academia de Estudio</h3>
-            <p>Tareas, técnicas de estudio y repaso de cualquier asignatura. Profesora: Raquel Gómez.</p>
-            <div class="act-card__meta">
-              <span><i class="bi bi-clock"></i> Mar y Jue · 17:00–18:00 h</span>
-              <span><i class="bi bi-people"></i> Primaria</span>
-            </div>
+          <div class="sim__acciones">
+            <a class="btn btn--primary" href="mailto:secretaria@colegionsdolores.es" data-sim-correo><i class="bi bi-envelope" aria-hidden="true"></i> Enviar a secretaría</a>
+            <button type="button" class="btn btn--ghost" id="simCopiar"><i class="bi bi-link-45deg" aria-hidden="true"></i> Copiar enlace</button>
+            <button type="button" class="sim__vaciar" id="simVaciar">Vaciar</button>
           </div>
-        </div>
-
-        <!-- Baile -->
-        <div class="act-card" id="baile">
-          <div class="act-card__visual" style="background: linear-gradient(135deg, #ec4899, #9d174d);">
-            <i class="bi bi-music-note-beamed"></i>
-          </div>
-          <div class="act-card__body">
-            <span class="act-price-badge"><i class="bi bi-tag-fill"></i> 44 €/mes</span>
-            <h3>Baile</h3>
-            <p>Clases de baile para Infantil y Primaria. Salida por la puerta principal de la calle Tordo. Profesora: Ainhoa Rodríguez.</p>
-            <div class="act-card__meta">
-              <span><i class="bi bi-clock"></i> Lun y Mié · 17:00–18:00 h</span>
-              <span><i class="bi bi-people"></i> Infantil y Primaria</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Judo -->
-        <div class="act-card" id="judo">
-          <div class="act-card__visual" style="background: linear-gradient(135deg, #ef4444, #991b1b);">
-            <i class="bi bi-shield-check"></i>
-          </div>
-          <div class="act-card__body">
-            <span class="act-price-badge"><i class="bi bi-tag-fill"></i> 44 €/mes</span>
-            <h3>Escuela de Judo</h3>
-            <p>Iniciación, entrenamiento y competición oficial. Preparación de cinturones desde los 4 años. Judogui gratis para nuevos alumnos.</p>
-            <div class="act-card__meta">
-              <span><i class="bi bi-clock"></i> Mar y Jue · 17:00–18:00 h</span>
-              <span><i class="bi bi-people"></i> Inf. 4-5 y Primaria</span>
-            </div>
-          </div>
-        </div>
-
+          <p class="sim__nota">Precio orientativo: secretaría confirma el importe. Aparte, las cuotas anuales del colegio.</p>
+        </aside>
       </div>
+      <p class="sr-only" id="simVoz" role="status" aria-live="polite"></p>
+    </div>
+  </section>
 
-      <!-- ═══════════════════════════════════════
-           PROMOCIONES — sección protagonista
-      ═══════════════════════════════════════ -->
-      <div class="promos-block">
-        <div class="promos-block__header">
-          <div class="promo-eyebrow"><i class="bi bi-lightning-fill"></i> Descuentos y promociones</div>
-          <h2>Ahorra con nuestras promociones</h2>
-          <p>Pensadas para que toda la familia pueda participar sin preocuparse por el coste</p>
-        </div>
-
-        <div class="promos-grid">
-
-          <div class="promo-card">
-            <span class="promo-emoji">👨‍👩‍👦</span>
-            <span class="promo-amount">50%</span>
-            <h3>Descuento 2.º hermano</h3>
-            <p>En todas las Escuelas Deportivas y en Judo. El segundo hermano paga la mitad, siempre.</p>
-          </div>
-
-          <div class="promo-card">
-            <span class="promo-emoji">⚽ &thinsp; 🏀</span>
-            <span class="promo-amount">50%</span>
-            <h3>2.ª actividad deportiva</h3>
-            <p>Fútbol Sala + Baloncesto combinados: la segunda actividad cuesta solo la mitad.</p>
-          </div>
-
-          <div class="promo-card">
-            <span class="promo-emoji">🥋</span>
-            <span class="promo-amount promo-amount--free">GRATIS</span>
-            <h3>Judogui para nuevos</h3>
-            <p>Todos los alumnos que se inscriban por primera vez en Judo reciben el judogui sin coste adicional.</p>
-          </div>
-
+  <section class="dragons-banda" id="dolores-dragons" aria-labelledby="dragonsTitulo">
+    <div class="container dragons-banda__inner">
+      <img class="dragons-banda__escudo" src="/assets/img/webs/dolores-dragons.png" alt="Escudo de Dolores Dragons" width="96" height="96" loading="lazy" />
+      <div>
+        <p class="dragons-banda__ante">Escuela deportiva de baloncesto</p>
+        <h2 id="dragonsTitulo">El baloncesto del cole tiene club</h2>
+        <p>Dolores Dragons entrena en la pista del colegio y compite cada sábado por la mañana en Carabanchel y Latina, con equipo desde Prebenjamín hasta Cadete.</p>
+        <ul class="dragons-banda__datos">
+          <li><strong>M y J</strong><span>17:00 Primaria · 18:00 ESO</span></li>
+          <li><strong>35 €</strong><span>al mes, con partidos</span></li>
+          <li><strong>5</strong><span>categorías en edad escolar, de 1.º de Primaria a 4.º de ESO; el club también tiene equipos de Babybasket, Júnior y Sénior</span></li>
+        </ul>
+        <div class="dragons-banda__botones">
+          <a href="#simulador" class="btn btn--gold" data-sim-anadir="baloncesto"><i class="bi bi-plus-lg" aria-hidden="true"></i> Añadir al simulador</a>
+          <a href="https://dolores-dragons.vercel.app" class="btn btn--on-dark">Conocer Dolores Dragons <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- ═══════════════════════════════════════
-           ESCUELAS DEPORTIVAS
-      ═══════════════════════════════════════ -->
-      <h2 id="deportivas">Escuelas Deportivas</h2>
-      <p>Programa completo de iniciación y competición para alumnos de todas las etapas. Nuestros equipos participan en ligas y competiciones oficiales a lo largo de todo el curso.</p>
-
-      <div class="sport-grid">
-
-        <div class="sport-card">
-          <div class="sport-card__img" style="background: linear-gradient(135deg, #22c55e, #14532d);">
-            <i class="bi bi-lightning"></i>
-          </div>
-          <div class="sport-card__body">
-            <h4>Predeporte</h4>
-            <p>Iniciación al movimiento y al juego deportivo. Lunes y Miércoles.</p>
-            <span class="sport-card__tag">Infantil · 3–5 años</span>
-          </div>
-        </div>
-
-        <div class="sport-card">
-          <div class="sport-card__img" style="background: linear-gradient(135deg, #0a5e24, #022c12);">
-            <i class="bi bi-dribbble"></i>
-          </div>
-          <div class="sport-card__body">
-            <h4>Fútbol Sala</h4>
-            <p>Entrenamiento y competición por categorías: Prebenjamín (1.º–2.º), Benjamín (3.º–4.º), Alevín (5.º–6.º), Infantil y Cadete (ESO).</p>
-            <span class="sport-card__tag">Primaria y ESO</span>
-          </div>
-        </div>
-
-        <div class="sport-card">
-          <div class="sport-card__img" style="background: linear-gradient(135deg, #f97316, #9a3412);">
-            <i class="bi bi-circle-fill"></i>
-          </div>
-          <div class="sport-card__body">
-            <h4>Baloncesto</h4>
-            <p>Competición los sábados. Lun/Mié o Mar/Jue según categoría. Alumnos desde 5 años hasta ESO.</p>
-            <span class="sport-card__tag">5 años · Primaria · ESO</span>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="callout">
-        <i class="bi bi-tag-fill"></i>
-        <p><strong>Precio Escuelas Deportivas: 44 €/mes</strong> (2 entrenamientos + partidos). <strong>50 % de descuento</strong> para la segunda actividad deportiva combinada y para el segundo hermano inscrito. Responsables: Abraham Menes, Jesús Blázquez, Javier Ramiro y Fangyi.</p>
-      </div>
-
-      <!-- ═══════════════════════════════════════
-           HORARIO SEMANAL
-      ═══════════════════════════════════════ -->
-      <h2>Horario semanal de actividades</h2>
-
-      <div class="schedule">
-        <table aria-label="Horario semanal de actividades extraescolares">
-          <thead>
-            <tr>
-              <th scope="col">Horario</th>
-              <th scope="col">Lunes</th>
-              <th scope="col">Martes</th>
-              <th scope="col">Miércoles</th>
-              <th scope="col">Jueves</th>
-              <th scope="col">Viernes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>7:00–9:00</strong></td>
-              <td colspan="5" style="text-align:center;">Madrugadores / Acogida temprana</td>
-            </tr>
-            <tr>
-              <td><strong>9:00–9:50</strong></td>
-              <td colspan="5" style="text-align:center;">Bilingüe extraescolar (Infantil y Primaria)</td>
-            </tr>
-            <tr>
-              <td><strong>14:00–15:00</strong></td>
-              <td class="multi-cell">Informática Gr.A (4.º–6.º)</td>
-              <td class="multi-cell">Informática Gr.B (1.º–3.º)</td>
-              <td class="multi-cell">Informática Gr.A</td>
-              <td class="multi-cell">Informática Gr.B</td>
-              <td style="text-align:center;color:var(--ink-400);">—</td>
-            </tr>
-            <tr style="vertical-align:top;">
-              <td><strong>17:00–18:00</strong></td>
-              <td class="multi-cell">Predeporte<br>Fútbol Prebenjamín/Benjamín<br>Baile</td>
-              <td class="multi-cell">Baloncesto<br>Fútbol Alevín<br>Judo<br>Academia</td>
-              <td class="multi-cell">Predeporte<br>Fútbol Prebenjamín/Benjamín<br>Baile</td>
-              <td class="multi-cell">Baloncesto<br>Judo<br>Academia</td>
-              <td class="multi-cell">Fútbol Alevín</td>
-            </tr>
-            <tr style="vertical-align:top;">
-              <td><strong>18:00–19:00</strong></td>
-              <td class="multi-cell">Fútbol ESO<br>Acogida tarde</td>
-              <td class="multi-cell">Baloncesto ESO<br>Fútbol ESO<br>Acogida</td>
-              <td class="multi-cell">Fútbol ESO<br>Acogida</td>
-              <td class="multi-cell">Baloncesto ESO<br>Fútbol ESO</td>
-              <td class="multi-cell">Fútbol ESO</td>
-            </tr>
-          </tbody>
+  <section class="section" id="horario">
+    <div class="container">
+      <header class="section__head section__head--left">
+        <h2>Horario semanal</h2>
+        <p>Todas las actividades, por día y franja. Empiezan el 1 de octubre; los horarios pueden ajustarse al formar los grupos.</p>
+      </header>
+      <div class="table-wrap">
+        <table class="horario-extra">
+          <caption class="sr-only">Horario semanal de actividades extraescolares por franja y día</caption>
+          <thead><tr><th scope="col">Hora</th><th scope="col">Lunes</th><th scope="col">Martes</th><th scope="col">Miércoles</th><th scope="col">Jueves</th><th scope="col">Viernes</th></tr></thead>
+          <tbody><tr><th scope="row">8:55</th><td><ul><li><strong>Bilingüismo</strong> <span>Inf, Primaria</span></li></ul></td><td><ul><li><strong>Bilingüismo</strong> <span>Inf, Primaria</span></li></ul></td><td><ul><li><strong>Bilingüismo</strong> <span>Inf, Primaria</span></li></ul></td><td><ul><li><strong>Bilingüismo</strong> <span>Inf, Primaria</span></li></ul></td><td><ul><li><strong>Bilingüismo</strong> <span>Inf, Primaria</span></li></ul></td></tr><tr><th scope="row">12:30</th><td><ul><li><strong>Cambridge</strong> <span>ESO</span></li></ul></td><td><ul><li><strong>Cambridge</strong> <span>ESO</span></li></ul></td><td><ul><li><strong>Cambridge</strong> <span>ESO</span></li></ul></td><td><ul><li><strong>Cambridge</strong> <span>ESO</span></li></ul></td><td><ul><li><strong>Cambridge</strong> <span>ESO</span></li></ul></td></tr><tr><th scope="row">14:00</th><td><ul><li><strong>Música</strong> <span>Inf</span></li><li><strong>Informática</strong> <span>4.º–6.º</span></li></ul></td><td><ul><li><strong>Música</strong> <span>Primaria</span></li><li><strong>Pintura</strong> <span>Inf</span></li><li><strong>Informática</strong> <span>1.º–3.º</span></li></ul></td><td><ul><li><strong>Música</strong> <span>Inf</span></li><li><strong>Informática</strong> <span>4.º–6.º</span></li></ul></td><td><ul><li><strong>Música</strong> <span>Primaria</span></li><li><strong>Pintura</strong> <span>Inf</span></li><li><strong>Informática</strong> <span>1.º–3.º</span></li></ul></td><td class="is-vacia"><span class="sr-only">Sin actividades</span></td></tr><tr><th scope="row">17:00</th><td><ul><li><strong>Fútbol</strong> <span>Primaria</span></li><li><strong>Predeporte</strong> <span>Inf</span></li><li><strong>Música</strong> <span>ESO</span></li><li><strong>Baile</strong> <span>Inf, Primaria</span></li><li><strong>Ajedrez</strong> <span>Primaria</span></li><li><strong>Refuerzo</strong> <span>ESO, Primaria</span></li></ul></td><td><ul><li><strong>Baloncesto</strong> <span>Primaria</span></li><li><strong>Predeporte</strong> <span>Inf</span></li><li><strong>Judo</strong> <span>Inf, Primaria</span></li><li><strong>Academia</strong> <span>ESO, Primaria</span></li><li><strong>Pintura</strong> <span>Primaria</span></li><li><strong>Teatro</strong> <span>ESO, Primaria</span></li><li><strong>Robótica</strong> <span>Primaria</span></li></ul></td><td><ul><li><strong>Fútbol</strong> <span>Primaria</span></li><li><strong>Predeporte</strong> <span>Inf</span></li><li><strong>Música</strong> <span>ESO</span></li><li><strong>Baile</strong> <span>Inf, Primaria</span></li><li><strong>Ajedrez</strong> <span>Primaria</span></li><li><strong>Refuerzo</strong> <span>ESO, Primaria</span></li></ul></td><td><ul><li><strong>Baloncesto</strong> <span>Primaria</span></li><li><strong>Predeporte</strong> <span>Inf</span></li><li><strong>Judo</strong> <span>Inf, Primaria</span></li><li><strong>Academia</strong> <span>ESO, Primaria</span></li><li><strong>Pintura</strong> <span>Primaria</span></li><li><strong>Teatro</strong> <span>ESO, Primaria</span></li><li><strong>Robótica</strong> <span>Primaria</span></li></ul></td><td class="is-vacia"><span class="sr-only">Sin actividades</span></td></tr><tr><th scope="row">18:00</th><td><ul><li><strong>Fútbol</strong> <span>ESO</span></li></ul></td><td><ul><li><strong>Baloncesto</strong> <span>ESO</span></li></ul></td><td><ul><li><strong>Fútbol</strong> <span>ESO</span></li></ul></td><td><ul><li><strong>Baloncesto</strong> <span>ESO</span></li></ul></td><td class="is-vacia"><span class="sr-only">Sin actividades</span></td></tr></tbody>
         </table>
       </div>
-
-      <p style="font-size:.8rem;color:var(--ink-400);margin-top:8px;">* Horarios orientativos sujetos a modificación. Las actividades comienzan el 1 de octubre.</p>
-
-      <div class="callout">
-        <i class="bi bi-info-circle-fill"></i>
-        <p>Para inscribirte en cualquier actividad utiliza la Secretaría del centro en horario de atención al público, o la <strong>secretaría virtual</strong> en <a href="/">colegionsdolores.es</a>. Las plazas son limitadas.</p>
-      </div>
-
-      <div class="article-footer">
-        <a href="/contacto.html" class="btn btn--primary"><i class="bi bi-building"></i> Ir a Secretaría Virtual</a>
-        <a href="/#servicios" class="btn btn--ghost"><i class="bi bi-arrow-left"></i> Volver a Servicios</a>
-      </div>
-
-    </article>
-
-    <!-- ═══════════════════════════════════════
-         ASIDE — sidebar
-    ═══════════════════════════════════════ -->
-    <aside class="aside">
-
-      <div class="aside__card">
-        <h4>Actividades</h4>
-        <ul>
-          <li><a href="#madrugadores">Madrugadores <i class="bi bi-arrow-right"></i></a></li>
-          <li><a href="#bilinguee">Bilingüe Extraescolar <i class="bi bi-arrow-right"></i></a></li>
-          <li><a href="#informatica">Informática y Robótica <i class="bi bi-arrow-right"></i></a></li>
-          <li><a href="#academia">Academia de Estudio <i class="bi bi-arrow-right"></i></a></li>
-          <li><a href="#deportivas">Escuelas Deportivas <i class="bi bi-arrow-right"></i></a></li>
-          <li><a href="#baile">Baile <i class="bi bi-arrow-right"></i></a></li>
-          <li><a href="#judo">Judo <i class="bi bi-arrow-right"></i></a></li>
-        </ul>
-      </div>
-
-      <div class="aside__card" style="background:var(--green-100);border-color:#c8dcc9;">
-        <h4>Promociones activas</h4>
-        <ul style="list-style:none;padding:0;margin:0;display:grid;gap:12px;">
-          <li style="display:flex;gap:10px;align-items:flex-start;">
-            <span style="background:var(--yellow-500);color:var(--ink-900);font-weight:800;padding:2px 9px;border-radius:999px;font-size:.75rem;flex-shrink:0;margin-top:1px;">50%</span>
-            <span style="font-size:.85rem;color:var(--ink-700);line-height:1.45;">Descuento 2.º hermano en Deportivas y Judo</span>
-          </li>
-          <li style="display:flex;gap:10px;align-items:flex-start;">
-            <span style="background:var(--yellow-500);color:var(--ink-900);font-weight:800;padding:2px 9px;border-radius:999px;font-size:.75rem;flex-shrink:0;margin-top:1px;">50%</span>
-            <span style="font-size:.85rem;color:var(--ink-700);line-height:1.45;">2.ª actividad deportiva (Fútbol + Baloncesto)</span>
-          </li>
-          <li style="display:flex;gap:10px;align-items:flex-start;">
-            <span style="background:#16a34a;color:#fff;font-weight:800;padding:2px 9px;border-radius:999px;font-size:.72rem;flex-shrink:0;margin-top:1px;">GRATIS</span>
-            <span style="font-size:.85rem;color:var(--ink-700);line-height:1.45;">Judogui para nuevos alumnos de Judo</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="aside__card">
-        <h4>Precio mensual</h4>
-        <p style="font-size:.88rem;color:var(--ink-700);margin:0 0 6px;">Mayoría de actividades: <strong>44 €/mes</strong></p>
-        <p style="font-size:.88rem;color:var(--ink-700);margin:0 0 10px;">Bilingüe extraescolar: <strong>63 €/mes</strong></p>
-        <p style="font-size:.78rem;color:var(--ink-400);margin:0;">Cargo domiciliado los primeros días del mes.</p>
-      </div>
-
-      <div class="aside__card">
-        <h4>Cuotas anuales</h4>
-        <ul style="list-style:none;padding:0;margin:0;display:grid;gap:0;">
-          <li style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--ink-100);font-size:.84rem;">
-            <span style="color:var(--ink-700);">Gabinete Pedagógico</span><strong>33 €/año</strong>
-          </li>
-          <li style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--ink-100);font-size:.84rem;">
-            <span style="color:var(--ink-700);">Seguro de accidentes</span><strong>25 €/año</strong>
-          </li>
-          <li style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:.84rem;">
-            <span style="color:var(--ink-700);">Alexia Familias (app)</span><strong>25 €/año</strong>
-          </li>
-        </ul>
-        <p style="font-size:.72rem;color:var(--ink-400);margin:8px 0 0;">Gabinete: cargo en enero. Seguro y Alexia: cargo en octubre.</p>
-      </div>
-
-      <div class="aside__card" style="background:linear-gradient(135deg,var(--green-700),var(--green-900));color:#fff;">
-        <h4 style="color:#fff;">¿Te interesa alguna actividad?</h4>
-        <p style="color:#d6efd9;font-size:.9rem;margin:0 0 14px;">Contacta con la Secretaría del centro para formalizar la inscripción antes del inicio del curso.</p>
-        <a href="/contacto.html" class="btn btn--ghost" style="background:var(--yellow-500);color:var(--ink-900);border:none;">Contactar</a>
-      </div>
-
-    </aside>
-
+    </div>
   </section>
+
+  <section class="cta">
+    <div class="container cta__inner">
+      <div>
+        <h2>¿Lo tenéis claro?</h2>
+        <p>Inscripción en secretaría o por la Secretaría Virtual. Las plazas son limitadas.</p>
+      </div>
+      <div class="cta__actions">
+        <a href="/contacto" class="btn btn--primary btn--lg"><i class="bi bi-chat-dots" aria-hidden="true"></i> Contacto</a>
+        <a href="/admision" class="btn btn--ghost btn--lg"><i class="bi bi-mortarboard" aria-hidden="true"></i> Admisión</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
 
   <div id="site-footer"></div>
   <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/nsd-arriba.js" defer></script>
+  <script src="/assets/js/extraescolares-datos.js" defer></script>
+  <script src="/assets/js/extraescolares.js" defer></script>
 </body>
 </html>

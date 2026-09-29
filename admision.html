@@ -1,25 +1,37 @@
 ﻿<!doctype html>
 <html lang="es" data-page="admision">
 <head>
-  <meta charset="utf-8" />  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Admisión 2026-2027 · Colegio NSD</title>
+  <meta charset="utf-8" />  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script src="/assets/js/theme-init.js"></script>
+  <title>Admisión 2027-2028 · Colegio NSD</title>
   <meta name="description" content="Proceso de admisión en el Colegio NSD: plazos, documentación, baremo y reserva de visita guiada al centro." />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="theme-color" content="#1FA42C" />
-  <link rel="canonical" href="https://www.colegionsdolores.es/admision.html" />
+  <link rel="canonical" href="https://colegio-nsd.vercel.app/admision" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Admisión 2026-2027 · Colegio NSD" />
+  <meta property="og:title" content="Admisión 2027-2028 · Colegio NSD" />
   <meta property="og:description" content="Toda la información del proceso de admisión y reserva de visita." />
   <link rel="icon" type="image/png" href="/assets/img/logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
   <link rel="stylesheet" href="/assets/css/pages.css" />
+  <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
+  <meta property="og:url" content="https://colegio-nsd.vercel.app/admision" />
+  <meta property="og:image" content="https://colegio-nsd.vercel.app/assets/img/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Colegio NSD" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
 </head>
 <body id="top">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
   <div id="site-header"></div>
+
+  <main id="contenido">
 
   <section class="page-hero">
     <div class="container page-hero__inner">
@@ -28,12 +40,12 @@
           <a href="/">Inicio</a> <i class="bi bi-chevron-right"></i>
           <span>Admisión</span>
         </nav>
-        <h1>Admisión 2026-2027</h1>
-        <p>Acompañamos a tu familia en cada paso del proceso de admisión: información, visita guiada, documentación y matrícula.</p>
+        <h1>Admisión 2027-2028</h1>
+        <p>Acompañamos a tu familia en cada paso del proceso de admisión: información, visita guiada, documentación y matrícula. La Comunidad de Madrid abre el plazo ordinario en primavera; publicaremos aquí las fechas oficiales en cuanto salgan. Si necesitas plaza para este curso 2026-2027, pregunta en secretaría por las vacantes.</p>
       </div>
       <div class="page-hero__meta">
-        <span class="meta"><i class="bi bi-calendar-check"></i> Plazo abierto</span>
-        <span class="meta"><i class="bi bi-mortarboard"></i> Plazas para todas las etapas</span>
+        <span class="meta"><i class="bi bi-calendar-check" aria-hidden="true"></i> Plazo ordinario: primavera de 2027</span>
+        <span class="meta"><i class="bi bi-mortarboard" aria-hidden="true"></i> De 0 años a 4.º de ESO</span>
       </div>
     </div>
   </section>
@@ -45,13 +57,13 @@
         <h2>Cómo solicitar plaza, paso a paso</h2>
       </header>
 
-      <div class="stages" style="grid-template-columns:repeat(4,1fr);">
+      <div class="stages">
         <article class="stage">
           <div class="stage__icon" style="--c:#1FA42C;"><i class="bi bi-1-circle"></i></div>
           <span class="stage__age">Paso 1</span>
           <h3>Visita el cole</h3>
           <p>Reserva una visita guiada con el equipo directivo. Conocerás aulas, instalaciones y proyecto educativo.</p>
-          <a href="/contacto.html" class="stage__link">Reservar visita <i class="bi bi-arrow-right"></i></a>
+          <a href="/contacto" class="stage__link">Reservar visita <i class="bi bi-arrow-right"></i></a>
         </article>
         <article class="stage">
           <div class="stage__icon" style="--c:#FFC857;"><i class="bi bi-2-circle"></i></div>
@@ -64,7 +76,7 @@
           <div class="stage__icon" style="--c:#5B4DE3;"><i class="bi bi-3-circle"></i></div>
           <span class="stage__age">Paso 3</span>
           <h3>Baremo y listas</h3>
-          <p>Las solicitudes se baremam según los criterios oficiales. Publicamos las listas provisionales y definitivas.</p>
+          <p>Las solicitudes se bareman según los criterios oficiales. Publicamos las listas provisionales y definitivas.</p>
           <a href="#baremo" class="stage__link">Ver baremo <i class="bi bi-arrow-right"></i></a>
         </article>
         <article class="stage">
@@ -72,7 +84,7 @@
           <span class="stage__age">Paso 4</span>
           <h3>Matrícula</h3>
           <p>Una vez admitido, formalizas la matrícula en secretaría dentro del plazo establecido.</p>
-          <a href="/contacto.html" class="stage__link">Contactar <i class="bi bi-arrow-right"></i></a>
+          <a href="/contacto" class="stage__link">Contactar <i class="bi bi-arrow-right"></i></a>
         </article>
       </div>
     </div>
@@ -114,7 +126,7 @@
 
       <aside class="aside">
         <div class="aside__card">
-          <h4>Plazos clave</h4>
+          <h3>Plazos clave</h3>
           <ul>
             <li><i class="bi bi-calendar"></i> Solicitud: abril</li>
             <li><i class="bi bi-calendar"></i> Listas provisionales: mayo</li>
@@ -122,16 +134,196 @@
             <li><i class="bi bi-calendar"></i> Matrícula: junio-julio</li>
           </ul>
         </div>
-        <div class="aside__card" style="background:linear-gradient(135deg,var(--green-700),var(--green-900));color:#fff;">
+        <div class="aside__card" style="background:linear-gradient(135deg,var(--brand-700),var(--brand-900));color:#fff;">
           <h4 style="color:#fff;">Reserva tu visita</h4>
           <p style="color:#d6efd9;font-size:.9rem;margin:0 0 14px;">Conoce el centro antes de tomar tu decisión.</p>
-          <a href="/contacto.html" class="btn btn--ghost" style="background:var(--yellow-500);color:var(--ink-900);border:none;width:100%;justify-content:center;">Solicitar visita</a>
+          <a href="/contacto" class="btn btn--ghost" style="background:var(--yellow-500);color:var(--brand-900);border:none;width:100%;justify-content:center;">Solicitar visita</a>
         </div>
       </aside>
     </div>
   </section>
 
+  <!-- CONTACTO -->
+  <section class="section section--soft" id="solicitar">
+    <div class="container">
+      <header class="section__head">
+        <span class="eyebrow">Solicitar plaza</span>
+        <h2>Pedir plaza, en tres pasos</h2>
+        <p>Escríbenos y secretaría te confirma disponibilidad, documentación y plazos del proceso de admisión.</p>
+      </header>
+      <ol class="steps">
+        <li class="step"><h3>Envía la solicitud</h3><p>Con el formulario de al lado o llamando a secretaría, en horario de atención.</p></li>
+        <li class="step"><h3>Visita el colegio</h3><p>Te enseñamos las instalaciones y resolvemos tus dudas antes de decidir.</p></li>
+        <li class="step"><h3>Presenta la documentación</h3><p>En secretaría, dentro del plazo oficial de la Comunidad de Madrid.</p></li>
+      </ol>
+      <div class="contacta">
+        <div class="contacta__accion">
+          <form class="form-card" id="contactoFormAdm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="206c83e1-a7f9-485a-9c91-46e8a892f6f4" />
+            <input type="hidden" name="subject" value="Solicitud de plaza — Colegio NSD" />
+            <input type="hidden" name="from_name" value="Web Colegio NSD" />
+            <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+            <div class="form-card__header">
+              <span class="form-card__header-ico"><i class="bi bi-chat-dots-fill" aria-hidden="true"></i></span>
+              <div class="form-card__header-text">
+                <h3>Solicita información</h3>
+                <p class="form-card__header-sub">Te respondemos en menos de 24 h hábiles · Sin compromiso</p>
+              </div>
+            </div>
+            <div class="form-body">
+              <div class="form-row">
+                <label for="Adm-nombre">Nombre y apellidos
+                  <input type="text" id="Adm-nombre" name="nombre" required autocomplete="name" placeholder="Tu nombre completo" />
+                </label>
+              </div>
+              <div class="form-row form-row--2">
+                <label for="Adm-email">Email
+                  <input type="email" id="Adm-email" name="email" required autocomplete="email" placeholder="tu@email.com" />
+                </label>
+                <label for="Adm-tel">Teléfono
+                  <input type="tel" id="Adm-tel" name="telefono" autocomplete="tel" placeholder="6XX XXX XXX" />
+                </label>
+              </div>
+              <div class="form-row">
+                <label for="Adm-etapa">Etapa de interés
+                  <select id="Adm-etapa" name="etapa">
+                    <option value="">Selecciona etapa</option>
+                    <option>Infantil 0–3</option>
+                    <option>Infantil 3–6</option>
+                    <option>Primaria</option>
+                    <option>ESO</option>
+                    <option>Visita guiada</option>
+                    <option>Otra</option>
+                  </select>
+                </label>
+              </div>
+              <div class="form-row">
+                <label for="Adm-msg">Mensaje
+                  <textarea id="Adm-msg" name="mensaje" rows="6" placeholder="Cuéntanos qué necesitas…"></textarea>
+                </label>
+              </div>
+              <div class="aviso-datos">
+                <p class="aviso-datos__titulo">Información básica sobre protección de datos</p>
+                <dl>
+                  <div><dt>Responsable</dt><dd>Colegio Ntra. Sra. de los Dolores, S.L.</dd></div>
+                  <div><dt>Finalidad</dt><dd>Gestionar la solicitud de información sobre una plaza y el proceso de admisión.</dd></div>
+                  <div><dt>Legitimación</dt><dd>Aplicación de medidas precontractuales a petición de la persona interesada (art. 6.1.b RGPD).</dd></div>
+                  <div><dt>Destinatarios</dt><dd>Web3Forms (servicio de envío de formularios) y Vercel (alojamiento de la web), como encargados del tratamiento, con garantías para las transferencias internacionales. No se ceden datos a terceros salvo obligación legal.</dd></div>
+                  <div><dt>Derechos</dt><dd>Acceso, rectificación, supresión, oposición, limitación, portabilidad y retirada del consentimiento en <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a>.</dd></div>
+                  <div><dt>Más información</dt><dd><a href="/privacidad">Política de privacidad</a></dd></div>
+                </dl>
+              </div>
+              <label class="form-check">
+                <input type="checkbox" name="rgpd" required />
+                <span>He leído y acepto la <a href="/privacidad" target="_blank" rel="noopener">política de privacidad</a>.</span>
+              </label>
+              <button type="submit" class="btn btn--primary btn--block">Enviar solicitud</button>
+              <p class="form-nota">Secretaría responde en menos de 24 horas hábiles. Si lo prefieres, llama al <a href="tel:+34914719959">91 471 99 59</a> en horario de atención, aquí al lado.</p>
+              <div class="form-status form-status--ok" id="contactoSuccessAdm" role="status" hidden>
+                <i class="bi bi-check-circle-fill"></i>
+                <div><strong>¡Mensaje enviado!</strong><br>Te responderemos en menos de 24 horas hábiles. ¡Gracias!</div>
+              </div>
+              <div class="form-status form-status--err" id="contactoErrorAdm" role="alert" hidden>
+                <i class="bi bi-x-circle-fill"></i>
+                <div><strong>Error al enviar.</strong> Inténtalo de nuevo o llámanos al <a href="tel:+34914719959">91 471 99 59</a>.</div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="contacta__datos">
+          <span class="eyebrow">Datos de contacto</span>
+          <h2>Estamos en Carabanchel.</h2>
+          <p>Muy cerca del Metro Vista Alegre. Te esperamos.</p>
+          <ul class="contact-list">
+            <li><i class="bi bi-geo-alt"></i> <span>C/ Tordo, 15 · 28019 Madrid (Carabanchel)</span></li>
+            <li><i class="bi bi-telephone"></i> <a href="tel:+34914719959">91 471 99 59</a></li>
+            <li><i class="bi bi-envelope"></i> <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a></li>
+          </ul>
+          <div class="contacta__horario">
+            <h3><i class="bi bi-clock-history" aria-hidden="true"></i> Horario de secretaría</h3>
+            <div class="tabla-marco">
+              <table class="tabla">
+                <thead><tr><th scope="col">Periodo</th><th scope="col">L, X y V</th><th scope="col">M y J</th></tr></thead>
+                <tbody>
+                  <tr><td>Sept. y junio</td><td>9:15 – 12:30</td><td>16:00 – 18:30</td></tr>
+                  <tr><td>Oct. a mayo</td><td>9:15 – 12:00</td><td>15:15 – 18:00</td></tr>
+                  <tr><td>Julio</td><td>9:15 – 13:00</td><td>9:15 – 13:00</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="map-card">
+            <div class="mapa-diferido" data-mapa-src="https://maps.google.com/maps?q=Calle%20del%20Tordo%2015%2C%2028019%20Madrid&amp;z=15&amp;output=embed" data-mapa-titulo="Mapa con la ubicación del Colegio NSD">
+              <div class="mapa-diferido__ficha">
+                <svg class="mapa-diferido__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <p class="mapa-diferido__dir"><strong>Colegio Ntra. Sra. de los Dolores</strong>C/ Tordo, 15 · 28019 Madrid (Carabanchel)</p>
+                <div class="mapa-diferido__botones">
+                  <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Calle+del+Tordo+15%2C+28019+Madrid" target="_blank" rel="noopener noreferrer">Cómo llegar <span class="sr-only">(abre Google Maps en una pestaña nueva)</span></a>
+                  <button type="button" class="btn btn--ghost mapa-diferido__cargar" hidden>Cargar mapa interactivo</button>
+                </div>
+                <p class="mapa-diferido__aviso">El mapa interactivo es de Google: solo se carga si se pulsa el botón y, al hacerlo, Google recibe la dirección IP del dispositivo y puede instalar cookies. <a href="/cookies">Más información</a>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="fotos">
+    <div class="carrusel">
+      <div class="carrusel__cab">
+        <div>
+          <h2>Conoce el colegio</h2>
+          <p>La fachada, el gimnasio y el patio, tal y como se ven en la visita.</p>
+        </div>
+        <div class="carrusel__controles">
+          <button type="button" class="carrusel__boton" data-carrusel="ant" aria-label="Anterior"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
+          <button type="button" class="carrusel__boton" data-carrusel="sig" aria-label="Siguiente"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <ul class="carrusel__pista" tabindex="0" aria-label="Conoce el colegio">
+        <li class="carrusel__item carrusel__item--ancho">
+          <div class="carrusel__media"><picture class="foto-real foto-real--ancho">
+            <source type="image/webp" srcset="/assets/img/fotos/fachada-color-800.webp 800w, /assets/img/fotos/fachada-color-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 460px" />
+            <img src="/assets/img/fotos/fachada-color-800.webp" alt="Fachada del colegio en la calle Tordo, con las lamas de colores y el rótulo del centro" width="800" height="640" loading="lazy" decoding="async" />
+          </picture></div>
+          <div class="carrusel__pie"><h3>La fachada</h3><p>La entrada por la calle Tordo</p></div>
+        </li>
+        <li class="carrusel__item">
+          <div class="carrusel__media"><picture class="foto-real">
+            <source type="image/webp" srcset="/assets/img/fotos/gimnasio-800.webp 800w, /assets/img/fotos/gimnasio-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 460px" />
+            <img src="/assets/img/fotos/gimnasio-800.webp" alt="Gimnasio del colegio, con el suelo de parqué y las espalderas en la pared" width="800" height="1000" loading="lazy" decoding="async" />
+          </picture></div>
+          <div class="carrusel__pie"><h3>El gimnasio</h3><p>Donde se dan las clases de Educación Física</p></div>
+        </li>
+        <li class="carrusel__item">
+          <div class="carrusel__media"><div class="hueco ">
+            <i class="bi bi-camera" aria-hidden="true"></i>
+            <strong>Un aula</strong>
+            <span>Lo que se ve en la visita</span>
+          </div></div>
+          <div class="carrusel__pie"><h3>Un aula</h3><p>Lo que se ve en la visita</p></div>
+        </li>
+        <li class="carrusel__item">
+          <div class="carrusel__media"><picture class="foto-real">
+            <source type="image/webp" srcset="/assets/img/fotos/patio-lamas-800.webp 800w, /assets/img/fotos/patio-lamas-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 460px" />
+            <img src="/assets/img/fotos/patio-lamas-800.webp" alt="Patio del colegio en el recreo, con la canasta y la fachada de lamas al fondo" width="800" height="1000" loading="lazy" decoding="async" />
+          </picture></div>
+          <div class="carrusel__pie"><h3>El patio</h3><p>Recreos y actividades</p></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+  </main>
+
   <div id="site-footer"></div>
   <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/nsd-arriba.js" defer></script>
+  <script src="/assets/js/nsd-mapa.js" defer></script>
+  <script src="/assets/js/forms.js" defer></script>
+  <script src="/assets/js/nsd-spring.js" defer></script>
+  <script src="/assets/js/nsd-carrusel.js" defer></script>
 </body>
 </html>

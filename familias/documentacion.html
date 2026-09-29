@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script src="/assets/js/theme-init.js"></script>
+  <title>Documentación · Colegio NSD</title>
+  <meta name="description" content="Centro de documentación del Colegio NSD: impresos, horarios, comedor, extraescolares, becas y normas, con buscador y vista previa." />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#F5F1EA" />
+  <link rel="canonical" href="https://colegio-nsd.vercel.app/familias/documentacion" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Documentación · Colegio NSD" />
+  <meta property="og:description" content="Centro de documentación del Colegio NSD: impresos, horarios, comedor, extraescolares, becas y normas, con buscador y vista previa." />
+  <meta property="og:url" content="https://colegio-nsd.vercel.app/familias/documentacion" />
+  <meta property="og:image" content="https://colegio-nsd.vercel.app/assets/img/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Colegio NSD" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/png" href="/assets/img/logo.png" />
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
+  <link rel="stylesheet" href="/assets/css/pages.css" />
+  <link rel="stylesheet" href="/assets/css/secciones.css" />
+
+  <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
+</head>
+<body id="top">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div id="site-header"></div>
+
+  <main id="contenido">
+
+  <section class="page-hero">
+    <div class="container page-hero__inner">
+      <div>
+        <nav class="crumbs" aria-label="Migas de pan"><a href="/">Inicio</a> <i class="bi bi-chevron-right" aria-hidden="true"></i> <span>Documentación</span></nav>
+        <h1>Documentación</h1>
+        <p>Impresos, horarios, comedor, becas y normas. Empezad por lo más descargado o entrad en una carpeta; si sabéis lo que buscáis, escribidlo. La vista previa os enseña cada documento antes de abrirlo.</p>
+      </div>
+      <div class="page-hero__meta">
+        <span class="meta"><i class="bi bi-search" aria-hidden="true"></i> Búsqueda sin tildes</span>
+        <span class="meta"><i class="bi bi-eye" aria-hidden="true"></i> Vista previa</span>
+        <span class="meta"><i class="bi bi-folder2" aria-hidden="true"></i> 7 carpetas</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section doc2" id="docCenter">
+    <div class="container">
+      <div class="doc2__buscador">
+        <div class="doc2-buscar">
+          <i class="bi bi-search doc2-buscar__ico" aria-hidden="true"></i>
+          <label for="docSearch" class="sr-only">Buscar documentación</label>
+          <input type="search" id="docSearch" placeholder="Buscar: menú, matrícula, becas, notas…" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-describedby="docCount" />
+          <button type="button" id="docClear" class="doc2-buscar__borrar" hidden><i class="bi bi-x-lg" aria-hidden="true"></i><span class="sr-only">Borrar la búsqueda</span></button>
+          <kbd class="doc2-buscar__kbd" aria-hidden="true">/</kbd>
+        </div>
+        <div class="doc2-rapidas"><span>Lo más buscado:</span><div id="docRapidas"></div></div>
+        <div class="doc2-tabs" id="docTabs" role="group" aria-label="Filtrar por categoría"></div>
+      </div>
+
+      <!-- En reposo la pagina abre por aqui: lo mas descargado y las siete
+           carpetas. Lo pinta documentacion.js. -->
+      <h2 class="sr-only">Por dónde empezar</h2>
+      <div class="doc2-panel" id="docPanel" hidden></div>
+
+      <div class="doc2-migas" id="docVolver" hidden></div>
+      <p class="doc2-cuenta" id="docCount" role="status" aria-live="polite"></p>
+
+      <h2 class="sr-only">Documentos</h2>
+      <div class="doc2__cuerpo">
+        <ul class="doc2-lista" id="docResults" aria-label="Documentos"></ul>
+        <div class="doc2-vacio" id="docEmpty" hidden>
+          <i class="bi bi-folder2-open" aria-hidden="true"></i>
+          <h2>No hay nada con <span id="docEmptyTerm"></span></h2>
+          <p>Probad con otra palabra o quitad el filtro. Si no aparece, en secretaría os lo damos.</p>
+          <a href="tel:+34914719959" class="btn btn--primary"><i class="bi bi-telephone-fill" aria-hidden="true"></i> Llamar a secretaría</a>
+        </div>
+        <div class="doc2__vista-col" id="docVistaCol">
+          <aside class="doc2-vista" id="docVista" aria-label="Vista previa del documento" hidden></aside>
+        </div>
+      </div>
+
+      <noscript>
+        <p>El buscador necesita JavaScript. Podéis pedir cualquier documento en secretaría: <a href="tel:+34914719959">91 471 99 59</a> o <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a>.</p>
+      </noscript>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container resumen">
+      <div>
+        <h2>¿No encontráis un documento?</h2>
+        <p>Secretaría atiende lunes, miércoles y viernes por la mañana y martes y jueves por la tarde. Os lo enviamos por correo o lo preparamos para recoger.</p>
+      </div>
+      <ul class="indice">
+        <li><a href="tel:+34914719959"><span class="indice__ico" aria-hidden="true"><i class="bi bi-telephone"></i></span><span><h3>91 471 99 59</h3><p>Llamar a secretaría</p></span></a></li>
+        <li><a href="mailto:secretaria@colegionsdolores.es"><span class="indice__ico" aria-hidden="true"><i class="bi bi-envelope"></i></span><span><h3>Correo</h3><p>secretaria@colegionsdolores.es</p></span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/nsd-arriba.js" defer></script>
+  <script src="/assets/js/documentacion.js" defer></script>
+</body>
+</html>

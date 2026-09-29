@@ -2,22 +2,24 @@
 <html lang="es" data-page="servicios">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Comedor Escolar · Menú Mayo 2026 · Colegio NSD</title>
-  <meta name="description" content="Menú del comedor escolar del Colegio NSD para mayo de 2026. Menú elaborado y evaluado por el Asesoramiento Nutricional de la Comunidad de Madrid." />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script src="/assets/js/theme-init.js"></script>
+  <title>Comedor Escolar · Menú de septiembre de 2026 · Colegio NSD</title>
+  <meta name="description" content="Menú del comedor escolar del Colegio NSD para septiembre de 2026. Menú elaborado y evaluado por el Asesoramiento Nutricional de la Comunidad de Madrid." />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="theme-color" content="#0A5E24" />
-  <link rel="canonical" href="https://www.colegionsdolores.es/servicios/comedor.html" />
+  <link rel="canonical" href="https://colegio-nsd.vercel.app/servicios/comedor" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Comedor Escolar · Menú Mayo 2026 · Colegio NSD" />
-  <meta property="og:description" content="Menú del comedor escolar del Colegio NSD para mayo de 2026, evaluado por el Asesoramiento Nutricional de la Comunidad de Madrid." />
+  <meta property="og:title" content="Comedor Escolar · Menú de septiembre de 2026 · Colegio NSD" />
+  <meta property="og:description" content="Menú del comedor escolar del Colegio NSD para septiembre de 2026, evaluado por el Asesoramiento Nutricional de la Comunidad de Madrid." />
   <link rel="icon" type="image/png" href="/assets/img/logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
   <link rel="stylesheet" href="/assets/css/pages.css" />
+  <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
   <style>
     /* ── Comedor page ── */
     .menu-month-header {
@@ -50,6 +52,80 @@
     }
 
     /* ── Week table ── */
+    /* El menu del mes va en PDF: es el documento oficial del centro. Se ve
+       aqui dentro y se puede abrir aparte o descargar. */
+    .menu-pdf { margin: 26px 0 8px; }
+    .menu-pdf__acciones { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 18px; }
+    .menu-pdf__peso { font-size: .82rem; color: var(--ink-500); }
+    .menu-pdf__marco {
+      position: relative; border: 1px solid var(--border); border-radius: 14px;
+      overflow: hidden; background: var(--surface-raised); box-shadow: var(--shadow-sm);
+    }
+    .menu-pdf__marco iframe { display: block; width: 100%; height: 640px; border: 0; }
+    @media (max-width: 720px) { .menu-pdf__marco iframe { height: 420px; } }
+    .menu-pdf__nota { margin-top: 12px; font-size: .84rem; color: var(--ink-500); }
+    /* ── Menu del comedor ──────────────────────────────────
+       Tabla por semanas, con el PDF del centro en un boton
+       bien visible. La tabla es lo principal: se lee con
+       lector de pantalla y se busca con Ctrl+F. */
+    .menu-cab {
+      display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end;
+      justify-content: space-between; margin: 8px 0 22px;
+      padding-bottom: 20px; border-bottom: 2px solid var(--green-100);
+    }
+    .menu-cab h2 { margin: 0 0 4px; font-size: 1.5rem; }
+    .menu-cab h2 i { color: var(--green-700); margin-right: 8px; }
+    .menu-cab__sub { margin: 0; font-size: .88rem; color: var(--ink-500); }
+    .menu-cab__acciones { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .menu-cab__peso { font-size: .8rem; color: var(--ink-500); }
+    .menu-hoy {
+      display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline;
+      margin: 0 0 26px; padding: 16px 20px; border-radius: 14px;
+      background: var(--green-50, #F0FDF4); border: 1px solid var(--green-100);
+    }
+    .menu-hoy__eti { font-size: .74rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--green-700); }
+    .menu-hoy__platos { margin: 0; font-weight: 600; color: var(--ink-800); }
+    .menu-semana { margin: 0 0 30px; }
+    .menu-semana__rotulo {
+      margin: 0 0 10px; font-family: var(--font-sans, inherit);
+      font-size: .76rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-500);
+    }
+    .menu-marco { overflow-x: auto; border: 1px solid var(--border); border-radius: 14px; background: var(--surface-raised); }
+    .menu-tabla { width: 100%; min-width: 680px; border-collapse: collapse; font-size: .86rem; }
+    .menu-tabla thead th {
+      padding: 12px 14px; text-align: left; vertical-align: bottom;
+      /* Verde oscuro fijo: --green-700 se aclara en el tema oscuro y dejaba
+         el texto blanco sin contraste. */
+      background: #0B3A18; color: #fff; border-right: 1px solid rgba(255,255,255,.16);
+    }
+    .menu-tabla thead th:last-child { border-right: 0; }
+    .menu-dia { display: block; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: #D6E8DA; }
+    .menu-num { display: block; font-family: var(--font-display); font-size: 1.25rem; line-height: 1.1; }
+    .menu-tabla tbody th {
+      width: 128px; padding: 11px 14px; text-align: left; vertical-align: top;
+      font-size: .76rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+      color: var(--ink-500); background: var(--surface-sunken);
+      border-bottom: 1px solid var(--border);
+    }
+    .menu-tabla tbody td {
+      padding: 11px 14px; vertical-align: top; color: var(--ink-700);
+      border-bottom: 1px solid var(--border); border-right: 1px solid var(--border);
+    }
+    .menu-tabla tbody td:last-child { border-right: 0; }
+    .menu-tabla tbody tr:last-child td, .menu-tabla tbody tr:last-child th { border-bottom: 0; }
+    .menu-vacia { color: var(--ink-300); }
+    .menu-extra { display: block; font-size: .8rem; color: var(--ink-500); }
+    .menu-extra em { font-style: normal; }   /* sin opacidad: bajaba del 4.5:1 */
+    .menu-energia td { background: var(--surface-sunken); font-size: .8rem; color: var(--ink-600); }
+    .menu-energia strong { color: var(--ink-900); font-size: .92rem; }
+    .menu-macros { display: block; font-size: .72rem; color: var(--ink-500); }
+    .menu-pie { margin-top: 6px; font-size: .86rem; color: var(--ink-500); }
+    @media (max-width: 720px) {
+      .menu-cab { flex-direction: column; align-items: stretch; }
+      .menu-cab__acciones .btn { flex: 1; justify-content: center; }
+      .menu-tabla tbody th { width: 104px; font-size: .7rem; }
+    }
     .week-table {
       width: 100%; min-width: 640px;
       border-collapse: collapse; table-layout: fixed;
@@ -57,13 +133,13 @@
 
     /* Column headers: day name + date */
     .week-table thead th {
-      background: var(--green-700); color: #fff;
+      background: var(--brand-700); color: #fff;
       padding: 10px 14px; font-weight: 600;
       border-right: 1px solid rgba(255,255,255,.15);
       text-align: left; width: 20%;
     }
     .week-table thead th:last-child { border-right: none; }
-    .wt-head--festivo { background: var(--green-900) !important; }
+    .wt-head--festivo { background: var(--brand-900) !important; }
 
     .wt-weekday {
       display: block; font-size: .68rem; font-weight: 700;
@@ -83,7 +159,7 @@
     .week-table td:last-child { border-right: none; }
 
     /* 1.º plato */
-    .wtr--primero td { background: #fff; }
+    .wtr--primero td { background: var(--surface-raised); }
 
     /* 2.º plato + guarnición — divided from primero */
     .wtr--segundo td {
@@ -93,7 +169,7 @@
 
     /* Postre / bebida */
     .wtr--postre td {
-      background: #fff;
+      background: var(--surface-raised);
       border-top: 2px solid var(--ink-200);
       padding: 9px 14px;
     }
@@ -109,7 +185,7 @@
     .wt-label {
       display: block; font-size: .62rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: .07em;
-      color: var(--ink-400); margin-bottom: 3px;
+      color: var(--ink-500); margin-bottom: 3px;
     }
     .wt-dish { display: block; }
     .wt-guarn {
@@ -121,7 +197,7 @@
       content: "Guarnición · ";
       font-weight: 600; font-size: .68rem;
       text-transform: uppercase; letter-spacing: .05em;
-      color: var(--ink-400);
+      color: var(--ink-500);
     }
 
     /* Postre / bebida tags */
@@ -140,7 +216,7 @@
       font-family: var(--font-display); font-size: 1.05rem;
       font-weight: 900; color: var(--green-700);
     }
-    .wt-kcal-unit { font-size: .68rem; font-weight: 600; color: var(--ink-400); }
+    .wt-kcal-unit { font-size: .68rem; font-weight: 600; color: var(--ink-500); }
     .wt-macros {
       display: block; font-size: .67rem; color: var(--ink-500); margin-top: 2px;
     }
@@ -148,7 +224,7 @@
 
     /* Festivo cell */
     .wt-festivo {
-      background: #FDFBF3 !important;
+      background: var(--surface-raised) !important;
       border-top: none !important;
       text-align: center; vertical-align: middle !important;
     }
@@ -163,7 +239,7 @@
       font-weight: 700; font-size: .78rem; text-transform: uppercase;
       letter-spacing: .08em; color: var(--ink-600);
     }
-    .wt-festivo-note { font-size: .7rem; color: var(--ink-400); }
+    .wt-festivo-note { font-size: .7rem; color: var(--ink-500); }
 
     /* Info callout */
     .callout {
@@ -186,7 +262,7 @@
     /* Nutritional table */
     .nutri-table { width: 100%; border-collapse: collapse; font-size: .85rem; margin-top: 12px; }
     .nutri-table th {
-      background: var(--green-700); color: #fff;
+      background: var(--brand-700); color: #fff;
       font-size: .75rem; text-transform: uppercase; letter-spacing: .06em;
       padding: 8px 10px; text-align: left;
     }
@@ -194,25 +270,35 @@
     .nutri-table tr:last-child td { border-bottom: none; }
     .nutri-table tr:nth-child(odd) td { background: var(--ink-50); }
   </style>
+  <meta property="og:url" content="https://colegio-nsd.vercel.app/servicios/comedor" />
+  <meta property="og:image" content="https://colegio-nsd.vercel.app/assets/img/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Colegio NSD" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
 </head>
 <body id="top">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
   <div id="site-header"></div>
+
+  <main id="contenido">
 
   <section class="page-hero">
     <div class="container page-hero__inner">
       <div>
         <nav class="crumbs" aria-label="Migas de pan">
           <a href="/">Inicio</a> <i class="bi bi-chevron-right"></i>
-          <a href="/#servicios">Servicios</a> <i class="bi bi-chevron-right"></i>
+          <a href="/servicios">Servicios</a> <i class="bi bi-chevron-right"></i>
           <span>Comedor</span>
         </nav>
         <h1>Comedor Escolar</h1>
         <p>Menú elaborado y supervisado por el Asesoramiento Nutricional de la Comunidad de Madrid, con productos frescos y equilibrados para el correcto desarrollo de nuestros alumnos.</p>
       </div>
       <div class="page-hero__meta">
-        <span class="meta"><i class="bi bi-calendar3"></i> Curso 2025–26</span>
+        <span class="meta"><i class="bi bi-calendar3"></i> Curso 2026–27</span>
         <span class="meta"><i class="bi bi-award"></i> CAM Nutrición</span>
-        <span class="meta"><i class="bi bi-clock"></i> 13:30 – 15:00 h</span>
+        <span class="meta"><i class="bi bi-clock"></i> 13:00 – 15:00 h</span>
       </div>
     </div>
   </section>
@@ -220,331 +306,35 @@
   <section class="container article">
     <article class="prose">
 
-      <div class="menu-month-header">
-        <h2><i class="bi bi-calendar2-week" style="color:var(--green-700);margin-right:8px;"></i>Menú mayo 2026</h2>
-        <span class="menu-badge"><i class="bi bi-patch-check-fill"></i> Evaluado CAM</span>
-      </div>
 
-      <p>El comedor funciona de <strong>12:00 a 15:00 h</strong>, incorporando a los alumnos paulatinamente al término de cada clase. Disponemos de <strong>200 plazas</strong> en turnos, con cocina propia que elabora cada día menús frescos y naturales. El mismo menú se aplica a todos los comensales —alumnos, profesores y personal—, con la única excepción de las dietas especiales. El plan mensual se publica en esta web y en <strong>Alexia Familia</strong>.</p>
+      <h2>El comedor del colegio</h2>
+
+      <p>El comedor funciona de <strong>13:00 a 15:00 h</strong>, incorporando a los alumnos paulatinamente al término de cada clase. Disponemos de <strong>200 plazas</strong> en turnos, con cocina propia que elabora cada día menús frescos y naturales. El mismo menú se aplica a todos los comensales —alumnos, profesores y personal—, con la única excepción de las dietas especiales. El plan mensual se publica en esta web y en <strong>Alexia Familia</strong>.</p>
 
       <div class="highlight-grid">
         <div class="highlight">
           <i class="bi bi-fire"></i>
-          <h4>Cocina propia</h4>
+          <h3>Cocina propia</h3>
           <p>Elaboración diaria en el centro con productos naturales y frescos. Sin precocinados.</p>
         </div>
         <div class="highlight">
           <i class="bi bi-patch-check"></i>
-          <h4>Supervisado por la CAM</h4>
+          <h3>Supervisado por la CAM</h3>
           <p>Menús evaluados por el Asesoramiento Nutricional de la Comunidad de Madrid.</p>
         </div>
         <div class="highlight">
           <i class="bi bi-heart-pulse"></i>
-          <h4>Dietas adaptadas</h4>
+          <h3>Dietas adaptadas</h3>
           <p>Menús específicos para alumnos con alergias e intolerancias, elaborados en el propio centro.</p>
         </div>
       </div>
 
       <div class="callout" style="margin-top:28px;">
         <i class="bi bi-info-circle-fill"></i>
-        <p>El menú del comedor cubre entre el <strong>40 y el 50 %</strong> de las necesidades nutricionales diarias. Completa la alimentación con un <strong>desayuno abundante</strong> y una <strong>cena equilibrada</strong> con alimentos distintos a los de la comida.</p>
+        <p>El menú del comedor cubre entre el <strong>35 y el 40 %</strong> de las necesidades nutricionales diarias. Completa la alimentación con un <strong>desayuno abundante</strong> y una <strong>cena equilibrada</strong> con alimentos distintos a los de la comida.</p>
       </div>
 
-
-      <!-- ═══════════════════════════════════════
-           SEMANA 1 — 4 al 8 de mayo
-      ═══════════════════════════════════════ -->
-      <div class="week-section">
-        <p class="week-label">Semana 1 &mdash; 4 al 8 de mayo</p>
-        <div class="week-wrapper">
-          <table class="week-table" aria-label="Menú semana 1">
-            <thead>
-              <tr>
-                <th scope="col"><span class="wt-weekday">Lunes</span><span class="wt-num">4</span></th>
-                <th scope="col"><span class="wt-weekday">Martes</span><span class="wt-num">5</span></th>
-                <th scope="col"><span class="wt-weekday">Miércoles</span><span class="wt-num">6</span></th>
-                <th scope="col"><span class="wt-weekday">Jueves</span><span class="wt-num">7</span></th>
-                <th scope="col"><span class="wt-weekday">Viernes</span><span class="wt-num">8</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- 1.º plato -->
-              <tr class="wtr--primero">
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Espaguetis integrales con salsa de tomate</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Sopa de cocido con fideos ECO</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Patatas guisadas</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Judías pintas guisadas con arroz</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Puré de verduras</span></td>
-              </tr>
-              <!-- 2.º plato + guarnición -->
-              <tr class="wtr--segundo">
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Bacalao rebozado</span>
-                  <span class="wt-guarn">Pisto (verduras guisadas)</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Cocido completo (garbanzos, carne y verdura)</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Filete de merluza al horno</span>
-                  <span class="wt-guarn">Ensalada de lechuga</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Tortilla de patatas</span>
-                  <span class="wt-guarn">Menestra de verduras guisadas</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Hamburguesas de pollo</span>
-                  <span class="wt-guarn">Guisantes rehogados</span>
-                </td>
-              </tr>
-              <!-- Postre / bebida -->
-              <tr class="wtr--postre">
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag"><i class="bi bi-cup-hot"></i> Leche</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan blanco</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan blanco</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-cup"></i> Yogur</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan integral</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan blanco</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag"><i class="bi bi-cup-hot"></i> Leche</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan integral</span></div></td>
-              </tr>
-              <!-- Kcal -->
-              <tr class="wtr--kcal">
-                <td><span class="wt-kcal-num">819 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>40g</strong> · L <strong>28g</strong> · HC <strong>94g</strong></span></td>
-                <td><span class="wt-kcal-num">798 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>29g</strong> · L <strong>15g</strong> · HC <strong>134g</strong></span></td>
-                <td><span class="wt-kcal-num">517 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>27g</strong> · L <strong>8g</strong> · HC <strong>77g</strong></span></td>
-                <td><span class="wt-kcal-num">899 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>38g</strong> · L <strong>16g</strong> · HC <strong>149g</strong></span></td>
-                <td><span class="wt-kcal-num">699 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>43g</strong> · L <strong>17g</strong> · HC <strong>85g</strong></span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-
-      <!-- ═══════════════════════════════════════
-           SEMANA 2 — 11 al 15 de mayo
-      ═══════════════════════════════════════ -->
-      <div class="week-section">
-        <p class="week-label">Semana 2 &mdash; 11 al 15 de mayo</p>
-        <div class="week-wrapper">
-          <table class="week-table" aria-label="Menú semana 2">
-            <thead>
-              <tr>
-                <th scope="col"><span class="wt-weekday">Lunes</span><span class="wt-num">11</span></th>
-                <th scope="col"><span class="wt-weekday">Martes</span><span class="wt-num">12</span></th>
-                <th scope="col"><span class="wt-weekday">Miércoles</span><span class="wt-num">13</span></th>
-                <th scope="col"><span class="wt-weekday">Jueves</span><span class="wt-num">14</span></th>
-                <th scope="col" class="wt-head--festivo"><span class="wt-weekday">Viernes</span><span class="wt-num">15</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- 1.º plato -->
-              <tr class="wtr--primero">
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Macarrones integrales con salsa de tomate</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Crema de calabacín</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Sopa de cocido con fideos ECO</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Arroz blanco con salsa de tomate</span></td>
-                <td rowspan="4" class="wt-festivo">
-                  <div class="wt-festivo-inner">
-                    <i class="bi bi-star-fill"></i>
-                    <span class="wt-festivo-name">Festivo</span>
-                    <span class="wt-festivo-note">San Isidro</span>
-                  </div>
-                </td>
-              </tr>
-              <!-- 2.º plato + guarnición -->
-              <tr class="wtr--segundo">
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Filete de palometa al horno</span>
-                  <span class="wt-guarn">Champiñones rehogados</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Cinta de lomo de cerdo a la plancha</span>
-                  <span class="wt-guarn">Ensalada de lechuga, tomate, maíz y atún</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Cocido completo (garbanzos, carne y verdura)</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Filete de merluza al horno</span>
-                  <span class="wt-guarn">Ensalada de lechuga</span>
-                </td>
-              </tr>
-              <!-- Postre / bebida -->
-              <tr class="wtr--postre">
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag"><i class="bi bi-cup-hot"></i> Leche</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan blanco</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan blanco</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-cup"></i> Yogur</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan integral</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan blanco</span></div></td>
-              </tr>
-              <!-- Kcal -->
-              <tr class="wtr--kcal">
-                <td><span class="wt-kcal-num">621 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>35g</strong> · L <strong>12g</strong> · HC <strong>86g</strong></span></td>
-                <td><span class="wt-kcal-num">739 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>43g</strong> · L <strong>23g</strong> · HC <strong>67g</strong></span></td>
-                <td><span class="wt-kcal-num">856 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>33g</strong> · L <strong>16g</strong> · HC <strong>143g</strong></span></td>
-                <td><span class="wt-kcal-num">638 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>25g</strong> · L <strong>4g</strong> · HC <strong>136g</strong></span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-
-      <!-- ═══════════════════════════════════════
-           SEMANA 3 — 18 al 22 de mayo
-      ═══════════════════════════════════════ -->
-      <div class="week-section">
-        <p class="week-label">Semana 3 &mdash; 18 al 22 de mayo</p>
-        <div class="week-wrapper">
-          <table class="week-table" aria-label="Menú semana 3">
-            <thead>
-              <tr>
-                <th scope="col"><span class="wt-weekday">Lunes</span><span class="wt-num">18</span></th>
-                <th scope="col"><span class="wt-weekday">Martes</span><span class="wt-num">19</span></th>
-                <th scope="col"><span class="wt-weekday">Miércoles</span><span class="wt-num">20</span></th>
-                <th scope="col"><span class="wt-weekday">Jueves</span><span class="wt-num">21</span></th>
-                <th scope="col"><span class="wt-weekday">Viernes</span><span class="wt-num">22</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- 1.º plato -->
-              <tr class="wtr--primero">
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Espaguetis integrales con salsa de tomate</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Sopa de cocido con fideos ECO</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Judías verdes rehogadas</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Judías blancas guisadas con verduras</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Sopa de picadillo con fideos (jamón, pollo y huevo)</span></td>
-              </tr>
-              <!-- 2.º plato + guarnición -->
-              <tr class="wtr--segundo">
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Filete de palometa al horno</span>
-                  <span class="wt-guarn">Rodajas de tomate natural</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Cocido completo (garbanzos, carne y verdura)</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Pollo en salsa (cebolla, ajo y perejil)</span>
-                  <span class="wt-guarn">Champiñones rehogados</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Tortilla francesa</span>
-                  <span class="wt-guarn">Menestra de verduras guisadas</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Filete de merluza al horno</span>
-                  <span class="wt-guarn">Ensalada de pimientos rojos</span>
-                </td>
-              </tr>
-              <!-- Postre / bebida -->
-              <tr class="wtr--postre">
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag"><i class="bi bi-cup-hot"></i> Leche</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan blanco</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan blanco</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-cup"></i> Yogur</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan integral</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan blanco</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag"><i class="bi bi-cup-hot"></i> Leche</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan integral</span></div></td>
-              </tr>
-              <!-- Kcal -->
-              <tr class="wtr--kcal">
-                <td><span class="wt-kcal-num">814 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>39g</strong> · L <strong>27g</strong> · HC <strong>99g</strong></span></td>
-                <td><span class="wt-kcal-num">798 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>29g</strong> · L <strong>15g</strong> · HC <strong>134g</strong></span></td>
-                <td><span class="wt-kcal-num">575 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>36g</strong> · L <strong>9g</strong> · HC <strong>83g</strong></span></td>
-                <td><span class="wt-kcal-num">877 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>41g</strong> · L <strong>24g</strong> · HC <strong>121g</strong></span></td>
-                <td><span class="wt-kcal-num">665 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>36g</strong> · L <strong>19g</strong> · HC <strong>77g</strong></span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-
-      <!-- ═══════════════════════════════════════
-           SEMANA 4 — 25 al 29 de mayo
-      ═══════════════════════════════════════ -->
-      <div class="week-section">
-        <p class="week-label">Semana 4 &mdash; 25 al 29 de mayo</p>
-        <div class="week-wrapper">
-          <table class="week-table" aria-label="Menú semana 4">
-            <thead>
-              <tr>
-                <th scope="col"><span class="wt-weekday">Lunes</span><span class="wt-num">25</span></th>
-                <th scope="col"><span class="wt-weekday">Martes</span><span class="wt-num">26</span></th>
-                <th scope="col"><span class="wt-weekday">Miércoles</span><span class="wt-num">27</span></th>
-                <th scope="col"><span class="wt-weekday">Jueves</span><span class="wt-num">28</span></th>
-                <th scope="col"><span class="wt-weekday">Viernes</span><span class="wt-num">29</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- 1.º plato -->
-              <tr class="wtr--primero">
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Macarrones integrales con salsa de tomate</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Potaje de garbanzos y verduras</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Judías verdes rehogadas</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Patatas guisadas</span></td>
-                <td><span class="wt-label">1.er plato</span><span class="wt-dish">Lentejas guisadas con chorizo</span></td>
-              </tr>
-              <!-- 2.º plato + guarnición -->
-              <tr class="wtr--segundo">
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Bacalao rebozado</span>
-                  <span class="wt-guarn">Rodajas de tomate natural</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Salchichas de pavo cocidas</span>
-                  <span class="wt-guarn">Ensalada de lechuga, tomate, maíz y atún</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Pollo en salsa (cebolla, ajo y perejil)</span>
-                  <span class="wt-guarn">Rodajas de tomate natural</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Filete de merluza al horno</span>
-                  <span class="wt-guarn">Ensalada de lechuga, tomate, zanahoria, maíz y atún</span>
-                </td>
-                <td>
-                  <span class="wt-label">2.º plato</span>
-                  <span class="wt-dish">Huevos cocidos</span>
-                  <span class="wt-guarn">Ensalada de lechuga, tomate, maíz y atún</span>
-                </td>
-              </tr>
-              <!-- Postre / bebida -->
-              <tr class="wtr--postre">
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag"><i class="bi bi-cup-hot"></i> Leche</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan blanco</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan blanco</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-cup"></i> Yogur</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan integral</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan blanco</span></div></td>
-                <td><div class="wt-tags"><span class="wt-tag"><i class="bi bi-apple"></i> Fruta</span><span class="wt-tag"><i class="bi bi-cup-hot"></i> Leche</span><span class="wt-tag wt-tag--pan"><i class="bi bi-stars"></i> Pan integral</span></div></td>
-              </tr>
-              <!-- Kcal -->
-              <tr class="wtr--kcal">
-                <td><span class="wt-kcal-num">748 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>38g</strong> · L <strong>25g</strong> · HC <strong>87g</strong></span></td>
-                <td><span class="wt-macros" style="margin-top:0;">P <strong>27g</strong> · L <strong>26g</strong> · HC <strong>77g</strong></span></td>
-                <td><span class="wt-kcal-num">535 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>33g</strong> · L <strong>7g</strong> · HC <strong>82g</strong></span></td>
-                <td><span class="wt-kcal-num">545 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>26g</strong> · L <strong>8g</strong> · HC <strong>68g</strong></span></td>
-                <td><span class="wt-kcal-num">764 <span class="wt-kcal-unit">kcal</span></span><span class="wt-macros">P <strong>31g</strong> · L <strong>23g</strong> · HC <strong>86g</strong></span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <div data-menu-comedor></div>
 
       <hr />
 
@@ -563,9 +353,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>4–6 años</td><td>1 830 kcal</td><td>29 mg</td><td>500 mg</td><td>5–10 mg</td></tr>
-            <tr><td>7–9 años</td><td>2 190 kcal</td><td>35 mg</td><td>500 mg</td><td>5–10 mg</td></tr>
-            <tr><td>10–12 años</td><td>2 600 kcal</td><td>43 mg</td><td>600 mg</td><td>5–10 mg</td></tr>
+            <tr><td>4–6 años</td><td>1 830 kcal</td><td>29 g</td><td>500 mg</td><td>5–10 mg</td></tr>
+            <tr><td>7–9 años</td><td>2 190 kcal</td><td>35 g</td><td>500 mg</td><td>5–10 mg</td></tr>
+            <tr><td>10–12 años</td><td>2 600 kcal</td><td>43 g</td><td>600 mg</td><td>5–10 mg</td></tr>
             <tr><td>13–15 años</td><td>2 900 kcal</td><td>53 mg</td><td>700 mg</td><td>9–18 mg</td></tr>
           </tbody>
         </table>
@@ -574,7 +364,27 @@
       <h2>Alérgenos</h2>
       <div class="allergen-notice">
         <i class="bi bi-exclamation-triangle-fill"></i>
-        <p>Tenemos a su disposición la información completa sobre los alimentos alérgenos presentes en cada plato. Puede solicitarla en <strong>secretaría</strong> o por correo a <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a>. Si su hijo tiene alguna alergia o intolerancia, comuníquenoslo con antelación.</p>
+        <p>
+          Tenemos a su disposición la información completa sobre los alimentos alérgenos presentes en cada plato.
+          Puede solicitarla en <strong>secretaría</strong> o por correo a
+          <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a>.
+          <br /><br />
+          <strong>Alergias e intolerancias:</strong> para modificar el menú escolar es obligatorio presentar
+          una <strong>acreditación médica</strong>.
+          <br />
+          <strong>Dietas puntuales</strong> (gastroenteritis, diarrea…): avisen a secretaría por teléfono o correo
+          <strong>antes de las 11:00 h</strong> de la mañana.
+        </p>
+      </div>
+
+      <div class="callout" style="margin-top:20px;">
+        <i class="bi bi-ticket-perforated-fill"></i>
+        <p>
+          <strong>¿Solo algunos días?</strong> El comedor se contrata por <strong>meses naturales</strong>.
+          Para usarlo de forma puntual hay <strong>bonos de día suelto</strong>: adquiéralos el día anterior o
+          llame a secretaría el mismo día <strong>antes de las 11:00 h</strong>. El alumno debe echar el bono
+          en el buzón antes de esa hora.
+        </p>
       </div>
 
       <hr />
@@ -586,9 +396,9 @@
         <table style="width:100%;border-collapse:collapse;font-size:.88rem;">
           <thead>
             <tr>
-              <th style="background:var(--green-700);color:#fff;padding:8px 12px;text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;width:22%;">Toma</th>
-              <th style="background:var(--green-700);color:#fff;padding:8px 12px;text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;width:14%;">Aportación</th>
-              <th style="background:var(--green-700);color:#fff;padding:8px 12px;text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;">Qué incluir</th>
+              <th style="background:var(--brand-700);color:#fff;padding:8px 12px;text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;width:22%;">Toma</th>
+              <th style="background:var(--brand-700);color:#fff;padding:8px 12px;text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;width:14%;">Aportación</th>
+              <th style="background:var(--brand-700);color:#fff;padding:8px 12px;text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;">Qué incluir</th>
             </tr>
           </thead>
           <tbody>
@@ -620,7 +430,7 @@
         <strong>Sobre el picoteo:</strong> Los alimentos consumidos entre horas suelen contener grasa, azúcar y sal en exceso. Aportan calorías vacías, reducen el apetito para las comidas principales y a largo plazo favorecen el sobrepeso. Limita el picoteo y ofrece alternativas saludables.
       </blockquote>
 
-      <p style="font-size:.8rem;color:var(--ink-400);margin-top:6px;">Fuente: Ministerio de Sanidad y Consumo.</p>
+      <p style="font-size:.8rem;color:var(--ink-500);margin-top:6px;">Fuente: Ministerio de Sanidad.</p>
 
       <h2>Normas del servicio</h2>
       <ul>
@@ -630,43 +440,42 @@
       </ul>
 
       <div class="article-footer">
-        <a href="/contacto.html" class="btn btn--primary"><i class="bi bi-envelope"></i> Contactar con el comedor</a>
-        <a href="/#servicios" class="btn btn--ghost"><i class="bi bi-arrow-left"></i> Todos los servicios</a>
+        <a href="/contacto" class="btn btn--primary"><i class="bi bi-envelope"></i> Contactar con el comedor</a>
+        <a href="/servicios" class="btn btn--ghost"><i class="bi bi-arrow-left"></i> Todos los servicios</a>
       </div>
-
     </article>
 
     <aside class="aside">
       <div class="aside__card">
-        <h4>Otros servicios</h4>
+        <h3>Otros servicios</h3>
         <ul>
-          <li><a href="/servicios/extraescolares.html">Actividades extraescolares <i class="bi bi-arrow-right"></i></a></li>
-          <li><a href="/servicios/extraescolares.html">Madrugadores <i class="bi bi-arrow-right"></i></a></li>
-          <li><a href="/#servicios">Transporte escolar <i class="bi bi-arrow-right"></i></a></li>
-          <li><a href="https://campamento-nsd.vercel.app">Campamento NSD <i class="bi bi-arrow-right"></i></a></li>
+          <li><a href="/servicios/extraescolares">Actividades extraescolares <i class="bi bi-arrow-right"></i></a></li>
+          <li><a href="/servicios/madrugadores">Madrugadores <i class="bi bi-arrow-right"></i></a></li>
+          <li><a href="/familias/documentacion">Documentación para familias <i class="bi bi-arrow-right"></i></a></li>
+          <li><a href="https://campamento-nsd.vercel.app" target="_blank" rel="noopener noreferrer">Campamento de verano <i class="bi bi-arrow-right"></i></a></li>
         </ul>
       </div>
 
-      <div class="aside__card">
-        <h4>Tarifas 2025–26</h4>
+      <div class="aside__card" id="precios">
+        <h3>Tarifas 2026–27</h3>
         <table style="width:100%;border-collapse:collapse;font-size:.82rem;margin-bottom:10px;">
           <thead>
             <tr>
-              <th style="text-align:left;padding:6px 8px;background:var(--green-700);color:#fff;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;">Mes</th>
-              <th style="text-align:right;padding:6px 8px;background:var(--green-700);color:#fff;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;">Precio</th>
+              <th style="text-align:left;padding:6px 8px;background:var(--brand-700);color:#fff;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;">Mes</th>
+              <th style="text-align:right;padding:6px 8px;background:var(--brand-700);color:#fff;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;">Precio</th>
             </tr>
           </thead>
           <tbody>
             <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);">Septiembre</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;">120 €</td></tr>
             <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);background:var(--ink-50);">Octubre</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;background:var(--ink-50);">160 €</td></tr>
-            <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);">Noviembre</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;">130 €</td></tr>
-            <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);background:var(--ink-50);">Diciembre</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;background:var(--ink-50);">100 €</td></tr>
-            <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);">Enero</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;">120 €</td></tr>
-            <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);background:var(--ink-50);">Febrero</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;background:var(--ink-50);">145 €</td></tr>
-            <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);">Marzo</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;">140 €</td></tr>
-            <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);background:var(--ink-50);">Abril</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;background:var(--ink-50);">130 €</td></tr>
-            <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);">Mayo</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;">140 €</td></tr>
-            <tr><td style="padding:5px 8px;color:var(--ink-700);">Junio</td><td style="padding:5px 8px;text-align:right;font-weight:700;">110 €</td></tr>
+            <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);">Noviembre</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;">150 €</td></tr>
+            <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);background:var(--ink-50);">Diciembre</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;background:var(--ink-50);">105 €</td></tr>
+            <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);">Enero</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;">115 €</td></tr>
+            <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);background:var(--ink-50);">Febrero</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;background:var(--ink-50);">135 €</td></tr>
+            <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);">Marzo</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;">120 €</td></tr>
+            <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);background:var(--ink-50);">Abril</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;background:var(--ink-50);">165 €</td></tr>
+            <tr><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);color:var(--ink-700);">Mayo</td><td style="padding:5px 8px;border-bottom:1px solid var(--ink-100);text-align:right;font-weight:700;">160 €</td></tr>
+            <tr><td style="padding:5px 8px;color:var(--ink-700);">Junio</td><td style="padding:5px 8px;text-align:right;font-weight:700;">105 €</td></tr>
           </tbody>
         </table>
         <div style="display:grid;gap:4px;">
@@ -680,11 +489,11 @@
             <span>Bono día suelto</span><strong>12 €</strong>
           </div>
         </div>
-        <p style="font-size:.72rem;color:var(--ink-400);margin:8px 0 0;">El precio varía según los días lectivos del mes. Domiciliado los primeros días.</p>
+        <p style="font-size:.72rem;color:var(--ink-500);margin:8px 0 0;">El precio varía según los días lectivos del mes. Domiciliado los primeros días.</p>
       </div>
 
       <div class="aside__card">
-        <h4>Horario comedor</h4>
+        <h3>Horario comedor</h3>
         <ul>
           <li style="display:flex;gap:8px;align-items:center;font-size:.9rem;color:var(--ink-700);">
             <i class="bi bi-clock" style="color:var(--green-700);"></i>
@@ -702,21 +511,27 @@
       </div>
 
       <div class="aside__card">
-        <h4>Información nutricional</h4>
+        <h3>Información nutricional</h3>
         <p style="font-size:.88rem;color:var(--ink-600);margin:0 0 10px;">Menú evaluado por el <strong>Asesoramiento Nutricional de la Comunidad de Madrid</strong>.</p>
         <p style="font-size:.88rem;color:var(--ink-600);margin:0;">Bebida siempre incluida: <strong>Agua</strong>.</p>
       </div>
 
-      <div class="aside__card" style="background:linear-gradient(135deg,var(--green-700),var(--green-900));color:#fff;">
-        <h4 style="color:#fff;">¿Alguna duda?</h4>
+      <div class="aside__card" style="background:linear-gradient(135deg,var(--brand-700),var(--brand-900));color:#fff;">
+        <h3 style="color:#fff;">¿Alguna duda?</h3>
         <p style="color:#d6efd9;font-size:.9rem;margin:0 0 14px;">Contacta con nosotros para información sobre inscripciones o dietas especiales.</p>
-        <a href="/contacto.html" class="btn btn--ghost" style="background:var(--yellow-500);color:var(--ink-900);border:none;">Escribirnos</a>
+        <a href="/contacto" class="btn btn--ghost" style="background:var(--yellow-500);color:var(--brand-900);border:none;">Escribirnos</a>
       </div>
     </aside>
 
   </section>
+  </main>
 
   <div id="site-footer"></div>
+  <script src="/assets/js/menu-datos.js" defer></script>
+  <script src="/assets/js/menu-comedor.js" defer></script>
   <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/nsd-arriba.js" defer></script>
+  <script src="/assets/js/nsd-spring.js" defer></script>
+  <script src="/assets/js/nsd-carrusel.js" defer></script>
 </body>
 </html>
