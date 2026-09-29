@@ -1,0 +1,30 @@
+/*
+ * Fuentes servidas desde la propia web (septiembre de 2026).
+ * Antes venían de Google Fonts, que recibía la IP de cada visitante antes
+ * de cualquier consentimiento. Son las variables de Fontsource (OFL 1.1),
+ * solo el juego latino, que cubre el castellano.
+ *   Fraunces: eje de peso y de tamaño óptico (titulares 700–900, cursiva 500)
+ *   Outfit:   eje de peso (300–800)
+ * Copia maestra en _DISENO/vendor/fuentes; se reparte con sincronizar.js.
+ */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(fraunces-latin-opsz-normal.woff2) format('woff2-variations'), url(fraunces-latin-opsz-normal.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(fraunces-latin-opsz-italic.woff2) format('woff2-variations'), url(fraunces-latin-opsz-italic.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(outfit-latin-wght-normal.woff2) format('woff2-variations'), url(outfit-latin-wght-normal.woff2) format('woff2');
+}

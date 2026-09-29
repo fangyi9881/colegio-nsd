@@ -1,0 +1,147 @@
+/* =========================================================
+   NSD — Portada a pantalla completa con cinta inferior
+   ---------------------------------------------------------
+   La primera sección de las tres webs (colegio, campamento e
+   infantil) ocupa exactamente lo que queda de pantalla bajo la
+   cabecera, como la portada de Dolores Dragons, y termina en la
+   misma cinta con texto en movimiento. Al entrar se ve entera.
+
+   Se carga DESPUÉS de la hoja principal de cada web (styles.css en
+   el colegio, nsd-base.css en las otras), así que solo retoca.
+
+   ⚠ Copia maestra: se edita aquí y se reparte con
+   `node _DISENO/sincronizar.js`. Las alturas de la barra superior
+   y de la cabecera (--topbar-h y --navbar-h) las publica el JS de
+   cada web al cargar y al cambiar de tamaño.
+   ========================================================= */
+
+:root { --cinta-h: 36px; }
+
+/* Lo que queda de pantalla bajo la cabecera */
+.hero {
+  /* --barra-hoy-h la mide nsd-sitio.js / partials.js: 0 si no hay barra
+     de hoy en esta pagina, o si aun no se ha llenado de mensajes. */
+  --portada-h: calc(100svh - var(--topbar-h, 41px) - var(--navbar-h, 77px) - var(--barra-hoy-h, 0px));
+  min-height: var(--portada-h);
+  display: flex; flex-direction: column; justify-content: center;
+  /* El relleno superior absorbe la barra de hoy: si mide mas que estos
+     44px, el relleno baja a 0 en vez de sumarse a lo que ya ocupa la
+     barra. Así la cinta del final no se cae de la pantalla. */
+  padding: max(0px, calc(44px - var(--barra-hoy-h, 0px))) 0 calc(var(--cinta-h) + 52px);
+}
+.hero > .hero__grid { width: 100%; }
+/* La cinta sustituye al indicador de «bajar» */
+.hero__scroll { display: none !important; }
+
+@media (min-width: 981px) {
+  /* El titular y la tarjeta se ajustan también al alto de la pantalla, para
+     que en portátiles de poca altura la cinta siga viéndose al entrar. */
+  /* En pantallas altas y anchas (portatiles de poca resolucion vertical no
+     llegan aqui) el titular y la tarjeta crecen un poco mas para que la
+     portada no deje tanto hueco vacio antes de la cinta. */
+  .hero h1 { font-size: clamp(2.5rem, min(5.5vw, 7.4svh), 4.6rem); }
+  .hero__card-inner {
+    width: min(100%, clamp(340px, calc((var(--portada-h) - 150px) / 1.125), 580px));
+    max-width: none;
+  }
+}
+
+/* ---------- Cinta ---------- */
+.cinta {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 4;
+  height: var(--cinta-h); overflow: hidden;
+  display: flex; align-items: center;
+  background: var(--brand-800);
+  border-top: 1px solid rgba(196,146,0,.28);
+  /* Los extremos se funden en vez de cortar el texto en seco */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.cinta__pista {
+  display: flex; flex-shrink: 0; width: max-content;
+  animation: nsd-cinta 48s linear infinite;
+}
+.cinta__grupo { display: flex; flex-shrink: 0; }
+.cinta__item {
+  display: inline-flex; align-items: center; gap: 2.2rem; padding-right: 2.2rem;
+  font-family: var(--font-sans); font-size: .66rem; font-weight: 700; line-height: 1;
+  letter-spacing: .3em; text-transform: uppercase; white-space: nowrap;
+  color: var(--gold-300);
+}
+.cinta__item::after {
+  content: ""; width: 4px; height: 4px; border-radius: 50%;
+  background: currentColor; opacity: .7;
+}
+@keyframes nsd-cinta { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .cinta__pista { animation: none; } }
+
+/* ---------- Móvil y tableta ----------
+   La tarjeta de la portada queda debajo del texto. Para que la cinta cierre
+   la primera pantalla, el texto ocupa esa pantalla, la cinta va justo
+   después y la tarjeta sigue a continuación. */
+@media (max-width: 980px) {
+  .hero { padding: 0; min-height: 0; justify-content: flex-start; }
+  .hero > .hero__grid { display: contents; }
+  .hero__content {
+    order: 1; position: relative; box-sizing: border-box;
+    width: 100%; max-width: var(--container, 1200px); margin: 0 auto;
+    padding: 28px 24px 36px;
+    /* Sin tope, en tablets altas (768×1024 y parecidos) el alto de
+       pantalla completo deja un hueco enorme antes del titular: se limita
+       a 620px, que en los teléfonos habituales no cambia nada (su alto
+       de portada ya ronda o queda por debajo de esa cifra). */
+    min-height: min(calc(var(--portada-h) - var(--cinta-h)), 620px);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero__content .badge-pill { align-self: flex-start; }
+  .cinta { position: relative; order: 2; flex-shrink: 0; }
+  .hero__card {
+    order: 3; position: relative;
+    width: calc(100% - 40px); max-width: 460px; margin: 44px auto 56px;
+  }
+  /* Con display:contents cada hijo necesita su orden: sin esto el credito
+     de las fotos se colaba por delante del titular. */
+  .hero__credito { order: 4; width: calc(100% - 40px); margin: 0 auto 44px; }
+}
+@media (max-width: 720px) {
+  .hero__content { padding-inline: 20px; }
+}
+/* Tabletas (721-980px): el texto ocupa unos 400px y el tope de 620px aun
+   dejaba casi 100px de aire vacio por encima y por debajo. Con 500px la
+   cinta se acerca al texto y la tarjeta asoma antes; los telefonos no
+   cambian. */
+@media (min-width: 721px) and (max-width: 980px) {
+  .hero__content {
+    min-height: min(calc(var(--portada-h) - var(--cinta-h)), 500px);
+    padding-block: 40px 44px;
+  }
+}
+
+/* Portátiles de poca altura (1280×720 y parecidos): menos aire arriba y
+   abajo para que la portada siga cabiendo con su cinta. */
+@media (min-width: 981px) and (max-height: 800px) {
+  .hero { padding: 20px 0 calc(var(--cinta-h) + 24px); }
+  .hero h1 { font-size: clamp(2.5rem, min(5.5vw, 7svh), 4.2rem); margin-bottom: .45em; }
+  .hero .lead { line-height: 1.7; }
+  .hero__cta { margin: 18px 0 18px; }
+}
+.cinta:hover .cinta__pista { animation-play-state: paused; }
+
+/* ---------- Botón de pausa del contenido en movimiento ----------
+   WCAG 2.2.2: todo lo que se mueve solo más de 5 s se puede parar. El
+   botón va dentro de la cinta, a la derecha (por eso la máscara solo
+   funde el borde izquierdo). Con movimiento reducido no hay nada que
+   parar y el botón no se muestra. */
+.pausa-mov {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-width: 28px; min-height: 28px; padding: 0 8px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.35); background: var(--brand-800, #0B3A18); color: #fff;
+  font: 600 .78rem/1 var(--font-sans); cursor: pointer;
+}
+.pausa-mov:focus-visible { outline: 3px solid var(--gold-300, #E3C254); outline-offset: 2px; }
+.pausa-mov .pausa-mov__play, .pausa-mov[aria-pressed="true"] .pausa-mov__pausa { display: none; }
+.pausa-mov[aria-pressed="true"] .pausa-mov__play { display: block; }
+.cinta { -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%); mask-image: linear-gradient(90deg, transparent, #000 6%); }
+.cinta .pausa-mov { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 2; box-shadow: -18px 0 16px var(--brand-800, #0B3A18); }
+.is-pausado .cinta__pista, .cinta.is-pausado .cinta__pista { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) { .pausa-mov { display: none !important; } }

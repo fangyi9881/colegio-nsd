@@ -1,0 +1,23 @@
+# Qué NO subir al desplegar la web del colegio.
+#
+# Desde la separación por titularidad (septiembre de 2026) las otras webs ya
+# no viven dentro de esta carpeta: el campamento está en ../01_web_campamento,
+# la escuela infantil en ../02_web_infantil y las marcas propias en
+# E:\CLAUDE\ACTIVOS_PROPIOS. Por eso aquí solo quedan dependencias, control de
+# versiones y notas de trabajo.
+
+# Dependencias y artefactos de compilación
+node_modules/
+**/node_modules/
+.vite/
+
+# Control de versiones y editor
+.git/
+.vscode/
+.claude/
+
+# Scripts y notas de trabajo, no forman parte del sitio
+*.ps1
+TODO.md
+CLAUDE.md
+quotes-state.json

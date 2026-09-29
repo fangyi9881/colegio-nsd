@@ -1,0 +1,388 @@
+/* =========================================================
+   NSD — Capa de acabado "de dispositivo" (a lo Apple)
+   ---------------------------------------------------------
+   Materiales translúcidos, respuesta inmediata al pulsar,
+   movimiento con curva de muelle y dos piezas de imagen:
+   la galería deslizable y las baldosas con foto.
+
+   No cambia la identidad (colores, Fraunces y Outfit): la
+   acompaña. Se carga después de la hoja principal de cada web.
+
+   ⚠ Copia maestra: se edita aquí y se reparte con
+   `node _DISENO/sincronizar.js`.
+   ========================================================= */
+
+:root {
+  /* Muelle críticamente amortiguado (sin rebote) y uno con un leve rebote
+     para lo que el usuario "lanza". Se usan como curvas de transición. */
+  --muelle: cubic-bezier(.32, .72, 0, 1);
+  --muelle-rebote: cubic-bezier(.34, 1.36, .64, 1);
+  --radio-dispositivo: 28px;
+  --vidrio: color-mix(in srgb, var(--surface-raised) 72%, transparent);
+  --vidrio-borde: color-mix(in srgb, #fff 45%, transparent);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --vidrio-borde: rgba(255,255,255,.1); } }
+:root[data-theme="dark"] { --vidrio-borde: rgba(255,255,255,.1); }
+
+/* ---------- Respuesta al pulsar: en el momento, no al soltar ---------- */
+.btn, .nav-cta, .act__boton, .sim-etapa, .doc2-fila, .web, .baldosa,
+.carrusel__boton, .indice a, .diario-filtro, .sim-tipo, .doc2-tab, .theme-switch__opt {
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active, .nav-cta:active, .web:active, .baldosa:active, .indice a:active, .carrusel__boton:active {
+  transform: scale(.97);
+  transition: transform 100ms ease-out;
+}
+
+/* ---------- Materiales: capas flotantes translúcidas ----------
+   Los menús desplegables NO van aquí: un menú tiene que leerse sin que
+   se cuele la página de debajo, así que son sólidos. */
+.sim__resumen, .doc2-vista, .subnav {
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* ---------- Galería deslizable ----------
+   Tarjetas grandes y redondeadas que se deslizan con el dedo o con los
+   botones; la primera queda alineada con el contenido de la página. */
+.carrusel { position: relative; }
+.carrusel__cab {
+  display: flex; align-items: end; justify-content: space-between; gap: 20px;
+  max-width: var(--container, 1200px); margin: 0 auto 26px; padding: 0 24px;
+}
+.carrusel__cab h2 { margin: 0; }
+.carrusel__cab p { margin: 8px 0 0; color: var(--ink-600); max-width: 60ch; }
+.carrusel__controles { display: flex; gap: 10px; flex-shrink: 0; }
+.carrusel__boton {
+  width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+  border: 1px solid var(--vidrio-borde); background: var(--vidrio); color: var(--ink-900); font-size: 1.1rem;
+  -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 6px 18px -10px rgba(11,58,24,.45);
+  transition: opacity .2s, background .2s;
+}
+.carrusel__boton:hover { background: var(--surface-raised); }
+.carrusel__boton:disabled { opacity: .35; cursor: default; }
+.carrusel__pista {
+  --lateral: max(24px, calc((100vw - var(--container, 1200px)) / 2 + 24px));
+  display: flex; gap: 20px; margin: 0; padding: 6px var(--lateral) 26px; list-style: none;
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--lateral); scrollbar-width: none;
+}
+.carrusel__pista::-webkit-scrollbar { display: none; }
+.carrusel__item { flex: 0 0 min(78vw, 400px); scroll-snap-align: start; }
+.carrusel__item--ancho { flex-basis: min(86vw, 620px); }
+.carrusel__media {
+  position: relative; aspect-ratio: 4 / 5; border-radius: var(--radio-dispositivo); overflow: hidden;
+  background: var(--surface-sunken);
+  box-shadow: 0 1px 2px rgba(11,58,24,.06), 0 22px 44px -26px rgba(11,58,24,.45);
+}
+.carrusel__item--ancho .carrusel__media { aspect-ratio: 5 / 4; }
+.carrusel__media img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transform: scale(1.06); transition: transform 1.1s var(--muelle);
+}
+.carrusel__item.is-visible .carrusel__media img { transform: scale(1); }
+.carrusel__item:hover .carrusel__media img { transform: scale(1.03); }
+.carrusel__pie { padding: 16px 6px 0; }
+.carrusel__pie h3 { margin: 0 0 4px; font-size: 1.2rem; }
+.carrusel__pie p { margin: 0; font-size: .93rem; color: var(--ink-600); line-height: 1.55; }
+.carrusel__nota { max-width: var(--container, 1200px); margin: 0 auto; padding: 0 24px; font-size: .82rem; color: var(--ink-500); }
+@media (max-width: 720px) {
+  .carrusel__cab { padding: 0 20px; align-items: flex-start; flex-direction: column; }
+  .carrusel__controles { display: none; }
+  .carrusel__pista { --lateral: 20px; gap: 14px; }
+  .carrusel__nota { padding: 0 20px; }
+}
+
+/* ---------- Baldosas con foto ----------
+   La imagen llena la tarjeta y el texto se apoya arriba, sobre un velo. */
+.baldosas { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+.baldosa {
+  position: relative; isolation: isolate; overflow: hidden; grid-column: span 6;
+  min-height: 460px; border-radius: var(--radio-dispositivo); color: #fff;
+  display: flex; flex-direction: column; justify-content: space-between; padding: 34px;
+  background: var(--brand-800);
+  box-shadow: 0 1px 2px rgba(11,58,24,.06), 0 26px 50px -30px rgba(11,58,24,.55);
+}
+.baldosa--ancha { grid-column: span 12; min-height: 520px; }
+.baldosa--tercio { grid-column: span 4; }
+.baldosa--dos-tercios { grid-column: span 8; }
+.baldosa > img, .baldosa > picture img {
+  position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover;
+  transform: scale(1.06); transition: transform 1.2s var(--muelle);
+}
+.baldosa > picture { position: absolute; inset: 0; z-index: -2; }
+.baldosa.is-visible > img, .baldosa.is-visible > picture img { transform: scale(1); }
+.baldosa::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(4,18,10,.86) 0%, rgba(4,18,10,.55) 38%, rgba(4,18,10,.35) 62%, rgba(4,18,10,.7) 100%);
+}
+.baldosa--clara::after { background: linear-gradient(180deg, rgba(4,18,10,.55) 0%, transparent 50%); }
+.baldosa__ante { margin: 0 0 8px; font-size: .78rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-300, #E3C254); }
+.baldosa h3 { margin: 0; color: #fff; font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.05; letter-spacing: -.03em; max-width: 18ch; }
+.baldosa p { margin: 10px 0 0; color: rgba(255,255,255,.86); max-width: 44ch; }
+.baldosa__pie { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.baldosa__pie small { color: rgba(255,255,255,.72); font-size: .78rem; }
+.baldosa a { color: #fff; }
+@media (max-width: 900px) {
+  .baldosa, .baldosa--tercio, .baldosa--dos-tercios { grid-column: span 12; min-height: 380px; }
+  .baldosa { padding: 26px; }
+}
+
+/* ---------- Movimiento reducido: sin zoom, mismo contenido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .carrusel__media img, .baldosa > img, .baldosa > picture img { transform: none !important; transition: none; }
+  .carrusel__pista { scroll-behavior: auto; }
+}
+
+/* ---------- Hueco de foto ----------
+   Marca dónde irá una fotografía que todavía no existe, con el mismo
+   tamaño y forma que tendrá. Así se ve la página terminada sin colar
+   imágenes de banco. Al llegar la foto real, se sustituye el hueco. */
+.hueco {
+  position: relative; display: grid; place-content: center; justify-items: center; gap: 8px;
+  aspect-ratio: 4 / 5; padding: 26px; text-align: center;
+  border-radius: var(--radio-dispositivo); border: 2px dashed var(--border-strong);
+  background:
+    repeating-linear-gradient(135deg, transparent 0 10px, color-mix(in srgb, var(--ink-100) 45%, transparent) 10px 11px),
+    var(--surface-sunken);
+  color: var(--ink-600);
+}
+.hueco i { font-size: 1.7rem; color: var(--green-600); }
+.hueco strong { font-size: .95rem; color: var(--ink-800); font-weight: 700; }
+.hueco span { font-size: .82rem; line-height: 1.45; max-width: 26ch; }
+.hueco::after {
+  content: "Foto pendiente"; position: absolute; top: 14px; left: 14px;
+  padding: 3px 10px; border-radius: 999px; background: var(--surface-raised); border: 1px solid var(--border);
+  font-size: .68rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-500);
+}
+.hueco--ancho { aspect-ratio: 5 / 4; }
+/* Un hueco que ya tiene su foto: misma forma y mismo sitio que tenia el
+   hueco vacio, para que la pagina no se mueva al llegar la imagen. */
+.foto-real { display: block; overflow: hidden; aspect-ratio: 4 / 5; border-radius: var(--radio-dispositivo); background: var(--surface-sunken); }
+.foto-real > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.foto-real--ancho { aspect-ratio: 5 / 4; }
+.foto-real--banda { aspect-ratio: 21 / 9; }
+.foto-real--alta { aspect-ratio: 3 / 4; }
+
+.hueco--banda { aspect-ratio: 21 / 9; }
+.baldosa .hueco { position: absolute; inset: 0; z-index: -2; aspect-ratio: auto; border: 0; border-radius: 0; }
+
+/* Tira de imágenes dentro de una página de artículo */
+.tira-fotos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 18px 0 8px; }
+.tira-fotos .hueco { padding: 18px; }
+.tira-fotos .hueco span { font-size: .78rem; }
+@media (max-width: 760px) { .tira-fotos { grid-template-columns: 1fr; } }
+
+/* ---------- Enlace a otra web del grupo ----------
+   Cuando un enlace sale del sitio y entra en otra web de NSD conviene
+   que se note antes de hacer clic: de ahí el recuadro, el sello y el
+   dominio a la vista. Variante --infantil para la Escuela Infantil. */
+.enlace-web {
+  --acento: var(--green-600);
+  position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 18px;
+  margin: 18px 0; padding: 20px 22px;
+  border-radius: var(--radio-dispositivo); border: 1px solid var(--border);
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--acento) 12%, transparent), transparent 60%),
+    var(--surface-raised);
+  box-shadow: 0 18px 40px -28px rgba(4, 18, 10, .5);
+  color: inherit; text-decoration: none;
+  transition: transform .35s var(--muelle), box-shadow .35s var(--muelle), border-color .25s ease;
+}
+.enlace-web::before {
+  content: ""; position: absolute; inset: 0 auto 0 0; width: 4px;
+  border-radius: var(--radio-dispositivo) 0 0 var(--radio-dispositivo);
+  background: linear-gradient(180deg, var(--acento), color-mix(in srgb, var(--acento) 35%, transparent));
+}
+.enlace-web:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--acento) 45%, var(--border)); box-shadow: 0 26px 52px -30px rgba(4, 18, 10, .6); }
+.enlace-web:active { transform: translateY(-1px) scale(.995); }
+.enlace-web__ico {
+  width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center;
+  background: color-mix(in srgb, var(--acento) 16%, var(--surface-sunken));
+  color: var(--acento); font-size: 1.6rem;
+}
+.enlace-web__ico img { width: 34px; height: 34px; object-fit: contain; }
+.enlace-web__txt { display: grid; gap: 4px; min-width: 0; }
+.enlace-web__sello {
+  display: inline-flex; align-items: center; gap: 6px; width: max-content;
+  padding: 3px 10px; border-radius: 999px;
+  background: color-mix(in srgb, var(--acento) 14%, transparent);
+  color: var(--acento); font-size: .68rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+}
+.enlace-web__txt strong { font-size: 1.08rem; line-height: 1.3; color: var(--ink-900); }
+.enlace-web__txt > span:last-child { font-size: .9rem; line-height: 1.5; color: var(--ink-600); }
+.enlace-web__dominio { font-weight: 700; color: var(--acento); white-space: nowrap; }
+.enlace-web__ir {
+  width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid var(--border); background: var(--surface); color: var(--acento); font-size: 1.05rem;
+  transition: transform .35s var(--muelle), background .25s ease, color .25s ease;
+}
+.enlace-web:hover .enlace-web__ir { transform: translate(3px, -3px); background: var(--acento); color: #fff; }
+/* El rosa de la escuela infantil, oscurecido para que el texto pequeño
+   pase el 4.5:1 sobre crema; en modo oscuro se aclara. */
+.enlace-web--infantil { --acento: #a8325f; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .enlace-web--infantil { --acento: #f79ec0; }
+}
+:root[data-theme="dark"] .enlace-web--infantil { --acento: #f79ec0; }
+/* Con el acento claro, la flecha en hover necesita texto oscuro encima. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .enlace-web:hover .enlace-web__ir { color: #14100e; }
+}
+:root[data-theme="dark"] .enlace-web:hover .enlace-web__ir { color: #14100e; }
+/* Versión estrecha, para columnas laterales */
+.enlace-web--mini { grid-template-columns: auto 1fr; gap: 12px; padding: 14px 16px; margin: 0; }
+.enlace-web--mini .enlace-web__ico { width: 40px; height: 40px; border-radius: 13px; font-size: 1.2rem; }
+.enlace-web--mini .enlace-web__txt strong { font-size: .98rem; }
+.enlace-web--mini .enlace-web__txt > span:last-child { font-size: .82rem; }
+.enlace-web--mini .enlace-web__ir { display: none; }
+
+@media (max-width: 720px) {
+  .enlace-web { grid-template-columns: auto 1fr; gap: 14px; padding: 18px; }
+  .enlace-web__ir { grid-column: 2; justify-self: start; width: 40px; height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .enlace-web, .enlace-web__ir { transition: none; }
+  .enlace-web:hover { transform: none; }
+  .enlace-web:hover .enlace-web__ir { transform: none; }
+}
+
+/* ---------- Impresión ----------
+   Las páginas se pueden guardar en PDF desde el centro de documentación.
+   En papel sobran la navegación, los adornos y todo lo que flota. */
+@media print {
+  :root { --topbar-h: 0px; --navbar-h: 0px; }
+  .topbar, .navbar, #site-header, #site-footer, .drawer, .drawer__velo,
+  .cinta, .cursor-ring, .to-top, #ck-banner, #ck-overlay, .subnav,
+  .blob, .hero__cta, .cta, .carrusel__btn, .enlace-web__ir {
+    display: none !important;
+  }
+  body { background: #fff !important; color: #111 !important; }
+  main, .section, .container { padding-top: 0 !important; margin-top: 0 !important; }
+  .section { break-inside: auto; padding-block: 12px !important; }
+  h1, h2, h3 { break-after: avoid; color: #111 !important; }
+  table, figure, .baldosa, .promo, .indice li, .enlace-web { break-inside: avoid; }
+  a { color: #111 !important; text-decoration: underline; }
+  /* En papel, un enlace sin su dirección no sirve de nada */
+  main a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .78em; word-break: break-all; }
+  * { box-shadow: none !important; text-shadow: none !important; animation: none !important; }
+  .hueco { border-color: #bbb !important; }
+}
+
+/* ---------- Recuadros de fotos que se cambian solos ----------
+   Una sola imagen a la vista; la siguiente entra deslizándose de
+   derecha a izquierda. Los mandos (puntos y pausa) los pone
+   nsd-fotos.js. Sin JS se ve la primera foto, que ya es correcta. */
+.rotafotos {
+  position: relative; overflow: hidden; isolation: isolate;
+  border-radius: var(--radio-dispositivo);
+  background: var(--surface-sunken);
+  box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 24px 48px -28px rgba(0,0,0,.4);
+  touch-action: pan-y;
+}
+.rotafotos__pista { position: relative; list-style: none; margin: 0; padding: 0; height: 100%; }
+.rotafotos__lam {
+  position: absolute; inset: 0; opacity: 0; transform: translateX(100%);
+  transition: transform .75s var(--muelle), opacity .45s var(--muelle);
+  pointer-events: none;
+}
+/* Todas las láminas van superpuestas, así que el recuadro necesita
+   siempre una de las proporciones de abajo para tener altura. */
+.rotafotos__lam.is-activa { opacity: 1; transform: none; pointer-events: auto; z-index: 1; }
+.rotafotos__lam.viene-de-izquierda { transform: translateX(-100%); }
+.rotafotos__lam.se-va-izquierda { opacity: 0; transform: translateX(-100%); }
+.rotafotos__lam.se-va-derecha { opacity: 0; transform: translateX(100%); }
+.rotafotos__lam > img,
+.rotafotos__lam > picture img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rotafotos__lam > .hueco { height: 100%; aspect-ratio: auto; border: 0; border-radius: 0; }
+/* El pie de foto, sobre un velo para que se lea sobre cualquier imagen */
+.rotafotos__pie {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  padding: 44px 150px 18px 20px; color: #fff; font-size: .88rem; line-height: 1.45;
+  background: linear-gradient(transparent, rgba(4,8,6,.82));
+}
+.rotafotos__pie strong { display: block; font-size: 1rem; }
+.rotafotos__pie em { display: block; margin-top: 3px; font-size: .76rem; font-style: normal; color: rgba(255,255,255,.72); }
+/* Los mandos, en dos esquinas: así no se comen el pie de foto */
+.rotafotos__mandos { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.rotafotos__mandos > * { pointer-events: auto; position: absolute; }
+.rotafotos__pausa { top: 14px; right: 14px; }
+.rotafotos__puntos { bottom: 14px; right: 14px; }
+.rotafotos__pausa {
+  width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; cursor: pointer;
+  border: 1px solid var(--vidrio-borde); background: var(--vidrio); color: var(--ink-900); font-size: .85rem;
+  -webkit-backdrop-filter: blur(16px) saturate(180%); backdrop-filter: blur(16px) saturate(180%);
+}
+.rotafotos__puntos { display: flex; gap: 6px; align-items: center; }
+.rotafotos__punto {
+  width: 26px; height: 26px; padding: 0; border: 0; background: none; cursor: pointer;
+  display: grid; place-items: center;
+}
+.rotafotos__punto::before {
+  content: ""; width: 8px; height: 8px; border-radius: 999px;
+  background: rgba(255,255,255,.55); box-shadow: 0 1px 3px rgba(0,0,0,.45);
+  transition: width .3s var(--muelle), background .3s;
+}
+.rotafotos__punto.is-activo::before { width: 22px; background: #fff; }
+.rotafotos--claro .rotafotos__punto::before { background: color-mix(in srgb, var(--ink-900) 28%, transparent); box-shadow: none; }
+.rotafotos--claro .rotafotos__punto.is-activo::before { background: var(--green-600); }
+/* Proporciones de uso corriente */
+.rotafotos--alto { aspect-ratio: 4 / 5; }
+.rotafotos--ancho { aspect-ratio: 16 / 10; }
+.rotafotos--banda { aspect-ratio: 21 / 9; }
+.rotafotos--cuadro { aspect-ratio: 1; }
+/* Para rellenar un marco que ya tiene tamaño, como la foto de portada */
+.rotafotos--relleno { position: absolute; inset: 0; height: 100%; border-radius: inherit; box-shadow: none; }
+@media (max-width: 720px) {
+  .rotafotos--banda { aspect-ratio: 4 / 3; }
+  .rotafotos__pie { padding: 40px 16px 44px; }
+  .rotafotos__puntos { left: 14px; right: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rotafotos__lam { transition: opacity .25s linear; transform: none !important; }
+}
+
+/* ---------- Visor de imágenes ----------
+   La imagen se abre centrada sobre la página, se amplía y se cierra
+   pulsando fuera. Lo monta nsd-visor.js. */
+.con-lupa { cursor: zoom-in; }
+html.con-visor { overflow: hidden; }
+.visor {
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid; place-items: center; padding: 24px;
+  opacity: 0; transition: opacity .22s ease;
+}
+.visor.is-abierto { opacity: 1; }
+.visor__fondo {
+  position: absolute; inset: 0; background: rgba(6, 14, 8, .82);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.visor__caja {
+  position: relative; z-index: 1; display: grid; gap: 12px; justify-items: center;
+  max-width: min(1100px, 94vw); max-height: 86vh;
+}
+.visor__img {
+  max-width: min(1100px, 94vw); max-height: 78vh; width: auto; height: auto;
+  border-radius: 14px; background: #fff; touch-action: none; user-select: none;
+  box-shadow: 0 30px 70px -20px rgba(0, 0, 0, .6);
+  transform-origin: center; transition: transform .18s var(--muelle);
+}
+.visor__pie { margin: 0; color: rgba(255, 255, 255, .86); font-size: .88rem; text-align: center; max-width: 70ch; }
+.visor__mandos { position: absolute; top: 18px; right: 18px; z-index: 2; display: flex; gap: 8px; }
+.visor__boton {
+  width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, .22); background: rgba(255, 255, 255, .14); color: #fff; font-size: 1rem;
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  transition: background .2s, opacity .2s;
+}
+.visor__boton:hover { background: rgba(255, 255, 255, .26); }
+.visor__boton:disabled { opacity: .35; cursor: default; }
+@media (max-width: 600px) {
+  .visor { padding: 12px; }
+  .visor__mandos { top: 12px; right: 12px; }
+  .visor__img { max-height: 70vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .visor, .visor__img { transition: none; }
+}
