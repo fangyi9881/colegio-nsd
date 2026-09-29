@@ -315,8 +315,8 @@
     { url: '/', titulo: 'Colegio NSD', sub: 'De 0 a 16 años', icono: 'bi-mortarboard', aqui: true },
     { url: 'https://infantil-nsd.vercel.app', titulo: 'Escuela Infantil', sub: '0 – 3 años', icono: 'bi-balloon-heart' },
     { url: 'https://campamento-nsd.vercel.app', titulo: 'Campamento', sub: 'Verano en el cole', icono: 'bi-sun' },
-    { url: 'https://dolores-dragons.vercel.app', titulo: 'Dolores Dragons', sub: 'Baloncesto', icono: 'bi-dribbble' },
-    { url: 'https://dragons-den-eight.vercel.app', titulo: 'Dragons Den', sub: 'Academia de basket', icono: 'bi-trophy' },
+    { url: 'https://dolores-dragons.vercel.app', titulo: 'Dolores Dragons', sub: 'Escuela de baloncesto', icono: 'bi-dribbble' },
+    { url: 'https://dragons-den-eight.vercel.app', titulo: 'Dragons Den', sub: 'Programa de baloncesto', icono: 'bi-trophy' },
   ];
   const WEBS = `
   <section class="grupo-webs" aria-labelledby="grupo-webs-titulo">
