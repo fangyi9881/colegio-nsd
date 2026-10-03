@@ -1,0 +1,4 @@
+# GENERADO por scripts/generar-htaccess.mjs (caché de imágenes).
+<IfModule mod_headers.c>
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</IfModule>

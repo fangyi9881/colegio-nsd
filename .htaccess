@@ -1,0 +1,133 @@
+# ---------------------------------------------------------------
+# GENERADO por scripts/generar-htaccess.mjs a partir de vercel.json.
+# No editar a mano: cambia vercel.json y vuelve a generarlo.
+# ---------------------------------------------------------------
+
+Options -Indexes -MultiViews
+DirectoryIndex index.html
+DirectorySlash Off
+ErrorDocument 404 /404.html
+
+<IfModule mod_mime.c>
+  AddType application/manifest+json .webmanifest
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+  AddDefaultCharset utf-8
+  AddCharset utf-8 .html .css .js .json .xml .txt .webmanifest
+</IfModule>
+
+RewriteEngine On
+RewriteBase /
+
+# 1. Archivos internos del repositorio: no existen para el público.
+RewriteRule ^(docs|supabase|scripts|material-sin-procesar|baloncesto-nsd|node_modules|\.git|\.vercel|\.vscode|\.claude)(/|$) - [R=404,L]
+RewriteRule ^((vercel|quotes-state)\.json|[^/]+\.(md|ps1|sh|mjs)|\.(gitignore|vercelignore|htaccess))$ - [R=404,L]
+
+# Dominio sin www -> www, en un solo salto.
+RewriteCond %{HTTP_HOST} ^colegionsdolores\.es$ [NC]
+RewriteRule ^(.*)/?$ https://www.colegionsdolores.es/$1 [R=301,L,NE]
+
+# 2. HTTPS siempre (detrás del proxy de Hostinger también).
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:\d+)?$
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE]
+
+# 3. Redirecciones (las mismas que en vercel.json).
+RewriteRule ^etapas/infantil-0-3/?$ https://infantil-nsd.vercel.app [R=301,L,NE]
+RewriteRule ^centro/ideario/?$ /centro/mision-valores#ideario [R=301,L,NE]
+RewriteRule ^centro/departamentos\.html/?$ /centro/departamentos [R=301,L,NE]
+RewriteRule ^(.+)/admision/?$ /admision [R=301,L,NE]
+RewriteRule ^(.+)/secretaria-virtual/?$ /familias/formularios [R=301,L,NE]
+RewriteRule ^(.+)/informacion-y-contacto/?$ /contacto [R=301,L,NE]
+RewriteRule ^(.+)/contacto/?$ /contacto [R=301,L,NE]
+RewriteRule ^(.+)/menu-de-comedor/?$ /servicios/comedor [R=301,L,NE]
+RewriteRule ^(.+)/servicio-de-comedor/?$ /servicios/comedor [R=301,L,NE]
+RewriteRule ^(.+)/calendario-escolar/?$ /etapas#calendario [R=301,L,NE]
+RewriteRule ^(.+)/comunicados-y-noticias/?$ /blog [R=301,L,NE]
+RewriteRule ^(.+)/noticias/?$ /blog [R=301,L,NE]
+RewriteRule ^(.+)/becas-y-ayudas/?$ /familias/documentacion?q=becas [R=301,L,NE]
+RewriteRule ^(.+)/libros-de-texto/?$ /familias/documentacion?q=libros [R=301,L,NE]
+RewriteRule ^(.+)/uniforme-escolar/?$ /familias#uniforme [R=301,L,NE]
+RewriteRule ^(.+)/covid-19/?$ /familias [R=301,L,NE]
+RewriteRule ^(.+)/oferta-educativa/?$ /etapas [R=301,L,NE]
+RewriteRule ^(.+)/boletin-informativo/?$ /blog [R=301,L,NE]
+RewriteRule ^(.+)/campamento-de-verano/?$ https://campamento-nsd.vercel.app [R=301,L,NE]
+RewriteRule ^(.+)/horario-extendido/?$ /servicios/madrugadores [R=301,L,NE]
+RewriteRule ^(.+)/formularios-de-altas-y-bajas-en-servicios/?$ /familias/formularios [R=301,L,NE]
+RewriteRule ^(.+)/politica-de-privacidad/?$ /privacidad [R=301,L,NE]
+RewriteRule ^(.+)/politica-de-cookies/?$ /cookies [R=301,L,NE]
+RewriteRule ^(.+)/normas-funcionamiento-convivencia/?$ /familias/informacion#normas [R=301,L,NE]
+RewriteRule ^(.+)/resultados-de-las-pruebas-de-evaluacion-externas/?$ /familias/informacion#pruebas-externas [R=301,L,NE]
+RewriteRule ^(.+)/plan-de-convivencia/?$ /familias/informacion#normas [R=301,L,NE]
+RewriteRule ^(.+)/reglamento-de-regimen-interior/?$ /familias/informacion#normas [R=301,L,NE]
+RewriteRule ^(.+)/proyecto-educativo/?$ /familias/informacion#proyecto-educativo [R=301,L,NE]
+RewriteRule ^(.+)/ideario/?$ /centro/mision-valores#ideario [R=301,L,NE]
+RewriteRule ^(.+)/normativa/?$ /centro/departamentos#informacion-pedagogica [R=301,L,NE]
+RewriteRule ^(.+)/acoso-escolar/?$ /proteccion-infancia [R=301,L,NE]
+RewriteRule ^(.+)/departamento-de-matematicas/?$ /centro/departamentos/matematicas [R=301,L,NE]
+RewriteRule ^(.+)/departamento-de-lengua-espanola/?$ /centro/departamentos/lengua [R=301,L,NE]
+RewriteRule ^(.+)/departamento-de-geografia-e-historia/?$ /centro/departamentos/geografia-historia [R=301,L,NE]
+RewriteRule ^(.+)/departamento-de-ciencias/?$ /centro/departamentos/ciencias [R=301,L,NE]
+RewriteRule ^(.+)/departamento-de-tecnologia/?$ /centro/departamentos/tecnologia [R=301,L,NE]
+RewriteRule ^(.+)/departamento-de-ingles/?$ /centro/departamentos/ingles [R=301,L,NE]
+RewriteRule ^(.+)/departamento-de-frances/?$ /centro/departamentos/frances [R=301,L,NE]
+RewriteRule ^(.+)/departamento-de-educacion-fisica/?$ /centro/departamentos/educacion-fisica [R=301,L,NE]
+RewriteRule ^(.+)/departamento-artistico/?$ /centro/departamentos/artistico [R=301,L,NE]
+RewriteRule ^(.+)/religion-valores-eticos/?$ /centro/departamentos/religion-valores [R=301,L,NE]
+RewriteRule ^(.+)/programas-de-mejora-del-aprendizaje/?$ /centro/departamentos/diversificacion [R=301,L,NE]
+RewriteRule ^(.+)/departamento-de-orientacion/?$ /centro/departamentos/orientacion [R=301,L,NE]
+RewriteRule ^(.+)/departamento-de-bilinguismo/?$ /centro/departamentos/bilinguismo [R=301,L,NE]
+RewriteRule ^(.+)/ed-infantil/?$ /centro/departamentos/infantil [R=301,L,NE]
+RewriteRule ^(.+)/programaciones-didacticas-de-ed-primaria/?$ /centro/departamentos/primaria [R=301,L,NE]
+RewriteRule ^(.+)/criterios-de-evaluacion-calificacion-y-promocion-de-ed-primaria/?$ /familias/evaluacion#primaria [R=301,L,NE]
+RewriteCond %{QUERY_STRING} (^|&)option=
+RewriteRule ^index\.php/?$ / [R=301,L,NE,QSD]
+RewriteRule ^index\.php(?:/(.*))?/?$ /$1 [R=301,L,NE]
+RewriteRule ^component(?:/(.*))?/?$ / [R=301,L,NE]
+
+# 4. URLs limpias: /pagina.html -> /pagina y /pagina/index -> /pagina
+RewriteCond %{THE_REQUEST} \s/+(?:([^?\s]*?)/)?index\.html[\s?]
+RewriteRule ^ /%1 [R=301,L,NE]
+# (menos el archivo de verificación de Google, que debe responder tal cual)
+RewriteCond %{REQUEST_URI} !^/google[0-9a-f]+\.html$
+RewriteCond %{THE_REQUEST} \s/+([^?\s]+?)\.html[\s?]
+RewriteRule ^ /%1 [R=301,L,NE]
+# Sin barra final (salvo la raíz).
+RewriteCond %{REQUEST_URI} ^/(.+)/$
+RewriteRule ^ /%1 [R=301,L,NE]
+# /pagina sirve pagina.html; /carpeta sirve carpeta/index.html.
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME}/index.html -f
+RewriteRule ^(.+)$ $1/index.html [L]
+
+# 5. Cabeceras de seguridad (todas las respuestas).
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://api.web3forms.com https://*.supabase.co; frame-src 'self' https://maps.google.com https://www.google.com; form-action 'self' https://api.web3forms.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header always set Strict-Transport-Security "max-age=31536000"
+
+  # Caché: HTML, CSS y JS se revalidan siempre (se publican sin hash).
+  <FilesMatch "\.(html|css|js)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  # Fuentes: no cambian de nombre ni de contenido.
+  <FilesMatch "\.woff2$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # Panel y acceso: ni buscadores ni caché.
+  <FilesMatch "^(panel|acceso|nueva-clave)\.html$">
+    Header set X-Robots-Tag "noindex, nofollow"
+    Header set Cache-Control "no-store"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json application/xml image/svg+xml application/manifest+json
+</IfModule>

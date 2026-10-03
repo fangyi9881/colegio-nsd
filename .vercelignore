@@ -26,3 +26,8 @@ quotes-state.json
 /scripts/
 /supabase/
 /docs/
+
+# Hostinger: el .htaccess solo sirve allí
+.htaccess
+**/.htaccess
+dist/
