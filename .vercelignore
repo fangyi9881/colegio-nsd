@@ -23,6 +23,6 @@ CLAUDE.md
 quotes-state.json
 
 # Herramientas y documentación interna (no forman parte del sitio)
-scripts/
-supabase/
-docs/
+/scripts/
+/supabase/
+/docs/
