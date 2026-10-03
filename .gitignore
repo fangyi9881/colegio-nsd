@@ -1,3 +1,10 @@
 .vercel
 .vscode/
 dist/
+# Notas y herramientas locales (no forman parte de la web)
+TODO.md
+material-sin-procesar/
+bajar-drive.sh
+push-cambios.ps1
+pdf-texto.html
+pdf-vista.html
