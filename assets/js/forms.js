@@ -66,8 +66,18 @@
         const j = await r.json();
         if (!r.ok || !j.success) throw new Error(j.message || 'Error del servidor');
 
-        // Estado: éxito
-        form.style.display = 'none';
+        // Estado: éxito.
+        // Ojo: el aviso vive dentro del propio formulario, así que esconder el
+        // formulario entero escondía también el «mensaje enviado». Se esconden
+        // solo los campos y se deja el aviso a la vista.
+        const cuerpo = form.querySelector('.form-body') || form.querySelector('.form-card__cuerpo');
+        if (cuerpo && successEl && cuerpo.contains(successEl)) {
+          Array.prototype.forEach.call(cuerpo.children, (el) => {
+            if (el !== successEl) el.style.display = 'none';
+          });
+        } else {
+          form.style.display = 'none';
+        }
         if (successEl) {
           successEl.hidden = false;
           successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -87,5 +97,9 @@
 
   // Formulario en contacto.html
   setup('contactoFormPage', 'contactoSuccessPage', 'contactoErrorPage');
+
+  // La misma sección en la portada y en admisión
+  setup('contactoFormHome', 'contactoSuccessHome', 'contactoErrorHome');
+  setup('contactoFormAdm', 'contactoSuccessAdm', 'contactoErrorAdm');
 
 })();

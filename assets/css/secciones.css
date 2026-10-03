@@ -913,3 +913,52 @@
   .uniforme__prendas { grid-template-columns: 1fr; }
   .uniforme__acciones .btn { flex: 1 1 100%; justify-content: center; }
 }
+
+/* =========================================================
+   Historia: instalaciones y entorno (sobre-nosotros)
+   ========================================================= */
+.historia-bloques { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.historia-bloque {
+  background: var(--surface-raised); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 26px 26px 24px;
+}
+.historia-bloque__ico {
+  display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 16px;
+  border-radius: 12px; background: var(--green-100); color: var(--green-700); font-size: 1.4rem;
+}
+.historia-bloque h3 { margin: 0 0 10px; font-size: 1.12rem; }
+.historia-bloque p { margin: 0 0 10px; color: var(--ink-700); font-size: .95rem; }
+.historia-bloque p:last-child { margin-bottom: 0; }
+.historia-transporte { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
+.historia-transporte li {
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  padding: 10px 14px; border-radius: var(--radius-sm); background: var(--surface-sunken); font-size: .93rem;
+}
+.historia-transporte strong { color: var(--ink-900); }
+.historia-transporte span { color: var(--ink-700); font-variant-numeric: tabular-nums; }
+@media (max-width: 980px) { .historia-bloques { grid-template-columns: 1fr; } }
+
+/* =========================================================
+   Ideario (mision-valores): los ocho puntos aprobados
+   ========================================================= */
+.ideario { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 48px; align-items: start; }
+.ideario__aside { position: sticky; top: calc(var(--navbar-h, 72px) + 24px); }
+.ideario__sello {
+  border-radius: var(--radius-lg); padding: 24px; background: var(--surface-raised); border: 1px solid var(--border);
+}
+.ideario__sello p { margin: 0 0 14px; color: var(--ink-700); font-size: .93rem; }
+.ideario__sello strong { color: var(--ink-900); }
+.ideario__lista { list-style: none; margin: 0; padding: 0; counter-reset: ideario; display: grid; gap: 14px; }
+.ideario__lista li {
+  counter-increment: ideario; position: relative; padding: 20px 22px 20px 70px;
+  background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius);
+  color: var(--ink-800); line-height: 1.65;
+}
+.ideario__lista li::before {
+  content: counter(ideario); position: absolute; left: 20px; top: 18px;
+  width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%;
+  background: var(--green-100); color: var(--green-700); font-weight: 700; font-variant-numeric: tabular-nums;
+}
+.ideario__lista strong { color: var(--ink-900); }
+@media (max-width: 900px) { .ideario { grid-template-columns: 1fr; gap: 24px; } .ideario__aside { position: static; } }
+@media (max-width: 480px) { .ideario__lista li { padding: 56px 18px 18px; } .ideario__lista li::before { left: 18px; top: 14px; } }

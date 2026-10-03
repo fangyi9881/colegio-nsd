@@ -1669,9 +1669,9 @@ body {
 
 /* Cabecera de página: el velo verde sobre la foto se oscurece */
 [data-theme="dark"] .page-hero {
-  background:
-    linear-gradient(135deg, rgba(4,18,10,.96), rgba(8,48,22,.94)),
-    url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1600&auto=format&fit=crop') center/cover;
+  /* Sin foto de banco de imágenes: cargarla mandaba la IP de cada visita a
+     un tercero (Unsplash) solo por usar el tema oscuro. */
+  background: linear-gradient(135deg, rgba(4,18,10,.98), rgba(8,48,22,.96));
 }
 
 /* Mosaico de la galería */
@@ -3068,6 +3068,28 @@ html.con-post { overflow: hidden; }
 }
 @media (max-width: 640px) { .nsd-post-overlay { padding: 0; } .nsd-post-overlay .post-card { min-height: 100%; } }
 
+/* El post va en un iframe a pantalla completa, transparente: el desplazamiento
+   lo hace el propio iframe y la tarjeta se pinta con sus propios estilos. */
+.nsd-post-overlay:has(.nsd-post-overlay__marco) { padding: 0; overflow: hidden; }
+.nsd-post-overlay__marco {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  border: 0; background: transparent;
+  transform: translateY(14px); transition: transform .28s var(--ease-out, ease);
+}
+.nsd-post-overlay.is-abierta .nsd-post-overlay__marco { transform: none; }
+@media (prefers-reduced-motion: reduce) { .nsd-post-overlay__marco { transition: none; transform: none; } }
+
+/* Dentro del iframe: solo la tarjeta, sobre fondo transparente */
+html.en-ventana, html.en-ventana body { background: transparent !important; }
+html.en-ventana .skip-link, html.en-ventana #site-header, html.en-ventana #site-footer,
+html.en-ventana .sellos, html.en-ventana .grupo-webs { display: none !important; }
+html.en-ventana body { min-height: 100vh; padding: 28px 16px; box-sizing: border-box; }
+html.en-ventana .post-card { margin: 0 auto 28px; }
+@media (max-width: 640px) {
+  html.en-ventana body { padding: 0; }
+  html.en-ventana .post-card { margin: 0; min-height: 100vh; }
+}
+
 /* =========================================================
    Mapa que se carga al pulsar (.mapa-diferido)
    Google Maps no entra en la página hasta que la familia lo pide:
@@ -3124,3 +3146,12 @@ html.con-post { overflow: hidden; }
 .footer__infancia p { margin: 0; font-size: .82rem; line-height: 1.6; color: rgba(255,255,255,.78); max-width: 110ch; }
 .footer__infancia strong { color: #fff; }
 .footer__infancia a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+/* El titular recibe el foco al abrir el post (para lectores de pantalla); no
+   hace falta pintarle el anillo, que no es un control. */
+.post-card h1[tabindex="-1"]:focus { outline: none; }
+html.con-post .to-top, html.con-post .mobile-cta-bar, html.con-post .cursor-ring { display: none !important; }
+
+/* Enlaces dentro de avisos: subrayados, que no dependan solo del color (WCAG 1.4.1) */
+.dep-pendiente a, .info-sello a, .info-nota a, .acceso-estado a { text-decoration: underline; text-underline-offset: 2px; }
+/* En móvil el botón de cerrar del post tapaba las migas: se bajan */
+@media (max-width: 640px) { .post-card .page-hero { padding-top: 76px; } }

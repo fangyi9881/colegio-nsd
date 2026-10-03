@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="/assets/css/animations.css" />
   <link rel="stylesheet" href="/assets/css/pages.css" />
   <link rel="stylesheet" href="/assets/css/secciones.css" />
+  <link rel="stylesheet" href="/assets/css/informacion.css" />
 
   <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
 </head>
@@ -49,6 +50,23 @@
         <span class="meta"><i class="bi bi-tree" aria-hidden="true"></i> Raíces</span>
         <a class="meta meta--enlace" href="#uniforme"><i class="bi bi-bag" aria-hidden="true"></i> Uniforme</a>
       </div>
+    </div>
+  </section>
+
+  <section class="section section--tight" data-cms-bloque="secretaria:aviso" hidden>
+    <div class="container">
+      <div class="info-sello"><i class="bi bi-megaphone" aria-hidden="true"></i><p><strong>Aviso de secretaría:</strong> <span data-cms="secretaria:aviso" data-cms-ocultar-vacio></span> <span data-cms="secretaria:aviso_enlace" data-cms-tipo="url" data-cms-texto="Más información"></span></p></div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <ul class="pedagogica">
+        <li><a href="/familias/informacion"><i class="bi bi-patch-check" aria-hidden="true"></i><span>Información a las familias<small>Ideario, proyecto educativo, normas, precios y resultados</small></span></a></li>
+        <li><a href="/familias/formularios"><i class="bi bi-ui-checks-grid" aria-hidden="true"></i><span>Formularios y gestiones<small>Altas y bajas de servicios, autorizaciones</small></span></a></li>
+        <li><a href="/familias/evaluacion"><i class="bi bi-clipboard-check" aria-hidden="true"></i><span>Evaluación y reclamaciones<small>Criterios por etapa y cómo reclamar una nota</small></span></a></li>
+        <li><a href="/centro/departamentos"><i class="bi bi-diagram-3" aria-hidden="true"></i><span>Departamentos<small>Objetivos y criterios de cada materia</small></span></a></li>
+      </ul>
     </div>
   </section>
 
@@ -120,7 +138,7 @@
     <div class="container">
       <header class="section__head section__head--left">
         <h2>Plataformas</h2>
-        <p>Notas, faltas y comunicaciones con los tutores van por Alexia; la gestión oficial de la Comunidad de Madrid, por Raíces.</p>
+        <p>Notas, faltas y comunicaciones con los tutores van por Alexia; la gestión oficial de la Comunidad de Madrid, por Raíces; las tareas de clase, por Google Classroom.</p>
       </header>
       <ul class="indice">
         <li><a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx" target="_blank" rel="noopener noreferrer">
@@ -131,6 +149,11 @@
         <li><a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer">
           <span class="indice__ico" aria-hidden="true"><i class="bi bi-tree"></i></span>
           <span><h3>Raíces</h3><p>Plataforma oficial de gestión académica de la Comunidad de Madrid.</p></span>
+          <span class="indice__ir">Abrir <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i><span class="sr-only">(se abre en otra pestaña)</span></span>
+        </a></li>
+        <li><a href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer">
+          <span class="indice__ico" aria-hidden="true"><i class="bi bi-easel"></i></span>
+          <span><h3>Google Classroom</h3><p>Tareas, materiales y entregas de cada clase. Se entra con la cuenta que da el colegio.</p></span>
           <span class="indice__ir">Abrir <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i><span class="sr-only">(se abre en otra pestaña)</span></span>
         </a></li>
       </ul>
@@ -214,6 +237,8 @@
 
   <div id="site-footer"></div>
   <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/cms-config.js" defer></script>
+  <script src="/assets/js/cms.js" defer></script>
   <script src="/assets/js/nsd-arriba.js" defer></script>
   <script src="/assets/js/calendario-datos.js" defer></script>
   <script src="/assets/js/agenda.js" defer></script>

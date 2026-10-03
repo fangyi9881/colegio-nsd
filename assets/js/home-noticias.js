@@ -10,6 +10,9 @@
 // =========================================================
 (function () {
   'use strict';
+  // Espera (unos segundos como mucho) a los comunicados del panel, para
+  // pintarlos ya mezclados por fecha con el resto (ver cms.js).
+  function iniciar() {
   const caja = document.querySelector('[data-actualidad]');
   const N = window.NSD_NOTICIAS;
   const CATS = window.NSD_CATEGORIAS;
@@ -171,4 +174,6 @@
   });
 
   pintar();
+  }
+  (window.NSD_CMS_NOTICIAS || Promise.resolve()).then(iniciar, iniciar);
 })();

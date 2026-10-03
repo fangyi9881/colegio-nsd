@@ -152,16 +152,24 @@ const DOCUMENTOS = [
   { titulo: 'Normas administrativas y pagos', descripcion: 'Pagos antes del día 10, altas y bajas antes del 25, recibos devueltos y certificados.', categoria: 'normativa', tipo: 'pagina', url: '/contacto#normas', seccion: 'Normas administrativas',
     etiquetas: ['pago', 'recibo', 'domiciliacion', 'baja', 'alta', 'mensualidad', 'cuota', 'certificado', 'impago'], actualizado: '2026-09' },
 
-  { titulo: 'Programaciones didácticas', descripcion: 'Contenidos y organización de cada materia por curso.', categoria: 'calendario', tipo: 'pdf', url: null,
+  { titulo: 'Programaciones didácticas', descripcion: 'Objetivos, criterios y programación de cada departamento y etapa.', categoria: 'normativa', tipo: 'pagina', url: '/centro/departamentos',
     etiquetas: ['programaciones', 'programacion', 'contenidos', 'materias', 'temario'], actualizado: '2026-09' },
-  { titulo: 'Criterios de evaluación', descripcion: 'Cómo se evalúa y califica cada materia.', categoria: 'calendario', tipo: 'pdf', url: null,
+  { titulo: 'Criterios de evaluación', descripcion: 'Criterios generales de cada etapa, promoción y cómo reclamar una nota.', categoria: 'normativa', tipo: 'pagina', url: '/familias/evaluacion',
     etiquetas: ['criterios de evaluacion', 'criterios', 'evaluacion', 'calificacion', 'notas'], actualizado: '2026-09' },
 
   // Plataformas
   { titulo: 'Alexia · plataforma de familias', descripcion: 'Notas, faltas, comunicaciones con los tutores y autorizaciones.', categoria: 'plataformas', tipo: 'enlace', url: 'https://web2.alexiaedu.com/ACWeb/LogOn.aspx',
     etiquetas: ['alexia', 'notas', 'calificaciones', 'faltas', 'tutor', 'comunicaciones', 'app'], actualizado: '2026-09' },
   { titulo: 'Raíces · Comunidad de Madrid', descripcion: 'Plataforma oficial de gestión académica de la Comunidad de Madrid.', categoria: 'plataformas', tipo: 'enlace', url: 'https://raices.madrid.org/',
-    etiquetas: ['raices', 'comunidad de madrid', 'oficial', 'expediente'], actualizado: '2026-09' }
+    etiquetas: ['raices', 'comunidad de madrid', 'oficial', 'expediente'], actualizado: '2026-09' },
+  { titulo: 'Google Classroom', descripcion: 'Tareas, materiales y entregas de cada clase.', categoria: 'plataformas', tipo: 'enlace', url: 'https://classroom.google.com/',
+    etiquetas: ['classroom', 'google', 'tareas', 'deberes', 'clase'], actualizado: '2026-10' },
+  { titulo: 'Información a las familias', descripcion: 'Ideario, proyecto educativo, normas, servicios y precios, programas y resultados de pruebas externas.', categoria: 'normativa', tipo: 'pagina', url: '/familias/informacion',
+    etiquetas: ['informacion', 'precios', 'resultados', 'pruebas externas', 'proyecto educativo', 'transparencia'], actualizado: '2026-10' },
+  { titulo: 'Formularios y gestiones en línea', descripcion: 'Altas y bajas de servicios, autorizaciones e inscripciones.', categoria: 'admision', tipo: 'formulario', url: '/familias/formularios',
+    etiquetas: ['formulario', 'alta', 'baja', 'servicios', 'secretaria virtual', 'google forms'], actualizado: '2026-10' },
+  { titulo: 'Canal interno de información', descripcion: 'Para comunicar posibles infracciones de forma confidencial o anónima (Ley 2/2023).', categoria: 'normativa', tipo: 'pagina', url: '/canal-informante',
+    etiquetas: ['canal', 'denuncia', 'informante', 'whistleblowing', 'irregularidad'], actualizado: '2026-10' }
 ];
 
 // Lo primero que necesita una familia. Es una lista escogida a mano, no una

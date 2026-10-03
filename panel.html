@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es" data-page="panel">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script src="/assets/js/theme-init.js"></script>
+  <title>Panel · Colegio NSD</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#1FA42C" />
+  <link rel="icon" type="image/png" href="/assets/img/logo.png" />
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/panel.css" />
+</head>
+<body class="pnl-body">
+  <a class="skip-link" href="#panelMain">Saltar al contenido</a>
+  <header class="pnl-cab">
+    <a class="pnl-marca" href="/">
+      <img src="/assets/img/logo-64.png" alt="" width="36" height="36" />
+      <span><strong>Colegio NSD</strong><small>Panel de la web</small></span>
+    </a>
+    <div class="pnl-cab__usuario" data-usuario hidden>
+      <span class="pnl-cab__nombre"><i class="bi bi-person-circle" aria-hidden="true"></i> <span data-nombre></span></span>
+      <span class="pnl-insignia" data-rol></span>
+      <a class="btn btn--ghost btn--sm" href="/" target="_blank" rel="noopener">Ver la web</a>
+      <button type="button" class="btn btn--ghost btn--sm" data-salir>Salir</button>
+    </div>
+  </header>
+  <div class="pnl">
+    <nav class="pnl-nav" aria-label="Secciones del panel" data-nav hidden></nav>
+    <main id="panelMain" class="pnl-main" tabindex="-1" data-vista>
+      <p class="pnl-cargando">Cargando el panel…</p>
+    </main>
+  </div>
+  <div class="pnl-toast" role="status" aria-live="polite" data-toast></div>
+
+  <script src="/assets/vendor/supabase/supabase.js" defer></script>
+  <script src="/assets/js/cms-config.js" defer></script>
+  <script src="/assets/js/cms-esquema.js" defer></script>
+  <script src="/assets/js/departamentos-datos.js" defer></script>
+  <script src="/assets/js/noticias-datos.js" defer></script>
+  <script src="/assets/js/panel-api.js" defer></script>
+  <script src="/assets/js/panel.js" defer></script>
+</body>
+</html>

@@ -1,40 +1,352 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "colegionsdolores.es"
+        }
+      ],
+      "destination": "https://www.colegionsdolores.es/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/etapas/infantil-0-3",
+      "destination": "https://infantil-nsd.vercel.app",
+      "permanent": true
+    },
+    {
+      "source": "/centro/ideario",
+      "destination": "/centro/mision-valores#ideario",
+      "permanent": true
+    },
+    {
+      "source": "/centro/departamentos.html",
+      "destination": "/centro/departamentos",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/admision",
+      "destination": "/admision",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/secretaria-virtual",
+      "destination": "/familias/formularios",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/informacion-y-contacto",
+      "destination": "/contacto",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/contacto",
+      "destination": "/contacto",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/menu-de-comedor",
+      "destination": "/servicios/comedor",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/servicio-de-comedor",
+      "destination": "/servicios/comedor",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/calendario-escolar",
+      "destination": "/etapas#calendario",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/comunicados-y-noticias",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/noticias",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/becas-y-ayudas",
+      "destination": "/familias/documentacion?q=becas",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/libros-de-texto",
+      "destination": "/familias/documentacion?q=libros",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/uniforme-escolar",
+      "destination": "/familias#uniforme",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/covid-19",
+      "destination": "/familias",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/oferta-educativa",
+      "destination": "/etapas",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/boletin-informativo",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/campamento-de-verano",
+      "destination": "https://campamento-nsd.vercel.app",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/horario-extendido",
+      "destination": "/servicios/madrugadores",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/formularios-de-altas-y-bajas-en-servicios",
+      "destination": "/familias/formularios",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/politica-de-privacidad",
+      "destination": "/privacidad",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/politica-de-cookies",
+      "destination": "/cookies",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/normas-funcionamiento-convivencia",
+      "destination": "/familias/informacion#normas",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/resultados-de-las-pruebas-de-evaluacion-externas",
+      "destination": "/familias/informacion#pruebas-externas",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/plan-de-convivencia",
+      "destination": "/familias/informacion#normas",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/reglamento-de-regimen-interior",
+      "destination": "/familias/informacion#normas",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/proyecto-educativo",
+      "destination": "/familias/informacion#proyecto-educativo",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/ideario",
+      "destination": "/centro/mision-valores#ideario",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/normativa",
+      "destination": "/centro/departamentos#informacion-pedagogica",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/acoso-escolar",
+      "destination": "/proteccion-infancia",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/departamento-de-matematicas",
+      "destination": "/centro/departamentos/matematicas",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/departamento-de-lengua-espanola",
+      "destination": "/centro/departamentos/lengua",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/departamento-de-geografia-e-historia",
+      "destination": "/centro/departamentos/geografia-historia",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/departamento-de-ciencias",
+      "destination": "/centro/departamentos/ciencias",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/departamento-de-tecnologia",
+      "destination": "/centro/departamentos/tecnologia",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/departamento-de-ingles",
+      "destination": "/centro/departamentos/ingles",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/departamento-de-frances",
+      "destination": "/centro/departamentos/frances",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/departamento-de-educacion-fisica",
+      "destination": "/centro/departamentos/educacion-fisica",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/departamento-artistico",
+      "destination": "/centro/departamentos/artistico",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/religion-valores-eticos",
+      "destination": "/centro/departamentos/religion-valores",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/programas-de-mejora-del-aprendizaje",
+      "destination": "/centro/departamentos/diversificacion",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/departamento-de-orientacion",
+      "destination": "/centro/departamentos/orientacion",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/departamento-de-bilinguismo",
+      "destination": "/centro/departamentos/bilinguismo",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/ed-infantil",
+      "destination": "/centro/departamentos/infantil",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/programaciones-didacticas-de-ed-primaria",
+      "destination": "/centro/departamentos/primaria",
+      "permanent": true
+    },
+    {
+      "source": "/:prefijo+/criterios-de-evaluacion-calificacion-y-promocion-de-ed-primaria",
+      "destination": "/familias/evaluacion#primaria",
+      "permanent": true
+    },
+    {
+      "source": "/index.php",
+      "has": [
+        {
+          "type": "query",
+          "key": "option"
+        }
+      ],
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/:ruta*",
+      "destination": "/:ruta*",
+      "permanent": true
+    },
+    {
+      "source": "/component/:ruta*",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com; frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=()" },
-        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" }
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://api.web3forms.com https://*.supabase.co; frame-src 'self' https://maps.google.com https://www.google.com; form-action 'self' https://api.web3forms.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000"
+        }
       ]
     },
     {
       "source": "/assets/img/:path*",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/assets/css/:path*",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
       ]
     },
     {
       "source": "/assets/js/:path*",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
       ]
     },
     {
       "source": "/:path*.html",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(panel|acceso)(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
       ]
     }
   ]

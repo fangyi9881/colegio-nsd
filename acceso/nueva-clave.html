@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es" data-page="acceso">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script src="/assets/js/theme-init.js"></script>
+  <title>Nueva contraseña · Colegio NSD</title>
+  <meta name="description" content="Elegir una contraseña nueva para el panel del Colegio NSD." />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#1FA42C" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://colegio-nsd.vercel.app/acceso/nueva-clave" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Nueva contraseña · Colegio NSD" />
+  <meta property="og:description" content="Elegir una contraseña nueva para el panel del Colegio NSD." />
+  <meta property="og:url" content="https://colegio-nsd.vercel.app/acceso/nueva-clave" />
+  <meta property="og:image" content="https://colegio-nsd.vercel.app/assets/img/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Colegio NSD" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Nueva contraseña · Colegio NSD" />
+  <meta name="twitter:description" content="Elegir una contraseña nueva para el panel del Colegio NSD." />
+  <link rel="icon" type="image/png" href="/assets/img/logo.png" />
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
+  <link rel="stylesheet" href="/assets/css/pages.css" />
+  <link rel="stylesheet" href="/assets/css/informacion.css" />
+  <link rel="stylesheet" href="/assets/css/panel.css" />
+  <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
+</head>
+<body id="top">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div id="site-header"></div>
+
+  <main id="contenido">
+
+  <section class="page-hero">
+    <div class="container page-hero__inner">
+      <div>
+        <nav class="crumbs" aria-label="Migas de pan">
+          <a href="/">Inicio</a> <i class="bi bi-chevron-right" aria-hidden="true"></i>
+          <a href="/acceso">Acceso del personal</a> <i class="bi bi-chevron-right" aria-hidden="true"></i>
+          <span>Nueva contraseña</span>
+        </nav>
+        <h1>Elige una contraseña nueva</h1>
+        
+      </div>
+      
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container acceso" data-acceso>
+      <div class="info-sello acceso-aviso" data-acceso-sin-config hidden><i class="bi bi-plug" aria-hidden="true"></i><p>El acceso del personal todavía no está activado.</p></div>
+      <div class="acceso-panel">
+        <form id="formNuevaClave" novalidate>
+          <fieldset disabled><legend class="sr-only">Contraseña nueva</legend>
+            <label>Contraseña nueva<input type="password" name="clave" autocomplete="new-password" minlength="10" required aria-describedby="ncAyuda" /><span class="form-ayuda" id="ncAyuda">Al menos 10 caracteres.</span></label>
+            <label>Repítela<input type="password" name="clave2" autocomplete="new-password" required /></label>
+            <button type="submit" class="btn btn--primary btn--block">Guardar contraseña</button>
+          </fieldset>
+          <p class="acceso-estado" data-estado tabindex="-1">Comprobando el enlace…</p>
+        </form>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/nsd-arriba.js" defer></script>
+  <script src="/assets/vendor/supabase/supabase.js" defer></script>
+  <script src="/assets/js/cms-config.js" defer></script>
+  <script src="/assets/js/panel-api.js" defer></script>
+  <script src="/assets/js/acceso.js" defer></script>
+</body>
+</html>

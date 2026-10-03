@@ -64,6 +64,8 @@
       if (shouldShow !== visible) {
         visible = shouldShow;
         mobileCta.classList.toggle('is-visible', visible);
+        mobileCta.toggleAttribute('inert', !visible);
+        mobileCta.setAttribute('aria-hidden', String(!visible));
       }
     };
     document.addEventListener('scroll', checkCta, { passive: true });

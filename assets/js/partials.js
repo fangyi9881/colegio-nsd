@@ -9,6 +9,10 @@
   // muestra como miniatura: sin banner de cookies ni botones flotantes.
   const EN_VISTA_PREVIA = window.self !== window.top;
   if (EN_VISTA_PREVIA) document.documentElement.classList.add('en-vista-previa');
+  // Un post abierto en la ventana emergente se carga en un iframe con
+  // ?ventana=1: se pinta solo la tarjeta, sin cabecera ni pie.
+  const EN_VENTANA = EN_VISTA_PREVIA && /[?&]ventana=1/.test(location.search);
+  if (EN_VENTANA) document.documentElement.classList.add('en-ventana');
 
   // Desde el centro de documentación se puede pedir una página «para
   // llevar»: llega con ?imprimir=1 y abre sola el diálogo de impresión,
@@ -77,7 +81,7 @@
         <a href="mailto:secretaria@colegionsdolores.es" aria-label="Email"><i class="bi bi-envelope-fill"></i> <span>secretaria@colegionsdolores.es</span></a>
       </div>
       <div class="topbar__quick">
-        <a href="/contacto" class="quick-link quick-link--sv" title="Secretaría Virtual"><i class="bi bi-person-lines-fill"></i> <span>Secretaría Virtual</span></a>
+        <a href="/familias/formularios" class="quick-link quick-link--sv" title="Secretaría Virtual: formularios y gestiones"><i class="bi bi-person-lines-fill"></i> <span>Secretaría Virtual</span></a>
         <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-person-badge"></i> Alexia</a>
         <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-tree"></i> Raíces</a>
         <a href="https://www.instagram.com/colegionsdolores/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
@@ -101,7 +105,7 @@
       id: 'centro', titulo: 'El Centro', url: '/centro', icono: 'bi-building',
       paginas: [
         { titulo: 'Sobre nosotros',   url: '/centro/sobre-nosotros',   icono: 'bi-clock-history' },
-        { titulo: 'Misión y valores', url: '/centro/mision-valores',   icono: 'bi-heart' },
+        { titulo: 'Ideario y valores', url: '/centro/mision-valores',   icono: 'bi-heart' },
         { titulo: 'Equipo directivo', url: '/centro/equipo-directivo', icono: 'bi-person-badge' },
         { titulo: 'Departamentos',    url: '/centro/departamentos',    icono: 'bi-people' }
       ]
@@ -126,7 +130,10 @@
     {
       id: 'familias', titulo: 'Familias', url: '/familias', icono: 'bi-house-heart',
       paginas: [
+        { titulo: 'Información a las familias', url: '/familias/informacion', icono: 'bi-patch-check' },
         { titulo: 'Documentación', url: '/familias/documentacion', icono: 'bi-folder2-open' },
+        { titulo: 'Formularios',   url: '/familias/formularios',   icono: 'bi-ui-checks-grid' },
+        { titulo: 'Evaluación',    url: '/familias/evaluacion',    icono: 'bi-clipboard-check' },
         { titulo: 'Admisión',      url: '/admision',               icono: 'bi-mortarboard' },
         { titulo: 'Contacto',      url: '/contacto',               icono: 'bi-envelope' }
       ]
@@ -151,7 +158,7 @@
     RUTA === s.url || RUTA.startsWith(s.url + '/') ||
     SECCION_DE_RUTA[RUTA] === s.id || (RUTA.startsWith('/blog/') && s.id === 'comunidad')
   ) || null;
-  const PAGINA = SECCION ? SECCION.paginas.find(p => RUTA === p.url || (p.url === '/blog' && RUTA.startsWith('/blog'))) || null : null;
+  const PAGINA = SECCION ? SECCION.paginas.find(p => RUTA === p.url || (!p.externa && RUTA.startsWith(p.url + '/'))) || null : null;
 
   const FUERA = '&nbsp;<span class="dd-fuera" aria-hidden="true">&#8599;</span>';
 
@@ -250,6 +257,9 @@
         <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="drawer__platform-btn">
           <i class="bi bi-tree"></i> Raíces
         </a>
+        <a href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer" class="drawer__platform-btn">
+          <i class="bi bi-easel"></i> Classroom
+        </a>
       </div>
 
       <div class="drawer__theme">
@@ -257,7 +267,7 @@
         ${THEME_SWITCH.replace('themeSwitch"', 'themeSwitchDrawer"')}
       </div>
 
-      <a href="/contacto" class="drawer__cta" style="background:linear-gradient(135deg,var(--brand-700),var(--brand-900));margin-bottom:10px;">
+      <a href="/familias/formularios" class="drawer__cta" style="background:linear-gradient(135deg,var(--brand-700),var(--brand-900));margin-bottom:10px;">
         <i class="bi bi-person-lines-fill"></i> Secretaría Virtual
       </a>
       <a href="/admision" class="drawer__cta" style="background:linear-gradient(135deg,var(--yellow-500),#b8882a);color:var(--brand-900);">
@@ -405,6 +415,9 @@
           <li><a href="/cookies">Cookies</a></li>
           <li><a href="/accesibilidad">Accesibilidad</a></li>
           <li><a href="/proteccion-infancia">Protección de la infancia</a></li>
+          <li><a href="/familias/informacion">Información a las familias</a></li>
+          <li><a href="/canal-informante">Canal interno de información</a></li>
+          <li><a href="/acceso">Acceso del personal</a></li>
         </ul>
       </div>
     </div>
@@ -422,13 +435,13 @@
 
   const headerSlot = document.getElementById('site-header');
   const footerSlot = document.getElementById('site-footer');
-  if (headerSlot) headerSlot.innerHTML = TOPBAR + NAV;
-  if (footerSlot) footerSlot.innerHTML = LLAMADA + FOOTER;
+  if (headerSlot && !EN_VENTANA) headerSlot.innerHTML = TOPBAR + NAV;
+  if (footerSlot && !EN_VENTANA) footerSlot.innerHTML = LLAMADA + FOOTER;
 
   // Los sellos van por encima de la llamada a la accion, no debajo: primero
   // se ve de que va el centro y despues se le pide la visita. En las paginas
   // que no tienen esa banda, al principio del pie.
-  if (footerSlot) {
+  if (footerSlot && !EN_VENTANA) {
     const llamada = document.querySelector('main section.cta, body > section.cta, section.cta');
     if (llamada) llamada.insertAdjacentHTML('beforebegin', SELLOS_HTML);
     else footerSlot.insertAdjacentHTML('afterbegin', SELLOS_HTML);
@@ -535,9 +548,9 @@
     // Barra de páginas: justo debajo de la cabecera de la página, con la
     // página resumen primero y la actual marcada. En móvil se desliza.
     const cabecera = document.querySelector('.page-hero');
-    if (!cabecera || document.querySelector('.subnav')) return;
+    if (EN_VENTANA || !cabecera || document.querySelector('.subnav')) return;
     const enlace = (url, texto, icono, externa) => {
-      const actual = RUTA === url || (url === '/blog' && RUTA.startsWith('/blog'));
+      const actual = RUTA === url || (url !== SECCION.url && RUTA.startsWith(url + '/'));
       return `<li><a href="${url}"${actual ? ' aria-current="page"' : ''}><i class="bi ${icono}" aria-hidden="true"></i>${texto}${externa ? FUERA : ''}</a></li>`;
     };
     const barra = document.createElement('nav');
@@ -903,30 +916,59 @@
 /* =========================================================
    VENTANA EMERGENTE DE LOS POSTS
    ---------------------------------------------------------
-   Un enlace a un post propio (/blog/algo) no navega: se trae con
-   fetch y se muestra flotando encima de la página, sin crear una
-   página nueva. La tarjeta (.post-card) es la misma pieza que si se
-   entrara directamente por la url, así que no hace falta duplicar
-   nada: solo se saca de la página traída y se planta encima.
+   Un enlace a un post propio (/blog/algo) no navega: el post se
+   abre flotando encima de la página. Va dentro de un iframe con
+   ?ventana=1 para que la tarjeta se vea EXACTAMENTE como al entrar
+   por su url: con sus propias hojas de estilo (pages.css), que la
+   portada no carga. Antes se copiaba la tarjeta en la página de
+   detrás y perdía esos estilos: cabecera ilegible, tarjetas sin
+   relleno, columnas descolocadas.
 
-   Un enlace a otra web (dolores-dragons.vercel.app, dragons-den…)
-   no lo toca este script: sigue su camino normal y, como cada post
-   apunta a su url concreta, se aterriza directo en el artículo, que
-   en su web es su propia ventana o su propia página.
+   Dentro del iframe (html.en-ventana) solo se pinta la tarjeta; los
+   clics que deben salir de ella (cerrar, otro post, otra página) se
+   avisan a la página de fuera con postMessage.
+
+   Un enlace a otra web no lo toca este script: sigue su camino.
    ========================================================= */
 (function () {
   'use strict';
 
+  const ORIGEN = location.origin;
   const esEnlaceDePost = (href) => {
     if (!href) return false;
     let url;
     try { url = new URL(href, location.href); } catch (e) { return false; }
-    if (url.origin !== location.origin) return false;
+    if (url.origin !== ORIGEN) return false;
     return /^\/blog\/[^/?#]+\/?$/.test(url.pathname);
   };
-
   const reducido = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // ── Dentro del iframe ───────────────────────────────────────────────
+  if (document.documentElement.classList.contains('en-ventana')) {
+    const avisar = (datos) => window.parent.postMessage(Object.assign({ nsdPost: true }, datos), ORIGEN);
+    if (!document.querySelector('.post-card')) { avisar({ accion: 'navegar', href: location.pathname }); return; }
+
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href]');
+      if (!a) {
+        // Clic en el hueco transparente de alrededor de la tarjeta: cerrar.
+        if (!e.target.closest('.post-card')) avisar({ accion: 'cerrar' });
+        return;
+      }
+      if (a.target === '_blank' || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      if (a.matches('[data-cerrar-post]')) { e.preventDefault(); avisar({ accion: 'cerrar' }); return; }
+      const href = a.getAttribute('href') || '';
+      if (href.charAt(0) === '#') return;
+      e.preventDefault();
+      if (esEnlaceDePost(a.href)) avisar({ accion: 'abrir', href: a.href });
+      else avisar({ accion: 'navegar', href: a.href });
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') avisar({ accion: 'cerrar' }); });
+    avisar({ accion: 'lista', titulo: document.title });
+    return;
+  }
+
+  // ── En la página de fuera ───────────────────────────────────────────
   let capaActual = null;
   let devolverFoco = null;
   let tituloDeAntes = null;
@@ -948,73 +990,79 @@
     if (conVolverAtras) history.back();
   }
 
-  async function abrir(href, disparador) {
-    let html;
-    try {
-      const res = await fetch(href, { credentials: 'same-origin' });
-      if (!res.ok) throw new Error('respuesta no válida');
-      html = await res.text();
-    } catch (e) {
-      location.href = href; // sin red o fallo del fetch: se navega de verdad
-      return;
-    }
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    const tarjeta = doc.querySelector('.post-card');
-    if (!tarjeta) { location.href = href; return; }
+  function abrir(href, disparador, sustituir) {
+    const url = new URL(href, location.href);
+    const enVentana = new URL(url.href);
+    enVentana.searchParams.set('ventana', '1');
 
-    // Si ya había un post abierto (se pulsó "más artículos" dentro), se
-    // quita sin animar y sin tocar el historial: el nuevo añade su propia
-    // entrada, así que el botón atrás recorre los posts uno a uno.
+    // Si ya había un post abierto (se pulsó otro dentro), se quita sin
+    // animar: el nuevo añade su propia entrada al historial.
     if (capaActual) { capaActual.remove(); capaActual = null; }
 
-    devolverFoco = disparador || null;
+    if (disparador) devolverFoco = disparador;
     if (tituloDeAntes === null) tituloDeAntes = document.title;
-    document.title = doc.title;
 
     const capa = document.createElement('div');
     capa.className = 'nsd-post-overlay';
     capa.setAttribute('role', 'dialog');
     capa.setAttribute('aria-modal', 'true');
-    capa.innerHTML = '<div class="nsd-post-overlay__fondo" data-cerrar-fondo></div>';
-    // El observador de "data-reveal" solo vio lo que había al cargar la
-    // página: esto llega después, por fetch, así que se marca visible a
-    // mano en vez de quedarse esperando un scroll que aquí no ocurre.
-    tarjeta.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-visible'));
-    capa.appendChild(tarjeta);
+    capa.setAttribute('aria-label', (disparador && disparador.textContent.trim().replace(/\s+/g, ' ').slice(0, 120)) || 'Artículo del blog');
+    capa.innerHTML = '<div class="nsd-post-overlay__fondo" aria-hidden="true"></div>';
+
+    const marco = document.createElement('iframe');
+    marco.className = 'nsd-post-overlay__marco';
+    marco.title = capa.getAttribute('aria-label');
+    // Mismo esquema de color que la página: si no coinciden, el navegador
+    // pinta el fondo del iframe opaco en vez de transparente.
+    marco.style.colorScheme = getComputedStyle(document.documentElement).colorScheme || 'normal';
+    marco.src = enVentana.pathname + enVentana.search;
+    capa.appendChild(marco);
     document.body.appendChild(capa);
-    // Si venimos de una seccion con scroll (noticias de portada, listado
-    // filtrado...) el navegador puede heredar esa posicion en el propio
-    // scroll interno de la capa (overflow-y: auto), abriendo la tarjeta
-    // ya desplazada hacia abajo y cortada. Se fuerza a empezar arriba.
-    capa.scrollTop = 0;
     capaActual = capa;
     document.documentElement.classList.add('con-post');
-    history.pushState({ nsdPost: true }, '', href);
+    if (sustituir) history.replaceState({ nsdPost: true }, '', url.pathname);
+    else history.pushState({ nsdPost: true }, '', url.pathname);
 
-    requestAnimationFrame(() => { capa.scrollTop = 0; capa.classList.add('is-abierta'); });
-
-    const h1 = tarjeta.querySelector('h1');
-    if (h1) { h1.setAttribute('tabindex', '-1'); h1.focus({ preventScroll: true }); }
+    // Se enseña cuando el post está listo, para no ver un hueco vacío.
+    let mostrada = false;
+    const mostrar = () => {
+      if (mostrada || capaActual !== capa) return;
+      mostrada = true;
+      requestAnimationFrame(() => capa.classList.add('is-abierta'));
+      try {
+        const doc = marco.contentDocument;
+        if (doc && doc.title) document.title = doc.title;
+        const h1 = doc && doc.querySelector('.post-card h1');
+        marco.focus();
+        if (h1) { h1.setAttribute('tabindex', '-1'); h1.focus({ preventScroll: true }); }
+      } catch (e) { /* mismo origen: no debería fallar */ }
+    };
+    marco.addEventListener('load', mostrar);
+    setTimeout(mostrar, 1500);
   }
+
+  window.addEventListener('message', (e) => {
+    if (e.origin !== ORIGEN || !e.data || !e.data.nsdPost || !capaActual) return;
+    const marco = capaActual.querySelector('iframe');
+    if (!marco || e.source !== marco.contentWindow) return;
+    const d = e.data;
+    if (d.accion === 'cerrar') cerrar(true);
+    else if (d.accion === 'abrir' && esEnlaceDePost(d.href)) abrir(d.href, null, false);
+    else if (d.accion === 'navegar' && typeof d.href === 'string') {
+      let destino;
+      try { destino = new URL(d.href, location.href); } catch (err) { return; }
+      if (destino.origin === ORIGEN) location.href = destino.pathname + destino.search + destino.hash;
+    } else if (d.accion === 'lista' && typeof d.titulo === 'string') document.title = d.titulo;
+  });
 
   document.addEventListener('click', (e) => {
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     const a = e.target.closest('a[href]');
     if (!a || a.target === '_blank') return;
-
     if (esEnlaceDePost(a.getAttribute('href'))) {
       e.preventDefault();
-      abrir(a.href, a);
-      return;
+      abrir(a.href, a, false);
     }
-    if (capaActual && a.matches('[data-cerrar-post]')) {
-      e.preventDefault();
-      cerrar(true);
-    }
-  });
-
-  document.addEventListener('click', (e) => {
-    if (capaActual && e.target.matches('[data-cerrar-fondo]')) cerrar(true);
   });
 
   document.addEventListener('keydown', (e) => {

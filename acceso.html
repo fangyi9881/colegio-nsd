@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es" data-page="acceso">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script src="/assets/js/theme-init.js"></script>
+  <title>Acceso del personal · Colegio NSD</title>
+  <meta name="description" content="Acceso del personal del Colegio NSD al panel de edición de la web." />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#1FA42C" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://colegio-nsd.vercel.app/acceso" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Acceso del personal · Colegio NSD" />
+  <meta property="og:description" content="Acceso del personal del Colegio NSD al panel de edición de la web." />
+  <meta property="og:url" content="https://colegio-nsd.vercel.app/acceso" />
+  <meta property="og:image" content="https://colegio-nsd.vercel.app/assets/img/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Colegio NSD" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Acceso del personal · Colegio NSD" />
+  <meta name="twitter:description" content="Acceso del personal del Colegio NSD al panel de edición de la web." />
+  <link rel="icon" type="image/png" href="/assets/img/logo.png" />
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
+  <link rel="stylesheet" href="/assets/css/pages.css" />
+  <link rel="stylesheet" href="/assets/css/informacion.css" />
+  <link rel="stylesheet" href="/assets/css/panel.css" />
+  <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
+</head>
+<body id="top">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div id="site-header"></div>
+
+  <main id="contenido">
+
+  <section class="page-hero">
+    <div class="container page-hero__inner">
+      <div>
+        <nav class="crumbs" aria-label="Migas de pan">
+          <a href="/">Inicio</a> <i class="bi bi-chevron-right" aria-hidden="true"></i>
+          <span>Acceso del personal</span>
+        </nav>
+        <h1>Acceso del personal</h1>
+        <p>Panel de edición de la web para la dirección, los departamentos y secretaría.</p>
+      </div>
+      
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container acceso" data-acceso>
+      <div class="info-sello acceso-aviso" data-acceso-sin-config hidden><i class="bi bi-plug" aria-hidden="true"></i><p>El acceso del personal todavía no está activado. Si eres del colegio, habla con quien administra la web.</p></div>
+      <div class="info-sello acceso-aviso" data-aviso-confirmado hidden><i class="bi bi-envelope-check" aria-hidden="true"></i><p>Correo confirmado. Ahora la dirección del colegio tiene que aprobar tu solicitud; cuando lo haga, podrás entrar.</p></div>
+
+      <div class="acceso-pestanas" role="tablist" aria-label="Acceso del personal">
+        <button type="button" role="tab" id="tabEntrar" aria-controls="panelEntrar" aria-selected="true">Entrar</button>
+        <button type="button" role="tab" id="tabSolicitar" aria-controls="panelSolicitar" aria-selected="false" tabindex="-1">Solicitar cuenta</button>
+        <button type="button" role="tab" id="tabRecuperar" aria-controls="panelRecuperar" aria-selected="false" tabindex="-1">Contraseña</button>
+      </div>
+
+      <div class="acceso-panel" role="tabpanel" id="panelEntrar" aria-labelledby="tabEntrar">
+        <h2>Entrar al panel</h2>
+        <p>Para el personal del colegio que edita la web: dirección, departamentos y secretaría.</p>
+        <form id="formEntrar" novalidate>
+          <fieldset><legend class="sr-only">Datos de acceso</legend>
+            <label>Correo electrónico<input type="email" name="email" autocomplete="username" required /></label>
+            <label>Contraseña<input type="password" name="clave" autocomplete="current-password" required /></label>
+            <button type="submit" class="btn btn--primary btn--block">Entrar</button>
+          </fieldset>
+          <p class="acceso-estado" data-estado tabindex="-1" hidden></p>
+        </form>
+        <p class="acceso-alt">¿Aún no tienes cuenta? <a href="#solicitar" data-ir-pestana="panelSolicitar">Solicítala</a> · <a href="#recuperar" data-ir-pestana="panelRecuperar">He olvidado la contraseña</a></p>
+      </div>
+
+      <div class="acceso-panel" role="tabpanel" id="panelSolicitar" aria-labelledby="tabSolicitar" hidden>
+        <h2>Solicitar una cuenta</h2>
+        <p>La dirección del colegio revisará tu solicitud y te dará permiso para editar lo que te corresponda (por ejemplo, la ficha de tu departamento). Hasta entonces la cuenta no puede cambiar nada.</p>
+        <form id="formSolicitar" novalidate>
+          <fieldset><legend class="sr-only">Datos de la solicitud</legend>
+            <div class="acceso-fila">
+              <label>Nombre y apellidos<input type="text" name="nombre" autocomplete="name" required maxlength="120" /></label>
+              <label>Cargo<input type="text" name="cargo" maxlength="120" placeholder="Jefatura de Matemáticas" /></label>
+            </div>
+            <label>Correo electrónico<input type="email" name="email" autocomplete="email" required aria-describedby="solEmailAyuda" /><span class="form-ayuda" id="solEmailAyuda">Mejor el correo del colegio. A él llegarán los avisos de la cuenta.</span></label>
+            <label>Qué quieres editar<select name="ambito" id="solAmbito" required><option value="">Elige un departamento o sección</option></select></label>
+            <label>Comentario para la dirección (opcional)<textarea name="motivo" rows="3" maxlength="500"></textarea></label>
+            <div class="acceso-fila">
+              <label>Contraseña<input type="password" name="clave" autocomplete="new-password" minlength="10" required aria-describedby="solClaveAyuda" /><span class="form-ayuda" id="solClaveAyuda">Al menos 10 caracteres.</span></label>
+              <label>Repite la contraseña<input type="password" name="clave2" autocomplete="new-password" required /></label>
+            </div>
+            <p class="form-ayuda">Tus datos (nombre, cargo y correo) solo se usan para gestionar el acceso al panel. Responsable: Colegio Ntra. Sra. de los Dolores, S.L. Más información en la <a href="/privacidad">política de privacidad</a>.</p>
+            <button type="submit" class="btn btn--primary btn--block">Enviar solicitud</button>
+          </fieldset>
+          <p class="acceso-estado" data-estado tabindex="-1" hidden></p>
+        </form>
+      </div>
+
+      <div class="acceso-panel" role="tabpanel" id="panelRecuperar" aria-labelledby="tabRecuperar" hidden>
+        <h2>He olvidado la contraseña</h2>
+        <p>Escribe el correo de tu cuenta y te enviaremos un enlace para elegir una nueva.</p>
+        <form id="formRecuperar" novalidate>
+          <fieldset><legend class="sr-only">Correo de la cuenta</legend>
+            <label>Correo electrónico<input type="email" name="email" autocomplete="username" required /></label>
+            <button type="submit" class="btn btn--primary btn--block">Enviar enlace</button>
+          </fieldset>
+          <p class="acceso-estado" data-estado tabindex="-1" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/nsd-arriba.js" defer></script>
+  <script src="/assets/vendor/supabase/supabase.js" defer></script>
+  <script src="/assets/js/cms-config.js" defer></script>
+  <script src="/assets/js/panel-api.js" defer></script>
+  <script src="/assets/js/acceso.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+/* =========================================================
+   Páginas de información obligatoria y fichas de departamento
+   (centro/departamentos/*, familias/informacion, familias/evaluacion,
+   familias/formularios, canal-informante)
+   Solo tokens del sistema: el tema oscuro sale solo.
+   ========================================================= */
+
+/* ---------- Bloques que vienen del panel ---------- */
+.cms-tabla { margin: 0; }
+.cms-tabla table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.cms-tabla th, .cms-tabla td { text-align: left; vertical-align: top; padding: 11px 12px; border-bottom: 1px solid var(--border); }
+.cms-tabla thead th { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-500); font-weight: 700; }
+.cms-tabla tbody th { color: var(--ink-900); font-weight: 600; }
+.cms-tabla tbody tr:last-child > * { border-bottom: 0; }
+.cms-tabla td { color: var(--ink-700); }
+
+.cms-docs, .cms-enlaces { list-style: none; padding: 0 !important; margin: 0; display: grid; gap: 10px; }
+.cms-doc {
+  display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: var(--radius);
+  background: var(--surface-raised); border: 1px solid var(--border); color: var(--ink-900) !important;
+  text-decoration: none !important; font-weight: 600;
+  transition: border-color var(--dur-fast), transform var(--dur-fast) var(--ease-out);
+}
+.cms-doc:hover { border-color: var(--green-700); transform: translateY(-1px); }
+.cms-doc .bi { font-size: 1.3rem; color: var(--green-700); }
+.cms-doc__titulo { flex: 1; min-width: 0; }
+.cms-doc__tipo { font-size: .72rem; font-weight: 700; letter-spacing: .06em; color: var(--ink-500); }
+.cms-enlaces li { margin: 0 !important; }
+
+/* ---------- Pendiente de publicar ---------- */
+.dep-pendiente {
+  display: flex; gap: 12px; align-items: flex-start; margin: 0;
+  padding: 14px 16px; border-radius: var(--radius); font-size: .95rem; line-height: 1.6;
+  background: color-mix(in srgb, var(--gold-500) 10%, var(--surface-raised));
+  border: 1px dashed color-mix(in srgb, var(--gold-500) 55%, var(--border));
+  color: var(--ink-700);
+}
+.dep-pendiente .bi { color: var(--gold-700); font-size: 1.1rem; margin-top: 2px; }
+.dep-pendiente a { color: var(--green-700); }
+.dep-pendiente-corto { display: flex; gap: 8px; align-items: center; margin: 0; font-size: .93rem; color: var(--ink-500); font-style: italic; }
+.dep-pendiente-corto .bi { color: var(--gold-700); font-style: normal; }
+
+/* ---------- Ficha de un departamento ---------- */
+.dep-ficha { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 48px; align-items: start; }
+.dep-ficha__cuerpo { min-width: 0; display: grid; gap: 40px; }
+.dep-intro { font-size: 1.12rem; }
+.dep-intro p:first-child { margin-top: 0; }
+.dep-bloque { scroll-margin-top: calc(var(--navbar-h, 72px) + 20px); }
+.dep-bloque h2 { margin: 0 0 14px; font-size: clamp(1.35rem, 1.1rem + .8vw, 1.7rem); }
+.dep-bloque__cuerpo > :first-child { margin-top: 0; }
+.dep-lado { position: sticky; top: calc(var(--navbar-h, 72px) + 24px); display: grid; gap: 14px; }
+.dep-lado__grupo { background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+.dep-lado__titulo { margin: 0 0 10px; font-family: var(--font-sans); font-size: .76rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-500); }
+.dep-lado ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: .94rem; color: var(--ink-800); }
+.dep-indice a { display: block; padding: 6px 10px; margin: 0 -10px; border-radius: var(--radius-sm); color: var(--ink-800); text-decoration: none; }
+.dep-indice a:hover { background: var(--surface-sunken); color: var(--green-700); }
+.dep-lado__nota p { margin: 0 0 8px; font-size: .9rem; color: var(--ink-600); }
+.dep-lado__nota p:last-child { margin: 0; }
+.dep-lado__nota a { color: var(--green-700); text-decoration: none; font-weight: 600; }
+.dep-lado__nota a:hover { text-decoration: underline; }
+.dep-lado__nota .bi { margin-right: 8px; color: var(--ink-500); }
+@media (max-width: 980px) {
+  .dep-ficha { grid-template-columns: 1fr; gap: 32px; }
+  .dep-lado { position: static; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+}
+
+/* ---------- Índice de departamentos ---------- */
+.deps-grupo + .deps-grupo { margin-top: 56px; }
+.deps-grupo__cab { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 20px; }
+.deps-grupo__ico { flex: 0 0 auto; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: var(--green-100); color: var(--green-700); font-size: 1.3rem; }
+.deps-grupo__cab h2 { margin: 0 0 4px; font-size: clamp(1.35rem, 1.1rem + .8vw, 1.75rem); }
+.deps-grupo__cab p { margin: 0; color: var(--ink-600); }
+.deps-lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.deps-item a {
+  height: 100%; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; align-content: start;
+  padding: 18px 18px 16px; border-radius: var(--radius-lg); background: var(--surface-raised); border: 1px solid var(--border);
+  color: inherit; text-decoration: none;
+  transition: border-color var(--dur-fast), transform var(--dur) var(--ease-out), box-shadow var(--dur);
+}
+.deps-item a:hover { border-color: color-mix(in srgb, var(--green-700) 45%, var(--border)); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.deps-item__ico { grid-row: span 2; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 11px; background: var(--surface-sunken); color: var(--green-700); font-size: 1.15rem; }
+.deps-item__nombre { font-weight: 700; color: var(--ink-900); line-height: 1.3; }
+.deps-item__resumen { font-size: .88rem; color: var(--ink-600); line-height: 1.5; }
+@media (prefers-reduced-motion: reduce) { .deps-item a, .cms-doc { transition: none; } .deps-item a:hover, .cms-doc:hover { transform: none; } }
+
+.pedagogica { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; list-style: none; margin: 0; padding: 0; }
+.pedagogica a {
+  display: flex; gap: 12px; align-items: center; height: 100%;
+  padding: 14px 16px; border-radius: var(--radius); background: var(--surface-raised); border: 1px solid var(--border);
+  color: var(--ink-900); text-decoration: none; font-weight: 600; font-size: .95rem;
+}
+.pedagogica a:hover { border-color: var(--green-700); color: var(--green-700); }
+.pedagogica .bi { font-size: 1.15rem; color: var(--green-700); }
+.pedagogica small { display: block; font-weight: 400; color: var(--ink-500); font-size: .8rem; }
+
+/* ---------- Información a las familias ---------- */
+.info-oblig { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 48px; align-items: start; }
+.info-oblig__indice { position: sticky; top: calc(var(--navbar-h, 72px) + 24px); }
+.info-oblig__indice ol { list-style: none; counter-reset: io; margin: 0; padding: 0; display: grid; gap: 2px; }
+.info-oblig__indice li { counter-increment: io; }
+.info-oblig__indice a { display: flex; gap: 10px; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--ink-700); text-decoration: none; font-size: .93rem; }
+.info-oblig__indice a::before { content: counter(io); flex: 0 0 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: var(--surface-sunken); font-size: .75rem; font-weight: 700; color: var(--ink-600); }
+.info-oblig__indice a:hover { background: var(--surface-sunken); color: var(--green-700); }
+.info-oblig__secciones { display: grid; gap: 22px; min-width: 0; }
+.info-bloque {
+  scroll-margin-top: calc(var(--navbar-h, 72px) + 20px);
+  background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 26px 28px;
+}
+.info-bloque h2 { margin: 0 0 12px; font-size: clamp(1.25rem, 1.05rem + .7vw, 1.55rem); }
+.info-bloque > p { color: var(--ink-700); }
+.info-bloque .prose { font-size: 1rem; }
+.info-bloque__enlaces { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.info-bloque__enlaces a {
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: var(--radius-pill);
+  background: var(--surface-sunken); color: var(--ink-900); text-decoration: none; font-weight: 600; font-size: .88rem;
+}
+.info-bloque__enlaces a:hover { background: var(--green-100); color: var(--green-700); }
+.info-nota { margin-top: 14px; font-size: .86rem; color: var(--ink-500); }
+.info-sello {
+  display: flex; gap: 14px; align-items: flex-start; padding: 18px 20px; border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--green-700) 7%, var(--surface-raised)); border: 1px solid color-mix(in srgb, var(--green-700) 22%, var(--border));
+  color: var(--ink-800); font-size: .95rem;
+}
+.info-sello .bi { font-size: 1.3rem; color: var(--green-700); margin-top: 2px; }
+.info-sello p { margin: 0; }
+@media (max-width: 980px) { .info-oblig { grid-template-columns: 1fr; gap: 24px; } .info-oblig__indice { position: static; } }
+@media (max-width: 520px) { .info-bloque { padding: 20px 18px; } }
+
+/* ---------- Pasos (reclamación de notas, canal) ---------- */
+.pasos { list-style: none; counter-reset: paso; margin: 0; padding: 0 !important; display: grid; gap: 12px; }
+.pasos li {
+  counter-increment: paso; position: relative; margin: 0 !important; padding: 16px 18px 16px 62px;
+  background: var(--surface-sunken); border-radius: var(--radius);
+}
+.pasos li::before {
+  content: counter(paso); position: absolute; left: 16px; top: 14px; width: 30px; height: 30px; display: grid; place-items: center;
+  border-radius: 50%; background: var(--green-700); color: #fff; font-weight: 700; font-size: .9rem;
+}
+.pasos strong { display: block; color: var(--ink-900); }
+.pasos span { color: var(--ink-700); font-size: .95rem; }
+
+/* ---------- Formularios de familias ---------- */
+.formularios { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.formulario {
+  display: flex; flex-direction: column; gap: 8px; height: 100%; padding: 20px; border-radius: var(--radius-lg);
+  background: var(--surface-raised); border: 1px solid var(--border);
+}
+.formulario h3 { margin: 0; font-size: 1.08rem; }
+.formulario p { margin: 0; color: var(--ink-600); font-size: .93rem; }
+.formulario__plazo { font-size: .82rem; font-weight: 700; color: var(--gold-700); }
+.formulario .btn { margin-top: auto; align-self: flex-start; }
+
+/* ---------- Canal interno ---------- */
+.canal-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 32px; align-items: start; }
+.canal-codigo {
+  display: block; margin: 12px 0; padding: 16px; border-radius: var(--radius); text-align: center;
+  font: 700 1.5rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .08em;
+  background: var(--surface-sunken); color: var(--ink-900); user-select: all;
+}
+.canal-estado { margin-top: 14px; }
+.canal-estado dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 0; }
+.canal-estado dt { font-weight: 700; color: var(--ink-700); }
+.canal-estado dd { margin: 0; color: var(--ink-800); }
+.form-ayuda { display: block; margin-top: 6px; font-size: .8rem; color: var(--ink-500); font-weight: 400; }
+.radio-fila { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 8px; }
+.radio-fila label { display: inline-flex !important; align-items: center; gap: 8px; font-weight: 600 !important; }
+.radio-fila input { width: auto !important; margin: 0 !important; }
+@media (max-width: 900px) { .canal-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Enlace del inicio a la información obligatoria ---------- */
+.franja-legal { padding: 28px 0; background: var(--surface-sunken); border-top: 1px solid var(--border); }
+.canal-estado input { width: 100%; margin-top: 6px; padding: 10px 12px; font: inherit; color: var(--ink-900); background: var(--surface-raised); border: 1.5px solid var(--border-strong); border-radius: 10px; letter-spacing: .06em; }
+.canal-estado .btn { margin-top: 10px; }
+.canal-estado label { font-weight: 700; font-size: .9rem; color: var(--ink-800); }
+.formularios-impresos { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.section.section--tight { padding-top: 28px; padding-bottom: 28px; }
+.section.section--tight + .section { padding-top: 40px; }
+.form-body .dep-pendiente { margin-bottom: 18px; }
+.canal-grid .prose > h2:first-child { margin-top: 0; }

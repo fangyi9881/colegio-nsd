@@ -1,94 +1,283 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- ── COLEGIO PRINCIPAL ──────────────────── -->
+  <!-- Portada -->
   <url>
-    <loc>https://www.colegionsdolores.es/</loc>
-    <lastmod>2025-05-07</lastmod>
+    <loc>https://colegio-nsd.vercel.app/</loc>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- El Centro -->
   <url>
-    <loc>https://www.colegionsdolores.es/centro/sobre-nosotros.html</loc>
-    <lastmod>2025-05-07</lastmod>
+    <loc>https://colegio-nsd.vercel.app/centro</loc>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/sobre-nosotros</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.colegionsdolores.es/centro/departamentos.html</loc>
-    <lastmod>2025-05-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.colegionsdolores.es/etapas/infantil-3-6.html</loc>
-    <lastmod>2025-05-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.colegionsdolores.es/etapas/primaria.html</loc>
-    <lastmod>2025-05-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.colegionsdolores.es/etapas/eso.html</loc>
-    <lastmod>2025-05-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.colegionsdolores.es/admision.html</loc>
-    <lastmod>2025-05-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.colegionsdolores.es/contacto.html</loc>
-    <lastmod>2025-05-07</lastmod>
+    <loc>https://colegio-nsd.vercel.app/centro/mision-valores</loc>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.colegionsdolores.es/blog/</loc>
-    <lastmod>2025-05-07</lastmod>
+    <loc>https://colegio-nsd.vercel.app/centro/equipo-directivo</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Etapas -->
+  <url>
+    <loc>https://colegio-nsd.vercel.app/etapas</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/etapas/infantil-3-6</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/etapas/primaria</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/etapas/eso</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Servicios -->
+  <url>
+    <loc>https://colegio-nsd.vercel.app/servicios</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/servicios/comedor</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/servicios/extraescolares</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/servicios/madrugadores</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Familias -->
+  <url>
+    <loc>https://colegio-nsd.vercel.app/familias</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/familias/documentacion</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/admision</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/contacto</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Comunidad -->
+  <url>
+    <loc>https://colegio-nsd.vercel.app/comunidad</loc>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.colegionsdolores.es/blog/xxxvi-semana-cultural.html</loc>
-    <lastmod>2025-04-01</lastmod>
-    <changefreq>never</changefreq>
+    <loc>https://colegio-nsd.vercel.app/blog</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/blog/estrenamos-web</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/blog/boletin-25-26</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.colegionsdolores.es/blog/boletin-25-26.html</loc>
-    <lastmod>2025-09-15</lastmod>
-    <changefreq>never</changefreq>
+    <loc>https://colegio-nsd.vercel.app/blog/4eso-empresa</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.colegionsdolores.es/blog/4eso-empresa.html</loc>
-    <lastmod>2025-03-15</lastmod>
-    <changefreq>never</changefreq>
+    <loc>https://colegio-nsd.vercel.app/blog/xxxvi-semana-cultural</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
 
-  <!-- ── ESCUELA INFANTIL NSD (0–3) ────────── -->
+  <!-- Legal -->
+
   <url>
-    <loc>https://www.colegionsdolores.es/infantil-nsd/</loc>
-    <lastmod>2025-05-07</lastmod>
+    <loc>https://colegio-nsd.vercel.app/proteccion-infancia</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <!-- Información obligatoria y departamentos -->
+  <url>
+    <loc>https://colegio-nsd.vercel.app/familias/informacion</loc>
+    <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
+    <priority>0.8</priority>
   </url>
-
-  <!-- ── CAMPAMENTO URBANO NSD ─────────────── -->
   <url>
-    <loc>https://www.colegionsdolores.es/campamento-nsd/</loc>
-    <lastmod>2025-05-07</lastmod>
+    <loc>https://colegio-nsd.vercel.app/familias/evaluacion</loc>
+    <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.8</priority>
   </url>
-
+  <url>
+    <loc>https://colegio-nsd.vercel.app/familias/formularios</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/canal-informante</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/infantil</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/primaria</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/matematicas</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/lengua</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/geografia-historia</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/ciencias</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/tecnologia</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/ingles</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/frances</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/educacion-fisica</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/artistico</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/religion-valores</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/diversificacion</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/orientacion</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/centro/departamentos/bilinguismo</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

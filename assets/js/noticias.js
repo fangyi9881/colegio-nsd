@@ -5,6 +5,9 @@
 // =========================================================
 (function () {
   'use strict';
+  // Espera (unos segundos como mucho) a los comunicados del panel, para
+  // pintarlos ya mezclados por fecha con el resto (ver cms.js).
+  function iniciar() {
   const NOTICIAS = (window.NSD_NOTICIAS || []).slice().sort((a, b) => b.fecha.localeCompare(a.fecha));
   const CATS = window.NSD_CATEGORIAS || {};
   if (!NOTICIAS.length) return;
@@ -219,4 +222,6 @@
     const el = document.getElementById(location.hash.slice(1));
     if (el) { const det = el.querySelector('details'); if (det) det.open = true; el.scrollIntoView({ block: 'center' }); el.classList.add('is-destacada'); }
   }
+  }
+  (window.NSD_CMS_NOTICIAS || Promise.resolve()).then(iniciar, iniciar);
 })();
