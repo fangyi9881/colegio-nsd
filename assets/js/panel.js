@@ -49,7 +49,7 @@
   const vacio = (v) => v == null || v === '' || (Array.isArray(v) && !v.filter(Boolean).length) || (typeof v === 'object' && !Array.isArray(v) && !Object.keys(v).length);
   function urlValida(u) {
     const s = String(u || '').trim();
-    return /^(https:\/\/[^\s]+|mailto:[^\s]+|tel:[^\s]+|\/(?!\/)[^\s]*)$/i.test(s);
+    return /^(https?:\/\/[^\s]+|mailto:[^\s]+|tel:[^\s]+|\/(?!\/)[^\s]*)$/i.test(s);
   }
   const ambito = (id) => ambitos.find((a) => a.id === id);
   const puedeEditar = (id) => {

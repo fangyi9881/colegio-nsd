@@ -15,11 +15,12 @@
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   function urlSegura(u) {
     const s = String(u || '').trim();
-    if (/^(https:\/\/|mailto:|tel:)/i.test(s)) return s;
+    // http:// solo para enlaces externos antiguos (recursos de los departamentos)
+    if (/^(https?:\/\/|mailto:|tel:)/i.test(s)) return s;
     if (/^\/(?!\/)/.test(s)) return s;
     return '';
   }
-  const externo = (u) => /^https:\/\//i.test(u);
+  const externo = (u) => /^https?:\/\//i.test(u);
   const aEnlace = (texto, url) => {
     const u = urlSegura(url);
     if (!u) return esc(texto);
@@ -41,14 +42,45 @@
     return String(texto || '').replace(/\r/g, '').split(/\n\s*\n/).map((b) => {
       const l = b.split('\n').map((x) => x.trim()).filter(Boolean);
       if (!l.length) return '';
+      // «## Subtítulo»: dentro de la ficha va como h3
+      const t = /^#{2,3}\s+(.+)$/.exec(l[0]);
+      if (t) return `<h3>${enLinea(t[1])}</h3>` + (l.length > 1 ? parrafos(l.slice(1).join('\n')) : '');
       if (l.every((x) => /^[-•*]\s+/.test(x))) return `<ul>${l.map((x) => `<li>${enLinea(x.replace(/^[-•*]\s+/, ''))}</li>`).join('')}</ul>`;
       return `<p>${enLinea(l.join(' '))}</p>`;
     }).join('');
   }
   const lista = (a, clase) => `<ul${clase ? ` class="${clase}"` : ''}>${(a || []).filter(Boolean).map((x) => `<li>${enLinea(x)}</li>`).join('')}</ul>`;
-  const enlaces = (a) => `<ul class="cms-enlaces">${(a || []).filter((x) => x && x.texto).map((x) => `<li>${aEnlace(x.texto, x.url)}</li>`).join('')}</ul>`;
-  const documentos = (a) => `<ul class="cms-docs">${(a || []).filter((d) => d && urlSegura(d.url)).map((d) =>
-    `<li><a class="cms-doc" href="${esc(urlSegura(d.url))}" target="_blank" rel="noopener"><i class="bi bi-file-earmark-pdf" aria-hidden="true"></i><span class="cms-doc__titulo">${esc(d.titulo || 'Documento')}</span><span class="cms-doc__tipo">PDF</span></a></li>`).join('')}</ul>`;
+  // Enlaces. «Grupo · Texto» los agrupa: con muchos, cada grupo va en un
+  // desplegable (por ejemplo, los recursos de Francés por curso).
+  function enlaces(a) {
+    const items = (a || []).filter((x) => x && x.texto);
+    const li = (t, u) => `<li>${aEnlace(t, u)}</li>`;
+    const grupos = [];
+    const sueltos = [];
+    items.forEach((x) => {
+      const m = /^(.{2,60}?)\s+·\s+(.+)$/.exec(x.texto);
+      if (!m) { sueltos.push(x); return; }
+      let g = grupos.find((y) => y.nombre === m[1]);
+      if (!g) { g = { nombre: m[1], items: [] }; grupos.push(g); }
+      g.items.push({ texto: m[2], url: x.url });
+    });
+    const plegar = items.length > 8;
+    const simples = plegar ? sueltos : items;
+    let html = simples.length ? `<ul class="cms-enlaces">${simples.map((x) => li(x.texto, x.url)).join('')}</ul>` : '';
+    if (plegar) {
+      html += grupos.map((g) => `<details class="pliegue dep-recursos"><summary class="pliegue__cab"><h3>${esc(g.nombre)} <span class="dep-recursos__n">${g.items.length}</span></h3><i class="bi bi-chevron-down pliegue__ico" aria-hidden="true"></i></summary><div class="pliegue__cuerpo"><ul class="cms-enlaces">${g.items.map((x) => li(x.texto, x.url)).join('')}</ul></div></details>`).join('');
+    }
+    return html;
+  }
+  // Tipo del documento según dónde está: PDF, documento o carpeta de Google…
+  const tipoDoc = (u) => (/\.pdf(\?|#|$)/i.test(u) || /\/storage\/v1\/object\//.test(u) ? ['bi-file-earmark-pdf', 'PDF']
+    : /drive\.google\.com\/drive\/folders/.test(u) ? ['bi-folder2-open', 'Carpeta']
+    : /docs\.google\.com\/(document|spreadsheets|presentation)/.test(u) ? ['bi-file-earmark-text', 'Documento']
+    : ['bi-file-earmark', 'Archivo']);
+  const documentos = (a) => `<ul class="cms-docs">${(a || []).filter((d) => d && urlSegura(d.url)).map((d) => {
+    const [ico, tipo] = tipoDoc(d.url);
+    return `<li><a class="cms-doc" href="${esc(urlSegura(d.url))}" target="_blank" rel="noopener"><i class="bi ${ico}" aria-hidden="true"></i><span class="cms-doc__titulo">${esc(d.titulo || 'Documento')}</span><span class="cms-doc__tipo">${tipo}</span><span class="sr-only"> (se abre en otra pestaña)</span></a></li>`;
+  }).join('')}</ul>`;
   const filas = (datos, cols) => `<div class="tabla-marco cms-tabla"><table><thead><tr>${cols.map((c) => `<th scope="col">${esc(c.etiqueta)}</th>`).join('')}</tr></thead><tbody>${
     (datos || []).map((f) => `<tr>${cols.map((c, i) => {
       const v = f ? f[c.clave] : '';

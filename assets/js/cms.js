@@ -31,11 +31,11 @@
   // ── Enlaces seguros: solo https, correo, teléfono o rutas de la web ──
   function urlSegura(u) {
     const s = String(u || '').trim();
-    if (/^(https:\/\/|mailto:|tel:)/i.test(s)) return s;
+    if (/^(https?:\/\/|mailto:|tel:)/i.test(s)) return s;
     if (/^\/(?!\/)/.test(s)) return s;
     return '';
   }
-  const esExterna = (u) => /^https:\/\//i.test(u) && !u.startsWith(location.origin);
+  const esExterna = (u) => /^https?:\/\//i.test(u) && !u.startsWith(location.origin);
 
   function el(tag, clase, texto) {
     const e = document.createElement(tag);

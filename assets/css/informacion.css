@@ -325,3 +325,9 @@ details.info-bloque .pliegue__cab > h2 { font-size: clamp(1.05rem, 1rem + .4vw, 
 .dep-blog__lista a { font-weight: 600; color: var(--green-700); }
 .dep-blog__lista time { flex-shrink: 0; font-size: .82rem; color: var(--ink-500); }
 @media (max-width: 520px) { .dep-blog__lista li { flex-direction: column; gap: 2px; } }
+
+/* Recursos de un departamento agrupados (por ejemplo, Francés por curso) */
+.dep-recursos + .dep-recursos { margin-top: 10px; }
+.cms-enlaces + .dep-recursos { margin-top: 16px; }
+.dep-recursos__n { display: inline-grid; place-items: center; min-width: 26px; height: 22px; margin-left: 6px; padding: 0 7px; border-radius: 999px; background: var(--surface-sunken); color: var(--ink-600); font-family: var(--font-sans); font-size: .75rem; font-weight: 700; vertical-align: middle; }
+.dep-intro h3, .dep-bloque__cuerpo h3 { margin: 1.4em 0 .5em; font-size: 1.15rem; }
