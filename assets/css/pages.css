@@ -1013,8 +1013,8 @@ a.doc-row__inner:hover .doc-row__action {
     overflow-x: auto;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    margin-inline: -20px;   /* coincide con el padding móvil de .container */
-    padding-inline: 20px;
+    margin-inline: calc(-1 * var(--margen-izq)) calc(-1 * var(--margen-der));   /* sangra hasta el borde: mismo margen que .container */
+    padding-inline: var(--margen-izq) var(--margen-der);
     padding-bottom: 6px;
   }
   .doc-chips::-webkit-scrollbar { display: none; }
