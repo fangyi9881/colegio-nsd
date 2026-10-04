@@ -16,18 +16,18 @@ El panel deja que la dirección, cada departamento y secretaría editen su parte
 
 ## Puesta en marcha (una vez, unos 20 minutos)
 
-1. **Crear la cuenta de Supabase** en <https://supabase.com> (plan gratuito) con la cuenta del colegio. Organización «Colegio NSD».
+1. **Crear la cuenta de Supabase** en <https://supabase.com> (plan gratuito) con la **cuenta de Google de la web del colegio** (no una cuenta personal). Organización «Colegio NSD». Después, *Organization → Team* → invitar a Fan como *Developer* o *Administrator*. Cuando exista la cuenta de Workspace del colegio, invitarla como *Owner* y quitar la anterior.
 2. **Crear el proyecto** `colegio-nsd-web`, región **Europa** (*West EU – Frankfurt* o *Paris*). Guarda la contraseña de la base de datos en un gestor de contraseñas.
 3. **SQL Editor** → *New query* → pegar `supabase/01_esquema.sql` entero → *Run*. Después, lo mismo con `supabase/02_ambitos.sql`.
 4. **Authentication → Sign In / Providers → Email**: activado. *Minimum password length*: 10.
 5. **Authentication → URL Configuration**:
-   - *Site URL*: `https://colegio-nsd.vercel.app` (tras el traspaso: `https://www.colegionsdolores.es`).
+   - *Site URL*: `https://colegio-nsd.vercel.app` hasta el traspaso; después, `https://www.colegionsdolores.es`.
    - *Redirect URLs*: añadir `https://colegio-nsd.vercel.app/**` y `https://www.colegionsdolores.es/**`.
 6. **Correo de avisos (recomendado).** Sin SMTP propio, Supabase solo envía correos a los miembros del equipo del proyecto, así que el «He olvidado la contraseña» no les llegaría a los profesores.
    - *Authentication → Emails → SMTP Settings*: poner el servidor de correo del colegio (el buzón `secretaria@colegionsdolores.es` del proveedor de correo, o una cuenta de Google con verificación en dos pasos y *contraseña de aplicación*: `smtp.gmail.com`, puerto 465).
    - Con SMTP puesto, activar **Confirm email** en el proveedor Email: así nadie puede pedir cuenta con un correo que no es suyo.
    - Sin SMTP, dejar *Confirm email* desactivado. Es seguro igualmente, porque ninguna cuenta hace nada hasta que la dirección la aprueba, pero entonces la dirección debe comprobar quién es cada solicitante.
-7. **Conectar la web.** *Project Settings → API*: copiar **Project URL** y la clave **anon public** en `assets/js/cms-config.js`. Nunca la `service_role`. Guardar, `git commit` y `git push` (Vercel publica solo).
+7. **Conectar la web.** *Project Settings → API*: copiar **Project URL** y la clave **anon public** en `assets/js/cms-config.js`. Nunca la `service_role`. Guardar, `git commit` y `git push`, y volver a subir el paquete a Hostinger (`node scripts/empaquetar-hostinger.mjs`).
 8. **Primera cuenta de administración.** Registrarse en `/acceso` → *Solicitar cuenta*. Luego, en el SQL Editor:
 
    ```sql
