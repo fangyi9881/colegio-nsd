@@ -291,3 +291,6 @@
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .formulario__plazo { color: var(--gold-300); } }
 :root[data-theme="dark"] .formulario__plazo { color: var(--gold-300); }
 .actividad + .gform__seccion { border-top: 0; padding-top: 6px; }
+.gform__desc { margin: 0 0 16px; color: var(--ink-700); font-size: .93rem; line-height: 1.6; white-space: pre-line; }
+.form-card label.opcion-otro { display: flex; align-items: center; gap: 10px; flex-basis: 100%; font-weight: 600; }
+.form-card label.opcion-otro input { margin-top: 0; }

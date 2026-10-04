@@ -9,6 +9,12 @@
 // Si secretaría cambia una pregunta en Google Forms, hay que actualizar
 // este archivo y regenerar: node scripts/generar-formularios.mjs
 // Comprobado contra los formularios publicados el 4 de octubre de 2026.
+//
+// SINCRONIZACIÓN AUTOMÁTICA: al abrir la página, la web pide a Supabase
+// (función «formularios») la estructura actual del Google Form. Si su
+// huella sigue siendo la de aquí, se queda esta versión adaptada; si
+// secretaría ha cambiado algo, la web pinta el formulario nuevo tal cual
+// está en Google, con el diseño de la web. Ver docs/FORMULARIOS.md.
 
 const AB = [['ALTA', 'Alta'], ['BAJA', 'Baja']];
 
@@ -33,6 +39,7 @@ const MESES = ['Septiembre', 'Octubre', 'Noviembre', 'Diciembre', 'Enero', 'Febr
 export const FORMULARIOS = [
   {
     slug: 'actividades-y-servicios',
+    huella: '2ec3ce2a', // huella de las preguntas de Google cuando se adaptó (ver assets/js/gform-esquema.js)
     id: '1FAIpQLSfWPC4Ge-xvPgfLqojVjP08qJqZYSjzkaMzdnScrYpjljpsGg',
     corto: 'https://forms.gle/oGbKQdamjwEkbtyAA',
     titulo: 'Altas y bajas de actividades y servicios',
@@ -95,6 +102,7 @@ export const FORMULARIOS = [
 
   {
     slug: 'oferta-extraescolares',
+    huella: 'ce786ef1', // huella de las preguntas de Google cuando se adaptó (ver assets/js/gform-esquema.js)
     id: '1FAIpQLSeX5Lw-aM5uNq36RXF_Q_XDuh7KolfETyuz8J7RSojSGT-8oA',
     corto: 'https://forms.gle/MH1ijxVMZDZgyeu6A',
     titulo: 'Ofertas de actividades extraescolares 2026-2027',
@@ -126,6 +134,7 @@ export const FORMULARIOS = [
 
   {
     slug: 'actualizacion-de-datos',
+    huella: '23dece5d', // huella de las preguntas de Google cuando se adaptó (ver assets/js/gform-esquema.js)
     id: '1FAIpQLSd3Lr1lkpFm5QrnctvyeAMuuCnIszPjEWmRegdjmIE5G-OtoQ',
     corto: 'https://forms.gle/N3tEj63ubFBmYeMa6',
     titulo: 'Actualización de datos',
@@ -150,6 +159,7 @@ export const FORMULARIOS = [
 
   {
     slug: 'certificados',
+    huella: '51beb85c', // huella de las preguntas de Google cuando se adaptó (ver assets/js/gform-esquema.js)
     id: '1FAIpQLSfdNrd0MEjwujgE07oi9MPiQRE4XVnxjsWl2tu996PWgpcvrQ',
     corto: 'https://forms.gle/MBUKAyto4t5ppF6W9',
     titulo: 'Solicitud de certificados',
@@ -183,6 +193,7 @@ export const FORMULARIOS = [
 
   {
     slug: 'recogida-de-titulos',
+    huella: '590352ea', // huella de las preguntas de Google cuando se adaptó (ver assets/js/gform-esquema.js)
     id: '1FAIpQLSfYr2MMEZ-Tz2NysefFTaerJYeAh5HF0MVXxRP08qIIUEDkGQ',
     corto: 'https://forms.gle/Q2HUifSzHbR3nzFX6',
     titulo: 'Cita para recoger historiales y títulos',

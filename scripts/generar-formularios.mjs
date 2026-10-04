@@ -103,7 +103,7 @@ function formulario(f) {
         </ul>
         <p class="gform-lado__alt">¿Alguna duda? Llamad al <a href="tel:+34914719959">91&nbsp;471&nbsp;99&nbsp;59</a> o escribid a <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a>.</p>
       </div>
-      <form class="form-card gform" action="${accion(f)}" method="POST" data-gform data-al-menos="${esc(f.alMenos.selector)}" data-al-menos-msg="${esc(f.alMenos.mensaje)}" data-original="${esc(f.corto)}" novalidate>
+      <form class="form-card gform" action="${accion(f)}" method="POST" data-gform data-form-id="${f.id}" data-huella="${f.huella}" data-al-menos="${esc(f.alMenos.selector)}" data-al-menos-msg="${esc(f.alMenos.mensaje)}" data-original="${esc(f.corto)}" novalidate>
         <input type="hidden" name="fvv" value="1" />
         <input type="hidden" name="pageHistory" value="0" />
         <div class="form-card__header">
@@ -114,7 +114,9 @@ function formulario(f) {
           </div>
         </div>
         <div class="form-body" data-gform-cuerpo>
+          <div data-gform-campos>
           ${f.campos.map((c, i) => campo(f, c, i)).join('\n          ')}
+          </div>
           <div class="aviso-datos">
             <p class="aviso-datos__titulo">Información básica sobre protección de datos</p>
             <dl>
@@ -149,7 +151,7 @@ for (const f of FORMULARIOS) {
     ruta, seccion: 'familias', css: ['secciones.css', 'informacion.css'],
     hero: { migas, h1: f.titulo, intro: f.resumen, meta: [['bi-send-check', 'En línea'], ['bi-clock', 'Unos 3 minutos']] },
     cuerpo: formulario(f),
-    scripts: ['/assets/js/formularios-google.js'],
+    scripts: ['/assets/js/cms-config.js', '/assets/js/gform-esquema.js', '/assets/js/formularios-google.js'],
     jsonld: migasJsonLd ? migasJsonLd(migas) : undefined,
   });
   fs.writeFileSync(path.join(DIR, `${f.slug}.html`), html);

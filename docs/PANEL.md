@@ -36,7 +36,8 @@ El panel deja que la dirección, cada departamento y secretaría editen su parte
    ```
 
    Desde ahí, todo lo demás (aprobar a la dirección, a los departamentos, dar el canal a su responsable) se hace en el panel.
-9. **Comprobar**: entrar en `/panel`, editar un campo de un departamento y ver que aparece en `/centro/departamentos/...`.
+9. **Función de formularios**: *Edge Functions → Deploy a new function → Via Editor*, nombre `formularios`, pegar `supabase/functions/formularios/index.ts` y desactivar *Verify JWT*. Mantiene los formularios de secretaría sincronizados con Google Forms (ver `docs/FORMULARIOS.md`).
+10. **Comprobar**: entrar en `/panel`, editar un campo de un departamento y ver que aparece en `/centro/departamentos/...`.
 
 ## Mantenimiento
 
