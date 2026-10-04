@@ -190,3 +190,37 @@ html.ficha-abierta { overflow: hidden; }
 .persona__avatar { border-radius: 12px; }
 .persona--responsable .persona__avatar { border-radius: 14px; }
 @media (max-width: 480px) { .ficha-foto { border-radius: 30px; } }
+
+/* ---------- Foto alargada que sobresale por arriba de la tarjeta ----------
+   La tarjeta (fondo + franja de color) empieza --asoma más abajo que la
+   ficha; la foto arranca arriba del todo y asoma por encima del borde. */
+.ficha { --asoma: 56px; isolation: isolate; }
+.ficha::after {
+  content: ""; position: absolute; z-index: -2; top: var(--asoma); left: 0; right: 0; bottom: 0;
+  border-radius: 26px; background: var(--surface-raised);
+  box-shadow: 0 40px 80px -24px rgba(6, 30, 15, .45);
+}
+.ficha::before { z-index: -1; top: var(--asoma); height: 132px; border-radius: 26px 26px 0 0; }
+.ficha-ventana__caja { background: transparent; box-shadow: none; border-radius: 0; }
+.ficha-cerrar { top: calc(56px + 14px); }
+.ficha-cab { padding-top: 0; }
+.ficha-foto {
+  width: 184px; height: 232px; border-radius: 30px;
+  box-shadow: 0 30px 50px -22px rgba(4, 24, 12, .6), 0 0 0 1px rgba(0,0,0,.04);
+}
+.ficha-cargando { margin-top: 170px; }
+/* Página: el mismo efecto, sin el marco de antes */
+.ficha--pagina { --asoma: 72px; background: none; border: 0; overflow: visible; padding-top: 0; }
+.ficha--pagina::after { border: 1px solid var(--border); box-shadow: 0 30px 60px -30px rgba(6, 30, 15, .3); border-radius: 30px; }
+.ficha--pagina::before { height: 160px; border-radius: 30px 30px 0 0; }
+.ficha--pagina .ficha-cab { padding-top: 0; }
+.ficha--pagina .ficha-foto { width: 216px; height: 272px; border-radius: 34px; }
+.ficha--vacia::after { display: none; }
+@media (max-width: 600px) {
+  .ficha { --asoma: 44px; }
+  .ficha-cerrar { top: calc(44px + 12px); }
+  .ficha::after, .ficha::before { border-radius: 24px 24px 0 0; }
+  .ficha-foto { width: 150px; height: 190px; border-radius: 26px; }
+  .ficha--pagina .ficha-foto { width: 168px; height: 212px; }
+  .ficha--pagina::after { border-radius: 24px; }
+}
