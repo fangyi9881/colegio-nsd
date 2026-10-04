@@ -3303,3 +3303,35 @@ html.con-post .to-top, html.con-post .mobile-cta-bar, html.con-post .cursor-ring
 .llamadas a:hover { border-color: #C0392B; }
 .llamadas__n { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--ink-900); line-height: 1.1; }
 .llamadas__t { font-size: .88rem; color: var(--ink-600); line-height: 1.45; }
+
+/* =========================================================
+   Color de cada departamento (data-tono="slug").
+   Tonos oscuros: el texto blanco encima pasa AA. --tono-txt es la
+   versión para texto sobre el fondo de la página (más clara en oscuro).
+   ========================================================= */
+:root, [data-tono="centro"] { --tono: #17663A; }
+[data-tono="infantil"]           { --tono: #C2185B; }
+[data-tono="primaria"]           { --tono: #1565C0; }
+[data-tono="matematicas"]        { --tono: #3949AB; }
+[data-tono="lengua"]             { --tono: #C62828; }
+[data-tono="geografia-historia"] { --tono: #8A6100; }
+[data-tono="ciencias"]           { --tono: #2E7D32; }
+[data-tono="tecnologia"]         { --tono: #00695C; }
+[data-tono="ingles"]             { --tono: #6A1B9A; }
+[data-tono="frances"]            { --tono: #0277BD; }
+[data-tono="educacion-fisica"]   { --tono: #BF360C; }
+[data-tono="artistico"]          { --tono: #AD1457; }
+[data-tono="religion-valores"]   { --tono: #5D4037; }
+[data-tono="diversificacion"]    { --tono: #00838F; }
+[data-tono="orientacion"]        { --tono: #A64B00; }
+[data-tono="bilinguismo"]        { --tono: #283593; }
+:root, [data-tono] { --tono-txt: color-mix(in srgb, var(--tono) 82%, #000); --tono-suave: color-mix(in srgb, var(--tono) 12%, transparent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]), :root:not([data-theme="light"]) [data-tono] { --tono-txt: color-mix(in srgb, var(--tono) 45%, #fff); --tono-suave: color-mix(in srgb, var(--tono) 24%, transparent); }
+}
+:root[data-theme="dark"], :root[data-theme="dark"] [data-tono] { --tono-txt: color-mix(in srgb, var(--tono) 45%, #fff); --tono-suave: color-mix(in srgb, var(--tono) 24%, transparent); }
+
+/* Cabecera de la página de un departamento, teñida con su color */
+html[data-tono] .page-hero {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--tono) 45%, #03100a), color-mix(in srgb, var(--tono) 78%, #03100a));
+}

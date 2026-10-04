@@ -452,3 +452,24 @@ details.info-bloque .pliegue__cab > h2 { font-size: clamp(1.05rem, 1rem + .4vw, 
 .org-dep--ancho .personas-grupo { display: grid; }
 
 .org-nivel--direccion .org-nivel__t { background: #17663A; color: #fff; }
+
+/* ---------- Color del departamento ---------- */
+.dep-entrada { border-left-color: var(--tono); }
+.dep-tarjeta h3::before { background: var(--tono); }
+.dep-tarjeta { border-top: 3px solid var(--tono); }
+.dep-checks li::before {
+  background: var(--tono) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / 12px no-repeat;
+}
+.dato { background: var(--tono-suave); }
+.cms-enlaces a::after { color: var(--tono-txt); }
+.cms-enlaces a:hover, .cms-doc:hover { border-color: var(--tono); }
+.cms-doc .bi { color: var(--tono-txt); }
+.dep-indice a:hover { color: var(--tono-txt); }
+.dep-lado__nota a { color: var(--tono-txt); }
+.dep-lado__grupo:first-child { border-top: 3px solid var(--tono); }
+.org-dep { border-top: 4px solid var(--tono); }
+.org-dep__ico { color: #fff; background: var(--tono); }
+.org-dep__cab:hover .org-dep__nombre { color: var(--tono-txt); }
+.deps-item__ico { color: #fff; background: var(--tono); }
+.deps-item a { border-top: 3px solid var(--tono); }
+.deps-item a:hover { border-color: color-mix(in srgb, var(--tono) 55%, var(--border)); border-top-color: var(--tono); }

@@ -78,7 +78,7 @@ const grupos = GRUPOS.map((g) => {
           <div><h2 id="g-${esc(g.id.toLowerCase().replace(/[^a-z]+/g, '-'))}">${esc(g.titulo)}</h2><p>${esc(g.texto)}</p></div>
         </header>
         <ul class="deps-lista">
-          ${deps.map((d) => `<li class="deps-item"><a href="/centro/departamentos/${d.slug}">
+          ${deps.map((d) => `<li class="deps-item" data-tono="${d.slug}"><a href="/centro/departamentos/${d.slug}">
             <span class="deps-item__ico" aria-hidden="true"><i class="bi ${d.icono}"></i></span>
             <span class="deps-item__nombre">${esc(d.nombre)}</span>
             <span class="deps-item__resumen">${esc(d.resumen)}</span>

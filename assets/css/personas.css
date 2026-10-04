@@ -164,3 +164,29 @@ html.ficha-abierta { overflow: hidden; }
 .entrada-autor .persona__avatar { width: 52px; height: 52px; }
 .ficha--vacia::before { display: none; }
 .ficha--vacia { padding-top: 28px; }
+
+/* ---------- Color del departamento ---------- */
+.persona--responsable .persona__avatar,
+.persona--responsable .persona__cargo { background: var(--tono); }
+.persona--responsable {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--tono) 10%, var(--surface-raised)), var(--surface-raised));
+  border-color: color-mix(in srgb, var(--tono) 38%, var(--border));
+}
+.persona:hover { border-color: color-mix(in srgb, var(--tono) 55%, var(--border)); }
+.persona__avatar { color: var(--tono-txt); background: var(--tono-suave); }
+.ficha::before {
+  background: radial-gradient(circle at 85% 0%, rgba(255,255,255,.18), transparent 55%),
+              linear-gradient(135deg, color-mix(in srgb, var(--tono) 60%, #03100a), var(--tono));
+}
+.ficha-foto { background: linear-gradient(140deg, color-mix(in srgb, var(--tono) 70%, #03100a), var(--tono)); }
+.ficha-principal { background: var(--tono); }
+.ficha-dato__n { color: var(--tono-txt); }
+.ficha-cargos li[data-tono] a, .ficha-cargos li[data-tono] span { border-left: 4px solid var(--tono); }
+.ficha-cargos a:hover { border-color: var(--tono); }
+.ficha-cargos i { color: var(--tono-txt); }
+/* Foto cuadrada (esquinas suaves), en la ficha y en las tarjetas */
+.ficha-foto { border-radius: 36px; }
+.ficha--pagina .ficha-foto { border-radius: 42px; }
+.persona__avatar { border-radius: 12px; }
+.persona--responsable .persona__avatar { border-radius: 14px; }
+@media (max-width: 480px) { .ficha-foto { border-radius: 30px; } }

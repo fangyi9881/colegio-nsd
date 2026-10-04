@@ -274,7 +274,7 @@
       cuerpo.splice(tras + 1, 0, avisoPendiente(curso, faltan));
     }
 
-    return `<div class="dep-ficha" data-faltan="${faltan.length}">
+    return `<div class="dep-ficha" data-tono="${esc(dep.slug)}" data-faltan="${faltan.length}">
       <div class="dep-ficha__cuerpo">
         ${cuerpo.join('\n')}
       </div>
@@ -313,7 +313,7 @@
     (dir.otros || []).forEach((x) => coordinaciones.push(x));
     const tarjetasDep = deps.map((d) => {
       const gente = (equipoDe(d) || []).filter(Boolean);
-      return `<li class="org-dep${gente.length > 7 ? ' org-dep--ancho' : ''}">
+      return `<li class="org-dep${gente.length > 7 ? ' org-dep--ancho' : ''}" data-tono="${esc(d.slug)}">
           <a class="org-dep__cab" href="/centro/departamentos/${esc(d.slug)}">
             <span class="org-dep__ico" aria-hidden="true"><i class="bi ${esc(d.icono)}"></i></span>
             <span class="org-dep__nombre">${esc(d.nombre)}</span>
@@ -361,6 +361,8 @@
   const esquema = raiz.NSD_ESQUEMA.ESQUEMAS[dep.esquema] || [];
   // Con o sin panel, se repinta: así el curso escolar es el de hoy y
   // no el del día en que se generó la página.
+  // Cada departamento tiene su color: lo hereda toda la página (cabecera incluida)
+  document.documentElement.setAttribute('data-tono', dep.slug);
   const pintar = (pub) => { caja.innerHTML = htmlFicha(dep, esquema, pub); if (raiz.NSD_PERSONAS) raiz.NSD_PERSONAS.hidratar(caja); };
   if (!raiz.NSD_CMS.activo) { pintar({}); return; }
   raiz.NSD_CMS.leer([dep.id]).then((d) => pintar(d[dep.id] || {})).then(() => raiz.NSD_CMS.leerEntradas({ ambito: dep.id, limite: 4 })).then((lista) => {

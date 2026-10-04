@@ -124,7 +124,9 @@
       lista.length ? `<li><span class="ficha-dato__n">${lista.length}</span><span class="ficha-dato__t">${lista.length === 1 ? 'cargo o equipo' : 'cargos y equipos'}</span></li>` : ''
     ].join('');
     const titulo = enPagina ? 'h1' : 'h2';
-    return `<header class="ficha-cab">
+    const tonoDe = (c) => { const m = /\/centro\/departamentos\/([a-z0-9-]+)/.exec((c && c.url) || ''); return m ? m[1] : ''; };
+    const tono = tonoDe(lideres[0] || lista[0]);
+    return `<span class="ficha-tono" data-tono-ficha="${esc(tono)}" hidden></span><header class="ficha-cab">
         <span class="ficha-foto${foto ? ' con-foto' : ''}" aria-hidden="${foto ? 'false' : 'true'}">${foto || esc(iniciales(nombre))}</span>
         <div class="ficha-cab__txt">
           <${titulo} class="ficha-nombre" id="ficha-nombre">${esc(nombre)}</${titulo}>
@@ -133,7 +135,7 @@
         </div>
       </header>
       ${datosRapidos ? `<ul class="ficha-datos">${datosRapidos}</ul>` : ''}
-      ${lista.length ? `<section class="ficha-bloque"><h3>En el colegio</h3><ul class="ficha-cargos">${lista.map((c) => `<li class="${c.responsable ? 'es-responsable' : ''}">${c.url ? `<a href="${esc(c.url)}">` : '<span>'}<strong>${esc(c.cargo)}</strong><small>${esc(c.donde)}</small>${c.url ? '<i class="bi bi-arrow-right" aria-hidden="true"></i></a>' : '</span>'}</li>`).join('')}</ul></section>` : ''}
+      ${lista.length ? `<section class="ficha-bloque"><h3>En el colegio</h3><ul class="ficha-cargos">${lista.map((c) => `<li class="${c.responsable ? 'es-responsable' : ''}"${tonoDe(c) ? ` data-tono="${esc(tonoDe(c))}"` : ''}>${c.url ? `<a href="${esc(c.url)}">` : '<span>'}<strong>${esc(c.cargo)}</strong><small>${esc(c.donde)}</small>${c.url ? '<i class="bi bi-arrow-right" aria-hidden="true"></i></a>' : '</span>'}</li>`).join('')}</ul></section>` : ''}
       ${f && f.bio ? `<section class="ficha-bloque"><h3>Sobre ${esc(nombre.split(' ')[0])}</h3><div class="ficha-bio">${parrafos(f.bio)}</div></section>` : ''}
       ${f && f.formacion ? `<section class="ficha-bloque"><h3>Formación</h3><p class="ficha-formacion">${esc(f.formacion)}</p></section>` : ''}
       <section class="ficha-bloque" data-ficha-blog hidden><h3>En el blog</h3><ul class="ficha-blog"></ul></section>
@@ -156,6 +158,14 @@
       }).join('');
       caja.hidden = false;
     });
+  }
+
+  // El color de la ficha es el de su departamento principal
+  function ponerTono(caja) {
+    const m = caja && caja.querySelector('[data-tono-ficha]');
+    if (!caja) return;
+    if (m && m.getAttribute('data-tono-ficha')) caja.setAttribute('data-tono', m.getAttribute('data-tono-ficha'));
+    else caja.setAttribute('data-tono', 'centro');
   }
 
   // ── Ventana flotante ──
@@ -189,6 +199,7 @@
     if (!d.open) { d.showModal(); document.documentElement.classList.add('ficha-abierta'); }
     Promise.all([leerCargos(), leerFichas()]).then(([c, f]) => {
       cuerpo.innerHTML = htmlContenido(slug, c.get(slug), f.get(slug), false);
+      ponerTono(cuerpo);
       blogDe(slug, cuerpo);
       const x = d.querySelector('[data-ficha-cerrar]'); if (x) x.focus();
     });
@@ -230,6 +241,7 @@
       document.title = `${nombre} · Colegio NSD`;
       const miga = document.querySelector('[data-persona-miga]'); if (miga) miga.textContent = nombre;
       pagina.innerHTML = `<article class="ficha ficha--pagina">${htmlContenido(slug, datos, fi, true)}</article>`;
+      ponerTono(pagina.querySelector('.ficha'));
       blogDe(slug, pagina);
     });
   }
