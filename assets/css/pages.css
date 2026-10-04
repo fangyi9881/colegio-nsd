@@ -1110,3 +1110,28 @@ main[aria-busy="true"] [data-entrada-titulo] { opacity: .6; }
   transition: background .2s, border-color .2s, color .2s;
 }
 .entrada-copiar:hover, .entrada-copiar.is-copiado { background: var(--brand-700); border-color: var(--brand-700); color: #fff; }
+
+/* ===== Cabecera con foto =====
+   La foto ocupa la mitad derecha y se funde con el verde; en móvil va de
+   fondo, muy tapada, para que el texto se lea siempre. */
+.page-hero::after {
+  content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 52%;
+  background: var(--hero-foto, none) center / cover no-repeat;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.55) 30%, #000 70%);
+          mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.55) 30%, #000 70%);
+  opacity: 0; pointer-events: none;
+}
+.page-hero--foto::after { opacity: .92; }
+@media (prefers-reduced-motion: no-preference) {
+  .page-hero::after { transform: scale(1.04); transition: opacity .9s ease, transform 1.4s cubic-bezier(.22,1,.36,1); }
+  .page-hero--foto::after { transform: none; }
+}
+.page-hero__inner { z-index: 1; }
+.page-hero--foto .page-hero__meta .meta {
+  background: rgba(6, 34, 16, .62); border-color: rgba(255,255,255,.22);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+@media (max-width: 880px) {
+  .page-hero::after { width: 100%; -webkit-mask-image: none; mask-image: none; }
+  .page-hero--foto::after { opacity: .22; }
+}

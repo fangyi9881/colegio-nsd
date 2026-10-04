@@ -547,6 +547,35 @@
   // Todo sale de SECCIONES y de la ruta, así ninguna página lo escribe a
   // mano (antes había migas que llevaban a "/#servicios", una sección de la
   // portada, en vez de a la página de Servicios).
+  // ── Foto en la cabecera de cada página interior ──
+  // Cada sección tiene su foto del propio colegio; la página la elige por
+  // su ruta (la más concreta gana). La foto entra con un fundido cuando ha
+  // cargado, así la cabecera nunca se queda en blanco.
+  (function fotoCabecera() {
+    const hero = document.querySelector('.page-hero');
+    if (!hero || hero.closest('.post-card') || hero.hasAttribute('data-sin-foto')) return;
+    // Solo fotos sin niños reconocibles (fachadas, patio, pista, aulas)
+    const FOTOS = [
+      ['/centro/sobre-nosotros', 'fachada-color'], ['/centro/mision-valores', 'huerto'], ['/centro/equipo-directivo', 'fachada-nsd'],
+      ['/centro/organigrama', 'aula'], ['/centro/persona', 'aula'],
+      ['/centro/departamentos/ciencias', 'huerto'], ['/centro/departamentos/educacion-fisica', 'pista'],
+      ['/centro/departamentos/primaria', 'patio'], ['/centro/departamentos/bilinguismo', 'fachada-color'],
+      ['/centro/departamentos', 'aula'], ['/centro', 'fachada-nsd'],
+      ['/etapas/infantil-3-6', 'aula'], ['/etapas/primaria', 'patio'], ['/etapas/eso', 'fachada-color'], ['/etapas', 'patio'],
+      ['/servicios/comedor', 'huerto'], ['/servicios/extraescolares', 'gimnasio'], ['/servicios/madrugadores', 'patio'], ['/servicios', 'gimnasio'],
+      ['/familias/documentacion', 'fachada-nsd'], ['/familias/evaluacion', 'aula'], ['/familias', 'fachada-color'],
+      ['/admision', 'fachada-nsd'], ['/contacto', 'fachada-color'], ['/comunidad', 'pista'], ['/blog', 'gimnasio']
+    ];
+    const hit = FOTOS.find(([r]) => RUTA === r || RUTA.startsWith(r + '/'));
+    if (!hit) return;
+    const ancho = window.innerWidth > 900 ? 1400 : 800;
+    const url = `/assets/img/fotos/${hit[1]}-${ancho}.webp`;
+    const img = new Image();
+    img.decoding = 'async';
+    img.onload = () => { hero.style.setProperty('--hero-foto', `url("${url}")`); hero.classList.add('page-hero--foto'); };
+    img.src = url;
+  })();
+
   (function ubicacion() {
     const idActivo = RUTA === '/' ? 'inicio' : (SECCION ? SECCION.id : '');
     document.querySelectorAll(`#primaryNav [data-seccion="${idActivo}"]`).forEach(a => {
