@@ -224,3 +224,73 @@ html.ficha-abierta { overflow: hidden; }
   .ficha--pagina .ficha-foto { width: 168px; height: 212px; }
   .ficha--pagina::after { border-radius: 24px; }
 }
+
+/* =========================================================
+   Organigrama en árbol: de arriba abajo, unido con líneas.
+   Cada nivel: rótulo → barra horizontal → bajada a cada tarjeta;
+   debajo de las tarjetas, subida a una barra y de ahí al nivel siguiente.
+   ========================================================= */
+.org-cupula { --linea: color-mix(in srgb, var(--ink-900) 24%, transparent); --bajada: 22px; }
+.org-nivel { gap: 0; }
+.org .personas.personas--centro {
+  position: relative; display: flex; flex-wrap: nowrap; justify-content: center; gap: 0;
+  width: 100%; padding: var(--bajada) 0 0; margin: 0;
+}
+.org-nivel:not(.org-nivel--coord) .personas--centro { padding-bottom: var(--bajada); }
+/* Del rótulo a la barra */
+.org .personas--centro::before {
+  content: ""; position: absolute; top: -14px; left: 50%; height: 14px; border-left: 2px solid var(--linea);
+}
+.org-nivel__t { margin-bottom: 14px; }
+.org .personas--centro > .persona-item {
+  position: relative; flex: 0 1 300px; min-width: 0; padding: 0 10px;
+}
+/* Bajada de la barra a cada tarjeta */
+.org .personas--centro > .persona-item::before {
+  content: ""; position: absolute; top: calc(-1 * var(--bajada)); left: 50%; height: var(--bajada); border-left: 2px solid var(--linea);
+}
+/* Barra horizontal que une a los del mismo nivel */
+.org .personas--centro > .persona-item::after {
+  content: ""; position: absolute; top: calc(-1 * var(--bajada)); left: 0; right: 0; border-top: 2px solid var(--linea);
+}
+.org .personas--centro > .persona-item:first-child::after { left: 50%; }
+.org .personas--centro > .persona-item:last-child::after { right: 50%; }
+.org .personas--centro > .persona-item:only-child::after { display: none; }
+/* Por debajo: subida de cada tarjeta a la barra inferior */
+.org-nivel:not(.org-nivel--coord) .personas--centro > .persona-item > .persona { position: relative; overflow: visible; }
+.org-nivel:not(.org-nivel--coord) .personas--centro > .persona-item > .persona::before {
+  content: ""; position: absolute; bottom: calc(-1 * var(--bajada) - 1px); left: 50%; height: var(--bajada); border-left: 2px solid var(--linea);
+}
+.org-nivel:not(.org-nivel--coord) .personas--centro > .persona-item > .persona::after {
+  content: ""; position: absolute; bottom: calc(-1 * var(--bajada) - 1px); left: -11px; right: -11px; border-top: 2px solid var(--linea);
+}
+.org-nivel:not(.org-nivel--coord) .personas--centro > .persona-item:first-child > .persona::after { left: 50%; }
+.org-nivel:not(.org-nivel--coord) .personas--centro > .persona-item:last-child > .persona::after { right: 50%; }
+.org-nivel:not(.org-nivel--coord) .personas--centro > .persona-item:only-child > .persona::after { display: none; }
+/* Tronco entre niveles */
+.org-linea { width: 2px; height: 28px; background: var(--linea); }
+/* Coordinaciones: cinco en una fila en escritorio, tarjetas más estrechas */
+.org-nivel--coord .personas--centro > .persona-item { flex: 1 1 0; max-width: 260px; padding: 0 6px; }
+.org-nivel--coord .persona { flex-direction: column; text-align: center; padding: 16px 12px; }
+.org-nivel--coord .persona__txt { justify-items: center; }
+.org-nivel--coord .persona--responsable .persona__cargo { justify-self: center; }
+
+/* Móvil y tableta estrecha: una columna, unida por una sola línea central */
+@media (max-width: 760px) {
+  .org .personas.personas--centro { flex-direction: column; align-items: center; padding-bottom: 0; }
+  .org-nivel:not(.org-nivel--coord) .personas--centro { padding-bottom: 0; }
+  .org .personas--centro > .persona-item,
+  .org-nivel--coord .personas--centro > .persona-item { flex: none; width: min(100%, 360px); max-width: none; padding: var(--bajada) 0 0; }
+  .org .personas--centro > .persona-item:first-child { padding-top: 0; }
+  .org .personas--centro > .persona-item::before { top: 0; height: var(--bajada); }
+  .org .personas--centro > .persona-item:first-child::before { display: none; }
+  .org .personas--centro > .persona-item::after,
+  .org-nivel:not(.org-nivel--coord) .personas--centro > .persona-item > .persona::before,
+  .org-nivel:not(.org-nivel--coord) .personas--centro > .persona-item > .persona::after { display: none; }
+  .org .personas--centro::before { top: -14px; }
+  .org-nivel--coord .persona { flex-direction: row; text-align: left; }
+  .org-nivel--coord .persona__txt { justify-items: start; }
+  .org-nivel--coord .persona--responsable .persona__cargo { justify-self: start; }
+}
+.org-nivel--coord .persona { min-width: 0; width: 100%; }
+.org .persona__txt, .org .persona__nombre { min-width: 0; overflow-wrap: anywhere; }
