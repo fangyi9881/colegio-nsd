@@ -392,3 +392,11 @@ fieldset.pnl-campo > legend { padding: 0 6px; margin-left: -6px; }
 .es-movil .pnl-previa__hero strong { font-size: 1.7rem; }
 .es-movil .pnl-previa__cuerpo { padding: 22px 18px; }
 .es-movil .pnl-previa__lienzo .dep-recuadro, .es-movil .pnl-previa__lienzo .dep-tarjeta, .es-movil .pnl-previa__lienzo .dep-bloque__cuerpo { padding: 18px; }
+/* La vista previa ocupa el alto de la pantalla y se desplaza por dentro:
+   antes crecía más que la pantalla y, al ir fija, no se podía bajar. */
+@media (min-width: 1101px) {
+  .pnl-previa { height: calc(100dvh - 104px); grid-template-rows: auto auto minmax(0, 1fr) auto; }
+  .pnl-previa__marco { min-height: 0; height: 100%; }
+}
+.pnl-previa__marco.es-movil { align-items: flex-start; }
+.pnl-revision__det ul { max-height: 140px; }

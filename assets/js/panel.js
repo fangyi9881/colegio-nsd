@@ -680,6 +680,18 @@
     }
     const programarPrevia = () => { clearTimeout(tPrevia); tPrevia = setTimeout(actualizarPrevia, 250); };
     if (window.ResizeObserver) new ResizeObserver(escalar).observe(marco);
+    // Al ponerse en un campo, la vista previa baja hasta ese apartado
+    let campoActual = null;
+    form.addEventListener('focusin', (ev) => {
+      const caja = ev.target.closest('.pnl-campo');
+      if (!caja || caja.dataset.clave === campoActual) return;
+      campoActual = caja.dataset.clave;
+      const destino = lienzo.querySelector('#' + CSS.escape(campoActual.replace(/_/g, '-')));
+      if (!destino) return;
+      const z = parseFloat(lienzo.style.zoom) || 1;
+      const y = destino.getBoundingClientRect().top - marco.getBoundingClientRect().top + marco.scrollTop;
+      marco.scrollTo({ top: Math.max(0, y * (CSS.supports('zoom', '1') ? 1 : z) - 16), behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
     lienzo.addEventListener('click', (ev) => { if (ev.target.closest('a')) ev.preventDefault(); });
     $('.pnl-previa').addEventListener('click', (ev) => {
       const b = ev.target.closest('[data-ancho]');
@@ -702,11 +714,25 @@
     // Lo que se ve de serie cuenta como «sin guardar» solo si se toca.
     const deSerie = new Set(campos.filter((c) => vacio((datos[c.clave] || {}).valor) && !vacio(def[c.clave])).map((c) => c.clave));
     const estadoGuardar = $('[data-estado-guardar]', form);
-    const marcarSucio = () => { estadoGuardar.textContent = 'Hay cambios sin guardar.'; form.classList.add('is-sucio'); };
+    // «Sin guardar» solo si de verdad algo es distinto de lo publicado:
+    // abrir un recuadro, mover el foco o deshacer lo escrito no cuenta.
+    const hayCambios = () => $$('.pnl-campo', form).some((caja) => {
+      try { return JSON.stringify(leerCampo(caja)) !== originales[caja.dataset.clave]; } catch (e) { return true; }
+    });
+    let tSucio = null;
+    const marcarSucio = () => {
+      clearTimeout(tSucio);
+      tSucio = setTimeout(() => {
+        const sucio = hayCambios();
+        form.classList.toggle('is-sucio', sucio);
+        if (sucio) estadoGuardar.textContent = 'Hay cambios sin guardar.';
+        else if (/sin guardar/.test(estadoGuardar.textContent)) estadoGuardar.textContent = 'Sin cambios.';
+      }, 200);
+    };
     form.addEventListener('input', () => { marcarSucio(); programarPrevia(); });
     form.addEventListener('change', () => { marcarSucio(); programarPrevia(); });
     actualizarPrevia();
-    window.onbeforeunload = () => (form.isConnected && form.classList.contains('is-sucio') ? true : undefined);
+    window.onbeforeunload = () => (form.isConnected && hayCambios() ? true : undefined);
 
     form.addEventListener('click', async (ev) => {
       const b = ev.target.closest('button');
