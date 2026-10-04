@@ -13,6 +13,6 @@
    falta configurarlo.
    ========================================================= */
 window.NSD_CMS_CONFIG = {
-  url: '',
-  anonKey: ''
+  url: 'https://onhqkrmwwaclzwbckpzj.supabase.co',
+  anonKey: 'sb_publishable_ciTfSnSwo0G7buvBjBVKcw_Bq6Ot-NZ'
 };
