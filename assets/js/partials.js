@@ -188,21 +188,44 @@
             </div>
           </li>`;
 
-  const cajonSeccion = (s) => `
-        <li class="drawer__has-sub">
-          <button class="drawer__sub-toggle" type="button" aria-expanded="false"><span><i class="bi ${s.icono}" aria-hidden="true" style="margin-right:8px;color:var(--green-400)"></i>${s.titulo}</span><i class="bi bi-chevron-down dd-arrow" aria-hidden="true"></i></button>
+  // Cajón del móvil: todas las filas con el mismo tamaño de letra. Las
+  // secciones se abren como acordeón; la sección en la que estás sale abierta.
+  // Las webs hermanas no van dentro de Comunidad: tienen su propio bloque.
+  const cajonSeccion = (s) => {
+    const abierta = !!SECCION && SECCION.id === s.id;
+    return `
+        <li class="drawer__has-sub${abierta ? ' is-open' : ''}">
+          <button class="drawer__sub-toggle drawer__fila" type="button" aria-expanded="${abierta}">
+            <span class="drawer__fila-ico" aria-hidden="true"><i class="bi ${s.icono}"></i></span>
+            <span class="drawer__fila-txt">${s.titulo}</span>
+            <i class="bi bi-chevron-down dd-arrow" aria-hidden="true"></i>
+          </button>
           <ul class="drawer__sub">
-            <li><a href="${s.url}" class="drawer__sub-hub"><i class="bi bi-grid-1x2" aria-hidden="true"></i> Todo ${s.titulo === 'El Centro' ? 'el Centro' : s.titulo.toLowerCase()}</a></li>
+            <li><a href="${s.url}" class="drawer__sub-hub">Ver todo ${s.titulo === 'El Centro' ? 'el Centro' : s.titulo.toLowerCase()}<i class="bi bi-arrow-right" aria-hidden="true"></i></a></li>
             ${s.paginas.map(p => p.externa
-              ? `<li><a href="${p.url}" class="drawer__boton">
-                   <span class="drawer__boton-ico" aria-hidden="true"><i class="bi ${p.icono}"></i></span>
-                   <span class="drawer__boton-txt"><strong>${p.titulo}</strong><small>Tiene su propia web</small></span>
-                   <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
-                 </a></li>`
-              : `<li><a href="${p.url}"><i class="bi ${p.icono}" aria-hidden="true"></i> ${p.titulo}</a></li>`).join('')}
-            ${s.webs ? s.webs.map(w => `<li><a href="${w.url}" class="drawer__web">${iconoWeb(w)} ${w.titulo}${FUERA}</a></li>`).join('') : ''}
+              ? `<li><a href="${p.url}" class="drawer__sub-fuera">${p.titulo}<span class="drawer__etiqueta">Web propia</span><i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></li>`
+              : `<li><a href="${p.url}">${p.titulo}</a></li>`).join('')}
           </ul>
         </li>`;
+  };
+
+  // Accesos del cajón: plataformas, webs hermanas y el portal del profesorado
+  const PLATAFORMAS = [
+    { titulo: 'Alexia',    sub: 'Familias',   url: 'https://web2.alexiaedu.com/ACWeb/LogOn.aspx', icono: 'bi-person-badge', tono: 'azul' },
+    { titulo: 'Raíces',    sub: 'Madrid', url: 'https://raices.madrid.org/', icono: 'bi-tree', tono: 'verde' },
+    { titulo: 'Classroom', sub: 'Clases', url: 'https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fclassroom.google.com%2F', icono: 'bi-easel', tono: 'ambar' }
+  ];
+  const WEBS_CAJON = SECCIONES.find(x => x.id === 'comunidad').webs;
+  const SUB_WEB = { 'Campamento de verano': 'Verano en el cole', 'Dolores Dragons': 'Escuela de baloncesto' };
+  const accesoCajon = (a) => `<a href="${a.url}" target="_blank" rel="noopener noreferrer" class="drawer__acceso">
+            <span class="drawer__acceso-ico drawer__acceso-ico--${a.tono}" aria-hidden="true"><i class="bi ${a.icono}"></i></span>
+            <span class="drawer__acceso-txt"><strong>${a.titulo}</strong><small>${a.sub}</small></span>
+          </a>`;
+  const webCajon = (w) => `<a href="${w.url}" class="drawer__acceso">
+            ${iconoWeb(w)}
+            <span class="drawer__acceso-txt"><strong>${w.titulo.replace(' de verano', '')}</strong><small>${SUB_WEB[w.titulo] || 'Web propia'}</small></span>
+            <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+          </a>`;
 
   const NAV = `
   <header class="navbar" id="navbar">
@@ -244,38 +267,43 @@
       </button>
     </div>
 
-    <nav class="drawer__nav">
-      <ul style="list-style:none;padding:0;margin:0;">
-        <li><a href="/" class="drawer__link"><i class="bi bi-house"></i> Inicio</a></li>
+    <nav class="drawer__nav" aria-label="Secciones">
+      <ul class="drawer__menu">
+        <li><a href="/" class="drawer__fila"><span class="drawer__fila-ico" aria-hidden="true"><i class="bi bi-house"></i></span><span class="drawer__fila-txt">Inicio</span></a></li>
         ${SECCIONES.map(cajonSeccion).join('')}
       </ul>
 
-      <div class="drawer__platforms" style="margin-top:12px;">
-        <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx" target="_blank" rel="noopener noreferrer" class="drawer__platform-btn">
-          <i class="bi bi-person-badge"></i> Alexia
-        </a>
-        <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="drawer__platform-btn">
-          <i class="bi bi-tree"></i> Raíces
-        </a>
-        <a href="https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fclassroom.google.com%2F" target="_blank" rel="noopener noreferrer" class="drawer__platform-btn">
-          <i class="bi bi-easel"></i> Classroom
-        </a>
+      <div class="drawer__bloque">
+        <p class="drawer__bloque-titulo">Plataformas</p>
+        <div class="drawer__accesos drawer__accesos--3">
+          ${PLATAFORMAS.map(accesoCajon).join('')}
+        </div>
+      </div>
+
+      <div class="drawer__bloque">
+        <p class="drawer__bloque-titulo">Nuestras webs</p>
+        <div class="drawer__accesos">
+          ${WEBS_CAJON.map(webCajon).join('')}
+        </div>
+      </div>
+
+      <div class="drawer__ctas">
+        <a href="/admision" class="drawer__cta drawer__cta--admision"><i class="bi bi-mortarboard-fill" aria-hidden="true"></i> Solicitar admisión</a>
+        <a href="/familias" class="drawer__cta drawer__cta--secundario"><i class="bi bi-person-lines-fill" aria-hidden="true"></i> Secretaría Virtual</a>
       </div>
 
       <div class="drawer__theme">
         <span class="drawer__theme-label">Apariencia</span>
         ${THEME_SWITCH.replace('themeSwitch"', 'themeSwitchDrawer"')}
       </div>
-
-      <a href="/familias" class="drawer__cta" style="background:linear-gradient(135deg,var(--brand-700),var(--brand-900));margin-bottom:10px;">
-        <i class="bi bi-person-lines-fill"></i> Secretaría Virtual
-      </a>
-      <a href="/admision" class="drawer__cta" style="background:linear-gradient(135deg,var(--yellow-500),#b8882a);color:var(--brand-900);">
-        <i class="bi bi-mortarboard-fill"></i> Solicitar Admisión
-      </a>
     </nav>
 
     <div class="drawer__footer">
+      <a href="/acceso" class="drawer__portal">
+        <span class="drawer__portal-ico" aria-hidden="true"><i class="bi bi-shield-lock"></i></span>
+        <span class="drawer__acceso-txt"><strong>Portal</strong><small>Profesorado y dirección</small></span>
+        <i class="bi bi-arrow-right" aria-hidden="true"></i>
+      </a>
       <div class="drawer__contact">
         <a href="tel:+34914719959"><i class="bi bi-telephone-fill"></i> 91 471 99 59</a>
         <a href="mailto:secretaria@colegionsdolores.es"><i class="bi bi-envelope-fill"></i> secretaria@colegionsdolores.es</a>
@@ -419,7 +447,7 @@
           <li><a href="/proteccion-infancia">Protección de la infancia</a></li>
           <li><a href="/familias/informacion">Información a las familias</a></li>
           <li><a href="/canal-informante">Canal interno de información</a></li>
-          <li><a href="/acceso">Acceso del personal</a></li>
+          <li><a href="/acceso">Portal del profesorado</a></li>
         </ul>
       </div>
     </div>

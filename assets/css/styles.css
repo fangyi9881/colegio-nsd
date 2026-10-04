@@ -439,32 +439,6 @@ p  { margin: 0 0 1em; color: var(--ink-700); line-height: 1.75; }
 .has-dropdown.dd-cerrado:focus-within .dropdown { opacity: 0; transform: translateY(-8px); pointer-events: none; }
 .has-dropdown.dd-cerrado:focus-within > a .dd-arrow { transform: none; }
 
-/* drawer mobile accordion */
-.drawer__sub-toggle {
-  width: 100%; background: none; border: none; cursor: pointer;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 16px; border-radius: 12px;
-  font-size: .95rem; font-weight: 600; color: rgba(255,255,255,.8);
-  transition: background .15s, color .15s;
-}
-.drawer__sub-toggle:hover { background: rgba(255,255,255,.06); color: #fff; }
-.drawer__sub-toggle .dd-arrow { transition: transform .22s; }
-.drawer__has-sub.is-open .drawer__sub-toggle .dd-arrow { transform: rotate(180deg); }
-.drawer__has-sub.is-open .drawer__sub-toggle { color: #fff; }
-.drawer__sub {
-  display: none; padding: 0 0 4px 16px;
-}
-.drawer__has-sub.is-open .drawer__sub { display: block; }
-.drawer__sub li { list-style: none; }
-.drawer__sub a {
-  display: flex; align-items: center; gap: 8px;
-  padding: 9px 14px; border-radius: 10px;
-  font-size: .88rem; color: rgba(255,255,255,.6);
-  text-decoration: none; transition: background .15s, color .15s;
-}
-.drawer__sub a:hover { background: rgba(255,255,255,.07); color: #fff; }
-.drawer__sub a i { font-size: .8rem; color: var(--green-400); width: 14px; text-align: center; }
-
 /* hamburger */
 .hamburger {
   display: none;
@@ -1757,8 +1731,8 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin: 14px 0 10px;
-  padding: 12px 14px;
+  margin: 0;
+  padding: 10px 14px;
   border-radius: var(--radius);
   background: rgba(255, 255, 255, .05);
   border: 1px solid rgba(255, 255, 255, .08);
@@ -1829,9 +1803,8 @@ body {
 .web-ico--campamento i { background: var(--brand-700); color: #fff; }
 .web-ico--dragons    { background: #0c0c0c; box-shadow: inset 0 0 0 1px rgba(212,175,55,.45); }
 .dropdown__web { padding-block: 7px !important; }
-.drawer__web .web-ico i { border-color: #0b1a10; }
+.drawer__acceso .web-ico i { border-color: #0b1a10; }
 
-.drawer__sub-hub { color: #fff !important; font-weight: 700; }
 
 /* Barra de páginas de la sección, bajo la cabecera de cada página */
 .subnav {
@@ -1897,19 +1870,6 @@ body {
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .dropdown__boton { --acento: #f79ec0; } }
 :root[data-theme="dark"] .dropdown__boton { --acento: #f79ec0; }
 
-/* El mismo botón dentro del cajón móvil, sobre fondo oscuro */
-.drawer__sub .drawer__boton {
-  --acento: #f79ec0;
-  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px;
-  margin: 4px 0; padding: 9px 11px; border-radius: 12px;
-  background: rgba(247,158,192,.12); border: 1px solid rgba(247,158,192,.34);
-}
-.drawer__sub .drawer__boton:hover { background: rgba(247,158,192,.2); }
-.drawer__boton-ico { width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; background: rgba(247,158,192,.18); }
-.drawer__sub .drawer__boton i { color: var(--acento); }
-.drawer__boton-txt { display: grid; line-height: 1.25; }
-.drawer__boton-txt strong { color: #fff; font-weight: 700; }
-.drawer__boton-txt small { font-size: .72rem; color: var(--acento); font-weight: 700; }
 
 /* ---------- Barra de hoy ----------
    Debajo de la navegación: el día, la hora y lo que pasa hoy. Los
