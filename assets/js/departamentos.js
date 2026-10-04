@@ -27,16 +27,20 @@
     return `<a href="${esc(u)}"${externo(u) ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(texto)}</a>`;
   };
   // [texto](url) y **negrita** dentro de una línea ya escapada a trozos
-  function enLinea(texto) {
+  // Cifras que conviene ver de un vistazo: «65 %», «11 horas», «B2»…
+  const DATO = /(\d+(?:[.,]\d+)?\s?%|\b\d+ horas(?: a la semana)?\b|\b(?:A1|A2|B1|B2|C1|C2)\b)/g;
+  const realzar = (html) => html.replace(DATO, '<strong class="dato">$1</strong>');
+  function enLinea(texto, realce) {
     const re = /\[([^\]]{1,200})\]\(([^)\s]{1,500})\)|\*\*([^*]{1,300})\*\*/g;
     let out = '', ultimo = 0, m;
     const t = String(texto || '');
+    const plano = (x) => (realce ? realzar(esc(x)) : esc(x));
     while ((m = re.exec(t))) {
-      out += esc(t.slice(ultimo, m.index));
+      out += plano(t.slice(ultimo, m.index));
       out += m[1] != null ? aEnlace(m[1], m[2]) : `<strong>${esc(m[3])}</strong>`;
       ultimo = re.lastIndex;
     }
-    return out + esc(t.slice(ultimo));
+    return out + plano(t.slice(ultimo));
   }
   function parrafos(texto) {
     return String(texto || '').replace(/\r/g, '').split(/\n\s*\n/).map((b) => {
@@ -49,7 +53,89 @@
       return `<p>${enLinea(l.join(' '))}</p>`;
     }).join('');
   }
-  const lista = (a, clase) => `<ul${clase ? ` class="${clase}"` : ''}>${(a || []).filter(Boolean).map((x) => `<li>${enLinea(x)}</li>`).join('')}</ul>`;
+  // ── Texto con estructura ──
+  // Un párrafo largo abre con su primera frase en negrita: se puede leer
+  // la ficha solo por esas frases y entrar en el detalle donde interese.
+  function parrafoRico(linea) {
+    const t = String(linea);
+    if (t.length > 260 && t.indexOf('[') < 0 && t.indexOf('**') < 0) {
+      const m = /^(.{40,240}?[.:])\s+(?=[A-ZÁÉÍÓÚÑ¿¡])/.exec(t);
+      if (m) return `<p><strong class="arranque">${realzar(esc(m[1]))}</strong> ${enLinea(t.slice(m[0].length), true)}</p>`;
+    }
+    return `<p>${enLinea(t, true)}</p>`;
+  }
+  const bloquesDe = (texto) => String(texto || '').replace(/\r/g, '').split(/\n\s*\n/)
+    .map((b) => b.split('\n').map((x) => x.trim()).filter(Boolean)).filter((l) => l.length);
+  function bloqueRico(l) {
+    if (l.every((x) => /^[-•*]\s+/.test(x))) return `<ul class="dep-checks">${l.map((x) => `<li>${enLinea(x.replace(/^[-•*]\s+/, ''), true)}</li>`).join('')}</ul>`;
+    return parrafoRico(l.join(' '));
+  }
+  // Texto del panel en tarjetas: lo que va antes del primer «##» es la
+  // entrada (primer párrafo destacado, el resto en un recuadro) y cada
+  // «## Subtítulo» es una tarjeta propia.
+  function textoRico(texto, conEntrada) {
+    const secciones = [{ titulo: null, bloques: [] }];
+    bloquesDe(texto).forEach((l) => {
+      const t = /^#{2,3}\s+(.+)$/.exec(l[0]);
+      if (t) { secciones.push({ titulo: t[1], bloques: l.length > 1 ? [l.slice(1)] : [] }); return; }
+      secciones[secciones.length - 1].bloques.push(l);
+    });
+    let html = '';
+    const intro = secciones[0].bloques;
+    if (intro.length) {
+      let resto = intro;
+      if (conEntrada && !intro[0].every((x) => /^[-•*]\s+/.test(x))) {
+        html += `<p class="dep-entrada">${enLinea(intro[0].join(' '), true)}</p>`;
+        resto = intro.slice(1);
+      }
+      if (resto.length) html += `<div class="dep-recuadro">${resto.map(bloqueRico).join('')}</div>`;
+    }
+    const tarjetas = secciones.slice(1);
+    if (tarjetas.length) {
+      html += `<div class="dep-tarjetas${tarjetas.length === 1 ? ' dep-tarjetas--una' : ''}">${tarjetas.map((sec) => `<section class="dep-tarjeta"><h3>${enLinea(sec.titulo)}</h3>${sec.bloques.map(bloqueRico).join('')}</section>`).join('')}</div>`;
+    }
+    return html;
+  }
+
+  // ── Personas ──
+  // Formatos admitidos en el campo Profesorado:
+  //   «Nombre Apellidos · cargo o materia»
+  //   «Grupo · Nombre Apellidos (cargo)»  (Primaria, ESO, Auxiliares…)
+  const GRUPO_PERSONA = /^(infantil|primaria|eso|e\.s\.o\.|secundaria|bachillerato|auxiliar(es)?( de conversación)?)$/i;
+  function persona(linea) {
+    let t = String(linea || '').replace(/\s+/g, ' ').trim();
+    let grupo = '';
+    let partes = t.split(/\s+·\s+/);
+    if (partes.length > 1 && GRUPO_PERSONA.test(partes[0])) { grupo = partes.shift(); t = partes.join(' · '); partes = t.split(/\s+·\s+/); }
+    let nombre = partes[0];
+    let cargo = partes.slice(1).join(' · ');
+    const par = /^(.+?)\s*\(([^)]+)\)$/.exec(nombre);
+    if (par) { nombre = par[1]; cargo = cargo || par[2]; }
+    cargo = cargo ? cargo.charAt(0).toUpperCase() + cargo.slice(1) : '';
+    const responsable = /\b(jef[ea]|coordinador|coordinadora|director|directora)\b/i.test(cargo);
+    const NEXOS = ['de', 'del', 'la', 'las', 'los', 'y'];
+    const iniciales = nombre.split(/\s+/).filter((x) => x && NEXOS.indexOf(x.toLowerCase()) < 0)
+      .map((x) => x.charAt(0)).slice(0, 2).join('').toUpperCase();
+    return { nombre, cargo, grupo, responsable, iniciales };
+  }
+  const tarjetaPersona = (p, porDefecto) => `<li class="persona${p.responsable ? ' persona--responsable' : ''}">
+      <span class="persona__avatar" aria-hidden="true">${esc(p.iniciales)}</span>
+      <span class="persona__txt"><span class="persona__nombre">${esc(p.nombre)}</span><span class="persona__cargo">${esc(p.cargo || (/auxiliar/i.test(p.grupo) ? 'Auxiliar de conversación' : porDefecto))}</span></span>
+    </li>`;
+  function htmlPersonas(lineas, porDefecto) {
+    const ps = (lineas || []).filter(Boolean).map(persona);
+    if (!ps.length) return '';
+    const grupos = [];
+    ps.forEach((p) => {
+      let g = grupos.find((x) => x.nombre === p.grupo);
+      if (!g) { g = { nombre: p.grupo, ps: [] }; grupos.push(g); }
+      g.ps.push(p);
+    });
+    const lista = (arr) => `<ul class="personas">${arr.slice().sort((a, b) => b.responsable - a.responsable).map((p) => tarjetaPersona(p, porDefecto)).join('')}</ul>`;
+    return grupos.map((g) => g.nombre ? `<div class="personas-grupo"><h3 class="personas-grupo__t">${esc(g.nombre)}</h3>${lista(g.ps)}</div>` : lista(g.ps)).join('');
+  }
+
+  const lista = (a, clase) => `<ul${clase ? ` class="${clase}"` : ''}>${(a || []).filter(Boolean).map((x) => `<li>${enLinea(x, clase === 'dep-checks')}</li>`).join('')}</ul>`;
   // Enlaces. «Grupo · Texto» los agrupa: con muchos, cada grupo va en un
   // desplegable (por ejemplo, los recursos de Francés por curso).
   function enlaces(a) {
@@ -103,8 +189,8 @@
 
   function valorDe(campo, valor) {
     switch (campo.tipo) {
-      case 'parrafos': return parrafos(valor);
-      case 'lista': return lista(valor);
+      case 'parrafos': return textoRico(valor, false);
+      case 'lista': return lista(valor, 'dep-checks');
       case 'enlaces': return enlaces(valor);
       case 'documentos': return documentos(valor);
       case 'filas': return filas(valor, campo.columnas || []);
@@ -114,7 +200,11 @@
 
   // Un solo aviso arriba con lo que falta; en cada apartado, una marca corta.
   function avisoPendiente(curso, faltan) {
-    return `<div class="dep-pendiente" role="note"><i class="bi bi-hourglass-split" aria-hidden="true"></i><span>Pendiente de publicar para el curso ${esc(curso)}: ${esc(faltan.join(', ').toLowerCase())}. Mientras tanto, se puede pedir en secretaría: <a href="tel:+34914719959">91&nbsp;471&nbsp;99&nbsp;59</a> o <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a>.</span></div>`;
+    return `<div class="dep-pendiente" role="note"><i class="bi bi-hourglass-split" aria-hidden="true"></i><div>
+      <p class="dep-pendiente__t">Pendiente de publicar para el curso ${esc(curso)}</p>
+      <ul class="dep-pendiente__lista">${faltan.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+      <p>Mientras tanto, se puede pedir en secretaría: <a href="tel:+34914719959">91&nbsp;471&nbsp;99&nbsp;59</a> o <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a>.</p>
+    </div></div>`;
   }
   const marcaPendiente = '<p class="dep-pendiente-corto"><i class="bi bi-hourglass-split" aria-hidden="true"></i>Pendiente de publicar por el departamento.</p>';
 
@@ -134,16 +224,29 @@
     const indice = [];
     const faltan = [];
 
+    // Quién forma el equipo, lo primero: responsables delante y en tarjetas
+    const campoEquipo = esquema.find((c) => c.clave === 'profesorado');
+    const equipo = campoEquipo ? v('profesorado') : null;
+    if (campoEquipo && !vacio(equipo)) {
+      indice.push(`<li><a href="#equipo">${esc(campoEquipo.etiqueta)}</a></li>`);
+      cuerpo.push(`<section class="dep-equipo" id="equipo" aria-labelledby="equipo-t">
+          <h2 id="equipo-t">${esc(campoEquipo.etiqueta)}</h2>
+          ${htmlPersonas(equipo, dep.esquema === 'etapa' ? 'Profesorado de la etapa' : 'Profesorado del departamento')}
+        </section>`);
+    }
+
     esquema.forEach((campo) => {
-      if (LATERALES.indexOf(campo.clave) >= 0) return;
+      if (LATERALES.indexOf(campo.clave) >= 0 || campo.clave === 'profesorado') return;
       const valor = v(campo.clave);
       const id = ANCLAS[campo.clave] || campo.clave.replace(/_/g, '-');
       if (campo.clave === 'presentacion') {
-        if (!vacio(valor)) cuerpo.push(`<div class="dep-intro prose" id="${id}">${parrafos(valor)}</div>`);
+        if (!vacio(valor)) cuerpo.push(`<div class="dep-intro" id="${id}">${textoRico(valor, true)}</div>`);
         return;
       }
       if (vacio(valor) && !campo.obligatorio) return;
-      if (vacio(valor)) faltan.push(campo.etiqueta.replace(/ \(PDF\)$/, ''));
+      // Lo obligatorio que falta no ocupa un apartado vacío cada uno:
+      // va junto en el aviso de arriba.
+      if (vacio(valor)) { faltan.push(campo.etiqueta.replace(/ \(PDF\)$/, '')); return; }
       indice.push(`<li><a href="#${id}">${esc(campo.etiqueta)}</a></li>`);
       cuerpo.push(`<section class="dep-bloque" id="${id}" aria-labelledby="${id}-t">
           <h2 id="${id}-t">${esc(campo.etiqueta)}</h2>
@@ -160,7 +263,10 @@
     const fechas = Object.values(pub.__fechas || {}).sort();
     const ultima = fechas.length ? fechas[fechas.length - 1] : null;
 
-    if (faltan.length) cuerpo.splice(cuerpo[0] && cuerpo[0].indexOf('dep-intro') >= 0 ? 1 : 0, 0, avisoPendiente(curso, faltan));
+    if (faltan.length) {
+      const tras = cuerpo.findIndex((c) => c.indexOf('class="dep-intro"') >= 0);
+      cuerpo.splice(tras + 1, 0, avisoPendiente(curso, faltan));
+    }
 
     return `<div class="dep-ficha" data-faltan="${faltan.length}">
       <div class="dep-ficha__cuerpo">
@@ -178,11 +284,69 @@
     </div>`;
   }
 
-  const api = { htmlFicha, cursoEscolar, esc, urlSegura, parrafos, vacio };
+  // ── Organigrama del centro ──
+  // dir: DIRECCION de departamentos-datos.js; deps: DEPARTAMENTOS;
+  // equipoDe(dep): lista de Profesorado (la publicada o la de serie).
+  function htmlOrganigrama(dir, deps, equipoDe) {
+    const cargo = (x) => `<li class="persona persona--responsable persona--grande">
+        <span class="persona__avatar" aria-hidden="true">${esc(persona(x.nombre).iniciales)}</span>
+        <span class="persona__txt"><span class="persona__nombre">${esc(x.nombre)}</span><span class="persona__cargo">${esc(x.cargo)}</span><span class="persona__ambito">${esc(x.ambito)}</span></span>
+      </li>`;
+    const nivel = (titulo, icono, gente, mod) => `<div class="org-nivel${mod ? ' org-nivel--' + mod : ''}">
+        <p class="org-nivel__t"><i class="bi ${icono}" aria-hidden="true"></i>${esc(titulo)}</p>
+        <ul class="personas personas--centro">${gente.join('')}</ul>
+      </div>`;
+    // Coordinaciones: los responsables de etapas y programas
+    const coordinaciones = [];
+    deps.forEach((d) => {
+      if (d.esquema === 'departamento') return;
+      (equipoDe(d) || []).map(persona).filter((p) => p.responsable).forEach((p) => {
+        coordinaciones.push({ nombre: p.nombre, cargo: p.cargo, ambito: p.grupo ? `${d.nombre} · ${p.grupo}` : d.nombre });
+      });
+    });
+    (dir.otros || []).forEach((x) => coordinaciones.push(x));
+    const tarjetasDep = deps.map((d) => {
+      const gente = (equipoDe(d) || []).filter(Boolean);
+      return `<li class="org-dep${gente.length > 7 ? ' org-dep--ancho' : ''}">
+          <a class="org-dep__cab" href="/centro/departamentos/${esc(d.slug)}">
+            <span class="org-dep__ico" aria-hidden="true"><i class="bi ${esc(d.icono)}"></i></span>
+            <span class="org-dep__nombre">${esc(d.nombre)}</span>
+            <span class="org-dep__n">${gente.length ? gente.length + (gente.length === 1 ? ' persona' : ' personas') : 'Equipo por publicar'}</span>
+          </a>
+          ${gente.length ? htmlPersonas(gente, d.esquema === 'etapa' ? 'Profesorado de la etapa' : 'Profesorado') : ''}
+        </li>`;
+    });
+    const porGrupo = (g) => deps.map((d, i) => (d.grupo === g ? tarjetasDep[i] : '')).join('');
+    return `<div class="org">
+        <div class="org-cupula">
+          ${nivel('Dirección', 'bi-diagram-2', dir.direccion.map(cargo), 'direccion')}
+          <span class="org-linea" aria-hidden="true"></span>
+          ${nivel('Equipo de gestión', 'bi-diagram-3', dir.gestion.map(cargo))}
+          <span class="org-linea" aria-hidden="true"></span>
+          ${nivel('Coordinaciones', 'bi-bezier2', coordinaciones.map(cargo), 'coord')}
+        </div>
+        <section class="org-bloque" aria-labelledby="org-etapas"><h2 id="org-etapas">Etapas, orientación y bilingüismo</h2>
+          <ul class="org-deps">${deps.filter((d) => d.esquema !== 'departamento').map((d) => tarjetasDep[deps.indexOf(d)]).join('')}</ul>
+        </section>
+        <section class="org-bloque" aria-labelledby="org-eso"><h2 id="org-eso">Departamentos de la ESO</h2>
+          <ul class="org-deps">${porGrupo('ESO')}</ul>
+        </section>
+      </div>`;
+  }
+
+  const api = { htmlFicha, htmlOrganigrama, cursoEscolar, esc, urlSegura, parrafos, vacio, persona };
   if (typeof module === 'object' && module.exports) { module.exports = api; return; }
   raiz.NSD_FICHA = api;
 
   // ── En el navegador: repintar con lo publicado en el panel ──
+  const org = document.querySelector('[data-organigrama]');
+  if (org && raiz.NSD_DEPARTAMENTOS && raiz.NSD_CMS && raiz.NSD_CMS.activo) {
+    const D = raiz.NSD_DEPARTAMENTOS;
+    raiz.NSD_CMS.leer(D.DEPARTAMENTOS.map((d) => d.id)).then((pub) => {
+      const de = (d) => { const x = (pub[d.id] || {}).profesorado; return !vacio(x) ? x : (d.defecto || {}).profesorado; };
+      org.innerHTML = htmlOrganigrama(D.DIRECCION, D.DEPARTAMENTOS, de);
+    }).catch(() => {});
+  }
   const caja = document.querySelector('[data-dep]');
   if (!caja || !raiz.NSD_DEPARTAMENTOS || !raiz.NSD_ESQUEMA || !raiz.NSD_CMS) return;
   const dep = raiz.NSD_DEPARTAMENTOS.DEPARTAMENTOS.find((d) => d.id === caja.getAttribute('data-dep'));

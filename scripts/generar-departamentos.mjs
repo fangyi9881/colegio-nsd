@@ -15,9 +15,9 @@ import { pagina, migasJsonLd, esc } from './plantilla.mjs';
 
 const require = createRequire(import.meta.url);
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const { DEPARTAMENTOS, GRUPOS } = require(path.join(RAIZ, 'assets/js/departamentos-datos.js'));
+const { DEPARTAMENTOS, GRUPOS, DIRECCION } = require(path.join(RAIZ, 'assets/js/departamentos-datos.js'));
 const { ESQUEMAS } = require(path.join(RAIZ, 'assets/js/cms-esquema.js'));
-const { htmlFicha } = require(path.join(RAIZ, 'assets/js/departamentos.js'));
+const { htmlFicha, htmlOrganigrama } = require(path.join(RAIZ, 'assets/js/departamentos.js'));
 
 const dir = path.join(RAIZ, 'centro/departamentos');
 fs.mkdirSync(dir, { recursive: true });
@@ -119,3 +119,30 @@ ${grupos}
 });
 fs.writeFileSync(path.join(dir, 'index.html'), indice);
 console.log('Índice escrito en centro/departamentos/index.html');
+
+// ── Organigrama: /centro/organigrama ──
+const migasOrg = [['Inicio', '/'], ['El Centro', '/centro'], ['Organigrama', '/centro/organigrama']];
+const totalPersonas = new Set([
+  ...DIRECCION.direccion, ...DIRECCION.gestion, ...DIRECCION.otros
+].map((x) => x.nombre).concat(DEPARTAMENTOS.flatMap((d) => ((d.defecto || {}).profesorado || []).map((l) => require(path.join(RAIZ, 'assets/js/departamentos.js')).persona(l).nombre)))).size;
+const organigrama = pagina({
+  titulo: 'Organigrama · Colegio NSD Carabanchel',
+  descripcion: 'Organigrama del Colegio NSD: dirección, equipo de gestión, coordinaciones de etapa y programa, y el profesorado de cada departamento con su cargo.',
+  ruta: '/centro/organigrama', seccion: 'centro', css: ['secciones.css', 'informacion.css'],
+  hero: {
+    migas: migasOrg, h1: 'Organigrama',
+    intro: 'Quién es quién en el colegio: la dirección, las coordinaciones y el equipo de cada etapa y departamento, con el cargo de cada persona.',
+    meta: [['bi-people', `${totalPersonas} personas`], ['bi-diagram-3', `${DEPARTAMENTOS.length} equipos`]]
+  },
+  jsonld: migasJsonLd(migasOrg),
+  cuerpo: `
+  <section class="section">
+    <div class="container" data-organigrama>
+${htmlOrganigrama(DIRECCION, DEPARTAMENTOS, (d) => (d.defecto || {}).profesorado)}
+    </div>
+  </section>`,
+  scripts: ['/assets/js/cms-config.js', '/assets/js/cms.js', '/assets/js/departamentos-datos.js', '/assets/js/departamentos.js']
+});
+fs.mkdirSync(path.join(RAIZ, 'centro'), { recursive: true });
+fs.writeFileSync(path.join(RAIZ, 'centro/organigrama.html'), organigrama);
+console.log('Organigrama escrito en centro/organigrama.html');

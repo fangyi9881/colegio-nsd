@@ -3261,3 +3261,45 @@ html.con-post .to-top, html.con-post .mobile-cta-bar, html.con-post .cursor-ring
   .highlight p { margin: 0 !important; font-size: .88rem; }
 }
 .sellos__lista:focus-visible { outline: 3px solid rgba(31,164,44,.45); outline-offset: 4px; border-radius: 14px; }
+
+/* =========================================================
+   Bloques para que la información no sea un muro de texto.
+   Se usan en páginas de contenido (canal, protección…).
+   ========================================================= */
+.tarjetas-info {
+  list-style: none; margin: 18px 0 28px; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px;
+}
+.tarjetas-info > li {
+  display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-content: start; margin: 0;
+  padding: 16px 18px; border-radius: var(--radius-lg); background: var(--surface-raised); border: 1px solid var(--border);
+  line-height: 1.5;
+}
+.tarjetas-info > li > .bi {
+  grid-row: span 2; width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
+  background: var(--green-100); color: var(--green-700); font-size: 1rem;
+}
+.tarjetas-info > li > strong { color: var(--ink-900); font-size: .98rem; }
+.tarjetas-info > li > span { font-size: .9rem; color: var(--ink-600); }
+.pasos { list-style: none; counter-reset: paso; margin: 18px 0 28px; padding: 0; display: grid; gap: 10px; }
+.pasos > li {
+  counter-increment: paso; position: relative; display: grid; gap: 4px; margin: 0;
+  padding: 14px 18px 14px 62px; border-radius: var(--radius-lg); background: var(--surface-raised); border: 1px solid var(--border);
+  line-height: 1.5;
+}
+.pasos > li::before {
+  content: counter(paso); position: absolute; left: 16px; top: 14px; width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center; background: #17663A; color: #fff; font-weight: 700; font-size: .9rem;
+}
+.pasos > li > strong { color: var(--ink-900); }
+.pasos > li > span { font-size: .92rem; color: var(--ink-600); }
+.llamadas { list-style: none; margin: 18px 0 28px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 12px; }
+.llamadas li { margin: 0; }
+.llamadas a {
+  height: 100%; display: grid; gap: 6px; align-content: start; padding: 16px 18px; border-radius: var(--radius-lg);
+  background: var(--surface-raised); border: 1px solid var(--border); border-top: 4px solid #C0392B;
+  text-decoration: none !important; color: inherit;
+}
+.llamadas a:hover { border-color: #C0392B; }
+.llamadas__n { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--ink-900); line-height: 1.1; }
+.llamadas__t { font-size: .88rem; color: var(--ink-600); line-height: 1.45; }

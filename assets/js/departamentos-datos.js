@@ -194,7 +194,23 @@
     }
   ];
 
-  const api = { GRUPOS, DEPARTAMENTOS: D };
+  // Equipo directivo y cargos que no salen de ningún departamento. Los
+  // nombres son los que publica el centro (ver centro/equipo-directivo).
+  const DIRECCION = {
+    direccion: [
+      { nombre: 'Jesús Blázquez del Mazo', cargo: 'Director pedagógico', ambito: 'Infantil y Primaria' },
+      { nombre: 'Jesús Romero Domínguez', cargo: 'Director pedagógico', ambito: 'E.S.O.' }
+    ],
+    gestion: [
+      { nombre: 'Mariano Caballero Espericueta', cargo: 'Jefe de estudios', ambito: 'Las tres etapas' },
+      { nombre: 'Laura Hidalgo Macías', cargo: 'Secretaria', ambito: 'Secretaría y administración' }
+    ],
+    otros: [
+      { nombre: 'Sergio del Pino Díaz', cargo: 'Coordinador TIC', ambito: 'Código Escuela 4.0 y Plan Digital' }
+    ]
+  };
+
+  const api = { GRUPOS, DEPARTAMENTOS: D, DIRECCION };
   if (typeof module === 'object' && module.exports) module.exports = api;
   else raiz.NSD_DEPARTAMENTOS = api;
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -107,6 +107,7 @@
         { titulo: 'Sobre nosotros',   url: '/centro/sobre-nosotros',   icono: 'bi-clock-history' },
         { titulo: 'Ideario y valores', url: '/centro/mision-valores',   icono: 'bi-heart' },
         { titulo: 'Equipo directivo', url: '/centro/equipo-directivo', icono: 'bi-person-badge' },
+        { titulo: 'Organigrama',      url: '/centro/organigrama',      icono: 'bi-diagram-3' },
         { titulo: 'Departamentos',    url: '/centro/departamentos',    icono: 'bi-people' }
       ]
     },
