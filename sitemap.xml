@@ -185,6 +185,36 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://colegio-nsd.vercel.app/familias/formularios/actividades-y-servicios</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/familias/formularios/oferta-extraescolares</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/familias/formularios/actualizacion-de-datos</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/familias/formularios/certificados</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://colegio-nsd.vercel.app/familias/formularios/recogida-de-titulos</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://colegio-nsd.vercel.app/canal-informante</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>

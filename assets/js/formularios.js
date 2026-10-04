@@ -1,8 +1,9 @@
-/* /familias/formularios: tarjetas con los formularios en línea que
-   secretaría publica desde el panel (sección «Formularios»). */
+/* /familias/formularios: formularios EXTRA que secretaría publica desde
+   el panel (sección «Formularios»). Los cinco de siempre ya están en la
+   página (scripts/generar-formularios.mjs); estos se añaden debajo. */
 (function () {
   'use strict';
-  const caja = document.querySelector('[data-formularios]');
+  const caja = document.querySelector('[data-formularios-extra]');
   const CMS = window.NSD_CMS;
   if (!caja || !CMS || !CMS.activo) return;
   const { el } = CMS.render;
@@ -27,7 +28,6 @@
       li.appendChild(art);
       ul.appendChild(li);
     });
-    caja.textContent = '';
     caja.appendChild(ul);
   });
 })();
