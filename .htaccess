@@ -35,11 +35,12 @@ RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:\d+)?$
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE]
 
 # 3. Redirecciones (las mismas que en vercel.json).
+RewriteRule ^secretaria-virtual/?$ /familias [R=301,L,NE]
 RewriteRule ^etapas/infantil-0-3/?$ https://infantil-nsd.vercel.app [R=301,L,NE]
 RewriteRule ^centro/ideario/?$ /centro/mision-valores#ideario [R=301,L,NE]
 RewriteRule ^centro/departamentos\.html/?$ /centro/departamentos [R=301,L,NE]
 RewriteRule ^(.+)/admision/?$ /admision [R=301,L,NE]
-RewriteRule ^(.+)/secretaria-virtual/?$ /familias/formularios [R=301,L,NE]
+RewriteRule ^(.+)/secretaria-virtual/?$ /familias [R=301,L,NE]
 RewriteRule ^(.+)/informacion-y-contacto/?$ /contacto [R=301,L,NE]
 RewriteRule ^(.+)/contacto/?$ /contacto [R=301,L,NE]
 RewriteRule ^(.+)/menu-de-comedor/?$ /servicios/comedor [R=301,L,NE]

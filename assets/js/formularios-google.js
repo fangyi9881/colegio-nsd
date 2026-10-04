@@ -294,6 +294,8 @@
         error.textContent = fallo[0];
         error.hidden = false;
         if (fallo[1]) {
+          const pl = fallo[1].closest('details');
+          if (pl) pl.open = true;
           fallo[1].setAttribute('aria-invalid', 'true');
           fallo[1].focus({ preventScroll: true });
           fallo[1].scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
@@ -329,6 +331,17 @@
       const primero = cuerpo.querySelector('input:not([type=hidden]), select, textarea');
       if (primero) primero.focus();
     });
+
+    // En cada desplegable, cuántos cambios lleva marcados
+    const contar = () => form.querySelectorAll('.gform__pliegue').forEach((d) => {
+      const n = d.querySelectorAll('[data-cambio]:checked').length;
+      const b = d.querySelector('[data-cuenta]');
+      if (!b) return;
+      b.hidden = !n;
+      b.textContent = n === 1 ? '1 cambio' : n + ' cambios';
+    });
+    form.addEventListener('change', contar);
+    form.addEventListener('reset', () => setTimeout(contar));
 
     sincronizar(form);
   }

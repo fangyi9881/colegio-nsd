@@ -294,3 +294,26 @@
 .gform__desc { margin: 0 0 16px; color: var(--ink-700); font-size: .93rem; line-height: 1.6; white-space: pre-line; }
 .form-card label.opcion-otro { display: flex; align-items: center; gap: 10px; flex-basis: 100%; font-weight: 600; }
 .form-card label.opcion-otro input { margin-top: 0; }
+
+/* Información a las familias en pliegues: el bloque es el pliegue */
+details.info-bloque { padding: 0; }
+.info-oblig__secciones { gap: 10px; }
+details.info-bloque.pliegue { margin: 0; }
+details.info-bloque .pliegue__cab > h2 { font-size: clamp(1.05rem, 1rem + .4vw, 1.25rem); }
+.info-bloque > .pliegue__cuerpo > p { color: var(--ink-700); }
+@media (max-width: 980px) { .info-oblig__indice { display: none; } }
+
+/* Secretaría Virtual (/familias) */
+.sv-titulo { margin: 0 0 14px; font-size: clamp(1.2rem, 1rem + .6vw, 1.45rem); }
+.pedagogica + .sv-titulo { margin-top: 34px; }
+.sv-gestiones .sv-principal a { background: var(--brand-800); border-color: var(--brand-800); color: #fff; }
+.sv-gestiones .sv-principal a .bi, .sv-gestiones .sv-principal small { color: rgba(255,255,255,.85); }
+.sv-gestiones .sv-principal a:hover { background: var(--brand-700); color: #fff; }
+#uniforme .uniforme { padding: 0; }
+#uniforme .uniforme { grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 28px; }
+#uniforme .uniforme__foto { position: static; box-shadow: none; }
+@media (max-width: 900px) { #uniforme .uniforme { grid-template-columns: 1fr; } #uniforme .uniforme__foto { max-width: 220px; } }
+.gform__pliegue { margin: 12px 0; }
+.gform__pliegue > .pliegue__cab > h3 { font-size: 1.02rem; flex: 1; }
+.gform__cuenta { flex: none; padding: 3px 10px; border-radius: 999px; background: var(--brand-700); color: #fff; font-size: .76rem; font-weight: 800; }
+.gform__pliegue .actividad:last-child { border-bottom: 0; }

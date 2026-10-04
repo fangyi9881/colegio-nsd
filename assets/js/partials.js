@@ -81,7 +81,7 @@
         <a href="mailto:secretaria@colegionsdolores.es" aria-label="Email"><i class="bi bi-envelope-fill"></i> <span>secretaria@colegionsdolores.es</span></a>
       </div>
       <div class="topbar__quick">
-        <a href="/familias/formularios" class="quick-link quick-link--sv" title="Secretaría Virtual: formularios y gestiones"><i class="bi bi-person-lines-fill"></i> <span>Secretaría Virtual</span></a>
+        <a href="/familias" class="quick-link quick-link--sv" title="Secretaría Virtual: gestiones, formularios y documentos"><i class="bi bi-person-lines-fill"></i> <span>Secretaría Virtual</span></a>
         <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-person-badge"></i> Alexia</a>
         <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-tree"></i> Raíces</a>
         <a href="https://www.instagram.com/colegionsdolores/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
@@ -128,7 +128,7 @@
       ]
     },
     {
-      id: 'familias', titulo: 'Familias', url: '/familias', icono: 'bi-house-heart',
+      id: 'familias', titulo: 'Secretaría Virtual', url: '/familias', icono: 'bi-person-lines-fill',
       paginas: [
         { titulo: 'Información a las familias', url: '/familias/informacion', icono: 'bi-patch-check' },
         { titulo: 'Documentación', url: '/familias/documentacion', icono: 'bi-folder2-open' },
@@ -267,7 +267,7 @@
         ${THEME_SWITCH.replace('themeSwitch"', 'themeSwitchDrawer"')}
       </div>
 
-      <a href="/familias/formularios" class="drawer__cta" style="background:linear-gradient(135deg,var(--brand-700),var(--brand-900));margin-bottom:10px;">
+      <a href="/familias" class="drawer__cta" style="background:linear-gradient(135deg,var(--brand-700),var(--brand-900));margin-bottom:10px;">
         <i class="bi bi-person-lines-fill"></i> Secretaría Virtual
       </a>
       <a href="/admision" class="drawer__cta" style="background:linear-gradient(135deg,var(--yellow-500),#b8882a);color:var(--brand-900);">
@@ -290,13 +290,16 @@
 
   // El pie repite el mapa del sitio, sección por sección y en el mismo orden
   // que el menú: el título de cada columna lleva a la página de la sección.
+  // En el móvil cada columna es un desplegable cerrado: abiertas, las cinco
+  // listas alargaban el pie más de una pantalla. En escritorio se abren solas.
   const pieColumna = (s) => `
-      <div>
-        <h3 class="footer__col-title"><a href="${s.url}">${s.titulo}</a></h3>
+      <details class="footer__col">
+        <summary class="footer__col-title"><span>${s.titulo}</span><i class="bi bi-chevron-down" aria-hidden="true"></i></summary>
         <ul>
+          <li class="footer__col-portada"><a href="${s.url}">Visión general</a></li>
           ${s.paginas.map(p => `<li><a href="${p.url}">${p.titulo}${p.externa ? FUERA : ''}</a></li>`).join('')}
         </ul>
-      </div>`;
+      </details>`;
 
 
   // ── Llamada final: la misma banda verde en todas las páginas ──
@@ -304,14 +307,13 @@
   // quedaban con la misma función y hacían el final de página larguísimo.
   // Ahora solo va esta, con los mismos dos botones en todo el sitio. En
   // /contacto y /admision no se pone: ya estás en el destino.
-  const SIN_LLAMADA = ['/contacto', '/admision'];
+  const SIN_LLAMADA = ['/', '/contacto', '/admision'];
   const LLAMADA = (SIN_LLAMADA.indexOf(RUTA) >= 0 || document.querySelector('section.cta')) ? '' : `
   <section class="cta" aria-labelledby="cta-final-titulo">
     <div class="container cta__inner">
       <div>
-        <span class="eyebrow eyebrow--light">Admisión 2027–2028</span>
         <h2 id="cta-final-titulo">La mejor forma de conocernos es venir.</h2>
-        <p>Secretaría resuelve dudas de admisión, etapas y servicios, y concierta la visita. Sin compromiso.</p>
+        <p>Admisión 2027-2028: secretaría resuelve vuestras dudas y concierta la visita.</p>
       </div>
       <div class="cta__actions">
         <a href="/contacto" class="btn btn--primary btn--lg"><i class="bi bi-chat-dots" aria-hidden="true"></i> Contacto</a>
@@ -366,7 +368,7 @@
   <section class="sellos" aria-labelledby="sellos-titulo">
     <div class="container">
       <h2 class="sellos__titulo" id="sellos-titulo">Programas y certificaciones</h2>
-      <ul class="sellos__lista">
+      <ul class="sellos__lista" tabindex="0" aria-label="Programas y certificaciones del colegio (se puede desplazar)">
         ${SELLOS.map(([archivo, nombre, hayLogo, w, h]) => `
         <li class="sello${hayLogo ? ' sello--con-logo' : ''}">
           ${hayLogo ? `<img class="sello__logo" src="/assets/img/sellos/${archivo}.png" alt="${nombre}" width="${w}" height="${h}" loading="lazy" decoding="async" />` : ''}
@@ -446,6 +448,26 @@
     if (llamada) llamada.insertAdjacentHTML('beforebegin', SELLOS_HTML);
     else footerSlot.insertAdjacentHTML('afterbegin', SELLOS_HTML);
   }
+
+  // Un enlace a una parte que está dentro de un pliegue cerrado lo abre.
+  const abrirPliegue = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const el = id && document.getElementById(id);
+    if (!el) return;
+    let d = el.closest('details');
+    while (d) { d.open = true; d = d.parentElement && d.parentElement.closest('details'); }
+    if (el.tagName === 'DETAILS') el.open = true;
+    requestAnimationFrame(() => el.scrollIntoView({ block: 'start' }));
+  };
+  abrirPliegue();
+  window.addEventListener('hashchange', abrirPliegue);
+  window.addEventListener('beforeprint', () => document.querySelectorAll('details').forEach((d) => { d.open = true; }));
+
+  // Columnas del pie: abiertas en escritorio, plegadas en el móvil.
+  const pieAncho = window.matchMedia('(min-width: 761px)');
+  const ajustarPie = () => document.querySelectorAll('.footer__col').forEach((d) => { d.open = pieAncho.matches; });
+  ajustarPie();
+  if (pieAncho.addEventListener) pieAncho.addEventListener('change', ajustarPie);
 
   // Red de seguridad: si un logo que se daba por puesto no llega a cargar,
   // el sello vuelve a su nombre escrito en vez de quedarse en blanco.

@@ -59,7 +59,7 @@ export const FORMULARIOS = [
       CONTACTO(true),
       { tipo: 'mes', entry: 1293194945, req: true, label: 'Mes en el que empieza el alta o la baja', ops: MESES },
 
-      { tipo: 'seccion', titulo: 'Servicios', ayuda: 'Marcad Alta o Baja solo en lo que cambia. Lo que dejéis en «Sin cambios» no se envía.' },
+      { tipo: 'seccion', titulo: 'Servicios', ayuda: 'Marcad Alta o Baja solo en lo que cambia. Lo que dejéis en «Sin cambios» no se envía. El horario ampliado, el bilingüismo y las extraescolares están en los desplegables de abajo.' },
       { tipo: 'altabaja', entry: 1982291985, nombre: 'Escuela Infantil (0, 1 y 2 años)', horario: 'Elegid el alta o la baja y los servicios.',
         extra: { tipo: 'casillas', label: 'Servicios', ops: [['DESAYUNO', 'Desayuno'], ['COMIDA', 'Comida'], ['MERIENDA', 'Merienda'],
           ['MODIFICACIÓN DE HORARIO (Escriba el nuevo horario en observaciones y comentarios, al final del formulario)', 'Cambio de horario (escribid el nuevo en observaciones)']] } },
@@ -67,7 +67,7 @@ export const FORMULARIOS = [
         detalle: { tipo: 'parrafo', entry: 1387798149, label: 'Alergias o intolerancias del alumno o la alumna', ayuda: 'Solo si las hay. Secretaría las pasa a cocina.' } },
       { tipo: 'altabaja', entry: 1279733622, nombre: 'Plataforma de comunicación Alexia Familia' },
 
-      { tipo: 'seccion', titulo: 'Horario ampliado' },
+      { tipo: 'seccion', titulo: 'Horario ampliado', plegar: true },
       { tipo: 'altabaja', entry: 150743366, nombre: 'Mañanas, de septiembre a junio',
         extra: { tipo: 'radio', label: 'Horario', ops: [['De 07:00 a 09:00 horas', '7:00 a 9:00'], ['De 07:30 a 09:00 horas', '7:30 a 9:00'], ['De 08:00 a 09:00 horas', '8:00 a 9:00'], ['De 08:30 a 09:00 horas', '8:30 a 9:00']] } },
       { tipo: 'altabaja', entry: 1771654384, nombre: 'Tardes, de octubre a mayo',
@@ -75,11 +75,11 @@ export const FORMULARIOS = [
       { tipo: 'altabaja', entry: 1933639936, nombre: 'Tardes de septiembre y junio', horario: 'Con la jornada continua, horas de estancia después del comedor.',
         extra: { tipo: 'radio', label: 'Horario', ops: [['De 15:00 a 15:30 horas', '15:00 a 15:30'], ['De 15:00 a 16:00 horas', '15:00 a 16:00'], ['De 15:00 a 16:30 horas', '15:00 a 16:30'], ['De 15:00 a 17:00 horas', '15:00 a 17:00'], ['De 15:00 a 17:30 horas', '15:00 a 17:30'], ['De 15:00 a 18:00 horas', '15:00 a 18:00'], ['De 15:00 a 18:30 horas', '15:00 a 18:30'], ['De 15:00 a 19:00 horas', '15:00 a 19:00']] } },
 
-      { tipo: 'seccion', titulo: 'Bilingüismo' },
+      { tipo: 'seccion', titulo: 'Bilingüismo', plegar: true },
       { tipo: 'altabaja', entry: 302010649, nombre: 'Infantil y Primaria', horario: 'De lunes a viernes, de 8:55 a 9:50.' },
       { tipo: 'altabaja', entry: 253023968, nombre: 'ESO: preparación de KET, PET y First', horario: 'KET (1.º) y PET (2.º): de lunes a viernes, de 12:30 a 13:25. First (3.º y 4.º): martes y jueves, de 14:15 a 15:05.' },
 
-      { tipo: 'seccion', titulo: 'Actividades extraescolares' },
+      { tipo: 'seccion', titulo: 'Actividades extraescolares', plegar: true },
       { tipo: 'altabaja', entry: 750836880, nombre: 'Informática y nuevas tecnologías', horario: 'Grupo A (4.º a 6.º de Primaria): lunes y miércoles, de 14:00 a 15:00. Grupo B (1.º a 3.º): martes y jueves, de 14:00 a 15:00.' },
       { tipo: 'altabaja', entry: 38555804, nombre: 'Robótica', horario: 'Martes y jueves, de 17:00 a 18:00.' },
       { tipo: 'altabaja', entry: 959533080, nombre: 'Predeporte (Infantil)', horario: 'Grupo A: lunes y miércoles. Grupo B: martes y jueves. De 17:00 a 18:00.' },

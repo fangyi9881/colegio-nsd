@@ -14,6 +14,11 @@
       "permanent": true
     },
     {
+      "source": "/secretaria-virtual",
+      "destination": "/familias",
+      "permanent": true
+    },
+    {
       "source": "/etapas/infantil-0-3",
       "destination": "https://infantil-nsd.vercel.app",
       "permanent": true
@@ -35,7 +40,7 @@
     },
     {
       "source": "/:prefijo+/secretaria-virtual",
-      "destination": "/familias/formularios",
+      "destination": "/familias",
       "permanent": true
     },
     {

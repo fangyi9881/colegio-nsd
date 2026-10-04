@@ -962,3 +962,15 @@
 .ideario__lista strong { color: var(--ink-900); }
 @media (max-width: 900px) { .ideario { grid-template-columns: 1fr; gap: 24px; } .ideario__aside { position: static; } }
 @media (max-width: 480px) { .ideario__lista li { padding: 56px 18px 18px; } .ideario__lista li::before { left: 18px; top: 14px; } }
+.doc2-vertodo { justify-self: start; margin-top: 4px; }
+
+/* Simulador de extraescolares en el móvil: tarjetas compactas
+   (el botón sube a la cabecera y el resumen largo se queda en «Más detalles») */
+@media (max-width: 720px) {
+  .sim-grupo__lista { gap: 8px; }
+  .act { padding: 14px 14px 12px; gap: 6px; }
+  .act__cab { padding-right: 104px; }
+  .act > p:not([class]) { display: none; }
+  .act__boton { position: absolute; top: 14px; right: 14px; min-height: 40px; padding: 6px 14px; }
+  .act__ico { width: 34px; height: 34px; border-radius: 10px; font-size: .95rem; }
+}

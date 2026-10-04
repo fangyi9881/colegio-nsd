@@ -45,7 +45,7 @@
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Familias",
+      "name": "Secretaría Virtual",
       "item": "https://colegio-nsd.vercel.app/familias"
     },
     {
@@ -75,7 +75,7 @@
       <div>
         <nav class="crumbs" aria-label="Migas de pan">
           <a href="/">Inicio</a> <i class="bi bi-chevron-right" aria-hidden="true"></i>
-          <a href="/familias">Familias</a> <i class="bi bi-chevron-right" aria-hidden="true"></i>
+          <a href="/familias">Secretaría Virtual</a> <i class="bi bi-chevron-right" aria-hidden="true"></i>
           <a href="/familias/formularios">Formularios</a> <i class="bi bi-chevron-right" aria-hidden="true"></i>
           <span>Altas y bajas de actividades y servicios</span>
         </nav>
@@ -135,7 +135,7 @@
           </fieldset>
           <div class="form-row"><label for="actividades-y-servicios-1293194945-8">Mes en el que empieza el alta o la baja
           <select id="actividades-y-servicios-1293194945-8" name="entry.1293194945" required><option value="">Elegid el mes</option><option>Septiembre</option><option>Octubre</option><option>Noviembre</option><option>Diciembre</option><option>Enero</option><option>Febrero</option><option>Marzo</option><option>Abril</option><option>Mayo</option><option>Junio</option><option>Julio</option></select></label></div>
-          <div class="gform__seccion"><h3>Servicios</h3><p>Marcad Alta o Baja solo en lo que cambia. Lo que dejéis en «Sin cambios» no se envía.</p></div>
+          <div class="gform__seccion"><h3>Servicios</h3><p>Marcad Alta o Baja solo en lo que cambia. Lo que dejéis en «Sin cambios» no se envía. El horario ampliado, el bilingüismo y las extraescolares están en los desplegables de abajo.</p></div>
           <fieldset class="actividad">
           <legend><span class="actividad__nombre">Escuela Infantil (0, 1 y 2 años)</span><span class="actividad__horario">Elegid el alta o la baja y los servicios.</span></legend>
           <div class="segmento" role="radiogroup" aria-label="Escuela Infantil (0, 1 y 2 años)"><label><input type="radio" name="entry.1982291985" value="" checked /><span>Sin cambios</span></label><label><input type="radio" name="entry.1982291985" value="ALTA" data-cambio /><span>Alta</span></label><label><input type="radio" name="entry.1982291985" value="BAJA" data-cambio /><span>Baja</span></label></div>
@@ -149,7 +149,7 @@
           <legend><span class="actividad__nombre">Plataforma de comunicación Alexia Familia</span></legend>
           <div class="segmento" role="radiogroup" aria-label="Plataforma de comunicación Alexia Familia"><label><input type="radio" name="entry.1279733622" value="" checked /><span>Sin cambios</span></label><label><input type="radio" name="entry.1279733622" value="ALTA" data-cambio /><span>Alta</span></label><label><input type="radio" name="entry.1279733622" value="BAJA" data-cambio /><span>Baja</span></label></div>
           </fieldset>
-          <div class="gform__seccion"><h3>Horario ampliado</h3></div>
+          <details class="pliegue gform__pliegue"><summary class="pliegue__cab"><h3>Horario ampliado</h3><span class="gform__cuenta" data-cuenta hidden></span><i class="bi bi-chevron-down pliegue__ico" aria-hidden="true"></i></summary><div class="pliegue__cuerpo">
           <fieldset class="actividad">
           <legend><span class="actividad__nombre">Mañanas, de septiembre a junio</span></legend>
           <div class="segmento" role="radiogroup" aria-label="Mañanas, de septiembre a junio"><label><input type="radio" name="entry.150743366" value="" checked /><span>Sin cambios</span></label><label><input type="radio" name="entry.150743366" value="ALTA" data-cambio /><span>Alta</span></label><label><input type="radio" name="entry.150743366" value="BAJA" data-cambio /><span>Baja</span></label></div>
@@ -165,7 +165,8 @@
           <div class="segmento" role="radiogroup" aria-label="Tardes de septiembre y junio"><label><input type="radio" name="entry.1933639936" value="" checked /><span>Sin cambios</span></label><label><input type="radio" name="entry.1933639936" value="ALTA" data-cambio /><span>Alta</span></label><label><input type="radio" name="entry.1933639936" value="BAJA" data-cambio /><span>Baja</span></label></div>
           <label class="actividad__extra" for="actividades-y-servicios-1933639936-16-h">Horario
             <select id="actividades-y-servicios-1933639936-16-h" name="entry.1933639936" data-horario><option value="">Elegid el horario</option><option value="De 15:00 a 15:30 horas">15:00 a 15:30</option><option value="De 15:00 a 16:00 horas">15:00 a 16:00</option><option value="De 15:00 a 16:30 horas">15:00 a 16:30</option><option value="De 15:00 a 17:00 horas">15:00 a 17:00</option><option value="De 15:00 a 17:30 horas">15:00 a 17:30</option><option value="De 15:00 a 18:00 horas">15:00 a 18:00</option><option value="De 15:00 a 18:30 horas">15:00 a 18:30</option><option value="De 15:00 a 19:00 horas">15:00 a 19:00</option></select></label></fieldset>
-          <div class="gform__seccion"><h3>Bilingüismo</h3></div>
+          </div></details>
+          <details class="pliegue gform__pliegue"><summary class="pliegue__cab"><h3>Bilingüismo</h3><span class="gform__cuenta" data-cuenta hidden></span><i class="bi bi-chevron-down pliegue__ico" aria-hidden="true"></i></summary><div class="pliegue__cuerpo">
           <fieldset class="actividad">
           <legend><span class="actividad__nombre">Infantil y Primaria</span><span class="actividad__horario">De lunes a viernes, de 8:55 a 9:50.</span></legend>
           <div class="segmento" role="radiogroup" aria-label="Infantil y Primaria"><label><input type="radio" name="entry.302010649" value="" checked /><span>Sin cambios</span></label><label><input type="radio" name="entry.302010649" value="ALTA" data-cambio /><span>Alta</span></label><label><input type="radio" name="entry.302010649" value="BAJA" data-cambio /><span>Baja</span></label></div>
@@ -174,7 +175,8 @@
           <legend><span class="actividad__nombre">ESO: preparación de KET, PET y First</span><span class="actividad__horario">KET (1.º) y PET (2.º): de lunes a viernes, de 12:30 a 13:25. First (3.º y 4.º): martes y jueves, de 14:15 a 15:05.</span></legend>
           <div class="segmento" role="radiogroup" aria-label="ESO: preparación de KET, PET y First"><label><input type="radio" name="entry.253023968" value="" checked /><span>Sin cambios</span></label><label><input type="radio" name="entry.253023968" value="ALTA" data-cambio /><span>Alta</span></label><label><input type="radio" name="entry.253023968" value="BAJA" data-cambio /><span>Baja</span></label></div>
           </fieldset>
-          <div class="gform__seccion"><h3>Actividades extraescolares</h3></div>
+          </div></details>
+          <details class="pliegue gform__pliegue"><summary class="pliegue__cab"><h3>Actividades extraescolares</h3><span class="gform__cuenta" data-cuenta hidden></span><i class="bi bi-chevron-down pliegue__ico" aria-hidden="true"></i></summary><div class="pliegue__cuerpo">
           <fieldset class="actividad">
           <legend><span class="actividad__nombre">Informática y nuevas tecnologías</span><span class="actividad__horario">Grupo A (4.º a 6.º de Primaria): lunes y miércoles, de 14:00 a 15:00. Grupo B (1.º a 3.º): martes y jueves, de 14:00 a 15:00.</span></legend>
           <div class="segmento" role="radiogroup" aria-label="Informática y nuevas tecnologías"><label><input type="radio" name="entry.750836880" value="" checked /><span>Sin cambios</span></label><label><input type="radio" name="entry.750836880" value="ALTA" data-cambio /><span>Alta</span></label><label><input type="radio" name="entry.750836880" value="BAJA" data-cambio /><span>Baja</span></label></div>
@@ -227,6 +229,7 @@
           <legend><span class="actividad__nombre">Refuerzo y apoyo escolar</span><span class="actividad__horario">Primaria y ESO: lunes y miércoles, de 17:00 a 18:00.</span></legend>
           <div class="segmento" role="radiogroup" aria-label="Refuerzo y apoyo escolar"><label><input type="radio" name="entry.585359360" value="" checked /><span>Sin cambios</span></label><label><input type="radio" name="entry.585359360" value="ALTA" data-cambio /><span>Alta</span></label><label><input type="radio" name="entry.585359360" value="BAJA" data-cambio /><span>Baja</span></label></div>
           </fieldset>
+          </div></details>
           <div class="gform__seccion"><h3>Para terminar</h3></div>
           <div class="form-row"><label for="actividades-y-servicios-1000023-35">Observaciones <span class="gform__opc">(opcional)</span>
           <textarea id="actividades-y-servicios-1000023-35" name="entry.1000023" rows="3" aria-describedby="actividades-y-servicios-1000023-35-ayuda"></textarea>

@@ -322,7 +322,7 @@ const RAPIDAS = ['menú', 'horarios', 'precios', 'notas', 'madrugadores', 'becas
   function filtrar() {
     const palabras = palabrasDe();
     return INDICE
-      .filter(({ doc, texto }) => (categoria === 'todas' || doc.categoria === categoria) && palabras.every((p) => texto.includes(p)))
+      .filter(({ doc, texto }) => (categoria === 'todas' || categoria === 'todo' || doc.categoria === categoria) && palabras.every((p) => texto.includes(p)))
       .map((x) => ({ ...x, puntos: palabras.reduce((s, p) => s + (x.titulo.includes(p) ? 2 : 1), 0) + (x.doc.url ? 0.5 : 0) }))
       .sort((a, b) => b.puntos - a.puntos || a.i - b.i);
   }
@@ -418,8 +418,9 @@ const RAPIDAS = ['menú', 'horarios', 'precios', 'notas', 'madrugadores', 'becas
       </section>
       <section class="doc2-panel__bloque" aria-labelledby="docCarpH">
         <h3 class="doc2-panel__h" id="docCarpH"><i class="bi bi-folder2" aria-hidden="true"></i> Las carpetas</h3>
-        <p class="doc2-panel__nota">Elegid una para ver solo esos documentos. Debajo están todos, agrupados igual.</p>
+        <p class="doc2-panel__nota">Elegid una para ver solo esos documentos, o buscad arriba.</p>
         <ul class="doc2-carpetas">${carpetas()}</ul>
+        <button type="button" class="btn btn--ghost doc2-vertodo" data-cat="todo"><i class="bi bi-list-ul" aria-hidden="true"></i> Ver la lista completa (${INDICE.length} documentos)</button>
       </section>`;
   }
 
@@ -427,7 +428,7 @@ const RAPIDAS = ['menú', 'horarios', 'precios', 'notas', 'madrugadores', 'becas
     const palabras = palabrasDe();
     const base = INDICE.filter(({ texto }) => palabras.every((p) => texto.includes(p)));
     const n = (c) => base.filter(({ doc }) => doc.categoria === c).length;
-    tabs.innerHTML = `<button type="button" class="doc2-tab" data-cat="todas" aria-pressed="${categoria === 'todas'}">Todo <span>${base.length}</span></button>` +
+    tabs.innerHTML = `<button type="button" class="doc2-tab" data-cat="todo" aria-pressed="${categoria === 'todas' || categoria === 'todo'}">Todo <span>${base.length}</span></button>` +
       Object.entries(CATEGORIAS).map(([k, c]) => `<button type="button" class="doc2-tab" data-cat="${k}" aria-pressed="${categoria === k}"${n(k) ? '' : ' disabled'}><i class="bi ${c.icono}" aria-hidden="true"></i>${c.nombre} <span>${n(k)}</span></button>`).join('');
   }
 
@@ -442,7 +443,7 @@ const RAPIDAS = ['menú', 'horarios', 'precios', 'notas', 'madrugadores', 'becas
       panel.innerHTML = enReposo ? panelHtml() : '';
     }
     if (volver) {
-      const c = CATEGORIAS[categoria];
+      const c = categoria === 'todo' ? { icono: 'bi-list-ul', nombre: 'Todos los documentos' } : CATEGORIAS[categoria];
       const dentro = !!c && !consulta.trim();
       volver.hidden = !dentro;
       volver.innerHTML = dentro
@@ -451,7 +452,7 @@ const RAPIDAS = ['menú', 'horarios', 'precios', 'notas', 'madrugadores', 'becas
         : '';
     }
     // Sin búsqueda y con "Todo": agrupado por categoría. Con búsqueda: por relevancia.
-    if (!consulta.trim() && categoria === 'todas') {
+    if (!consulta.trim() && (categoria === 'todas' || categoria === 'todo')) {
       lista.innerHTML = Object.entries(CATEGORIAS).map(([k, c]) => {
         const grupo = res.filter(({ doc }) => doc.categoria === k);
         return grupo.length ? `<li class="doc2-grupo"><h3 class="doc2-grupo__titulo"><i class="bi ${c.icono}" aria-hidden="true"></i> ${c.nombre}</h3><ul>${grupo.map(fila).join('')}</ul></li>` : '';
@@ -459,16 +460,19 @@ const RAPIDAS = ['menú', 'horarios', 'precios', 'notas', 'madrugadores', 'becas
     } else lista.innerHTML = res.map(fila).join('');
 
     const hay = res.length > 0;
-    lista.hidden = !hay;
+    // En reposo solo se ven los destacados y las carpetas: la lista entera
+    // duplicaba la página (más de diez pantallas en el móvil).
+    lista.hidden = !hay || enReposo;
     vacio.hidden = hay;
     if (vacioTermino) vacioTermino.textContent = consulta.trim() ? `«${consulta.trim()}»` : 'ese filtro';
     limpiarBtn.hidden = !consulta;
+    cuenta.hidden = enReposo;
     cuenta.textContent = hay ? `${res.length} ${res.length === 1 ? 'resultado' : 'resultados'}` : 'Ningún resultado';
     pintarTabs();
 
     // La vista previa sigue al elegido si sigue en la lista; si no, al primero
     if (!res.some(({ i }) => i === elegido)) elegido = hay ? res[0].i : null;
-    mostrar(elegido, false);
+    mostrar(enReposo ? null : elegido, false);
     sincronizarUrl();
   }
 
@@ -647,7 +651,7 @@ const RAPIDAS = ['menú', 'horarios', 'precios', 'notas', 'madrugadores', 'becas
   // Estado inicial desde la URL (se puede compartir una búsqueda)
   const p = new URLSearchParams(location.search);
   if (p.get('q')) { consulta = p.get('q'); input.value = consulta; }
-  if (p.get('cat') && CATEGORIAS[p.get('cat')]) categoria = p.get('cat');
+  if (p.get('cat') && (CATEGORIAS[p.get('cat')] || p.get('cat') === 'todo')) categoria = p.get('cat');
   raiz.classList.add('is-listo');
   pintar();
 })();

@@ -66,7 +66,12 @@
     ['pan', 'Pan'],
   ];
 
-  function tabla(s) {
+  // Una semana a la vista: las cuatro o cinco tablas seguidas ocupaban
+  // cinco pantallas en el móvil. Se abre la de esta semana (o la próxima).
+  let activa = semanas.findIndex((s) => s.dias.some((d) => d.fecha >= claveHoy));
+  if (activa < 0) activa = 0;
+
+  function tabla(s, i) {
     const dias = s.dias;
     // El dia de hoy se recalcula en cada carga de la pagina (claveHoy, mas
     // arriba), asi que la columna que se destaca cambia sola cada dia sin
@@ -91,7 +96,7 @@
 
     const energia = dias.map((d) => `<td${d.fecha === claveHoy ? ' class="es-hoy"' : ''}><strong>${d.kcal}</strong> kcal<span class="menu-macros">P ${d.prot} · L ${d.lip} · HC ${d.hc}</span></td>`).join('');
 
-    return `<div class="menu-semana">
+    return `<div class="menu-semana" id="menu-semana-${i}"${i === activa ? '' : ' hidden'}>
       <h3 class="menu-semana__rotulo">${esc(rotulo(s))}</h3>
       <div class="menu-marco">
         <table class="menu-tabla">
@@ -127,6 +132,15 @@
       </div>
     </div>
     ${hoyHtml}
+    ${semanas.length > 1 ? `<div class="menu-semanas" role="group" aria-label="Elegir semana">${semanas.map((s, i) => `<button type="button" class="menu-semanas__btn" data-semana="${i}" aria-controls="menu-semana-${i}" aria-pressed="${i === activa}">${esc(rotulo(s))}</button>`).join('')}</div>` : ''}
     ${semanas.map(tabla).join('')}
     <p class="menu-pie">El mismo menú para todos los comensales. Las dietas por alergia o intolerancia se elaboran aparte, en la cocina del centro: avisa en secretaría.</p>`;
+
+  caja.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-semana]');
+    if (!b) return;
+    const n = Number(b.dataset.semana);
+    caja.querySelectorAll('[data-semana]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    caja.querySelectorAll('.menu-semana').forEach((t, i) => { t.hidden = i !== n; });
+  });
 })();

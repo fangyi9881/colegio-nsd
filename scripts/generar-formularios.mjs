@@ -89,6 +89,26 @@ function campo(f, c, n) {
   }
 }
 
+// Las secciones con «plegar: true» van en un desplegable cerrado: el
+// formulario de altas y bajas medía diez pantallas en el móvil.
+function campos(f) {
+  const out = [];
+  let abierto = false;
+  f.campos.forEach((c, i) => {
+    if (c.tipo === 'seccion') {
+      if (abierto) { out.push('</div></details>'); abierto = false; }
+      if (c.plegar) {
+        out.push(`<details class="pliegue gform__pliegue"><summary class="pliegue__cab"><h3>${esc(c.titulo)}</h3><span class="gform__cuenta" data-cuenta hidden></span><i class="bi bi-chevron-down pliegue__ico" aria-hidden="true"></i></summary><div class="pliegue__cuerpo">${c.ayuda ? `<p class="form-ayuda">${esc(c.ayuda)}</p>` : ''}`);
+        abierto = true;
+        return;
+      }
+    }
+    out.push(campo(f, c, i));
+  });
+  if (abierto) out.push('</div></details>');
+  return out.join('\n          ');
+}
+
 function formulario(f) {
   return `
   <section class="section">
@@ -115,7 +135,7 @@ function formulario(f) {
         </div>
         <div class="form-body" data-gform-cuerpo>
           <div data-gform-campos>
-          ${f.campos.map((c, i) => campo(f, c, i)).join('\n          ')}
+          ${campos(f)}
           </div>
           <div class="aviso-datos">
             <p class="aviso-datos__titulo">Información básica sobre protección de datos</p>
@@ -144,7 +164,7 @@ function formulario(f) {
 
 for (const f of FORMULARIOS) {
   const ruta = `/familias/formularios/${f.slug}`;
-  const migas = [['Inicio', '/'], ['Familias', '/familias'], ['Formularios', '/familias/formularios'], [f.titulo, ruta]];
+  const migas = [['Inicio', '/'], ['Secretaría Virtual', '/familias'], ['Formularios', '/familias/formularios'], [f.titulo, ruta]];
   const html = pagina({
     titulo: `${f.titulo} · Colegio NSD`,
     descripcion: `${f.titulo} en el Colegio NSD: ${f.resumen} Se envía en línea a secretaría.`.slice(0, 300),
