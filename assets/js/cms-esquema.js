@@ -60,7 +60,10 @@
       { clave: 'promocion', etiqueta: 'Criterios de promoción', tipo: 'parrafos',
         ayuda: 'En Primaria, cuándo se decide la permanencia de un año más. En Infantil puede quedar vacío.' },
       Object.assign({}, PROGRAMACION, { etiqueta: 'Programaciones didácticas y propuesta pedagógica (PDF)' }),
-      { clave: 'recursos', etiqueta: 'Recursos y enlaces', tipo: 'enlaces' }
+      { clave: 'profesorado', etiqueta: 'Profesorado', tipo: 'lista',
+        ayuda: 'Una persona por línea. Opcional. Solo nombre y función: nada de correos personales.' },
+      { clave: 'recursos', etiqueta: 'Recursos y enlaces', tipo: 'enlaces',
+        ayuda: 'Una línea por enlace: Texto | https://enlace. Con «Grupo · Texto» se agrupan en desplegables (por ejemplo, «Inglés 3.º · Grammar Unit 1»).' }
     ],
     orientacion: [
       { clave: 'presentacion', etiqueta: 'Presentación', tipo: 'parrafos' },
