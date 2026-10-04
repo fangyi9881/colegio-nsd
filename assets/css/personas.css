@@ -294,3 +294,34 @@ html.ficha-abierta { overflow: hidden; }
 }
 .org-nivel--coord .persona { min-width: 0; width: 100%; }
 .org .persona__txt, .org .persona__nombre { min-width: 0; overflow-wrap: anywhere; }
+
+/* Tarjetas del árbol: verticales y centradas, con la foto alargada
+   asomando por encima del borde (como en las fichas). La línea que baja
+   llega justo al borde superior de la foto. */
+.org-cupula { --asoma-org: 46px; }
+.org .personas--centro > .persona-item { flex: 0 1 260px; }
+.org-cupula .persona {
+  flex-direction: column; align-items: center; justify-content: flex-start; text-align: center;
+  margin-top: var(--asoma-org); padding: 0 14px 18px; gap: 12px;
+}
+.org-cupula .persona .persona__avatar {
+  width: 92px; height: 116px; border-radius: 20px; margin-top: calc(-1 * var(--asoma-org));
+  font-size: 1.5rem; border: 4px solid var(--surface-raised);
+  box-shadow: 0 16px 28px -14px rgba(4, 24, 12, .55);
+}
+.org-cupula .persona__txt { justify-items: center; }
+.org-cupula .persona--responsable .persona__cargo { justify-self: center; }
+.org-cupula .persona__nombre { font-size: 1rem; }
+.org-nivel--coord .persona { padding: 0 10px 16px; }
+@media (max-width: 760px) {
+  .org .personas--centro > .persona-item,
+  .org-nivel--coord .personas--centro > .persona-item { width: min(100%, 300px); }
+  .org-nivel--coord .persona { flex-direction: column; text-align: center; }
+  .org-nivel--coord .persona__txt { justify-items: center; }
+  .org-nivel--coord .persona--responsable .persona__cargo { justify-self: center; }
+}
+/* Sin margen negativo arriba: en columna flexible inflaba la altura de la tarjeta */
+.org-cupula .persona .persona__avatar { margin-top: 0; position: relative; top: calc(-1 * var(--asoma-org)); margin-bottom: calc(-1 * var(--asoma-org)); }
+@media (max-width: 760px) {
+  .org .personas--centro > .persona-item, .org-nivel--coord .personas--centro > .persona-item { flex: none; }
+}
