@@ -331,3 +331,8 @@ details.info-bloque .pliegue__cab > h2 { font-size: clamp(1.05rem, 1rem + .4vw, 
 .cms-enlaces + .dep-recursos { margin-top: 16px; }
 .dep-recursos__n { display: inline-grid; place-items: center; min-width: 26px; height: 22px; margin-left: 6px; padding: 0 7px; border-radius: 999px; background: var(--surface-sunken); color: var(--ink-600); font-family: var(--font-sans); font-size: .75rem; font-weight: 700; vertical-align: middle; }
 .dep-intro h3, .dep-bloque__cuerpo h3 { margin: 1.4em 0 .5em; font-size: 1.15rem; }
+
+/* Textos dentro de los bloques de información (normas, programas) */
+.info-normas { margin-top: 18px; }
+.info-normas h3, .info-normas__sub { margin: 22px 0 8px; font-size: 1.05rem; }
+.info-normas__sub { margin-top: 26px; }
