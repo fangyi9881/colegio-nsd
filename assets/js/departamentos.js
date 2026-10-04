@@ -42,6 +42,32 @@
     }
     return out + plano(t.slice(ultimo));
   }
+  // ── Piezas especiales en una línea propia ──
+  //   [[Texto del botón|https://enlace]]   → botón
+  //   ![Qué se ve en la imagen](https://…) → imagen con pie
+  const RE_BOTON = /^\[\[([^|\]]{1,80})\|([^\]\s]{1,500})\]\]$/;
+  const RE_IMAGEN = /^!\[([^\]]{0,200})\]\((https:\/\/[^)\s]{1,500})\)$/;
+  const botonHtml = (texto, url) => {
+    const u = urlSegura(url);
+    if (!u) return '';
+    const fuera = externo(u);
+    return `<a class="btn-enlace${/\.pdf(\?|#|$)/i.test(u) || /\/storage\/v1\/object\//.test(u) ? ' btn-enlace--doc' : ''}" href="${esc(u)}"${fuera ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(texto.trim())}${fuera ? '<span class="sr-only"> (se abre en otra pestaña)</span>' : ''}</a>`;
+  };
+  const imagenHtml = (alt, url) => `<figure class="figura"><img src="${esc(url)}" alt="${esc(alt)}" loading="lazy" decoding="async" />${alt ? `<figcaption>${esc(alt)}</figcaption>` : ''}</figure>`;
+  // Reparte un bloque en trozos: botones seguidos van juntos en una botonera
+  function trozos(lineas, normal) {
+    const out = []; let texto = []; let botones = [];
+    const cierraTexto = () => { if (texto.length) { out.push(normal(texto)); texto = []; } };
+    const cierraBotones = () => { if (botones.length) { out.push(`<p class="botonera">${botones.join('')}</p>`); botones = []; } };
+    lineas.forEach((x) => {
+      let m;
+      if ((m = RE_BOTON.exec(x))) { cierraTexto(); botones.push(botonHtml(m[1], m[2])); }
+      else if ((m = RE_IMAGEN.exec(x))) { cierraTexto(); cierraBotones(); out.push(imagenHtml(m[1], m[2])); }
+      else { cierraBotones(); texto.push(x); }
+    });
+    cierraTexto(); cierraBotones();
+    return out.join('');
+  }
   function parrafos(texto) {
     return String(texto || '').replace(/\r/g, '').split(/\n\s*\n/).map((b) => {
       const l = b.split('\n').map((x) => x.trim()).filter(Boolean);
@@ -49,8 +75,9 @@
       // «## Subtítulo»: dentro de la ficha va como h3
       const t = /^#{2,3}\s+(.+)$/.exec(l[0]);
       if (t) return `<h3>${enLinea(t[1])}</h3>` + (l.length > 1 ? parrafos(l.slice(1).join('\n')) : '');
-      if (l.every((x) => /^[-•*]\s+/.test(x))) return `<ul>${l.map((x) => `<li>${enLinea(x.replace(/^[-•*]\s+/, ''))}</li>`).join('')}</ul>`;
-      return `<p>${enLinea(l.join(' '))}</p>`;
+      return trozos(l, (t) => (t.every((x) => /^[-•*]\s+/.test(x))
+        ? `<ul>${t.map((x) => `<li>${enLinea(x.replace(/^[-•*]\s+/, ''))}</li>`).join('')}</ul>`
+        : `<p>${enLinea(t.join(' '))}</p>`));
     }).join('');
   }
   // ── Texto con estructura ──
@@ -67,8 +94,9 @@
   const bloquesDe = (texto) => String(texto || '').replace(/\r/g, '').split(/\n\s*\n/)
     .map((b) => b.split('\n').map((x) => x.trim()).filter(Boolean)).filter((l) => l.length);
   function bloqueRico(l) {
-    if (l.every((x) => /^[-•*]\s+/.test(x))) return `<ul class="dep-checks">${l.map((x) => `<li>${enLinea(x.replace(/^[-•*]\s+/, ''), true)}</li>`).join('')}</ul>`;
-    return parrafoRico(l.join(' '));
+    return trozos(l, (t) => (t.every((x) => /^[-•*]\s+/.test(x))
+      ? `<ul class="dep-checks">${t.map((x) => `<li>${enLinea(x.replace(/^[-•*]\s+/, ''), true)}</li>`).join('')}</ul>`
+      : parrafoRico(t.join(' '))));
   }
   // Texto del panel en tarjetas: lo que va antes del primer «##» es la
   // entrada (primer párrafo destacado, el resto en un recuadro) y cada
@@ -84,7 +112,7 @@
     const intro = secciones[0].bloques;
     if (intro.length) {
       let resto = intro;
-      if (conEntrada && !intro[0].every((x) => /^[-•*]\s+/.test(x))) {
+      if (conEntrada && !intro[0].every((x) => /^[-•*]\s+/.test(x)) && !intro[0].some((x) => RE_BOTON.test(x) || RE_IMAGEN.test(x))) {
         html += `<p class="dep-entrada">${enLinea(intro[0].join(' '), true)}</p>`;
         resto = intro.slice(1);
       }
@@ -173,6 +201,10 @@
     const [ico, tipo] = tipoDoc(d.url);
     return `<li><a class="cms-doc" href="${esc(urlSegura(d.url))}" target="_blank" rel="noopener"><i class="bi ${ico}" aria-hidden="true"></i><span class="cms-doc__titulo">${esc(d.titulo || 'Documento')}</span><span class="cms-doc__tipo">${tipo}</span><span class="sr-only"> (se abre en otra pestaña)</span></a></li>`;
   }).join('')}</ul>`;
+  const galeria = (a) => {
+    const fotos = (a || []).filter((f) => f && /^https:\/\//.test(f.url || ''));
+    return `<ul class="galeria galeria--${Math.min(fotos.length, 3)}">${fotos.map((f) => `<li><figure class="figura"><img src="${esc(f.url)}" alt="${esc(f.alt || '')}" loading="lazy" decoding="async" />${f.alt ? `<figcaption>${esc(f.alt)}</figcaption>` : ''}</figure></li>`).join('')}</ul>`;
+  };
   const filas = (datos, cols) => `<div class="tabla-marco cms-tabla"><table><thead><tr>${cols.map((c) => `<th scope="col">${esc(c.etiqueta)}</th>`).join('')}</tr></thead><tbody>${
     (datos || []).map((f) => `<tr>${cols.map((c, i) => {
       const v = f ? f[c.clave] : '';
@@ -199,6 +231,7 @@
       case 'lista': return lista(valor, 'dep-checks');
       case 'enlaces': return enlaces(valor);
       case 'documentos': return documentos(valor);
+      case 'imagenes': return galeria(valor);
       case 'filas': return filas(valor, campo.columnas || []);
       default: return `<p>${enLinea(valor)}</p>`;
     }
@@ -340,7 +373,7 @@
       </div>`;
   }
 
-  const api = { htmlFicha, htmlOrganigrama, htmlPersonas, cursoEscolar, esc, urlSegura, parrafos, vacio, persona, slugPersona, urlPersona };
+  const api = { valorDe, textoRico, RE_BOTON, RE_IMAGEN, htmlFicha, htmlOrganigrama, htmlPersonas, cursoEscolar, esc, urlSegura, parrafos, vacio, persona, slugPersona, urlPersona };
   if (typeof module === 'object' && module.exports) { module.exports = api; return; }
   raiz.NSD_FICHA = api;
 

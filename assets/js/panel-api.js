@@ -78,6 +78,29 @@
         return sb.storage.from('documentos').getPublicUrl(ruta).data.publicUrl;
       },
 
+      // Cualquier archivo para ponerlo como botón (04_archivos.sql)
+      async subirArchivo(ambito, archivo) {
+        const TIPOS = {
+          pdf: 'application/pdf', doc: 'application/msword', docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          xls: 'application/vnd.ms-excel', xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          ppt: 'application/vnd.ms-powerpoint', pptx: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+          odt: 'application/vnd.oasis.opendocument.text', ods: 'application/vnd.oasis.opendocument.spreadsheet', odp: 'application/vnd.oasis.opendocument.presentation',
+          jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp'
+        };
+        const ext = (/\.([a-z0-9]+)$/i.exec(archivo.name) || [])[1];
+        const tipo = ext && TIPOS[ext.toLowerCase()];
+        if (!tipo) throw new Error('Ese tipo de archivo no se puede subir. Usa PDF, Word, Excel, PowerPoint, LibreOffice o una foto.');
+        if (archivo.size > 15 * 1024 * 1024) throw new Error('El archivo pasa de 15 MB. Redúcelo o súbelo a Drive y pon el enlace.');
+        const limpio = archivo.name.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').replace(/\.[a-z0-9]+$/, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'archivo';
+        const ruta = `${ambito}/${Date.now()}-${limpio}.${ext.toLowerCase()}`;
+        const r = await sb.storage.from('documentos').upload(ruta, archivo, { contentType: tipo, upsert: false });
+        if (r.error && /mime|type|not allowed/i.test(r.error.message || '') && tipo !== 'application/pdf') {
+          throw new Error('Por ahora solo se pueden subir PDF. Quien administra la web tiene que ejecutar supabase/04_archivos.sql para admitir más tipos.');
+        }
+        ok(r);
+        return sb.storage.from('documentos').getPublicUrl(ruta).data.publicUrl;
+      },
+
       // ── Blog ──
       async entradas() {
         return ok(await sb.from('entradas').select('id,slug,ambito_id,firma,categoria,etiquetas,titulo,resumen,fecha,publicado,imagen,actualizado_en').order('fecha', { ascending: false }).order('creado_en', { ascending: false }).limit(300));

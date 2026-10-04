@@ -81,13 +81,31 @@
         if (lineas.length > 1) f.appendChild(parrafos(lineas.slice(1).join('\n')));
         return;
       }
-      if (lineas.every((l) => /^[-•*]\s+/.test(l))) {
-        const ul = el('ul');
-        lineas.forEach((l) => ul.appendChild(enLinea(el('li'), l.replace(/^[-•*]\s+/, ''))));
-        f.appendChild(ul);
-      } else {
-        f.appendChild(enLinea(el('p'), lineas.join(' ')));
-      }
+      // Botones ([[Texto|enlace]]) e imágenes (![descripción](https://…)) van en su línea
+      let texto = []; let botonera = null;
+      const normal = () => {
+        if (!texto.length) return;
+        if (texto.every((l) => /^[-•*]\s+/.test(l))) {
+          const ul = el('ul');
+          texto.forEach((l) => ul.appendChild(enLinea(el('li'), l.replace(/^[-•*]\s+/, ''))));
+          f.appendChild(ul);
+        } else f.appendChild(enLinea(el('p'), texto.join(' ')));
+        texto = [];
+      };
+      lineas.forEach((l) => {
+        let m;
+        if ((m = /^\[\[([^|\]]{1,80})\|([^\]\s]{1,500})\]\]$/.exec(l)) && urlSegura(m[2])) {
+          normal();
+          if (!botonera) { botonera = el('p', 'botonera'); f.appendChild(botonera); }
+          const b = enlace(m[1].trim(), m[2]); b.className = 'btn-enlace'; botonera.appendChild(b);
+        } else if ((m = /^!\[([^\]]{0,200})\]\((https:\/\/[^)\s]{1,500})\)$/.exec(l))) {
+          normal(); botonera = null;
+          const fig = el('figure', 'figura'); const img = el('img');
+          img.src = m[2]; img.alt = m[1]; img.loading = 'lazy'; img.decoding = 'async';
+          fig.appendChild(img); if (m[1]) fig.appendChild(el('figcaption', null, m[1])); f.appendChild(fig);
+        } else { botonera = null; texto.push(l); }
+      });
+      normal();
     });
     return f;
   }

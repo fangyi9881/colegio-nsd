@@ -291,11 +291,15 @@
       case 'texto': case 'email': case 'url':
         control = `<input id="${id}" type="${c.tipo === 'texto' ? 'text' : c.tipo}" value="${esc(v || '')}"${descr} maxlength="500" />`; break;
       case 'parrafos':
-        control = `<textarea id="${id}" rows="7"${descr}>${esc(v || '')}</textarea><p class="pnl-formato">Línea en blanco = párrafo nuevo · «- » al principio = lista · [texto](https://enlace) = enlace · **texto** = negrita</p>`; break;
+        control = `${barraHtml(c)}<textarea id="${id}" rows="9"${descr}${c.ejemplo ? ` placeholder="${esc(c.ejemplo)}"` : ''}>${esc(v || '')}</textarea>
+          <div class="pnl-recuadro" data-recuadro hidden></div>
+          <p class="pnl-formato">Escribe normal. Línea en blanco = párrafo nuevo. Usa la barra para subtítulos, listas, enlaces, botones, archivos e imágenes.</p>`; break;
       case 'lista':
-        control = `<textarea id="${id}" rows="6"${descr}>${esc((v || []).join('\n'))}</textarea><p class="pnl-formato">Una entrada por línea.</p>`; break;
+        control = `<textarea id="${id}" rows="6"${descr}${c.ejemplo ? ` placeholder="${esc(c.ejemplo)}"` : ''}>${esc((v || []).join('\n'))}</textarea><p class="pnl-formato">Una entrada por línea.</p>`; break;
       case 'enlaces':
-        control = `<textarea id="${id}" rows="5"${descr} placeholder="Página de la Comunidad | https://www.comunidad.madrid/">${esc((v || []).map((x) => `${x.texto} | ${x.url}`).join('\n'))}</textarea><p class="pnl-formato">Una línea por enlace: Texto | https://enlace</p>`; break;
+        control = enlacesHtml(c, v || []); break;
+      case 'imagenes':
+        control = imagenesHtml(c, v || []); break;
       case 'filas':
         control = filasHtml(c, v || []); break;
       case 'documentos':
@@ -305,10 +309,75 @@
       default:
         control = `<p>Tipo de campo no soportado: ${esc(c.tipo)}</p>`;
     }
-    const etiqueta = ['filas', 'documentos', 'noticias'].indexOf(c.tipo) >= 0
+    const GRUPO = ['filas', 'documentos', 'noticias', 'enlaces', 'imagenes'];
+    const etiqueta = GRUPO.indexOf(c.tipo) >= 0
       ? `<span class="pnl-campo__etiqueta" id="${id}-et">${esc(c.etiqueta)} ${obligatorio}${deSerie}</span>`
       : `<label class="pnl-campo__etiqueta" for="${id}">${esc(c.etiqueta)} ${obligatorio}${deSerie}</label>`;
-    return `<div class="pnl-campo" data-clave="${esc(c.clave)}" data-tipo="${esc(c.tipo)}"${['filas', 'documentos', 'noticias'].indexOf(c.tipo) >= 0 ? ` role="group" aria-labelledby="${id}-et"` : ''}>${etiqueta}${ayuda}${control}<p class="pnl-error" data-error hidden></p></div>`;
+    return `<div class="pnl-campo" id="campo-${esc(c.clave)}" data-clave="${esc(c.clave)}" data-tipo="${esc(c.tipo)}"${GRUPO.indexOf(c.tipo) >= 0 ? ` role="group" aria-labelledby="${id}-et"` : ''}>${etiqueta}${ayuda}${control}<p class="pnl-error" data-error hidden></p><ul class="pnl-revision-campo" data-revision-campo hidden></ul></div>`;
+  }
+
+  // Barra de formato de los textos largos. Lo que pide datos (enlace,
+  // botón, archivo, imagen) abre un recuadro debajo con sus casillas.
+  function barraHtml(c) {
+    const b = (fmt, ico, txt) => `<button type="button" class="pnl-barra__b" data-fmt="${fmt}"><i class="bi ${ico}" aria-hidden="true"></i><span>${txt}</span></button>`;
+    return `<div class="pnl-barra" role="toolbar" aria-label="Formato de ${esc(c.etiqueta)}">
+      ${b('sub', 'bi-type-h2', 'Subtítulo')}${b('neg', 'bi-type-bold', 'Negrita')}${b('lista', 'bi-list-ul', 'Lista')}
+      <span class="pnl-barra__sep" aria-hidden="true"></span>
+      ${b('enlace', 'bi-link-45deg', 'Enlace')}${b('boton', 'bi-hand-index-thumb', 'Botón')}${b('archivo', 'bi-paperclip', 'Archivo')}${b('imagen', 'bi-image', 'Imagen')}
+    </div>`;
+  }
+  const RECUADROS = {
+    enlace: { titulo: 'Enlace dentro del texto', campos: [['texto', 'Texto que se lee', 'text', 'el calendario escolar'], ['url', 'Dirección (https://…)', 'url', 'https://']] },
+    boton: { titulo: 'Botón', campos: [['texto', 'Texto del botón', 'text', 'Ver la programación'], ['url', 'Adónde lleva (https://…)', 'url', 'https://']] },
+    archivo: { titulo: 'Botón para descargar un archivo', campos: [['texto', 'Texto del botón', 'text', 'Descargar la programación de 2.º'], ['archivo', 'Archivo (PDF, Word, Excel, PowerPoint o foto, hasta 15 MB)', 'file', '']] },
+    imagen: { titulo: 'Imagen', campos: [['archivo', 'Foto', 'file-img', ''], ['texto', 'Qué se ve en la foto (obligatorio)', 'text', 'Alumnos de 3.º en el huerto del colegio']] }
+  };
+  function recuadroHtml(tipo) {
+    const r = RECUADROS[tipo];
+    let n = 0;
+    return `<p class="pnl-recuadro__t">${esc(r.titulo)}</p><div class="pnl-recuadro__campos">${r.campos.map(([k, et, t, ph]) => {
+      const rid = 'rq-' + tipo + '-' + (n++);
+      if (t === 'file' || t === 'file-img') return `<label class="pnl-recuadro__c" for="${rid}">${esc(et)}<input id="${rid}" type="file" data-rq="${k}"${t === 'file-img' ? ' accept="image/*"' : ' accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.odp,.jpg,.jpeg,.png,.webp"'} /></label>`;
+      return `<label class="pnl-recuadro__c" for="${rid}">${esc(et)}<input id="${rid}" type="${t}" data-rq="${k}" placeholder="${esc(ph)}" maxlength="${k === 'texto' ? 80 : 500}" /></label>`;
+    }).join('')}</div>
+      <div class="pnl-acciones"><button type="button" class="btn btn--primary btn--sm" data-rq-insertar="${tipo}">Insertar</button><button type="button" class="btn btn--ghost btn--sm" data-rq-cancelar>Cancelar</button></div>`;
+  }
+
+  // Recursos y enlaces: una fila por botón
+  function enlaceFilaHtml(x) {
+    const m = /^(.{2,60}?)\s+·\s+(.+)$/.exec((x && x.texto) || '');
+    const grupo = m ? m[1] : '';
+    const texto = m ? m[2] : ((x && x.texto) || '');
+    return `<li class="pnl-enlace">
+      <label>Grupo <small>(opcional)</small><input type="text" data-e="grupo" value="${esc(grupo)}" maxlength="60" list="grupos-enlace" placeholder="1.º ESO" /></label>
+      <label>Texto del botón<input type="text" data-e="texto" value="${esc(texto)}" maxlength="80" placeholder="Libro digital" /></label>
+      <label>Enlace<input type="url" data-e="url" value="${esc((x && x.url) || '')}" placeholder="https://… o sube un archivo" /></label>
+      <div class="pnl-enlace__acc">
+        <label class="btn btn--ghost btn--sm pnl-subir" title="Subir un archivo en lugar de poner el enlace"><i class="bi bi-upload" aria-hidden="true"></i><span>Archivo</span><input type="file" data-subir-enlace class="sr-only" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.odp,.jpg,.jpeg,.png,.webp" /></label>
+        <button type="button" class="pnl-ico" data-subir-fila aria-label="Subir"><i class="bi bi-arrow-up" aria-hidden="true"></i></button>
+        <button type="button" class="pnl-ico" data-bajar-fila aria-label="Bajar"><i class="bi bi-arrow-down" aria-hidden="true"></i></button>
+        <button type="button" class="pnl-ico pnl-ico--peligro" data-quitar-fila aria-label="Quitar"><i class="bi bi-trash" aria-hidden="true"></i></button>
+      </div></li>`;
+  }
+  function enlacesHtml(c, lista) {
+    const grupos = [...new Set(lista.map((x) => (/^(.{2,60}?)\s+·\s+/.exec(x.texto || '') || [])[1]).filter(Boolean))];
+    return `<div class="pnl-enlaces"><datalist id="grupos-enlace">${grupos.map((g) => `<option value="${esc(g)}"></option>`).join('')}</datalist>
+      <ol class="pnl-enlaces__lista" data-filas-enlace>${(lista.length ? lista : [{}]).map(enlaceFilaHtml).join('')}</ol>
+      <button type="button" class="btn btn--ghost btn--sm" data-anadir-enlace><i class="bi bi-plus-lg" aria-hidden="true"></i> Añadir botón</button></div>`;
+  }
+  // Fotos: miniatura, descripción obligatoria y orden
+  function imagenItemHtml(f) {
+    return `<li class="pnl-imagen"><img src="${esc(f.url)}" alt="" data-img-url="${esc(f.url)}" />
+      <label>Qué se ve<input type="text" data-img-alt value="${esc(f.alt || '')}" maxlength="200" placeholder="Alumnos de 1.º en la salida al museo" /></label>
+      <div class="pnl-enlace__acc">
+        <button type="button" class="pnl-ico" data-subir-fila aria-label="Antes"><i class="bi bi-arrow-up" aria-hidden="true"></i></button>
+        <button type="button" class="pnl-ico" data-bajar-fila aria-label="Después"><i class="bi bi-arrow-down" aria-hidden="true"></i></button>
+        <button type="button" class="pnl-ico pnl-ico--peligro" data-quitar-fila aria-label="Quitar foto"><i class="bi bi-trash" aria-hidden="true"></i></button>
+      </div></li>`;
+  }
+  function imagenesHtml(c, lista) {
+    return `<div class="pnl-imagenes"><ul class="pnl-imagenes__lista" data-lista-imagenes>${lista.map(imagenItemHtml).join('')}</ul>
+      <label class="btn btn--ghost btn--sm pnl-subir"><i class="bi bi-images" aria-hidden="true"></i> Añadir fotos<input type="file" accept="image/*" multiple data-subir-galeria class="sr-only" /></label></div>`;
   }
 
   function filaHtml(c, f) {
@@ -329,7 +398,7 @@
   function documentosHtml(c, docs) {
     return `<div class="pnl-docs"><ul data-lista-docs>${docs.map(docHtml).join('')}</ul>
       <div class="pnl-docs__subir">
-        <label class="btn btn--ghost btn--sm pnl-subir"><i class="bi bi-upload" aria-hidden="true"></i> Subir PDF<input type="file" accept="application/pdf" data-subir-pdf class="sr-only" /></label>
+        <label class="btn btn--ghost btn--sm pnl-subir"><i class="bi bi-upload" aria-hidden="true"></i> Subir archivo<input type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.odp" data-subir-pdf class="sr-only" /></label>
         <button type="button" class="btn btn--ghost btn--sm" data-enlace-doc><i class="bi bi-link-45deg" aria-hidden="true"></i> Añadir por enlace</button>
       </div></div>`;
   }
@@ -373,18 +442,23 @@
       case 'parrafos': return q('textarea').value.replace(/\r/g, '').trim();
       case 'lista': return q('textarea').value.split('\n').map((l) => l.trim()).filter(Boolean);
       case 'enlaces': {
-        const malas = [];
-        const out = q('textarea').value.split('\n').map((l, i) => {
-          const t = l.trim();
-          if (!t) return null;
-          const p = t.split('|');
-          const texto = p[0].trim(), url = (p[1] || '').trim();
-          if (!texto || !urlValida(url)) { malas.push(i + 1); return null; }
-          return { texto, url };
-        }).filter(Boolean);
-        if (malas.length) throw new Error(`Revisa la línea ${malas.join(', ')}: tiene que ser «Texto | https://enlace».`);
+        const out = [];
+        $$('.pnl-enlace', caja).forEach((li, i) => {
+          const g = (k) => li.querySelector(`[data-e="${k}"]`).value.trim();
+          const grupo = g('grupo'), texto = g('texto'), url = g('url');
+          if (!texto && !url) return;
+          if (!texto) throw new Error(`Botón ${i + 1}: falta el texto del botón.`);
+          if (!urlValida(url)) throw new Error(`Botón ${i + 1}: falta el enlace o no empieza por https://. También puedes subir un archivo.`);
+          out.push({ texto: grupo ? `${grupo} · ${texto}` : texto, url });
+        });
         return out;
       }
+      case 'imagenes':
+        return $$('.pnl-imagen', caja).map((li, i) => {
+          const alt = li.querySelector('[data-img-alt]').value.trim();
+          if (alt.length < 5) throw new Error(`Foto ${i + 1}: describe en una frase qué se ve (lo leen quienes no pueden ver la imagen).`);
+          return { url: li.querySelector('[data-img-url]').getAttribute('data-img-url'), alt };
+        });
       case 'filas': {
         const cols = JSON.parse(q('[data-columnas]').getAttribute('data-columnas'));
         const filas = $$('tbody tr', caja).map((tr) => {
@@ -414,6 +488,126 @@
     }
   }
 
+  // ── Reglas de la web ──
+  // Lo que rompe la página (enlaces mal puestos, fotos sin descripción,
+  // menos del mínimo) es un error y no deja guardar ese campo. Lo que
+  // solo la afea (mayúsculas, párrafos larguísimos, botones de más) es
+  // un aviso: se puede guardar igual.
+  const textoPlano = (t) => String(t || '').replace(/\[\[([^|\]]*)\|[^\]]*\]\]/g, '$1').replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/^#{1,3}\s+/gm, '').replace(/^[-•*]\s+/gm, '').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
+  const GENERICOS = /^(aqu[ií]|pincha aqu[ií]|haz clic aqu[ií]|clic aqu[ií]|click|enlace|link|ver|m[aá]s|leer m[aá]s|descargar)$/i;
+  const enMayusculas = (t) => {
+    const p = String(t).match(/[A-Za-zÁÉÍÓÚÑÜáéíóúñü]{3,}/g) || [];
+    if (p.length >= 4 && p.filter((w) => w === w.toUpperCase()).length / p.length > 0.7) return true;
+    // o cuatro palabras seguidas en mayúsculas
+    return /(\b[A-ZÁÉÍÓÚÑÜ]{2,}\b[\s,.;:]+){3,}\b[A-ZÁÉÍÓÚÑÜ]{2,}\b/.test(String(t));
+  };
+  function revisar(c, v) {
+    const errores = [], avisos = [];
+    if (vacio(v)) return { errores, avisos };
+    const min = c.minimo || {};
+    if (min.caracteres && typeof v === 'string') {
+      const n = textoPlano(v).length;
+      if (n < min.caracteres) errores.push(`Escribe al menos ${min.caracteres} caracteres (llevas ${n}).`);
+    }
+    if (min.elementos && Array.isArray(v) && v.length < min.elementos) errores.push(`Pon al menos ${min.elementos} (llevas ${v.length}).`);
+    const F = window.NSD_FICHA || {};
+    if (c.tipo === 'parrafos') {
+      const lineas = v.split('\n').map((l) => l.trim());
+      let botones = 0, previaTitulo = false;
+      lineas.forEach((l) => {
+        if (!l) return;
+        let m;
+        if (F.RE_BOTON && (m = F.RE_BOTON.exec(l))) {
+          botones++;
+          if (!urlValida(m[2])) errores.push(`El botón «${m[1]}» no tiene un enlace válido.`);
+          if (m[1].length > 40) avisos.push(`El botón «${m[1].slice(0, 30)}…» es muy largo: déjalo en menos de 40 letras.`);
+          if (GENERICOS.test(m[1].trim())) avisos.push(`«${m[1]}» no dice adónde lleva el botón. Mejor algo como «Ver la programación».`);
+        } else if (/^\[\[/.test(l)) errores.push('Hay un botón mal escrito. Bórralo y vuelve a crearlo con el botón «Botón» de la barra.');
+        else if (F.RE_IMAGEN && (m = F.RE_IMAGEN.exec(l))) {
+          if (m[1].trim().length < 5) errores.push('Una imagen no tiene descripción: escribe qué se ve en ella.');
+        } else if (/^!\[/.test(l)) errores.push('Hay una imagen mal escrita. Bórrala y vuelve a añadirla con «Imagen».');
+        if (/^#\s/.test(l)) avisos.push('Usa «Subtítulo» de la barra (##) en lugar de un solo #.');
+        const t = /^#{2,3}\s+(.+)$/.exec(l);
+        if (t && t[1].length > 60) avisos.push(`El subtítulo «${t[1].slice(0, 30)}…» es muy largo: déjalo en menos de 60 letras.`);
+        if (t && previaTitulo) avisos.push('Hay dos subtítulos seguidos sin texto entre ellos.');
+        previaTitulo = !!t;
+      });
+      (v.match(/\[([^\]]+)\]\(([^)]*)\)/g) || []).forEach((x) => {
+        if (x.charAt(0) === '!' ) return;
+        const m = /\[([^\]]+)\]\(([^)]*)\)/.exec(x);
+        if (m && !urlValida(m[2])) errores.push(`El enlace «${m[1]}» no empieza por https://`);
+      });
+      if (botones > 6) avisos.push(`Hay ${botones} botones en este texto. Si son recursos, ponlos mejor en «Recursos y enlaces».`);
+      v.split(/\n\s*\n/).forEach((b) => {
+        const plano = textoPlano(b);
+        if (plano.length > 900) avisos.push('Hay un párrafo muy largo: divídelo o añade un subtítulo para que se lea mejor.');
+        if (b.split('\n').some((l) => !/^\[\[|^!\[/.test(l.trim()) && enMayusculas(textoPlano(l)))) avisos.push('Hay texto en MAYÚSCULAS: se lee peor y parece que se grita. Escríbelo normal.');
+      });
+    } else if (c.tipo === 'lista') {
+      if (v.some((x) => x.length > 220)) avisos.push('Alguna línea es muy larga: una idea por línea.');
+      if (new Set(v.map((x) => x.toLowerCase())).size < v.length) avisos.push('Hay líneas repetidas.');
+      if (v.some(enMayusculas)) avisos.push('Hay líneas en MAYÚSCULAS: escríbelas normal.');
+    } else if (c.tipo === 'enlaces') {
+      const textos = v.map((x) => (/^.{2,60}?\s+·\s+(.+)$/.exec(x.texto) || [null, x.texto])[1]);
+      textos.forEach((t) => {
+        if (t.length > 60) avisos.push(`«${t.slice(0, 30)}…»: el texto del botón es muy largo.`);
+        if (GENERICOS.test(t.trim())) avisos.push(`«${t}» no dice adónde lleva. Mejor algo como «Libro digital de 2.º».`);
+      });
+      if (new Set(v.map((x) => x.url)).size < v.length) avisos.push('Hay dos botones que llevan al mismo sitio.');
+      const conGrupo = v.filter((x) => /\s·\s/.test(x.texto)).length;
+      if (v.length > 8 && conGrupo && conGrupo < v.length) avisos.push('Unos botones tienen grupo y otros no: ponles grupo a todos para que salgan ordenados.');
+      if (v.length > 40) avisos.push('Son muchos botones: agrúpalos por curso o tema.');
+    } else if (c.tipo === 'imagenes') {
+      if (v.length > 12) avisos.push('Más de 12 fotos hacen la página muy pesada: elige las mejores.');
+    } else if (c.tipo === 'documentos') {
+      v.forEach((d) => {
+        if (/^documento$/i.test(d.titulo) || /\.(pdf|docx?|xlsx?|pptx?)$/i.test(d.titulo) || /_/.test(d.titulo)) avisos.push(`«${d.titulo}»: pon un título claro, por ejemplo «Programación de 2.º de ESO».`);
+      });
+    }
+    return { errores: [...new Set(errores)], avisos: [...new Set(avisos)] };
+  }
+
+  // ── Vista previa ──
+  // Pinta la sección con el mismo código que la web (departamentos.js),
+  // con su color, a tamaño de ordenador o de móvil.
+  function htmlPrevia(a, campos, vals) {
+    const F = window.NSD_FICHA;
+    if (!F) return '<p class="pnl-ayuda">La vista previa no está disponible.</p>';
+    const dep = DEPS.find((d) => d.id === a.id);
+    if (dep) {
+      return `<div class="pnl-previa__hero"><small>${esc(dep.grupo || '')}</small><strong>${esc(dep.nombre)}</strong>${dep.resumen ? `<span>${esc(dep.resumen)}</span>` : ''}</div>
+        <div class="pnl-previa__cuerpo">${F.htmlFicha(dep, campos, vals, {})}</div>`;
+    }
+    const secciones = campos.filter((c) => !vacio(vals[c.clave])).map((c) => {
+      let cuerpo;
+      if (c.tipo === 'noticias') {
+        cuerpo = `<ul class="pnl-previa__noticias">${vals[c.clave].filter((n) => n.publicado !== false).slice(0, 6).map((n) => `<li><time>${esc(n.fecha)}</time><strong>${esc(n.titulo)}</strong><span>${esc(n.resumen || '')}</span></li>`).join('')}</ul>`;
+      } else cuerpo = F.valorDe(c, vals[c.clave]);
+      return `<section class="pnl-previa__sec"><h2>${esc(c.etiqueta)}</h2><div class="prose dep-bloque__cuerpo">${cuerpo}</div></section>`;
+    }).join('');
+    return `<div class="pnl-previa__hero"><small>Sección de la web</small><strong>${esc(a.nombre)}</strong></div><div class="pnl-previa__cuerpo">${secciones || '<p class="pnl-ayuda">Aún no hay nada que mostrar.</p>'}</div>`;
+  }
+
+  function insertarEn(ta, texto, opciones) {
+    const o = opciones || {};
+    const ini = Number(ta.dataset.selIni != null ? ta.dataset.selIni : ta.selectionStart);
+    const fin = Number(ta.dataset.selFin != null ? ta.dataset.selFin : ta.selectionEnd);
+    delete ta.dataset.selIni; delete ta.dataset.selFin;
+    const v = ta.value;
+    let antes = v.slice(0, ini), despues = v.slice(fin);
+    if (o.lineaPropia) {
+      if (antes && !/\n$/.test(antes)) antes += '\n';
+      if (o.parrafo && antes && !/\n\n$/.test(antes)) antes += '\n';
+      if (despues && !/^\n/.test(despues)) despues = '\n' + despues;
+    }
+    ta.value = antes + texto + despues;
+    const pos = antes.length + (o.seleccion ? o.seleccion[0] : texto.length);
+    ta.focus();
+    ta.setSelectionRange(pos, o.seleccion ? antes.length + o.seleccion[1] : pos);
+    ta.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
   function vistaEditor(id) {
     const a = ambito(id);
     if (!a || !puedeEditar(id)) { pintar('<div class="pnl-vacio"><h1>No puedes editar esto</h1><p><a href="#contenidos">Volver a tus contenidos</a></p></div>', 'Sin permiso'); return; }
@@ -425,20 +619,93 @@
       <header class="pnl-titular pnl-titular--fila"><div><h1>${esc(a.nombre)}</h1>
         <p>${e.total ? (e.hechos === e.total ? 'Todo lo obligatorio está publicado.' : `Falta por publicar: ${esc(e.faltan.join(', ').toLowerCase())}.`) : 'Sección de la web.'}</p></div>
         ${PAGINA_DE[id] ? `<a class="btn btn--ghost btn--sm" href="${esc(PAGINA_DE[id])}" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> Ver en la web</a>` : ''}</header>
+      <div class="pnl-editor">
       <form class="pnl-form" data-editor="${esc(id)}" novalidate>
+        <p class="pnl-reglas"><i class="bi bi-info-circle" aria-hidden="true"></i><span>Todo lo que escribas sale con el diseño de la web: no hace falta dar formato a mano. Las reglas básicas (mínimos, enlaces que funcionen, fotos con descripción, nada en mayúsculas) se comprueban mientras escribes; la vista previa enseña cómo quedará.</span></p>
         ${campos.map((c) => campoHtml(c, (datos[c.clave] || {}).valor, def[c.clave])).join('')}
         <div class="pnl-guardar"><p class="pnl-guardar__estado" data-estado-guardar>Sin cambios.</p>
           <button type="submit" class="btn btn--primary"><i class="bi bi-cloud-check" aria-hidden="true"></i> Guardar y publicar</button></div>
-      </form>`, a.nombre);
+      </form>
+      <aside class="pnl-previa" aria-labelledby="previa-t">
+        <div class="pnl-previa__barra">
+          <h2 id="previa-t">Vista previa</h2>
+          <div class="pnl-segmentado" role="group" aria-label="Tamaño de la vista previa">
+            <button type="button" data-ancho="1180" aria-pressed="true"><i class="bi bi-laptop" aria-hidden="true"></i> Ordenador</button>
+            <button type="button" data-ancho="390" aria-pressed="false"><i class="bi bi-phone" aria-hidden="true"></i> Móvil</button>
+          </div>
+        </div>
+        <div class="pnl-revision" data-revision aria-live="polite"></div>
+        <div class="pnl-previa__marco" data-previa-marco><div class="pnl-previa__lienzo" data-previa data-tono="${esc((DEPS.find((d) => d.id === id) || {}).slug || 'centro')}"></div></div>
+        <p class="pnl-ayuda">Así se verá al guardar. Los enlaces de la vista previa no se abren.</p>
+      </aside>
+      </div>`, a.nombre);
     const form = $('[data-editor]');
+    const lienzo = $('[data-previa]');
+    const marco = $('[data-previa-marco]');
+    let anchoPrevia = 1180;
+    const escalar = () => {
+      const w = marco.clientWidth || anchoPrevia;
+      lienzo.style.width = anchoPrevia + 'px';
+      lienzo.style.zoom = String(Math.min(1, w / anchoPrevia));
+    };
+    let tPrevia = null;
+    function actualizarPrevia() {
+      const vals = {};
+      const resultado = [];
+      $$('.pnl-campo', form).forEach((caja) => {
+        const k = caja.dataset.clave;
+        const c = campos.find((x) => x.clave === k);
+        const lista = caja.querySelector('[data-revision-campo]');
+        let v; let r;
+        try { v = leerCampo(caja); r = revisar(c, v); } catch (er) {
+          r = { errores: [er.message], avisos: [] };
+          if (caja.dataset.tipo === 'parrafos') v = caja.querySelector('textarea').value;
+        }
+        vals[k] = v;
+        const tocado = (() => { try { return JSON.stringify(leerCampo(caja)) !== originales[k]; } catch (e) { return true; } })();
+        caja.dataset.bloquea = tocado && r.errores.length ? '1' : '';
+        lista.innerHTML = r.errores.map((m) => `<li class="is-error"><i class="bi bi-x-circle" aria-hidden="true"></i>${esc(m)}</li>`).join('') + r.avisos.map((m) => `<li class="is-aviso"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i>${esc(m)}</li>`).join('');
+        lista.hidden = !lista.innerHTML;
+        r.errores.forEach((m) => resultado.push(['error', c.etiqueta, m, k]));
+        r.avisos.forEach((m) => resultado.push(['aviso', c.etiqueta, m, k]));
+      });
+      const nE = resultado.filter((x) => x[0] === 'error').length;
+      const nA = resultado.length - nE;
+      $('[data-revision]').innerHTML = !resultado.length
+        ? '<p class="pnl-revision__ok"><i class="bi bi-check-circle" aria-hidden="true"></i> Todo cumple las reglas de la web.</p>'
+        : `<details class="pnl-revision__det"${nE ? ' open' : ''}><summary><span class="${nE ? 'is-error' : 'is-aviso'}">${nE ? `${nE} ${nE === 1 ? 'cosa que corregir' : 'cosas que corregir'}` : ''}${nE && nA ? ' · ' : ''}${nA ? `${nA} ${nA === 1 ? 'consejo' : 'consejos'}` : ''}</span></summary>
+            <ul>${resultado.map(([t, et, m, k]) => `<li class="is-${t}"><a href="#campo-${esc(k)}" data-ir-campo="${esc(k)}"><strong>${esc(et)}:</strong> ${esc(m)}</a></li>`).join('')}</ul></details>`;
+      lienzo.innerHTML = htmlPrevia(a, campos, vals);
+      escalar();
+    }
+    const programarPrevia = () => { clearTimeout(tPrevia); tPrevia = setTimeout(actualizarPrevia, 250); };
+    if (window.ResizeObserver) new ResizeObserver(escalar).observe(marco);
+    lienzo.addEventListener('click', (ev) => { if (ev.target.closest('a')) ev.preventDefault(); });
+    $('.pnl-previa').addEventListener('click', (ev) => {
+      const b = ev.target.closest('[data-ancho]');
+      if (b) {
+        anchoPrevia = Number(b.dataset.ancho);
+        $$('[data-ancho]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        marco.classList.toggle('es-movil', anchoPrevia < 600);
+        escalar();
+      }
+      const ir = ev.target.closest('[data-ir-campo]');
+      if (ir) {
+        ev.preventDefault();
+        const caja = form.querySelector(`[data-clave="${ir.dataset.irCampo}"]`);
+        caja.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+        const f = caja.querySelector('textarea, input'); if (f) f.focus({ preventScroll: true });
+      }
+    });
     const originales = {};
     $$('.pnl-campo', form).forEach((caja) => { try { originales[caja.dataset.clave] = JSON.stringify(leerCampo(caja)); } catch (er) { originales[caja.dataset.clave] = null; } });
     // Lo que se ve de serie cuenta como «sin guardar» solo si se toca.
     const deSerie = new Set(campos.filter((c) => vacio((datos[c.clave] || {}).valor) && !vacio(def[c.clave])).map((c) => c.clave));
     const estadoGuardar = $('[data-estado-guardar]', form);
     const marcarSucio = () => { estadoGuardar.textContent = 'Hay cambios sin guardar.'; form.classList.add('is-sucio'); };
-    form.addEventListener('input', marcarSucio);
-    form.addEventListener('change', marcarSucio);
+    form.addEventListener('input', () => { marcarSucio(); programarPrevia(); });
+    form.addEventListener('change', () => { marcarSucio(); programarPrevia(); });
+    actualizarPrevia();
     window.onbeforeunload = () => (form.isConnected && form.classList.contains('is-sucio') ? true : undefined);
 
     form.addEventListener('click', async (ev) => {
@@ -449,10 +716,77 @@
         const cols = JSON.parse(caja.querySelector('[data-columnas]').getAttribute('data-columnas'));
         caja.querySelector('tbody').insertAdjacentHTML('beforeend', filaHtml({ columnas: cols }, {}));
         caja.querySelector('tbody tr:last-child input').focus(); marcarSucio();
-      } else if (b.matches('[data-quitar-fila]')) { b.closest('tr').remove(); marcarSucio(); }
-      else if (b.matches('[data-subir-fila]')) { const tr = b.closest('tr'); if (tr.previousElementSibling) { tr.parentNode.insertBefore(tr, tr.previousElementSibling); b.focus(); marcarSucio(); } }
-      else if (b.matches('[data-bajar-fila]')) { const tr = b.closest('tr'); if (tr.nextElementSibling) { tr.parentNode.insertBefore(tr.nextElementSibling, tr); b.focus(); marcarSucio(); } }
-      else if (b.matches('[data-quitar-doc]')) { b.closest('li').remove(); marcarSucio(); }
+      } else if (b.matches('[data-quitar-fila]')) {
+        const fila = b.closest('tr, li');
+        const lista = fila.parentNode;
+        fila.remove();
+        if (lista.matches('[data-filas-enlace]') && !lista.children.length) lista.insertAdjacentHTML('beforeend', enlaceFilaHtml({}));
+        marcarSucio(); programarPrevia();
+      }
+      else if (b.matches('[data-subir-fila]')) { const tr = b.closest('tr, li'); if (tr.previousElementSibling) { tr.parentNode.insertBefore(tr, tr.previousElementSibling); b.focus(); marcarSucio(); programarPrevia(); } }
+      else if (b.matches('[data-bajar-fila]')) { const tr = b.closest('tr, li'); if (tr.nextElementSibling) { tr.parentNode.insertBefore(tr.nextElementSibling, tr); b.focus(); marcarSucio(); programarPrevia(); } }
+      else if (b.matches('[data-anadir-enlace]')) {
+        caja.querySelector('[data-filas-enlace]').insertAdjacentHTML('beforeend', enlaceFilaHtml({}));
+        caja.querySelector('.pnl-enlace:last-child [data-e="texto"]').focus(); marcarSucio();
+      }
+      else if (b.matches('[data-fmt]')) {
+        const ta = caja.querySelector('textarea');
+        const fmt = b.dataset.fmt;
+        const sel = ta.value.slice(ta.selectionStart, ta.selectionEnd);
+        if (fmt === 'sub') {
+          const t = sel.trim() || 'Subtítulo';
+          insertarEn(ta, '## ' + t, { lineaPropia: true, parrafo: true, seleccion: [3, 3 + t.length] });
+        } else if (fmt === 'neg') {
+          const t = sel || 'texto destacado';
+          insertarEn(ta, '**' + t + '**', { seleccion: [2, 2 + t.length] });
+        } else if (fmt === 'lista') {
+          const t = sel ? sel.split('\n').map((l) => (/^[-•*]\s/.test(l) ? l : '- ' + l)).join('\n') : '- Primer punto\n- Segundo punto';
+          insertarEn(ta, t, { lineaPropia: true, parrafo: true });
+        } else {
+          const rq = caja.querySelector('[data-recuadro]');
+          ta.dataset.selIni = ta.selectionStart; ta.dataset.selFin = ta.selectionEnd;
+          rq.innerHTML = recuadroHtml(fmt);
+          rq.hidden = false;
+          const t = rq.querySelector('[data-rq="texto"]');
+          if (t && sel && fmt !== 'imagen') t.value = sel.trim();
+          rq.querySelector('input').focus();
+        }
+      }
+      else if (b.matches('[data-rq-cancelar]')) { const rq = b.closest('[data-recuadro]'); rq.hidden = true; rq.innerHTML = ''; caja.querySelector('textarea').focus(); }
+      else if (b.matches('[data-rq-insertar]')) {
+        const rq = b.closest('[data-recuadro]');
+        const ta = caja.querySelector('textarea');
+        const tipo = b.dataset.rqInsertar;
+        const val = (k) => { const x = rq.querySelector(`[data-rq="${k}"]`); return x ? (x.type === 'file' ? x.files[0] : x.value.trim()) : ''; };
+        try {
+          let texto = val('texto');
+          if (tipo === 'enlace' || tipo === 'boton') {
+            const url = val('url');
+            if (!texto) throw new Error(tipo === 'boton' ? 'Escribe el texto del botón.' : 'Escribe el texto del enlace.');
+            if (!urlValida(url)) throw new Error('El enlace tiene que empezar por https:// (o por / si es de esta web).');
+            if (tipo === 'enlace') insertarEn(ta, `[${texto}](${url})`);
+            else insertarEn(ta, `[[${texto.replace(/[|\]]/g, ' ')}|${url}]]`, { lineaPropia: true });
+          } else if (tipo === 'archivo') {
+            const f = val('archivo');
+            if (!f) throw new Error('Elige el archivo.');
+            if (!texto) texto = f.name.replace(/\.[a-z0-9]+$/i, '').replace(/[_-]+/g, ' ');
+            b.disabled = true; aviso('Subiendo ' + f.name + '…');
+            const url = await api.subirArchivo(id, f);
+            insertarEn(ta, `[[${texto.replace(/[|\]]/g, ' ')}|${url}]]`, { lineaPropia: true });
+            aviso('Archivo subido. Ya está como botón en el texto.', 'ok');
+          } else if (tipo === 'imagen') {
+            const f = val('archivo');
+            if (!f) throw new Error('Elige la foto.');
+            if (texto.length < 5) throw new Error('Describe en una frase qué se ve en la foto.');
+            b.disabled = true; aviso('Preparando la foto…');
+            const r = await api.subirImagen(id, f);
+            insertarEn(ta, `![${texto.replace(/[\]]/g, ' ')}](${r.url})`, { lineaPropia: true, parrafo: true });
+            aviso('Foto añadida al texto.', 'ok');
+          }
+          rq.hidden = true; rq.innerHTML = '';
+        } catch (er) { aviso(er.message, 'error'); b.disabled = false; }
+      }
+      else if (b.matches('[data-quitar-doc]')) { b.closest('li').remove(); marcarSucio(); programarPrevia(); }
       else if (b.matches('[data-enlace-doc]')) {
         const fila = document.createElement('div');
         fila.className = 'pnl-doc-nuevo';
@@ -475,15 +809,48 @@
 
     form.addEventListener('change', async (ev) => {
       const inp = ev.target;
+      if (inp.matches('[data-subir-enlace]') && inp.files[0]) {
+        const li = inp.closest('.pnl-enlace');
+        const f = inp.files[0];
+        aviso('Subiendo ' + f.name + '…');
+        try {
+          const url = await api.subirArchivo(id, f);
+          li.querySelector('[data-e="url"]').value = url;
+          const t = li.querySelector('[data-e="texto"]');
+          if (!t.value.trim()) t.value = f.name.replace(/\.[a-z0-9]+$/i, '').replace(/[_-]+/g, ' ');
+          marcarSucio(); programarPrevia();
+          aviso('Archivo subido. Revisa el texto del botón y guarda.', 'ok');
+        } catch (er) { aviso(er.message, 'error'); }
+        inp.value = '';
+        return;
+      }
+      if (inp.matches('[data-subir-galeria]') && inp.files.length) {
+        const caja = inp.closest('.pnl-campo');
+        const archivos = [...inp.files];
+        for (const f of archivos) {
+          aviso('Preparando ' + f.name + '…');
+          try {
+            const r = await api.subirImagen(id, f);
+            caja.querySelector('[data-lista-imagenes]').insertAdjacentHTML('beforeend', imagenItemHtml({ url: r.url, alt: '' }));
+          } catch (er) { aviso(er.message, 'error'); }
+        }
+        inp.value = '';
+        marcarSucio(); programarPrevia();
+        const vacia = caja.querySelector('.pnl-imagen [data-img-alt]:placeholder-shown');
+        if (vacia) vacia.focus();
+        aviso('Fotos subidas. Escribe qué se ve en cada una.', 'ok');
+        return;
+      }
       if (!inp.matches('[data-subir-pdf]') || !inp.files[0]) return;
       const caja = inp.closest('.pnl-campo');
       const archivo = inp.files[0];
       aviso('Subiendo ' + archivo.name + '…');
       try {
-        const url = await api.subirPdf(id, archivo);
-        caja.querySelector('[data-lista-docs]').insertAdjacentHTML('beforeend', docHtml({ url, titulo: archivo.name.replace(/\.pdf$/i, '') }));
+        const url = await api.subirArchivo(id, archivo);
+        caja.querySelector('[data-lista-docs]').insertAdjacentHTML('beforeend', docHtml({ url, titulo: archivo.name.replace(/\.[a-z0-9]+$/i, '').replace(/[_-]+/g, ' ') }));
+        programarPrevia();
         marcarSucio();
-        aviso('PDF subido. Ponle un título claro y pulsa «Guardar y publicar».', 'ok');
+        aviso('Archivo subido. Ponle un título claro y pulsa «Guardar y publicar».', 'ok');
       } catch (er) { aviso(er.message, 'error'); }
       inp.value = '';
     });
@@ -505,7 +872,10 @@
           errores++; err.textContent = er.message; err.hidden = false; caja.classList.add('is-error');
         }
       });
-      if (errores) { const p = form.querySelector('.is-error input, .is-error textarea'); if (p) p.focus(); aviso('Revisa los campos marcados.', 'error'); return; }
+      actualizarPrevia();
+      const bloqueados = $$('.pnl-campo[data-bloquea="1"]', form);
+      bloqueados.forEach((caja) => { caja.classList.add('is-error'); errores++; });
+      if (errores) { const p = form.querySelector('.is-error input, .is-error textarea'); if (p) p.focus(); aviso(bloqueados.length ? 'Hay cosas que corregir antes de publicar: están marcadas en rojo en cada campo y en la revisión.' : 'Revisa los campos marcados.', 'error'); return; }
       if (!Object.keys(cambios).length) { aviso('No hay cambios que guardar.'); return; }
       const boton = form.querySelector('[type="submit"]');
       boton.disabled = true;

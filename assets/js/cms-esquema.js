@@ -14,9 +14,16 @@
                [texto](https://enlace) = enlace
      lista     una entrada por línea
      enlaces   una entrada por línea: Texto | https://enlace
-     documentos  PDF subidos al panel (con título)
+     documentos  archivos subidos al panel (PDF, Word, Excel…) con título
+     imagenes  fotos subidas al panel, con su descripción
      filas     tabla con las columnas indicadas
      email, url
+   "minimo": lo mínimo que tiene que tener el campo cuando se rellena
+     ({ caracteres: N } o { elementos: N }), para que no se publique
+     un apartado a medias. Un campo vacío se puede guardar: sale
+     como pendiente.
+   "ejemplo": texto de muestra que se ve en el campo vacío y que
+     marca la estructura que se espera.
    "obligatorio": lo exige la normativa o la web no tiene
    sentido sin ello. El panel avisa si falta y la página pública
    lo marca como pendiente.
@@ -24,56 +31,68 @@
 (function (raiz) {
   'use strict';
 
-  const OBJETIVOS = { clave: 'objetivos', etiqueta: 'Objetivos', tipo: 'lista', obligatorio: true,
-    ayuda: 'Uno por línea. Qué se espera que aprenda el alumnado en vuestra materia o etapa.' };
-  const CRITERIOS = { clave: 'criterios_evaluacion', etiqueta: 'Criterios de evaluación', tipo: 'parrafos', obligatorio: true,
-    ayuda: 'Cómo se valora el aprendizaje. Basta un resumen claro por curso; la programación completa va en PDF.' };
-  const INSTRUMENTOS = { clave: 'instrumentos', etiqueta: 'Instrumentos y procedimientos de evaluación', tipo: 'lista', obligatorio: true,
-    ayuda: 'Uno por línea: exámenes, trabajos, observación en clase, cuaderno, proyectos, exposiciones…' };
-  const CALIFICACION = { clave: 'criterios_calificacion', etiqueta: 'Criterios de calificación', tipo: 'filas', obligatorio: true,
+  const OBJETIVOS = { clave: 'objetivos', etiqueta: 'Objetivos', tipo: 'lista', obligatorio: true, minimo: { elementos: 3 },
+    ayuda: 'Al menos tres, uno por línea. Qué se espera que aprenda el alumnado en vuestra materia o etapa.',
+    ejemplo: 'Comprender y expresar ideas con claridad, de forma oral y escrita.\nResolver problemas aplicando lo aprendido a situaciones reales.\nTrabajar en equipo y respetar las opiniones de los demás.' };
+  const CRITERIOS = { clave: 'criterios_evaluacion', etiqueta: 'Criterios de evaluación', tipo: 'parrafos', obligatorio: true, minimo: { caracteres: 60 },
+    ayuda: 'Cómo se valora el aprendizaje: un resumen claro, mejor por curso con un subtítulo para cada uno. Si tenéis el documento completo, súbelo con el botón «Archivo» y quedará como botón de descarga.',
+    ejemplo: '## 1.º de ESO\nSe valora la comprensión de los contenidos, el razonamiento y la expresión…\n\n## 2.º de ESO\n…' };
+  const INSTRUMENTOS = { clave: 'instrumentos', etiqueta: 'Instrumentos y procedimientos de evaluación', tipo: 'lista', obligatorio: true, minimo: { elementos: 2 },
+    ayuda: 'Al menos dos, uno por línea: exámenes, trabajos, observación en clase, cuaderno, proyectos, exposiciones…',
+    ejemplo: 'Pruebas escritas al final de cada unidad.\nTrabajos y proyectos individuales y en grupo.\nObservación del trabajo diario en clase.' };
+  const CALIFICACION = { clave: 'criterios_calificacion', etiqueta: 'Criterios de calificación', tipo: 'filas', obligatorio: true, minimo: { elementos: 2 },
     columnas: [{ clave: 'concepto', etiqueta: 'Qué se califica' }, { clave: 'peso', etiqueta: 'Peso en la nota' }],
-    ayuda: 'Cómo se obtiene la nota. Por ejemplo: Pruebas escritas · 60 %.' };
-  const PROGRAMACION = { clave: 'programaciones', etiqueta: 'Programaciones didácticas (PDF)', tipo: 'documentos', obligatorio: true,
-    ayuda: 'Una por curso o una para todo el departamento. Solo PDF, hasta 10 MB.' };
+    ayuda: 'Cómo se obtiene la nota, con al menos dos filas. Por ejemplo: Pruebas escritas · 60 %.' };
+  const PROGRAMACION = { clave: 'programaciones', etiqueta: 'Programaciones didácticas', tipo: 'documentos', obligatorio: true, minimo: { elementos: 1 },
+    ayuda: 'Una por curso o una para todo el departamento, con un título claro (por ejemplo, «Programación de 2.º de ESO, curso 2026-2027»). PDF, Word, Excel o PowerPoint, hasta 15 MB.' };
+  const PRESENTACION = { clave: 'presentacion', etiqueta: 'Presentación', tipo: 'parrafos', minimo: { caracteres: 120 },
+    ayuda: 'Dos o tres frases sobre el departamento y su forma de trabajar. Puedes añadir subtítulos, enlaces como botones, archivos e imágenes con la barra de herramientas.',
+    ejemplo: 'El departamento trabaja… En clase se combinan…\n\n## Qué hacemos este curso\n- Proyecto…\n- Salida a…' };
+  const GALERIA = { clave: 'galeria', etiqueta: 'Fotos', tipo: 'imagenes',
+    ayuda: 'Fotos de proyectos, salidas o del aula. Describe cada una en una frase. No subáis fotos en las que se reconozca a alumnos sin autorización de imagen.' };
+  const RECURSOS = { clave: 'recursos', etiqueta: 'Recursos y enlaces', tipo: 'enlaces',
+    ayuda: 'Cada fila es un botón: un enlace o un archivo que subas. Con «Grupo» se ordenan en desplegables (por ejemplo, por curso).' };
 
   const ESQUEMAS = {
     departamento: [
-      { clave: 'presentacion', etiqueta: 'Presentación', tipo: 'parrafos',
-        ayuda: 'Dos o tres frases sobre el departamento y su forma de trabajar.' },
+      PRESENTACION,
       { clave: 'cursos', etiqueta: 'Cursos y materias', tipo: 'lista',
         ayuda: 'Una por línea. Por ejemplo: 1.º ESO · Matemáticas (bilingüe).' },
       OBJETIVOS, CRITERIOS, INSTRUMENTOS, CALIFICACION,
-      { clave: 'recuperacion', etiqueta: 'Recuperación y materias pendientes', tipo: 'parrafos',
-        ayuda: 'Cómo se recupera una evaluación y una materia pendiente de cursos anteriores.' },
+      { clave: 'recuperacion', etiqueta: 'Recuperación y materias pendientes', tipo: 'parrafos', minimo: { caracteres: 60 },
+        ayuda: 'Cómo se recupera una evaluación y una materia pendiente de cursos anteriores. Puedes adjuntar los materiales con el botón «Archivo».',
+        ejemplo: '## Recuperar una evaluación\n…\n\n## Materia pendiente de cursos anteriores\n…' },
       PROGRAMACION,
       { clave: 'profesorado', etiqueta: 'Profesorado', tipo: 'lista',
-        ayuda: 'Una persona por línea. Opcional. Solo nombre y materia: nada de correos personales.' },
-      { clave: 'recursos', etiqueta: 'Recursos y enlaces', tipo: 'enlaces',
-        ayuda: 'Una línea por enlace: Texto | https://enlace' }
+        ayuda: 'Una persona por línea. Opcional. Solo nombre y función: nada de correos personales.',
+        ejemplo: 'Nombre Apellidos · jefa del departamento\nNombre Apellidos' },
+      GALERIA,
+      RECURSOS
     ],
     etapa: [
-      { clave: 'presentacion', etiqueta: 'Presentación de la etapa', tipo: 'parrafos' },
+      Object.assign({}, PRESENTACION, { etiqueta: 'Presentación de la etapa' }),
       { clave: 'areas', etiqueta: 'Áreas y horario', tipo: 'lista', ayuda: 'Una por línea.' },
       OBJETIVOS, CRITERIOS, INSTRUMENTOS,
       Object.assign({}, CALIFICACION, { obligatorio: false,
         ayuda: 'En Primaria: IN, SU, BI, NT, SB y cómo se llega a cada uno. En Infantil no hay calificación numérica: puede quedar vacío.' }),
       { clave: 'promocion', etiqueta: 'Criterios de promoción', tipo: 'parrafos',
         ayuda: 'En Primaria, cuándo se decide la permanencia de un año más. En Infantil puede quedar vacío.' },
-      Object.assign({}, PROGRAMACION, { etiqueta: 'Programaciones didácticas y propuesta pedagógica (PDF)' }),
+      Object.assign({}, PROGRAMACION, { etiqueta: 'Programaciones didácticas y propuesta pedagógica' }),
       { clave: 'profesorado', etiqueta: 'Profesorado', tipo: 'lista',
         ayuda: 'Una persona por línea. Opcional. Solo nombre y función: nada de correos personales.' },
-      { clave: 'recursos', etiqueta: 'Recursos y enlaces', tipo: 'enlaces',
-        ayuda: 'Una línea por enlace: Texto | https://enlace. Con «Grupo · Texto» se agrupan en desplegables (por ejemplo, «Inglés 3.º · Grammar Unit 1»).' }
+      GALERIA,
+      RECURSOS
     ],
     orientacion: [
-      { clave: 'presentacion', etiqueta: 'Presentación', tipo: 'parrafos' },
+      PRESENTACION,
       { clave: 'funciones', etiqueta: 'Funciones del Departamento de Orientación', tipo: 'lista', obligatorio: true },
       { clave: 'atencion_diversidad', etiqueta: 'Medidas de atención a la diversidad', tipo: 'parrafos', obligatorio: true },
       { clave: 'recursos_alumnos', etiqueta: 'Recursos para alumnos', tipo: 'enlaces' },
       { clave: 'recursos_familias', etiqueta: 'Recursos para familias', tipo: 'enlaces' },
       { clave: 'materias', etiqueta: 'Materias vinculadas al Departamento', tipo: 'lista' },
-      Object.assign({}, PROGRAMACION, { obligatorio: false, etiqueta: 'Plan de orientación y documentos (PDF)' }),
-      { clave: 'profesorado', etiqueta: 'Equipo', tipo: 'lista' }
+      Object.assign({}, PROGRAMACION, { obligatorio: false, minimo: null, etiqueta: 'Plan de orientación y documentos' }),
+      { clave: 'profesorado', etiqueta: 'Equipo', tipo: 'lista' },
+      GALERIA
     ],
     bilinguismo: [
       { clave: 'presentacion', etiqueta: 'Presentación del programa', tipo: 'parrafos' },
@@ -83,9 +102,10 @@
       { clave: 'resultados', etiqueta: 'Resultados de las pruebas externas de inglés', tipo: 'filas',
         columnas: [{ clave: 'curso', etiqueta: 'Curso y prueba' }, { clave: 'resultado', etiqueta: 'Resultado' }],
         ayuda: 'La normativa de Madrid pide publicar los resultados de las pruebas externas, también las de bilingüismo.' },
-      Object.assign({}, PROGRAMACION, { obligatorio: false, etiqueta: 'Documentos del programa (PDF)' }),
+      Object.assign({}, PROGRAMACION, { obligatorio: false, minimo: null, etiqueta: 'Documentos del programa' }),
       { clave: 'profesorado', etiqueta: 'Profesorado y auxiliares', tipo: 'lista',
-        ayuda: 'Una persona por línea. Por ejemplo: «Primaria · Nombre Apellidos (coordinadora)». Nada de correos personales.' }
+        ayuda: 'Una persona por línea. Por ejemplo: «Primaria · Nombre Apellidos (coordinadora)». Nada de correos personales.' },
+      GALERIA
     ],
     noticias: [
       { clave: 'breves', etiqueta: 'Comunicados breves', tipo: 'noticias',

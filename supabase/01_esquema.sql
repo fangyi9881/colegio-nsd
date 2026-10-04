@@ -512,7 +512,8 @@ revoke execute on function public._comprobar_gestion(uuid, text), public._fijar_
 
 -- ---------------------------------------------------------------------
 -- 9. Archivos (PDF de programaciones, documentos de cada ámbito)
---    Carpeta = id del ámbito. Solo PDF, 10 MB como máximo.
+--    Carpeta = id del ámbito. Solo PDF, 10 MB como máximo
+--    (04_archivos.sql lo amplía a Office, LibreOffice y fotos, 15 MB).
 -- ---------------------------------------------------------------------
 
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
