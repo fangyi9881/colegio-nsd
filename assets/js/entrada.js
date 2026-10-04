@@ -205,6 +205,23 @@
       if (mismas.length) lateral.appendChild(tarjeta('Más de ' + e.firma, mismas));
       if (ultimas.length) lateral.appendChild(tarjeta('Lo último del colegio', ultimas));
       lateral.hidden = !lateral.children.length;
+      pintarAutor(e, lateral);
+    });
+  }
+
+  // Tarjeta de quien la ha escrito (si tiene ficha): arriba del lateral.
+  // Al pulsarla se abre su ficha flotante (personas.js).
+  function pintarAutor(e, lateral) {
+    const P = window.NSD_PERSONAS;
+    if (!P || !CMS.fichaDeEntrada) return;
+    CMS.fichaDeEntrada(e.slug).then((ficha) => (ficha ? P.tarjeta(ficha) : '')).then((html) => {
+      if (!html) return;
+      const c = el('div', 'aside__card entrada-autor');
+      c.appendChild(el('p', 'entrada-autor__t', 'Escrito por'));
+      c.insertAdjacentHTML('beforeend', html);
+      lateral.insertBefore(c, lateral.firstChild);
+      lateral.hidden = false;
+      P.hidratar(c);
     });
   }
 

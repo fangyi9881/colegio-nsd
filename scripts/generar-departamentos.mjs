@@ -33,7 +33,7 @@ for (const d of DEPARTAMENTOS) {
   const html = pagina({
     titulo: `${d.nombre} · ${esEtapa ? 'Etapa' : 'Departamento'} · Colegio NSD`,
     descripcion: `${d.nombre} en el Colegio NSD (Carabanchel): objetivos, criterios de evaluación y calificación, programación didáctica y recursos. ${d.resumen}`.slice(0, 300),
-    ruta, seccion: 'centro', css: ['secciones.css', 'informacion.css'],
+    ruta, seccion: 'centro', css: ['secciones.css', 'informacion.css', 'personas.css'],
     hero: {
       migas, h1: d.nombre, intro: d.resumen,
       meta: [[grupo ? grupo.icono : 'bi-people', grupo ? grupo.titulo : d.grupo]]
@@ -47,7 +47,7 @@ ${htmlFicha(d, esquema, {}, {})}
       </div>
     </div>
   </section>`,
-    scripts: ['/assets/js/cms-config.js', '/assets/js/cms.js', '/assets/js/cms-esquema.js', '/assets/js/departamentos-datos.js', '/assets/js/departamentos.js']
+    scripts: ['/assets/js/cms-config.js', '/assets/js/cms.js', '/assets/js/cms-esquema.js', '/assets/js/departamentos-datos.js', '/assets/js/departamentos.js', '/assets/js/personas.js']
   });
   fs.writeFileSync(path.join(dir, `${d.slug}.html`), html);
   generadas.push(ruta);
@@ -128,7 +128,7 @@ const totalPersonas = new Set([
 const organigrama = pagina({
   titulo: 'Organigrama · Colegio NSD Carabanchel',
   descripcion: 'Organigrama del Colegio NSD: dirección, equipo de gestión, coordinaciones de etapa y programa, y el profesorado de cada departamento con su cargo.',
-  ruta: '/centro/organigrama', seccion: 'centro', css: ['secciones.css', 'informacion.css'],
+  ruta: '/centro/organigrama', seccion: 'centro', css: ['secciones.css', 'informacion.css', 'personas.css'],
   hero: {
     migas: migasOrg, h1: 'Organigrama',
     intro: 'Quién es quién en el colegio: la dirección, las coordinaciones y el equipo de cada etapa y departamento, con el cargo de cada persona.',
@@ -141,8 +141,28 @@ const organigrama = pagina({
 ${htmlOrganigrama(DIRECCION, DEPARTAMENTOS, (d) => (d.defecto || {}).profesorado)}
     </div>
   </section>`,
-  scripts: ['/assets/js/cms-config.js', '/assets/js/cms.js', '/assets/js/departamentos-datos.js', '/assets/js/departamentos.js']
+  scripts: ['/assets/js/cms-config.js', '/assets/js/cms.js', '/assets/js/departamentos-datos.js', '/assets/js/departamentos.js', '/assets/js/personas.js']
 });
 fs.mkdirSync(path.join(RAIZ, 'centro'), { recursive: true });
 fs.writeFileSync(path.join(RAIZ, 'centro/organigrama.html'), organigrama);
 console.log('Organigrama escrito en centro/organigrama.html');
+
+// ── Ficha de una persona: /centro/persona?p=slug ──
+const migasPersona = [['Inicio', '/'], ['El Centro', '/centro'], ['Organigrama', '/centro/organigrama'], ['Ficha', '/centro/persona']];
+const persona = pagina({
+  titulo: 'Ficha del equipo · Colegio NSD',
+  descripcion: 'Ficha de una persona del equipo del Colegio NSD: cargos, presentación y formación.',
+  ruta: '/centro/persona', seccion: 'centro', css: ['secciones.css', 'informacion.css', 'personas.css'],
+  hero: { migas: migasPersona, h1: 'Ficha del equipo', intro: 'Quién es, qué hace en el colegio y cómo contactar.', meta: [] },
+  jsonld: migasJsonLd(migasPersona),
+  cuerpo: `
+  <section class="section">
+    <div class="container" data-persona-pagina>
+      <p class="ficha-cargando">Cargando la ficha…</p>
+      <noscript><p>Para ver la ficha hace falta JavaScript. Todo el equipo está en el <a href="/centro/organigrama">organigrama</a>.</p></noscript>
+    </div>
+  </section>`,
+  scripts: ['/assets/js/cms-config.js', '/assets/js/cms.js', '/assets/js/departamentos-datos.js', '/assets/js/departamentos.js', '/assets/js/personas.js']
+});
+fs.writeFileSync(path.join(RAIZ, 'centro/persona.html'), persona);
+console.log('Ficha escrita en centro/persona.html');

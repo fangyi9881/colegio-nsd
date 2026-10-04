@@ -246,6 +246,23 @@
     return pedir(`entradas?select=${CAMPOS_ENTRADA}&slug=eq.${slug}&limit=1`).then((l) => l[0] || null);
   }
   const urlEntrada = (slug) => '/blog/entrada?e=' + encodeURIComponent(slug);
+  // ── Fichas del personal (supabase/05_personas.sql) ──
+  // Si la tabla aún no existe, pedir() devuelve [] y todo sigue igual.
+  let fichasPedidas = null;
+  function leerFichas() {
+    if (!ACTIVO) return Promise.resolve([]);
+    if (!fichasPedidas) fichasPedidas = pedir('fichas?select=slug,nombre,foto,frase,bio,formacion,desde,correo&limit=1000');
+    return fichasPedidas;
+  }
+  const slugValido = (s) => /^[a-z0-9-]{1,90}$/.test(s || '');
+  function fichaDeEntrada(slug) {
+    if (!ACTIVO || !slugValido(slug)) return Promise.resolve(null);
+    return pedir(`entradas?select=ficha&slug=eq.${slug}&limit=1`).then((l) => (l[0] && l[0].ficha) || null);
+  }
+  function entradasDeFicha(ficha, limite) {
+    if (!ACTIVO || !slugValido(ficha)) return Promise.resolve([]);
+    return pedir(`entradas?select=slug,titulo,fecha&ficha=eq.${ficha}&order=fecha.desc&limit=${Math.min(limite || 4, 20)}`);
+  }
   // Convierte una entrada del panel al formato de noticias-datos.js
   function comoNoticia(e) {
     const cats = window.NSD_CATEGORIAS || {};
@@ -287,7 +304,7 @@
     ]).catch(() => {});
   }
 
-  window.NSD_CMS = { activo: ACTIVO, leer, leerEntradas, leerEntrada, comoNoticia, urlEntrada, pintarPagina, aplicar, urlSegura, render: { parrafos, lista, enlaces, documentos, filas, enLinea, el }, vacio };
+  window.NSD_CMS = { activo: ACTIVO, leer, leerEntradas, leerEntrada, leerFichas, fichaDeEntrada, entradasDeFicha, comoNoticia, urlEntrada, pintarPagina, aplicar, urlSegura, render: { parrafos, lista, enlaces, documentos, filas, enLinea, el }, vacio };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => pintarPagina());
   else pintarPagina();

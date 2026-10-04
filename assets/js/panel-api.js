@@ -122,6 +122,40 @@
         return { url: sb.storage.from('imagenes').getPublicUrl(ruta).data.publicUrl, ancho: lienzo.width, alto: lienzo.height };
       },
 
+      // ── Fichas del personal (05_personas.sql) ──
+      async miFicha() { return ok(await sb.rpc('mi_ficha')); },
+      async fichas() { return ok(await sb.from('fichas').select('slug,nombre,perfil_id,foto,frase,bio,formacion,desde,correo,actualizado_en').order('nombre')); },
+      async guardarFicha(slug, d) {
+        const r = ok(await sb.from('fichas').update({
+          foto: d.foto || null, frase: d.frase || null, bio: d.bio || null, formacion: d.formacion || null,
+          desde: d.desde ? Number(d.desde) : null, correo: d.correo || null
+        }).eq('slug', slug).select('slug'));
+        if (!r || !r.length) throw new Error('No tienes permiso para editar esta ficha.');
+      },
+      async crearFicha(nombre) { return ok(await sb.rpc('crear_ficha', { p_nombre: nombre })); },
+      async enlazarFicha(slug, perfil) { ok(await sb.rpc('enlazar_ficha', { p_slug: slug, p_perfil: perfil || null })); },
+      // Foto cuadrada de 640 px, recortada al centro
+      async subirFoto(slug, archivo) {
+        if (!/^image\//.test(archivo.type)) throw new Error('Elige una imagen (JPG, PNG o WebP).');
+        if (archivo.size > 25 * 1024 * 1024) throw new Error('La imagen pasa de 25 MB. Elige otra.');
+        let mapa;
+        try { mapa = await createImageBitmap(archivo); } catch (e) { throw new Error('No se puede leer esa imagen. Prueba con una foto JPG o PNG.'); }
+        const lado = Math.min(mapa.width, mapa.height);
+        const sal = Math.min(640, lado);
+        const lienzo = document.createElement('canvas');
+        lienzo.width = sal; lienzo.height = sal;
+        lienzo.getContext('2d').drawImage(mapa, (mapa.width - lado) / 2, (mapa.height - lado) / 2, lado, lado, 0, 0, sal, sal);
+        if (mapa.close) mapa.close();
+        const aBlob = (tipo) => new Promise((res) => lienzo.toBlob(res, tipo, 0.86));
+        let blob = await aBlob('image/webp');
+        if (!blob || blob.type !== 'image/webp') blob = await aBlob('image/jpeg');
+        if (!blob) throw new Error('No se ha podido preparar la foto.');
+        const ext = blob.type === 'image/webp' ? 'webp' : 'jpg';
+        const ruta = `${slug}/${Date.now()}.${ext}`;
+        ok(await sb.storage.from('personas').upload(ruta, blob, { contentType: blob.type, upsert: false }));
+        return sb.storage.from('personas').getPublicUrl(ruta).data.publicUrl;
+      },
+
       // ── Cuentas (dirección) ──
       async usuarios() { return ok(await sb.rpc('listar_usuarios')); },
       async aprobar(id, rol, ambitos) { ok(await sb.rpc('aprobar_usuario', { p_id: id, p_rol: rol, p_ambitos: ambitos })); },

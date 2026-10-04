@@ -233,3 +233,32 @@ fieldset.pnl-campo > legend { padding: 0 6px; margin-left: -6px; }
 .pnl-foto__vista span { padding: 16px; text-align: center; }
 .pnl-enlace { padding: 0; border: 0; background: none; color: var(--green-700); font: inherit; font-weight: 700; text-decoration: underline; cursor: pointer; }
 .pnl-guardar .pnl-peligro { margin-left: auto; }
+
+/* ---------- Fichas del personal ---------- */
+.pnl-ficha { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 28px; align-items: start; }
+.pnl-ficha__lado { position: sticky; top: 90px; display: grid; gap: 16px; }
+.pnl-ficha__foto {
+  position: relative; overflow: hidden; width: 132px; height: 132px; border-radius: 32px;
+  display: grid; place-items: center; background: var(--surface-sunken); color: var(--ink-500); font-size: 2.4rem;
+}
+.pnl-ficha__foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pnl-ficha-vista { pointer-events: none; }
+.pnl-form--suave { background: var(--surface-sunken); }
+.pnl-resumen { margin: 0 0 16px; color: var(--ink-700); }
+.pnl-fichas { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.pnl-fichas__item {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 14px; align-items: center;
+  padding: 12px 14px; border-radius: var(--radius); background: var(--surface-raised); border: 1px solid var(--border);
+}
+.pnl-fichas__txt { display: grid; gap: 2px; min-width: 0; }
+.pnl-fichas__txt small { color: var(--ink-500); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pnl-fichas__estado { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+@media (max-width: 860px) {
+  .pnl-ficha { grid-template-columns: 1fr; }
+  .pnl-ficha__lado { position: static; order: -1; }
+  .pnl-fichas__item { grid-template-columns: auto minmax(0, 1fr); }
+  .pnl-fichas__estado { grid-column: 1 / -1; justify-content: flex-start; }
+  .pnl-fichas__item > .btn { grid-column: 1 / -1; justify-self: start; }
+}
+.pnl-ficha .pnl-form { padding: 22px; border-radius: var(--radius-lg); background: var(--surface-raised); border: 1px solid var(--border); }
+.pnl-ficha .pnl-form--suave { background: var(--surface-sunken); }

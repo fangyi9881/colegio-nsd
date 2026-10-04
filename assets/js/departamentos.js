@@ -101,6 +101,12 @@
   // Formatos admitidos en el campo Profesorado:
   //   «Nombre Apellidos · cargo o materia»
   //   «Grupo · Nombre Apellidos (cargo)»  (Primaria, ESO, Auxiliares…)
+  // Mismo «slug» que public._slug_persona() en Supabase: la misma persona
+  // es la misma ficha en todas las páginas, lleve o no tildes su nombre.
+  const slugPersona = (n) => String(n || '').toLowerCase()
+    .replace(/[áàäâ]/g, 'a').replace(/[éèëê]/g, 'e').replace(/[íìïî]/g, 'i').replace(/[óòöô]/g, 'o').replace(/[úùüû]/g, 'u').replace(/ñ/g, 'n').replace(/ç/g, 'c')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80).replace(/-+$/, '');
+  const urlPersona = (slug) => '/centro/persona?p=' + encodeURIComponent(slug);
   const GRUPO_PERSONA = /^(infantil|primaria|eso|e\.s\.o\.|secundaria|bachillerato|auxiliar(es)?( de conversación)?)$/i;
   function persona(linea) {
     let t = String(linea || '').replace(/\s+/g, ' ').trim();
@@ -116,12 +122,12 @@
     const NEXOS = ['de', 'del', 'la', 'las', 'los', 'y'];
     const iniciales = nombre.split(/\s+/).filter((x) => x && NEXOS.indexOf(x.toLowerCase()) < 0)
       .map((x) => x.charAt(0)).slice(0, 2).join('').toUpperCase();
-    return { nombre, cargo, grupo, responsable, iniciales };
+    return { nombre, cargo, grupo, responsable, iniciales, slug: slugPersona(nombre) };
   }
-  const tarjetaPersona = (p, porDefecto) => `<li class="persona${p.responsable ? ' persona--responsable' : ''}">
+  const tarjetaPersona = (p, porDefecto) => `<li class="persona-item${p.responsable ? ' persona-item--responsable' : ''}"><a class="persona${p.responsable ? ' persona--responsable' : ''}" href="${urlPersona(p.slug)}" data-persona="${esc(p.slug)}">
       <span class="persona__avatar" aria-hidden="true">${esc(p.iniciales)}</span>
       <span class="persona__txt"><span class="persona__nombre">${esc(p.nombre)}</span><span class="persona__cargo">${esc(p.cargo || (/auxiliar/i.test(p.grupo) ? 'Auxiliar de conversación' : porDefecto))}</span></span>
-    </li>`;
+    </a></li>`;
   function htmlPersonas(lineas, porDefecto) {
     const ps = (lineas || []).filter(Boolean).map(persona);
     if (!ps.length) return '';
@@ -288,10 +294,10 @@
   // dir: DIRECCION de departamentos-datos.js; deps: DEPARTAMENTOS;
   // equipoDe(dep): lista de Profesorado (la publicada o la de serie).
   function htmlOrganigrama(dir, deps, equipoDe) {
-    const cargo = (x) => `<li class="persona persona--responsable persona--grande">
+    const cargo = (x) => `<li class="persona-item"><a class="persona persona--responsable persona--grande" href="${urlPersona(slugPersona(x.nombre))}" data-persona="${esc(slugPersona(x.nombre))}">
         <span class="persona__avatar" aria-hidden="true">${esc(persona(x.nombre).iniciales)}</span>
         <span class="persona__txt"><span class="persona__nombre">${esc(x.nombre)}</span><span class="persona__cargo">${esc(x.cargo)}</span><span class="persona__ambito">${esc(x.ambito)}</span></span>
-      </li>`;
+      </a></li>`;
     const nivel = (titulo, icono, gente, mod) => `<div class="org-nivel${mod ? ' org-nivel--' + mod : ''}">
         <p class="org-nivel__t"><i class="bi ${icono}" aria-hidden="true"></i>${esc(titulo)}</p>
         <ul class="personas personas--centro">${gente.join('')}</ul>
@@ -334,7 +340,7 @@
       </div>`;
   }
 
-  const api = { htmlFicha, htmlOrganigrama, cursoEscolar, esc, urlSegura, parrafos, vacio, persona };
+  const api = { htmlFicha, htmlOrganigrama, htmlPersonas, cursoEscolar, esc, urlSegura, parrafos, vacio, persona, slugPersona, urlPersona };
   if (typeof module === 'object' && module.exports) { module.exports = api; return; }
   raiz.NSD_FICHA = api;
 
@@ -345,6 +351,7 @@
     raiz.NSD_CMS.leer(D.DEPARTAMENTOS.map((d) => d.id)).then((pub) => {
       const de = (d) => { const x = (pub[d.id] || {}).profesorado; return !vacio(x) ? x : (d.defecto || {}).profesorado; };
       org.innerHTML = htmlOrganigrama(D.DIRECCION, D.DEPARTAMENTOS, de);
+      if (raiz.NSD_PERSONAS) raiz.NSD_PERSONAS.hidratar(org);
     }).catch(() => {});
   }
   const caja = document.querySelector('[data-dep]');
@@ -354,7 +361,7 @@
   const esquema = raiz.NSD_ESQUEMA.ESQUEMAS[dep.esquema] || [];
   // Con o sin panel, se repinta: así el curso escolar es el de hoy y
   // no el del día en que se generó la página.
-  const pintar = (pub) => { caja.innerHTML = htmlFicha(dep, esquema, pub); };
+  const pintar = (pub) => { caja.innerHTML = htmlFicha(dep, esquema, pub); if (raiz.NSD_PERSONAS) raiz.NSD_PERSONAS.hidratar(caja); };
   if (!raiz.NSD_CMS.activo) { pintar({}); return; }
   raiz.NSD_CMS.leer([dep.id]).then((d) => pintar(d[dep.id] || {})).then(() => raiz.NSD_CMS.leerEntradas({ ambito: dep.id, limite: 4 })).then((lista) => {
     // Lo último que el departamento ha publicado en el blog

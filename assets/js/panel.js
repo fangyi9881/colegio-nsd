@@ -11,6 +11,8 @@
      #cuentas                 cuentas y permisos (dirección)
      #historial               cambios recientes
      #canal                   canal interno (solo quien lo gestiona)
+     #ficha                   mi ficha pública (foto, presentación…)
+     #fichas · #fichas/<slug> fichas de todo el personal (dirección)
      #cuenta                  mis datos y contraseña
    Todo lo que viene de la base de datos se escapa con esc()
    antes de entrar en el HTML.
@@ -212,6 +214,8 @@
     }
     items.push(['historial', 'bi-clock-history', 'Historial']);
     if (yo.gestiona_canal) items.push(['canal', 'bi-shield-lock', 'Canal interno']);
+    items.push(['ficha', 'bi-person-vcard', 'Mi ficha']);
+    if (yo.es_directiva) items.push(['fichas', 'bi-people-fill', 'Fichas del personal']);
     items.push(['cuenta', 'bi-person-circle', 'Mi cuenta']);
     const nav = $('[data-nav]');
     nav.innerHTML = `<ul>${items.map(([id, ico, t]) => `<li><a href="#${id}" data-ruta="${id}"><i class="bi ${ico}" aria-hidden="true"></i><span>${esc(t)}</span><span class="pnl-contador" data-contador="${id}" hidden></span></a></li>`).join('')}</ul>`;
@@ -237,7 +241,7 @@
   function enrutar() {
     const [ruta, arg] = (location.hash.slice(1) || 'contenidos').split('/');
     $$('[data-ruta]').forEach((a) => { if (a.dataset.ruta === ruta) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-    const vistas = { contenidos: () => (arg ? vistaEditor(decodeURIComponent(arg)) : vistaContenidos()), blog: () => (arg ? vistaEntrada(decodeURIComponent(arg)) : vistaBlog()), cumplimiento: vistaCumplimiento, solicitudes: vistaSolicitudes, cuentas: vistaCuentas, historial: vistaHistorial, canal: vistaCanal, cuenta: vistaCuenta };
+    const vistas = { contenidos: () => (arg ? vistaEditor(decodeURIComponent(arg)) : vistaContenidos()), blog: () => (arg ? vistaEntrada(decodeURIComponent(arg)) : vistaBlog()), cumplimiento: vistaCumplimiento, solicitudes: vistaSolicitudes, cuentas: vistaCuentas, historial: vistaHistorial, canal: vistaCanal, cuenta: vistaCuenta, ficha: () => vistaFicha(null), fichas: () => (arg ? vistaFicha(decodeURIComponent(arg)) : vistaFichas()) };
     (vistas[ruta] || vistaContenidos)();
   }
 
@@ -938,6 +942,178 @@
       ev.preventDefault();
       try { await api.canalActualizar(f.closest('[data-canal-id]').dataset.canalId, f.estado.value, f.respuesta.value, f.notas.value); aviso('Guardado.', 'ok'); vistaCanal(); }
       catch (er) { aviso(er.message, 'error'); }
+    };
+  }
+
+  // ── Fichas del personal ──
+  // Nombres que salen en la web (equipo directivo y profesorado de cada
+  // departamento), para que la dirección vea quién tiene ficha.
+  function personasDeLaWeb() {
+    const D = window.NSD_DEPARTAMENTOS || {}; const F = window.NSD_FICHA;
+    const m = new Map();
+    if (!F) return m;
+    const poner = (nombre, donde) => {
+      const slug = F.slugPersona(nombre);
+      if (!m.has(slug)) m.set(slug, { slug, nombre, donde: [] });
+      if (m.get(slug).donde.indexOf(donde) < 0) m.get(slug).donde.push(donde);
+    };
+    const dir = D.DIRECCION || { direccion: [], gestion: [], otros: [] };
+    [...dir.direccion, ...dir.gestion, ...(dir.otros || [])].forEach((x) => poner(x.nombre, x.cargo));
+    (D.DEPARTAMENTOS || []).forEach((d) => {
+      const pub = ((contenidos[d.id] || {}).profesorado || {}).valor;
+      const lineas = Array.isArray(pub) && pub.length ? pub : ((d.defecto || {}).profesorado || []);
+      lineas.filter(Boolean).forEach((l) => poner(F.persona(l).nombre, d.nombre));
+    });
+    return m;
+  }
+  const tarjetaVista = (f) => {
+    const F = window.NSD_FICHA;
+    const ini = F ? F.persona(f.nombre || '').iniciales : '';
+    return `<div class="persona persona--responsable pnl-ficha-vista" aria-hidden="true">
+      <span class="persona__avatar">${esc(ini)}${f.foto ? `<img src="${esc(f.foto)}" alt="" />` : ''}</span>
+      <span class="persona__txt"><span class="persona__nombre">${esc(f.nombre)}</span><span class="persona__cargo">${esc(f.frase || 'Así se verá tu tarjeta')}</span></span></div>`;
+  };
+
+  async function vistaFicha(slug) {
+    pintar('<p class="pnl-cargando">Cargando la ficha…</p>');
+    let f;
+    let lista = null;
+    try {
+      if (slug) {
+        if (!yo.es_directiva) return vistaFicha(null);
+        lista = await api.fichas();
+        f = lista.find((x) => x.slug === slug);
+        if (!f) { pintar('<div class="pnl-vacio"><h1>No existe esa ficha</h1><p><a href="#fichas">Volver a las fichas</a></p></div>'); return; }
+      } else {
+        f = await api.miFicha();
+      }
+    } catch (e) {
+      pintar(`<div class="pnl-vacio"><h1>No se ha podido cargar la ficha</h1><p>${esc(e.message)}</p><p class="pnl-ayuda">Si las fichas son nuevas, quien administra la web tiene que ejecutar <code>supabase/05_personas.sql</code> en Supabase.</p></div>`, 'Ficha');
+      return;
+    }
+    const mia = !slug;
+    const cuentas = yo.es_directiva && !mia ? (usuarios && usuarios.length ? usuarios : await api.usuarios().catch(() => [])) : [];
+    const anio = new Date().getFullYear();
+    pintar(`<header class="pnl-titular">${mia ? '' : '<p><a href="#fichas"><i class="bi bi-arrow-left" aria-hidden="true"></i> Fichas del personal</a></p>'}
+        <h1>${mia ? 'Mi ficha' : esc(f.nombre)}</h1>
+        <p>${mia ? 'Es lo que ve cualquiera al pulsar tu tarjeta en la web (organigrama, tu departamento, tus entradas del blog). Solo tú y la dirección podéis cambiarla.' : 'Ficha pública de esta persona. La dirección puede editarla y decidir qué cuenta del panel es suya.'}</p></header>
+      <div class="pnl-ficha">
+        <form class="pnl-form" data-form-ficha>
+          <fieldset class="pnl-campo pnl-foto"><legend class="pnl-campo__etiqueta">Foto</legend>
+            <div class="pnl-ficha__foto" data-foto-vista>${f.foto ? `<img src="${esc(f.foto)}" alt="" />` : '<span><i class="bi bi-person-bounding-box" aria-hidden="true"></i></span>'}</div>
+            <input type="hidden" name="foto" value="${esc(f.foto || '')}" />
+            <div class="pnl-acciones">
+              <label class="btn btn--ghost btn--sm pnl-subir"><i class="bi bi-upload" aria-hidden="true"></i> ${f.foto ? 'Cambiar foto' : 'Subir foto'}<input type="file" accept="image/*" data-subir-retrato class="sr-only" /></label>
+              <button type="button" class="btn btn--ghost btn--sm pnl-peligro" data-quitar-retrato${f.foto ? '' : ' hidden'}>Quitar foto</button>
+            </div>
+            <p class="pnl-ayuda">Una foto de cara, con buena luz. Se recorta en cuadrado. Opcional: si no hay foto, se ven tus iniciales.</p>
+          </fieldset>
+          <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="fFrase">Una frase tuya</label>
+            <input id="fFrase" name="frase" value="${esc(f.frase || '')}" maxlength="160" placeholder="Lo que más me gusta de enseñar es…" /></div>
+          <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="fBio">Presentación</label>
+            <textarea id="fBio" name="bio" rows="7" maxlength="1500" aria-describedby="fBioAyuda" placeholder="Quién eres, qué das en el colegio, qué te gusta trabajar con los alumnos…">${esc(f.bio || '')}</textarea>
+            <p class="pnl-ayuda" id="fBioAyuda">Mínimo 80 caracteres si la rellenas; hasta 1500. Línea en blanco = párrafo nuevo. Nada de datos privados (teléfono, dirección…).</p></div>
+          <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="fForm">Formación</label>
+            <input id="fForm" name="formacion" value="${esc(f.formacion || '')}" maxlength="400" placeholder="Licenciada en Filología Inglesa. Máster en Educación Bilingüe." /></div>
+          <div class="pnl-fila">
+            <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="fDesde">En el colegio desde</label>
+              <input id="fDesde" name="desde" type="number" inputmode="numeric" min="1957" max="${anio}" value="${esc(f.desde || '')}" placeholder="${anio - 5}" /></div>
+            <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="fCorreo">Correo del colegio</label>
+              <input id="fCorreo" name="correo" type="email" value="${esc(f.correo || '')}" maxlength="120" placeholder="nombre@colegionsdolores.es" aria-describedby="fCorreoAyuda" />
+              <p class="pnl-ayuda" id="fCorreoAyuda">Opcional. Solo correos @colegionsdolores.es.</p></div>
+          </div>
+          <div class="pnl-acciones"><button type="submit" class="btn btn--primary">Guardar ficha</button>
+            <a class="btn btn--ghost" href="/centro/persona?p=${encodeURIComponent(f.slug)}" target="_blank" rel="noopener">Ver en la web <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i></a></div>
+        </form>
+        <aside class="pnl-ficha__lado">
+          <p class="pnl-campo__etiqueta">Vista previa de la tarjeta</p>
+          <div data-vista-tarjeta>${tarjetaVista(f)}</div>
+          ${!mia ? `<form class="pnl-form pnl-form--suave" data-enlazar>
+            <h2>Cuenta del panel</h2>
+            <label class="pnl-campo__etiqueta" for="fCuenta">Quién puede editar esta ficha</label>
+            <select id="fCuenta" name="perfil"><option value="">Nadie (solo la dirección)</option>${cuentas.filter((u) => u.estado === 'aprobado').map((u) => `<option value="${esc(u.id)}"${u.id === f.perfil_id ? ' selected' : ''}>${esc(u.nombre)} · ${esc(u.email)}</option>`).join('')}</select>
+            <button type="submit" class="btn btn--ghost btn--sm">Guardar</button>
+          </form>` : ''}
+        </aside>
+      </div>`, mia ? 'Mi ficha' : f.nombre);
+    const form = $('[data-form-ficha]');
+    const refrescar = () => { $('[data-vista-tarjeta]').innerHTML = tarjetaVista({ nombre: f.nombre, foto: form.foto.value, frase: form.frase.value }); };
+    form.addEventListener('input', refrescar);
+    form.addEventListener('change', async (ev) => {
+      const t = ev.target;
+      if (!t.matches('[data-subir-retrato]') || !t.files[0]) return;
+      aviso('Preparando la foto…');
+      try {
+        const url = await api.subirFoto(f.slug, t.files[0]);
+        form.foto.value = url;
+        $('[data-foto-vista]', form).innerHTML = `<img src="${esc(url)}" alt="" />`;
+        $('[data-quitar-retrato]', form).hidden = false;
+        refrescar();
+        aviso('Foto subida. Guarda la ficha para publicarla.', 'ok');
+      } catch (er) { aviso(er.message, 'error'); }
+      t.value = '';
+    });
+    vista.onclick = (ev) => {
+      if (ev.target.closest('[data-quitar-retrato]')) {
+        form.foto.value = '';
+        $('[data-foto-vista]', form).innerHTML = '<span><i class="bi bi-person-bounding-box" aria-hidden="true"></i></span>';
+        ev.target.closest('[data-quitar-retrato]').hidden = true;
+        refrescar();
+      }
+    };
+    vista.onsubmit = async (ev) => {
+      ev.preventDefault();
+      const t = ev.target;
+      try {
+        if (t.matches('[data-form-ficha]')) {
+          const bio = t.bio.value.trim();
+          if (bio && bio.length < 80) throw new Error(`La presentación es muy corta (${bio.length} caracteres). Escribe al menos 80 o déjala vacía.`);
+          const d = t.desde.value ? Number(t.desde.value) : null;
+          if (d && (d < 1957 || d > anio)) throw new Error(`El año tiene que estar entre 1957 y ${anio}.`);
+          const correo = t.correo.value.trim().toLowerCase();
+          if (correo && !/^[a-z0-9._%+-]+@colegionsdolores\.es$/.test(correo)) throw new Error('El correo tiene que ser del colegio (@colegionsdolores.es).');
+          await api.guardarFicha(f.slug, { foto: t.foto.value, frase: t.frase.value.trim(), bio, formacion: t.formacion.value.trim(), desde: d, correo });
+          aviso('Ficha guardada. Ya se ve en la web.', 'ok');
+        } else if (t.matches('[data-enlazar]')) {
+          await api.enlazarFicha(f.slug, t.perfil.value || null);
+          aviso('Cuenta actualizada.', 'ok');
+        }
+      } catch (er) { aviso(er.message, 'error'); }
+    };
+  }
+
+  async function vistaFichas() {
+    if (!yo.es_directiva) return vistaFicha(null);
+    pintar('<p class="pnl-cargando">Cargando fichas…</p>');
+    let lista;
+    try { lista = await api.fichas(); } catch (e) {
+      pintar(`<div class="pnl-vacio"><h1>No se han podido cargar las fichas</h1><p>${esc(e.message)}</p><p class="pnl-ayuda">Quien administra la web tiene que ejecutar <code>supabase/05_personas.sql</code> en Supabase.</p></div>`, 'Fichas');
+      return;
+    }
+    const web = personasDeLaWeb();
+    const porSlug = new Map(lista.map((f) => [f.slug, f]));
+    const todas = [...new Set([...web.keys(), ...porSlug.keys()])].map((slug) => ({ slug, web: web.get(slug), ficha: porSlug.get(slug) }))
+      .sort((a, b) => ((a.ficha || a.web).nombre).localeCompare((b.ficha || b.web).nombre, 'es'));
+    const completas = todas.filter((x) => x.ficha && x.ficha.foto && x.ficha.bio).length;
+    pintar(`<header class="pnl-titular"><h1>Fichas del personal</h1>
+        <p>Cada persona que sale en la web tiene su tarjeta. Aquí ves quién tiene ficha, foto y presentación, y puedes crearlas o editarlas. Cada persona con cuenta edita la suya desde «Mi ficha».</p></header>
+      <p class="pnl-resumen"><strong>${completas}</strong> de ${todas.length} fichas completas (con foto y presentación).</p>
+      <ul class="pnl-fichas">${todas.map((x) => {
+        const f = x.ficha; const nombre = (f || x.web).nombre;
+        const ini = window.NSD_FICHA ? window.NSD_FICHA.persona(nombre).iniciales : '';
+        return `<li class="pnl-fichas__item">
+          <span class="persona__avatar">${esc(ini)}${f && f.foto ? `<img src="${esc(f.foto)}" alt="" />` : ''}</span>
+          <span class="pnl-fichas__txt"><strong>${esc(nombre)}</strong><small>${esc(x.web ? x.web.donde.join(' · ') : 'No sale en ninguna página')}</small></span>
+          <span class="pnl-fichas__estado">${f ? `${f.foto ? '<span class="pnl-insignia pnl-insignia--ok">Foto</span>' : '<span class="pnl-insignia pnl-insignia--falta">Sin foto</span>'}${f.bio ? '<span class="pnl-insignia pnl-insignia--ok">Presentación</span>' : '<span class="pnl-insignia pnl-insignia--falta">Sin presentación</span>'}${f.perfil_id ? '<span class="pnl-insignia">Con cuenta</span>' : ''}` : '<span class="pnl-insignia pnl-insignia--falta">Sin ficha</span>'}</span>
+          ${f ? `<a class="btn btn--ghost btn--sm" href="#fichas/${encodeURIComponent(x.slug)}">Editar</a>` : `<button type="button" class="btn btn--primary btn--sm" data-crear-ficha="${esc(nombre)}">Crear ficha</button>`}
+        </li>`;
+      }).join('')}</ul>`, 'Fichas del personal');
+    vista.onclick = async (ev) => {
+      const b = ev.target.closest('[data-crear-ficha]');
+      if (!b) return;
+      b.disabled = true;
+      try { const slug = await api.crearFicha(b.dataset.crearFicha); location.hash = '#fichas/' + encodeURIComponent(slug); }
+      catch (er) { aviso(er.message, 'error'); b.disabled = false; }
     };
   }
 

@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="/assets/css/animations.css" />
   <link rel="stylesheet" href="/assets/css/pages.css" />
   <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
+  <link rel="stylesheet" href="/assets/css/personas.css" />
   <meta property="og:url" content="https://colegio-nsd.vercel.app/centro/equipo-directivo" />
   <meta property="og:image" content="https://colegio-nsd.vercel.app/assets/img/og-cover.png" />
   <meta property="og:image:width" content="1200" />
@@ -91,7 +92,7 @@
       <header class="section__head">
         <span class="eyebrow" data-reveal>Equipo directivo</span>
         <h2 data-reveal data-reveal-delay="1">Quién dirige el colegio</h2>
-        <p data-reveal data-reveal-delay="2">Cuatro personas al frente de las tres etapas y de la secretaría. Pulsa en cada una para ver de qué se ocupa y cómo contactarla.</p>
+        <p data-reveal data-reveal-delay="2">Cuatro personas al frente de las tres etapas y de la secretaría. Pulsa en cada una para ver de qué se ocupa, cómo contactarla y su ficha.</p>
       </header>
 
       <div class="organigrama" data-equipo>
@@ -100,7 +101,7 @@
           <p class="organigrama__etiqueta"><i class="bi bi-diagram-2" aria-hidden="true"></i> Dirección</p>
           <div class="organigrama__fila">
 
-            <article class="dir-card dir-card--principal">
+            <article class="dir-card dir-card--principal" data-persona="jesus-blazquez-del-mazo">
               <button type="button" class="dir-card__ficha" aria-expanded="false" aria-controls="dir-jesus-b">
                 <span class="dir-card__medio">
                   <span class="hueco hueco--color-1" aria-hidden="true"><i class="bi bi-person-bounding-box" aria-hidden="true"></i></span>
@@ -118,10 +119,11 @@
                   <li><i class="bi bi-calendar-check" aria-hidden="true"></i> Reuniones con cita previa en secretaría</li>
                 </ul>
                 <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Pedir cita</a>
+                <a class="btn btn--primary btn--sm" href="/centro/persona?p=jesus-blazquez-del-mazo" data-persona="jesus-blazquez-del-mazo"><i class="bi bi-person-vcard" aria-hidden="true"></i> Ver ficha</a>
               </div>
             </article>
 
-            <article class="dir-card dir-card--principal">
+            <article class="dir-card dir-card--principal" data-persona="jesus-romero-dominguez">
               <button type="button" class="dir-card__ficha" aria-expanded="false" aria-controls="dir-jesus-r">
                 <span class="dir-card__medio">
                   <span class="hueco hueco--color-2" aria-hidden="true"><i class="bi bi-person-bounding-box" aria-hidden="true"></i></span>
@@ -139,6 +141,7 @@
                   <li><i class="bi bi-calendar-check" aria-hidden="true"></i> Reuniones con cita previa en secretaría</li>
                 </ul>
                 <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Pedir cita</a>
+                <a class="btn btn--primary btn--sm" href="/centro/persona?p=jesus-romero-dominguez" data-persona="jesus-romero-dominguez"><i class="bi bi-person-vcard" aria-hidden="true"></i> Ver ficha</a>
               </div>
             </article>
 
@@ -151,7 +154,7 @@
           <p class="organigrama__etiqueta organigrama__etiqueta--suave"><i class="bi bi-diagram-3" aria-hidden="true"></i> Equipo de gestión</p>
           <div class="organigrama__fila">
 
-            <article class="dir-card">
+            <article class="dir-card" data-persona="mariano-caballero-espericueta">
               <button type="button" class="dir-card__ficha" aria-expanded="false" aria-controls="dir-mariano">
                 <span class="dir-card__medio">
                   <span class="hueco hueco--color-3" aria-hidden="true"><i class="bi bi-person-bounding-box" aria-hidden="true"></i></span>
@@ -169,10 +172,11 @@
                   <li><i class="bi bi-cpu" aria-hidden="true"></i> Código Escuela 4.0</li>
                 </ul>
                 <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Pedir cita</a>
+                <a class="btn btn--primary btn--sm" href="/centro/persona?p=mariano-caballero-espericueta" data-persona="mariano-caballero-espericueta"><i class="bi bi-person-vcard" aria-hidden="true"></i> Ver ficha</a>
               </div>
             </article>
 
-            <article class="dir-card">
+            <article class="dir-card" data-persona="laura-hidalgo-macias">
               <button type="button" class="dir-card__ficha" aria-expanded="false" aria-controls="dir-laura">
                 <span class="dir-card__medio">
                   <span class="hueco hueco--color-5" aria-hidden="true"><i class="bi bi-person-bounding-box" aria-hidden="true"></i></span>
@@ -191,6 +195,7 @@
                   <li><i class="bi bi-clock-history" aria-hidden="true"></i> <a href="/familias#secretaria">Horario de atención</a></li>
                 </ul>
                 <a class="btn btn--ghost btn--sm" href="/contacto"><i class="bi bi-envelope" aria-hidden="true"></i> Escribir a secretaría</a>
+                <a class="btn btn--primary btn--sm" href="/centro/persona?p=laura-hidalgo-macias" data-persona="laura-hidalgo-macias"><i class="bi bi-person-vcard" aria-hidden="true"></i> Ver ficha</a>
               </div>
             </article>
 
@@ -212,35 +217,25 @@
         <p data-reveal data-reveal-delay="2">De 3 a 6 años, con una coordinadora de etapa y las tutoras de cada aula.</p>
       </header>
 
-      <ul class="equipo equipo--simple">
-        <li class="equipo__item equipo__item--plano">
-          <span class="equipo__avatar" aria-hidden="true"><span>LR</span></span>
-          <span class="equipo__txt">
-            <span class="equipo__nombre">Laura Ruiz Yerpes</span>
-            <span class="equipo__cargo">Coordinadora de Educación Infantil</span>
-          </span>
-        </li>
-        <li class="equipo__item equipo__item--plano">
-          <span class="equipo__avatar" aria-hidden="true"><span>NB</span></span>
-          <span class="equipo__txt"><span class="equipo__nombre">Noelia del Burgo Rodríguez</span><span class="equipo__cargo">Profesora</span></span>
-        </li>
-        <li class="equipo__item equipo__item--plano">
-          <span class="equipo__avatar" aria-hidden="true"><span>MC</span></span>
-          <span class="equipo__txt"><span class="equipo__nombre">M.ª Carmen Caballero Puerto</span><span class="equipo__cargo">Profesora</span></span>
-        </li>
-        <li class="equipo__item equipo__item--plano">
-          <span class="equipo__avatar" aria-hidden="true"><span>YG</span></span>
-          <span class="equipo__txt"><span class="equipo__nombre">Yolanda González Burgos</span><span class="equipo__cargo">Profesora</span></span>
-        </li>
-        <li class="equipo__item equipo__item--plano">
-          <span class="equipo__avatar" aria-hidden="true"><span>EP</span></span>
-          <span class="equipo__txt"><span class="equipo__nombre">Elena Peinado del Río</span><span class="equipo__cargo">Profesora</span></span>
-        </li>
-        <li class="equipo__item equipo__item--plano">
-          <span class="equipo__avatar" aria-hidden="true"><span>JS</span></span>
-          <span class="equipo__txt"><span class="equipo__nombre">Jennifer Soto Genova</span><span class="equipo__cargo">Profesora</span></span>
-        </li>
-      </ul>
+      <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=laura-ruiz-yerpes" data-persona="laura-ruiz-yerpes">
+      <span class="persona__avatar" aria-hidden="true">LR</span>
+      <span class="persona__txt"><span class="persona__nombre">Laura Ruiz Yerpes</span><span class="persona__cargo">Coordinadora</span></span>
+    </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=noelia-del-burgo-rodriguez" data-persona="noelia-del-burgo-rodriguez">
+      <span class="persona__avatar" aria-hidden="true">NB</span>
+      <span class="persona__txt"><span class="persona__nombre">Noelia del Burgo Rodríguez</span><span class="persona__cargo">Profesorado de la etapa</span></span>
+    </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=m-carmen-caballero-puerto" data-persona="m-carmen-caballero-puerto">
+      <span class="persona__avatar" aria-hidden="true">MC</span>
+      <span class="persona__txt"><span class="persona__nombre">M.ª Carmen Caballero Puerto</span><span class="persona__cargo">Profesorado de la etapa</span></span>
+    </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=yolanda-gonzalez-burgos" data-persona="yolanda-gonzalez-burgos">
+      <span class="persona__avatar" aria-hidden="true">YG</span>
+      <span class="persona__txt"><span class="persona__nombre">Yolanda González Burgos</span><span class="persona__cargo">Profesorado de la etapa</span></span>
+    </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=elena-peinado-del-rio" data-persona="elena-peinado-del-rio">
+      <span class="persona__avatar" aria-hidden="true">EP</span>
+      <span class="persona__txt"><span class="persona__nombre">Elena Peinado del Río</span><span class="persona__cargo">Profesorado de la etapa</span></span>
+    </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=jennifer-soto-genova" data-persona="jennifer-soto-genova">
+      <span class="persona__avatar" aria-hidden="true">JS</span>
+      <span class="persona__txt"><span class="persona__nombre">Jennifer Soto Genova</span><span class="persona__cargo">Profesorado de la etapa</span></span>
+    </a></li></ul>
     </div>
   </section>
 
@@ -294,5 +289,10 @@
   <script src="/assets/js/equipo.js" defer></script>
   <script src="/assets/js/partials.js" defer></script>
   <script src="/assets/js/nsd-arriba.js" defer></script>
+  <script src="/assets/js/cms-config.js" defer></script>
+  <script src="/assets/js/cms.js" defer></script>
+  <script src="/assets/js/departamentos-datos.js" defer></script>
+  <script src="/assets/js/departamentos.js" defer></script>
+  <script src="/assets/js/personas.js" defer></script>
 </body>
 </html>
