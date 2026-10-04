@@ -83,7 +83,9 @@
       { clave: 'resultados', etiqueta: 'Resultados de las pruebas externas de inglés', tipo: 'filas',
         columnas: [{ clave: 'curso', etiqueta: 'Curso y prueba' }, { clave: 'resultado', etiqueta: 'Resultado' }],
         ayuda: 'La normativa de Madrid pide publicar los resultados de las pruebas externas, también las de bilingüismo.' },
-      Object.assign({}, PROGRAMACION, { obligatorio: false, etiqueta: 'Documentos del programa (PDF)' })
+      Object.assign({}, PROGRAMACION, { obligatorio: false, etiqueta: 'Documentos del programa (PDF)' }),
+      { clave: 'profesorado', etiqueta: 'Profesorado y auxiliares', tipo: 'lista',
+        ayuda: 'Una persona por línea. Por ejemplo: «Primaria · Nombre Apellidos (coordinadora)». Nada de correos personales.' }
     ],
     noticias: [
       { clave: 'breves', etiqueta: 'Comunicados breves', tipo: 'noticias',
