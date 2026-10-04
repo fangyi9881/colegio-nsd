@@ -162,7 +162,7 @@ const DOCUMENTOS = [
     etiquetas: ['alexia', 'notas', 'calificaciones', 'faltas', 'tutor', 'comunicaciones', 'app'], actualizado: '2026-09' },
   { titulo: 'Raíces · Comunidad de Madrid', descripcion: 'Plataforma oficial de gestión académica de la Comunidad de Madrid.', categoria: 'plataformas', tipo: 'enlace', url: 'https://raices.madrid.org/',
     etiquetas: ['raices', 'comunidad de madrid', 'oficial', 'expediente'], actualizado: '2026-09' },
-  { titulo: 'Google Classroom', descripcion: 'Tareas, materiales y entregas de cada clase.', categoria: 'plataformas', tipo: 'enlace', url: 'https://classroom.google.com/',
+  { titulo: 'Google Classroom', descripcion: 'Tareas, materiales y entregas de cada clase.', categoria: 'plataformas', tipo: 'enlace', url: 'https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fclassroom.google.com%2F',
     etiquetas: ['classroom', 'google', 'tareas', 'deberes', 'clase'], actualizado: '2026-10' },
   { titulo: 'Información a las familias', descripcion: 'Ideario, proyecto educativo, normas, servicios y precios, programas y resultados de pruebas externas.', categoria: 'normativa', tipo: 'pagina', url: '/familias/informacion',
     etiquetas: ['informacion', 'precios', 'resultados', 'pruebas externas', 'proyecto educativo', 'transparencia'], actualizado: '2026-10' },

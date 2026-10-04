@@ -257,7 +257,7 @@
         <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="drawer__platform-btn">
           <i class="bi bi-tree"></i> Raíces
         </a>
-        <a href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer" class="drawer__platform-btn">
+        <a href="https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fclassroom.google.com%2F" target="_blank" rel="noopener noreferrer" class="drawer__platform-btn">
           <i class="bi bi-easel"></i> Classroom
         </a>
       </div>
