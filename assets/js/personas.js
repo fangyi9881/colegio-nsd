@@ -223,7 +223,7 @@
     Promise.all([leerCargos(), leerFichas()]).then(([c, f]) => {
       const datos = c.get(slug); const fi = f.get(slug);
       if (!/^[a-z0-9-]{3,80}$/.test(slug) || (!datos && !fi)) {
-        pagina.innerHTML = '<div class="ficha"><h1 class="ficha-nombre">No encontramos esta ficha</h1><p>Puede que el enlace esté mal copiado. Todo el equipo está en el <a href="/centro/organigrama">organigrama</a>.</p></div>';
+        pagina.innerHTML = '<div class="ficha ficha--vacia"><h1 class="ficha-nombre">No encontramos esta ficha</h1><p>Puede que el enlace esté mal copiado. Todo el equipo está en el <a href="/centro/organigrama">organigrama</a>.</p></div>';
         return;
       }
       const nombre = (fi && fi.nombre) || datos.nombre;
