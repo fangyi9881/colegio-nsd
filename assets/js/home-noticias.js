@@ -51,14 +51,13 @@
       <div class="act-card__foto">
         ${window.NSD_PORTADA(n, '')}
         <div class="act-card__insignias">
-          <span class="act-card__cat"><i class="bi ${c.icono || 'bi-tag'}" aria-hidden="true"></i>${esc(c.nombre || n.categoria)}</span>
+          <span class="act-card__cat">${esc(c.nombre || n.categoria)}</span>
           ${i === 0 ? '<span class="act-card__nuevo">Nuevo</span>' : ''}
         </div>
       </div>
       <div class="act-card__cuerpo">
         <p class="act-card__meta">
-          <span><i class="bi bi-calendar-event" aria-hidden="true"></i> ${fecha(n.fecha)}</span>
-          <span><i class="bi bi-journal-richtext" aria-hidden="true"></i> ${TIPOS[n.tipo] || ''}</span>
+          <time datetime="${n.fecha}">${fecha(n.fecha)}</time>${TIPOS[n.tipo] ? `<span>${TIPOS[n.tipo]}</span>` : ''}
         </p>
         <h3 class="act-card__titulo">${esc(n.titulo)}</h3>
         <p class="act-card__resumen">${esc(n.resumen)}</p>
@@ -118,7 +117,7 @@
       ? lista.map((_, i) => `<button type="button" class="act-punto" data-act-punto aria-current="${i === 0}" aria-label="Ir a la noticia ${i + 1}"><span></span></button>`).join('')
       : '';
 
-    const nav = caja.querySelector('[data-act-nav]');
+    const nav = (hueco || caja).querySelector('[data-act-nav]');
     if (nav) nav.hidden = lista.length < 2;
 
     revelar(caja.querySelector('[data-act-pistabox]'));
@@ -136,37 +135,39 @@
     }, 80);
   }
 
-  caja.innerHTML = `
+  const opcion = (k, nombre, n) => `<option value="${k}">${esc(nombre)} (${n})</option>`;
+  const controles = `
     <div class="act-toolbar">
-      <div class="act-toolbar__filtros" role="group" aria-label="Filtrar las noticias por sección">
-        <button type="button" class="act-filtro is-activo" data-cat="todas" aria-pressed="true">Todo <span>${ordenadas.length}</span></button>
-        ${categoriasConNoticias.map((k) => `<button type="button" class="act-filtro" data-cat="${k}" aria-pressed="false"><i class="bi ${CATS[k].icono}" aria-hidden="true"></i>${esc(CATS[k].nombre)} <span>${ordenadas.filter((n) => n.categoria === k).length}</span></button>`).join('')}
+      <div class="act-select">
+        <label for="actSeccion" class="sr-only">Filtrar las noticias por sección</label>
+        <select id="actSeccion">
+          ${opcion('todas', 'Todas las secciones', ordenadas.length)}
+          ${categoriasConNoticias.map((k) => opcion(k, CATS[k].nombre, ordenadas.filter((n) => n.categoria === k).length)).join('')}
+        </select>
+        <i class="bi bi-chevron-down" aria-hidden="true"></i>
       </div>
-      <div class="act-toolbar__derecha">
-        <div class="act-search">
-          <i class="bi bi-search" aria-hidden="true"></i>
-          <label for="actBuscar" class="sr-only">Buscar en las noticias del colegio</label>
-          <input type="search" id="actBuscar" placeholder="Buscar…" autocomplete="off" enterkeyhint="search">
-        </div>
-        <div class="act-nav" data-act-nav hidden>
-          <button type="button" class="act-nav__btn" data-act-prev aria-label="Noticia anterior"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
-          <button type="button" class="act-nav__btn" data-act-next aria-label="Noticia siguiente"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
-        </div>
+      <div class="act-search">
+        <i class="bi bi-search" aria-hidden="true"></i>
+        <label for="actBuscar" class="sr-only">Buscar en las noticias del colegio</label>
+        <input type="search" id="actBuscar" placeholder="Buscar…" autocomplete="off" enterkeyhint="search">
       </div>
-    </div>
+      <div class="act-nav" data-act-nav hidden>
+        <button type="button" class="act-nav__btn" data-act-prev aria-label="Noticia anterior"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
+        <button type="button" class="act-nav__btn" data-act-next aria-label="Noticia siguiente"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+    </div>`;
+  // En la portada los controles van arriba a la derecha, junto al título.
+  const hueco = document.querySelector('[data-act-controles]');
+  if (hueco) hueco.innerHTML = controles;
+  caja.innerHTML = `${hueco ? '' : controles}
     <div class="act-pistabox" data-act-pistabox></div>
     <div class="act-puntos" data-act-puntos></div>
     <p class="act-pie"><a class="btn btn--ghost" href="/blog">Ver el blog y todas las noticias <i class="bi bi-arrow-right" aria-hidden="true"></i></a></p>`;
+  const zona = hueco || caja;
 
-  caja.querySelector('.act-toolbar__filtros').addEventListener('click', (e) => {
-    const b = e.target.closest('[data-cat]');
-    if (!b) return;
-    categoria = b.dataset.cat;
-    caja.querySelectorAll('[data-cat]').forEach((x) => { const si = x === b; x.classList.toggle('is-activo', si); x.setAttribute('aria-pressed', String(si)); });
-    pintar();
-  });
-  caja.querySelector('#actBuscar').addEventListener('input', (e) => { consulta = e.target.value; pintar(); });
-  caja.addEventListener('click', (e) => {
+  zona.querySelector('#actSeccion').addEventListener('change', (e) => { categoria = e.target.value; pintar(); });
+  zona.querySelector('#actBuscar').addEventListener('input', (e) => { consulta = e.target.value; pintar(); });
+  (caja.closest('section') || caja).addEventListener('click', (e) => {
     if (e.target.closest('[data-act-prev]')) irA(indice - 1, filtrar());
     if (e.target.closest('[data-act-next]')) irA(indice + 1, filtrar());
     const punto = e.target.closest('[data-act-punto]');
