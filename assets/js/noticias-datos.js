@@ -48,7 +48,13 @@ window.NSD_CATEGORIAS = {
   servicios:   { nombre: 'Servicios',   icono: 'bi-cup-hot' },
   comunicados: { nombre: 'Comunicados', icono: 'bi-megaphone' },
   deporte:     { nombre: 'Deporte',     icono: 'bi-dribbble' },
-  academia:    { nombre: 'Academia',    icono: 'bi-trophy' }
+  academia:    { nombre: 'Academia',    icono: 'bi-trophy' },
+  // Las usan sobre todo las entradas que publica cada etapa o departamento
+  // desde el panel (ver supabase/03_blog.sql).
+  infantil:    { nombre: 'Infantil',    icono: 'bi-balloon-heart' },
+  primaria:    { nombre: 'Primaria',    icono: 'bi-book' },
+  orientacion: { nombre: 'Orientación', icono: 'bi-compass' },
+  bilinguismo: { nombre: 'Bilingüismo', icono: 'bi-translate' }
 };
 
 window.NSD_NOTICIAS = [
@@ -214,7 +220,11 @@ window.NSD_TONOS = {
   servicios:   ['#9A5B00', '#F0B95C'],
   comunicados: ['#3C4A54', '#8FA3B0'],
   deporte:     ['#B1420A', '#F2954A'],
-  academia:    ['#6B2D8C', '#B37AD1']
+  academia:    ['#6B2D8C', '#B37AD1'],
+  infantil:    ['#A23E6E', '#E68BB4'],
+  primaria:    ['#1F6F78', '#5FC0C8'],
+  orientacion: ['#4A5A1E', '#A3B85A'],
+  bilinguismo: ['#24407A', '#7C9BD9']
 };
 
 window.NSD_PORTADA = function (n, clase) {

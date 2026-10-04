@@ -160,5 +160,19 @@
   // no el del día en que se generó la página.
   const pintar = (pub) => { caja.innerHTML = htmlFicha(dep, esquema, pub); };
   if (!raiz.NSD_CMS.activo) { pintar({}); return; }
-  raiz.NSD_CMS.leer([dep.id]).then((d) => pintar(d[dep.id] || {}));
+  raiz.NSD_CMS.leer([dep.id]).then((d) => pintar(d[dep.id] || {})).then(() => raiz.NSD_CMS.leerEntradas({ ambito: dep.id, limite: 4 })).then((lista) => {
+    // Lo último que el departamento ha publicado en el blog
+    const cuerpo = caja.querySelector('.dep-ficha__cuerpo');
+    if (!cuerpo || !lista || !lista.length) return;
+    const MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+    const items = lista.map((e) => {
+      const [a, m, dd] = String(e.fecha).split('-').map(Number);
+      return `<li><a href="${raiz.NSD_CMS.urlEntrada(e.slug)}">${esc(e.titulo)}</a><time datetime="${esc(e.fecha)}">${dd} ${MES[m - 1]} ${a}</time></li>`;
+    }).join('');
+    cuerpo.insertAdjacentHTML('beforeend', `<section class="dep-bloque dep-blog" id="blog" aria-labelledby="blog-t">
+      <h2 id="blog-t">En el blog</h2>
+      <ul class="dep-blog__lista">${items}</ul>
+      <p><a href="/blog?q=${encodeURIComponent(dep.nombre)}">Ver todas sus entradas <i class="bi bi-arrow-right" aria-hidden="true"></i></a></p>
+    </section>`);
+  });
 })(typeof window !== 'undefined' ? window : globalThis);

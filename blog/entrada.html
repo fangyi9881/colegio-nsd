@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es" data-page="blog">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script src="/assets/js/theme-init.js"></script>
+  <title>Blog · Colegio NSD</title>
+  <meta name="description" content="Entrada del blog del Colegio NSD, publicada por uno de sus departamentos o secciones." />
+  <meta name="theme-color" content="#1FA42C" />
+  <link rel="canonical" href="https://colegio-nsd.vercel.app/blog" data-entrada-canonica />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Blog · Colegio NSD" />
+  <meta property="og:site_name" content="Colegio NSD" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="https://colegio-nsd.vercel.app/assets/img/og-cover.png" />
+  <link rel="icon" type="image/png" href="/assets/img/logo.png" />
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
+  <link rel="stylesheet" href="/assets/css/pages.css" />
+  <link rel="stylesheet" href="/assets/css/nsd-apple.css" />
+</head>
+<body id="top">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div id="site-header"></div>
+
+  <!-- Entradas que publican los departamentos y secciones desde el panel.
+       La dirección es /blog/entrada?e=<slug>; el contenido lo pinta
+       assets/js/entrada.js con lo que devuelve la base de datos. -->
+  <main id="contenido" class="post-card" data-entrada aria-busy="true">
+  <a href="/blog" class="post-card__cerrar" data-cerrar-post aria-label="Cerrar y volver al blog"><i class="bi bi-x-lg" aria-hidden="true"></i></a>
+
+  <section class="page-hero entrada-hero" data-entrada-hero>
+    <div class="container page-hero__inner">
+      <div>
+        <nav class="crumbs" aria-label="Migas de pan">
+          <a href="/">Inicio</a> <i class="bi bi-chevron-right" aria-hidden="true"></i>
+          <a href="/blog">Blog</a> <i class="bi bi-chevron-right" aria-hidden="true"></i>
+          <span data-entrada-miga>Entrada</span>
+        </nav>
+        <h1 data-entrada-titulo>Cargando la entrada…</h1>
+        <p data-entrada-resumen></p>
+      </div>
+      <div class="page-hero__meta" data-entrada-meta></div>
+    </div>
+  </section>
+
+  <section class="container article">
+    <article class="prose" data-entrada-cuerpo>
+      <noscript><p>Para leer esta entrada hace falta JavaScript. Puedes ver el resto de noticias en el <a href="/blog">blog</a>.</p></noscript>
+    </article>
+    <aside class="aside" data-entrada-lateral hidden></aside>
+  </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/assets/js/partials.js" defer></script>
+  <script src="/assets/js/nsd-arriba.js" defer></script>
+  <script src="/assets/js/noticias-datos.js" defer></script>
+  <script src="/assets/js/cms-config.js" defer></script>
+  <script src="/assets/js/cms.js" defer></script>
+  <script src="/assets/js/entrada.js" defer></script>
+</body>
+</html>

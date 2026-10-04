@@ -84,7 +84,7 @@
     ],
     noticias: [
       { clave: 'breves', etiqueta: 'Comunicados breves', tipo: 'noticias',
-        ayuda: 'Aparecen en la portada y en el blog. Para un reportaje con fotos, pídelo a quien administra la web.' }
+        ayuda: 'Avisos cortos que aparecen en la portada y en el blog. Para una noticia con texto largo, foto o documento, usa «Blog» en el menú.' }
     ],
     secretaria: [
       { clave: 'aviso', etiqueta: 'Aviso destacado para familias', tipo: 'texto',
@@ -95,10 +95,10 @@
       { clave: 'notas', etiqueta: 'Normas administrativas', tipo: 'lista' }
     ],
     formularios: [
-      { clave: 'lista', etiqueta: 'Formularios', tipo: 'filas', obligatorio: true,
+      { clave: 'lista', etiqueta: 'Formularios adicionales', tipo: 'filas',
         columnas: [{ clave: 'titulo', etiqueta: 'Nombre del formulario' }, { clave: 'para', etiqueta: 'Para qué sirve' },
                    { clave: 'plazo', etiqueta: 'Plazo' }, { clave: 'url', etiqueta: 'Enlace al formulario', tipo: 'url' }],
-        ayuda: 'Pega el enlace del formulario de Google (o del que uséis). Revisa que en el propio formulario aparezca la información de protección de datos.' }
+        ayuda: 'Los cinco formularios de secretaría ya están en la web y se actualizan solos cuando cambian en Google. Aquí solo hace falta añadir otros nuevos: pega su enlace de Google Forms (o del que uséis) y revisa que el formulario incluya la información de protección de datos.' }
     ],
     'informacion-familias': [
       { clave: 'precios', etiqueta: 'Precios de actividades complementarias, extraescolares y servicios', tipo: 'filas', obligatorio: true,

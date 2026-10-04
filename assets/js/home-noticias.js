@@ -21,7 +21,7 @@
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
   const esc = (s) => String(s || '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const normalizar = (s) => (s || '').toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');
+  const normalizar = (s) => (s || '').toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').replace(/[^\p{L}\p{N}\s]/gu, ' ');
   const fecha = (f) => { const [a, m, d] = f.split('-').map(Number); return `${d} ${MESES[m - 1]} ${a}`; };
   const TIPOS = { reportaje: 'Reportaje', comunicado: 'Comunicado', breve: 'Breve' };
 
@@ -40,7 +40,7 @@
     return ordenadas.filter((n) => {
       if (categoria !== 'todas' && n.categoria !== categoria) return false;
       if (!q) return true;
-      const texto = normalizar([n.titulo, n.resumen, (CATS[n.categoria] || {}).nombre].join(' '));
+      const texto = normalizar([n.titulo, n.resumen, (CATS[n.categoria] || {}).nombre, n.firma, (n.etiquetas || []).join(' ')].join(' '));
       return q.split(/\s+/).every((p) => texto.includes(p));
     });
   };

@@ -1060,3 +1060,53 @@ a.doc-row__inner:hover .doc-row__action {
   font-weight: 700;
   letter-spacing: 0;
 }
+
+/* ==========================================================
+   Entradas del blog publicadas desde el panel (/blog/entrada)
+   El color sale de la categoría (NSD_TONOS) y, si hay foto, va
+   debajo del velo. Del tono claro solo se toma una parte para
+   que el texto blanco siga leyéndose bien.
+   ========================================================= */
+.entrada-hero {
+  --t1: #10572C; --t2: #5EBF78;
+  background: linear-gradient(135deg, var(--t1), color-mix(in srgb, var(--t1) 62%, var(--t2)));
+}
+.entrada-hero--foto {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--t1) 94%, transparent), color-mix(in srgb, color-mix(in srgb, var(--t1) 62%, var(--t2)) 88%, transparent)),
+    var(--foto) center / cover;
+}
+.entrada-hero .meta--enlace { color: #fff; text-decoration: none; transition: border-color .2s, background .2s; }
+.entrada-hero .meta--enlace:hover { border-color: var(--yellow-500); background: rgba(255,255,255,.16); }
+.entrada-hero .meta--enlace:focus-visible { outline: 2px solid var(--yellow-500); outline-offset: 2px; }
+main[aria-busy="true"] [data-entrada-titulo] { opacity: .6; }
+
+.entrada-foto { margin: 0 0 28px; }
+.entrada-foto img {
+  display: block; width: 100%; height: auto; max-height: 520px; object-fit: cover;
+  border-radius: var(--radius-lg, 20px); background: var(--surface-sunken);
+}
+.entrada-foto figcaption { margin-top: 8px; font-size: .85rem; color: var(--ink-500); }
+
+.entrada-documento { margin: 28px 0 0; }
+.entrada-documento .btn { gap: 8px; }
+
+.entrada-etiquetas { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 32px 0 0; padding: 0; }
+.entrada-etiquetas li { margin: 0; padding: 0; }
+.entrada-etiquetas li::before { content: none; }
+.entrada-etiquetas a {
+  display: inline-flex; align-items: center; min-height: 32px; padding: 4px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--surface-raised);
+  font-size: .82rem; font-weight: 600; color: var(--ink-700); text-decoration: none;
+  transition: border-color .2s, color .2s;
+}
+.entrada-etiquetas a::before { content: "#"; margin-right: 2px; color: var(--ink-400); }
+.entrada-etiquetas a:hover { border-color: var(--green-600); color: var(--green-700); }
+
+.entrada-copiar {
+  width: 38px; height: 38px; border-radius: 10px; cursor: pointer;
+  background: var(--surface-raised); border: 1px solid var(--border);
+  display: grid; place-items: center; color: var(--ink-700);
+  transition: background .2s, border-color .2s, color .2s;
+}
+.entrada-copiar:hover, .entrada-copiar.is-copiado { background: var(--brand-700); border-color: var(--brand-700); color: #fff; }

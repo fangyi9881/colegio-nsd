@@ -317,3 +317,11 @@ details.info-bloque .pliegue__cab > h2 { font-size: clamp(1.05rem, 1rem + .4vw, 
 .gform__pliegue > .pliegue__cab > h3 { font-size: 1.02rem; flex: 1; }
 .gform__cuenta { flex: none; padding: 3px 10px; border-radius: 999px; background: var(--brand-700); color: #fff; font-size: .76rem; font-weight: 800; }
 .gform__pliegue .actividad:last-child { border-bottom: 0; }
+
+/* Lo último que el departamento ha publicado en el blog */
+.dep-blog__lista { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 2px; }
+.dep-blog__lista li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--border); margin: 0; }
+.dep-blog__lista li::before { content: none; }
+.dep-blog__lista a { font-weight: 600; color: var(--green-700); }
+.dep-blog__lista time { flex-shrink: 0; font-size: .82rem; color: var(--ink-500); }
+@media (max-width: 520px) { .dep-blog__lista li { flex-direction: column; gap: 2px; } }

@@ -4,6 +4,8 @@
    Vistas (por el #hash de la dirección):
      #contenidos              lo que puedo editar
      #contenidos/<ámbito>     editor de un ámbito
+     #blog                    entradas del blog que puedo editar
+     #blog/nueva · #blog/<id> editor de una entrada
      #cumplimiento            qué falta por publicar (dirección)
      #solicitudes             cuentas pendientes de aprobar (dirección)
      #cuentas                 cuentas y permisos (dirección)
@@ -55,7 +57,75 @@
     if (!a || a.tipo === 'especial' || !yo) return false;
     return yo.es_directiva || (yo.ambitos || []).indexOf(id) >= 0;
   };
-  const defectoDe = (id) => ((DEPS.find((d) => d.id === id) || {}).defecto) || {};
+  // Lo que se ve «de serie» en la web mientras nadie lo publique desde el
+  // panel: lo de departamentos-datos.js y lo que ya está escrito en las
+  // páginas (data-cms). Así el panel no da por pendiente lo que la web ya
+  // enseña. Lo marcado data-cms-provisional o con «pendiente» no cuenta.
+  const DEF_HTML = {};
+  const defectoDe = (id) => Object.assign({}, DEF_HTML[id] || {}, ((DEPS.find((d) => d.id === id) || {}).defecto) || {});
+  const PAGINAS_CON_CMS = ['/familias/informacion', '/familias/evaluacion', '/familias', '/admision', '/aviso-legal', '/privacidad', '/proteccion-infancia', '/canal-informante'];
+
+  function textoEnLinea(nodo) {
+    let out = '';
+    nodo.childNodes.forEach((n) => {
+      if (n.nodeType === 3) out += n.textContent;
+      else if (n.nodeType === 1) {
+        const t = n.tagName;
+        if (t === 'A') out += `[${n.textContent.trim()}](${n.getAttribute('href') || ''})`;
+        else if (t === 'STRONG' || t === 'B') out += `**${n.textContent.trim()}**`;
+        else if (t === 'BR') out += ' ';
+        else if (!n.matches('[aria-hidden="true"], .sr-only, script, style')) out += textoEnLinea(n);
+      }
+    });
+    return out.replace(/\s+/g, ' ').trim();
+  }
+  function valorDeHtml(nodo) {
+    const tipo = nodo.getAttribute('data-cms-tipo') || 'texto';
+    if (tipo === 'texto' || tipo === 'email') return nodo.textContent.replace(/\s+/g, ' ').trim();
+    if (tipo === 'url') { const a = nodo.querySelector('a[href]'); return a ? a.getAttribute('href') : ''; }
+    if (tipo === 'lista') return [...nodo.querySelectorAll('li')].map(textoEnLinea).filter(Boolean);
+    if (tipo === 'parrafos') {
+      const bloques = [];
+      [...nodo.children].forEach((h) => {
+        if (/^H[2-4]$/.test(h.tagName)) bloques.push((h.tagName === 'H2' ? '## ' : '### ') + h.textContent.trim());
+        else if (h.tagName === 'UL' || h.tagName === 'OL') bloques.push([...h.children].map((li) => '- ' + textoEnLinea(li)).join('\n'));
+        else if (h.tagName === 'P') bloques.push(textoEnLinea(h));
+      });
+      return bloques.filter(Boolean).join('\n\n');
+    }
+    if (tipo === 'filas') {
+      const cols = (nodo.getAttribute('data-cms-columnas') || '').split('|').filter(Boolean).map((x) => x.split(':'));
+      return [...nodo.querySelectorAll('tbody tr')].map((tr) => {
+        const celdas = [...tr.children];
+        const f = {};
+        cols.forEach(([clave, , t], i) => {
+          const c = celdas[i];
+          if (!c) return;
+          const a = c.querySelector('a[href]');
+          f[clave] = t === 'url' ? (a ? a.getAttribute('href') : '') : textoEnLinea(c);
+        });
+        return f;
+      }).filter((f) => Object.values(f).some(Boolean));
+    }
+    return '';
+  }
+  async function cargarDefectosHtml() {
+    const curso = (() => { const d = new Date(); const a = d.getFullYear(); return d.getMonth() >= 7 ? `${a}-${a + 1}` : `${a - 1}-${a}`; })();
+    const leerPagina = (ruta) => fetch(ruta, { credentials: 'same-origin' }).then((r) => (r.ok ? r.text() : '')).catch(() => '');
+    const paginas = await Promise.race([Promise.all(PAGINAS_CON_CMS.map(leerPagina)), new Promise((r) => setTimeout(() => r([]), 6000))]);
+    paginas.forEach((html) => {
+      if (!html) return;
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      doc.querySelectorAll('[data-cms]').forEach((nodo) => {
+        const [amb, clave] = nodo.getAttribute('data-cms').split(':');
+        if (!amb || !clave || nodo.hasAttribute('data-cms-provisional') || nodo.querySelector('.dep-pendiente')) return;
+        const v = nodo.hasAttribute('data-curso-actual') ? curso : valorDeHtml(nodo);
+        if (vacio(v)) return;
+        DEF_HTML[amb] = DEF_HTML[amb] || {};
+        if (vacio(DEF_HTML[amb][clave])) DEF_HTML[amb][clave] = v;
+      });
+    });
+  }
 
   let temporizador;
   function aviso(texto, tipo) {
@@ -114,7 +184,8 @@
     }
 
     try {
-      ambitos = await api.ambitos();
+      const [amb, , ] = await Promise.all([api.ambitos(), cargarDefectosHtml()]);
+      ambitos = amb;
       const ids = yo.es_directiva ? null : yo.ambitos;
       contenidos = await api.contenidos(ids);
     } catch (e) { aviso(e.message, 'error'); }
@@ -133,6 +204,7 @@
 
   async function construirMenu() {
     const items = [['contenidos', 'bi-pencil-square', yo.es_directiva ? 'Contenido de la web' : 'Mis contenidos']];
+    if (ambitos.some((a) => puedeEditar(a.id))) items.push(['blog', 'bi-journal-richtext', 'Blog']);
     if (yo.es_directiva) {
       items.push(['cumplimiento', 'bi-clipboard-check', 'Qué falta publicar']);
       items.push(['solicitudes', 'bi-person-plus', 'Solicitudes']);
@@ -165,7 +237,7 @@
   function enrutar() {
     const [ruta, arg] = (location.hash.slice(1) || 'contenidos').split('/');
     $$('[data-ruta]').forEach((a) => { if (a.dataset.ruta === ruta) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-    const vistas = { contenidos: () => (arg ? vistaEditor(decodeURIComponent(arg)) : vistaContenidos()), cumplimiento: vistaCumplimiento, solicitudes: vistaSolicitudes, cuentas: vistaCuentas, historial: vistaHistorial, canal: vistaCanal, cuenta: vistaCuenta };
+    const vistas = { contenidos: () => (arg ? vistaEditor(decodeURIComponent(arg)) : vistaContenidos()), blog: () => (arg ? vistaEntrada(decodeURIComponent(arg)) : vistaBlog()), cumplimiento: vistaCumplimiento, solicitudes: vistaSolicitudes, cuentas: vistaCuentas, historial: vistaHistorial, canal: vistaCanal, cuenta: vistaCuenta };
     (vistas[ruta] || vistaContenidos)();
   }
 
@@ -448,19 +520,257 @@
     });
   }
 
+  // ── Blog: entradas que publica cada departamento o sección ──
+  // La clasificación la decide la base de datos (supabase/03_blog.sql):
+  // dirección y secretaría la eligen; el resto lleva la de su ámbito.
+  const hoyIso = () => { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); };
+  const estadoEntrada = (e) => (!e.publicado ? ['Borrador', ''] : e.fecha > hoyIso() ? ['Programada · ' + fecha(e.fecha + 'T12:00'), ''] : ['Publicada', 'pnl-insignia--ok']);
+  const urlEntrada = (slug) => '/blog/entrada?e=' + encodeURIComponent(slug);
+  const nombreCat = (k) => (CATS[k] || {}).nombre || k;
+
+  async function vistaBlog() {
+    const mios = ambitos.filter((a) => puedeEditar(a.id));
+    if (!mios.length) return vistaContenidos();
+    pintar('<p class="pnl-cargando">Cargando entradas…</p>', 'Blog');
+    let lista;
+    try { lista = await api.entradas(); } catch (e) { pintar(`<div class="pnl-vacio"><h1>No se han podido cargar las entradas</h1><p>${esc(e.message)}</p><p class="pnl-ayuda">Si acabáis de estrenar el blog, quien administra la web tiene que ejecutar <code>supabase/03_blog.sql</code> en Supabase.</p></div>`, 'Blog'); return; }
+    const visibles = yo.es_directiva ? lista : lista.filter((e) => puedeEditar(e.ambito_id));
+    pintar(`<header class="pnl-titular pnl-titular--fila"><div><h1>Blog</h1>
+        <p>${yo.es_directiva ? 'Todas las entradas del blog. Puedes publicar en nombre de cualquier departamento o sección y elegir su categoría.' : 'Las entradas de ' + esc(mios.map((a) => a.nombre).join(', ')) + '. La categoría y las etiquetas se ponen solas según tu departamento.'}</p></div>
+        <a class="btn btn--primary" href="#blog/nueva"><i class="bi bi-plus-lg" aria-hidden="true"></i> Nueva entrada</a></header>
+      ${visibles.length ? `<ul class="pnl-entradas">${visibles.map((e) => {
+        const [est, cls] = estadoEntrada(e);
+        return `<li class="pnl-entrada">
+          ${e.imagen ? `<img src="${esc(e.imagen)}" alt="" loading="lazy" width="96" height="64" />` : '<span class="pnl-entrada__sinfoto" aria-hidden="true"><i class="bi bi-image"></i></span>'}
+          <div class="pnl-entrada__txt"><a href="#blog/${encodeURIComponent(e.id)}"><strong>${esc(e.titulo)}</strong></a>
+            <small>${esc(fecha(e.fecha + 'T12:00'))} · ${esc(e.firma || '')} · ${esc(nombreCat(e.categoria))}${(e.etiquetas || []).length ? ' · ' + esc(e.etiquetas.join(', ')) : ''}</small></div>
+          <span class="pnl-insignia ${cls}">${esc(est)}</span>
+          <div class="pnl-entrada__acc"><a class="btn btn--ghost btn--sm" href="#blog/${encodeURIComponent(e.id)}">Editar</a>
+          ${e.publicado && e.fecha <= hoyIso() ? `<a class="btn btn--ghost btn--sm" href="${esc(urlEntrada(e.slug))}" target="_blank" rel="noopener">Ver<span class="sr-only"> en la web (se abre en otra pestaña)</span></a>` : ''}</div>
+        </li>`;
+      }).join('')}</ul>` : '<div class="pnl-vacio pnl-vacio--suave"><p>Todavía no hay entradas. Pulsa «Nueva entrada» para escribir la primera.</p></div>'}`, 'Blog');
+  }
+
+  async function vistaEntrada(id) {
+    const mios = ambitos.filter((a) => puedeEditar(a.id));
+    if (!mios.length) return vistaContenidos();
+    let e = { titulo: '', resumen: '', cuerpo: '', fecha: hoyIso(), publicado: true, etiquetas: [], ambito_id: mios[0].id, categoria: '', imagen: '', imagen_alt: '', documento: null };
+    const nueva = id === 'nueva';
+    if (!nueva) {
+      pintar('<p class="pnl-cargando">Cargando la entrada…</p>', 'Blog');
+      try { e = await api.entrada(id); } catch (er) { e = null; aviso(er.message, 'error'); }
+      if (!e || !puedeEditar(e.ambito_id)) { pintar('<div class="pnl-vacio"><h1>No puedes editar esta entrada</h1><p><a href="#blog">Volver al blog</a></p></div>', 'Sin permiso'); return; }
+    }
+    const elige = yo.es_directiva || (yo.ambitos || []).indexOf('secretaria') >= 0;
+    const opcionesFirma = mios.map((a) => `<option value="${esc(a.id)}"${a.id === e.ambito_id ? ' selected' : ''}>${esc(a.nombre)}</option>`).join('');
+    const doc = e.documento && e.documento.url ? e.documento : null;
+    pintar(`<nav class="pnl-migas" aria-label="Migas de pan"><a href="#blog">Blog</a> <i class="bi bi-chevron-right" aria-hidden="true"></i> <span>${nueva ? 'Nueva entrada' : esc(e.titulo)}</span></nav>
+      <header class="pnl-titular pnl-titular--fila"><div><h1>${nueva ? 'Nueva entrada' : 'Editar entrada'}</h1>
+        <p>Sale en el blog y en la portada, mezclada por fecha con el resto de noticias.</p></div>
+        ${!nueva && e.publicado ? `<a class="btn btn--ghost btn--sm" href="${esc(urlEntrada(e.slug))}" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> Ver en la web</a>` : ''}</header>
+      <form class="pnl-form pnl-form--entrada" data-entrada-form novalidate>
+        <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="eTitulo">Titular <span class="pnl-oblig">Obligatorio</span></label>
+          <input id="eTitulo" name="titulo" value="${esc(e.titulo)}" maxlength="160" required /><p class="pnl-error" data-error hidden></p></div>
+        <div class="pnl-fila">
+          <div class="pnl-campo">${mios.length > 1
+            ? `<label class="pnl-campo__etiqueta" for="eFirma">Publica</label><select id="eFirma" name="ambito">${opcionesFirma}</select>`
+            : `<span class="pnl-campo__etiqueta">Publica</span><input name="ambito" type="hidden" value="${esc(mios[0].id)}" /><p class="pnl-fijo">${esc(mios[0].nombre)}</p>`}</div>
+          <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="eFecha">Fecha</label>
+            <input id="eFecha" name="fecha" type="date" value="${esc(e.fecha)}" required aria-describedby="eFechaAyuda" /><p class="pnl-ayuda" id="eFechaAyuda">Con una fecha futura, la entrada aparece ese día.</p></div>
+        </div>
+        <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="eResumen">Resumen</label>
+          <textarea id="eResumen" name="resumen" rows="2" maxlength="400" aria-describedby="eResumenAyuda">${esc(e.resumen)}</textarea><p class="pnl-ayuda" id="eResumenAyuda">Una o dos frases. Es lo que se lee en la tarjeta de la portada y del blog.</p></div>
+        <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="eCuerpo">Texto</label>
+          <textarea id="eCuerpo" name="cuerpo" rows="14" maxlength="40000">${esc(e.cuerpo)}</textarea>
+          <p class="pnl-formato">Línea en blanco = párrafo nuevo · «## » al principio = subtítulo · «- » = lista · [texto](https://enlace) = enlace · **texto** = negrita</p></div>
+        <fieldset class="pnl-campo pnl-foto"><legend class="pnl-campo__etiqueta">Foto de portada</legend>
+          <div class="pnl-foto__vista" data-foto-vista>${e.imagen ? `<img src="${esc(e.imagen)}" alt="" />` : '<span><i class="bi bi-image" aria-hidden="true"></i> Sin foto: se usará el color de la categoría.</span>'}</div>
+          <input type="hidden" name="imagen" value="${esc(e.imagen || '')}" />
+          <div class="pnl-acciones">
+            <label class="btn btn--ghost btn--sm pnl-subir"><i class="bi bi-upload" aria-hidden="true"></i> ${e.imagen ? 'Cambiar foto' : 'Subir foto'}<input type="file" accept="image/*" data-subir-foto class="sr-only" /></label>
+            <button type="button" class="btn btn--ghost btn--sm pnl-peligro" data-quitar-foto${e.imagen ? '' : ' hidden'}>Quitar foto</button>
+          </div>
+          <label class="pnl-campo__etiqueta pnl-campo__etiqueta--sub" for="eAlt">Qué se ve en la foto</label>
+          <input id="eAlt" name="imagen_alt" value="${esc(e.imagen_alt || '')}" maxlength="200" aria-describedby="eAltAyuda" />
+          <p class="pnl-ayuda" id="eAltAyuda">Una frase para quien no puede ver la imagen. Ejemplo: «Alumnos de 2.º de ESO en el laboratorio». Evitad fotos donde se reconozca a alumnos sin autorización de imagen.</p>
+          <p class="pnl-error" data-error hidden></p>
+        </fieldset>
+        <fieldset class="pnl-campo"><legend class="pnl-campo__etiqueta">Documento adjunto (opcional)</legend>
+          <div data-doc-entrada>${doc ? `<p class="pnl-fijo"><i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> <a href="${esc(doc.url)}" target="_blank" rel="noopener">${esc(doc.titulo || 'Documento')}</a></p>` : ''}</div>
+          <input type="hidden" name="doc_url" value="${esc(doc ? doc.url : '')}" />
+          <label class="pnl-campo__etiqueta pnl-campo__etiqueta--sub" for="eDocTitulo">Título del documento</label>
+          <input id="eDocTitulo" name="doc_titulo" value="${esc(doc ? doc.titulo || '' : '')}" maxlength="120" placeholder="Circular, autorización, programa…" />
+          <div class="pnl-acciones">
+            <label class="btn btn--ghost btn--sm pnl-subir"><i class="bi bi-upload" aria-hidden="true"></i> Subir PDF<input type="file" accept="application/pdf" data-subir-doc class="sr-only" /></label>
+            <button type="button" class="btn btn--ghost btn--sm pnl-peligro" data-quitar-doc-entrada${doc ? '' : ' hidden'}>Quitar documento</button>
+          </div>
+        </fieldset>
+        <fieldset class="pnl-campo pnl-clasif" data-clasif><legend class="pnl-campo__etiqueta">Categoría y etiquetas</legend>
+          ${elige ? `<p class="pnl-ayuda">Puedes elegirlas. Si dejas las etiquetas vacías, se ponen solas.</p>
+            <div class="pnl-fila">
+              <div><label class="pnl-campo__etiqueta pnl-campo__etiqueta--sub" for="eCat">Categoría</label>
+                <select id="eCat" name="categoria">${Object.keys(CATS).map((k) => `<option value="${esc(k)}"${k === e.categoria ? ' selected' : ''}>${esc(CATS[k].nombre)}</option>`).join('')}</select></div>
+              <div><label class="pnl-campo__etiqueta pnl-campo__etiqueta--sub" for="eEtq">Etiquetas</label>
+                <input id="eEtq" name="etiquetas" value="${esc((e.etiquetas || []).join(', '))}" maxlength="300" aria-describedby="eEtqAyuda" /></div>
+            </div>
+            <p class="pnl-ayuda" id="eEtqAyuda">Separadas por comas, hasta 8. Sugeridas: <span data-sugeridas>…</span> <button type="button" class="pnl-enlace" data-usar-sugeridas>Usar estas</button></p>`
+          : `<p class="pnl-ayuda">Se ponen solas según quién publica y lo que dice el texto.</p><p class="pnl-fijo" data-sugeridas aria-live="polite">…</p>`}
+        </fieldset>
+        <div class="pnl-campo"><label class="pnl-check"><input type="checkbox" name="publicado"${e.publicado ? ' checked' : ''} /> Publicada (si la desmarcas, queda como borrador y solo la ve quien puede editarla)</label></div>
+        <div class="pnl-guardar"><p class="pnl-guardar__estado" data-estado-guardar>${nueva ? 'Sin guardar.' : 'Sin cambios.'}</p>
+          ${nueva ? '' : '<button type="button" class="btn btn--ghost pnl-peligro" data-borrar-entrada><i class="bi bi-trash" aria-hidden="true"></i> Borrar</button>'}
+          <button type="submit" class="btn btn--primary"><i class="bi bi-cloud-check" aria-hidden="true"></i> ${nueva ? 'Publicar' : 'Guardar cambios'}</button></div>
+      </form>`, nueva ? 'Nueva entrada' : e.titulo);
+
+    const form = $('[data-entrada-form]');
+    const estado = $('[data-estado-guardar]', form);
+    let sucio = false;
+    const marcarSucio = () => { sucio = true; estado.textContent = 'Hay cambios sin guardar.'; form.classList.add('is-sucio'); };
+    window.onbeforeunload = () => (form.isConnected && sucio ? true : undefined);
+    const ambitoActual = () => form.ambito.value;
+    const separar = (t) => t.split(',').map((x) => x.trim()).filter(Boolean).slice(0, 8);
+
+    // Clasificación que pondrá la base de datos, a la vista mientras se escribe
+    let sugeridas = [];
+    let tSug;
+    const actualizarSugerencia = () => {
+      clearTimeout(tSug);
+      tSug = setTimeout(async () => {
+        try {
+          const r = await api.clasificacion(ambitoActual(), form.titulo.value, form.resumen.value, form.cuerpo.value);
+          sugeridas = r.etiquetas || [];
+          const caja = $('[data-sugeridas]', form);
+          if (elige) caja.textContent = sugeridas.length ? sugeridas.join(', ') : 'ninguna';
+          else caja.textContent = `${nombreCat(r.categoria)}${sugeridas.length ? ' · ' + sugeridas.join(', ') : ''}`;
+          if (elige && nueva && !form.dataset.catTocada) form.categoria.value = r.categoria;
+        } catch (er) { const caja = $('[data-sugeridas]', form); if (caja) caja.textContent = '—'; }
+      }, 400);
+    };
+    actualizarSugerencia();
+
+    form.addEventListener('input', (ev) => {
+      marcarSucio();
+      if (/^(titulo|resumen|cuerpo)$/.test(ev.target.name)) actualizarSugerencia();
+    });
+    form.addEventListener('change', async (ev) => {
+      const t = ev.target;
+      marcarSucio();
+      if (t.name === 'ambito') actualizarSugerencia();
+      if (t.name === 'categoria') form.dataset.catTocada = '1';
+      if (t.matches('[data-subir-foto]') && t.files[0]) {
+        aviso('Preparando la foto…');
+        try {
+          const r = await api.subirImagen(ambitoActual(), t.files[0]);
+          form.imagen.value = r.url;
+          $('[data-foto-vista]', form).innerHTML = `<img src="${esc(r.url)}" alt="" />`;
+          $('[data-quitar-foto]', form).hidden = false;
+          if (!form.imagen_alt.value.trim()) form.imagen_alt.focus();
+          aviso('Foto subida. Escribe qué se ve en ella y guarda la entrada.', 'ok');
+        } catch (er) { aviso(er.message, 'error'); }
+        t.value = '';
+      }
+      if (t.matches('[data-subir-doc]') && t.files[0]) {
+        aviso('Subiendo ' + t.files[0].name + '…');
+        try {
+          const url = await api.subirPdf(ambitoActual(), t.files[0]);
+          form.doc_url.value = url;
+          if (!form.doc_titulo.value.trim()) form.doc_titulo.value = t.files[0].name.replace(/\.pdf$/i, '');
+          $('[data-doc-entrada]', form).innerHTML = `<p class="pnl-fijo"><i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> <a href="${esc(url)}" target="_blank" rel="noopener">${esc(form.doc_titulo.value)}</a></p>`;
+          $('[data-quitar-doc-entrada]', form).hidden = false;
+          aviso('PDF subido. Guarda la entrada para publicarlo.', 'ok');
+        } catch (er) { aviso(er.message, 'error'); }
+        t.value = '';
+      }
+    });
+    form.addEventListener('click', async (ev) => {
+      const b = ev.target.closest('button');
+      if (!b) return;
+      if (b.matches('[data-quitar-foto]')) {
+        form.imagen.value = ''; form.imagen_alt.value = '';
+        $('[data-foto-vista]', form).innerHTML = '<span><i class="bi bi-image" aria-hidden="true"></i> Sin foto: se usará el color de la categoría.</span>';
+        b.hidden = true; marcarSucio();
+      } else if (b.matches('[data-quitar-doc-entrada]')) {
+        form.doc_url.value = ''; form.doc_titulo.value = ''; $('[data-doc-entrada]', form).innerHTML = ''; b.hidden = true; marcarSucio();
+      } else if (b.matches('[data-usar-sugeridas]')) {
+        form.etiquetas.value = sugeridas.join(', '); marcarSucio();
+      } else if (b.matches('[data-borrar-entrada]')) {
+        if (!confirmarDosVeces(b, '¿Borrarla? Pulsa otra vez')) return;
+        try { await api.borrarEntrada(id); sucio = false; aviso('Entrada borrada.', 'ok'); location.hash = '#blog'; }
+        catch (er) { aviso(er.message, 'error'); }
+      }
+    });
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const errores = [];
+      const marcarError = (campo, msg) => {
+        const caja = campo.closest('.pnl-campo');
+        const p = caja.querySelector('[data-error]');
+        if (p) { p.textContent = msg; p.hidden = false; }
+        caja.classList.add('is-error');
+        errores.push(campo);
+      };
+      $$('.is-error', form).forEach((c) => { c.classList.remove('is-error'); const p = c.querySelector('[data-error]'); if (p) p.hidden = true; });
+      const titulo = form.titulo.value.trim();
+      if (titulo.length < 3) marcarError(form.titulo, 'Escribe un titular (al menos 3 letras).');
+      if (form.imagen.value && !form.imagen_alt.value.trim()) marcarError(form.imagen_alt, 'Describe la foto en una frase.');
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(form.fecha.value)) { aviso('Pon la fecha de la entrada.', 'error'); return; }
+      if (errores.length) { errores[0].focus(); aviso('Revisa los campos marcados.', 'error'); return; }
+      const datos = {
+        ambito_id: ambitoActual(), titulo, resumen: form.resumen.value.trim(), cuerpo: form.cuerpo.value.replace(/\r/g, '').trim(),
+        fecha: form.fecha.value, publicado: form.publicado.checked,
+        imagen: form.imagen.value || null, imagen_alt: form.imagen.value ? form.imagen_alt.value.trim() : null,
+        documento: form.doc_url.value ? { url: form.doc_url.value, titulo: form.doc_titulo.value.trim() || 'Documento' } : null
+      };
+      if (elige) { datos.categoria = form.categoria.value; datos.etiquetas = separar(form.etiquetas.value); }
+      const boton = form.querySelector('[type="submit"]');
+      boton.disabled = true;
+      try {
+        const r = await api.guardarEntrada(nueva ? null : id, datos);
+        sucio = false; form.classList.remove('is-sucio');
+        aviso(datos.publicado ? (datos.fecha > hoyIso() ? 'Guardada. Se publicará el ' + fecha(datos.fecha + 'T12:00') + '.' : 'Publicada. Ya se ve en el blog.') : 'Guardada como borrador.', 'ok');
+        if (nueva) { location.hash = '#blog/' + encodeURIComponent(r.id); return; }
+        estado.textContent = `Guardado a las ${new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })} · ${nombreCat(r.categoria)}${(r.etiquetas || []).length ? ' · ' + r.etiquetas.join(', ') : ''}.`;
+      } catch (er) { aviso(er.message, 'error'); }
+      boton.disabled = false;
+    });
+  }
+
   // ── Vista: qué falta (dirección) ──
-  function vistaCumplimiento() {
+  // Separado por quién tiene que aportarlo: los datos del centro los da la
+  // dirección; lo de cada departamento, el propio departamento desde su
+  // cuenta. Para estos últimos se dice si ya hay alguien con acceso.
+  async function vistaCumplimiento() {
     if (!yo.es_directiva) return vistaContenidos();
+    if (!usuarios) { try { await cargarUsuarios(); } catch (e) { usuarios = []; } }
     const lista = ambitos.filter((a) => a.tipo !== 'especial' && (ESQ[a.esquema] || []).some((c) => c.obligatorio));
     const filas = lista.map((a) => ({ a, e: estadoAmbito(a) }));
+    const responsables = (id) => usuarios.filter((u) => u.estado === 'aprobado' && u.rol === 'editor' && (u.ambitos || []).indexOf(id) >= 0).map((u) => u.nombre);
+    const GRUPOS = [
+      { titulo: 'Datos del centro', texto: 'Los aporta la dirección (o secretaría). Son pocos datos y algunos los exige la ley a todos los centros.', filtro: (a) => a.tipo === 'seccion', quien: false },
+      { titulo: 'Departamentos y etapas', texto: 'Los escribe cada departamento desde su cuenta: objetivos, criterios de evaluación y calificación, instrumentos y programaciones. Mientras falten, su página lo indica y remite a secretaría.', filtro: (a) => a.tipo !== 'seccion', quien: true }
+    ];
     const completos = filas.filter((f) => f.e.hechos === f.e.total).length;
+    const tabla = (g) => {
+      const fg = filas.filter((f) => g.filtro(f.a));
+      if (!fg.length) return '';
+      const hechos = fg.filter((f) => f.e.hechos === f.e.total).length;
+      return `<section class="pnl-grupo"><h2>${esc(g.titulo)} <span class="pnl-insignia ${hechos === fg.length ? 'pnl-insignia--ok' : ''}">${hechos} de ${fg.length} completos</span></h2><p class="pnl-ayuda">${esc(g.texto)}</p>
+        <div class="pnl-tabla-lista"><table><thead><tr><th scope="col">Apartado</th><th scope="col">Estado</th><th scope="col">Falta</th>${g.quien ? '<th scope="col">Quién lo rellena</th>' : ''}<th scope="col">Última edición</th></tr></thead><tbody>
+        ${fg.map(({ a, e }) => {
+          const r = responsables(a.id);
+          return `<tr><th scope="row"><a href="#contenidos/${encodeURIComponent(a.id)}">${esc(a.nombre)}</a></th>
+          <td><span class="pnl-insignia ${e.hechos === e.total ? 'pnl-insignia--ok' : 'pnl-insignia--falta'}">${e.hechos}/${e.total}</span></td>
+          <td>${e.faltan.length ? esc(e.faltan.join(', ')) : '—'}</td>
+          ${g.quien ? `<td>${r.length ? esc(r.join(', ')) : '<em>Nadie todavía</em>'}</td>` : ''}
+          <td>${e.ultima ? esc(fecha(e.ultima)) : '—'}</td></tr>`;
+        }).join('')}
+        </tbody></table></div></section>`;
+    };
+    const sinNadie = filas.filter((f) => f.a.tipo !== 'seccion' && f.e.hechos < f.e.total && !responsables(f.a.id).length).length;
     pintar(`<header class="pnl-titular"><h1>Qué falta publicar</h1>
-      <p>La normativa obliga a hacer públicos los criterios de evaluación y calificación de cada etapa y materia, la información a las familias (precios, resultados de pruebas externas, proyecto educativo) y los datos legales del centro. <strong>${completos} de ${filas.length}</strong> apartados están completos.</p></header>
-      <div class="pnl-tabla-lista"><table><thead><tr><th scope="col">Apartado</th><th scope="col">Estado</th><th scope="col">Falta</th><th scope="col">Última edición</th></tr></thead><tbody>
-      ${filas.map(({ a, e }) => `<tr><th scope="row"><a href="#contenidos/${encodeURIComponent(a.id)}">${esc(a.nombre)}</a></th>
-        <td><span class="pnl-insignia ${e.hechos === e.total ? 'pnl-insignia--ok' : 'pnl-insignia--falta'}">${e.hechos}/${e.total}</span></td>
-        <td>${e.faltan.length ? esc(e.faltan.join(', ')) : '—'}</td><td>${e.ultima ? esc(fecha(e.ultima)) : '—'}</td></tr>`).join('')}
-      </tbody></table></div>`, 'Qué falta publicar');
+      <p>La normativa obliga a publicar los criterios de evaluación y calificación de cada etapa y materia, la información a las familias y los datos legales del centro. <strong>${completos} de ${filas.length}</strong> apartados están completos. Lo que la web ya enseña de serie cuenta como publicado.</p>
+      ${sinNadie ? `<p class="pnl-nota">${sinNadie} ${sinNadie === 1 ? 'departamento no tiene' : 'departamentos no tienen'} todavía a nadie con cuenta para rellenarlo. Cuando el profesorado pida su cuenta en <a href="/acceso">/acceso</a>, apruébala en <a href="#solicitudes">Solicitudes</a> con su departamento; o rellénalo tú desde aquí si te pasan los textos.</p>` : ''}</header>
+      ${GRUPOS.map(tabla).join('')}`, 'Qué falta publicar');
   }
 
   // ── Selector de ámbitos (aprobar y gestionar cuentas) ──
@@ -578,12 +888,12 @@
     pintar('<p class="pnl-cargando">Cargando historial…</p>');
     let filas;
     try { filas = await api.historial(150); } catch (e) { pintar(`<div class="pnl-vacio"><h1>No se ha podido cargar</h1><p>${esc(e.message)}</p></div>`); return; }
-    const ACC = { insert: 'Publicó', update: 'Cambió', borrar: 'Vació', solicitud: 'Solicitó cuenta', aprobar: 'Aprobó', rechazar: 'Rechazó', suspender: 'Suspendió', reactivar: 'Reactivó', 'cambiar rol': 'Cambió el rol', permisos: 'Cambió permisos' };
+    const ACC = { insert: 'Publicó', update: 'Cambió', borrar: 'Vació', 'blog-publicar': 'Escribió la entrada', 'blog-cambiar': 'Cambió la entrada', 'blog-borrar': 'Borró la entrada', solicitud: 'Solicitó cuenta', aprobar: 'Aprobó', rechazar: 'Rechazó', suspender: 'Suspendió', reactivar: 'Reactivó', 'cambiar rol': 'Cambió el rol', permisos: 'Cambió permisos' };
     const etiquetaCampo = (amb, clave) => { const a = ambito(amb); const c = a && (ESQ[a.esquema] || []).find((x) => x.clave === clave); return c ? c.etiqueta : clave; };
     pintar(`<header class="pnl-titular"><h1>Historial</h1><p>${yo.es_directiva ? 'Todos los cambios de la web y de las cuentas.' : 'Los cambios en lo que puedes editar.'} Si algo se ha cambiado por error, puedes recuperar el valor anterior.</p></header>
       ${filas.length ? `<div class="pnl-tabla-lista"><table><thead><tr><th scope="col">Cuándo</th><th scope="col">Quién</th><th scope="col">Qué</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody>
       ${filas.map((h) => `<tr><td>${esc(fecha(h.fecha, true))}</td><td>${esc(h.autor_email || '—')}</td>
-        <td>${esc(ACC[h.accion] || h.accion)} ${h.ambito_id ? `<strong>${esc(etiquetaCampo(h.ambito_id, h.clave))}</strong> en ${esc((ambito(h.ambito_id) || {}).nombre || h.ambito_id)}` : esc(h.detalle || '')}</td>
+        <td>${esc(ACC[h.accion] || h.accion)} ${h.clave === 'blog' ? `<strong>«${esc(h.detalle || '')}»</strong> de ${esc((ambito(h.ambito_id) || {}).nombre || h.ambito_id)}` : h.ambito_id ? `<strong>${esc(etiquetaCampo(h.ambito_id, h.clave))}</strong> en ${esc((ambito(h.ambito_id) || {}).nombre || h.ambito_id)}` : esc(h.detalle || '')}</td>
         <td>${h.ambito_id && h.valor_anterior != null && puedeEditar(h.ambito_id) ? `<button type="button" class="btn btn--ghost btn--sm" data-restaurar="${esc(h.id)}">Recuperar lo anterior</button>` : ''}</td></tr>`).join('')}
       </tbody></table></div>` : '<div class="pnl-vacio pnl-vacio--suave"><p>Todavía no hay cambios.</p></div>'}`, 'Historial');
     vista.onclick = async (ev) => {

@@ -78,6 +78,50 @@
         return sb.storage.from('documentos').getPublicUrl(ruta).data.publicUrl;
       },
 
+      // ── Blog ──
+      async entradas() {
+        return ok(await sb.from('entradas').select('id,slug,ambito_id,firma,categoria,etiquetas,titulo,resumen,fecha,publicado,imagen,actualizado_en').order('fecha', { ascending: false }).order('creado_en', { ascending: false }).limit(300));
+      },
+      async entrada(id) {
+        return ok(await sb.from('entradas').select('id,slug,ambito_id,firma,categoria,etiquetas,titulo,resumen,cuerpo,imagen,imagen_alt,documento,fecha,publicado').eq('id', id).maybeSingle());
+      },
+      // La base de datos pone slug, autor, firma y (salvo a dirección y
+      // secretaría) la categoría y las etiquetas: lo que mande el panel
+      // para esos campos se ignora.
+      async guardarEntrada(id, datos) {
+        const q = id ? sb.from('entradas').update(datos).eq('id', id) : sb.from('entradas').insert(datos);
+        return ok(await q.select('id,slug,categoria,etiquetas,firma').single());
+      },
+      async borrarEntrada(id) { ok(await sb.from('entradas').delete().eq('id', id)); },
+      async clasificacion(ambito, titulo, resumen, cuerpo) {
+        return ok(await sb.rpc('clasificacion_sugerida', { p_ambito: ambito, p_titulo: titulo || '', p_resumen: resumen || '', p_cuerpo: cuerpo || '' }));
+      },
+      // Reduce la foto a 1600 px como mucho (WebP, o JPEG si el navegador
+      // no sabe hacer WebP) antes de subirla: las fotos del móvil pesan
+      // varios MB y la web tiene que cargar rápido.
+      async subirImagen(ambito, archivo) {
+        if (!/^image\//.test(archivo.type)) throw new Error('Elige una imagen (JPG, PNG o WebP).');
+        if (archivo.size > 25 * 1024 * 1024) throw new Error('La imagen pasa de 25 MB. Elige otra o redúcela antes.');
+        let mapa;
+        try { mapa = await createImageBitmap(archivo); } catch (e) { throw new Error('No se puede leer esa imagen. Prueba con una foto JPG o PNG.'); }
+        const escala = Math.min(1, 1600 / Math.max(mapa.width, mapa.height));
+        const lienzo = document.createElement('canvas');
+        lienzo.width = Math.round(mapa.width * escala);
+        lienzo.height = Math.round(mapa.height * escala);
+        lienzo.getContext('2d').drawImage(mapa, 0, 0, lienzo.width, lienzo.height);
+        if (mapa.close) mapa.close();
+        const aBlob = (tipo) => new Promise((res) => lienzo.toBlob(res, tipo, 0.84));
+        let blob = await aBlob('image/webp');
+        if (!blob || blob.type !== 'image/webp') blob = await aBlob('image/jpeg');
+        if (!blob) throw new Error('No se ha podido preparar la imagen.');
+        if (blob.size > 5 * 1024 * 1024) throw new Error('La imagen sigue pesando demasiado. Prueba con otra.');
+        const ext = blob.type === 'image/webp' ? 'webp' : 'jpg';
+        const limpio = archivo.name.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').replace(/\.[a-z0-9]+$/, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 50) || 'foto';
+        const ruta = `${ambito}/${Date.now()}-${limpio}.${ext}`;
+        ok(await sb.storage.from('imagenes').upload(ruta, blob, { contentType: blob.type, upsert: false }));
+        return { url: sb.storage.from('imagenes').getPublicUrl(ruta).data.publicUrl, ancho: lienzo.width, alto: lienzo.height };
+      },
+
       // ── Cuentas (dirección) ──
       async usuarios() { return ok(await sb.rpc('listar_usuarios')); },
       async aprobar(id, rol, ambitos) { ok(await sb.rpc('aprobar_usuario', { p_id: id, p_rol: rol, p_ambitos: ambitos })); },

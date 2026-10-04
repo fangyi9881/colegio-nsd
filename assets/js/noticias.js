@@ -21,7 +21,7 @@
   };
 
   const esc = (s) => String(s || '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const normalizar = (s) => (s || '').toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');
+  const normalizar = (s) => (s || '').toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').replace(/[^\p{L}\p{N}\s]/gu, ' ');
   const partes = (f) => { const [a, m, d] = f.split('-').map(Number); return { a, m, d }; };
   const fechaLarga = (f) => { const { a, m, d } = partes(f); return `${d} de ${MESES_LARGOS[m - 1]} de ${a}`; };
   // El curso empieza en septiembre: marzo de 2025 es del curso 2024-25
@@ -127,7 +127,7 @@
       if (webActiva !== 'todas' && websDe(n).indexOf(webActiva) < 0) return false;
       if (tipo !== 'todos' && n.tipo !== tipo) return false;
       if (!q) return true;
-      const texto = normalizar([n.titulo, n.resumen, n.texto, (CATS[n.categoria] || {}).nombre].join(' '));
+      const texto = normalizar([n.titulo, n.resumen, n.texto, (CATS[n.categoria] || {}).nombre, n.firma, (n.etiquetas || []).join(' ')].join(' '));
       return q.split(/\s+/).every((p) => texto.includes(p));
     });
   };
@@ -139,7 +139,9 @@
     const cuerpoBreve = n.tipo === 'breve'
       ? (n.texto ? `<details class="diario-breve"><summary>Leer el breve</summary><p>${esc(n.texto)}${n.url ? ` ${enlace(n, 'Más información')}` : ''}</p></details>` : '')
       : `<p class="diario-ir">${enlace(n, `${n.tipo === 'reportaje' ? 'Leer el reportaje' : 'Ver el comunicado'} <i class="bi ${externo(n.url) ? 'bi-box-arrow-up-right' : 'bi-arrow-right'}" aria-hidden="true"></i>`)}</p>`;
-    return `<li class="diario-entrada diario-entrada--${n.tipo}" id="${n.fecha}" data-reveal data-reveal-delay="${(i % 8) + 1}">
+    // El id es la fecha (enlaces #AAAA-MM-DD); si coinciden dos, la segunda lleva sufijo
+    const id = idsUsados[n.fecha] ? `${n.fecha}-${++idsUsados[n.fecha]}` : (idsUsados[n.fecha] = 1, n.fecha);
+    return `<li class="diario-entrada diario-entrada--${n.tipo}" id="${id}" data-reveal data-reveal-delay="${(i % 8) + 1}">
       <time class="diario-fecha" datetime="${n.fecha}" title="${fechaLarga(n.fecha)}"><b>${d}</b><span>${MESES[m - 1]} ${String(a).slice(2)}</span></time>
       <article>
         <a class="diario-entrada__portada" href="${n.url || '#' + n.fecha}" tabindex="-1" aria-hidden="true">${portadaDe(n, 'portada-noticia--mini')}</a>
@@ -178,7 +180,9 @@
     return destacada;
   };
 
+  let idsUsados = {};
   const pintar = () => {
+    idsUsados = {};
     const lista = filtrar();
     const destacada = pintarPortada(lista);
     // Lo que ya sale en la portada no se repite en la línea de tiempo
@@ -214,6 +218,12 @@
     consulta = ''; buscador.value = ''; categoria = 'todas'; tipo = 'todos';
     marcar(chipsCat, 'cat', categoria); marcar(chipsTipo, 'tipo', tipo); pintar(); buscador.focus();
   });
+
+  // Filtros desde la dirección: /blog?q=Matemáticas o /blog?cat=eso
+  // (los usan las etiquetas de cada entrada)
+  const params = new URLSearchParams(location.search);
+  if (params.get('q')) { consulta = params.get('q').slice(0, 80); buscador.value = consulta; }
+  if (params.get('cat') && chipsCat.querySelector(`[data-cat="${CSS.escape(params.get('cat'))}"]`)) { categoria = params.get('cat'); marcar(chipsCat, 'cat', categoria); }
 
   raiz.classList.add('is-listo');
   pintar();

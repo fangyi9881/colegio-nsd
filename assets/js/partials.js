@@ -1042,8 +1042,10 @@
     document.body.appendChild(capa);
     capaActual = capa;
     document.documentElement.classList.add('con-post');
-    if (sustituir) history.replaceState({ nsdPost: true }, '', url.pathname);
-    else history.pushState({ nsdPost: true }, '', url.pathname);
+    // Las entradas del panel van por ?e=slug: la dirección conserva la consulta
+    const direccion = url.pathname + (url.searchParams.has('e') ? '?e=' + encodeURIComponent(url.searchParams.get('e')) : '');
+    if (sustituir) history.replaceState({ nsdPost: true }, '', direccion);
+    else history.pushState({ nsdPost: true }, '', direccion);
 
     // Se enseña cuando el post está listo, para no ver un hueco vacío.
     let mostrada = false;

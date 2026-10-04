@@ -18,7 +18,7 @@ El panel deja que la dirección, cada departamento y secretaría editen su parte
 
 1. **Crear la cuenta de Supabase** en <https://supabase.com> (plan gratuito) con la **cuenta de Google de la web del colegio** (no una cuenta personal). Organización «Colegio NSD». Después, *Organization → Team* → invitar a Fan como *Developer* o *Administrator*. Cuando exista la cuenta de Workspace del colegio, invitarla como *Owner* y quitar la anterior.
 2. **Crear el proyecto** `colegio-nsd-web`, región **Europa** (*West EU – Frankfurt* o *Paris*). Guarda la contraseña de la base de datos en un gestor de contraseñas.
-3. **SQL Editor** → *New query* → pegar `supabase/01_esquema.sql` entero → *Run*. Después, lo mismo con `supabase/02_ambitos.sql`.
+3. **SQL Editor** → *New query* → pegar `supabase/01_esquema.sql` entero → *Run*. Después, lo mismo con `supabase/02_ambitos.sql` y con `supabase/03_blog.sql` (el blog). Los tres se pueden volver a ejecutar sin perder nada.
 4. **Authentication → Sign In / Providers → Email**: activado. *Minimum password length*: 10.
 5. **Authentication → URL Configuration**:
    - *Site URL*: `https://colegio-nsd.vercel.app` hasta el traspaso; después, `https://www.colegionsdolores.es`.
@@ -38,6 +38,27 @@ El panel deja que la dirección, cada departamento y secretaría editen su parte
    Desde ahí, todo lo demás (aprobar a la dirección, a los departamentos, dar el canal a su responsable) se hace en el panel.
 9. **Función de formularios**: *Edge Functions → Deploy a new function → Via Editor*, nombre `formularios`, pegar `supabase/functions/formularios/index.ts` y desactivar *Verify JWT*. Mantiene los formularios de secretaría sincronizados con Google Forms (ver `docs/FORMULARIOS.md`).
 10. **Comprobar**: entrar en `/panel`, editar un campo de un departamento y ver que aparece en `/centro/departamentos/...`.
+
+## Blog
+
+Cualquier cuenta aprobada escribe entradas en **Blog** (menú del panel): titular, resumen, texto, foto de portada, un PDF opcional y la fecha. Salen en `/blog`, en la portada y en la página del departamento que las firma. La dirección de cada una es `/blog/entrada?e=<titular-sin-tildes>`.
+
+- **Quién firma.** La entrada va a nombre de un ámbito que la cuenta puede editar (su departamento o sección). Quien tiene varios elige cuál.
+- **Categoría y etiquetas.** Las decide la base de datos, no el panel:
+  - Dirección y quien tenga el ámbito «Secretaría» las **eligen**. Si dejan las etiquetas vacías, se ponen solas.
+  - El resto **no** las elige: categoría de su etapa (Infantil, Primaria, ESO, Orientación, Bilingüismo) y etiquetas de su departamento, más la etapa que nombre el texto. Si la dirección recategoriza una entrada y luego el departamento la edita, vuelve a la clasificación automática.
+  - La tabla de cada ámbito está en `supabase/03_blog.sql` (sección 1). Las categorías tienen que existir también en `NSD_CATEGORIAS` (`assets/js/noticias-datos.js`).
+- **Borradores y programadas.** Sin marcar «Publicada» es un borrador. Con fecha futura sale ese día. Ninguna de las dos se ve fuera del panel.
+- **Fotos.** El panel las reduce a 1600 px (WebP) antes de subirlas al bucket `imagenes`. Hay que describir cada foto, y no publicar fotos de alumnos sin autorización de imagen.
+- Los «Comunicados breves» de la sección Noticias siguen existiendo para avisos de una línea.
+
+## Qué falta publicar
+
+La vista de dirección separa lo que aporta la dirección (información a las familias, datos legales) de lo que escribe cada departamento, y dice si ese departamento ya tiene alguien con cuenta. Lo que la web enseña de serie cuenta como publicado. Un texto de sustitución (por ejemplo, «disponible en secretaría») se marca en el HTML con `data-cms-provisional` para que siga contando como pendiente.
+
+## Pruebas
+
+`supabase/pruebas/` tiene una simulación mínima de Supabase para PostgreSQL local y las pruebas del blog (permisos, clasificación, borradores, fotos). Nunca se ejecutan contra el proyecto real.
 
 ## Mantenimiento
 

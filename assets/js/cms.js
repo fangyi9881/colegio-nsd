@@ -13,6 +13,9 @@
      data-cms-ocultar-vacio  → si no hay contenido, oculta el
                                elemento con ese atributo
                                (data-cms-bloque="secretaria:aviso").
+     data-cms-provisional    → el texto de serie es un sustituto (por
+                               ejemplo, «disponible en secretaría»):
+                               el panel lo sigue dando por pendiente.
 
    Todo se pinta creando nodos (textContent), nunca con innerHTML
    de lo que llega: aunque alguien escribiera HTML en el panel, aquí
@@ -70,6 +73,14 @@
     String(texto || '').replace(/\r/g, '').split(/\n\s*\n/).forEach((bloque) => {
       const lineas = bloque.split('\n').map((l) => l.trim()).filter(Boolean);
       if (!lineas.length) return;
+      // «## Subtítulo» y «### Apartado»: el título va solo y lo que le
+      // sigue en el mismo bloque se trata como un bloque aparte.
+      const t = /^(#{2,3})\s+(.+)$/.exec(lineas[0]);
+      if (t) {
+        f.appendChild(enLinea(el(t[1].length === 2 ? 'h2' : 'h3'), t[2]));
+        if (lineas.length > 1) f.appendChild(parrafos(lineas.slice(1).join('\n')));
+        return;
+      }
       if (lineas.every((l) => /^[-•*]\s+/.test(l))) {
         const ul = el('ul');
         lineas.forEach((l) => ul.appendChild(enLinea(el('li'), l.replace(/^[-•*]\s+/, ''))));
@@ -211,11 +222,52 @@
     });
   }
 
-  // ── Comunicados breves del panel → lista de noticias de la web ──
+  // ── Entradas del blog publicadas desde el panel ──
+  // La base de datos solo devuelve lo publicado y con fecha de hoy o
+  // anterior (borradores y programadas no salen).
+  const CAMPOS_ENTRADA = 'slug,titulo,resumen,cuerpo,categoria,etiquetas,imagen,imagen_alt,documento,fecha,firma,ambito_id';
+  function pedir(ruta) {
+    const ctrl = window.AbortController ? new AbortController() : null;
+    const t = setTimeout(() => ctrl && ctrl.abort(), 5000);
+    return fetch(`${URL_API}/rest/v1/${ruta}`, {
+      headers: { apikey: C.anonKey, Authorization: `Bearer ${C.anonKey}` },
+      signal: ctrl ? ctrl.signal : undefined
+    }).then((r) => (r.ok ? r.json() : [])).catch(() => []).finally(() => clearTimeout(t));
+  }
+  function leerEntradas(opciones) {
+    if (!ACTIVO) return Promise.resolve([]);
+    const o = opciones || {};
+    const filtro = o.ambito && /^[a-z0-9-]+$/.test(o.ambito) ? `&ambito_id=eq.${o.ambito}` : '';
+    const campos = o.conCuerpo ? CAMPOS_ENTRADA : CAMPOS_ENTRADA.replace('cuerpo,', '');
+    return pedir(`entradas?select=${campos}${filtro}&order=fecha.desc,creado_en.desc&limit=${Math.min(o.limite || 60, 200)}`);
+  }
+  function leerEntrada(slug) {
+    if (!ACTIVO || !/^[a-z0-9-]{1,90}$/.test(slug || '')) return Promise.resolve(null);
+    return pedir(`entradas?select=${CAMPOS_ENTRADA}&slug=eq.${slug}&limit=1`).then((l) => l[0] || null);
+  }
+  const urlEntrada = (slug) => '/blog/entrada?e=' + encodeURIComponent(slug);
+  // Convierte una entrada del panel al formato de noticias-datos.js
+  function comoNoticia(e) {
+    const cats = window.NSD_CATEGORIAS || {};
+    const doc = e.documento && urlSegura(e.documento.url) ? { url: urlSegura(e.documento.url), titulo: String(e.documento.titulo || 'Documento') } : undefined;
+    return {
+      fecha: e.fecha, titulo: String(e.titulo || '').slice(0, 160),
+      categoria: cats[e.categoria] ? e.categoria : 'comunicados', tipo: 'reportaje',
+      resumen: String(e.resumen || '').slice(0, 400), url: urlEntrada(e.slug),
+      imagen: /^https:\/\//.test(e.imagen || '') ? e.imagen : undefined, imagenAlt: e.imagen_alt || '',
+      etiquetas: Array.isArray(e.etiquetas) ? e.etiquetas.slice(0, 8) : [], firma: e.firma || '',
+      documento: doc, webs: ['colegio'], delPanel: true
+    };
+  }
+
+  // ── Comunicados breves y entradas del panel → lista de noticias de la web ──
   // home-noticias.js y noticias.js esperan a esta promesa (como mucho
   // unos segundos) antes de pintar, así salen ya mezcladas por fecha.
   if (window.NSD_NOTICIAS) {
-    window.NSD_CMS_NOTICIAS = !ACTIVO ? Promise.resolve() : Promise.race([
+    window.NSD_CMS_NOTICIAS = !ACTIVO ? Promise.resolve() : Promise.race([Promise.all([
+      leerEntradas().then((lista) => {
+        lista.forEach((e) => { if (e && e.slug && /^\d{4}-\d{2}-\d{2}$/.test(e.fecha || '')) window.NSD_NOTICIAS.push(comoNoticia(e)); });
+      }),
       leer(['noticias']).then((d) => {
         const breves = (d.noticias && d.noticias.breves) || [];
         const cats = window.NSD_CATEGORIAS || {};
@@ -230,12 +282,12 @@
             url: urlSegura(b.url) || undefined, webs: ['colegio'], delPanel: true
           });
         });
-      }),
+      })]),
       new Promise((r) => setTimeout(r, 2500))
     ]).catch(() => {});
   }
 
-  window.NSD_CMS = { activo: ACTIVO, leer, pintarPagina, aplicar, urlSegura, render: { parrafos, lista, enlaces, documentos, filas, enLinea, el }, vacio };
+  window.NSD_CMS = { activo: ACTIVO, leer, leerEntradas, leerEntrada, comoNoticia, urlEntrada, pintarPagina, aplicar, urlSegura, render: { parrafos, lista, enlaces, documentos, filas, enLinea, el }, vacio };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => pintarPagina());
   else pintarPagina();
