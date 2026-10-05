@@ -143,9 +143,16 @@ for (const h of global ? global.headers : []) {
   p(`  Header always set ${h.key} "${h.value.replace(/"/g, '\\"')}"`);
 }
 p('',
-  '  # Caché: HTML, CSS y JS se revalidan siempre (se publican sin hash).',
-  '  <FilesMatch "\\.(html|css|js)$">',
+  '  # Caché (igual que vercel.json): el HTML se revalida siempre; CSS y JS',
+  '  # valen 10 minutos y después se renuevan por detrás (stale-while-revalidate).',
+  '  <FilesMatch "\\.html$">',
   '    Header set Cache-Control "public, max-age=0, must-revalidate"',
+  '  </FilesMatch>',
+  '  <FilesMatch "\\.(css|js)$">',
+  '    Header set Cache-Control "public, max-age=600, stale-while-revalidate=86400"',
+  '  </FilesMatch>',
+  '  <FilesMatch "\\.(pdf|docx?|xlsx?|pptx?|odt|ods)$">',
+  '    Header set Cache-Control "public, max-age=3600, stale-while-revalidate=604800"',
   '  </FilesMatch>',
   '  # Fuentes: no cambian de nombre ni de contenido.',
   '  <FilesMatch "\\.woff2$">',

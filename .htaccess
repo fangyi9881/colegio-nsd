@@ -107,16 +107,25 @@ RewriteRule ^(.+)$ $1/index.html [L]
 
 # 5. Cabeceras de seguridad (todas las respuestas).
 <IfModule mod_headers.c>
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://api.web3forms.com https://*.supabase.co https://docs.google.com; frame-src 'self' https://maps.google.com https://www.google.com; form-action 'self' https://api.web3forms.com https://docs.google.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://challenges.cloudflare.com https://api.web3forms.com https://*.supabase.co https://docs.google.com; frame-src 'self' https://challenges.cloudflare.com https://maps.google.com https://www.google.com; form-action 'self' https://api.web3forms.com https://docs.google.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; worker-src 'self'; manifest-src 'self'; upgrade-insecure-requests"
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
-  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set X-Permitted-Cross-Domain-Policies "none"
 
-  # Caché: HTML, CSS y JS se revalidan siempre (se publican sin hash).
-  <FilesMatch "\.(html|css|js)$">
+  # Caché (igual que vercel.json): el HTML se revalida siempre; CSS y JS
+  # valen 10 minutos y después se renuevan por detrás (stale-while-revalidate).
+  <FilesMatch "\.html$">
     Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=600, stale-while-revalidate=86400"
+  </FilesMatch>
+  <FilesMatch "\.(pdf|docx?|xlsx?|pptx?|odt|ods)$">
+    Header set Cache-Control "public, max-age=3600, stale-while-revalidate=604800"
   </FilesMatch>
   # Fuentes: no cambian de nombre ni de contenido.
   <FilesMatch "\.woff2$">
