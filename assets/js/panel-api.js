@@ -73,12 +73,13 @@
       // ── Sesión ──
       async sesion() { return ok(await sb.auth.getSession()).session; },
       alCambiarSesion(fn) { return sb.auth.onAuthStateChange((evento, sesion) => fn(evento, sesion)); },
-      async entrar(email, clave) { return ok(await sb.auth.signInWithPassword({ email: email.trim(), password: clave })); },
+      async entrar(email, clave, captcha) { return ok(await sb.auth.signInWithPassword({ email: email.trim(), password: clave, options: captcha ? { captchaToken: captcha } : undefined })); },
       async salir() { await sb.auth.signOut(); },
       async solicitar(d) {
         const r = ok(await sb.auth.signUp({
           email: d.email.trim(), password: d.clave,
           options: {
+            captchaToken: d.captcha || undefined,
             emailRedirectTo: base + '/acceso?confirmado=1',
             data: { nombre: d.nombre.trim(), cargo: (d.cargo || '').trim(), ambito: d.ambito || '', motivo: (d.motivo || '').trim() }
           }
@@ -90,7 +91,7 @@
         }
         return { necesitaConfirmar: !r.session };
       },
-      async recuperar(email) { ok(await sb.auth.resetPasswordForEmail(email.trim(), { redirectTo: base + '/acceso/nueva-clave' })); },
+      async recuperar(email, captcha) { ok(await sb.auth.resetPasswordForEmail(email.trim(), { redirectTo: base + '/acceso/nueva-clave', captchaToken: captcha || undefined })); },
       async cambiarClave(clave) { ok(await sb.auth.updateUser({ password: clave })); },
 
       // ── Perfil ──

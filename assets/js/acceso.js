@@ -101,20 +101,54 @@
     });
   }).catch(() => {});
 
+
+  // ── CAPTCHA (Cloudflare Turnstile), solo si hay clave en cms-config.js ──
+  // Cada formulario lleva su comprobación; el resultado vale para un envío,
+  // así que después de cada intento se renueva.
+  const CLAVE_CAPTCHA = (window.NSD_CMS_CONFIG || {}).turnstile || '';
+  const captchas = new Map();
+  let cargaCaptcha = null;
+  function prepararCaptcha(form) {
+    if (!CLAVE_CAPTCHA || !form) return;
+    const hueco = document.createElement('div');
+    hueco.className = 'acceso-captcha';
+    form.querySelector('[type="submit"]').before(hueco);
+    cargaCaptcha = cargaCaptcha || new Promise((res, rej) => {
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      s.async = true; s.onload = res; s.onerror = rej;
+      document.head.appendChild(s);
+    });
+    cargaCaptcha.then(() => {
+      captchas.set(form, window.turnstile.render(hueco, { sitekey: CLAVE_CAPTCHA, language: 'es', theme: 'auto' }));
+    }).catch(() => estado(form, 'No se ha podido cargar la comprobación de seguridad. Revisa la conexión y recarga la página.', 'error'));
+  }
+  // Devuelve el código de la comprobación, o lanza un aviso si falta.
+  function codigoCaptcha(form) {
+    if (!CLAVE_CAPTCHA) return undefined;
+    const id = captchas.get(form);
+    const c = id !== undefined && window.turnstile ? window.turnstile.getResponse(id) : '';
+    if (!c) throw new Error('Espera a que termine la comprobación de seguridad (el recuadro de encima del botón) y vuelve a pulsar.');
+    return c;
+  }
+  const renovarCaptcha = (form) => { const id = captchas.get(form); if (id !== undefined && window.turnstile) window.turnstile.reset(id); };
+
   // ── Entrar ──
   const fEntrar = $('#formEntrar');
+  prepararCaptcha(fEntrar);
   fEntrar.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!fEntrar.checkValidity()) { fEntrar.reportValidity(); return; }
     ocupado(fEntrar, true, 'Entrando…');
     try {
-      await api.entrar(fEntrar.email.value, fEntrar.clave.value);
+      await api.entrar(fEntrar.email.value, fEntrar.clave.value, codigoCaptcha(fEntrar));
       location.href = '/panel';
-    } catch (err) { estado(fEntrar, err.message, 'error'); ocupado(fEntrar, false); }
+    } catch (err) { estado(fEntrar, err.message, 'error'); ocupado(fEntrar, false); renovarCaptcha(fEntrar); }
   });
 
   // ── Solicitar cuenta ──
   const fSol = $('#formSolicitar');
+  prepararCaptcha(fSol);
   fSol.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!fSol.checkValidity()) { fSol.reportValidity(); return; }
@@ -122,25 +156,26 @@
     if (fSol.clave.value !== fSol.clave2.value) return estado(fSol, 'Las dos contraseñas no coinciden.', 'error');
     ocupado(fSol, true, 'Enviando la solicitud…');
     try {
-      const r = await api.solicitar({ email: fSol.email.value, clave: fSol.clave.value, nombre: fSol.nombre.value, cargo: fSol.cargo.value, ambito: fSol.ambito.value, motivo: fSol.motivo.value });
+      const r = await api.solicitar({ email: fSol.email.value, clave: fSol.clave.value, nombre: fSol.nombre.value, cargo: fSol.cargo.value, ambito: fSol.ambito.value, motivo: fSol.motivo.value, captcha: codigoCaptcha(fSol) });
       fSol.querySelector('fieldset').hidden = true;
       estado(fSol, r.necesitaConfirmar
         ? 'Solicitud enviada. Te hemos mandado un correo: abre el enlace para confirmar tu dirección. Después, la dirección del colegio revisará tu solicitud y te dará acceso.'
         : 'Solicitud enviada. La dirección del colegio la revisará; cuando la apruebe podrás entrar con tu correo y tu contraseña.', 'ok');
       if (!r.necesitaConfirmar) await api.salir();
-    } catch (err) { estado(fSol, err.message, 'error'); ocupado(fSol, false); }
+    } catch (err) { estado(fSol, err.message, 'error'); ocupado(fSol, false); renovarCaptcha(fSol); }
   });
 
   // ── Recuperar contraseña ──
   const fRec = $('#formRecuperar');
+  prepararCaptcha(fRec);
   fRec.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!fRec.checkValidity()) { fRec.reportValidity(); return; }
     ocupado(fRec, true, 'Enviando…');
     try {
-      await api.recuperar(fRec.email.value);
+      await api.recuperar(fRec.email.value, codigoCaptcha(fRec));
       estado(fRec, 'Si ese correo tiene una cuenta, en unos minutos recibirás un enlace para elegir una contraseña nueva. Mira también en la carpeta de spam.', 'ok');
     } catch (err) { estado(fRec, err.message, 'error'); }
-    ocupado(fRec, false);
+    ocupado(fRec, false); renovarCaptcha(fRec);
   });
 })();

@@ -13,6 +13,10 @@
    falta configurarlo.
    ========================================================= */
 window.NSD_CMS_CONFIG = {
+  // Cloudflare Turnstile (CAPTCHA del acceso): la «Site Key», que es
+  // pública. Vacía = sin CAPTCHA. Activarla en Supabase (Authentication →
+  // Attack Protection) SOLO después de publicar la web con esta clave.
+  turnstile: '',
   url: 'https://onhqkrmwwaclzwbckpzj.supabase.co',
   anonKey: 'sb_publishable_ciTfSnSwo0G7buvBjBVKcw_Bq6Ot-NZ'
 };
