@@ -82,6 +82,7 @@ La vista de dirección separa lo que aporta la dirección (información a las fa
 - **Pausa del plan gratuito.** Supabase pausa los proyectos gratuitos tras 7 días sin actividad. Las visitas a la web ya generan actividad, pero si alguna vez se pausa, la web sigue funcionando con el contenido de serie. Para reactivarlo: *Dashboard → Restore project*.
 - **Copia de seguridad.** Automática y cifrada cada domingo con GitHub Actions; se guardan 90 días. Puesta en marcha y cómo restaurar: `docs/COPIAS.md`.
 - **Borrar una cuenta del todo**: suspenderla en el panel y luego *Authentication → Users → Delete user*.
+- **Iconos.** La web carga solo los iconos de Bootstrap Icons que usa (`assets/vendor/bootstrap-icons/iconos-nsd.css`). Si pones un icono nuevo (`bi-algo`), ejecuta `python3 scripts/iconos.py` para añadirlo; sin eso no se verá.
 - **Añadir un departamento**: añadirlo en `assets/js/departamentos-datos.js` y en `supabase/02_ambitos.sql` (ejecutarlo de nuevo), y después `node scripts/generar-departamentos.mjs`.
 - **Canal interno.** Avisos: acuse en 7 días naturales, respuesta en 3 meses. El panel marca los plazos. Conviene que la responsable entre al menos una vez por semana.
 

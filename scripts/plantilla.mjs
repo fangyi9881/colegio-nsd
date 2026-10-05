@@ -60,7 +60,7 @@ ${p.noindex ? '  <meta name="robots" content="noindex, nofollow" />\n' : ''}  <l
   <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/assets/vendor/fuentes/fraunces-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
-  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/iconos-nsd.css" />
 ${css.map((c) => `  <link rel="stylesheet" href="/assets/css/${c}" />`).join('\n')}
 ${p.jsonld ? `  <script type="application/ld+json">\n${JSON.stringify(p.jsonld, null, 2)}\n  </script>\n` : ''}</head>
 <body id="top">
