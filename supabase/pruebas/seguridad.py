@@ -3,7 +3,8 @@
 Contra un PostgreSQL local, NUNCA contra el Supabase real:
   psql -d nsd -f supabase/pruebas/simulacion-supabase.sql
   psql -d nsd -f supabase/01_esquema.sql -f supabase/02_ambitos.sql -f supabase/03_blog.sql \
-              -f supabase/05_personas.sql -f supabase/06_rendimiento_y_seguridad.sql
+              -f supabase/05_personas.sql -f supabase/06_rendimiento_y_seguridad.sql \
+              -f supabase/07_avisos_supabase.sql
   python3 supabase/pruebas/seguridad.py
 """
 import psycopg2, json, uuid, time
@@ -128,6 +129,21 @@ comprobar(f'historial de un profesor con 20.000 filas ajenas en {ms:.0f} ms (< 5
 plan = '\n'.join(x[0] for x in sql("explain select id from public.historial order by fecha desc limit 100"))
 comprobar('la política usa InitPlan/SubPlan (no una función por fila)', 'SubPlan' in plan or 'InitPlan' in plan)
 sql("reset role"); sql("delete from public.historial where autor_email = 'x'")
+
+# ── 07: avisos del Advisor ──
+como(None)
+r = intenta(lambda: sql("select public.es_directiva()"))
+comprobar('anónimo no puede llamar a las auxiliares de permisos', r[0] == 'error')
+como(MAT); sql("insert into public.entradas (slug, ambito_id, categoria, titulo, autor, publicado) values ('borrador-mates','dep-matematicas','comunicados','Borrador', %s, false)", (MAT,))
+comprobar('con sesión se ve lo publicado y el borrador propio', {x[0] for x in sql("select titulo from public.entradas")} >= {'Una noticia', 'Borrador'})
+como(OTR)
+comprobar('otro departamento no ve el borrador ajeno', 'Borrador' not in [x[0] for x in sql("select titulo from public.entradas")])
+como(None)
+comprobar('anónimo no ve borradores', [x[0] for x in sql("select slug from public.entradas")] == ['una-noticia'])
+como(OTR)
+comprobar('con sesión se leen los ámbitos', sql("select count(*) from public.ambitos")[0][0] > 0)
+r = intenta(lambda: sql("insert into public.ambitos (id, nombre, tipo) values ('colado','Colado','seccion')"))
+comprobar('solo admin crea ámbitos', r[0] == 'error')
 
 print(f'\n{total - fallos}/{total} correctas')
 raise SystemExit(1 if fallos else 0)
