@@ -525,14 +525,23 @@
     // mide igual que la cabecera para que --portada-h la tenga en cuenta.
     const barraHoy = document.querySelector('.barra-hoy');
     const raiz = document.documentElement;
+    // Solo se escribe si cambia: cada escritura obliga a recalcular estilos.
+    const poner = (v, px) => { if (raiz.style.getPropertyValue(v) !== px) raiz.style.setProperty(v, px); };
     const publicar = () => {
-      if (topbar) raiz.style.setProperty('--topbar-h', topbar.offsetHeight + 'px');
-      if (navbar) raiz.style.setProperty('--navbar-h', navbar.offsetHeight + 'px');
-      // Con JS la barra ya ocupa su sitio aunque siga [hidden] (ver styles.css):
-      // se mide tal cual, sin esperar a que se llene.
-      raiz.style.setProperty('--barra-hoy-h', (barraHoy ? barraHoy.offsetHeight : 0) + 'px');
+      // Las tres medidas antes de escribir nada (si no, cada escritura
+      // obliga a recolocar antes de la siguiente lectura).
+      // Con JS la barra de hoy ya ocupa su sitio aunque siga [hidden]
+      // (ver styles.css): se mide tal cual, sin esperar a que se llene.
+      const t = topbar ? topbar.offsetHeight : 0, n = navbar ? navbar.offsetHeight : 0, b = barraHoy ? barraHoy.offsetHeight : 0;
+      if (topbar) poner('--topbar-h', t + 'px');
+      if (navbar) poner('--navbar-h', n + 'px');
+      poner('--barra-hoy-h', b + 'px');
     };
-    publicar();
+    // Con ResizeObserver no se mide aquí: el observador avisa nada más
+    // empezar, justo después de maquetar y antes de pintar, sin forzar una
+    // maquetación a mitad de script (era la tarea más larga de la portada).
+    // El CSS ya arranca con las medidas habituales (styles.css, html.js).
+    if (!window.ResizeObserver) publicar();
 
     if (window.ResizeObserver) {
       const ro = new ResizeObserver(publicar);
@@ -542,7 +551,6 @@
     } else {
       window.addEventListener('resize', publicar, { passive: true });
     }
-    if (barraHoy) setTimeout(publicar, 0);
   })();
 
   // ── Sección activa, migas de pan y barra de páginas de la sección ──────
@@ -660,20 +668,21 @@
   let lastNavScrolled = false;
   let lastCtaVisible  = false;
   function onScrollFrame() {
+    // Primero se lee todo y después se escribe: mezclar lecturas de medidas
+    // con cambios de clase obligaba al navegador a recolocar la página
+    // varias veces por fotograma.
     const y = window.scrollY;
-    // navbar shadow
+    const h = document.documentElement;
+    const denom = progress ? h.scrollHeight - h.clientHeight : 0;
+    const vh = window.innerHeight;
+    const topeArriba = toTopBtn && toTopTrigger ? toTopTrigger.getBoundingClientRect().top : null;
+
     const navScrolled = y > 12;
     if (nav && navScrolled !== lastNavScrolled) {
       nav.classList.toggle('is-scrolled', navScrolled);
       lastNavScrolled = navScrolled;
     }
-    // progress bar
-    if (progress) {
-      const h = document.documentElement;
-      const denom = h.scrollHeight - h.clientHeight;
-      progress.style.width = denom > 0 ? (y / denom) * 100 + '%' : '0%';
-    }
-    // mobile CTA
+    if (progress) progress.style.transform = `scaleX(${denom > 0 ? Math.min(1, y / denom) : 0})`;
     if (mobileCtaEl) {
       const ctaVisible = y > 400;
       if (ctaVisible !== lastCtaVisible) {
@@ -684,10 +693,8 @@
         lastCtaVisible = ctaVisible;
       }
     }
-    // to-top button
-    if (toTopBtn && toTopTrigger) {
-      const r = toTopTrigger.getBoundingClientRect();
-      const should = r.top < window.innerHeight * 0.5;
+    if (topeArriba !== null) {
+      const should = topeArriba < vh * 0.5;
       if (should !== lastToTopVisible) {
         toTopBtn.classList.toggle('is-visible', should);
         lastToTopVisible = should;
@@ -923,10 +930,11 @@
     document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-visible'));
   }
   // Contadores ya en pantalla al cargar
-  document.querySelectorAll('[data-count]').forEach(c => {
+  // En el siguiente fotograma: medir aquí forzaba una maquetación extra.
+  requestAnimationFrame(() => document.querySelectorAll('[data-count]').forEach(c => {
     const r = c.getBoundingClientRect();
     if (r.top < window.innerHeight && r.bottom > 0) animateCounter(c);
-  });
+  }));
 
   // ── BOTÓN "SUBIR ARRIBA" inteligente ─────────────────────
   // Aparece a partir de la 3ª sección si la página tiene >2 secciones
@@ -944,7 +952,7 @@
 
   // Registrar el handler unificado UNA sola vez al final
   document.addEventListener('scroll', onScroll, { passive: true });
-  onScrollFrame();
+  onScroll(); // primer cálculo en el siguiente fotograma, sin forzar maquetación
 
   // ══════════════════════════════════════════════════════════
   // COOKIES
@@ -1171,8 +1179,13 @@
       }
     });
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', marcar); else marcar();
-  window.addEventListener('resize', marcar, { passive: true });
+  // No corre prisa: se hace cuando el navegador está libre, y al cambiar
+  // de tamaño, una sola vez cuando se termina de cambiar.
+  const enReposo = window.requestIdleCallback || ((f) => setTimeout(f, 200));
+  const lanzar = () => enReposo(marcar, { timeout: 2000 });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', lanzar); else lanzar();
+  let tMarcar = null;
+  window.addEventListener('resize', () => { clearTimeout(tMarcar); tMarcar = setTimeout(marcar, 250); }, { passive: true });
 })();
 
 // ── Respuesta táctil (muelles) ──────────────────────────────────────────

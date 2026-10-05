@@ -172,7 +172,51 @@
   const vacio = (v) => v == null || v === '' || (Array.isArray(v) && !v.filter(Boolean).length)
     || (typeof v === 'object' && !Array.isArray(v) && !Object.keys(v).length);
 
-  // ── Lectura ──
+  // ── Caché de lecturas (stale-while-revalidate) ──
+  // Cada página de la web pedía lo mismo a Supabase (contenidos, noticias,
+  // fichas) en cada clic. Ahora la respuesta se guarda en el navegador:
+  //  · menos de 1 min  → se usa tal cual, sin pedir nada;
+  //  · menos de 30 min → se usa al momento y se renueva por detrás para la
+  //                      siguiente página;
+  //  · más vieja       → se pide; si Supabase no responde, se usa la vieja
+  //                      (hasta 1 día) antes que dejar la página vacía.
+  // Al guardar en el panel se deja un «sello» y todo lo anterior caduca.
+  const FRESCO = 60 * 1000, SERVIBLE = 30 * 60 * 1000, ULTIMO_RECURSO = 24 * 60 * 60 * 1000;
+  const PREFIJO = 'nsd-cms:v1:';
+  const leerLocal = (k) => { try { return JSON.parse(localStorage.getItem(PREFIJO + k) || 'null'); } catch (e) { return null; } };
+  const guardarLocal = (k, d) => {
+    try { localStorage.setItem(PREFIJO + k, JSON.stringify({ t: Date.now(), d })); }
+    catch (e) { try { Object.keys(localStorage).filter((x) => x.startsWith(PREFIJO)).forEach((x) => localStorage.removeItem(x)); } catch (e2) { /* sin almacenamiento */ } }
+  };
+  const sello = () => { try { return +localStorage.getItem('nsd-cms:sello') || 0; } catch (e) { return 0; } };
+
+  // Petición sin caché: devuelve los datos o null si falla.
+  function traer(ruta) {
+    const ctrl = window.AbortController ? new AbortController() : null;
+    const t = setTimeout(() => ctrl && ctrl.abort(), 5000);
+    return fetch(`${URL_API}/rest/v1/${ruta}`, {
+      headers: { apikey: C.anonKey, Authorization: `Bearer ${C.anonKey}` },
+      signal: ctrl ? ctrl.signal : undefined
+    }).then((r) => (r.ok ? r.json() : null)).catch(() => null).finally(() => clearTimeout(t));
+  }
+  const enVuelo = {};
+  function traerYGuardar(ruta) {
+    if (!enVuelo[ruta]) {
+      enVuelo[ruta] = traer(ruta).then((d) => { if (d) guardarLocal(ruta, d); return d; })
+        .finally(() => { delete enVuelo[ruta]; });
+    }
+    return enVuelo[ruta];
+  }
+  // Petición con caché. Siempre resuelve con un array (vacío si no hay nada).
+  function pedir(ruta) {
+    const g = leerLocal(ruta);
+    const edad = g && g.t > sello() ? Date.now() - g.t : Infinity;
+    if (edad < FRESCO) return Promise.resolve(g.d);
+    if (edad < SERVIBLE) { traerYGuardar(ruta); return Promise.resolve(g.d); }
+    return traerYGuardar(ruta).then((d) => d || (g && Date.now() - g.t < ULTIMO_RECURSO ? g.d : []));
+  }
+
+  // ── Lectura de contenidos ──
   const cache = {};
   function leer(ambitos) {
     if (!ACTIVO) return Promise.resolve({});
@@ -180,19 +224,14 @@
     if (!ids.length) return Promise.resolve({});
     const clave = ids.sort().join(',');
     if (cache[clave]) return cache[clave];
-    const ctrl = window.AbortController ? new AbortController() : null;
-    const t = setTimeout(() => ctrl && ctrl.abort(), 5000);
-    cache[clave] = fetch(`${URL_API}/rest/v1/contenidos?select=ambito_id,clave,valor,actualizado_en&ambito_id=in.(${ids.join(',')})`, {
-      headers: { apikey: C.anonKey, Authorization: `Bearer ${C.anonKey}` },
-      signal: ctrl ? ctrl.signal : undefined
-    }).then((r) => (r.ok ? r.json() : [])).then((filasLeidas) => {
+    cache[clave] = pedir(`contenidos?select=ambito_id,clave,valor,actualizado_en&ambito_id=in.(${ids.join(',')})`).then((filasLeidas) => {
       const out = {};
-      filasLeidas.forEach((f) => {
+      (filasLeidas || []).forEach((f) => {
         (out[f.ambito_id] = out[f.ambito_id] || {})[f.clave] = f.valor;
         (out[f.ambito_id].__fechas = out[f.ambito_id].__fechas || {})[f.clave] = f.actualizado_en;
       });
       return out;
-    }).catch(() => ({})).finally(() => clearTimeout(t));
+    });
     return cache[clave];
   }
 
@@ -244,14 +283,6 @@
   // La base de datos solo devuelve lo publicado y con fecha de hoy o
   // anterior (borradores y programadas no salen).
   const CAMPOS_ENTRADA = 'slug,titulo,resumen,cuerpo,categoria,etiquetas,imagen,imagen_alt,documento,fecha,firma,ambito_id';
-  function pedir(ruta) {
-    const ctrl = window.AbortController ? new AbortController() : null;
-    const t = setTimeout(() => ctrl && ctrl.abort(), 5000);
-    return fetch(`${URL_API}/rest/v1/${ruta}`, {
-      headers: { apikey: C.anonKey, Authorization: `Bearer ${C.anonKey}` },
-      signal: ctrl ? ctrl.signal : undefined
-    }).then((r) => (r.ok ? r.json() : [])).catch(() => []).finally(() => clearTimeout(t));
-  }
   function leerEntradas(opciones) {
     if (!ACTIVO) return Promise.resolve([]);
     const o = opciones || {};

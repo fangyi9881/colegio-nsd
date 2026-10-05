@@ -2,7 +2,7 @@
 
 Contra un PostgreSQL local, NUNCA contra el Supabase real:
   psql -d nsd -f supabase/pruebas/simulacion-supabase.sql
-  psql -d nsd -f supabase/01_esquema.sql -f supabase/02_ambitos.sql -f supabase/03_blog.sql -f supabase/05_personas.sql
+  psql -d nsd -f supabase/01_esquema.sql -f supabase/02_ambitos.sql -f supabase/03_blog.sql -f supabase/05_personas.sql -f supabase/06_rendimiento_y_seguridad.sql
   python3 supabase/pruebas/personas.py
 """
 import psycopg2, json, uuid

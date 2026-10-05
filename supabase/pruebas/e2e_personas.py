@@ -60,7 +60,7 @@ with sync_playwright() as p:
         pg.goto(BASE+'/blog/entrada?e='+slug.split('|')[0]); pg.wait_for_timeout(2000)
         comprobar(f'{w}: entrada con tarjeta del autor', pg.locator('.entrada-autor a.persona img').count()==1)
         pg.goto(BASE+'/centro/persona?p=marga-orell-cernuda'); pg.wait_for_timeout(1500)
-        comprobar(f'{w}: página propia', 'Marga Orell Cernuda' in pg.locator('h1').last.inner_text() or pg.locator('.ficha--pagina h1').count()==1)
+        comprobar(f'{w}: página propia', pg.locator('h1').count()==1 and 'Marga Orell Cernuda' in pg.locator('.ficha--pagina .ficha-nombre').inner_text())
         pg.screenshot(path=f'/tmp/claude-0/shots/persona-{w}-{tema}.png', full_page=True)
         comprobar(f'{w}: accesibilidad página', not axe(pg,'main'), axe(pg,'main'))
         pg.goto(BASE+'/centro/equipo-directivo'); pg.wait_for_timeout(1200)

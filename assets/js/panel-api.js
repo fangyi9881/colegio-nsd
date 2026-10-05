@@ -21,6 +21,50 @@
     return new Error(m);
   }
   const ok = (r) => { if (r.error) throw error(r.error); return r.data; };
+  // Al escribir, la caché de la web pública (cms.js) de este navegador
+  // caduca: quien acaba de guardar ve su cambio al abrir la página.
+  // ── Imágenes: se reducen en un Worker (imagen-worker.js) para no
+  // congelar el panel; sin OffscreenCanvas, en el hilo principal.
+  function prepararEnHilo(archivo, max, cuadrado, calidad) {
+    return createImageBitmap(archivo).catch(() => { throw new Error('leer'); }).then((mapa) => {
+      let sx = 0, sy = 0, sw = mapa.width, sh = mapa.height, ancho, alto;
+      if (cuadrado) {
+        const lado = Math.min(mapa.width, mapa.height);
+        sx = (mapa.width - lado) / 2; sy = (mapa.height - lado) / 2; sw = sh = lado;
+        ancho = alto = Math.min(max, lado);
+      } else {
+        const escala = Math.min(1, max / Math.max(mapa.width, mapa.height));
+        ancho = Math.round(mapa.width * escala); alto = Math.round(mapa.height * escala);
+      }
+      const lienzo = document.createElement('canvas');
+      lienzo.width = ancho; lienzo.height = alto;
+      lienzo.getContext('2d').drawImage(mapa, sx, sy, sw, sh, 0, 0, ancho, alto);
+      if (mapa.close) mapa.close();
+      const aBlob = (tipo) => new Promise((res) => lienzo.toBlob(res, tipo, calidad));
+      return aBlob('image/webp').then((b) => (b && b.type === 'image/webp' ? b : aBlob('image/jpeg')))
+        .then((blob) => ({ blob, ancho, alto }));
+    });
+  }
+  function prepararImagen(archivo, max, cuadrado, calidad) {
+    if (!(window.Worker && window.OffscreenCanvas)) return prepararEnHilo(archivo, max, cuadrado, calidad);
+    return new Promise((res, rej) => {
+      let w;
+      try { w = new Worker('/assets/js/imagen-worker.js'); } catch (e) { res(prepararEnHilo(archivo, max, cuadrado, calidad)); return; }
+      const fin = () => w.terminate();
+      const t = setTimeout(() => { fin(); res(prepararEnHilo(archivo, max, cuadrado, calidad)); }, 30000);
+      w.onmessage = (e) => {
+        clearTimeout(t); fin();
+        if (e.data && e.data.error === 'leer') rej(new Error('leer'));
+        else if (e.data && e.data.blob) res(e.data);
+        else res(prepararEnHilo(archivo, max, cuadrado, calidad));
+      };
+      w.onerror = () => { clearTimeout(t); fin(); res(prepararEnHilo(archivo, max, cuadrado, calidad)); };
+      w.postMessage({ archivo, max, cuadrado, calidad });
+    });
+  }
+  const LEER = 'No se puede leer esa imagen. Prueba con una foto JPG o PNG.';
+
+  const sellar = () => { try { localStorage.setItem('nsd-cms:sello', String(Date.now())); } catch (e) { /* sin almacenamiento */ } };
 
   function crearApi(cliente, origen) {
     const sb = cliente;
@@ -63,7 +107,7 @@
         filas.forEach((f) => { (out[f.ambito_id] = out[f.ambito_id] || {})[f.clave] = { valor: f.valor, fecha: f.actualizado_en }; });
         return out;
       },
-      async guardar(ambito, cambios) {
+      async guardar(ambito, cambios) { sellar();
         const filas = Object.keys(cambios).filter((k) => cambios[k] !== undefined && cambios[k] !== null).map((k) => ({ ambito_id: ambito, clave: k, valor: cambios[k] }));
         const borrar = Object.keys(cambios).filter((k) => cambios[k] === null);
         if (filas.length) ok(await sb.from('contenidos').upsert(filas, { onConflict: 'ambito_id,clave' }));
@@ -111,11 +155,11 @@
       // La base de datos pone slug, autor, firma y (salvo a dirección y
       // secretaría) la categoría y las etiquetas: lo que mande el panel
       // para esos campos se ignora.
-      async guardarEntrada(id, datos) {
+      async guardarEntrada(id, datos) { sellar();
         const q = id ? sb.from('entradas').update(datos).eq('id', id) : sb.from('entradas').insert(datos);
         return ok(await q.select('id,slug,categoria,etiquetas,firma').single());
       },
-      async borrarEntrada(id) { ok(await sb.from('entradas').delete().eq('id', id)); },
+      async borrarEntrada(id) { sellar(); ok(await sb.from('entradas').delete().eq('id', id)); },
       async clasificacion(ambito, titulo, resumen, cuerpo) {
         return ok(await sb.rpc('clasificacion_sugerida', { p_ambito: ambito, p_titulo: titulo || '', p_resumen: resumen || '', p_cuerpo: cuerpo || '' }));
       },
@@ -125,53 +169,36 @@
       async subirImagen(ambito, archivo) {
         if (!/^image\//.test(archivo.type)) throw new Error('Elige una imagen (JPG, PNG o WebP).');
         if (archivo.size > 25 * 1024 * 1024) throw new Error('La imagen pasa de 25 MB. Elige otra o redúcela antes.');
-        let mapa;
-        try { mapa = await createImageBitmap(archivo); } catch (e) { throw new Error('No se puede leer esa imagen. Prueba con una foto JPG o PNG.'); }
-        const escala = Math.min(1, 1600 / Math.max(mapa.width, mapa.height));
-        const lienzo = document.createElement('canvas');
-        lienzo.width = Math.round(mapa.width * escala);
-        lienzo.height = Math.round(mapa.height * escala);
-        lienzo.getContext('2d').drawImage(mapa, 0, 0, lienzo.width, lienzo.height);
-        if (mapa.close) mapa.close();
-        const aBlob = (tipo) => new Promise((res) => lienzo.toBlob(res, tipo, 0.84));
-        let blob = await aBlob('image/webp');
-        if (!blob || blob.type !== 'image/webp') blob = await aBlob('image/jpeg');
+        let r;
+        try { r = await prepararImagen(archivo, 1600, false, 0.84); } catch (e) { throw new Error(LEER); }
+        const { blob } = r;
         if (!blob) throw new Error('No se ha podido preparar la imagen.');
         if (blob.size > 5 * 1024 * 1024) throw new Error('La imagen sigue pesando demasiado. Prueba con otra.');
         const ext = blob.type === 'image/webp' ? 'webp' : 'jpg';
         const limpio = archivo.name.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').replace(/\.[a-z0-9]+$/, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 50) || 'foto';
         const ruta = `${ambito}/${Date.now()}-${limpio}.${ext}`;
         ok(await sb.storage.from('imagenes').upload(ruta, blob, { contentType: blob.type, upsert: false }));
-        return { url: sb.storage.from('imagenes').getPublicUrl(ruta).data.publicUrl, ancho: lienzo.width, alto: lienzo.height };
+        return { url: sb.storage.from('imagenes').getPublicUrl(ruta).data.publicUrl, ancho: r.ancho, alto: r.alto };
       },
 
       // ── Fichas del personal (05_personas.sql) ──
       async miFicha() { return ok(await sb.rpc('mi_ficha')); },
       async fichas() { return ok(await sb.from('fichas').select('slug,nombre,perfil_id,foto,frase,bio,formacion,desde,correo,actualizado_en').order('nombre')); },
-      async guardarFicha(slug, d) {
+      async guardarFicha(slug, d) { sellar();
         const r = ok(await sb.from('fichas').update({
           foto: d.foto || null, frase: d.frase || null, bio: d.bio || null, formacion: d.formacion || null,
           desde: d.desde ? Number(d.desde) : null, correo: d.correo || null
         }).eq('slug', slug).select('slug'));
         if (!r || !r.length) throw new Error('No tienes permiso para editar esta ficha.');
       },
-      async crearFicha(nombre) { return ok(await sb.rpc('crear_ficha', { p_nombre: nombre })); },
-      async enlazarFicha(slug, perfil) { ok(await sb.rpc('enlazar_ficha', { p_slug: slug, p_perfil: perfil || null })); },
+      async crearFicha(nombre) { sellar(); return ok(await sb.rpc('crear_ficha', { p_nombre: nombre })); },
+      async enlazarFicha(slug, perfil) { sellar(); ok(await sb.rpc('enlazar_ficha', { p_slug: slug, p_perfil: perfil || null })); },
       // Foto cuadrada de 640 px, recortada al centro
       async subirFoto(slug, archivo) {
         if (!/^image\//.test(archivo.type)) throw new Error('Elige una imagen (JPG, PNG o WebP).');
         if (archivo.size > 25 * 1024 * 1024) throw new Error('La imagen pasa de 25 MB. Elige otra.');
-        let mapa;
-        try { mapa = await createImageBitmap(archivo); } catch (e) { throw new Error('No se puede leer esa imagen. Prueba con una foto JPG o PNG.'); }
-        const lado = Math.min(mapa.width, mapa.height);
-        const sal = Math.min(640, lado);
-        const lienzo = document.createElement('canvas');
-        lienzo.width = sal; lienzo.height = sal;
-        lienzo.getContext('2d').drawImage(mapa, (mapa.width - lado) / 2, (mapa.height - lado) / 2, lado, lado, 0, 0, sal, sal);
-        if (mapa.close) mapa.close();
-        const aBlob = (tipo) => new Promise((res) => lienzo.toBlob(res, tipo, 0.86));
-        let blob = await aBlob('image/webp');
-        if (!blob || blob.type !== 'image/webp') blob = await aBlob('image/jpeg');
+        let blob;
+        try { ({ blob } = await prepararImagen(archivo, 640, true, 0.86)); } catch (e) { throw new Error(LEER); }
         if (!blob) throw new Error('No se ha podido preparar la foto.');
         const ext = blob.type === 'image/webp' ? 'webp' : 'jpg';
         const ruta = `${slug}/${Date.now()}.${ext}`;
