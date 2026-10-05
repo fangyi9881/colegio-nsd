@@ -120,7 +120,7 @@
       document.head.appendChild(s);
     });
     cargaCaptcha.then(() => {
-      captchas.set(form, window.turnstile.render(hueco, { sitekey: CLAVE_CAPTCHA, language: 'es', theme: 'auto' }));
+      captchas.set(form, window.turnstile.render(hueco, { sitekey: CLAVE_CAPTCHA, language: 'es', theme: 'auto', size: 'flexible' }));
     }).catch(() => estado(form, 'No se ha podido cargar la comprobación de seguridad. Revisa la conexión y recarga la página.', 'error'));
   }
   // Devuelve el código de la comprobación, o lanza un aviso si falta.
