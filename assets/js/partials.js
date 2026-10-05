@@ -528,7 +528,9 @@
     const publicar = () => {
       if (topbar) raiz.style.setProperty('--topbar-h', topbar.offsetHeight + 'px');
       if (navbar) raiz.style.setProperty('--navbar-h', navbar.offsetHeight + 'px');
-      raiz.style.setProperty('--barra-hoy-h', (barraHoy && !barraHoy.hidden ? barraHoy.offsetHeight : 0) + 'px');
+      // Con JS la barra ya ocupa su sitio aunque siga [hidden] (ver styles.css):
+      // se mide tal cual, sin esperar a que se llene.
+      raiz.style.setProperty('--barra-hoy-h', (barraHoy ? barraHoy.offsetHeight : 0) + 'px');
     };
     publicar();
 

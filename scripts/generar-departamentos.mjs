@@ -13,6 +13,8 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { pagina, migasJsonLd, esc } from './plantilla.mjs';
 
+/** Meta description: hasta 158 caracteres, cortando en una palabra. */
+const recortar = (t, max = 158) => (t.length <= max ? t : t.slice(0, t.lastIndexOf(' ', max - 1)).replace(/[,;:.\s]+$/, '') + '…');
 const require = createRequire(import.meta.url);
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const { DEPARTAMENTOS, GRUPOS, DIRECCION } = require(path.join(RAIZ, 'assets/js/departamentos-datos.js'));
@@ -32,7 +34,7 @@ for (const d of DEPARTAMENTOS) {
   const esEtapa = d.esquema === 'etapa';
   const html = pagina({
     titulo: `${d.nombre} · ${esEtapa ? 'Etapa' : 'Departamento'} · Colegio NSD`,
-    descripcion: `${d.nombre} en el Colegio NSD (Carabanchel): objetivos, criterios de evaluación y calificación, programación didáctica y recursos. ${d.resumen}`.slice(0, 300),
+    descripcion: recortar(`${d.nombre} en el Colegio NSD (Carabanchel): ${d.resumen}`),
     ruta, seccion: 'centro', css: ['secciones.css', 'informacion.css', 'personas.css'],
     hero: {
       migas, h1: d.nombre, intro: d.resumen,
@@ -88,7 +90,7 @@ const grupos = GRUPOS.map((g) => {
 }).join('\n');
 const indice = pagina({
   titulo: 'Departamentos Didácticos · Colegio NSD Carabanchel',
-  descripcion: 'Departamentos y etapas del Colegio NSD en Carabanchel: objetivos, criterios de evaluación y calificación y programaciones de Infantil, Primaria, cada materia de la ESO, Orientación y Bilingüismo.',
+  descripcion: 'Departamentos y etapas del Colegio NSD en Carabanchel: objetivos, evaluación, programaciones y profesorado de Infantil, Primaria y ESO.',
   ruta: '/centro/departamentos', seccion: 'centro', css: ['secciones.css', 'informacion.css'],
   hero: {
     migas: migasIndice, h1: 'Departamentos didácticos',
@@ -151,7 +153,7 @@ console.log('Organigrama escrito en centro/organigrama.html');
 const migasPersona = [['Inicio', '/'], ['El Centro', '/centro'], ['Organigrama', '/centro/organigrama'], ['Ficha', '/centro/persona']];
 const persona = pagina({
   titulo: 'Ficha del equipo · Colegio NSD',
-  descripcion: 'Ficha de una persona del equipo del Colegio NSD: cargos, presentación y formación.',
+  descripcion: 'Ficha de una persona del equipo del Colegio NSD: cargos, presentación y formación.', noindex: true,
   ruta: '/centro/persona', seccion: 'centro', css: ['secciones.css', 'informacion.css', 'personas.css'],
   hero: { migas: migasPersona, h1: 'Ficha del equipo', intro: 'Quién es, qué hace en el colegio y cómo contactar.', meta: [] },
   jsonld: migasJsonLd(migasPersona),

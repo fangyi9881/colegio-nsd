@@ -123,7 +123,7 @@
       f && f.desde ? `<li><span class="ficha-dato__n">${anios > 0 ? anios : '1'}</span><span class="ficha-dato__t">${anios === 1 || anios <= 0 ? 'año' : 'años'} en el colegio<br><small>desde ${esc(f.desde)}</small></span></li>` : '',
       lista.length ? `<li><span class="ficha-dato__n">${lista.length}</span><span class="ficha-dato__t">${lista.length === 1 ? 'cargo o equipo' : 'cargos y equipos'}</span></li>` : ''
     ].join('');
-    const titulo = enPagina ? 'h1' : 'h2';
+    const titulo = 'h2'; // la página ya tiene su h1 en la cabecera
     const tonoDe = (c) => { const m = /\/centro\/departamentos\/([a-z0-9-]+)/.exec((c && c.url) || ''); return m ? m[1] : ''; };
     const tono = tonoDe(lideres[0] || lista[0]);
     return `<span class="ficha-tono" data-tono-ficha="${esc(tono)}" hidden></span><header class="ficha-cab">
@@ -234,7 +234,7 @@
     Promise.all([leerCargos(), leerFichas()]).then(([c, f]) => {
       const datos = c.get(slug); const fi = f.get(slug);
       if (!/^[a-z0-9-]{3,80}$/.test(slug) || (!datos && !fi)) {
-        pagina.innerHTML = '<div class="ficha ficha--vacia"><h1 class="ficha-nombre">No encontramos esta ficha</h1><p>Puede que el enlace esté mal copiado. Todo el equipo está en el <a href="/centro/organigrama">organigrama</a>.</p></div>';
+        pagina.innerHTML = '<div class="ficha ficha--vacia"><h2 class="ficha-nombre">No encontramos esta ficha</h2><p>Puede que el enlace esté mal copiado. Todo el equipo está en el <a href="/centro/organigrama">organigrama</a>.</p></div>';
         return;
       }
       const nombre = (fi && fi.nombre) || datos.nombre;

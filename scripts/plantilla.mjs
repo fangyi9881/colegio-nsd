@@ -58,6 +58,7 @@ ${p.noindex ? '  <meta name="robots" content="noindex, nofollow" />\n' : ''}  <l
   <meta name="twitter:description" content="${esc(p.descripcion)}" />
   <link rel="icon" type="image/png" href="/assets/img/logo.png" />
   <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/vendor/fuentes/fraunces-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/assets/vendor/fuentes/fuentes.css" />
   <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
 ${css.map((c) => `  <link rel="stylesheet" href="/assets/css/${c}" />`).join('\n')}

@@ -338,7 +338,7 @@
   .rotafotos__pie { padding: 40px 16px 44px; }
   /* Con muchas fotos los puntos no caben en fila: se reparten y, si hace falta, bajan de línea */
   .rotafotos__puntos { left: 10px; right: 10px; justify-content: center; flex-wrap: wrap; gap: 0; }
-  .rotafotos__punto { width: 20px; }
+  .rotafotos__punto { width: 24px; height: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .rotafotos__lam { transition: opacity .25s linear; transform: none !important; }

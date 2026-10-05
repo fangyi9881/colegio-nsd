@@ -28,3 +28,23 @@
   font-weight: 100 900;
   src: url(outfit-latin-wght-normal.woff2) format('woff2-variations'), url(outfit-latin-wght-normal.woff2) format('woff2');
 }
+
+/* Respaldo con las medidas de Outfit y Fraunces: mientras llegan las
+   fuentes, el texto se pinta con Arial / Times ajustadas al mismo ancho y
+   alto de línea, así que al cambiar de fuente la página no se recoloca.
+   Medidas sacadas de los propios woff2 (Outfit 400/700, Fraunces 800). */
+@font-face {
+  font-family: 'Outfit respaldo'; font-weight: 100 549;
+  src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('Helvetica');
+  size-adjust: 97.87%; ascent-override: 102.18%; descent-override: 26.57%; line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Outfit respaldo'; font-weight: 550 900;
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('Helvetica Bold');
+  size-adjust: 94.65%; ascent-override: 105.66%; descent-override: 27.47%; line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Fraunces respaldo'; font-weight: 100 900;
+  src: local('Times New Roman Bold'), local('TimesNewRomanPS-BoldMT'), local('Liberation Serif Bold'), local('Times Bold');
+  size-adjust: 107.32%; ascent-override: 91.13%; descent-override: 23.76%; line-gap-override: 0%;
+}

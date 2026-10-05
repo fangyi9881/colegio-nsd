@@ -111,8 +111,8 @@
   --margen-izq: max(var(--gutter), env(safe-area-inset-left));
   --margen-der: max(var(--gutter), env(safe-area-inset-right));
 
-  --font-sans: 'Outfit', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'Outfit', 'Outfit respaldo', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Fraunces', 'Fraunces respaldo', Georgia, serif;
 }
 
 * { box-sizing: border-box; }
@@ -303,6 +303,18 @@ p  { margin: 0 0 1em; color: var(--ink-700); line-height: 1.75; }
   top: calc(-1 * var(--topbar-h, 41px));
   z-index: 50;
 }
+/* Hueco reservado mientras partials.js pinta la cabecera: sin él, todo el
+   contenido baja de golpe al aparecer y la página "salta" (CLS). */
+#site-header:empty { min-height: 118px; }
+@media (min-width: 721px) and (max-width: 980px) { #site-header:empty { min-height: 106px; } }
+/* Las mismas medidas, como valor de partida de las variables que luego
+   publica partials.js: la portada calcula su alto con ellas y, si empezaran
+   en otro valor, el titular se recolocaría al llegar el JS. */
+html.js { --topbar-h: 41px; --navbar-h: 77px; }
+html.js:has(.barra-hoy) { --barra-hoy-h: 47px; }
+@media (max-width: 980px) { html.js { --navbar-h: 65px; } }
+@media (max-width: 860px) { html.js:has(.barra-hoy) { --barra-hoy-h: 99px; } }
+@media (max-width: 720px) { html.js { --topbar-h: 53px; } }
 
 .navbar {
   position: relative;
@@ -1807,6 +1819,11 @@ body {
 
 
 /* Barra de páginas de la sección, bajo la cabecera de cada página */
+/* La barra de páginas la añade partials.js después de pintar: se le guarda
+   el sitio bajo la cabecera para que el contenido no baje de golpe.
+   Las páginas sin barra llevan .page-hero--sola. */
+.js .page-hero:not(.page-hero--sola) { margin-bottom: 61px; }
+.js .page-hero:has(+ .subnav), html.en-ventana .page-hero { margin-bottom: 0; }
 .subnav {
   position: relative; z-index: 2;
   background: var(--surface-raised); border-bottom: 1px solid var(--border);
@@ -1881,6 +1898,11 @@ body {
   border-bottom: 1px solid rgba(196,146,0,.3);
   color: #fff;
 }
+/* Con JS la barra siempre acaba saliendo (como mínimo, con una cita):
+   se pinta vacía y con su altura desde el principio para que no empuje
+   la portada hacia abajo al llegar el contenido. */
+.js .barra-hoy[hidden] { display: block !important; min-height: 47px; }
+@media (max-width: 860px) { .js .barra-hoy[hidden] { min-height: 99px; } }
 .barra-hoy__in {
   max-width: var(--container); margin: 0 auto; padding-inline: var(--margen-izq) var(--margen-der);
   min-height: 46px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 18px;

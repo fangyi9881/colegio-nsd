@@ -4,6 +4,9 @@
 // y el tema oscuro no llegaría a aplicarse.
 // Debe cargarse de forma SÍNCRONA en el <head>: sin defer ni async.
 (function () {
+  // Marca que hay JavaScript: el CSS reserva el sitio de las piezas que
+  // pinta JS (barra de hoy) para que la página no salte al aparecer.
+  document.documentElement.classList.add('js');
   try {
     var guardado = localStorage.getItem('nsd-theme');
     var tema = (guardado === 'dark' || guardado === 'light')
