@@ -23,10 +23,8 @@ El panel deja que la dirección, cada departamento y secretaría editen su parte
 5. **Authentication → URL Configuration**:
    - *Site URL*: `https://colegio-nsd.vercel.app` hasta el traspaso; después, `https://www.colegionsdolores.es`.
    - *Redirect URLs*: añadir `https://colegio-nsd.vercel.app/**` y `https://www.colegionsdolores.es/**`.
-6. **Correo de avisos (recomendado).** Sin SMTP propio, Supabase solo envía correos a los miembros del equipo del proyecto, así que el «He olvidado la contraseña» no les llegaría a los profesores.
-   - *Authentication → Emails → SMTP Settings*: poner el servidor de correo del colegio (el buzón `secretaria@colegionsdolores.es` del proveedor de correo, o una cuenta de Google con verificación en dos pasos y *contraseña de aplicación*: `smtp.gmail.com`, puerto 465).
-   - Con SMTP puesto, activar **Confirm email** en el proveedor Email: así nadie puede pedir cuenta con un correo que no es suyo.
-   - Sin SMTP, dejar *Confirm email* desactivado. Es seguro igualmente, porque ninguna cuenta hace nada hasta que la dirección la aprueba, pero entonces la dirección debe comprobar quién es cada solicitante.
+6. **Correo de avisos.** Sin SMTP propio, Supabase solo envía correos a los miembros del equipo del proyecto, así que el «He olvidado la contraseña» no les llegaría a los profesores. El colegio tiene Google Workspace for Education: los pasos (cuenta `no-responder@`, contraseña de aplicación, SMTP de Gmail, plantillas en español y **Confirm email**) están en `docs/CORREO.md`.
+   - Hasta que esté puesto, dejar *Confirm email* desactivado. Es seguro igualmente, porque ninguna cuenta hace nada hasta que la dirección la aprueba, pero entonces la dirección debe comprobar quién es cada solicitante.
 7. **Conectar la web.** *Project Settings → API*: copiar **Project URL** y la clave **anon public** en `assets/js/cms-config.js`. Nunca la `service_role`. Guardar, `git commit` y `git push`, y volver a subir el paquete a Hostinger (`node scripts/empaquetar-hostinger.mjs`).
 8. **Primera cuenta de administración.** Registrarse en `/acceso` → *Solicitar cuenta*. Luego, en el SQL Editor:
 

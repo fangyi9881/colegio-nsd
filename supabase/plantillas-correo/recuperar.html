@@ -1,0 +1,19 @@
+<!-- Supabase → Authentication → Emails → Templates → Reset password. Asunto: Cambia tu contraseña del panel del Colegio NSD -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f1ea;padding:24px 12px;font-family:Arial,Helvetica,sans-serif;">
+  <tr><td align="center">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#ffffff;border-radius:12px;overflow:hidden;">
+      <tr><td style="background:#10572C;padding:20px 28px;color:#ffffff;font-size:18px;font-weight:bold;">Colegio Nuestra Señora de los Dolores</td></tr>
+      <tr><td style="padding:28px;color:#1f2a22;font-size:16px;line-height:1.55;">
+        <h1 style="margin:0 0 16px;font-size:22px;color:#0B3A18;">Cambia tu contraseña</h1>
+        <p style="margin:0;">Alguien ha pedido cambiar la contraseña de tu cuenta del panel de la web del colegio. Pulsa el botón para elegir una nueva. El enlace sirve una sola vez y caduca en una hora.</p>
+        <p style="margin:28px 0;text-align:center;">
+          <a href="{{ .ConfirmationURL }}" style="display:inline-block;background:#10572C;color:#ffffff;text-decoration:none;font-weight:bold;padding:14px 26px;border-radius:8px;">Elegir contraseña nueva</a>
+        </p>
+        <p style="margin:0 0 8px;font-size:14px;color:#55605a;">Si el botón no funciona, copia esta dirección en el navegador:</p>
+        <p style="margin:0 0 20px;font-size:13px;word-break:break-all;"><a href="{{ .ConfirmationURL }}" style="color:#10572C;">{{ .ConfirmationURL }}</a></p>
+        <p style="margin:0;font-size:14px;color:#55605a;">Si no lo has pedido tú, ignora este correo: tu contraseña sigue siendo la misma.</p>
+      </td></tr>
+      <tr><td style="padding:16px 28px;background:#f4f1ea;font-size:12px;color:#55605a;">Correo automático del panel de la web del colegio. No respondas a este mensaje: para cualquier duda, escribe a secretaria@colegionsdolores.es.</td></tr>
+    </table>
+  </td></tr>
+</table>
