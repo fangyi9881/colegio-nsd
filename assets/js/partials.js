@@ -564,14 +564,14 @@
   (function fotoCabecera() {
     const hero = document.querySelector('.page-hero');
     if (!hero || hero.closest('.post-card') || hero.hasAttribute('data-sin-foto')) return;
-    // Solo fotos sin niños reconocibles (fachadas, patio, pista, aulas)
+    // Solo fotos sin niños reconocibles (fachadas, patio, pista, aulas, mesas)
     const FOTOS = [
       ['/centro/sobre-nosotros', 'fachada-color'], ['/centro/mision-valores', 'huerto'], ['/centro/equipo-directivo', 'fachada-nsd'],
       ['/centro/organigrama', 'aula'], ['/centro/persona', 'aula'],
       ['/centro/departamentos/ciencias', 'huerto'], ['/centro/departamentos/educacion-fisica', 'pista'],
-      ['/centro/departamentos/primaria', 'patio'], ['/centro/departamentos/bilinguismo', 'fachada-color'],
+      ['/centro/departamentos/primaria', 'patio'], ['/centro/departamentos/bilinguismo', 'naturaleza'],
       ['/centro/departamentos', 'aula'], ['/centro', 'fachada-nsd'],
-      ['/etapas/infantil-3-6', 'aula'], ['/etapas/primaria', 'patio'], ['/etapas/eso', 'fachada-color'], ['/etapas', 'patio'],
+      ['/etapas/infantil-3-6', 'aula'], ['/etapas/primaria', 'plastilina-figuras'], ['/etapas/eso', 'fachada-color'], ['/etapas', 'patio'],
       ['/servicios/comedor', 'huerto'], ['/servicios/extraescolares', 'gimnasio'], ['/servicios/madrugadores', 'patio'], ['/servicios', 'gimnasio'],
       ['/familias/documentacion', 'fachada-nsd'], ['/familias/evaluacion', 'aula'], ['/familias', 'fachada-color'],
       ['/admision', 'fachada-nsd'], ['/contacto', 'fachada-color'], ['/comunidad', 'pista'], ['/blog', 'gimnasio']
