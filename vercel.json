@@ -344,6 +344,326 @@
       "permanent": true
     },
     {
+      "source": "/index.php/mega/layout-builder/reli",
+      "destination": "/centro/departamentos/religion-valores",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/layout-builder/art",
+      "destination": "/centro/departamentos/artistico",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/layout-builder/mats",
+      "destination": "/centro/departamentos/matematicas",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/layout-builder/franc",
+      "destination": "/centro/departamentos/frances",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/layout-builder/cienc",
+      "destination": "/centro/departamentos/ciencias",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/layout-builder/ingles",
+      "destination": "/centro/departamentos/ingles",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/layout-builder/ef",
+      "destination": "/centro/departamentos/educacion-fisica",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/layout-builder/gyh",
+      "destination": "/centro/departamentos/geografia-historia",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/layout-builder/le",
+      "destination": "/centro/departamentos/lengua",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/layout-builder/tecno",
+      "destination": "/centro/departamentos/tecnologia",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/layout-builder/pmar",
+      "destination": "/centro/departamentos/diversificacion",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/powerful-features/bileso",
+      "destination": "/centro/departamentos/bilinguismo",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/powerful-features/bilpri",
+      "destination": "/centro/departamentos/bilinguismo",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/ep/pdep",
+      "destination": "/centro/departamentos/primaria",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/ep/crievcalpro",
+      "destination": "/familias/evaluacion",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/megamenu-options/normat",
+      "destination": "/familias/informacion",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/megamenu-options/styling-menus",
+      "destination": "/familias/informacion",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/megamenu-options/rri",
+      "destination": "/acceso",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/megamenu-options/comp",
+      "destination": "/centro",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/portfolio/equ",
+      "destination": "/centro/equipo-directivo",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/portfolio/hist",
+      "destination": "/centro/sobre-nosotros",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/portfolio/login",
+      "destination": "/acceso",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/portfolio/registro",
+      "destination": "/acceso",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/portfolio",
+      "destination": "/centro",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/pages/masnstal",
+      "destination": "/centro/sobre-nosotros",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/pages/proye",
+      "destination": "/centro/mision-valores",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/pages/services-2",
+      "destination": "/servicios",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/pages-4/secre3",
+      "destination": "/familias",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/serv1/priv",
+      "destination": "/privacidad",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/serv1/cookies",
+      "destination": "/cookies",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/cookies2",
+      "destination": "/cookies",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/serv1/comedor",
+      "destination": "/servicios/comedor",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/serv1/extendido",
+      "destination": "/servicios/madrugadores",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/serv1/form",
+      "destination": "/familias/formularios/actividades-y-servicios",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/serv1/pee",
+      "destination": "/servicios",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/serv1/veran",
+      "destination": "https://campamento.colegionsdolores.es",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/serv1",
+      "destination": "/servicios",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/our-services",
+      "destination": "/servicios",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/about-us",
+      "destination": "/centro/sobre-nosotros",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/gallery",
+      "destination": "/centro",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/pages-4/services-8/leche",
+      "destination": "/servicios/comedor",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/pages-4/services-8/desayunos",
+      "destination": "/servicios/comedor",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/pages-4/services-8/descargadoc",
+      "destination": "/familias/documentacion",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/pages-4/services-8/4eso",
+      "destination": "/blog/4eso-empresa",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/pages-4/services-8/xxxv-semana-cultural-2",
+      "destination": "/blog/xxxvi-semana-cultural",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/pages-4/services-8/inicio-26-27",
+      "destination": "/familias/documentacion?q=libros",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/component/tags/tag/departamentos",
+      "destination": "/centro/departamentos",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/component/tags/tag/covid-19",
+      "destination": "/familias",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/component/tags/tag/secretaria",
+      "destination": "/familias",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/pages-4/services-8/:resto*",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/ep/pdep-2/:resto*",
+      "destination": "/centro/departamentos",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/easy-customization/:resto*",
+      "destination": "/familias/documentacion",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/pages-4/:resto*",
+      "destination": "/centro",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/layout-builder/:resto*",
+      "destination": "/centro/departamentos",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/powerful-features/:resto*",
+      "destination": "/centro/departamentos/bilinguismo",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/megamenu-options/:resto*",
+      "destination": "/centro",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/mega/:resto*",
+      "destination": "/centro",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/pages/:resto*",
+      "destination": "/centro",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/serv1/:resto*",
+      "destination": "/servicios",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/portfolio/:resto*",
+      "destination": "/centro",
+      "permanent": true
+    },
+    {
+      "source": "/extra/mapa.html",
+      "destination": "/contacto",
+      "permanent": true
+    },
+    {
+      "source": "/extra/mapa.htm",
+      "destination": "/contacto",
+      "permanent": true
+    },
+    {
+      "source": "/extra/fcolegio.html",
+      "destination": "/centro",
+      "permanent": true
+    },
+    {
+      "source": "/extra/fcolegio.htm",
+      "destination": "/centro",
+      "permanent": true
+    },
+    {
       "source": "/index.php",
       "has": [
         {
