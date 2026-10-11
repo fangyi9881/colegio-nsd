@@ -4,25 +4,25 @@
    - waves, shimmer, float, glow, stagger reveals
    ========================================================= */
 
-/* ===== Reveal premium con stagger ===== */
-[data-reveal] {
+/* ===== Reveal premium con stagger =====
+   Solo transform y opacity (sin blur ni will-change: con decenas de piezas
+   en la página, cada filter forzaba una capa propia y repintados en móvil).
+   Las piezas solo se ocultan si hay JS (html.js lo pone theme-init.js antes
+   del primer pintado): sin JS, o si un script falla, el contenido se ve. */
+.js [data-reveal] {
   opacity: 0;
   transform: translateY(14px);
   transition:
     opacity .45s cubic-bezier(.2,.8,.2,1),
-    transform .45s cubic-bezier(.2,.8,.2,1),
-    filter .45s cubic-bezier(.2,.8,.2,1);
-  filter: blur(4px);
-  will-change: opacity, transform, filter;
+    transform .45s cubic-bezier(.2,.8,.2,1);
 }
-[data-reveal="fade"] { transform: none; }
-[data-reveal="left"] { transform: translateX(-32px); }
-[data-reveal="right"] { transform: translateX(32px); }
-[data-reveal="zoom"] { transform: scale(.9); }
-[data-reveal].is-visible {
+.js [data-reveal="fade"] { transform: none; }
+.js [data-reveal="left"] { transform: translateX(-32px); }
+.js [data-reveal="right"] { transform: translateX(32px); }
+.js [data-reveal="zoom"] { transform: scale(.9); }
+.js [data-reveal].is-visible {
   opacity: 1;
   transform: translate(0,0) scale(1);
-  filter: blur(0);
 }
 [data-reveal-delay="1"]  { transition-delay: .05s; }
 [data-reveal-delay="2"]  { transition-delay: .10s; }
@@ -32,6 +32,27 @@
 [data-reveal-delay="6"]  { transition-delay: .30s; }
 [data-reveal-delay="7"]  { transition-delay: .35s; }
 [data-reveal-delay="8"]  { transition-delay: .40s; }
+
+/* Portada: la entrada va con CSS puro, sin esperar a los scripts. Antes el
+   título y la foto seguían invisibles hasta que se ejecutaban los 15 JS, y
+   eso retrasaba lo primero que ve la gente (LCP) sobre todo en móvil. */
+@keyframes nsd-entra      { from { opacity: 0; transform: translateY(14px); } }
+@keyframes nsd-entra-zoom { from { opacity: 0; transform: scale(.9); } }
+.js .hero [data-reveal] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  animation: nsd-entra .45s cubic-bezier(.2,.8,.2,1) backwards;
+}
+.js .hero [data-reveal="zoom"] { animation-name: nsd-entra-zoom; }
+.js .hero [data-reveal-delay="1"] { animation-delay: .05s; }
+.js .hero [data-reveal-delay="2"] { animation-delay: .10s; }
+.js .hero [data-reveal-delay="3"] { animation-delay: .15s; }
+.js .hero [data-reveal-delay="4"] { animation-delay: .20s; }
+.js .hero [data-reveal-delay="5"] { animation-delay: .25s; }
+.js .hero [data-reveal-delay="6"] { animation-delay: .30s; }
+.js .hero [data-reveal-delay="7"] { animation-delay: .35s; }
+.js .hero [data-reveal-delay="8"] { animation-delay: .40s; }
 
 /* ===== Marquee infinito ===== */
 .marquee {
@@ -699,7 +720,7 @@
     animation-iteration-count: 1 !important;
     transition-duration: .001ms !important;
   }
-  [data-reveal] { opacity: 1; transform: none; filter: none; }
+  .js [data-reveal], .js .hero [data-reveal] { opacity: 1; transform: none; filter: none; animation: none; }
   .marquee__track, .gallery-marquee { animation: none; }
 }
 

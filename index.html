@@ -32,8 +32,9 @@
   <link rel="manifest" href="/manifest.webmanifest" />
 
 
-  <!-- Preload del logo (LCP critico) -->
-  <link rel="preload" as="image" href="/assets/img/logo.png" fetchpriority="high" />
+  <!-- Foto de la portada: en escritorio queda junto al título y es lo primero que se ve, así que se pide ya con prioridad.
+       En móvil queda debajo del título: ahí no se precarga, para no quitarle ancho de banda al CSS y a las fuentes. -->
+  <link rel="preload" as="image" type="image/webp" imagesrcset="/assets/img/fotos/fachada-color-800.webp 800w, /assets/img/fotos/fachada-color-1400.webp 1400w" imagesizes="(max-width: 980px) 90vw, 500px" media="(min-width: 981px)" fetchpriority="high" />
 
   <!-- Fuentes e iconos servidos desde la propia web (sin Google Fonts ni jsDelivr) -->
   <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
@@ -132,7 +133,7 @@
               <li class="rotafotos__lam">
                 <picture>
                   <source type="image/webp" srcset="/assets/img/fotos/fachada-color-800.webp 800w, /assets/img/fotos/fachada-color-1400.webp 1400w" sizes="(max-width: 980px) 90vw, 500px" />
-                  <img src="/assets/img/fotos/fachada-color-800.webp" alt="Fachada del colegio en la calle Tordo, con las lamas amarillas, naranjas y blancas" width="800" height="1000" fetchpriority="high" decoding="async" />
+                  <img src="/assets/img/fotos/fachada-color-800.webp" alt="Fachada del colegio en la calle Tordo, con las lamas amarillas, naranjas y blancas" width="800" height="1000" decoding="async" />
                 </picture>
               </li>
               <li class="rotafotos__lam">
