@@ -3394,3 +3394,201 @@ html[data-tono] .page-hero {
 .galeria .figura img { aspect-ratio: 4 / 3; max-height: none; }
 .galeria--1 { grid-template-columns: 1fr; }
 .galeria--1 .figura img { aspect-ratio: 16 / 9; }
+
+/* =========================================================
+   DETALLES DE INTERACCIÓN (pulido «a lo Apple»)
+   ---------------------------------------------------------
+   Inspirado en «Designing Fluid Interfaces» (WWDC 2018).
+   No cambia la identidad: mismos colores, mismas fuentes y
+   misma maquetación. Sólo afina cómo responde la web al
+   tocarla, cómo se mueve y cómo se lee.
+
+   - Va al final de la hoja principal. Como pages.css,
+     secciones.css, nsd-apple.css… se cargan después, las
+     reglas que tienen que ganarles llevan `html` delante
+     (sube la especificidad sin !important).
+   - La pulsación usa la propiedad `scale`, no `transform`:
+     así se suma al translate del hover en vez de pisarlo y
+     no choca con las `transition: transform` existentes.
+   ========================================================= */
+
+/* ── Curvas tipo muelle ─────────────────────────────────── */
+:root {
+  /* Amortiguamiento crítico: llega sin rebotar. Para casi todo. */
+  --ease-fluido: cubic-bezier(.22, 1, .36, 1);
+  /* Rebote leve (~0,8): sólo para lo que el usuario lanza o arrastra. */
+  --ease-muelle: linear(0, .006, .025 2.8%, .101 6.1%, .539 18.9%, .721 25.3%, .849 31.5%, .937 38.1%, .968 41.8%, .991 45.7%, 1.006 50.1%, 1.015 55%, 1.017 63.9%, 1.001 85.9%, 1);
+  --dur-pulsar: 100ms;
+  --dur-aparecer: 200ms;
+  --dur-panel: 350ms;
+  /* Anillo de foco: verde de marca; en zonas oscuras, el oro claro. */
+  --anillo: var(--green-600);
+}
+@supports not (transition-timing-function: linear(0, 1)) {
+  :root { --ease-muelle: var(--ease-fluido); }
+}
+
+/* ── Base: tamaño de texto estable y tipografía ─────────── */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { font-optical-sizing: auto; }
+/* Titulares sin una palabra huérfana en la última línea; párrafos
+   con cortes más equilibrados. No cambia tamaños ni interletraje,
+   que ya estaban ajustados (negativo en titulares grandes). */
+h1, h2, h3 { text-wrap: balance; }
+p, li, figcaption, blockquote { text-wrap: pretty; }
+/* Cifras que se comparan o cuentan: todas del mismo ancho. */
+table, time, .stat__num, .agenda__fecha, .pnl-tabla { font-variant-numeric: tabular-nums; }
+
+/* ── Selección de texto: oro de marca a baja opacidad ───── */
+::selection { background: color-mix(in srgb, var(--gold-300) 42%, transparent); color: inherit; }
+
+/* ── Foco visible coherente ─────────────────────────────── */
+/* :where() deja la especificidad en lo mínimo: los anillos que ya
+   tenían componentes concretos (botones, interruptor de tema…)
+   siguen mandando. Esto cubre todo lo demás con el mismo anillo. */
+:where(a, button, [role="button"], input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid var(--anillo);
+  outline-offset: 2px;
+}
+.topbar, .footer, .drawer, .section--dark, .cta, .stats, .baldosa,
+.promos, .marquee, .espacio--oscuro, .carrusel__media, .visor {
+  --anillo: var(--gold-300);
+}
+
+/* ── Respuesta inmediata al tocar ───────────────────────── */
+/* Sin el retraso de 300 ms que algunos móviles guardan para el doble toque. */
+a, button, [role="button"], input, select, textarea, label, summary {
+  touch-action: manipulation;
+}
+/* Pulsación: el elemento cede en cuanto el dedo lo toca (:active),
+   no al soltar. Botones pequeños 0,97; tarjetas grandes 0,985.
+   Nunca en enlaces dentro de un párrafo. */
+.pagination a, .tag-filter a, .quick-link, .topbar__pill, .hamburger-x, .drawer__close,
+.contacto-band__ir, .contact-social a, .mobile-cta-bar a, .doc2-tab, .diario-filtro,
+.sim-etapa, .sim-tipo, .menu-semanas__btn, .btn-enlace, .ficha-cerrar, .post-card__cerrar,
+.rotafotos__pausa, .visor__boton, .entrada-copiar,
+.stage, .dept, a.teacher, .persona, .cms-doc, .deps-item a, .cms-enlaces a, .doc2-tarjeta,
+.doc2-carpeta, .grupo-web, .act-card, .dir-card, .dep-card, .news__item, .promo, .service {
+  -webkit-tap-highlight-color: transparent;
+}
+html :is(.pagination a, .tag-filter a, .quick-link, .topbar__pill, .hamburger-x, .drawer__close,
+.contacto-band__ir, .contact-social a, .mobile-cta-bar a, .doc2-tab, .diario-filtro,
+.sim-etapa, .sim-tipo, .menu-semanas__btn, .btn-enlace, .ficha-cerrar, .post-card__cerrar,
+.rotafotos__pausa, .visor__boton, .entrada-copiar):not([data-tacto]):active {
+  scale: .97;
+}
+html :is(.stage, .dept, a.teacher, .persona, .cms-doc, .deps-item a, .cms-enlaces a, .doc2-tarjeta,
+.doc2-carpeta, .grupo-web, .act-card, .dir-card, .dep-card, .news__item, .promo,
+.service):not([data-tacto]):active {
+  scale: .985;
+}
+/* Los que ya llevan su transición conocida: se le añade `scale` para
+   que la vuelta tras soltar sea suave (100 ms al bajar, igual al subir). */
+html :is(.pagination a, .tag-filter a) {
+  transition: background-color .2s, color .2s, border-color .2s, scale var(--dur-pulsar) ease-out;
+}
+/* Botones con muelle de nsd-spring.js (marcados con data-tacto): el
+   muelle ya escala; el :active de CSS no debe sumar una segunda escala. */
+html .btn[data-tacto]:active { transform: none; }
+
+/* ── Hover sólo donde hay ratón ─────────────────────────── */
+/* En pantallas táctiles, el :hover se queda «pegado» tras tocar y la
+   tarjeta se quedaba levantada. Se anula sólo el movimiento; los
+   cambios de color del hover se mantienen. */
+@media (hover: none), (pointer: coarse) {
+  html :is(.gallery-tile, .cms-doc, .deps-item a, .cms-enlaces a, .enlace-web, .dept, a.teacher,
+  .persona, .web, .btn--gold, .doc2-tarjeta, .doc2-carpeta, .promo, .stage, .service--featured,
+  .news__item, .cta .btn--primary, .contact-social a, .dropdown__boton, .act-card,
+  .contacto-band__ir, .grupo-web, .dragons2__tarjeta, .dragons2__fila, .dragons2__boton,
+  .dir-card, .dep-card, .post-card__cerrar, .btn-enlace):hover,
+  html .to-top.is-visible:hover,
+  html .enlace-web:hover .enlace-web__ir,
+  html .indice a:hover .indice__ir i,
+  html .web:hover .web__ir i,
+  html .stage__link:hover i,
+  html .act-card:hover .act-card__link i,
+  html .dropdown__hub:hover .dropdown__hub-ver i {
+    transform: none;
+  }
+  /* La tarjeta destacada de etapas está un poco elevada de base. */
+  html .stage.stage--featured:hover { transform: translateY(-4px); }
+  html .carrusel__item.is-visible:hover .carrusel__media img { transform: scale(1); }
+}
+
+/* ── Desplegables y cajones: interrumpibles y simétricos ── */
+/* El desplegable ya abre y cierra con transiciones (si se interrumpe,
+   vuelve desde donde está). Se le da la curva fluida y nace del borde
+   de su botón. */
+.dropdown {
+  transform-origin: top left;
+  transition-timing-function: var(--ease-fluido);
+}
+/* El cajón entra por la derecha y sale por la derecha (ya era así).
+   El scroll de dentro no se escapa a la página de detrás. */
+.drawer { overscroll-behavior: contain; }
+
+/* ── Carriles horizontales: límites suaves ──────────────── */
+.subnav__lista, .act-pista, .doc2-tabs, .menu-semanas {
+  overscroll-behavior-x: contain;
+}
+
+/* ── Formularios ────────────────────────────────────────── */
+input, select, textarea { caret-color: var(--green-600); }
+input[type="checkbox"], input[type="radio"], input[type="range"], progress { accent-color: var(--green-700); }
+/* En móvil, 16 px como mínimo: por debajo, iOS hace zoom al escribir
+   y la página se queda desplazada. */
+@media (max-width: 720px), (pointer: coarse) {
+  input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="hidden"]),
+  select, textarea {
+    font-size: max(16px, 1em) !important;
+  }
+}
+
+/* ── Zonas seguras: lo que flota abajo ──────────────────── */
+.to-top {
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  right: max(24px, calc(env(safe-area-inset-right) + 12px));
+}
+@media (max-width: 720px) {
+  .to-top {
+    bottom: calc(86px + env(safe-area-inset-bottom));
+    right: max(14px, calc(env(safe-area-inset-right) + 8px));
+  }
+}
+
+/* ── Dianas táctiles de 44 × 44 ─────────────────────────── */
+/* Botones de sólo icono más pequeños que un dedo: se amplía la zona
+   que responde con un pseudo-elemento invisible, sin cambiar el dibujo. */
+@media (pointer: coarse) {
+  html :is(.rotafotos__pausa, .ficha-cerrar, .post-card__cerrar, .to-top)::after {
+    content: ""; position: absolute;
+    inset: min(0px, calc((100% - 44px) / 2));
+  }
+  /* Interruptor de tema: sus opciones van pegadas, así que sólo se
+     amplía en vertical para no pisar a la de al lado. */
+  html .theme-switch__opt::after {
+    content: ""; position: absolute;
+    inset: min(0px, calc((100% - 44px) / 2)) 0;
+  }
+  .pagination a { position: relative; }
+  .pagination a::after { content: ""; position: absolute; inset: -2px; }
+}
+
+/* ── Movimiento reducido: respuesta suave, sin desplazamientos ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  /* Sin escalar al pulsar: en su lugar, un leve atenuado. */
+  html [data-tacto] { scale: none !important; }
+  html :is(.btn, .nav-cta, .web, .baldosa, .indice a, .carrusel__boton, .enlace-web, .to-top, .theme-switch__opt,
+  .pagination a, .tag-filter a, .quick-link, .topbar__pill, .hamburger-x, .drawer__close,
+  .contacto-band__ir, .contact-social a, .mobile-cta-bar a, .doc2-tab, .diario-filtro,
+  .sim-etapa, .sim-tipo, .menu-semanas__btn, .btn-enlace, .ficha-cerrar, .post-card__cerrar,
+  .rotafotos__pausa, .visor__boton, .entrada-copiar,
+  .stage, .dept, a.teacher, .persona, .cms-doc, .deps-item a, .cms-enlaces a, .doc2-tarjeta,
+  .doc2-carpeta, .grupo-web, .act-card, .dir-card, .dep-card, .news__item, .promo, .service):active {
+    scale: none; transform: none; opacity: .8;
+  }
+  /* Las apariciones de menús pasan a ser un fundido corto, sin moverse. */
+  html .dropdown { transform: none !important; transition: opacity 150ms ease !important; }
+  html .reveal { transform: none; }
+}

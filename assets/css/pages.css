@@ -189,7 +189,7 @@
   display: grid; place-items: center;
   border-radius: 10px; color: var(--ink-700); font-weight: 700;
   border: 1px solid var(--ink-100);
-  transition: all .2s;
+  transition: background-color .2s, color .2s, border-color .2s;
 }
 .pagination a:hover, .pagination a.is-current {
   background: var(--brand-700); color: #fff; border-color: var(--green-700);
@@ -204,7 +204,7 @@
   padding: 8px 14px; background: var(--ink-50);
   border: 1px solid var(--ink-100); border-radius: 999px;
   font-size: .85rem; color: var(--ink-700); font-weight: 600;
-  transition: all .2s;
+  transition: background-color .2s, color .2s, border-color .2s;
 }
 .tag-filter a:hover, .tag-filter a.is-active {
   background: var(--brand-700); color: #fff; border-color: var(--green-700);

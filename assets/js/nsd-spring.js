@@ -70,7 +70,10 @@
       if (!this._lastT) this._lastT = t || performance.now();
       const now = t || performance.now();
       let dt = (now - this._lastT) / 1000;
-      dt = Math.min(dt, 0.032); // evita saltos si la pestana estuvo en segundo plano
+      // Evita saltos si la pestana estuvo en segundo plano. Nunca negativo:
+      // el primer fotograma puede traer una marca de tiempo anterior a la
+      // del evento que lo lanzo, y un paso negativo mete energia al muelle.
+      dt = Math.min(Math.max(dt, 0), 0.032);
       this._lastT = now;
 
       // Conversion damping/response -> rigidez/friccion (parametrizacion de
@@ -79,13 +82,17 @@
       const stiffness = angularFreq * angularFreq;
       const dampingCoef = 2 * this.damping * angularFreq;
 
+      // Se integra en pasos de 1/240 s como maximo: con un paso de
+      // fotograma entero a 30 fps (modo ahorro, moviles modestos) el muelle
+      // rapido de "tacto" se volvia inestable y el boton oscilaba cada vez mas.
+      const pasos = Math.max(1, Math.ceil(dt * 240));
+      const h = dt / pasos;
+      for (let i = 0; i < pasos; i++) {
+        const accel = -stiffness * (this.value - this.target) - dampingCoef * this.velocity;
+        this.velocity += accel * h;
+        this.value += this.velocity * h;
+      }
       const displacement = this.value - this.target;
-      const springForce = -stiffness * displacement;
-      const dampingForce = -dampingCoef * this.velocity;
-      const accel = springForce + dampingForce;
-
-      this.velocity += accel * dt;
-      this.value += this.velocity * dt;
 
       this.onUpdate && this.onUpdate(this.value);
 
@@ -124,10 +131,18 @@
   function tacto(el, { escala = 0.96, preset = 'tacto' } = {}) {
     if (!el || el.__nsdTactoInit) return;
     el.__nsdTactoInit = true;
+    // Marca para la hoja: estos elementos ya tienen su pulsacion aqui y el
+    // :active de CSS no debe sumar otra escala encima.
+    el.setAttribute('data-tacto', '');
     const cfg = PRESETS[preset] || PRESETS.tacto;
+    // Se usa la propiedad `scale` (independiente de `transform`): asi no
+    // pisa el translate del hover ni choca con la `transition: transform`
+    // de la hoja (que retrasaba la pulsacion). Al volver a reposo se borra,
+    // y el elemento depende otra vez solo de la hoja de estilos.
     const s = new Spring(1, {
       ...cfg,
-      onUpdate: (v) => { el.style.transform = `scale(${v})`; },
+      onUpdate: (v) => { el.style.scale = String(v); },
+      onSettle: () => { if (s.target === 1) el.style.removeProperty('scale'); },
     });
     const bajar = () => s.to(escala);
     const soltar = () => s.to(1);
