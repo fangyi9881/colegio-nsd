@@ -254,6 +254,96 @@
       "permanent": true
     },
     {
+      "source": "/extra/proyecto.html",
+      "destination": "/centro/mision-valores",
+      "permanent": true
+    },
+    {
+      "source": "/extra/informatica.html",
+      "destination": "/centro/departamentos/tecnologia",
+      "permanent": true
+    },
+    {
+      "source": "/extra/ampa.html",
+      "destination": "/comunidad",
+      "permanent": true
+    },
+    {
+      "source": "/extra/ayuda.html",
+      "destination": "/familias",
+      "permanent": true
+    },
+    {
+      "source": "/extra/libros.html",
+      "destination": "/familias/documentacion?q=libros",
+      "permanent": true
+    },
+    {
+      "source": "/extra/anuncios.html",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/extra/futbol.html",
+      "destination": "/servicios/extraescolares",
+      "permanent": true
+    },
+    {
+      "source": "/extra/guarderia.html",
+      "destination": "https://infantil.colegionsdolores.es",
+      "permanent": true
+    },
+    {
+      "source": "/extra/colegio.html",
+      "destination": "/centro/sobre-nosotros",
+      "permanent": true
+    },
+    {
+      "source": "/extra/proyecto.htm",
+      "destination": "/centro/mision-valores",
+      "permanent": true
+    },
+    {
+      "source": "/extra/informatica.htm",
+      "destination": "/centro/departamentos/tecnologia",
+      "permanent": true
+    },
+    {
+      "source": "/extra/ampa.htm",
+      "destination": "/comunidad",
+      "permanent": true
+    },
+    {
+      "source": "/extra/ayuda.htm",
+      "destination": "/familias",
+      "permanent": true
+    },
+    {
+      "source": "/extra/libros.htm",
+      "destination": "/familias/documentacion?q=libros",
+      "permanent": true
+    },
+    {
+      "source": "/extra/anuncios.htm",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/extra/futbol.htm",
+      "destination": "/servicios/extraescolares",
+      "permanent": true
+    },
+    {
+      "source": "/extra/guarderia.htm",
+      "destination": "https://infantil.colegionsdolores.es",
+      "permanent": true
+    },
+    {
+      "source": "/extra/colegio.htm",
+      "destination": "/centro/sobre-nosotros",
+      "permanent": true
+    },
+    {
       "source": "/index.php",
       "has": [
         {
