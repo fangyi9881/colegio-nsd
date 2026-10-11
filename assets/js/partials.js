@@ -114,7 +114,7 @@
     {
       id: 'etapas', titulo: 'Etapas', url: '/etapas', icono: 'bi-mortarboard',
       paginas: [
-        { titulo: 'Infantil 0–3',       url: 'https://infantil-nsd.vercel.app', icono: 'bi-balloon-heart', externa: true },
+        { titulo: 'Infantil 0–3',       url: 'https://infantil.colegionsdolores.es', icono: 'bi-balloon-heart', externa: true },
         { titulo: 'Infantil 3–6',       url: '/etapas/infantil-3-6', icono: 'bi-stars' },
         { titulo: 'Educación Primaria', url: '/etapas/primaria',     icono: 'bi-book' },
         { titulo: 'E.S.O.',             url: '/etapas/eso',          icono: 'bi-laptop' }
@@ -146,7 +146,7 @@
       ],
       // Webs hermanas: cada una con su propio icono
       webs: [
-        { titulo: 'Campamento de verano', url: 'https://campamento-nsd.vercel.app', clase: 'web-ico--campamento', insignia: 'bi-sun' },
+        { titulo: 'Campamento de verano', url: 'https://campamento.colegionsdolores.es', clase: 'web-ico--campamento', insignia: 'bi-sun' },
         { titulo: 'Dolores Dragons',      url: 'https://dolores-dragons.vercel.app', clase: 'web-ico--dragons', imagen: '/assets/img/webs/dolores-dragons.png' }
       ]
     }
@@ -354,8 +354,8 @@
   // ── Las webs del grupo, en botones, en todas las páginas ──
   const GRUPO = [
     { url: '/', titulo: 'Colegio NSD', sub: 'De 0 a 16 años', icono: 'bi-mortarboard', aqui: true },
-    { url: 'https://infantil-nsd.vercel.app', titulo: 'Escuela Infantil', sub: '0 – 3 años', icono: 'bi-balloon-heart' },
-    { url: 'https://campamento-nsd.vercel.app', titulo: 'Campamento', sub: 'Verano en el cole', icono: 'bi-sun' },
+    { url: 'https://infantil.colegionsdolores.es', titulo: 'Escuela Infantil', sub: '0 – 3 años', icono: 'bi-balloon-heart' },
+    { url: 'https://campamento.colegionsdolores.es', titulo: 'Campamento', sub: 'Verano en el cole', icono: 'bi-sun' },
     { url: 'https://dolores-dragons.vercel.app', titulo: 'Dolores Dragons', sub: 'Escuela de baloncesto', icono: 'bi-dribbble' },
     { url: 'https://dragons-den-eight.vercel.app', titulo: 'Dragons Den', sub: 'Programa de baloncesto', icono: 'bi-trophy' },
   ];

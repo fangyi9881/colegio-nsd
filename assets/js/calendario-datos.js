@@ -29,7 +29,7 @@ window.NSD_CALENDARIO = {
     { titulo: 'Vacaciones de Navidad', detalle: 'El curso pasado fueron del 22 de diciembre al 7 de enero.' },
     { titulo: 'Vacaciones de Semana Santa', detalle: 'El curso pasado fueron del 27 de marzo al 6 de abril.' },
     { titulo: 'Fin de curso', detalle: 'El curso pasado terminó el 22 de junio (Infantil y Primaria) y el 23 (ESO).' },
-    { titulo: 'Campamento de verano 2027', detalle: 'Las fechas se anuncian en secretaría.', url: 'https://campamento-nsd.vercel.app' },
+    { titulo: 'Campamento de verano 2027', detalle: 'Las fechas se anuncian en secretaría.', url: 'https://campamento.colegionsdolores.es' },
   ],
 
   // Cuándo hay clase y cuándo no.

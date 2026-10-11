@@ -20,7 +20,7 @@
     },
     {
       "source": "/etapas/infantil-0-3",
-      "destination": "https://infantil-nsd.vercel.app",
+      "destination": "https://infantil.colegionsdolores.es",
       "permanent": true
     },
     {
@@ -110,7 +110,7 @@
     },
     {
       "source": "/:prefijo+/campamento-de-verano",
-      "destination": "https://campamento-nsd.vercel.app",
+      "destination": "https://campamento.colegionsdolores.es",
       "permanent": true
     },
     {

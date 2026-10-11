@@ -38,7 +38,7 @@ const DOCUMENTOS = [
     etiquetas: ['matricula', 'plaza', 'nuevo alumno', 'inscripcion', 'solicitud', 'baremo'], actualizado: '2026-03' },
   { titulo: 'Reserva de visita al centro', descripcion: 'Formulario para concertar una visita guiada con el equipo directivo.', categoria: 'admision', tipo: 'formulario', url: '/contacto',
     etiquetas: ['visita', 'cita', 'puertas abiertas', 'conocer el colegio'], actualizado: '2026-03' },
-  { titulo: 'Escuela Infantil 0–3 años', descripcion: 'Web de la escuela infantil: proyecto, horarios, becas de la Comunidad de Madrid y reserva de plaza.', categoria: 'admision', tipo: 'enlace', url: 'https://infantil-nsd.vercel.app',
+  { titulo: 'Escuela Infantil 0–3 años', descripcion: 'Web de la escuela infantil: proyecto, horarios, becas de la Comunidad de Madrid y reserva de plaza.', categoria: 'admision', tipo: 'enlace', url: 'https://infantil.colegionsdolores.es',
     etiquetas: ['guarderia', 'bebes', 'infantil', 'primer ciclo', '0-3'], actualizado: '2026-09' },
 
   // Curso y horarios
@@ -139,7 +139,7 @@ const DOCUMENTOS = [
     etiquetas: ['madrugadores', 'aula matinal', 'acogida', 'temprano', 'conciliacion', 'horario ampliado'], actualizado: '2026-09' },
   { titulo: 'Dolores Dragons · baloncesto', descripcion: 'Web de la escuela de baloncesto del colegio: categorías, calendario y cómo apuntarse.', categoria: 'actividades', tipo: 'enlace', url: 'https://dolores-dragons.vercel.app',
     etiquetas: ['baloncesto', 'basket', 'club', 'deporte', 'dragons', 'equipo'], actualizado: '2026-09' },
-  { titulo: 'Campamento urbano de verano', descripcion: 'Web del campamento: semanas, horarios, actividades e inscripción.', categoria: 'actividades', tipo: 'enlace', url: 'https://campamento-nsd.vercel.app',
+  { titulo: 'Campamento urbano de verano', descripcion: 'Web del campamento: semanas, horarios, actividades e inscripción.', categoria: 'actividades', tipo: 'enlace', url: 'https://campamento.colegionsdolores.es',
     etiquetas: ['campamento', 'verano', 'julio', 'vacaciones', 'urbano'], actualizado: '2026-06' },
 
   // Becas
