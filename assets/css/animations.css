@@ -751,6 +751,9 @@
   /* content-visibility: auto en secciones largas para que no se rendericen
      hasta que entren en el viewport. Mejora drásticamente el scroll. */
   .life-strip, .section, .footer, .stats { content-visibility: auto; contain-intrinsic-size: auto 600px; }
+  /* Secciones muy altas o rellenadas por JS (organigrama, fichas, departamentos):
+     con content-visibility pueden quedarse en blanco en móvil. */
+  .section:has([data-organigrama], [data-persona-pagina], [data-dep], [data-equipo], [data-departamento], [data-departamentos]) { content-visibility: visible; contain-intrinsic-size: none; }
 
   /* En el hero, las morph-blobs no necesitan animación continua — son decorativas */
   .hero__bg .morph-blob { animation-duration: 30s; }

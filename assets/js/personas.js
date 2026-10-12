@@ -23,12 +23,12 @@
 
   // ── Hojas y scripts que hacen falta (por si la página no los trae) ──
   function hoja(href) {
-    if (document.querySelector(`link[href="${href}"]`)) return;
+    if (document.querySelector(`link[href^="${href}"]`)) return;
     const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l);
   }
   function script(src, listo) {
     if (listo()) return Promise.resolve();
-    const ya = document.querySelector(`script[src="${src}"]`);
+    const ya = document.querySelector(`script[src^="${src}"]`);
     return new Promise((ok) => {
       if (ya) { ya.addEventListener('load', () => ok(), { once: true }); setTimeout(ok, 3000); return; }
       const s = document.createElement('script'); s.src = src; s.onload = () => ok(); s.onerror = () => ok(); document.head.appendChild(s);

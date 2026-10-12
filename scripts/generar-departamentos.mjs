@@ -138,12 +138,36 @@ const organigrama = pagina({
   },
   jsonld: migasJsonLd(migasOrg),
   cuerpo: `
-  <section class="section">
-    <div class="container" data-organigrama>
+  <section class="section org-pagina">
+    <div class="container">
+      <div class="org-herr" data-org-herr>
+        <div class="org-herr__fila">
+          <div class="org-buscar" role="search">
+            <label class="sr-only" for="org-q">Buscar por nombre, cargo o departamento</label>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="org-q" class="org-buscar__campo" type="search" placeholder="Buscar persona o departamento" autocomplete="off" enterkeyhint="search" spellcheck="false" />
+            <button type="button" class="org-buscar__x" data-org-limpiar hidden aria-label="Borrar la búsqueda"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+          </div>
+          <div class="org-acciones" role="group" aria-label="Departamentos">
+            <button type="button" class="org-acciones__b" data-org-abrir>Abrir todos</button>
+            <button type="button" class="org-acciones__b" data-org-cerrar>Cerrar todos</button>
+          </div>
+        </div>
+        <p class="org-estado" data-org-estado role="status" aria-live="polite"></p>
+      </div>
+      <nav class="org-saltos" aria-label="Ir a una parte del organigrama">
+        <a href="#org-direccion">Dirección</a>
+        <a href="#org-gestion">Gestión</a>
+        <a href="#org-coord">Coordinaciones</a>
+        <a href="#org-etapas">Etapas</a>
+        <a href="#org-eso">ESO</a>
+      </nav>
+      <div data-organigrama>
 ${htmlOrganigrama(DIRECCION, DEPARTAMENTOS, (d) => (d.defecto || {}).profesorado)}
+      </div>
     </div>
   </section>`,
-  scripts: ['/assets/js/cms-config.js', '/assets/js/cms.js', '/assets/js/departamentos-datos.js', '/assets/js/departamentos.js', '/assets/js/personas.js']
+  scripts: ['/assets/js/cms-config.js', '/assets/js/cms.js', '/assets/js/departamentos-datos.js', '/assets/js/departamentos.js', '/assets/js/personas.js', '/assets/js/organigrama.js']
 });
 fs.mkdirSync(path.join(RAIZ, 'centro'), { recursive: true });
 fs.writeFileSync(path.join(RAIZ, 'centro/organigrama.html'), organigrama);

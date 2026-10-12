@@ -926,7 +926,18 @@
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
-    document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+    // Un elemento más alto que la pantalla (organigrama, listados largos) no llega al
+    // 10 % visible mientras se está leyendo su principio: se revela en cuanto entra una parte.
+    const ioAlto = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        ioAlto.unobserve(entry.target);
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+      (el.offsetHeight > window.innerHeight * 1.2 ? ioAlto : io).observe(el);
+    });
   } else {
     document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-visible'));
   }

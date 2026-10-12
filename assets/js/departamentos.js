@@ -331,8 +331,8 @@
         <span class="persona__avatar" aria-hidden="true">${esc(persona(x.nombre).iniciales)}</span>
         <span class="persona__txt"><span class="persona__nombre">${esc(x.nombre)}</span><span class="persona__cargo">${esc(x.cargo)}</span><span class="persona__ambito">${esc(x.ambito)}</span></span>
       </a></li>`;
-    const nivel = (titulo, icono, gente, mod) => `<div class="org-nivel${mod ? ' org-nivel--' + mod : ''}">
-        <p class="org-nivel__t"><i class="bi ${icono}" aria-hidden="true"></i>${esc(titulo)}</p>
+    const nivel = (titulo, icono, gente, mod, id) => `<div class="org-nivel${mod ? ' org-nivel--' + mod : ''}"${id ? ` id="${id}"` : ''}>
+        <h2 class="org-nivel__t"><i class="bi ${icono}" aria-hidden="true"></i>${esc(titulo)}</h2>
         <ul class="personas personas--centro">${gente.join('')}</ul>
       </div>`;
     // Coordinaciones: los responsables de etapas y programas
@@ -346,23 +346,29 @@
     (dir.otros || []).forEach((x) => coordinaciones.push(x));
     const tarjetasDep = deps.map((d) => {
       const gente = (equipoDe(d) || []).filter(Boolean);
-      return `<li class="org-dep${gente.length > 7 ? ' org-dep--ancho' : ''}" data-tono="${esc(d.slug)}">
-          <a class="org-dep__cab" href="/centro/departamentos/${esc(d.slug)}">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi ${esc(d.icono)}"></i></span>
-            <span class="org-dep__nombre">${esc(d.nombre)}</span>
-            <span class="org-dep__n">${gente.length ? gente.length + (gente.length === 1 ? ' persona' : ' personas') : 'Equipo por publicar'}</span>
-          </a>
-          ${gente.length ? htmlPersonas(gente, d.esquema === 'etapa' ? 'Profesorado de la etapa' : 'Profesorado') : ''}
+      return `<li class="org-dep${gente.length > 7 ? ' org-dep--ancho' : ''}" data-tono="${esc(d.slug)}" data-org-nombre="${esc(d.nombre)}">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi ${esc(d.icono)}"></i></span>
+              <span class="org-dep__nombre">${esc(d.nombre)}</span>
+              <span class="org-dep__n">${gente.length ? gente.length + (gente.length === 1 ? ' persona' : ' personas') : 'Equipo por publicar'}</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              ${gente.length ? htmlPersonas(gente, d.esquema === 'etapa' ? 'Profesorado de la etapa' : 'Profesorado') : ''}
+              <a class="org-dep__ver" href="/centro/departamentos/${esc(d.slug)}">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
         </li>`;
     });
     const porGrupo = (g) => deps.map((d, i) => (d.grupo === g ? tarjetasDep[i] : '')).join('');
     return `<div class="org">
         <div class="org-cupula">
-          ${nivel('Dirección', 'bi-diagram-2', dir.direccion.map(cargo), 'direccion')}
+          ${nivel('Dirección', 'bi-diagram-2', dir.direccion.map(cargo), 'direccion', 'org-direccion')}
           <span class="org-linea" aria-hidden="true"></span>
-          ${nivel('Equipo de gestión', 'bi-diagram-3', dir.gestion.map(cargo))}
+          ${nivel('Equipo de gestión', 'bi-diagram-3', dir.gestion.map(cargo), '', 'org-gestion')}
           <span class="org-linea" aria-hidden="true"></span>
-          ${nivel('Coordinaciones', 'bi-bezier2', coordinaciones.map(cargo), 'coord')}
+          ${nivel('Coordinaciones', 'bi-bezier2', coordinaciones.map(cargo), 'coord', 'org-coord')}
         </div>
         <section class="org-bloque" aria-labelledby="org-etapas"><h2 id="org-etapas">Etapas, orientación y bilingüismo</h2>
           <ul class="org-deps">${deps.filter((d) => d.esquema !== 'departamento').map((d) => tarjetasDep[deps.indexOf(d)]).join('')}</ul>

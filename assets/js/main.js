@@ -88,7 +88,15 @@
         io.unobserve(entry.target);
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
-    reveals.forEach(el => io.observe(el));
+    // Elementos más altos que la pantalla: basta con que entre una parte.
+    const ioAlto = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        ioAlto.unobserve(entry.target);
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
+    reveals.forEach(el => (el.offsetHeight > window.innerHeight * 1.2 ? ioAlto : io).observe(el));
   } else {
     reveals.forEach(el => el.classList.add('is-visible'));
   }

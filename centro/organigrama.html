@@ -84,12 +84,35 @@
     </div>
   </section>
 
-  <section class="section">
-    <div class="container" data-organigrama>
+  <section class="section org-pagina">
+    <div class="container">
+      <div class="org-herr" data-org-herr>
+        <div class="org-herr__fila">
+          <div class="org-buscar" role="search">
+            <label class="sr-only" for="org-q">Buscar por nombre, cargo o departamento</label>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="org-q" class="org-buscar__campo" type="search" placeholder="Buscar persona o departamento" autocomplete="off" enterkeyhint="search" spellcheck="false" />
+            <button type="button" class="org-buscar__x" data-org-limpiar hidden aria-label="Borrar la búsqueda"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+          </div>
+          <div class="org-acciones" role="group" aria-label="Departamentos">
+            <button type="button" class="org-acciones__b" data-org-abrir>Abrir todos</button>
+            <button type="button" class="org-acciones__b" data-org-cerrar>Cerrar todos</button>
+          </div>
+        </div>
+        <p class="org-estado" data-org-estado role="status" aria-live="polite"></p>
+      </div>
+      <nav class="org-saltos" aria-label="Ir a una parte del organigrama">
+        <a href="#org-direccion">Dirección</a>
+        <a href="#org-gestion">Gestión</a>
+        <a href="#org-coord">Coordinaciones</a>
+        <a href="#org-etapas">Etapas</a>
+        <a href="#org-eso">ESO</a>
+      </nav>
+      <div data-organigrama>
 <div class="org">
         <div class="org-cupula">
-          <div class="org-nivel org-nivel--direccion">
-        <p class="org-nivel__t"><i class="bi bi-diagram-2" aria-hidden="true"></i>Dirección</p>
+          <div class="org-nivel org-nivel--direccion" id="org-direccion">
+        <h2 class="org-nivel__t"><i class="bi bi-diagram-2" aria-hidden="true"></i>Dirección</h2>
         <ul class="personas personas--centro"><li class="persona-item"><a class="persona persona--responsable persona--grande" href="/centro/persona?p=jesus-blazquez-del-mazo" data-persona="jesus-blazquez-del-mazo">
         <span class="persona__avatar" aria-hidden="true">JB</span>
         <span class="persona__txt"><span class="persona__nombre">Jesús Blázquez del Mazo</span><span class="persona__cargo">Director pedagógico</span><span class="persona__ambito">Infantil y Primaria</span></span>
@@ -99,8 +122,8 @@
       </a></li></ul>
       </div>
           <span class="org-linea" aria-hidden="true"></span>
-          <div class="org-nivel">
-        <p class="org-nivel__t"><i class="bi bi-diagram-3" aria-hidden="true"></i>Equipo de gestión</p>
+          <div class="org-nivel" id="org-gestion">
+        <h2 class="org-nivel__t"><i class="bi bi-diagram-3" aria-hidden="true"></i>Equipo de gestión</h2>
         <ul class="personas personas--centro"><li class="persona-item"><a class="persona persona--responsable persona--grande" href="/centro/persona?p=mariano-caballero-espericueta" data-persona="mariano-caballero-espericueta">
         <span class="persona__avatar" aria-hidden="true">MC</span>
         <span class="persona__txt"><span class="persona__nombre">Mariano Caballero Espericueta</span><span class="persona__cargo">Jefe de estudios</span><span class="persona__ambito">Las tres etapas</span></span>
@@ -110,8 +133,8 @@
       </a></li></ul>
       </div>
           <span class="org-linea" aria-hidden="true"></span>
-          <div class="org-nivel org-nivel--coord">
-        <p class="org-nivel__t"><i class="bi bi-bezier2" aria-hidden="true"></i>Coordinaciones</p>
+          <div class="org-nivel org-nivel--coord" id="org-coord">
+        <h2 class="org-nivel__t"><i class="bi bi-bezier2" aria-hidden="true"></i>Coordinaciones</h2>
         <ul class="personas personas--centro"><li class="persona-item"><a class="persona persona--responsable persona--grande" href="/centro/persona?p=laura-ruiz-yerpes" data-persona="laura-ruiz-yerpes">
         <span class="persona__avatar" aria-hidden="true">LR</span>
         <span class="persona__txt"><span class="persona__nombre">Laura Ruiz Yerpes</span><span class="persona__cargo">Coordinadora</span><span class="persona__ambito">Educación Infantil</span></span>
@@ -131,13 +154,16 @@
       </div>
         </div>
         <section class="org-bloque" aria-labelledby="org-etapas"><h2 id="org-etapas">Etapas, orientación y bilingüismo</h2>
-          <ul class="org-deps"><li class="org-dep" data-tono="infantil">
-          <a class="org-dep__cab" href="/centro/departamentos/infantil">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-balloon-heart"></i></span>
-            <span class="org-dep__nombre">Educación Infantil</span>
-            <span class="org-dep__n">6 personas</span>
-          </a>
-          <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=laura-ruiz-yerpes" data-persona="laura-ruiz-yerpes">
+          <ul class="org-deps"><li class="org-dep" data-tono="infantil" data-org-nombre="Educación Infantil">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-balloon-heart"></i></span>
+              <span class="org-dep__nombre">Educación Infantil</span>
+              <span class="org-dep__n">6 personas</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=laura-ruiz-yerpes" data-persona="laura-ruiz-yerpes">
       <span class="persona__avatar" aria-hidden="true">LR</span>
       <span class="persona__txt"><span class="persona__nombre">Laura Ruiz Yerpes</span><span class="persona__cargo">Coordinadora</span></span>
     </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=noelia-del-burgo-rodriguez" data-persona="noelia-del-burgo-rodriguez">
@@ -156,20 +182,32 @@
       <span class="persona__avatar" aria-hidden="true">JS</span>
       <span class="persona__txt"><span class="persona__nombre">Jennifer Soto Genova</span><span class="persona__cargo">Profesorado de la etapa</span></span>
     </a></li></ul>
-        </li><li class="org-dep" data-tono="primaria">
-          <a class="org-dep__cab" href="/centro/departamentos/primaria">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-book"></i></span>
-            <span class="org-dep__nombre">Educación Primaria</span>
-            <span class="org-dep__n">Equipo por publicar</span>
-          </a>
-          
-        </li><li class="org-dep" data-tono="orientacion">
-          <a class="org-dep__cab" href="/centro/departamentos/orientacion">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-compass"></i></span>
-            <span class="org-dep__nombre">Orientación</span>
-            <span class="org-dep__n">3 personas</span>
-          </a>
-          <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=augusto-vilchez-sag" data-persona="augusto-vilchez-sag">
+              <a class="org-dep__ver" href="/centro/departamentos/infantil">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
+        </li><li class="org-dep" data-tono="primaria" data-org-nombre="Educación Primaria">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-book"></i></span>
+              <span class="org-dep__nombre">Educación Primaria</span>
+              <span class="org-dep__n">Equipo por publicar</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              
+              <a class="org-dep__ver" href="/centro/departamentos/primaria">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
+        </li><li class="org-dep" data-tono="orientacion" data-org-nombre="Orientación">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-compass"></i></span>
+              <span class="org-dep__nombre">Orientación</span>
+              <span class="org-dep__n">3 personas</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=augusto-vilchez-sag" data-persona="augusto-vilchez-sag">
       <span class="persona__avatar" aria-hidden="true">AV</span>
       <span class="persona__txt"><span class="persona__nombre">Augusto Vilchez Sag</span><span class="persona__cargo">Jefe del departamento y orientador de ESO</span></span>
     </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=rosario-molinera-caracuel" data-persona="rosario-molinera-caracuel">
@@ -179,13 +217,19 @@
       <span class="persona__avatar" aria-hidden="true">ND</span>
       <span class="persona__txt"><span class="persona__nombre">Nerea Domaica Alarcón</span><span class="persona__cargo">Pedagogía Terapéutica</span></span>
     </a></li></ul>
-        </li><li class="org-dep org-dep--ancho" data-tono="bilinguismo">
-          <a class="org-dep__cab" href="/centro/departamentos/bilinguismo">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-translate"></i></span>
-            <span class="org-dep__nombre">Bilingüismo</span>
-            <span class="org-dep__n">15 personas</span>
-          </a>
-          <div class="personas-grupo"><h3 class="personas-grupo__t">Primaria</h3><ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=maite-somoza-gragera" data-persona="maite-somoza-gragera">
+              <a class="org-dep__ver" href="/centro/departamentos/orientacion">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
+        </li><li class="org-dep org-dep--ancho" data-tono="bilinguismo" data-org-nombre="Bilingüismo">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-translate"></i></span>
+              <span class="org-dep__nombre">Bilingüismo</span>
+              <span class="org-dep__n">15 personas</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              <div class="personas-grupo"><h3 class="personas-grupo__t">Primaria</h3><ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=maite-somoza-gragera" data-persona="maite-somoza-gragera">
       <span class="persona__avatar" aria-hidden="true">MS</span>
       <span class="persona__txt"><span class="persona__nombre">Maite Somoza Gragera</span><span class="persona__cargo">Coordinadora</span></span>
     </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=sonia-hervas-garcia" data-persona="sonia-hervas-garcia">
@@ -231,16 +275,22 @@
       <span class="persona__avatar" aria-hidden="true">TO</span>
       <span class="persona__txt"><span class="persona__nombre">Thomas Oliver Garner</span><span class="persona__cargo">Auxiliar de conversación</span></span>
     </a></li></ul></div>
+              <a class="org-dep__ver" href="/centro/departamentos/bilinguismo">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
         </li></ul>
         </section>
         <section class="org-bloque" aria-labelledby="org-eso"><h2 id="org-eso">Departamentos de la ESO</h2>
-          <ul class="org-deps"><li class="org-dep" data-tono="matematicas">
-          <a class="org-dep__cab" href="/centro/departamentos/matematicas">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-calculator"></i></span>
-            <span class="org-dep__nombre">Matemáticas</span>
-            <span class="org-dep__n">6 personas</span>
-          </a>
-          <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=marga-orell-cernuda" data-persona="marga-orell-cernuda">
+          <ul class="org-deps"><li class="org-dep" data-tono="matematicas" data-org-nombre="Matemáticas">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-calculator"></i></span>
+              <span class="org-dep__nombre">Matemáticas</span>
+              <span class="org-dep__n">6 personas</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=marga-orell-cernuda" data-persona="marga-orell-cernuda">
       <span class="persona__avatar" aria-hidden="true">MO</span>
       <span class="persona__txt"><span class="persona__nombre">Marga Orell Cernuda</span><span class="persona__cargo">Jefa del departamento</span></span>
     </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=monica-merino-polo" data-persona="monica-merino-polo">
@@ -259,13 +309,19 @@
       <span class="persona__avatar" aria-hidden="true">YH</span>
       <span class="persona__txt"><span class="persona__nombre">Yésica Horcajada Domingo</span><span class="persona__cargo">Profesorado</span></span>
     </a></li></ul>
-        </li><li class="org-dep" data-tono="lengua">
-          <a class="org-dep__cab" href="/centro/departamentos/lengua">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-book"></i></span>
-            <span class="org-dep__nombre">Lengua Castellana y Literatura</span>
-            <span class="org-dep__n">6 personas</span>
-          </a>
-          <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=pilar-ayllon-prados" data-persona="pilar-ayllon-prados">
+              <a class="org-dep__ver" href="/centro/departamentos/matematicas">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
+        </li><li class="org-dep" data-tono="lengua" data-org-nombre="Lengua Castellana y Literatura">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-book"></i></span>
+              <span class="org-dep__nombre">Lengua Castellana y Literatura</span>
+              <span class="org-dep__n">6 personas</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=pilar-ayllon-prados" data-persona="pilar-ayllon-prados">
       <span class="persona__avatar" aria-hidden="true">PA</span>
       <span class="persona__txt"><span class="persona__nombre">Pilar Ayllón Prados</span><span class="persona__cargo">Jefa del departamento</span></span>
     </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=virginia-tejedor-guillen" data-persona="virginia-tejedor-guillen">
@@ -284,13 +340,19 @@
       <span class="persona__avatar" aria-hidden="true">CB</span>
       <span class="persona__txt"><span class="persona__nombre">Clara Berea Navamuel</span><span class="persona__cargo">Profesorado</span></span>
     </a></li></ul>
-        </li><li class="org-dep" data-tono="geografia-historia">
-          <a class="org-dep__cab" href="/centro/departamentos/geografia-historia">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-globe-europe-africa"></i></span>
-            <span class="org-dep__nombre">Geografía e Historia</span>
-            <span class="org-dep__n">4 personas</span>
-          </a>
-          <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=jose-manuel-guzman-soria" data-persona="jose-manuel-guzman-soria">
+              <a class="org-dep__ver" href="/centro/departamentos/lengua">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
+        </li><li class="org-dep" data-tono="geografia-historia" data-org-nombre="Geografía e Historia">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-globe-europe-africa"></i></span>
+              <span class="org-dep__nombre">Geografía e Historia</span>
+              <span class="org-dep__n">4 personas</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=jose-manuel-guzman-soria" data-persona="jose-manuel-guzman-soria">
       <span class="persona__avatar" aria-hidden="true">JM</span>
       <span class="persona__txt"><span class="persona__nombre">José Manuel Guzmán Soria</span><span class="persona__cargo">Jefe del departamento</span></span>
     </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=clara-berea-navamuel" data-persona="clara-berea-navamuel">
@@ -303,13 +365,19 @@
       <span class="persona__avatar" aria-hidden="true">AV</span>
       <span class="persona__txt"><span class="persona__nombre">Augusto Vilchez Sag</span><span class="persona__cargo">Profesorado</span></span>
     </a></li></ul>
-        </li><li class="org-dep" data-tono="ciencias">
-          <a class="org-dep__cab" href="/centro/departamentos/ciencias">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-eyedropper"></i></span>
-            <span class="org-dep__nombre">Ciencias</span>
-            <span class="org-dep__n">6 personas</span>
-          </a>
-          <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=pablo-martinez-carreno" data-persona="pablo-martinez-carreno">
+              <a class="org-dep__ver" href="/centro/departamentos/geografia-historia">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
+        </li><li class="org-dep" data-tono="ciencias" data-org-nombre="Ciencias">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-eyedropper"></i></span>
+              <span class="org-dep__nombre">Ciencias</span>
+              <span class="org-dep__n">6 personas</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=pablo-martinez-carreno" data-persona="pablo-martinez-carreno">
       <span class="persona__avatar" aria-hidden="true">PM</span>
       <span class="persona__txt"><span class="persona__nombre">Pablo Martínez Carreño</span><span class="persona__cargo">Jefe del departamento</span></span>
     </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=yesica-horcajada-domingo" data-persona="yesica-horcajada-domingo">
@@ -328,26 +396,38 @@
       <span class="persona__avatar" aria-hidden="true">MO</span>
       <span class="persona__txt"><span class="persona__nombre">Marga Orell Cernuda</span><span class="persona__cargo">Profesorado</span></span>
     </a></li></ul>
-        </li><li class="org-dep" data-tono="tecnologia">
-          <a class="org-dep__cab" href="/centro/departamentos/tecnologia">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-cpu"></i></span>
-            <span class="org-dep__nombre">Tecnología y Digitalización</span>
-            <span class="org-dep__n">2 personas</span>
-          </a>
-          <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=monica-merino-polo" data-persona="monica-merino-polo">
+              <a class="org-dep__ver" href="/centro/departamentos/ciencias">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
+        </li><li class="org-dep" data-tono="tecnologia" data-org-nombre="Tecnología y Digitalización">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-cpu"></i></span>
+              <span class="org-dep__nombre">Tecnología y Digitalización</span>
+              <span class="org-dep__n">2 personas</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=monica-merino-polo" data-persona="monica-merino-polo">
       <span class="persona__avatar" aria-hidden="true">MM</span>
       <span class="persona__txt"><span class="persona__nombre">Mónica Merino Polo</span><span class="persona__cargo">Jefa del departamento</span></span>
     </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=sergio-alvarez-blanco" data-persona="sergio-alvarez-blanco">
       <span class="persona__avatar" aria-hidden="true">SÁ</span>
       <span class="persona__txt"><span class="persona__nombre">Sergio Álvarez Blanco</span><span class="persona__cargo">Profesorado</span></span>
     </a></li></ul>
-        </li><li class="org-dep" data-tono="ingles">
-          <a class="org-dep__cab" href="/centro/departamentos/ingles">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-translate"></i></span>
-            <span class="org-dep__nombre">Inglés</span>
-            <span class="org-dep__n">3 personas</span>
-          </a>
-          <ul class="personas"><li class="persona-item"><a class="persona" href="/centro/persona?p=raul-herschel-junyent" data-persona="raul-herschel-junyent">
+              <a class="org-dep__ver" href="/centro/departamentos/tecnologia">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
+        </li><li class="org-dep" data-tono="ingles" data-org-nombre="Inglés">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-translate"></i></span>
+              <span class="org-dep__nombre">Inglés</span>
+              <span class="org-dep__n">3 personas</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              <ul class="personas"><li class="persona-item"><a class="persona" href="/centro/persona?p=raul-herschel-junyent" data-persona="raul-herschel-junyent">
       <span class="persona__avatar" aria-hidden="true">RH</span>
       <span class="persona__txt"><span class="persona__nombre">Raúl Herschel Junyent</span><span class="persona__cargo">Profesorado</span></span>
     </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=virginia-tejedor-guillen" data-persona="virginia-tejedor-guillen">
@@ -357,59 +437,89 @@
       <span class="persona__avatar" aria-hidden="true">SS</span>
       <span class="persona__txt"><span class="persona__nombre">Sergio Sandoval Canosa</span><span class="persona__cargo">Profesorado</span></span>
     </a></li></ul>
-        </li><li class="org-dep" data-tono="frances">
-          <a class="org-dep__cab" href="/centro/departamentos/frances">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-chat-quote"></i></span>
-            <span class="org-dep__nombre">Francés</span>
-            <span class="org-dep__n">1 persona</span>
-          </a>
-          <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=pilar-ayllon-prados" data-persona="pilar-ayllon-prados">
+              <a class="org-dep__ver" href="/centro/departamentos/ingles">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
+        </li><li class="org-dep" data-tono="frances" data-org-nombre="Francés">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-chat-quote"></i></span>
+              <span class="org-dep__nombre">Francés</span>
+              <span class="org-dep__n">1 persona</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=pilar-ayllon-prados" data-persona="pilar-ayllon-prados">
       <span class="persona__avatar" aria-hidden="true">PA</span>
       <span class="persona__txt"><span class="persona__nombre">Pilar Ayllón Prados</span><span class="persona__cargo">Jefa del departamento</span></span>
     </a></li></ul>
-        </li><li class="org-dep" data-tono="educacion-fisica">
-          <a class="org-dep__cab" href="/centro/departamentos/educacion-fisica">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-bicycle"></i></span>
-            <span class="org-dep__nombre">Educación Física</span>
-            <span class="org-dep__n">1 persona</span>
-          </a>
-          <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=abraham-menes-medina" data-persona="abraham-menes-medina">
+              <a class="org-dep__ver" href="/centro/departamentos/frances">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
+        </li><li class="org-dep" data-tono="educacion-fisica" data-org-nombre="Educación Física">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-bicycle"></i></span>
+              <span class="org-dep__nombre">Educación Física</span>
+              <span class="org-dep__n">1 persona</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              <ul class="personas"><li class="persona-item persona-item--responsable"><a class="persona persona--responsable" href="/centro/persona?p=abraham-menes-medina" data-persona="abraham-menes-medina">
       <span class="persona__avatar" aria-hidden="true">AM</span>
       <span class="persona__txt"><span class="persona__nombre">Abraham Menés Medina</span><span class="persona__cargo">Jefe del departamento</span></span>
     </a></li></ul>
-        </li><li class="org-dep" data-tono="artistico">
-          <a class="org-dep__cab" href="/centro/departamentos/artistico">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-palette"></i></span>
-            <span class="org-dep__nombre">Departamento Artístico</span>
-            <span class="org-dep__n">2 personas</span>
-          </a>
-          <ul class="personas"><li class="persona-item"><a class="persona" href="/centro/persona?p=clara-berea-navamuel" data-persona="clara-berea-navamuel">
+              <a class="org-dep__ver" href="/centro/departamentos/educacion-fisica">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
+        </li><li class="org-dep" data-tono="artistico" data-org-nombre="Departamento Artístico">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-palette"></i></span>
+              <span class="org-dep__nombre">Departamento Artístico</span>
+              <span class="org-dep__n">2 personas</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              <ul class="personas"><li class="persona-item"><a class="persona" href="/centro/persona?p=clara-berea-navamuel" data-persona="clara-berea-navamuel">
       <span class="persona__avatar" aria-hidden="true">CB</span>
       <span class="persona__txt"><span class="persona__nombre">Clara Berea Navamuel</span><span class="persona__cargo">Música</span></span>
     </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=guillermo-fenoy-magan" data-persona="guillermo-fenoy-magan">
       <span class="persona__avatar" aria-hidden="true">GF</span>
       <span class="persona__txt"><span class="persona__nombre">Guillermo Fenoy Magán</span><span class="persona__cargo">Educación Plástica</span></span>
     </a></li></ul>
-        </li><li class="org-dep" data-tono="religion-valores">
-          <a class="org-dep__cab" href="/centro/departamentos/religion-valores">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-signpost-split"></i></span>
-            <span class="org-dep__nombre">Religión y Atención Educativa</span>
-            <span class="org-dep__n">2 personas</span>
-          </a>
-          <ul class="personas"><li class="persona-item"><a class="persona" href="/centro/persona?p=monica-merino-polo" data-persona="monica-merino-polo">
+              <a class="org-dep__ver" href="/centro/departamentos/artistico">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
+        </li><li class="org-dep" data-tono="religion-valores" data-org-nombre="Religión y Atención Educativa">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-signpost-split"></i></span>
+              <span class="org-dep__nombre">Religión y Atención Educativa</span>
+              <span class="org-dep__n">2 personas</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              <ul class="personas"><li class="persona-item"><a class="persona" href="/centro/persona?p=monica-merino-polo" data-persona="monica-merino-polo">
       <span class="persona__avatar" aria-hidden="true">MM</span>
       <span class="persona__txt"><span class="persona__nombre">Mónica Merino Polo</span><span class="persona__cargo">Religión</span></span>
     </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=mariano-caballero-espericueta" data-persona="mariano-caballero-espericueta">
       <span class="persona__avatar" aria-hidden="true">MC</span>
       <span class="persona__txt"><span class="persona__nombre">Mariano Caballero Espericueta</span><span class="persona__cargo">Atención Educativa y Educación en Valores</span></span>
     </a></li></ul>
-        </li><li class="org-dep" data-tono="diversificacion">
-          <a class="org-dep__cab" href="/centro/departamentos/diversificacion">
-            <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-diagram-3"></i></span>
-            <span class="org-dep__nombre">Diversificación Curricular</span>
-            <span class="org-dep__n">4 personas</span>
-          </a>
-          <ul class="personas"><li class="persona-item"><a class="persona" href="/centro/persona?p=clara-berea-navamuel" data-persona="clara-berea-navamuel">
+              <a class="org-dep__ver" href="/centro/departamentos/religion-valores">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
+        </li><li class="org-dep" data-tono="diversificacion" data-org-nombre="Diversificación Curricular">
+          <details class="org-dep__d">
+            <summary class="org-dep__cab">
+              <span class="org-dep__ico" aria-hidden="true"><i class="bi bi-diagram-3"></i></span>
+              <span class="org-dep__nombre">Diversificación Curricular</span>
+              <span class="org-dep__n">4 personas</span>
+              <svg class="org-dep__flecha" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="org-dep__cuerpo">
+              <ul class="personas"><li class="persona-item"><a class="persona" href="/centro/persona?p=clara-berea-navamuel" data-persona="clara-berea-navamuel">
       <span class="persona__avatar" aria-hidden="true">CB</span>
       <span class="persona__txt"><span class="persona__nombre">Clara Berea Navamuel</span><span class="persona__cargo">Ámbito Socio-Lingüístico I</span></span>
     </a></li><li class="persona-item"><a class="persona" href="/centro/persona?p=augusto-vilchez-sag" data-persona="augusto-vilchez-sag">
@@ -422,8 +532,12 @@
       <span class="persona__avatar" aria-hidden="true">YH</span>
       <span class="persona__txt"><span class="persona__nombre">Yésica Horcajada Domingo</span><span class="persona__cargo">Ámbito Científico-Tecnológico II</span></span>
     </a></li></ul>
+              <a class="org-dep__ver" href="/centro/departamentos/diversificacion">Ver la página del departamento <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </details>
         </li></ul>
         </section>
+      </div>
       </div>
     </div>
   </section>
@@ -437,5 +551,6 @@
   <script src="/assets/js/departamentos-datos.js" defer></script>
   <script src="/assets/js/departamentos.js" defer></script>
   <script src="/assets/js/personas.js" defer></script>
+  <script src="/assets/js/organigrama.js" defer></script>
 </body>
 </html>
