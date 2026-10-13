@@ -1,26 +1,36 @@
-# Hosting del ecosistema NSD (estado a 11/10/2026)
+# Hosting del ecosistema NSD (estado a 13/10/2026)
 
 | Web | Dominio | Dónde está |
 |---|---|---|
-| Colegio | https://www.colegionsdolores.es | Hostinger (public_html) |
-| Infantil | https://infantil.colegionsdolores.es | Hostinger (public_html/infantil) |
-| Campamento | https://campamento.colegionsdolores.es | Vercel (proyecto campamento-nsd) |
+| Colegio | https://www.colegionsdolores.es | Hostinger (`domains/colegionsdolores.es/public_html`) |
+| Infantil | https://infantil.colegionsdolores.es | Hostinger (`public_html/infantil`) |
+| Campamento | https://campamento.colegionsdolores.es | Hostinger (`public_html/campamento`) |
+| colegionsdolores.com | Dominio añadido en Hostinger | Redirección 301 a https://www.colegionsdolores.es |
 | Dolores Dragons | dolores-dragons.vercel.app | Vercel (a propósito) |
 | Dragons Den | dragons-den-eight.vercel.app | Vercel (a propósito) |
 
-Las únicas referencias que siguen apuntando a Vercel en todo el ecosistema son las de Dolores Dragons y Dragons Den.
+Las únicas referencias que siguen apuntando a Vercel son los enlaces a Dolores Dragons y Dragons Den. Los formularios de contacto de infantil y campamento ya no existen (botones de llamar y escribir); los de secretaría del colegio van por la función `formularios` de Supabase.
+
+Los dominios siguen registrados en Piensa con el DNS allí. El correo está en Google Workspace.
 
 ## Redirecciones
-- `/etapas/infantil-0-3` y `/…/campamento-de-verano` del colegio llevan a los subdominios (.htaccess del colegio).
-- `infantil-nsd.vercel.app/*` y `campamento-nsd.vercel.app/*` redirigen a su subdominio (vercel.json de cada proyecto; en Hostinger, .htaccess de infantil).
-- `colegio-nsd.vercel.app` sigue sirviendo de respaldo del colegio.
+- `/etapas/infantil-0-3` y `/…/campamento-de-verano` del colegio llevan a los subdominios (`.htaccess` del colegio).
+- `.htaccess` de cada sitio lo genera `scripts/generar-htaccess.mjs` a partir del `vercel.json` del colegio. Los `?v=` de CSS y JS llevan caché inmutable de un año; el HTML se revalida siempre.
 
 ## Cómo publicar
-- Colegio: `node scripts/cambiar-dominio.mjs` + `node scripts/empaquetar-hostinger.mjs`, subir el zip a public_html y extraer con "Replace all". Las fuentes locales conservan colegio-nsd.vercel.app a propósito.
-- Infantil: subir los archivos a public_html/infantil y `vercel --prod --yes` en la carpeta infantil.
-- Campamento: `npm run build` y `vercel --prod --yes`.
+Hostinger no tiene SSH ni FTP cómodo en este plan; se publica por el administrador de archivos (API REST con el JWT de la sesión) o subiendo un zip y extrayéndolo.
+
+- **Colegio**: construir en una copia, no en la carpeta de trabajo: `cambiar-dominio.mjs`, `versionar-assets.mjs`, `minificar-assets.mjs`, `generar-htaccess.mjs` y `seo.mjs <raiz> https://www.colegionsdolores.es`. Subir el resultado a `public_html`.
+- **Infantil**: HTML estático. Ejecutar `node ../colegio/scripts/seo.mjs . https://infantil.colegionsdolores.es` y subir a `public_html/infantil`.
+- **Campamento**: Astro. `npm run build` y subir `dist/` a `public_html/campamento` (`seo.mjs` sobre `dist` para sitemap y datos estructurados).
+- Zips de apoyo en `_publicar/` (se pueden borrar tras publicar).
+
+## SEO
+`scripts/seo.mjs` es idempotente: recorta descripciones de más de 160 caracteres, añade JSON-LD (`WebPage`, `AboutPage`, `ContactPage`, `Article` y `BreadcrumbList`) a las páginas indexables sin él, y regenera `sitemap.xml` y `robots.txt`. `scripts/faq-ld.mjs <archivo>` añade `FAQPage` a páginas con bloques `<details><summary>`.
 
 ## Pendiente
-- Search Console: comprobar sitemaps de infantil y campamento (enviados el 11/10/2026).
-- URLs antiguas de Joomla sin equivalencia (p. ej. /index.php/mega/ep/pdep): hace falta la lista de Search Console.
-- DNS: subir el TTL a 3600 pasadas dos semanas. El correo sigue en Piensa.
+- Search Console: reenviar los sitemaps de los tres sitios y revisar las páginas «Duplicada: Google eligió otra canónica».
+- Velocidad (PageSpeed móvil): CSS que bloquea el render, unos 169 KB de CSS sin usar en `styles.css`, optimización de la imagen LCP y `font-display`.
+- URLs antiguas de Joomla sin equivalencia (p. ej. `/index.php/mega/ep/pdep`): hace falta la lista de Search Console.
+- DNS: subir el TTL a 3600 pasadas dos semanas.
+- Cancelar los hostings de Piensa (.com 24/01/2027, .es 06/02/2027) tras confirmar con Piensa que se conserva la zona DNS.

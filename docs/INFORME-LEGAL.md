@@ -41,7 +41,7 @@ El ideario aprobado define el colegio como **centro laico**. Por eso la web ya n
 2. **En las próximas semanas:** solicitar **Google Workspace for Education Fundamentals**, que es gratuito para «centros reconocidos por la administración». El colegio está autorizado por la Comunidad de Madrid (código 28019592). Ser una S.L. no lo excluye por sí solo: Google excluye a las academias con ánimo de lucro, no a los colegios autorizados, aunque la decisión es suya.
    - Se pide la escritura o resolución de autorización del centro y se verifica el dominio `colegionsdolores.es` con un registro TXT, que **no** afecta al correo. Google lo resuelve en unos 14 días hábiles.
    - Después se pasan a Workspace los formularios y Classroom, con cuentas `@colegionsdolores.es` para profesores y alumnos. Así hay contrato de encargado firmado y se cumple la edad mínima.
-3. **Los formularios de la propia web** (contacto y visitas) no usan Google: llegan al correo de secretaría por Web3Forms.
+3. **Los formularios de la propia web** (contacto y visitas) no usan Google: llegan al correo de secretaría mediante una función de Supabase (`formularios`).
 
 ## Puntos sin verificar
 

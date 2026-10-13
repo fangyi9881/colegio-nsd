@@ -18,11 +18,11 @@ El panel deja que la dirección, cada departamento y secretaría editen su parte
 
 1. **Crear la cuenta de Supabase** en <https://supabase.com> (plan gratuito) con la **cuenta de Google de la web del colegio** (no una cuenta personal). Organización «Colegio NSD». Después, *Organization → Team* → invitar a Fan como *Developer* o *Administrator*. Cuando exista la cuenta de Workspace del colegio, invitarla como *Owner* y quitar la anterior.
 2. **Crear el proyecto** `colegio-nsd-web`, región **Europa** (*West EU – Frankfurt* o *Paris*). Guarda la contraseña de la base de datos en un gestor de contraseñas.
-3. **SQL Editor** → *New query* → pegar `supabase/01_esquema.sql` entero → *Run*. Después, lo mismo con `supabase/02_ambitos.sql`, `supabase/03_blog.sql` (el blog), `supabase/04_archivos.sql` (subir Word, Excel, PowerPoint y fotos además de PDF) `supabase/05_personas.sql` (fichas del personal) `supabase/06_rendimiento_y_seguridad.sql` (permisos rápidos, índices, límites contra envíos masivos y archivos sin listado público) y `supabase/07_avisos_supabase.sql` (lo que señala el *Security/Performance Advisor*). Todos se pueden volver a ejecutar sin perder nada; si se repite cualquiera del 01 al 05, hay que repetir después el 04, el 06 y el 07.
+3. **SQL Editor** → *New query* → pegar `supabase/01_esquema.sql` entero → *Run*. Después, lo mismo con `supabase/02_ambitos.sql`, `supabase/03_blog.sql` (el blog), `supabase/04_archivos.sql` (subir Word, Excel, PowerPoint y fotos además de PDF) `supabase/05_personas.sql` (fichas del personal) `supabase/06_rendimiento_y_seguridad.sql` (permisos rápidos, índices, límites contra envíos masivos y archivos sin listado público) `supabase/07_avisos_supabase.sql` (lo que señala el *Security/Performance Advisor*) y `supabase/09_comedor.sql` (el menú del comedor desde el panel). Todos se pueden volver a ejecutar sin perder nada; si se repite cualquiera del 01 al 05, hay que repetir después el 04, el 06 y el 07 (el 09 solo añade una fila y no se ve afectado).
 4. **Authentication → Sign In / Providers → Email**: activado. *Minimum password length*: 10.
 5. **Authentication → URL Configuration**:
-   - *Site URL*: `https://colegio-nsd.vercel.app` hasta el traspaso; después, `https://www.colegionsdolores.es`.
-   - *Redirect URLs*: añadir `https://colegio-nsd.vercel.app/**` y `https://www.colegionsdolores.es/**`.
+   - *Site URL*: `https://www.colegionsdolores.es`.
+   - *Redirect URLs*: añadir `https://www.colegionsdolores.es/**`.
 6. **Correo de avisos.** Sin SMTP propio, Supabase solo envía correos a los miembros del equipo del proyecto, así que el «He olvidado la contraseña» no les llegaría a los profesores. El colegio tiene Google Workspace for Education: los pasos (cuenta `no-responder@`, contraseña de aplicación, SMTP de Gmail, plantillas en español y **Confirm email**) están en `docs/CORREO.md`.
    - Hasta que esté puesto, dejar *Confirm email* desactivado. Es seguro igualmente, porque ninguna cuenta hace nada hasta que la dirección la aprueba, pero entonces la dirección debe comprobar quién es cada solicitante.
 7. **Conectar la web.** *Project Settings → API*: copiar **Project URL** y la clave **anon public** en `assets/js/cms-config.js`. Nunca la `service_role`. Guardar, `git commit` y `git push`, y volver a subir el paquete a Hostinger (`node scripts/empaquetar-hostinger.mjs`).
@@ -64,14 +64,25 @@ Cualquier cuenta aprobada escribe entradas en **Blog** (menú del panel): titula
 
 La vista de dirección separa lo que aporta la dirección (información a las familias, datos legales) de lo que escribe cada departamento, y dice si ese departamento ya tiene alguien con cuenta. Lo que la web enseña de serie cuenta como publicado. Un texto de sustitución (por ejemplo, «disponible en secretaría») se marca en el HTML con `data-cms-provisional` para que siga contando como pendiente.
 
+## Menú del comedor
+
+Quien tenga asignado el ámbito **«Menú del comedor»** (en *Cuentas y permisos*; dirección y administración ya lo tienen) ve en el panel el apartado **Menú del comedor**. Se sube el PDF o el Excel (.xlsx) del mes y la web se adapta sola:
+
+1. El navegador lee el archivo (con `pdf.js`, copia local en `assets/vendor/pdfjs/`; el archivo no sale a ningún servicio de terceros) y reconoce cada día: fecha, primer plato, segundo, guarnición, postre, postre 2 de guardería, bebida, pan y las cuatro cifras de energía.
+2. Enseña lo leído, día a día, para revisarlo y corregirlo. Los días a los que les falta el primer o el segundo plato salen abiertos y marcados «Revisar»; no se puede publicar mientras falten.
+3. Al pulsar **Publicar** se sube el archivo original (carpeta `comedor` del almacén `documentos`) y se guarda el mes como una fila de `contenidos` (`comedor` / `mes_2026_09`). Tiene historial como el resto de cambios. Un mes ya publicado se sustituye subiendo otro archivo (pide confirmar); **Quitar** lo retira.
+4. `/servicios/comedor` (`assets/js/menu-comedor.js`) pinta primero el menú que viene incluido en la web (`menu-datos.js`) y luego pide a Supabase los meses publicados: muestra el de este mes o, si no hay, el siguiente. Sin conexión o sin nada publicado se queda el incluido, así que la página nunca queda vacía.
+
+El formato que entiende es el de siempre (tabla con «Primero», «Segundo», «Guarniciones», «Postre 1/2», «Bebida», «Pan» y «Kcal. Prot. Lip. H.C.»). Si un día cambia el modelo del PDF y la lectura sale mal, el panel avisa y se puede corregir a mano; la lectura está en `assets/js/menu-lector.js`. Un PDF que es una foto (escaneo) no tiene texto y no se puede leer: hay que subir el original. El Excel se lee con la misma lógica, pero solo está probado con una hoja de muestra con ese diseño; con el primero real conviene mirar la revisión con atención.
+
 ## Pruebas
 
-`supabase/pruebas/` tiene una simulación mínima de Supabase para PostgreSQL local y las pruebas: `blog.py` (permisos, clasificación, borradores, fotos), `personas.py` (fichas) y `seguridad.py` (lo del 06: columnas ocultas, archivos sin listado, límites del canal y de altas, y que el historial no se vuelva lento). Nunca se ejecutan contra el proyecto real.
+`supabase/pruebas/` tiene una simulación mínima de Supabase para PostgreSQL local y las pruebas: `blog.py` (permisos, clasificación, borradores, fotos), `personas.py` (fichas) `comedor.py` (el menú del comedor), `seguridad.py` (lo del 06: columnas ocultas, archivos sin listado, límites del canal y de altas, y que el historial no se vuelva lento). Nunca se ejecutan contra el proyecto real.
 
 ## Rendimiento y caché
 
 - **Navegador** (`assets/js/cms.js`): cada lectura de Supabase se guarda en el navegador. Menos de 1 minuto: se usa tal cual. Hasta 30 minutos: se usa al momento y se renueva por detrás. Si Supabase no responde, se usa la copia (hasta 1 día). Al guardar en el panel, la caché de ese navegador caduca, así que quien edita ve su cambio en el acto; el resto de visitantes lo ve como mucho en un minuto.
-- **Vercel** (`vercel.json`): CSS y JS se guardan 10 minutos y se renuevan por detrás; fuentes e iconos, 30 días; fotos, un año. Si cambias una foto, súbela con otro nombre.
+- **Hostinger** (`.htaccess` generado): CSS y JS con `?v=` se guardan un año (inmutables); el HTML se revalida siempre; fuentes e iconos, 30 días. Si cambias una foto, súbela con otro nombre.
 - **Función de formularios**: guarda la estructura de cada Google Form 2 minutos (y la sirve hasta 1 hora mientras la renueva). Si Google falla, sigue sirviendo la última buena. Con 50 visitas a la vez hace una sola llamada a Google.
 - **Panel**: las fotos se reducen en segundo plano (`assets/js/imagen-worker.js`), así el panel no se congela con fotos grandes del móvil.
 
@@ -97,6 +108,7 @@ La vista de dirección separa lo que aporta la dirección (información a las fa
 | Formularios | `/familias/formularios` | enlaces a los formularios (Google Forms u otros) |
 | Información a las familias | `/familias/informacion`, `/admision` | precios\*, resultados de pruebas externas\*, programas, líneas del proyecto educativo\*, vacantes y SAE, curso\* |
 | Evaluación | `/familias/evaluacion` | fechas, criterios generales por etapa, reclamaciones |
+| Menú del comedor | `/servicios/comedor` | se sube el PDF o Excel del mes y se publica solo (ver «Menú del comedor») |
 | Datos legales | aviso legal, privacidad, protección de la infancia, canal | DPD\*, Registro Mercantil\*, coordinación de bienestar\*, responsable del canal\* |
 
 \* obligatorio por normativa; la vista «Qué falta publicar» del panel lo controla.

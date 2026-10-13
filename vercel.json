@@ -14,6 +14,28 @@
       "permanent": true
     },
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "colegionsdolores.com"
+        }
+      ],
+      "destination": "https://www.colegionsdolores.es/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.colegionsdolores.com"
+        }
+      ],
+      "destination": "https://www.colegionsdolores.es/:path*",
+      "permanent": true
+    },
+    {
       "source": "/secretaria-virtual",
       "destination": "/familias",
       "permanent": true
@@ -336,6 +358,46 @@
     {
       "source": "/extra/guarderia.htm",
       "destination": "https://infantil.colegionsdolores.es",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/departamentos/musica",
+      "destination": "/centro/departamentos/artistico",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/departamentos/educacion-artistica",
+      "destination": "/centro/departamentos/artistico",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/departamentos/ciencias-sociales",
+      "destination": "/centro/departamentos/geografia-historia",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/departamentos/legua-castellana-y-literatura",
+      "destination": "/centro/departamentos/lengua",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/departamentos/:slug*",
+      "destination": "/centro/departamentos",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/pages-4/services-8/inicio-25-26",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/serv1/extra",
+      "destination": "/servicios/extraescolares",
+      "permanent": true
+    },
+    {
+      "source": "/extra/instalacion.html",
+      "destination": "/centro/sobre-nosotros",
       "permanent": true
     },
     {
@@ -691,7 +753,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://challenges.cloudflare.com https://api.web3forms.com https://*.supabase.co https://docs.google.com; frame-src 'self' https://challenges.cloudflare.com https://maps.google.com https://www.google.com; form-action 'self' https://api.web3forms.com https://docs.google.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; worker-src 'self'; manifest-src 'self'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://challenges.cloudflare.com https://*.supabase.co https://docs.google.com; frame-src 'self' https://challenges.cloudflare.com https://maps.google.com https://www.google.com; form-action 'self' https://docs.google.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; worker-src 'self'; manifest-src 'self'; upgrade-insecure-requests"
         },
         {
           "key": "X-Content-Type-Options",

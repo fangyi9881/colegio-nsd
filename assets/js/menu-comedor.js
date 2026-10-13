@@ -15,7 +15,11 @@
   const caja = document.querySelector('[data-menu-comedor]');
   if (!caja || !window.NSD_MENU) return;
 
-  const M = window.NSD_MENU;
+  // El menú que trae la propia web (menu-datos.js) se pinta al instante.
+  // Después se piden a Supabase los meses que ha publicado el centro desde el
+  // panel: si hay uno que toca (el de este mes, o el siguiente), sustituye al
+  // incluido. Sin conexión o sin menús publicados, no cambia nada.
+  function pintar(M) {
   const esc = (t) => String(t == null ? '' : t).replace(/[&<>"']/g, (c) => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
   ));
@@ -122,19 +126,21 @@
       </div>
       <div class="menu-cab__acciones">
         <a class="btn btn--primary" href="${esc(M.archivo)}" download="${esc(M.nombreDescarga)}">
-          <i class="bi bi-download" aria-hidden="true"></i> Descargar el menú en PDF
+          <i class="bi bi-download" aria-hidden="true"></i> Descargar el menú${M.formato === 'xlsx' ? ' en Excel' : ' en PDF'}
         </a>
-        <a class="btn btn--ghost" href="${esc(M.archivo)}" target="_blank" rel="noopener">
+        ${M.formato === 'xlsx' ? '' : `<a class="btn btn--ghost" href="${esc(M.archivo)}" target="_blank" rel="noopener">
           <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> Ver el PDF
           <span class="sr-only">(se abre en una pestaña nueva)</span>
-        </a>
-        <span class="menu-cab__peso">${M.paginas} páginas · ${esc(M.peso)}</span>
+        </a>`}
+        <span class="menu-cab__peso">${M.paginas ? M.paginas + (M.paginas === 1 ? ' página' : ' páginas') + ' · ' : ''}${esc(M.peso)}</span>
       </div>
     </div>
     ${hoyHtml}
     ${semanas.length > 1 ? `<div class="menu-semanas" role="group" aria-label="Elegir semana">${semanas.map((s, i) => `<button type="button" class="menu-semanas__btn" data-semana="${i}" aria-controls="menu-semana-${i}" aria-pressed="${i === activa}">${esc(rotulo(s))}</button>`).join('')}</div>` : ''}
     ${semanas.map(tabla).join('')}
     <p class="menu-pie">El mismo menú para todos los comensales. Las dietas por alergia o intolerancia se elaboran aparte, en la cocina del centro: avisa en secretaría.</p>`;
+
+  }
 
   caja.addEventListener('click', (e) => {
     const b = e.target.closest('[data-semana]');
@@ -143,4 +149,22 @@
     caja.querySelectorAll('[data-semana]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
     caja.querySelectorAll('.menu-semana').forEach((t, i) => { t.hidden = i !== n; });
   });
+
+  pintar(window.NSD_MENU);
+
+  const C = window.NSD_CMS_CONFIG || {};
+  if (!C.url || !C.anonKey || !window.fetch) return;
+  const hoyIso = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+  const valido = (m) => m && Array.isArray(m.dias) && m.dias.length && m.dias.every((d) => /^\d{4}-\d{2}-\d{2}$/.test(d.fecha) && d.primero && d.segundo);
+  fetch(C.url + '/rest/v1/contenidos?ambito_id=eq.comedor&clave=like.mes_*&select=clave,valor&order=clave.asc', {
+    headers: { apikey: C.anonKey, Authorization: 'Bearer ' + C.anonKey }
+  }).then((r) => (r.ok ? r.json() : [])).then((filas) => {
+    const meses = (filas || []).map((f) => f.valor).filter(valido).map((m) => Object.assign({ nombreDescarga: 'Menu-comedor-Colegio-NSD', peso: '', formato: 'pdf' }, m));
+    if (!meses.length) return;
+    const hoy = hoyIso();
+    // el mes de hoy; si no hay, el primero que aún no ha pasado; si no, el último
+    const actual = meses.find((m) => m.dias[0].fecha.slice(0, 7) === hoy.slice(0, 7)) ||
+      meses.find((m) => m.dias[m.dias.length - 1].fecha >= hoy) || meses[meses.length - 1];
+    if (actual && actual.archivo !== window.NSD_MENU.archivo) pintar(actual);
+  }).catch(() => { /* se queda el menú incluido en la web */ });
 })();

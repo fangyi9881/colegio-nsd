@@ -60,78 +60,28 @@
 
       <div class="contacta">
       <div class="contacta__accion">
-      <form class="form-card" id="contactoFormPage" action="https://api.web3forms.com/submit" method="POST">
-        <!-- Web3Forms — obtén tu clave gratuita en https://web3forms.com -->
-        <input type="hidden" name="access_key" value="206c83e1-a7f9-485a-9c91-46e8a892f6f4" />
-        <input type="hidden" name="subject" value="Contacto — Colegio NSD" />
-        <input type="hidden" name="from_name" value="Web Colegio NSD" />
-        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+      <div class="form-card contacta__canales">
         <div class="form-card__header">
           <span class="form-card__header-ico"><i class="bi bi-chat-dots-fill" aria-hidden="true"></i></span>
           <div class="form-card__header-text">
-            <h3>Solicita información</h3>
+            <h3>Habla con secretaría</h3>
             <p class="form-card__header-sub">Te respondemos en menos de 24 h hábiles · Sin compromiso</p>
           </div>
         </div>
-        <div class="form-body">
-        <div class="form-row">
-          <label for="cp-nombre">Nombre y apellidos
-            <input type="text" id="cp-nombre" name="nombre" required autocomplete="name" placeholder="Tu nombre completo" />
-          </label>
+        <div class="form-body contacta__botones">
+          <a class="btn btn--primary btn--lg btn--block" href="tel:+34914719959"><i class="bi bi-telephone" aria-hidden="true"></i> Llamar al 91 471 99 59</a>
+          <a class="btn btn--ghost btn--lg btn--block" href="mailto:secretaria@colegionsdolores.es"><i class="bi bi-envelope" aria-hidden="true"></i> Escribir un correo</a>
+          <a class="btn btn--ghost btn--lg btn--block" href="/admision"><i class="bi bi-journal-check" aria-hidden="true"></i> Solicitar plaza o pedir cita</a>
         </div>
-        <div class="form-row form-row--2">
-          <label for="cp-email">Email
-            <input type="email" id="cp-email" name="email" required autocomplete="email" placeholder="tu@email.com" />
-          </label>
-          <label for="cp-tel">Teléfono
-            <input type="tel" id="cp-tel" name="telefono" autocomplete="tel" placeholder="6XX XXX XXX" />
-          </label>
+      </div>
+      <div class="contacta__mapa">
+        <iframe title="Mapa con la ubicación del Colegio NSD" src="https://maps.google.com/maps?q=Calle%20del%20Tordo%2015%2C%2028019%20Madrid&amp;z=15&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        <div class="contacta__mapa-pie">
+          <p><strong>Colegio Ntra. Sra. de los Dolores</strong><br />C/ Tordo, 15 · 28019 Madrid (Carabanchel)</p>
+          <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Calle+del+Tordo+15%2C+28019+Madrid" target="_blank" rel="noopener noreferrer">Cómo llegar <span class="sr-only">(abre Google Maps en una pestaña nueva)</span></a>
         </div>
-        <div class="form-row">
-          <label for="cp-etapa">Etapa de interés
-            <select id="cp-etapa" name="etapa">
-              <option value="">Selecciona etapa</option>
-              <option>Infantil 0–3</option>
-              <option>Infantil 3–6</option>
-              <option>Primaria</option>
-              <option>ESO</option>
-              <option>Visita guiada</option>
-              <option>Otra</option>
-            </select>
-          </label>
-        </div>
-        <div class="form-row">
-          <label for="cp-msg">Mensaje
-            <textarea id="cp-msg" name="mensaje" rows="6" placeholder="Cuéntanos qué necesitas…"></textarea>
-          </label>
-        </div>
-        <div class="aviso-datos">
-          <p class="aviso-datos__titulo">Información básica sobre protección de datos</p>
-          <dl>
-            <div><dt>Responsable</dt><dd>Colegio Ntra. Sra. de los Dolores, S.L.</dd></div>
-            <div><dt>Finalidad</dt><dd>Atender la consulta y, si se pide, informar sobre el proceso de admisión o concertar una visita.</dd></div>
-            <div><dt>Legitimación</dt><dd>Consentimiento de la persona interesada (art. 6.1.a RGPD).</dd></div>
-            <div><dt>Destinatarios</dt><dd>Web3Forms (servicio de envío de formularios) y Vercel (alojamiento de la web), como encargados del tratamiento, con garantías para las transferencias internacionales. No se ceden datos a terceros salvo obligación legal.</dd></div>
-            <div><dt>Derechos</dt><dd>Acceso, rectificación, supresión, oposición, limitación, portabilidad y retirada del consentimiento en <a href="mailto:secretaria@colegionsdolores.es">secretaria@colegionsdolores.es</a>.</dd></div>
-            <div><dt>Más información</dt><dd><a href="/privacidad">Política de privacidad</a></dd></div>
-          </dl>
-        </div>
-        <label class="form-check">
-          <input type="checkbox" name="rgpd" required />
-          <span>He leído y acepto la <a href="/privacidad" target="_blank" rel="noopener">política de privacidad</a>.</span>
-        </label>
-        <button type="submit" class="btn btn--primary btn--block">Enviar solicitud</button>
-        <p class="form-nota">Secretaría responde en menos de 24 horas hábiles. Si lo prefieres, llama al <a href="tel:+34914719959">91 471 99 59</a> en horario de atención, aquí al lado.</p>
-        <div class="form-status form-status--ok" id="contactoSuccessPage" role="status" hidden>
-          <i class="bi bi-check-circle-fill"></i>
-          <div><strong>¡Mensaje enviado!</strong><br>Te responderemos en menos de 24 horas hábiles. ¡Gracias!</div>
-        </div>
-        <div class="form-status form-status--err" id="contactoErrorPage" role="alert" hidden>
-          <i class="bi bi-x-circle-fill"></i>
-          <div><strong>Error al enviar.</strong> Por favor, inténtalo de nuevo o llámanos al <a href="tel:+34914719959">91 471 99 59</a>.</div>
-        </div>
-        </div>
-      </form>
+        <p class="contacta__mapa-aviso">Mapa de Google: al cargarse, Google recibe la dirección IP del dispositivo y puede instalar cookies. <a href="/cookies">Más información</a>.</p>
+      </div>
       </div>
       <div class="contacta__datos">
         <span class="eyebrow">Datos de contacto</span>
@@ -157,19 +107,6 @@
                 <tr><td>Julio</td><td>9:15 – 13:00</td><td>9:15 – 13:00</td></tr>
               </tbody>
             </table>
-          </div>
-        </div>
-        <div class="map-card" style="margin-top:30px;">
-          <div class="mapa-diferido" data-mapa-src="https://maps.google.com/maps?q=Calle%20del%20Tordo%2015%2C%2028019%20Madrid&amp;z=15&amp;output=embed" data-mapa-titulo="Mapa con la ubicación del Colegio NSD">
-            <div class="mapa-diferido__ficha">
-              <svg class="mapa-diferido__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              <p class="mapa-diferido__dir"><strong>Colegio Ntra. Sra. de los Dolores</strong>C/ Tordo, 15 · 28019 Madrid (Carabanchel)</p>
-              <div class="mapa-diferido__botones">
-                <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Calle+del+Tordo+15%2C+28019+Madrid" target="_blank" rel="noopener noreferrer">Cómo llegar <span class="sr-only">(abre Google Maps en una pestaña nueva)</span></a>
-                <button type="button" class="btn btn--ghost mapa-diferido__cargar" hidden>Cargar mapa interactivo</button>
-              </div>
-              <p class="mapa-diferido__aviso">El mapa interactivo es de Google: solo se carga si se pulsa el botón y, al hacerlo, Google recibe la dirección IP del dispositivo y puede instalar cookies. <a href="/cookies">Más información</a>.</p>
-            </div>
           </div>
         </div>
       </div>
@@ -250,6 +187,5 @@
   <script src="/assets/js/partials.js" defer></script>
   <script src="/assets/js/nsd-arriba.js" defer></script>
   <script src="/assets/js/nsd-mapa.js" defer></script>
-  <script src="/assets/js/forms.js" defer></script>
 </body>
 </html>

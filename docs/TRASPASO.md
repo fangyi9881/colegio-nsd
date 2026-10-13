@@ -1,3 +1,5 @@
+> Nota (13/10/2026): documento histórico. El estado actual del hosting está en docs/HOSTING.md (todo en Hostinger salvo Dolores Dragons y Dragons Den).
+
 # Traspaso a www.colegionsdolores.es · fin de semana del 9 al 12 de octubre de 2026
 
 Objetivo: que el dominio del colegio pase a servir la web nueva desde **Hostinger** **sin cortar el correo** y sin perder las direcciones antiguas que la gente tiene guardadas. Vercel (`colegio-nsd.vercel.app`) se queda dos semanas como copia de seguridad.

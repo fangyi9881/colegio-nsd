@@ -28,6 +28,14 @@ RewriteRule ^((vercel|quotes-state)\.json|[^/]+\.(md|ps1|sh|mjs)|\.(gitignore|ve
 RewriteCond %{HTTP_HOST} ^colegionsdolores\.es$ [NC]
 RewriteRule ^(.*)/?$ https://www.colegionsdolores.es/$1 [R=301,L,NE]
 
+# Dominio sin www -> www, en un solo salto.
+RewriteCond %{HTTP_HOST} ^colegionsdolores\.com$ [NC]
+RewriteRule ^(.*)/?$ https://www.colegionsdolores.es/$1 [R=301,L,NE]
+
+# Dominio sin www -> www, en un solo salto.
+RewriteCond %{HTTP_HOST} ^www\.colegionsdolores\.com$ [NC]
+RewriteRule ^(.*)/?$ https://www.colegionsdolores.es/$1 [R=301,L,NE]
+
 # 2. HTTPS siempre (detrás del proxy de Hostinger también).
 RewriteCond %{HTTPS} !=on
 RewriteCond %{HTTP:X-Forwarded-Proto} !=https

@@ -3592,3 +3592,16 @@ input[type="checkbox"], input[type="radio"], input[type="range"], progress { acc
   html .dropdown { transform: none !important; transition: opacity 150ms ease !important; }
   html .reveal { transform: none; }
 }
+
+/* Contacto sin formulario: tres botones de contacto directo. */
+.contacta__botones { display: grid; gap: 12px; align-content: start; }
+.contacta__botones .btn { text-align: center; line-height: 1.3; }
+.contacta__accion > .contacta__canales { flex: 0 0 auto; }
+
+/* Contacto: columna izquierda = botones + mapa; derecha = datos y horario. Misma altura. */
+.contacta__accion { gap: 20px; }
+.contacta__mapa { flex: 1 1 auto; display: flex; flex-direction: column; min-height: 360px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); background: var(--ink-50); }
+.contacta__mapa iframe { flex: 1 1 auto; width: 100%; min-height: 260px; border: 0; display: block; }
+.contacta__mapa-pie { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px 8px; }
+.contacta__mapa-pie p { margin: 0; font-size: .92rem; line-height: 1.45; }
+.contacta__mapa-aviso { margin: 0; padding: 0 18px 14px; font-size: .72rem; line-height: 1.5; color: var(--ink-600); }

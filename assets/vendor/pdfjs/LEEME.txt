@@ -1,0 +1,1 @@
+pdf.js 3.11.174 (Mozilla, Apache-2.0). Copia local para leer los menús en el panel; no se carga en las páginas públicas.

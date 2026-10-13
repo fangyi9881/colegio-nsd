@@ -9,7 +9,7 @@ end $$;
 grant anon, authenticated, service_role to authenticator;
 create schema auth;
 create table auth.users (id uuid primary key default gen_random_uuid(), email text unique, encrypted_password text,
-  raw_user_meta_data jsonb default '{}', email_confirmed_at timestamptz, last_sign_in_at timestamptz, created_at timestamptz default now());
+  raw_user_meta_data jsonb default '{}', raw_app_meta_data jsonb default '{}', email_confirmed_at timestamptz, last_sign_in_at timestamptz, created_at timestamptz default now());
 create function auth.uid() returns uuid language sql stable as $$
   select nullif(coalesce(current_setting('request.jwt.claim.sub', true), (nullif(current_setting('request.jwt.claims', true), '')::json ->> 'sub')), '')::uuid $$;
 create function auth.role() returns text language sql stable as $$ select nullif(current_setting('request.jwt.claims', true), '')::json ->> 'role' $$;

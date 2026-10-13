@@ -206,7 +206,8 @@
 
   async function construirMenu() {
     const items = [['contenidos', 'bi-pencil-square', yo.es_directiva ? 'Contenido de la web' : 'Mis contenidos']];
-    if (ambitos.some((a) => puedeEditar(a.id))) items.push(['blog', 'bi-journal-richtext', 'Blog']);
+    if (ambitos.some((a) => puedeEditar(a.id) && a.esquema !== 'ninguno')) items.push(['blog', 'bi-journal-richtext', 'Blog']);
+    if (puedeEditar('comedor')) items.push(['menu', 'bi-egg-fried', 'Menú del comedor']);
     if (yo.es_directiva) {
       items.push(['cumplimiento', 'bi-clipboard-check', 'Qué falta publicar']);
       items.push(['solicitudes', 'bi-person-plus', 'Solicitudes']);
@@ -241,7 +242,7 @@
   function enrutar() {
     const [ruta, arg] = (location.hash.slice(1) || 'contenidos').split('/');
     $$('[data-ruta]').forEach((a) => { if (a.dataset.ruta === ruta) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-    const vistas = { contenidos: () => (arg ? vistaEditor(decodeURIComponent(arg)) : vistaContenidos()), blog: () => (arg ? vistaEntrada(decodeURIComponent(arg)) : vistaBlog()), cumplimiento: vistaCumplimiento, solicitudes: vistaSolicitudes, cuentas: vistaCuentas, historial: vistaHistorial, canal: vistaCanal, cuenta: vistaCuenta, ficha: () => vistaFicha(null), fichas: () => (arg ? vistaFicha(decodeURIComponent(arg)) : vistaFichas()) };
+    const vistas = { contenidos: () => (arg ? vistaEditor(decodeURIComponent(arg)) : vistaContenidos()), blog: () => (arg ? vistaEntrada(decodeURIComponent(arg)) : vistaBlog()), menu: vistaMenu, cumplimiento: vistaCumplimiento, solicitudes: vistaSolicitudes, cuentas: vistaCuentas, historial: vistaHistorial, canal: vistaCanal, cuenta: vistaCuenta, ficha: () => vistaFicha(null), fichas: () => (arg ? vistaFicha(decodeURIComponent(arg)) : vistaFichas()) };
     (vistas[ruta] || vistaContenidos)();
   }
 
@@ -258,7 +259,8 @@
 
   // ── Vista: lo que puedo editar ──
   function vistaContenidos() {
-    const mios = ambitos.filter((a) => puedeEditar(a.id));
+    const mios = ambitos.filter((a) => puedeEditar(a.id) && a.esquema !== 'ninguno');
+    if (!mios.length && puedeEditar('comedor') && !location.hash) { location.replace('#menu'); return; }
     if (!mios.length) {
       pintar(`<div class="pnl-vacio"><h1>Aún no tienes nada asignado</h1><p>Tu cuenta está activa, pero la dirección todavía no te ha dado permiso sobre ningún departamento o sección.</p></div>`, 'Contenidos');
       return;
@@ -928,8 +930,131 @@
   const urlEntrada = (slug) => '/blog/entrada?e=' + encodeURIComponent(slug);
   const nombreCat = (k) => (CATS[k] || {}).nombre || k;
 
+  // ── Menú del comedor: se sube el PDF o el Excel y la web se adapta sola ──
+  // Cada mes queda en contenidos (ámbito «comedor», clave mes_2026_09). La
+  // lectura del archivo se hace aquí, en el navegador: no sale a ningún servicio.
+  const claveMes = (ym) => 'mes_' + ym.replace('-', '_');
+  const MENU_CAMPOS = [['primero', 'Primer plato'], ['segundo', 'Segundo plato'], ['guarnicion', 'Guarnición'], ['postre', 'Postre'], ['postre2', 'Postre 2 (solo guardería)'], ['bebida', 'Bebida'], ['pan', 'Pan']];
+  const MENU_NUM = [['kcal', 'Kcal'], ['prot', 'Proteínas'], ['lip', 'Lípidos'], ['hc', 'Hidratos']];
+  const SEMANA = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+  let pdfjsPromesa = null;
+  function cargarPdfjs() {
+    if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+    pdfjsPromesa = pdfjsPromesa || new Promise((res, rej) => {
+      const s = document.createElement('script');
+      s.src = '/assets/vendor/pdfjs/pdf.min.js';
+      s.onload = () => { window.pdfjsLib.GlobalWorkerOptions.workerSrc = '/assets/vendor/pdfjs/pdf.worker.min.js'; res(window.pdfjsLib); };
+      s.onerror = () => { pdfjsPromesa = null; rej(new Error('No se ha podido cargar el lector de PDF. Recarga la página.')); };
+      document.head.appendChild(s);
+    });
+    return pdfjsPromesa;
+  }
+  const diaLargo = (iso) => { const [a, m, d] = iso.split('-').map(Number); return SEMANA[new Date(a, m - 1, d).getDay()] + ' ' + d; };
+  const pesoTxt = (b) => (b / 1048576 >= 0.1 ? (b / 1048576).toFixed(1).replace('.', ',') + ' MB' : Math.max(1, Math.round(b / 1024)) + ' KB');
+
+  async function vistaMenu() {
+    if (!puedeEditar('comedor')) return vistaContenidos();
+    const L = window.NSD_MENU_LECTOR;
+    pintar('<p class="pnl-cargando">Cargando los menús…</p>', 'Menú del comedor');
+    let pub;
+    try { pub = ((await api.contenidos(['comedor'])).comedor) || {}; } catch (e) {
+      pintar(`<div class="pnl-vacio"><h1>No se han podido cargar los menús</h1><p>${esc(e.message)}</p></div>`, 'Menú del comedor'); return;
+    }
+    const claves = Object.keys(pub).filter((k) => /^mes_\d{4}_\d{2}$/.test(k)).sort().reverse();
+    pintar(`<header class="pnl-titular pnl-titular--fila"><div><h1>Menú del comedor</h1>
+        <p>Sube el PDF o el Excel del menú del mes. La web lo lee, te enseña lo que ha entendido para que lo revises y, al publicarlo, la página del comedor se actualiza sola.</p></div>
+        <a class="btn btn--ghost" href="/servicios/comedor" target="_blank" rel="noopener">Ver la página<span class="sr-only"> del comedor (se abre en otra pestaña)</span></a></header>
+      <section class="pnl-grupo"><h2>Subir el menú de un mes</h2>
+        <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="menu-archivo">Archivo del menú (PDF o Excel)</label>
+          <input id="menu-archivo" type="file" accept=".pdf,.xlsx,application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" aria-describedby="menu-ayuda" />
+          <p class="pnl-ayuda" id="menu-ayuda">Sirve el mismo formato de siempre (la tabla con «Primero», «Segundo», «Guarniciones», «Postre», «Bebida», «Pan» y las kcal). Un PDF escaneado como foto no se puede leer: sube el original.</p></div>
+        <div data-menu-prev aria-live="polite"></div></section>
+      <section class="pnl-grupo"><h2>Menús publicados</h2>
+        ${claves.length ? `<ul class="pnl-entradas">${claves.map((c) => { const m = pub[c].valor || {}; return `<li class="pnl-entrada"><div class="pnl-entrada__txt"><strong>${esc(m.mes || c)}</strong>
+          <small>${(m.dias || []).length} días${m.subido ? ' · publicado el ' + esc(fecha(m.subido)) : ''}</small></div>
+          <div class="pnl-entrada__acc">${m.archivo ? `<a class="btn btn--ghost btn--sm" href="${esc(m.archivo)}" target="_blank" rel="noopener">Archivo<span class="sr-only"> de ${esc(m.mes || c)} (se abre en otra pestaña)</span></a>` : ''}
+          <button type="button" class="btn btn--ghost btn--sm" data-quitar-menu="${esc(c)}">Quitar<span class="sr-only"> ${esc(m.mes || c)}</span></button></div></li>`; }).join('')}</ul>`
+          : '<div class="pnl-vacio pnl-vacio--suave"><p>Aún no hay ningún menú publicado desde el panel. Mientras tanto la web enseña el que viene incluido en ella.</p></div>'}
+      </section>`, 'Menú del comedor');
+
+    $$('[data-quitar-menu]').forEach((b) => b.addEventListener('click', async () => {
+      if (!confirmarDosVeces(b, '¿Quitarlo? Pulsa otra vez')) return;
+      b.disabled = true;
+      try { await api.guardar('comedor', { [b.dataset.quitarMenu]: null }); aviso('Menú quitado de la web.', 'ok'); vistaMenu(); } catch (e) { b.disabled = false; aviso(e.message, 'error'); }
+    }));
+
+    const entrada = $('#menu-archivo'), prev = $('[data-menu-prev]');
+    entrada.addEventListener('change', async () => {
+      const f = entrada.files[0];
+      prev.innerHTML = '';
+      if (!f) return;
+      const ext = ((/\.([a-z0-9]+)$/i.exec(f.name) || [])[1] || '').toLowerCase();
+      if (ext !== 'pdf' && ext !== 'xlsx') { prev.innerHTML = '<p class="pnl-error" role="alert">Sube un PDF o un Excel (.xlsx). Si lo tienes en .xls, guárdalo antes como .xlsx.</p>'; return; }
+      if (f.size > 15 * 1024 * 1024) { prev.innerHTML = '<p class="pnl-error" role="alert">El archivo pasa de 15 MB.</p>'; return; }
+      prev.innerHTML = '<p class="pnl-cargando">Leyendo el menú…</p>';
+      let res;
+      try {
+        const buf = await f.arrayBuffer();
+        res = ext === 'pdf' ? await L.leerPdf(new Uint8Array(buf), await cargarPdfjs()) : await L.leerXlsx(buf);
+      } catch (e) { prev.innerHTML = `<p class="pnl-error" role="alert">No he podido leer el archivo: ${esc(e.message || e)}</p>`; return; }
+      if (!res.dias.length) { prev.innerHTML = `<p class="pnl-error" role="alert">No he encontrado ningún día en el archivo.</p>${res.avisos.length ? `<ul class="pnl-avisos">${res.avisos.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>` : ''}`; return; }
+      previaMenu(prev, f, ext, res, pub);
+    });
+  }
+
+  function previaMenu(prev, f, ext, res, pub) {
+    const L = window.NSD_MENU_LECTOR;
+    const meses = L.agruparMeses(res.dias);
+    let subida = null;   // el archivo se sube una sola vez aunque traiga varios meses
+    prev.innerHTML = `<p class="pnl-ayuda">He encontrado <strong>${res.dias.length} días</strong> en ${Object.keys(meses).length > 1 ? Object.keys(meses).length + ' meses' : 'un mes'}. Revisa lo que he leído y corrige lo que haga falta antes de publicar.</p>
+      ${res.avisos.length ? `<div class="pnl-avisos-caja" role="status"><strong>A revisar</strong><ul class="pnl-avisos">${res.avisos.map((a) => `<li>${esc(a)}</li>`).join('')}</ul></div>` : ''}
+      ${Object.keys(meses).sort().map((ym) => `<form class="pnl-mes" data-mes="${ym}" novalidate>
+        <h3>${esc(L.nombreMes(ym))} <span class="pnl-insignia">${meses[ym].length} días</span></h3>
+        ${meses[ym].map((d, i) => {
+          const falta = !d.primero || !d.segundo;
+          return `<details class="pnl-dia"${falta ? ' open' : ''}><summary><strong>${esc(diaLargo(d.fecha))}</strong> <span>${esc([d.primero, d.segundo].filter(Boolean).join(' · ') || 'Sin platos')}</span>${falta ? ' <span class="pnl-insignia pnl-insignia--falta">Revisar</span>' : ''}</summary>
+            <div class="pnl-dia__campos">${MENU_CAMPOS.map(([k, t]) => `<label class="pnl-campo"><span class="pnl-campo__etiqueta">${t}</span><input type="text" data-d="${i}" data-k="${k}" value="${esc(d[k] || '')}" maxlength="200" /></label>`).join('')}
+            ${MENU_NUM.map(([k, t]) => `<label class="pnl-campo pnl-campo--num"><span class="pnl-campo__etiqueta">${t}</span><input type="number" inputmode="numeric" min="0" max="5000" step="1" data-d="${i}" data-k="${k}" value="${d[k] == null ? '' : d[k]}" /></label>`).join('')}</div></details>`;
+        }).join('')}
+        <p class="pnl-error" role="alert" data-error hidden></p>
+        <button type="submit" class="btn btn--primary">Publicar el menú de ${esc(L.nombreMes(ym).toLowerCase())}</button>
+      </form>`).join('')}`;
+
+    $$('form.pnl-mes', prev).forEach((form) => {
+      const ym = form.dataset.mes, dias = meses[ym];
+      form.addEventListener('input', (e) => {
+        const t = e.target; if (!t.dataset || t.dataset.d == null) return;
+        const d = dias[+t.dataset.d], k = t.dataset.k;
+        if (t.type === 'number') { if (t.value === '') delete d[k]; else d[k] = Math.max(0, Math.round(Number(t.value))); }
+        else if (t.value.trim()) d[k] = t.value.replace(/\s+/g, ' ').trim(); else if (k === 'guarnicion') d[k] = ''; else delete d[k];
+      });
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const err = $('[data-error]', form), b = $('button[type="submit"]', form);
+        err.hidden = true;
+        const mal = dias.filter((d) => !d.primero || !d.segundo);
+        if (mal.length) { err.textContent = 'Faltan el primer o el segundo plato de: ' + mal.map((d) => diaLargo(d.fecha)).join(', ') + '.'; err.hidden = false; return; }
+        if (pub[claveMes(ym)] && !confirmarDosVeces(b, 'Ya hay uno publicado. ¿Sustituirlo? Pulsa otra vez')) return;
+        b.disabled = true;
+        try {
+          aviso('Subiendo el archivo…');
+          subida = subida || api.subirArchivo('comedor', f);
+          const url = await subida;
+          const limpio = L.nombreMes(ym).toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').replace(/[^a-z0-9]+/g, '-');
+          await api.guardar('comedor', { [claveMes(ym)]: {
+            mes: L.nombreMes(ym), archivo: url, formato: ext, nombreDescarga: 'Menu-comedor-' + limpio + '-Colegio-NSD.' + ext,
+            paginas: res.paginas || null, peso: pesoTxt(f.size), subido: new Date().toISOString(),
+            dias: dias.map((d) => { const o = { fecha: d.fecha }; MENU_CAMPOS.concat(MENU_NUM).forEach(([k]) => { if (d[k] != null && d[k] !== '') o[k] = d[k]; }); return o; })
+          } });
+          aviso('Menú publicado. La página del comedor ya lo enseña.', 'ok');
+          vistaMenu();
+        } catch (er) { b.disabled = false; subida = null; err.textContent = er.message; err.hidden = false; aviso(er.message, 'error'); }
+      });
+    });
+  }
+
   async function vistaBlog() {
-    const mios = ambitos.filter((a) => puedeEditar(a.id));
+    const mios = ambitos.filter((a) => puedeEditar(a.id) && a.esquema !== 'ninguno');
     if (!mios.length) return vistaContenidos();
     pintar('<p class="pnl-cargando">Cargando entradas…</p>', 'Blog');
     let lista;
@@ -952,7 +1077,7 @@
   }
 
   async function vistaEntrada(id) {
-    const mios = ambitos.filter((a) => puedeEditar(a.id));
+    const mios = ambitos.filter((a) => puedeEditar(a.id) && a.esquema !== 'ninguno');
     if (!mios.length) return vistaContenidos();
     let e = { titulo: '', resumen: '', cuerpo: '', fecha: hoyIso(), publicado: true, etiquetas: [], ambito_id: mios[0].id, categoria: '', imagen: '', imagen_alt: '', documento: null };
     const nueva = id === 'nueva';

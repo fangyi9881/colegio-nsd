@@ -77,8 +77,8 @@
   <aside class="topbar" aria-label="Contacto y accesos rápidos">
     <div class="container topbar__inner">
       <div class="topbar__contact">
-        <a href="tel:+34914719959" aria-label="Teléfono"><i class="bi bi-telephone-fill"></i> <span>91 471 99 59</span></a>
-        <a href="mailto:secretaria@colegionsdolores.es" aria-label="Email"><i class="bi bi-envelope-fill"></i> <span>secretaria@colegionsdolores.es</span></a>
+        <a href="tel:+34914719959" aria-label="Llamar al 91 471 99 59"><i class="bi bi-telephone-fill" aria-hidden="true"></i> <span>91 471 99 59</span></a>
+        <a href="mailto:secretaria@colegionsdolores.es" aria-label="Escribir a secretaria@colegionsdolores.es"><i class="bi bi-envelope-fill" aria-hidden="true"></i> <span>secretaria@colegionsdolores.es</span></a>
       </div>
       <div class="topbar__quick">
         <a href="/familias" class="quick-link quick-link--sv" title="Secretaría Virtual: gestiones, formularios y documentos"><i class="bi bi-person-lines-fill"></i> <span>Secretaría Virtual</span></a>
@@ -456,10 +456,10 @@
     <a href="#top" class="to-top" aria-label="Volver arriba"><i class="bi bi-arrow-up"></i></a>
   </footer>
 
-  <div class="mobile-cta-bar" id="mobileCta" aria-hidden="true" inert>
+  <nav class="mobile-cta-bar" id="mobileCta" aria-label="Acciones rápidas" aria-hidden="true" inert>
     <a href="tel:+34914719959" class="cta-call"><i class="bi bi-telephone-fill"></i><span>Llamar</span></a>
     <a href="/contacto" class="cta-visit"><i class="bi bi-calendar-check"></i><span>Reservar visita</span></a>
-  </div>
+  </nav>
 
   <div class="cursor-ring" aria-hidden="true"></div>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>`;
