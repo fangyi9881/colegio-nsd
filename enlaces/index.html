@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Enlaces · Colegio NSD</title>
+  <meta name="description" content="Todas las webs y enlaces útiles del Colegio Nuestra Señora de los Dolores (Carabanchel, Madrid): colegio, escuela infantil, campamento urbano y club de baloncesto." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://www.colegionsdolores.es/enlaces" />
+  <meta name="theme-color" content="#F5F1EA" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#04120A" media="(prefers-color-scheme: dark)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.colegionsdolores.es/enlaces" />
+  <meta property="og:title" content="Colegio NSD · Todos los enlaces" />
+  <meta property="og:description" content="Colegio, Escuela Infantil, Campamento Urbano y Dolores Dragons en una sola página." />
+  <meta property="og:image" content="https://www.colegionsdolores.es/assets/img/og-cover.png" />
+  <meta property="og:locale" content="es_ES" />
+  <link rel="icon" type="image/png" href="/assets/img/logo.png" />
+  <script src="/enlaces/enlaces.js" defer></script>
+  <link rel="preload" href="/assets/vendor/fuentes/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/vendor/fuentes/fraunces-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <!--
+    Página de enlaces del ecosistema NSD (destino del QR).
+    El CSP del colegio no admite <script> inline: el apilado de tarjetas va en
+    /enlaces/enlaces.js (script-src 'self'). Sin JS la página funciona igual, en columna.
+    Los estilos inline sí están permitidos (style-src 'unsafe-inline').
+    Dragons Den queda fuera por decisión expresa.
+  -->
+  <style>
+    @font-face {
+      font-family: "Fraunces";
+      src: url("/assets/vendor/fuentes/fraunces-latin-opsz-normal.woff2") format("woff2");
+      font-weight: 100 900; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: "Outfit";
+      src: url("/assets/vendor/fuentes/outfit-latin-wght-normal.woff2") format("woff2");
+      font-weight: 100 900; font-style: normal; font-display: swap;
+    }
+
+    :root {
+      color-scheme: light dark;
+      --brand-900: #04120A; --brand-800: #0B3A18; --brand-700: #10572C;
+      --brand-600: #1A7040; --brand-500: #229050; --brand-100: #D4EBE0; --brand-50: #EAF5EF;
+      --gold-300: #E3C254; --gold-500: #C49200; --oro-titular: #9A7400;
+
+      --bg: #F5F1EA;
+      --card: #FFFCF7;
+      --card-hover: #FFFFFF;
+      --sunken: #EDE8DF;
+      --border: #DED8CC;
+      --border-strong: #C7BFAE;
+      --ink: #101810;
+      --ink-soft: #3A4E3D;
+      --ink-muted: #4C6450;
+      --focus: #10572C;
+
+      /* Color de cada web del ecosistema */
+      --c-colegio: #1A7040;
+      --c-infantil: #8C2F3F;
+      --c-campamento: #0E6B6B;
+      --c-dragons: #141414;
+      --c-dragons-ico: #E3C254;
+
+      --radius: 18px;
+      --shadow: 0 1px 2px rgba(11,58,24,.06), 0 10px 24px -14px rgba(11,58,24,.22);
+      --ease: cubic-bezier(.2,.8,.2,1);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #04120A;
+        --card: #0C1F13;
+        --card-hover: #112A1A;
+        --sunken: #081A0F;
+        --border: #1E3A27;
+        --border-strong: #2D5038;
+        --ink: #EEF3EC;
+        --ink-soft: #C3D3C6;
+        --ink-muted: #9DB3A1;
+        --focus: #9BD6AE;
+        --oro-titular: #E3C254;
+        --c-colegio: #229050;
+        --c-infantil: #A23A4C;
+        --c-campamento: #137F7F;
+        --c-dragons: #000000;
+        --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 24px -14px rgba(0,0,0,.6);
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 10px; }
+    .visually-hidden {
+      position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+    .icon { width: 1.25rem; height: 1.25rem; flex: none; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+
+    .skip {
+      position: absolute; left: 16px; top: -60px; z-index: 10;
+      background: var(--brand-800); color: #fff; padding: 10px 16px; border-radius: 10px;
+      font-weight: 600; text-decoration: none; transition: top .2s var(--ease);
+    }
+    .skip:focus { top: 12px; }
+
+    /* ---------- Estructura ---------- */
+    .page {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: max(28px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 40px max(16px, env(safe-area-inset-left));
+      display: grid;
+      gap: 32px;
+    }
+    @media (min-width: 600px) { .page { padding-left: 32px; padding-right: 32px; padding-top: 48px; } }
+    @media (min-width: 960px) {
+      .page { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; padding-top: 72px; align-items: start; }
+      .intro { position: sticky; top: 48px; }
+    }
+
+    /* ---------- Cabecera ---------- */
+    .marca { display: flex; align-items: center; gap: 14px; text-decoration: none; width: fit-content; }
+    .marca__sello {
+      width: 56px; height: 56px; border-radius: 16px; flex: none;
+      display: grid; place-items: center;
+      padding: 8px;
+      background: #FFFFFF;
+      box-shadow: inset 0 0 0 1px var(--border), var(--shadow);
+    }
+    .marca__sello img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .marca__txt { display: grid; line-height: 1.2; }
+    .marca__txt strong { font-weight: 700; font-size: 1rem; }
+    .marca__txt span { color: var(--ink-muted); font-size: .875rem; }
+
+    .intro h1 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 800;
+      font-size: clamp(2.1rem, 1.5rem + 3vw, 3.4rem);
+      line-height: 1.04;
+      letter-spacing: -.02em;
+      margin: 28px 0 14px;
+      text-wrap: balance;
+    }
+    .intro h1 em { font-style: normal; color: var(--oro-titular); }
+    .intro__lead { margin: 0; color: var(--ink-soft); font-size: 1.0625rem; max-width: 38ch; text-wrap: pretty; }
+
+    /* QR: solo en pantallas grandes (en el móvil ya estás dentro) */
+    .qr {
+      display: none;
+      margin-top: 36px;
+      padding: 18px;
+      gap: 18px;
+      align-items: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 400px;
+    }
+    .qr__codigo { width: 132px; height: 132px; border-radius: 12px; flex: none; display: block; }
+    .qr p { margin: 0; font-size: .9375rem; color: var(--ink-soft); }
+    .qr strong { display: block; color: var(--ink); font-size: 1rem; margin-bottom: 2px; }
+    .qr code { font-family: inherit; font-weight: 600; color: var(--ink); white-space: nowrap; }
+    @media (min-width: 960px) { .qr { display: flex; } }
+
+    /* ---------- Tarjetas apiladas ----------
+       Cada bloque es una tarjeta. Con enlaces.js cargado (clase .pila-viva en <html>)
+       se quedan fijas arriba al deslizar y la siguiente se coloca encima; la de debajo
+       se encoge y oscurece un poco (solo transform y opacity). Sin JS, se ven en columna. */
+    .pila { display: grid; gap: 20px; }
+    .panel {
+      position: relative;
+      padding: 20px 16px 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: 0 -10px 30px -18px rgba(11,58,24,.35), var(--shadow);
+      transform-origin: 50% 0;
+    }
+    .panel::after {
+      content: ""; position: absolute; inset: 0; border-radius: inherit;
+      background: #04120A; opacity: calc(var(--p, 0) * .22);
+      pointer-events: none;
+    }
+    @media (min-width: 600px) { .panel { padding: 26px 24px 28px; } }
+    @media (prefers-color-scheme: dark) {
+      .panel { box-shadow: 0 -12px 34px -16px rgba(0,0,0,.8), var(--shadow); }
+      .panel::after { background: #000; opacity: calc(var(--p, 0) * .45); }
+    }
+    .pila-viva .panel {
+      position: sticky;
+      top: var(--top, 16px);
+      transform: scale(calc(1 - var(--p, 0) * .06));
+    }
+    /* Al tabular, la tarjeta con el foco se pone delante para que no quede tapada */
+    .pila-viva .panel:focus-within { z-index: 2; transform: none; }
+    .pila-viva .panel:focus-within::after { opacity: 0; }
+    @media (prefers-reduced-motion: reduce) {
+      .pila-viva .panel { transform: none; }
+    }
+
+    .panel--secretaria {
+      background: var(--brand-800); border-color: var(--brand-800); color: #fff;
+    }
+    @media (prefers-color-scheme: dark) { .panel--secretaria { background: #0E3A1F; border-color: #1E5532; } }
+    .panel--secretaria .bloque__titulo { color: rgba(255,255,255,.78); }
+    .panel--secretaria .boton { background: transparent; border-color: rgba(255,255,255,.4); color: #fff; }
+    .panel--secretaria .boton--principal { background: #E3C254; border-color: #E3C254; color: #04120A; }
+    .panel--secretaria .direccion { color: rgba(255,255,255,.82); }
+
+    /* ---------- Secciones ---------- */
+    .bloque__titulo {
+      margin: 0 0 14px;
+      font-size: .8125rem;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    /* Webs del ecosistema: tarjetas grandes */
+    .webs { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    @media (min-width: 600px) and (max-width: 959px) { .webs { grid-template-columns: 1fr 1fr; } }
+
+    .web {
+      --c: var(--c-colegio);
+      --ico: #fff;
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 14px;
+      min-height: 84px;
+      padding: 16px;
+      text-decoration: none;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform .25s var(--ease), background-color .25s var(--ease), border-color .25s var(--ease);
+    }
+    .web::before {
+      content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--c);
+    }
+    .web--infantil { --c: var(--c-infantil); }
+    .web--campamento { --c: var(--c-campamento); }
+    .web--dragons { --c: var(--c-dragons); --ico: var(--c-dragons-ico); }
+    @media (prefers-color-scheme: dark) { .web--dragons::before { background: var(--c-dragons-ico); } }
+
+    .web__ico {
+      width: 48px; height: 48px; border-radius: 14px;
+      display: grid; place-items: center;
+      background: var(--c); color: var(--ico);
+    }
+    .web__ico .icon { width: 24px; height: 24px; }
+    .web__ico--logo { padding: 6px; }
+    .web__ico--logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .web--colegio .web__ico { background: #FFFFFF; box-shadow: inset 0 0 0 1px var(--border); }
+    .web--dragons .web__ico { box-shadow: inset 0 0 0 1px rgba(227,194,84,.35); }
+    .web__txt { display: grid; gap: 2px; min-width: 0; }
+    .web__txt strong { font-size: 1.0625rem; font-weight: 700; line-height: 1.25; }
+    .web__txt span { font-size: .9375rem; color: var(--ink-muted); line-height: 1.35; }
+    .web__ir { color: var(--ink-muted); transition: transform .25s var(--ease), color .25s var(--ease); }
+
+    @media (hover: hover) {
+      .web:hover { transform: translateY(-2px); background: var(--card-hover); border-color: var(--border-strong); }
+      .web:hover .web__ir { transform: translate(2px, -2px); color: var(--ink); }
+    }
+    .web:active { transform: scale(.985); }
+
+    /* Enlaces de interés: lista compacta */
+    .lista {
+      list-style: none; margin: 0 -8px; padding: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    @media (min-width: 600px) { .lista { margin: 0 -12px; } }
+    .lista li + li { border-top: 1px solid var(--border); }
+    .fila {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 14px;
+      min-height: 60px;
+      padding: 12px 16px;
+      text-decoration: none;
+      transition: background-color .2s var(--ease);
+    }
+    .fila__ico {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: grid; place-items: center;
+      background: var(--brand-50); color: var(--brand-700);
+    }
+    @media (prefers-color-scheme: dark) { .fila__ico { background: #10291A; color: #9BD6AE; } }
+    .fila__txt { display: grid; min-width: 0; line-height: 1.3; }
+    .fila__txt strong { font-weight: 600; font-size: 1rem; }
+    .fila__txt span { font-size: .875rem; color: var(--ink-muted); }
+    .fila__ir { color: var(--ink-muted); width: 1.1rem; height: 1.1rem; }
+    @media (hover: hover) { .fila:hover { background: var(--sunken); } }
+    .fila:focus-visible { outline-offset: -3px; border-radius: 12px; }
+    .fila { padding: 12px 8px; border-radius: 12px; }
+    @media (min-width: 600px) { .fila { padding: 12px 12px; } }
+
+    /* Contacto: botones */
+    .contacto { display: grid; gap: 10px; }
+    @media (min-width: 600px) { .contacto { grid-template-columns: repeat(3, 1fr); } }
+    .boton {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 52px; padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 600; font-size: 1rem; text-decoration: none; text-align: center;
+      border: 1px solid var(--border-strong);
+      background: var(--card);
+      transition: transform .2s var(--ease), background-color .2s var(--ease);
+    }
+    .boton--principal { background: var(--brand-800); border-color: var(--brand-800); color: #fff; }
+    @media (prefers-color-scheme: dark) { .boton--principal { background: #E3C254; border-color: #E3C254; color: #04120A; } }
+    @media (hover: hover) {
+      .boton:hover { transform: translateY(-1px); background: rgba(255,255,255,.12); }
+      .panel--secretaria .boton--principal:hover { background: #F0D27A; }
+    }
+    .boton:active { transform: scale(.98); }
+
+    .direccion { margin: 14px 0 0; color: var(--ink-muted); font-size: .9375rem; }
+
+    .pie {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between;
+      color: var(--ink-muted); font-size: .875rem;
+    }
+    .pie ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; }
+    .pie a { text-underline-offset: 3px; }
+    .pie p { margin: 0; }
+
+    /* ---------- Entrada (solo transform y opacity) ---------- */
+    @media (prefers-reduced-motion: no-preference) {
+      .entra { animation: entra .6s var(--ease) both; animation-delay: calc(var(--i, 0) * 60ms); }
+      @keyframes entra { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+    @media print {
+      .qr { display: flex; box-shadow: none; }
+      .web, .lista { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-baby" viewBox="0 0 24 24"><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+    <symbol id="i-ir" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+    <symbol id="i-flecha" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-cita" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol>
+    <symbol id="i-noticias" viewBox="0 0 24 24"><path d="M15 18h-5"/><path d="M18 14h-8"/><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="10" y="6" rx="1"/></symbol>
+    <symbol id="i-carpeta" viewBox="0 0 24 24"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/></symbol>
+    <symbol id="i-comedor" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol>
+    <symbol id="i-paleta" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 11.979 2z"/></symbol>
+    <symbol id="i-mensaje" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+    <symbol id="i-edificio" viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M6 18v-7"/><path d="M10 18v-7"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="M12 2 20 7H4z"/></symbol>
+    <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-tel" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-correo" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-mapa" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  </svg>
+
+  <a class="skip" href="#contenido">Saltar a los enlaces</a>
+
+  <div class="page">
+    <header class="intro">
+      <a class="marca entra" href="https://www.colegionsdolores.es" style="--i:0">
+        <span class="marca__sello"><img src="/assets/img/logo-192.png" width="192" height="192" alt="" /></span>
+        <span class="marca__txt">
+          <strong>Colegio Ntra. Sra. de los Dolores</strong>
+          <span>Carabanchel, Madrid · desde 1957</span>
+        </span>
+      </a>
+
+      <h1 class="entra" style="--i:1">Todo el cole, <em>en un solo sitio.</em></h1>
+      <p class="intro__lead entra" style="--i:2">Las webs del colegio, la escuela infantil, el campamento y el club de baloncesto, con los enlaces que más usan las familias.</p>
+
+      <div class="qr entra" style="--i:3">
+        <svg class="qr__codigo" viewBox="0 0 45 45" role="img" aria-label="Código QR que abre esta página: www.colegionsdolores.es/enlaces"><rect width="45" height="45" rx="3" fill="#FFFFFF"/><g fill="#0B3A18"><path d="M15.04 4.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M19.04 4.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M21.04 4.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M23.04 4.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M24.04 4.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M25.04 4.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 4.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 4.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 4.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 5.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 5.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 5.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 5.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 5.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M18.04 5.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 5.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M25.04 5.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 5.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 5.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 6.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 6.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M18.04 6.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M21.04 6.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 6.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 6.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 6.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 7.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 7.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 7.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M21.04 7.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 7.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M23.04 7.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M25.04 7.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 7.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 7.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 7.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 7.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 7.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 7.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 8.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 8.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 8.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M18.04 8.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 8.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M23.04 8.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M25.04 8.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 8.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 8.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 8.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 8.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 9.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 9.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 9.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 9.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M18.04 9.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M19.04 9.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 9.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M21.04 9.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M24.04 9.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M25.04 9.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 9.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 9.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 9.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 9.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 10.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 10.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 10.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M18.04 10.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 10.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 10.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M24.04 10.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 10.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 10.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 10.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 10.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 11.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 11.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 11.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 11.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 11.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 11.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M21.04 11.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 11.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M24.04 11.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 11.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 11.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 11.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M8.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M9.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M10.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M11.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M18.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M23.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M24.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M34.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M35.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M39.04 12.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M4.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M5.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M6.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M9.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M19.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M21.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M24.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M25.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M37.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 13.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M6.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M7.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M9.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M10.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M11.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M25.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M35.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M37.04 14.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M4.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M6.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M23.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M25.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M39.04 15.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M7.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M9.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M10.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M18.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M19.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M21.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M25.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M34.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M39.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M40.04 16.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M5.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M19.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M21.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M23.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M25.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 17.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M4.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M5.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M8.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M9.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M10.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M34.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M35.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M37.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M39.04 18.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M6.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M7.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M11.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M35.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M40.04 19.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M4.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M7.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M8.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M10.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M34.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M35.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M37.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M39.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M40.04 20.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M4.04 21.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M9.04 21.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 21.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 21.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 21.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 21.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 21.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 21.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 21.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 21.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 21.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M37.04 21.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 21.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M9.04 22.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M10.04 22.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 22.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 22.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 22.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 22.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 22.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 22.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 22.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M35.04 22.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 22.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M37.04 22.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M5.04 23.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M7.04 23.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M11.04 23.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 23.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 23.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 23.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 23.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 23.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 23.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M34.04 23.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M35.04 23.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 23.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 23.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M40.04 23.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M5.04 24.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M6.04 24.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M9.04 24.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M10.04 24.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 24.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 24.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 24.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 24.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 24.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M34.04 24.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 24.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M39.04 24.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M40.04 24.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M6.04 25.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M8.04 25.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M9.04 25.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 25.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 25.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 25.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M37.04 25.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 25.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M5.04 26.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M8.04 26.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M10.04 26.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 26.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 26.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 26.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 26.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 26.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 26.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 26.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 26.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 26.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 26.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M5.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M6.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M7.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M11.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M19.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M21.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M25.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M35.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 27.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M5.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M9.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M10.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M21.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M24.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M25.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M34.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M35.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M39.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M40.04 28.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M4.04 29.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M7.04 29.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 29.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 29.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 29.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M18.04 29.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M19.04 29.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M25.04 29.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 29.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 29.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 29.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 29.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M37.04 29.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 29.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M8.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M9.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M10.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M11.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M18.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M23.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M35.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M37.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 30.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M7.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M8.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M11.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M25.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M34.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M40.04 31.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M4.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M5.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M6.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M7.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M8.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M9.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M10.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M11.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M18.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M19.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M23.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M34.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M35.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M40.04 32.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M19.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M21.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M24.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M37.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M39.04 33.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M18.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M24.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M34.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M37.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 34.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M18.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M19.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M23.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M40.04 35.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M12.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M23.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M34.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M35.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M36.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M37.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M39.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M40.04 36.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 37.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 37.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 37.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 37.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M34.04 37.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M35.04 37.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 38.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 38.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 38.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M23.04 38.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M24.04 38.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 38.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 38.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 38.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M29.04 38.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M32.04 38.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M34.04 38.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M35.04 38.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M39.04 38.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M15.04 39.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 39.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M18.04 39.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M20.04 39.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M21.04 39.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M22.04 39.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 39.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M27.04 39.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 39.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 39.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 39.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M39.04 39.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M13.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M14.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M16.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M17.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M19.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M23.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M24.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M26.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M28.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M30.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M31.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M33.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M34.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M38.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M39.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0M40.04 40.5a.46 .46 0 1 0 .92 0a.46 .46 0 1 0-.92 0"/></g><rect x="4" y="4" width="7" height="7" rx="2.2" fill="#0B3A18"/><rect x="5" y="5" width="5" height="5" rx="1.5" fill="#FFFFFF"/><rect x="6" y="6" width="3" height="3" rx="1" fill="#10572C"/><rect x="34" y="4" width="7" height="7" rx="2.2" fill="#0B3A18"/><rect x="35" y="5" width="5" height="5" rx="1.5" fill="#FFFFFF"/><rect x="36" y="6" width="3" height="3" rx="1" fill="#10572C"/><rect x="4" y="34" width="7" height="7" rx="2.2" fill="#0B3A18"/><rect x="5" y="35" width="5" height="5" rx="1.5" fill="#FFFFFF"/><rect x="6" y="36" width="3" height="3" rx="1" fill="#10572C"/><rect x="18.25" y="18.25" width="8.5" height="8.5" rx="2" fill="#FFFFFF" stroke="#0B3A18" stroke-width=".3"/><image x="19" y="19" width="7" height="7" href="/assets/img/logo-192.png"/></svg>
+        <p><strong>Ábrela en el móvil</strong>Escanea el código o escribe<br /><code>colegionsdolores.es/enlaces</code></p>
+      </div>
+    </header>
+
+    <main id="contenido" class="pila">
+      <section class="panel" aria-labelledby="t-webs">
+        <h2 class="bloque__titulo" id="t-webs">Nuestras webs</h2>
+        <ul class="webs">
+          <li class="entra" style="--i:2">
+            <a class="web web--colegio" href="https://www.colegionsdolores.es">
+              <span class="web__ico web__ico--logo"><img src="/assets/img/logo-192.png" width="192" height="192" alt="" /></span>
+              <span class="web__txt"><strong>Colegio NSD</strong><span>Infantil, Primaria y ESO</span></span>
+              <svg class="icon web__ir" aria-hidden="true"><use href="#i-ir"/></svg>
+            </a>
+          </li>
+          <li class="entra" style="--i:3">
+            <a class="web web--infantil" href="https://infantil.colegionsdolores.es">
+              <span class="web__ico" aria-hidden="true"><svg class="icon"><use href="#i-baby"/></svg></span>
+              <span class="web__txt"><strong>Escuela Infantil</strong><span>De 4 meses a 3 años</span></span>
+              <svg class="icon web__ir" aria-hidden="true"><use href="#i-ir"/></svg>
+            </a>
+          </li>
+          <li class="entra" style="--i:4">
+            <a class="web web--campamento" href="https://campamento.colegionsdolores.es">
+              <span class="web__ico" aria-hidden="true"><svg class="icon"><use href="#i-sun"/></svg></span>
+              <span class="web__txt"><strong>Campamento Urbano</strong><span>Verano en el cole</span></span>
+              <svg class="icon web__ir" aria-hidden="true"><use href="#i-ir"/></svg>
+            </a>
+          </li>
+          <li class="entra" style="--i:5">
+            <a class="web web--dragons" href="https://dolores-dragons.vercel.app">
+              <span class="web__ico web__ico--logo"><img src="/images/dragon-logo.png" width="494" height="505" alt="" /></span>
+              <span class="web__txt"><strong>Dolores Dragons</strong><span>Club de baloncesto</span></span>
+              <svg class="icon web__ir" aria-hidden="true"><use href="#i-ir"/></svg>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="panel" aria-labelledby="t-familias">
+        <h2 class="bloque__titulo" id="t-familias">Para las familias</h2>
+        <ul class="lista">
+          <li><a class="fila" href="https://www.colegionsdolores.es/admision">
+            <span class="fila__ico" aria-hidden="true"><svg class="icon"><use href="#i-cita"/></svg></span>
+            <span class="fila__txt"><strong>Admisión y visitas</strong><span>Pedir plaza o una visita guiada</span></span>
+            <svg class="icon fila__ir" aria-hidden="true"><use href="#i-flecha"/></svg>
+          </a></li>
+          <li><a class="fila" href="https://www.colegionsdolores.es/blog">
+            <span class="fila__ico" aria-hidden="true"><svg class="icon"><use href="#i-noticias"/></svg></span>
+            <span class="fila__txt"><strong>Noticias y comunicados</strong><span>Lo último del colegio</span></span>
+            <svg class="icon fila__ir" aria-hidden="true"><use href="#i-flecha"/></svg>
+          </a></li>
+          <li><a class="fila" href="https://www.colegionsdolores.es/familias/documentacion">
+            <span class="fila__ico" aria-hidden="true"><svg class="icon"><use href="#i-carpeta"/></svg></span>
+            <span class="fila__txt"><strong>Documentación</strong><span>Libros de texto, calendario, autorizaciones</span></span>
+            <svg class="icon fila__ir" aria-hidden="true"><use href="#i-flecha"/></svg>
+          </a></li>
+          <li><a class="fila" href="https://www.colegionsdolores.es/servicios/comedor">
+            <span class="fila__ico" aria-hidden="true"><svg class="icon"><use href="#i-comedor"/></svg></span>
+            <span class="fila__txt"><strong>Comedor</strong><span>Menús y servicio</span></span>
+            <svg class="icon fila__ir" aria-hidden="true"><use href="#i-flecha"/></svg>
+          </a></li>
+          <li><a class="fila" href="https://www.colegionsdolores.es/servicios/extraescolares">
+            <span class="fila__ico" aria-hidden="true"><svg class="icon"><use href="#i-paleta"/></svg></span>
+            <span class="fila__txt"><strong>Extraescolares</strong><span>Idiomas, deporte, música, robótica</span></span>
+            <svg class="icon fila__ir" aria-hidden="true"><use href="#i-flecha"/></svg>
+          </a></li>
+          <li><a class="fila" href="https://web2.alexiaedu.com/">
+            <span class="fila__ico" aria-hidden="true"><svg class="icon"><use href="#i-mensaje"/></svg></span>
+            <span class="fila__txt"><strong>Alexia</strong><span>Comunicación con las familias</span></span>
+            <svg class="icon fila__ir" aria-hidden="true"><use href="#i-ir"/></svg>
+          </a></li>
+          <li><a class="fila" href="https://raices.madrid.org/">
+            <span class="fila__ico" aria-hidden="true"><svg class="icon"><use href="#i-edificio"/></svg></span>
+            <span class="fila__txt"><strong>Raíces</strong><span>Gestión académica de la Comunidad de Madrid</span></span>
+            <svg class="icon fila__ir" aria-hidden="true"><use href="#i-ir"/></svg>
+          </a></li>
+          <li><a class="fila" href="https://www.colegionsdolores.es/proteccion-infancia">
+            <span class="fila__ico" aria-hidden="true"><svg class="icon"><use href="#i-escudo"/></svg></span>
+            <span class="fila__txt"><strong>Protección de la infancia</strong><span>Bienestar y acoso escolar</span></span>
+            <svg class="icon fila__ir" aria-hidden="true"><use href="#i-flecha"/></svg>
+          </a></li>
+        </ul>
+      </section>
+
+      <section class="panel panel--secretaria" aria-labelledby="t-contacto">
+        <h2 class="bloque__titulo" id="t-contacto">Secretaría</h2>
+        <div class="contacto">
+          <a class="boton boton--principal" href="tel:+34914719959"><svg class="icon" aria-hidden="true"><use href="#i-tel"/></svg>91 471 99 59</a>
+          <a class="boton" href="mailto:secretaria@colegionsdolores.es"><svg class="icon" aria-hidden="true"><use href="#i-correo"/></svg>Enviar correo</a>
+          <a class="boton" href="https://www.google.com/maps/search/?api=1&amp;query=Calle+del+Tordo+15%2C+28019+Madrid"><svg class="icon" aria-hidden="true"><use href="#i-mapa"/></svg>Cómo llegar</a>
+        </div>
+        <p class="direccion">C/ Tordo, 15 · 28019 Madrid (Carabanchel) · Metro Vista Alegre</p>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p>© 2026 Colegio Ntra. Sra. de los Dolores, S.L.</p>
+      <ul>
+        <li><a href="https://www.colegionsdolores.es/aviso-legal">Aviso legal</a></li>
+        <li><a href="https://www.colegionsdolores.es/privacidad">Privacidad</a></li>
+        <li><a href="https://www.colegionsdolores.es/accesibilidad">Accesibilidad</a></li>
+      </ul>
+    </footer>
+  </div>
+</body>
+</html>
