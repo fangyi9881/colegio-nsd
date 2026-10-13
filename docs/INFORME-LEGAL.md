@@ -77,4 +77,8 @@ Corregido en el código:
 
 Comprobado sin incidencias: cabeceras (CSP, HSTS, X-Content-Type-Options, Referrer-Policy, Permissions-Policy), ausencia de archivos internos expuestos, rastreo de las 50 páginas del sitemap, solo `localStorage` técnico (tema y caché), sin analítica ni publicidad.
 
+Mismo arreglo en **Escuela Infantil** y **Campamento** (mapa con carga al pulsar, cookies y privacidad actualizadas) y línea de Registro Mercantil añadida a sus avisos legales, con el mismo texto provisional del colegio. Las tres webs (74 páginas) pasan axe-core (WCAG 2.1 AA y buenas prácticas) a 375, 768 y 1280 px sin infracciones, sin desbordes horizontales, sin errores de JavaScript y sin recursos 404. En producción, `.git`, el material sin procesar y los archivos internos devuelven 403 o 404.
+
+Mejora opcional sin aplicar: la política de entradas del blog permite a quien solo edita el ámbito «comedor» publicar entradas asignadas a ese ámbito. No expone datos; se cierra añadiendo una restricción en `03_blog.sql`.
+
 Sigue pendiente de datos que solo puede aportar el colegio: nombre y correo del DPD, datos del Registro Mercantil, coordinador/a de bienestar, Responsable del Sistema del canal, PDF de PEC y de reclamaciones actualizados, y la confirmación de que el correo corporativo está en Workspace for Education.
