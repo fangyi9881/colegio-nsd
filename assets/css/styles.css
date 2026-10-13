@@ -3604,4 +3604,7 @@ input[type="checkbox"], input[type="radio"], input[type="range"], progress { acc
 .contacta__mapa iframe { flex: 1 1 auto; width: 100%; min-height: 260px; border: 0; display: block; }
 .contacta__mapa-pie { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px 8px; }
 .contacta__mapa-pie p { margin: 0; font-size: .92rem; line-height: 1.45; }
+.contacta__mapa > .mapa-diferido { flex: 1 1 auto; height: auto; min-height: 0; }
+.contacta__mapa > .mapa-diferido.is-cargado { min-height: 360px; }
+.contacta__mapa > .mapa-diferido.is-cargado iframe { position: absolute; inset: 0; height: 100%; }
 .contacta__mapa-aviso { margin: 0; padding: 0 18px 14px; font-size: .72rem; line-height: 1.5; color: var(--ink-600); }

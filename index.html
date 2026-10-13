@@ -729,12 +729,17 @@
             </div>
           </div>
           <div class="contacta__mapa">
-            <iframe title="Mapa con la ubicación del Colegio NSD" src="https://maps.google.com/maps?q=Calle%20del%20Tordo%2015%2C%2028019%20Madrid&amp;z=15&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-            <div class="contacta__mapa-pie">
-              <p><strong>Colegio Ntra. Sra. de los Dolores</strong><br />C/ Tordo, 15 · 28019 Madrid (Carabanchel)</p>
-              <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Calle+del+Tordo+15%2C+28019+Madrid" target="_blank" rel="noopener noreferrer">Cómo llegar <span class="sr-only">(abre Google Maps en una pestaña nueva)</span></a>
+            <div class="mapa-diferido" data-mapa-src="https://maps.google.com/maps?q=Calle%20del%20Tordo%2015%2C%2028019%20Madrid&amp;z=15&amp;output=embed" data-mapa-titulo="Mapa con la ubicación del Colegio NSD">
+              <div class="mapa-diferido__ficha">
+                <svg class="mapa-diferido__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <p class="mapa-diferido__dir"><strong>Colegio Ntra. Sra. de los Dolores</strong>C/ Tordo, 15 · 28019 Madrid (Carabanchel)</p>
+                <div class="mapa-diferido__botones">
+                  <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Calle+del+Tordo+15%2C+28019+Madrid" target="_blank" rel="noopener noreferrer">Cómo llegar <span class="sr-only">(abre Google Maps en una pestaña nueva)</span></a>
+                  <button type="button" class="btn btn--ghost mapa-diferido__cargar" hidden="">Cargar mapa interactivo</button>
+                </div>
+                <p class="mapa-diferido__aviso">El mapa interactivo es de Google: solo se carga si se pulsa el botón y, al hacerlo, Google recibe la dirección IP del dispositivo y puede instalar cookies. <a href="/cookies">Más información</a>.</p>
+              </div>
             </div>
-            <p class="contacta__mapa-aviso">Mapa de Google: al cargarse, Google recibe la dirección IP del dispositivo y puede instalar cookies. <a href="/cookies">Más información</a>.</p>
           </div>
         </div>
 

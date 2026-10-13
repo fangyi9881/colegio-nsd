@@ -66,3 +66,15 @@ El ideario aprobado define el colegio como **centro laico**. Por eso la web ya n
 - RD 1112/2018: <https://www.boe.es/buscar/act.php?id=BOE-A-2018-12699>
 - Guía AEPD para centros educativos: <https://www.aepd.es/guias/guia-centros-educativos.pdf>
 - Requisitos de Google Workspace for Education: <https://knowledge.workspace.google.com/admin/getting-started/editions/qualifications-for-google-workspace-for-education>
+
+## Revisión previa a la auditoría (14/10/2026)
+
+Corregido en el código:
+
+- **Mapas de Google** en inicio y contacto: se cargaban al abrir la página (IP a Google y cookies sin consentimiento previo, art. 22.2 LSSI-CE). Ahora solo se cargan al pulsar «Cargar mapa interactivo», como en admisión. Verificado a 375/768/1280 px con axe-core sin infracciones y sin peticiones a Google antes del clic.
+- **Política de cookies y de privacidad**: actualizadas para reflejar lo anterior y para mencionar Cloudflare Turnstile (anti-spam en formularios con verificación y acceso al panel).
+- **security.txt** (`/.well-known/security.txt`) con contacto para avisos de seguridad; caduca el 14/10/2027, renovarlo antes.
+
+Comprobado sin incidencias: cabeceras (CSP, HSTS, X-Content-Type-Options, Referrer-Policy, Permissions-Policy), ausencia de archivos internos expuestos, rastreo de las 50 páginas del sitemap, solo `localStorage` técnico (tema y caché), sin analítica ni publicidad.
+
+Sigue pendiente de datos que solo puede aportar el colegio: nombre y correo del DPD, datos del Registro Mercantil, coordinador/a de bienestar, Responsable del Sistema del canal, PDF de PEC y de reclamaciones actualizados, y la confirmación de que el correo corporativo está en Workspace for Education.
