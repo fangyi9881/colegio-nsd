@@ -34,3 +34,11 @@ Hostinger no tiene SSH ni FTP cómodo en este plan; se publica por el administra
 - URLs antiguas de Joomla sin equivalencia (p. ej. `/index.php/mega/ep/pdep`): hace falta la lista de Search Console.
 - DNS: subir el TTL a 3600 pasadas dos semanas.
 - Cancelar los hostings de Piensa (.com 24/01/2027, .es 06/02/2027) tras confirmar con Piensa que se conserva la zona DNS.
+
+## Publicar una versión (procedimiento probado el 14/10/2026)
+
+1. `git archive HEAD` a una carpeta limpia y, en ella: `scripts/cambiar-dominio.mjs https://www.colegionsdolores.es`, `versionar-assets.mjs`, `minificar-assets.mjs` (necesita `npm i --no-save esbuild`), `generar-htaccess.mjs` y `seo.mjs . https://www.colegionsdolores.es`.
+2. Zip de esa carpeta sin `docs/`, `supabase/`, `scripts/`, `node_modules/`, `material-sin-procesar/`, `*.md`, `*.ps1`, `*.sh`, `*.mjs`, `vercel.json`, `quotes-state.json` ni `package*.json`. Debe incluir `.htaccess` y `.well-known/`.
+3. hPanel > Administrador de archivos > `domains/colegionsdolores.es/public_html` > subir y extraer **en public_html**, no en una subcarpeta. Si una carpeta ya existe, Hostinger crea otra con sufijo numérico: son copias antiguas y se pueden borrar tras comprobar la web.
+4. Comprobar con Ctrl+F5 la portada, `/servicios/comedor`, `/panel` y `/.well-known/security.txt`.
+5. `git push origin main` desde PowerShell en la carpeta del colegio (la máquina virtual no tiene credenciales de GitHub).
