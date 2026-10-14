@@ -158,7 +158,7 @@ const DOCUMENTOS = [
     etiquetas: ['criterios de evaluacion', 'criterios', 'evaluacion', 'calificacion', 'notas'], actualizado: '2026-09' },
 
   // Plataformas
-  { titulo: 'Alexia · plataforma de familias', descripcion: 'Notas, faltas, comunicaciones con los tutores y autorizaciones.', categoria: 'plataformas', tipo: 'enlace', url: 'https://web2.alexiaedu.com/ACWeb/LogOn.aspx',
+  { titulo: 'Alexia · plataforma de familias', descripcion: 'Notas, faltas, comunicaciones con los tutores y autorizaciones.', categoria: 'plataformas', tipo: 'enlace', url: 'https://web2.alexiaedu.com/ACWeb/LogOn.aspx?key=gVMhXb2Aw5Y%3D',
     etiquetas: ['alexia', 'notas', 'calificaciones', 'faltas', 'tutor', 'comunicaciones', 'app'], actualizado: '2026-09' },
   { titulo: 'Raíces · Comunidad de Madrid', descripcion: 'Plataforma oficial de gestión académica de la Comunidad de Madrid.', categoria: 'plataformas', tipo: 'enlace', url: 'https://raices.madrid.org/',
     etiquetas: ['raices', 'comunidad de madrid', 'oficial', 'expediente'], actualizado: '2026-09' },

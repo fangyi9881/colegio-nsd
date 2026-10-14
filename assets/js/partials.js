@@ -82,7 +82,7 @@
       </div>
       <div class="topbar__quick">
         <a href="/familias" class="quick-link quick-link--sv" title="Secretaría Virtual: gestiones, formularios y documentos"><i class="bi bi-person-lines-fill"></i> <span>Secretaría Virtual</span></a>
-        <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-person-badge"></i> Alexia</a>
+        <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx?key=gVMhXb2Aw5Y%3D" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-person-badge"></i> Alexia</a>
         <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-tree"></i> Raíces</a>
         <a href="https://www.instagram.com/colegionsdolores/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
         <a href="https://www.youtube.com/@colegionsd6473" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
@@ -212,7 +212,7 @@
 
   // Accesos del cajón: plataformas, webs hermanas y el portal del profesorado
   const PLATAFORMAS = [
-    { titulo: 'Alexia',    sub: 'Familias',   url: 'https://web2.alexiaedu.com/ACWeb/LogOn.aspx', icono: 'bi-person-badge', tono: 'azul' },
+    { titulo: 'Alexia',    sub: 'Familias',   url: 'https://web2.alexiaedu.com/ACWeb/LogOn.aspx?key=gVMhXb2Aw5Y%3D', icono: 'bi-person-badge', tono: 'azul' },
     { titulo: 'Raíces',    sub: 'Madrid', url: 'https://raices.madrid.org/', icono: 'bi-tree', tono: 'verde' },
     { titulo: 'Classroom', sub: 'Clases', url: 'https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fclassroom.google.com%2F', icono: 'bi-easel', tono: 'ambar' }
   ];
@@ -439,7 +439,7 @@
       <div class="container footer__bottom-inner">
         <p>© <span id="year"></span> Colegio Nuestra Señora de los Dolores. Todos los derechos reservados.</p>
         <ul>
-          <li><a href="https://web2.alexiaedu.com/" target="_blank" rel="noopener noreferrer">Alexia${FUERA}</a></li>
+          <li><a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx?key=gVMhXb2Aw5Y%3D" target="_blank" rel="noopener noreferrer">Alexia${FUERA}</a></li>
           <li><a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer">Raíces${FUERA}</a></li>
           <li><a href="/aviso-legal">Aviso legal</a></li>
           <li><a href="/privacidad">Política de privacidad</a></li>
