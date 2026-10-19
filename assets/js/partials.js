@@ -82,6 +82,7 @@
       </div>
       <div class="topbar__quick">
         <a href="/familias" class="quick-link quick-link--sv" title="Secretaría Virtual: gestiones, formularios y documentos"><i class="bi bi-person-lines-fill"></i> <span>Secretaría Virtual</span></a>
+        <a href="/acceso" class="quick-link quick-link--acceso" title="Acceso del personal al panel de edición"><i class="bi bi-box-arrow-in-right" aria-hidden="true"></i> <span>Acceso</span></a>
         <a href="https://web2.alexiaedu.com/ACWeb/LogOn.aspx?key=gVMhXb2Aw5Y%3D" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-person-badge"></i> Alexia</a>
         <a href="https://raices.madrid.org/" target="_blank" rel="noopener noreferrer" class="quick-link"><i class="bi bi-tree"></i> Raíces</a>
         <a href="https://www.instagram.com/colegionsdolores/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
@@ -136,7 +137,8 @@
         { titulo: 'Formularios',   url: '/familias/formularios',   icono: 'bi-ui-checks-grid' },
         { titulo: 'Evaluación',    url: '/familias/evaluacion',    icono: 'bi-clipboard-check' },
         { titulo: 'Admisión',      url: '/admision',               icono: 'bi-mortarboard' },
-        { titulo: 'Contacto',      url: '/contacto',               icono: 'bi-envelope' }
+        { titulo: 'Contacto',      url: '/contacto',               icono: 'bi-envelope' },
+        { titulo: 'Acceso',        url: '/acceso',                 icono: 'bi-box-arrow-in-right', boton: true, sub: 'Personal del colegio' }
       ]
     },
     {
@@ -166,10 +168,10 @@
   // Una página de esta sección que en realidad vive en otra web no puede
   // parecer una entrada más de la lista: va como botón, con su marca.
   const paginaFuera = (p) => `<li class="dropdown__destacado">
-                  <a href="${p.url}" class="dropdown__boton">
+                  <a href="${p.url}" class="dropdown__boton${p.boton ? ' dropdown__boton--acceso' : ''}">
                     <span class="dropdown__boton-ico" aria-hidden="true"><i class="bi ${p.icono}"></i></span>
-                    <span class="dropdown__boton-txt"><strong>${p.titulo}</strong><small>Tiene su propia web</small></span>
-                    <i class="bi bi-arrow-up-right dropdown__boton-ir" aria-hidden="true"></i>
+                    <span class="dropdown__boton-txt"><strong>${p.titulo}</strong><small>${p.sub || 'Tiene su propia web'}</small></span>
+                    <i class="bi ${p.boton ? 'bi-arrow-right' : 'bi-arrow-up-right'} dropdown__boton-ir" aria-hidden="true"></i>
                   </a>
                 </li>`;
   const iconoWeb = (w) => w.imagen
@@ -182,7 +184,7 @@
             <div class="dropdown">
               <a class="dropdown__hub" href="${s.url}"><span class="dropdown__hub-label">${s.titulo}</span><span class="dropdown__hub-ver">Ver todo <i class="bi bi-arrow-right" aria-hidden="true"></i></span></a>
               <ul>
-                ${s.paginas.map(p => p.externa ? paginaFuera(p) : `<li><a href="${p.url}"><i class="bi ${p.icono} dd-icon" aria-hidden="true"></i>${p.titulo}</a></li>`).join('')}
+                ${s.paginas.map(p => p.externa || p.boton ? paginaFuera(p) : `<li><a href="${p.url}"><i class="bi ${p.icono} dd-icon" aria-hidden="true"></i>${p.titulo}</a></li>`).join('')}
                 ${s.webs ? `<li><div class="dropdown-divider"></div></li><li class="dropdown__grupo">Nuestras webs</li>` +
                   s.webs.map(w => `<li><a href="${w.url}" class="dropdown__web">${iconoWeb(w)}${w.titulo}${FUERA}</a></li>`).join('') : ''}
               </ul>
@@ -203,8 +205,8 @@
           </button>
           <ul class="drawer__sub">
             <li><a href="${s.url}" class="drawer__sub-hub">Ver todo ${s.titulo === 'El Centro' ? 'el Centro' : s.titulo.toLowerCase()}<i class="bi bi-arrow-right" aria-hidden="true"></i></a></li>
-            ${s.paginas.map(p => p.externa
-              ? `<li><a href="${p.url}" class="drawer__sub-fuera">${p.titulo}<span class="drawer__etiqueta">Web propia</span><i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></li>`
+            ${s.paginas.map(p => p.externa || p.boton
+              ? `<li><a href="${p.url}" class="drawer__sub-fuera">${p.titulo}<span class="drawer__etiqueta">${p.boton ? p.sub : 'Web propia'}</span><i class="bi ${p.boton ? 'bi-arrow-right' : 'bi-arrow-up-right'}" aria-hidden="true"></i></a></li>`
               : `<li><a href="${p.url}">${p.titulo}</a></li>`).join('')}
           </ul>
         </li>`;
@@ -326,7 +328,7 @@
         <summary class="footer__col-title"><span>${s.titulo}</span><i class="bi bi-chevron-down" aria-hidden="true"></i></summary>
         <ul>
           <li class="footer__col-portada"><a href="${s.url}">Visión general</a></li>
-          ${s.paginas.map(p => `<li><a href="${p.url}">${p.titulo}${p.externa ? FUERA : ''}</a></li>`).join('')}
+          ${s.paginas.filter(p => !p.boton).map(p => `<li><a href="${p.url}">${p.titulo}${p.externa ? FUERA : ''}</a></li>`).join('')}
         </ul>
       </details>`;
 
@@ -649,7 +651,7 @@
     barra.setAttribute('aria-label', `Páginas de ${SECCION.titulo}`);
     barra.innerHTML = `<div class="container"><ul class="subnav__lista">
       ${enlace(SECCION.url, SECCION.id === 'centro' ? 'El Centro' : 'Visión general', 'bi-grid-1x2')}
-      ${SECCION.paginas.map(p => enlace(p.url, p.titulo, p.icono, p.externa)).join('')}
+      ${SECCION.paginas.filter(p => !p.boton).map(p => enlace(p.url, p.titulo, p.icono, p.externa)).join('')}
     </ul></div>`;
     cabecera.after(barra);
     const actual = barra.querySelector('[aria-current]');

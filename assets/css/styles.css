@@ -249,6 +249,9 @@ p  { margin: 0 0 1em; color: var(--ink-700); line-height: 1.75; }
   border: 1px solid rgba(191,140,0,.40);
 }
 .quick-link--sv:hover { background: var(--yellow-400) !important; color: #021509 !important; }
+/* Acceso del personal: pastilla discreta con borde, junto a Secretaría Virtual */
+.quick-link--acceso { border: 1px solid rgba(255,255,255,.28); font-weight: 600; }
+.quick-link--acceso:hover { border-color: var(--yellow-400); }
 
 @media (max-width: 720px) { .d-none-mobile { display: none; } }
 
@@ -1886,6 +1889,9 @@ body {
 .dropdown__boton-ir { color: var(--acento); font-size: .95rem; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .dropdown__boton { --acento: #f79ec0; } }
 :root[data-theme="dark"] .dropdown__boton { --acento: #f79ec0; }
+.dropdown__boton.dropdown__boton--acceso { --acento: var(--green-700); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .dropdown__boton.dropdown__boton--acceso { --acento: #7fdc8a; } }
+:root[data-theme="dark"] .dropdown__boton.dropdown__boton--acceso { --acento: #7fdc8a; }
 
 
 /* ---------- Barra de hoy ----------

@@ -123,7 +123,7 @@
       { clave: 'lista', etiqueta: 'Formularios adicionales', tipo: 'filas',
         columnas: [{ clave: 'titulo', etiqueta: 'Nombre del formulario' }, { clave: 'para', etiqueta: 'Para qué sirve' },
                    { clave: 'plazo', etiqueta: 'Plazo' }, { clave: 'url', etiqueta: 'Enlace al formulario', tipo: 'url' }],
-        ayuda: 'Los cinco formularios de secretaría ya están en la web y se actualizan solos cuando cambian en Google. Aquí solo hace falta añadir otros nuevos: pega su enlace de Google Forms (o del que uséis) y revisa que el formulario incluya la información de protección de datos.' }
+        ayuda: 'Los cinco formularios de secretaría ya están enlazados desde la web (abren el Google Form original). Aquí solo hace falta añadir otros nuevos: pega su enlace de Google Forms (o del que uséis) y revisa que el formulario incluya la información de protección de datos.' }
     ],
     'informacion-familias': [
       { clave: 'precios', etiqueta: 'Precios de actividades complementarias, extraescolares y servicios', tipo: 'filas', obligatorio: true,
