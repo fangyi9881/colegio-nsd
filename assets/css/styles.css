@@ -2449,11 +2449,96 @@ body {
 .cal__dia.is-elegido .cal__num { color: #fff; }
 
 /* =========================================================
+   Banda del club en la portada: maquetación
+   ---------------------------------------------------------
+   Dos columnas en escritorio; en móvil, una, con los botones
+   a ancho completo y las tres cifras en una fila de tres
+   columnas iguales (antes se partían en dos filas).
+   ========================================================= */
+.dragons2 {
+  position: relative; overflow: hidden; background: #080808;
+  padding: clamp(56px, 8vw, 88px) 0;
+  background-image: radial-gradient(ellipse at 60% 40%, rgba(212,175,55,.08) 0%, transparent 65%);
+}
+/* Escudo grande de fondo, casi invisible, a la derecha */
+.dragons2::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .045;
+  background: url('/images/dragon-logo.png') no-repeat right 6% center / min(380px, 60%);
+}
+.dragons2__grid {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+  gap: clamp(32px, 6vw, 72px); align-items: center;
+}
+.dragons2__texto { min-width: 0; }
+.dragons2__sello {
+  display: inline-flex; align-items: center; gap: 8px; max-width: 100%;
+  background: rgba(212,175,55,.14); border: 1px solid rgba(212,175,55,.34);
+  color: #E8C97A; font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  padding: 7px 14px; border-radius: 99px; margin-bottom: 20px; line-height: 1.3;
+}
+.dragons2__latido { flex: none; width: 7px; height: 7px; border-radius: 50%; background: #E8C97A; display: inline-block; }
+.dragons2__titulo {
+  font-family: 'Fraunces', serif; font-weight: 900; color: #fff;
+  font-size: clamp(2rem, 5.2vw, 3.1rem); line-height: 1.1; margin: 0 0 18px; text-wrap: balance;
+}
+.dragons2__oro { color: #E8C97A; display: block; }
+.dragons2__p { color: rgba(255,255,255,.82); font-size: 1.02rem; line-height: 1.7; margin: 0 0 16px; max-width: 52ch; text-wrap: pretty; }
+.dragons2__p--2 { color: rgba(255,255,255,.74); margin-bottom: 28px; }
+.dragons2__p strong { color: #fff; }
+.dragons2__p .dragons2__realce { color: #E8C97A; }
+.dragons2__botones { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 34px; }
+.dragons2__boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px;
+  background: #E8C97A; color: #080808; font-weight: 800; font-size: .94rem;
+  padding: 12px 24px; border-radius: 10px; text-decoration: none; border: 1.5px solid transparent;
+}
+.dragons2__boton--linea { background: transparent; color: #E8C97A; border-color: rgba(212,175,55,.5); font-weight: 700; }
+.dragons2__boton--ancho { display: flex; width: 100%; }
+.dragons2__cifras {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0;
+  border-top: 1px solid rgba(212,175,55,.18); padding-top: 22px;
+}
+.dragons2__cifras > div { padding: 0 clamp(10px, 2.5vw, 26px); border-left: 1px solid rgba(212,175,55,.16); min-width: 0; }
+.dragons2__cifras > div:first-child { padding-left: 0; border-left: 0; }
+.dragons2__cifra { margin: 0; font-size: clamp(1.8rem, 6vw, 2.2rem); font-weight: 900; color: #fff; line-height: 1; }
+.dragons2__cifra--oro { color: #E8C97A; }
+.dragons2__cifras dd { margin: 6px 0 0; font-size: .7rem; color: rgba(255,255,255,.78); text-transform: uppercase; letter-spacing: .07em; line-height: 1.35; }
+.dragons2__lado { display: flex; justify-content: center; min-width: 0; }
+.dragons2__tarjeta {
+  background: linear-gradient(135deg, #141100, #1a1500); border: 1px solid rgba(212,175,55,.26);
+  border-radius: 22px; padding: clamp(24px, 4vw, 34px); width: 100%; max-width: 400px;
+}
+.dragons2__escudo { display: block; width: 92px; height: 92px; object-fit: contain; margin: 0 auto 14px; }
+.dragons2__nombre { margin: 0 0 4px; font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 900; color: #fff; text-align: center; }
+.dragons2__temporada { margin: 0 0 22px; font-size: .74rem; color: #E8C97A; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-align: center; }
+.dragons2__filas { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 8px; }
+.dragons2__fila {
+  display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.05);
+  border-radius: 10px; padding: 10px 14px;
+}
+.dragons2__fila > i { flex: none; width: 20px; text-align: center; color: #E8C97A; font-size: 1rem; }
+.dragons2__fila > div { min-width: 0; }
+.dragons2__fila--cuota { background: rgba(232,201,122,.1); border: 1px solid rgba(212,175,55,.24); }
+.dragons2__fila-et { display: block; font-size: .66rem; color: rgba(255,255,255,.7); text-transform: uppercase; letter-spacing: .06em; }
+.dragons2__fila-val { display: block; color: #fff; font-weight: 700; font-size: .88rem; line-height: 1.35; }
+.dragons2__nota { margin: 12px 0 0; font-size: .74rem; color: rgba(255,255,255,.68); text-align: center; line-height: 1.5; }
+
+@media (max-width: 860px) {
+  .dragons2__grid { grid-template-columns: 1fr; }
+  .dragons2::before { background-position: right -50px top 36px; background-size: 260px; }
+}
+@media (max-width: 560px) {
+  .dragons2__botones { flex-direction: column; }
+  .dragons2__botones .dragons2__boton { width: 100%; }
+  .dragons2__sello { font-size: .68rem; letter-spacing: .06em; }
+  .dragons2__tarjeta { max-width: none; }
+}
+
+/* =========================================================
    Banda del club en la portada: brillo y movimiento
    ---------------------------------------------------------
-   El marcado lleva los colores en línea; aquí solo van
-   propiedades que no están ahí (sombra, transform, animación
-   y pseudoelementos), así que no pelean entre sí.
+   Sombras, transformaciones, animaciones y pseudoelementos.
    ========================================================= */
 
 /* Una luz dorada que cruza la banda de vez en cuando */

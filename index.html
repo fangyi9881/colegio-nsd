@@ -602,105 +602,63 @@
   </section>
 
   <!-- DOLORES DRAGONS -->
-  <section class="dragons2" style="background:#080808;padding:80px 0;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(212,175,55,.07) 0%,transparent 65%);pointer-events:none;"></div>
-    <div style="position:absolute;inset:0;background:url('/images/dragon-logo.png') center/300px no-repeat;opacity:.03;pointer-events:none;"></div>
-    <div id="dragons-section-grid" class="container" style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+  <section class="dragons2" aria-labelledby="dragons-titulo">
+    <div class="container dragons2__grid">
 
-      <div>
-        <span class="dragons2__sello" style="display:inline-flex;align-items:center;gap:7px;background:rgba(212,175,55,.14);border:1px solid rgba(212,175,55,.34);color:#E8C97A;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:6px 15px;border-radius:99px;margin-bottom:18px;">
-          <span class="dragons2__latido" style="width:7px;height:7px;border-radius:50%;background:#E8C97A;display:inline-block;"></span>
+      <div class="dragons2__texto">
+        <span class="dragons2__sello">
+          <span class="dragons2__latido" aria-hidden="true"></span>
           Inscripciones abiertas · Temporada 2026-27
         </span>
-        <h2 class="dragons2__titulo" style="font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:16px;">
-          Estamos montando<br><span class="dragons2__oro" style="color:#E8C97A;">la nueva temporada</span>
+        <h2 id="dragons-titulo" class="dragons2__titulo">
+          Estamos montando <span class="dragons2__oro">la nueva temporada</span>
         </h2>
-        <p style="color:rgba(255,255,255,.78);font-size:1.02rem;line-height:1.7;margin-bottom:18px;max-width:470px;">
-          Los <strong style="color:#fff;">Dolores Dragons</strong> vuelven en <strong style="color:#fff;">octubre</strong>,
-          y esta vez queremos que la pista se llene. Estamos preparando equipos, horarios y competición
-          para el nuevo curso.
+        <p class="dragons2__p">
+          Los <strong>Dolores Dragons</strong> vuelven en <strong>octubre</strong>, y esta vez queremos que la pista se llene. Estamos preparando equipos, horarios y competición para el nuevo curso.
         </p>
-        <p style="color:rgba(255,255,255,.7);font-size:.98rem;line-height:1.7;margin-bottom:28px;max-width:470px;">
-          <strong style="color:#E8C97A;">Da igual la edad y da igual el nivel.</strong> Desde los que nunca han
-          cogido un balón hasta los que ya compiten, y desde los 4 años de Babybasket hasta los equipos
-          de adultos y veteranos. Si te apetece probar, este es el momento.
+        <p class="dragons2__p dragons2__p--2">
+          <strong class="dragons2__realce">Da igual la edad y da igual el nivel.</strong> Desde los que nunca han cogido un balón hasta los que ya compiten, y desde los 4 años de Babybasket hasta los equipos de adultos y veteranos. Si te apetece probar, este es el momento.
         </p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px;">
-          <a href="/contacto" class="dragons2__boton" style="display:inline-flex;align-items:center;gap:8px;background:#E8C97A;color:#080808;font-weight:800;font-size:.92rem;padding:13px 24px;border-radius:8px;text-decoration:none;">
-            <i class="bi bi-person-plus-fill"></i> Quiero apuntarme
-          </a>
-          <a href="https://dolores-dragons.vercel.app" target="_blank" rel="noopener noreferrer" class="dragons2__boton dragons2__boton--linea" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#E8C97A;border:1.5px solid rgba(212,175,55,.42);font-weight:700;font-size:.9rem;padding:13px 20px;border-radius:8px;text-decoration:none;">
-            <i class="bi bi-dribbble" aria-hidden="true"></i> Ver el club
-          </a>
+        <div class="dragons2__botones">
+          <a href="/contacto" class="dragons2__boton"><i class="bi bi-person-plus-fill" aria-hidden="true"></i> Quiero apuntarme</a>
+          <a href="https://dolores-dragons.vercel.app" target="_blank" rel="noopener noreferrer" class="dragons2__boton dragons2__boton--linea"><i class="bi bi-dribbble" aria-hidden="true"></i> Ver el club<span class="sr-only"> (se abre en otra pestaña)</span></a>
         </div>
-        <div style="display:flex;border-top:1px solid rgba(212,175,55,.14);padding-top:24px;gap:0;flex-wrap:wrap;">
-          <div style="padding-right:28px;border-right:1px solid rgba(212,175,55,.14);">
-            <div class="dragons2__cifra" style="font-size:2rem;font-weight:900;color:#E8C97A;line-height:1;">9</div>
-            <div style="font-size:.72rem;color:rgba(255,255,255,.72);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;">Categorías</div>
-          </div>
-          <div style="padding:0 28px;border-right:1px solid rgba(212,175,55,.14);">
-            <div class="dragons2__cifra" style="font-size:2rem;font-weight:900;color:#fff;line-height:1;">4+</div>
-            <div style="font-size:.72rem;color:rgba(255,255,255,.72);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;">Años, sin tope</div>
-          </div>
-          <div style="padding-left:28px;">
-            <div class="dragons2__cifra" style="font-size:2rem;font-weight:900;color:#E8C97A;line-height:1;">60</div>
-            <div style="font-size:.72rem;color:rgba(255,255,255,.72);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;">Años de historia</div>
-          </div>
-        </div>
+        <dl class="dragons2__cifras">
+          <div><dt class="dragons2__cifra dragons2__cifra--oro">9</dt><dd>Categorías</dd></div>
+          <div><dt class="dragons2__cifra">4+</dt><dd>Años, sin tope</dd></div>
+          <div><dt class="dragons2__cifra dragons2__cifra--oro">60</dt><dd>Años de historia</dd></div>
+        </dl>
       </div>
 
-      <div style="display:flex;justify-content:center;">
-        <div class="dragons2__tarjeta" style="background:linear-gradient(135deg,#141100,#1a1500);border:1px solid rgba(212,175,55,.24);border-radius:20px;padding:34px;width:100%;max-width:360px;">
-          <img class="dragons2__escudo" src="/images/dragon-logo.png" alt="Escudo de la escuela Dolores Dragons" width="92" height="92" style="width:92px;height:92px;object-fit:contain;margin:0 auto 16px;display:block;" />
-          <div style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900;color:#fff;text-align:center;margin-bottom:4px;">DOLORES DRAGONS</div>
-          <div style="font-size:.74rem;color:#E8C97A;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:center;margin-bottom:22px;">Temporada 2026/27</div>
-
-          <div style="display:grid;gap:7px;margin-bottom:18px;">
-            <div class="dragons2__fila" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border-radius:8px;padding:9px 13px;">
-              <i class="bi bi-people-fill" style="color:#E8C97A;font-size:.95rem;"></i>
-              <div>
-                <div style="font-size:.66rem;color:rgba(255,255,255,.62);text-transform:uppercase;letter-spacing:.06em;">Categorías</div>
-                <div style="color:#fff;font-weight:700;font-size:.85rem;">De Babybasket a Sénior</div>
-              </div>
-            </div>
-            <div class="dragons2__fila" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border-radius:8px;padding:9px 13px;">
-              <i class="bi bi-clock-fill" style="color:#E8C97A;font-size:.95rem;"></i>
-              <div>
-                <div style="font-size:.66rem;color:rgba(255,255,255,.62);text-transform:uppercase;letter-spacing:.06em;">Entrenamientos</div>
-                <div style="color:#fff;font-weight:700;font-size:.85rem;">Martes y jueves · desde 17:00</div>
-              </div>
-            </div>
-            <div class="dragons2__fila" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border-radius:8px;padding:9px 13px;">
-              <i class="bi bi-trophy-fill" style="color:#E8C97A;font-size:.95rem;"></i>
-              <div>
-                <div style="font-size:.66rem;color:rgba(255,255,255,.62);text-transform:uppercase;letter-spacing:.06em;">Competición</div>
-                <div style="color:#fff;font-weight:700;font-size:.85rem;">Sábados · Carabanchel y Latina</div>
-              </div>
-            </div>
-            <div class="dragons2__fila dragons2__fila--cuota" style="display:flex;align-items:center;gap:10px;background:rgba(232,201,122,.1);border:1px solid rgba(212,175,55,.22);border-radius:8px;padding:9px 13px;">
-              <i class="bi bi-tag-fill" style="color:#E8C97A;font-size:.95rem;"></i>
-              <div>
-                <div style="font-size:.66rem;color:rgba(255,255,255,.62);text-transform:uppercase;letter-spacing:.06em;">Cuota</div>
-                <div style="color:#fff;font-weight:700;font-size:.85rem;">35 €/mes · de octubre a mayo</div>
-              </div>
-            </div>
-          </div>
-
-          <a href="/contacto" class="dragons2__boton dragons2__boton--ancho" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#E8C97A;color:#080808;font-weight:800;font-size:.9rem;padding:12px;border-radius:8px;text-decoration:none;">
-            Reservar plaza <i class="bi bi-arrow-right"></i>
-          </a>
-          <p style="font-size:.72rem;color:rgba(255,255,255,.58);text-align:center;margin:12px 0 0;line-height:1.5;">
-            Plazas limitadas por categoría.<br />Te escribimos para contarte los detalles.
-          </p>
+      <div class="dragons2__lado">
+        <div class="dragons2__tarjeta">
+          <img class="dragons2__escudo" src="/images/dragon-logo.png" alt="Escudo de la escuela Dolores Dragons" width="92" height="92" loading="lazy" />
+          <p class="dragons2__nombre">DOLORES DRAGONS</p>
+          <p class="dragons2__temporada">Temporada 2026/27</p>
+          <ul class="dragons2__filas">
+            <li class="dragons2__fila">
+              <i class="bi bi-people-fill" aria-hidden="true"></i>
+              <div><span class="dragons2__fila-et">Categorías</span><strong class="dragons2__fila-val">De Babybasket a Sénior</strong></div>
+            </li>
+            <li class="dragons2__fila">
+              <i class="bi bi-clock-fill" aria-hidden="true"></i>
+              <div><span class="dragons2__fila-et">Entrenamientos</span><strong class="dragons2__fila-val">Martes y jueves · desde 17:00</strong></div>
+            </li>
+            <li class="dragons2__fila">
+              <i class="bi bi-trophy-fill" aria-hidden="true"></i>
+              <div><span class="dragons2__fila-et">Competición</span><strong class="dragons2__fila-val">Sábados · Carabanchel y Latina</strong></div>
+            </li>
+            <li class="dragons2__fila dragons2__fila--cuota">
+              <i class="bi bi-tag-fill" aria-hidden="true"></i>
+              <div><span class="dragons2__fila-et">Cuota</span><strong class="dragons2__fila-val">35 €/mes · de octubre a mayo</strong></div>
+            </li>
+          </ul>
+          <a href="/contacto" class="dragons2__boton dragons2__boton--ancho">Reservar plaza <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+          <p class="dragons2__nota">Plazas limitadas por categoría. Te escribimos para contarte los detalles.</p>
         </div>
       </div>
 
     </div>
-    <style>
-      @media(max-width:768px){
-        #dragons-section-grid { grid-template-columns: 1fr !important; }
-      }
-    </style>
   </section>
 
 
