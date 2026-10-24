@@ -115,8 +115,8 @@
     {
       id: 'etapas', titulo: 'Etapas', url: '/etapas', icono: 'bi-mortarboard',
       paginas: [
-        { titulo: 'Infantil 0–3',       url: 'https://infantil.colegionsdolores.es', icono: 'bi-balloon-heart', externa: true },
-        { titulo: 'Infantil 3–6',       url: '/etapas/infantil-3-6', icono: 'bi-stars' },
+        { titulo: 'Escuela Infantil · I Ciclo (0-3 años)',      url: 'https://infantil.colegionsdolores.es', icono: 'bi-balloon-heart', externa: true },
+        { titulo: 'Infantil · II Ciclo (3-6 años)',      url: '/etapas/infantil-3-6', icono: 'bi-stars' },
         { titulo: 'Educación Primaria', url: '/etapas/primaria',     icono: 'bi-book' },
         { titulo: 'E.S.O.',             url: '/etapas/eso',          icono: 'bi-laptop' }
       ]
