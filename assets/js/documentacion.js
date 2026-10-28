@@ -131,8 +131,8 @@ const DOCUMENTOS = [
     etiquetas: ['precio', 'tarifa', 'coste', 'cuanto cuesta', 'bono', 'dia suelto', 'desayuno', 'merienda'], actualizado: '2026-09' },
 
   // Actividades
-  { titulo: 'Extraescolares y simulador de precios', descripcion: 'Las 14 actividades por tipo y la calculadora del precio de vuestra combinación.', categoria: 'actividades', tipo: 'pagina', url: '/servicios/extraescolares',
-    etiquetas: ['extraescolar', 'deporte', 'musica', 'robotica', 'judo', 'baile', 'ingles', 'simulador', 'calculadora'], actualizado: '2026-09' },
+  { titulo: 'Extraescolares y simulador de precios', descripcion: 'Las 10 actividades por tipo y la calculadora del precio de vuestra combinación.', categoria: 'actividades', tipo: 'pagina', url: '/servicios/extraescolares',
+    etiquetas: ['extraescolar', 'deporte', 'judo', 'baile', 'pintura', 'informatica', 'refuerzo', 'ingles', 'simulador', 'calculadora'], actualizado: '2026-09' },
   { titulo: 'Tarifas de extraescolares 2026-27', descripcion: 'Opciones A, B, C y D, actividades sueltas, descuentos y cuotas anuales.', categoria: 'actividades', tipo: 'pagina', url: '/servicios/extraescolares#tarifas',
     etiquetas: ['precio', 'precios', 'tarifa', 'coste', 'cuanto cuesta', 'descuento', 'opcion', 'cuota'], actualizado: '2026-09' },
   { titulo: 'Madrugadores', descripcion: 'Entrada desde las 7:30, con desayuno opcional y bilingüismo incluido, 12 € el día.', categoria: 'actividades', tipo: 'pagina', url: '/servicios/madrugadores',

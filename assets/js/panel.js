@@ -185,6 +185,10 @@
       return;
     }
 
+    // Contraseña provisional (cuenta creada por la dirección): hasta que la
+    // cambie, solo se puede usar «Mi cuenta».
+    if (yo.clave_provisional) { vistaCuenta(); return; }
+
     try {
       const [amb, , ] = await Promise.all([api.ambitos(), cargarDefectosHtml()]);
       ambitos = amb;
@@ -1640,7 +1644,10 @@
 
   // ── Vista: mi cuenta ──
   function vistaCuenta() {
+    const provisional = !!yo.clave_provisional;
     pintar(`<header class="pnl-titular"><h1>Mi cuenta</h1><p>${esc(yo.email)} · ${esc(ROLES[yo.rol])}</p></header>
+      ${provisional ? `<div class="pnl-avisos-caja pnl-provisional" role="alert"><strong>Primera vez: elige tu contraseña.</strong>
+        <p>Estás entrando con la contraseña provisional que te dio la dirección. Cámbiala aquí para poder subir tus documentos. Si quieres, cambia también el correo con el que entras por el tuyo.</p></div>` : ''}
       <div class="pnl-dos">
         <form class="pnl-form" data-mis-datos><h2>Tus datos</h2>
           <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="mNombre">Nombre</label><input id="mNombre" name="nombre" value="${esc(yo.nombre)}" required maxlength="120" autocomplete="name" /></div>
@@ -1650,6 +1657,10 @@
           <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="mClave">Contraseña nueva</label><input id="mClave" name="clave" type="password" minlength="10" required autocomplete="new-password" aria-describedby="mClaveAyuda" /><p class="pnl-ayuda" id="mClaveAyuda">Al menos 10 caracteres. Mejor una frase que una palabra.</p></div>
           <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="mClave2">Repítela</label><input id="mClave2" name="clave2" type="password" required autocomplete="new-password" /></div>
           <button type="submit" class="btn btn--primary btn--sm">Cambiar contraseña</button></form>
+        <form class="pnl-form" data-mi-correo><h2>Cambiar el correo de acceso</h2>
+          <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="mCorreo">Correo nuevo</label><input id="mCorreo" name="correo" type="email" required maxlength="120" autocomplete="email" value="" aria-describedby="mCorreoAyuda" /><p class="pnl-ayuda" id="mCorreoAyuda">Es el correo con el que entrarás desde ahora y al que llegará el enlace si olvidas la contraseña.</p></div>
+          <div class="pnl-campo"><label class="pnl-campo__etiqueta" for="mClaveActual">Tu contraseña actual</label><input id="mClaveActual" name="actual" type="password" required autocomplete="current-password" /></div>
+          <button type="submit" class="btn btn--primary btn--sm">Cambiar correo</button></form>
       </div>`, 'Mi cuenta');
     vista.onsubmit = async (ev) => {
       ev.preventDefault();
@@ -1663,6 +1674,15 @@
           if (f.clave.value.length < 10) throw new Error('La contraseña tiene que tener al menos 10 caracteres.');
           if (f.clave.value !== f.clave2.value) throw new Error('Las dos contraseñas no coinciden.');
           await api.cambiarClave(f.clave.value); f.reset(); aviso('Contraseña cambiada.', 'ok');
+          // Era la provisional: ya puede usar el panel entero
+          if (yo.clave_provisional) { yo.clave_provisional = false; setTimeout(() => location.reload(), 900); }
+        } else if (f.matches('[data-mi-correo]')) {
+          const nuevo = f.correo.value.trim();
+          if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(nuevo)) throw new Error('Escribe un correo válido.');
+          await api.cambiarCorreo(nuevo, f.actual.value);
+          yo.email = nuevo.toLowerCase(); f.reset();
+          const sub = $('.pnl-titular p'); if (sub) sub.textContent = `${yo.email} · ${ROLES[yo.rol]}`;
+          aviso('Correo cambiado. Desde ahora entras con ' + yo.email + '.', 'ok');
         }
       } catch (er) { aviso(er.message, 'error'); }
     };

@@ -93,6 +93,13 @@
       },
       async recuperar(email, captcha) { ok(await sb.auth.resetPasswordForEmail(email.trim(), { redirectTo: base + '/acceso/nueva-clave', captchaToken: captcha || undefined })); },
       async cambiarClave(clave) { ok(await sb.auth.updateUser({ password: clave })); },
+      // Cambia el correo de acceso sin esperar a un correo de confirmación
+      // (lo hace la base de datos pidiendo la contraseña actual) y renueva
+      // la sesión para que lleve el correo nuevo.
+      async cambiarCorreo(nuevo, clave) {
+        ok(await sb.rpc('cambiar_mi_correo', { p_nuevo: nuevo.trim(), p_clave: clave }));
+        try { await sb.auth.refreshSession(); } catch (e) { /* la sesión sigue valiendo */ }
+      },
 
       // ── Perfil ──
       async miPerfil() { return ok(await sb.rpc('mi_perfil')); },

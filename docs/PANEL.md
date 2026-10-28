@@ -112,3 +112,14 @@ El formato que entiende es el de siempre (tabla con «Primero», «Segundo», «
 | Datos legales | aviso legal, privacidad, protección de la infancia, canal | DPD\*, Registro Mercantil\*, coordinación de bienestar\*, responsable del canal\* |
 
 \* obligatorio por normativa; la vista «Qué falta publicar» del panel lo controla.
+
+## Cuentas del profesorado creadas por la dirección
+
+Para no esperar a que cada profesor pida su cuenta, la dirección puede darlas de alta de golpe:
+
+1. Ejecutar una vez `supabase/10_cuentas_profesorado.sql` (añade la contraseña provisional y el cambio de correo).
+2. `node scripts/cuentas-profesorado.mjs`: lee las listas de profesorado de `assets/js/departamentos-datos.js` y deja en `_privado/` (fuera del repositorio) el SQL de alta, un CSV y unas tarjetas para imprimir con el correo y la contraseña provisional de cada persona.
+3. Pegar `alta-profesorado.sql` en el SQL Editor y ejecutarlo **una sola vez**. Las cuentas nacen aprobadas, con rol `editor` y permiso sobre sus departamentos o etapa. Si alguien ya tenía cuenta con ese correo, no se toca su contraseña: solo se le añaden permisos.
+4. Repartir las tarjetas en mano y borrar `_privado/` cuando estén entregadas.
+
+Al entrar con la contraseña provisional, el panel solo deja usar «Mi cuenta» hasta cambiarla. Desde «Mi cuenta» cada persona puede cambiar también el correo con el que entra (pide la contraseña actual y no necesita correo de confirmación). Los correos provisionales siguen el patrón `nombre.apellido@colegionsdolores.es` y no son buzones reales: hasta que cada uno ponga el suyo, «He olvidado la contraseña» no le llegaría.

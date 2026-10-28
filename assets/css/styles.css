@@ -3085,11 +3085,8 @@ p a:not([class]), .legal li a:not([class]) {
    ========================================================= */
 @media (min-width: 981px) {
   .hero__grid { align-items: start; }
-  .hero__titular {
-    font-size: clamp(2.5rem, 5.5vw, 4.2rem); line-height: 1.05;
-    min-height: 282px; min-height: 4lh;
-    display: flex; align-items: center;
-  }
+  /* Sin altura reservada: con zoom o pantallas poco altas el titular
+     cambia de lineas y una reserva fija dejaba huecos o solapes. */
   .hero__titular h1 { width: 100%; }
   .hero__credito { min-height: 38px; min-height: 2lh; }
 }
@@ -3699,3 +3696,25 @@ input[type="checkbox"], input[type="radio"], input[type="range"], progress { acc
 .contacta__mapa > .mapa-diferido.is-cargado { min-height: 360px; }
 .contacta__mapa > .mapa-diferido.is-cargado iframe { position: absolute; inset: 0; height: 100%; }
 .contacta__mapa-aviso { margin: 0; padding: 0 18px 14px; font-size: .72rem; line-height: 1.5; color: var(--ink-600); }
+
+/* =========================================================
+   ZOOM Y VENTANAS INTERMEDIAS
+   ---------------------------------------------------------
+   Con el zoom del navegador (125-200 %) la ventana "mide" menos
+   píxeles y caía en la franja 981-1200 px, donde el menú, la
+   marca y la barra de contacto partían sus textos en dos líneas
+   y descolocaban la cabecera. Aquí nada de eso se parte: se
+   recorta el aire y, si no cabe, se esconde lo secundario.
+   ========================================================= */
+.nav a, .nav-cta, .brand__text strong, .brand__text small,
+.quick-link, .topbar__contact a { white-space: nowrap; }
+.topbar__inner { flex-wrap: nowrap; }
+.topbar__contact, .topbar__quick { min-width: 0; }
+@media (min-width: 981px) and (max-width: 1120px) {
+  .navbar__inner { gap: 12px; }
+  .nav a { padding: 7px 8px; font-size: .86rem; }
+  .brand__logo { width: 50px; height: 50px; }
+  .brand__text small { font-size: .68rem; }
+  .topbar__contact a[href^="mailto"] span { display: none; }
+  .topbar__quick { gap: 10px; }
+}

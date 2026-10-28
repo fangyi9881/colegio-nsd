@@ -231,7 +231,8 @@ html.ficha-abierta { overflow: hidden; }
    debajo de las tarjetas, subida a una barra y de ahí al nivel siguiente.
    ========================================================= */
 .org-cupula { --linea: color-mix(in srgb, var(--ink-900) 24%, transparent); --bajada: 22px; }
-.org-nivel { gap: 0; }
+.org-nivel { gap: 0; grid-template-columns: minmax(0, 1fr); }
+.org-cupula { grid-template-columns: minmax(0, 1fr); }
 .org .personas.personas--centro {
   position: relative; display: flex; flex-wrap: nowrap; justify-content: center; gap: 0;
   width: 100%; padding: var(--bajada) 0 0; margin: 0;
@@ -275,8 +276,9 @@ html.ficha-abierta { overflow: hidden; }
 .org-nivel--coord .persona__txt { justify-items: center; }
 .org-nivel--coord .persona--responsable .persona__cargo { justify-self: center; }
 
-/* Móvil y tableta estrecha: una columna, unida por una sola línea central */
-@media (max-width: 760px) {
+/* Móvil, tableta y escritorio con mucho zoom: una columna, unida por una
+   sola línea central (en fila no caben las coordinaciones por debajo de 980). */
+@media (max-width: 980px) {
   .org .personas.personas--centro { flex-direction: column; align-items: center; padding-bottom: 0; }
   .org-nivel:not(.org-nivel--coord) .personas--centro { padding-bottom: 0; }
   .org .personas--centro > .persona-item,

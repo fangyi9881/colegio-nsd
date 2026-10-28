@@ -21,8 +21,8 @@
   const TIPOS = {
     deporte:    { nombre: 'Deporte',               icono: 'bi-dribbble' },
     idiomas:    { nombre: 'Idiomas',               icono: 'bi-translate' },
-    arte:       { nombre: 'Arte, música y escena', icono: 'bi-palette' },
-    tecnologia: { nombre: 'Tecnología y lógica',   icono: 'bi-cpu' },
+    arte:       { nombre: 'Arte y baile', icono: 'bi-palette' },
+    tecnologia: { nombre: 'Tecnología',           icono: 'bi-cpu' },
     estudio:    { nombre: 'Estudio',               icono: 'bi-journal-check' }
   };
 
@@ -80,40 +80,14 @@
       horarios: { eso: [[f(LV, '12:30', '13:25')]] }
     },
     {
-      id: 'academia', nombre: 'Academia de inglés', corto: 'Academia', tipo: 'idiomas', tarifa: 'actividad',
-      resumen: 'Inglés de forma natural y dinámica, adaptado a cada edad.',
-      horarios: { pri1: [[f(MJ, '17:00', '18:00')]], pri2: [[f(MJ, '17:00', '18:00')]], eso: [[f(MJ, '17:00', '18:00')]] }
-    },
-    {
-      id: 'musica', nombre: 'Escuela de Música', corto: 'Música', tipo: 'arte', tarifa: 'actividad', insignia: 'Nuevo',
-      resumen: 'Del movimiento y la canción en Infantil a la banda de rock en Secundaria.',
-      detalles: {
-        inf: 'Música y Movimiento: canciones, danzas y cuentos musicales.',
-        pri1: 'Taller de Música: percusión, percusión corporal y canto coral.',
-        pri2: 'Taller de Música: percusión, percusión corporal y canto coral.',
-        eso: 'Banda de Rock · Combo: guitarra, bajo, batería y teclado.'
-      },
-      horarios: { inf: [[f(LX, '14:00', '15:00')]], pri1: [[f(MJ, '14:00', '15:00')]], pri2: [[f(MJ, '14:00', '15:00')]], eso: [[f(LX, '17:00', '18:00')]] }
-    },
-    {
       id: 'pintura', nombre: 'Pintura y manualidades', corto: 'Pintura', tipo: 'arte', tarifa: 'actividad', insignia: 'Nuevo',
       resumen: 'Jabones naturales, barro, dibujo, pulseras, velas y experimentos con fragancias.',
-      horarios: { inf: [[f(MJ, '14:00', '15:00')]], pri1: [[f(MJ, '17:00', '18:00')]], pri2: [[f(MJ, '17:00', '18:00')]] }
-    },
-    {
-      id: 'teatro', nombre: 'Teatro', corto: 'Teatro', tipo: 'arte', tarifa: 'actividad', insignia: 'Nuevo',
-      resumen: 'Técnicas de actuación, expresión corporal y trabajo en equipo.',
-      horarios: { pri1: [[f(MJ, '17:00', '18:00')]], pri2: [[f(MJ, '17:00', '18:00')]], eso: [[f(MJ, '17:00', '18:00')]] }
+      horarios: { pri1: [[f(MJ, '17:00', '18:00')]], pri2: [[f(MJ, '17:00', '18:00')]] }
     },
     {
       id: 'baile', nombre: 'Baile moderno', corto: 'Baile', tipo: 'arte', tarifa: 'actividad',
       resumen: 'Coreografías actuales para ganar coordinación, ritmo y expresión corporal.',
       horarios: { inf: [[f(LX, '17:00', '18:00')]], pri1: [[f(LX, '17:00', '18:00')]], pri2: [[f(LX, '17:00', '18:00')]] }
-    },
-    {
-      id: 'robotica', nombre: 'Robótica', corto: 'Robótica', tipo: 'tecnologia', tarifa: 'actividad', insignia: 'Nuevo',
-      resumen: 'Manejo y programación de robots: lógica, resolución de problemas y trabajo en equipo.',
-      horarios: { pri1: [[f(MJ, '17:00', '18:00')]], pri2: [[f(MJ, '17:00', '18:00')]] }
     },
     {
       id: 'informatica', semana: 'Informát.', nombre: 'Informática', corto: 'Informática', tipo: 'tecnologia', tarifa: 'actividad', insignia: 'Plazas limitadas',
@@ -125,14 +99,10 @@
       horarios: { pri1: [[f(MJ, '14:00', '15:00')]], pri2: [[f(LX, '14:00', '15:00')]] }
     },
     {
-      id: 'ajedrez', nombre: 'Ajedrez', corto: 'Ajedrez', tipo: 'tecnologia', tarifa: 'actividad', insignia: 'Nuevo',
-      resumen: 'De la base a las estrategias de torneo: lógica, memoria y concentración.',
-      horarios: { pri1: [[f(LX, '17:00', '18:00')]], pri2: [[f(LX, '17:00', '18:00')]] }
-    },
-    {
-      id: 'refuerzo', nombre: 'Refuerzo y apoyo escolar', corto: 'Refuerzo', tipo: 'estudio', tarifa: 'actividad', insignia: 'Nuevo',
+      id: 'refuerzo', nombre: 'Academia de Refuerzo', corto: 'Refuerzo', tipo: 'estudio', tarifa: 'actividad', insignia: 'Nuevo grupo',
       resumen: 'Grupos reducidos para hacer las tareas, reforzar contenidos y coger hábitos de estudio.',
-      horarios: { pri1: [[f(LX, '17:00', '18:00')]], pri2: [[f(LX, '17:00', '18:00')]], eso: [[f(LX, '17:00', '18:00')]] }
+      detalle: 'Nuevo grupo a mediodía: martes y jueves, de 14:00 a 15:00. Se mantiene el grupo de tarde de lunes y miércoles.',
+      horarios: { pri1: [[f(LX, '17:00', '18:00')], [f(MJ, '14:00', '15:00')]], pri2: [[f(LX, '17:00', '18:00')], [f(MJ, '14:00', '15:00')]], eso: [[f(LX, '17:00', '18:00')]] }
     }
   ];
 
